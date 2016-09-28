@@ -1,4 +1,4 @@
-# Bangazon Orientation API (.NET Edition)
+# Bangazon Orientation API
 
 ## Table of Contents
 
