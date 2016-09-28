@@ -36,19 +36,9 @@ Once all teams have built the initial version of the API, it will then be up to 
 
 You may work on any project, in any order.
 
-Once you have decided on a project, your management team will ensure that you have the proper training in the skills, concepts, and tools needed to complete the project, and then you will fulfill the requirements for the project until you are **_Done_**.
+Once you have decided on a project, your management team will ensure that you have the proper training in the skills, concepts, and tools needed to complete the project, and then you will fulfill the requirements for the project until you are done, as defined in the [Bangazon Definition of Done](./EMPLOYEE_HANDBOOK#definition-of-done).
 
-## Definition of Done
 
-There is a very clear [Definition of Done](https://www.agilealliance.org/glossary/definition-of-done/) that you must adhere to. If you do not, your manager will not accept the project.
-
-1. The project must be fully documented. This includes the following:
-    1. Complete README that documents the steps to install the code, how to install any dependencies, or system configuration needed.
-    2. Every class must be documented with purpose, author, and methods.
-    3. Every method must be documentation with purpose and argument list - which itself must contain a short purpose for each argument.
-1. The project must be able to run fully, and without errors, on each teammate's system.
-1. The project, in its entirety, can be presented to management by each teammate.
-1. Fulfills every requirement.
 
 
 
