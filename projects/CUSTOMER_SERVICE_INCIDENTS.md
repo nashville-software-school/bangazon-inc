@@ -32,6 +32,8 @@ For this project, all core logic of the application must have a failing unit tes
 
 ## Requirements
 
+> **Unit Testing**: Management will not accept a project for which implmentation code was written before a unit test. If you have questions about this, you need to speak with your manager.
+
 Your team must build a customer service application that allows our customer service representatives keep track of customer issues. There will be several menus of options to navigate, and you will also be writing a report that customer service managers will be using to keep track of trends.
 
 ### Access Prompt
@@ -80,9 +82,8 @@ Department:
 BANGAZON INC CUSTOMER SERVICE PORTAL
 ====================================
 
-1. Create incident
-2. List all my incidents
-3. Incident report
+1. Create Incident
+2. List My Incidents
 X. Exit
 ```
 
@@ -155,16 +156,93 @@ Make sure you have a class definition for each type of incident in your database
 
 Based on which interface the specific incident type implements will determine which label(s) are displayed on the incident screen above (see the `Labels` section).
 
-
 ### List Incidents
 
-### Incident Report
+```
+====================================
+BANGAZON INC CUSTOMER SERVICE PORTAL
+====================================
+
+1. Smith, Frank : Order 616
+2. Johansson, Karl : Order 909
+3. Levinson, Sarah : Order 112
+4. Winnery, Laura : Order 9
+5. Killigrew, Tekisha : Order 1130
+6. Gonzalez, Juan : Order 445
+7. Inik, Sh'Quanna : Order 919
+8. Andropov, Yuri : Order 1024
+>
+```
+
+As soon as an incidient number is chosen, the incident screen (_see above_) should be shown, if the incident is open.
+
+If the incident is closed, meaning a resolution has been entered, no prompt for resolution should be shown.
+
+```
+INCIDENT
+==============================================================
+Customer: Smith, John                            Order: 151
+Incident Type: Defective Product
+
+Labels:
+* This order is refundable
+* This order is replaceable
+* Non-Tranactional incident
+
+Resolution:
+Order was re-fulfilled from warehouse XD778 and will be
+delivered to same address
+==============================================================
+```
+
+### Power Up: Manager Incident Report
+
+> Only attempt this Power Up if you have fulfilled **all** base requirements.
+
+1. Add a new item to the main menu.
+
+    ```
+    ====================================
+    BANGAZON INC CUSTOMER SERVICE PORTAL
+    ====================================
+
+    1. Create Incident
+    2. List My Incidents
+    3. Incident Report
+    X. Exit
+    ```
+
+1. Add a new column to the `Employee` database named `Administrator` that is boolean.
+1. Use an `INSERT` SQL statement to add an administrator record to the `Employee` table.
+1. Access the program as the administrator account, and choose the Incident Report option.
+
+Produce the following output.
+
+```
+******************************************************
+*                                                    *
+*                 INCIDENTS REPORT                   *
+*                                                    *
+******************************************************
+
+Representative                Open        Closed/Month
+======================================================
+Henningsworth, Chad           2           2
+Jennings, Jenny               3           4
+Ross, Jamal                   1           3
+Eorling, Johan                1           3
+Thompson, Charisse            3           5
+Jones, B'lake                 2           3
+Malone, Tyler                 0           1
+```
 
 ## Resources
 
 ### Initial Data
 
-Run the following SQL statements against your database to have some initial data. You may add more departments or incident types if you wish.
+> **Note:** Any SQL that you need to populate your database needs to be checked into source control. Your database file should **never** be in source control - only the migrations.
+
+Save the following SQL statements into a `populate.sql` file in your project directory. Run the statements against your database to have some initial data. You may add more departments or incident types if you wish.
 
 ```
 /*
