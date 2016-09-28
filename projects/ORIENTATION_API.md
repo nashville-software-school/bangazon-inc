@@ -12,7 +12,7 @@
 * .NET Core [installed](https://www.microsoft.com/net/core#macos).
 * [Visual Studio Code](https://code.visualstudio.com/), or [Visual Studio Community Edition](https://www.visualstudio.com/vs/community/) installed for existing Windows users.
 * For Code users, [install the C# extension](#installing-c-extension-for-code).
-* Yeoman, and the ASP.NET generator, [installed](#installing-yeoman-and-the-aspnet-generator): 
+* Yeoman, and the ASP.NET generator, [installed](#installing-yeoman-and-the-aspnet-generator) 
 
 ## What You Will Be Learning
 
