@@ -1,4 +1,4 @@
-# Setting up Visual Code 
+# Getting .NET Core Up and Running
 Resource Article
 ##What you will learn: 
 With the introduction of .NET Core you can run the dotnet run time on more than windows. You will first install the .net core run time then create an asp.net 
