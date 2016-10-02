@@ -1,0 +1,17 @@
+#Bangazon Inc Coding Standards
+
+###Dev Teams will Establish Common Standards for the following reasons:
+Experienced developers follow numerous programming practices or rules of thumb, which typically derived from hard-learned lessons.
+The practices listed below are not all-inclusive, and should not be used without due consideration.
+Veteran programmers deviate from these practices on occasion, but not without careful consideration of the potential
+repercussions. There will be times when members of development teams will move to a different development team or will 
+need to work on code they are unfamilar with. Coding standards will insure that a developer can move from one code base t othe next
+more smoothly. Coding standards also make code review run more smoothly due to the fact that common techniques are used. 
+
+A good source for examples of coding practices can be found here:
+
+https://msdn.microsoft.com/en-us/library/aa291593(v=vs.71).aspx
+
+http://www.dofactory.com/reference/csharp-coding-standards
+
+##
