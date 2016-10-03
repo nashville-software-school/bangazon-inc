@@ -6,7 +6,7 @@ from the command line.
 
 
 ####Windows
---Install .NET Core
+##Install .NET Core
 https://www.microsoft.com/net/core#windows
   1. Click the link to download the .NET Core SDK for Windows (https://go.microsoft.com/fwlink/?LinkID=827524)
   2. Once installed open a command line app to intialize some code.
@@ -21,7 +21,7 @@ https://www.microsoft.com/net/core#windows
 
 
 ####OSX
-Install .NET Core
+##Install .NET Core
 https://www.microsoft.com/net/core#macos
 Create and run an asp.net app using .net core
 https://docs.asp.net/en/latest/getting-started.html
