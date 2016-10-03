@@ -1,7 +1,6 @@
 # Commonly Used Software Development Team Terms
 
-##The following list contains commonly used terms used by many software development teams. It is important that terms commonly used are understood by
-all the team members. A common understanding greatly enhances communication and makes it easier to on-board new team members. 
+##The following list contains commonly used terms used by many software development teams. It is important that terms commonly used are understood by all the team members. A common understanding greatly enhances communication and makes it easier to on-board new team members. 
 
 ####Continous Integration
 Continuous Integration (CI) is a development practice that requires developers to integrate code into a shared repository several times a day. Each check-in is then verified by an automated build, allowing teams to detect problems early.
@@ -43,9 +42,77 @@ So at the end of each sprint, a sprint review meeting is held. During this meeti
 https://www.mountaingoatsoftware.com/agile/scrum/sprint-review-meeting
 
 ####Sprint Retrospectives
-No matter how good a Scrum team is, there is always opportunity to improve. Although a good Scrum team will be constantly looking for improvement opportunities, the team should set aside a brief, dedicated period at the end of each sprint to deliberately reflect on how they are doing and to find ways to improve. This occurs during the sprint retrospective.
-The sprint retrospective is usually the last thing done in a sprint. Many teams will do it immediately after the sprint review. The entire team, including both the ScrumMaster and the product owner should participate. You can schedule a scrum retrospective for up to an hour, which is usually quite sufficient. However, occasionally a hot topic will arise or a team conflict will escalate and the retrospective could take significantly longer.
+No matter how good a development team is, there is always opportunity to improve. Although a good development team will be constantly looking for improvement opportunities, the team should set aside a brief, dedicated period at the end of each sprint to deliberately reflect on how they are doing and to find ways to improve. This occurs during the sprint retrospective.
+The sprint retrospective is usually the last thing done in a sprint. Many teams will do it immediately after the sprint review. Occasionally a hot topic will arise or a team conflict will escalate. The retrospective gives developers the opportunity to bring up issues in a constructive way. 
 https://www.mountaingoatsoftware.com/agile/scrum/sprint-retrospective
+
+####DRY (Don't Repeat Yourself)
+When you find that you are frequenlty copying and pasting the same code throughout an application it is usually a good indication that refactoring needs to be done that centralizes the functionality you are repeating in your code. A simple example would be a group of related methods you are calling, maybe it is crucial you call them in a particular order. This is an example of code needing a refactor. 
+
+####KISS (Keep It Simple Stupid)
+The KISS principle states that most systems work best if they are kept simple rather than made complicated; therefore simplicity should be a key goal in design and unnecessary complexity should be avoided. Write code that is simple as it can be to meet the requirements. Simple, elegant code is easier to maintain and easier for other developers to modify if needed.
+
+####YAGNI (You Arent Gonna Need It)
+The idea of not implementing a feature until it is truly needed. When prematurely implementing solutions wrong assumptions will be made. Wait until the feature or code change is truly a required. http://www.c2.com/cgi/wiki?YouArentGonnaNeedIt
+
+####Pair Programming
+Pair programming is an agile software development technique in which two programmers work together at one workstation. One, the driver, writes code while the other, the observer or navigator,reviews each line of code as it is typed in. The two programmers switch roles frequently.
+
+####Definition of Done
+A shared understanding of expectations that software must live up to in order to be releasable into production. Managed by the Development Team. It is difficult to have a definition of done when acceptance criteria are not clear. It is the task of the development team to clarify the definiton of done, without this the team is uncertain what to test and it is easy for new requirements to get added a feature. There will be misunderstandings if the team is not sure what requirement must be met. 
+
+####Scope Creep
+Refers to uncontrolled changes or continuous growth in a project’s scope. This can occur when the scope of a project is not properly defined, documented, or controlled. It is generally considered harmful. https://en.wikipedia.org/wiki/Scope_creep
+
+####Pair Programming
+ is an agile software development technique in which two programmers work together at one workstation. One, the driver, writes code while the other, the observer, reviews each line of code as it is typed in. The two programmers switch roles frequently.
+
+While reviewing, the observer also considers the "strategic" direction of the work, coming up with ideas for improvements and likely future problems to address. This frees the driver to focus all of his or her attention on the "tactical" aspects of completing the current task, using the observer as a safety net and guide. https://en.wikipedia.org/wiki/Pair_programming
+
+There are severl practical benefits to pair programming
+1. Both developers become familiar with the code
+2. Pair programming makes code reviews easier because the code has already been studied by two developers.
+2. Less bugs are created using pair programming.
+####Mob Programming
+When all or several members of a development team work on the code  at the same time, in the same space, and at the same computer.
+https://leanpub.com/mobprogramming
+
+####Spike
+A task aimed at answering a question or gathering information, rather than at producing shippable product. Sometimes a user story is generated that cannot be well estimated until the development team does some actual work to resolve a technical question or a design problem. The solution is to create a “spike,” which is some work whose purpose is to provide the answer or solution. http://agiledictionary.com/209/spike/
+
+####MVC Pattern
+A common design pattern found in many modern programming languages. MVC Pattern stands for Model-View-Controller Pattern. This pattern is used to separate an application's concerns. https://msdn.microsoft.com/en-us/library/dd381412(v=vs.108).aspx
+
+####ORM(object relation mapper)
+An object relational mapper returns the data in database tables as objects that can be queried, created, updated and deleted. Typically the orm uses sql to execute sql against a database. https://en.wikipedia.org/wiki/Object-relational_mapping
+.NET frequently use Microsofts Entity Framework but there are other orms such as NHibernate and Dapper. 
+
+####Refactor
+The act of purposely cleaning up and refining existing code. 
+
+####Code Smell
+Refers to any symptom in the source code of a program that possibly indicates a deeper problem. The team must decide whether to ignore the issue or refactor the code. 
+
+####Spaghetti Code
+Spaghetti code is a derogatory term for computer programming that is unnecessarily convoluted, and particularly programming code that uses frequent branching from one section of code to another. Spaghetti code sometimes exists as the result of older code being modified a number of times over the years. The presence of spaghetti code is a sign the development has not taken care of technical debt by refactoring the code. 
+
+####Technical Debt
+Those activities that a team or team members chooses not to do now and will impede future development if left undone  It is called debt because the debt will eventually slow the team down. Eventually the technical debt needs to be addressed. As more time passes and new code integrates with the quick fixes, it will become more difficult and refactor the technical debt from the code. 
+
+
+
+
+
+
+
+ 
+ 
+
+
+
+
+
+
 
 
 
