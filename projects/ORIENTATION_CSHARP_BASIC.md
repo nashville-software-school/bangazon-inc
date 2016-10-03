@@ -10,7 +10,7 @@ Let' start by building a simple application. We will look at the program structu
 5. Run the command to build the app: dotnet build
 6. Run the command to build the app: dotnet run.
 
-##Lets Look at this app. 
+##Lets Look at the app we just created 
 It starts with the class called "Program". The function "Main" in the starting point of the app. 
 
 Notice the "using" statement. In this case we are using the "System" namespace. A name space is a way of organizing programs and libraries.
