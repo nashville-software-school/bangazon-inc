@@ -1,8 +1,10 @@
 #C Sharp Tour (Creating and modifying a simple application)
 
-##You will learn the basics of the C# language. For more detail visit https://docs.microsoft.com/en-us/dotnet/articles/csharp/tour-of-csharp/index
+##You will learn the basics of the C# language. For more detail visit https://docs.microsoft.com/en-us/dotnet/articles/csharp/tour-of-csharp/index or https://www.microsoft.com/net/tutorials/csharp/getting-started
+
 
 Let' start by building a simple application. We will look at the program structure. 
+
 1. Create a new folder called "HelloBangazon"
 2. In the integrated terminal, cd to the directory
 3. Run the command to create a new command line app: dotnet new
