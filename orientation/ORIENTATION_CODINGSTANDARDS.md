@@ -7,7 +7,7 @@ Veteran programmers deviate from these practices on occasion, but not without ca
 repercussions. There will be times when members of development teams will move to a different development team or will 
 need to work on code they are unfamilar with. 
 
-Coding standards also make code review run more smoothly due to the fact that common techniques are used. 
+Coding standards also make code reviews run more smoothly due to the fact that common techniques are used. 
 
 A good source for examples of coding practices can be found here:
 
