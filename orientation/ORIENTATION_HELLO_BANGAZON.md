@@ -2,6 +2,8 @@
 
 ##You will learn the basics of the C# language. For more detail visit https://docs.microsoft.com/en-us/dotnet/articles/csharp/tour-of-csharp/index or https://www.microsoft.com/net/tutorials/csharp/getting-started
 
+A code sample for the finished app can be found here: https://github.com/dtinsley333/HelloBangazon
+
 
 Let' start by building a simple application. We will look at the program structure. 
 
