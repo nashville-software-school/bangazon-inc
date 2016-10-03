@@ -15,6 +15,8 @@ Open the integrated terminal window by going to "View" on the menu then "Integra
 2. Now type: "dotnet build" to build the application
 3. Now type: "dotnet run" to run the application.
 
+Refer to the ReadMe.md file that is contained in the solution if you have any issues. 
+
 Make sure the integrated terminal window is tall enough to show you all of the messages. You should see message in the color red. 
 
 You will need to find the function that is refered and fix the it so that the test passes. 
