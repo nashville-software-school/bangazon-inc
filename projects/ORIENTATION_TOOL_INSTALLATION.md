@@ -12,6 +12,7 @@ https://www.microsoft.com/net/core#windows
   2. Once installed open a command line app to intialize some code.
   3. Make a directory for your app: mkdir HelloWorld
   4. Move to the newly created directory: cd HelloWorld
+  5. Create a new app: dotnet new
   5. Build the app and restore any get any missing libraries (packages) : dotnet restore
   6. Run the app: dotnet run
   7. You should see the test "Hello World".
@@ -21,7 +22,7 @@ https://www.microsoft.com/net/core#windows
 ####OSX
 Install .NET Core
 https://www.microsoft.com/net/core#macos
---create and run an asp.net app using 
+Create and run an asp.net app using .net core
 https://docs.asp.net/en/latest/getting-started.html
 
 
