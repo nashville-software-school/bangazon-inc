@@ -106,3 +106,7 @@ Our main method is starting to get messy. Lets move the logic we created to disp
             return sb.ToString();
         }
 ```
+##Independent Practice
+Go though lesson 1-4. 
+https://www.microsoft.com/net/tutorials/csharp/getting-started
+https://www.microsoft.com/net/tutorials/csharp/getting-started
