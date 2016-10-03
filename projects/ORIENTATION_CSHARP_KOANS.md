@@ -1,8 +1,7 @@
 
-#CSharp Language Basics
+#DOTNET Core Koans
 ###What you will learn
-####You will learn both the syntax of the C# language but also be learning who work with XUnit, a unit testing framework. The Koans uses failing
-tests to teach you how to make the tests pass while applying C# principles. 
+####You will learn both the syntax of the C# language but also be learning who work with XUnit, a unit testing framework. The Koans uses failing tests to teach you how to make the tests pass while applying C# principles. 
 
 Download the code from the following GitHub Repository: https://github.com/NotMyself/DotNetCoreKoans/tree/master/Koans
 
@@ -12,9 +11,9 @@ Open Visual Studio code and go to File, Open Folder and select the folder where 
 
 Open the integrated terminal window by going to "View" on the menu then "Integrated Terminal".
 
-At the Terminal Type: "dotnet restore"
-Now type: "dotnet build" to build the application
-Now type: "dotnet run" to run the application.
+1. At the Terminal Type: "dotnet restore"
+2. Now type: "dotnet build" to build the application
+3. Now type: "dotnet run" to run the application.
 
 Make sure the integrated terminal window is tall enough to show you all of the messages. You should see message in the color red. 
 
