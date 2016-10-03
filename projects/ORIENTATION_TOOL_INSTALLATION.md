@@ -11,7 +11,8 @@ https://www.microsoft.com/net/core#windows
   1. Click the link to download the .NET Core SDK for Windows (https://go.microsoft.com/fwlink/?LinkID=827524)
   2. Once installed open a command line app to intialize some code.
   3. Make a directory for your app: mkdir HelloWorld
-  4. Move to the newly created directory: cd HelloWorld
+  4. Move to the newly created directory. : cd 
+  HelloWorld
   5. Create a new app: dotnet new
   5. Build the app and restore any get any missing libraries (packages) : dotnet restore
   6. Run the app: dotnet run
