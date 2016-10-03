@@ -1,4 +1,4 @@
-#C# Language Basics
+#CSharp Language Basics
 ###What you will learn
 ####You will learn both the syntax of the C# language but also be learning who work with XUnit, a unit testing framework. The Koans uses failing
 tests to teach you how to make the tests pass while applying C# principles. 
