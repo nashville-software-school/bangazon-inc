@@ -11,7 +11,8 @@
 
 * [ASP.NET MVC](https://docs.asp.net/en/latest/mvc/overview.html)
 * Migrations
-* View templates
+* View templates/Layouts
+* Forms
 * Controllers
 * ERD development
 * Routing
@@ -26,6 +27,14 @@ All views in this application will be generated on the server, using templates, 
 ### View Templates
 
 You learned about view templates when you used Angular, but now your application server will be serving a fully built template to any client request instead of the client building the view.
+
+### Layouts
+
+To keep your code DRY between different view templates, you should use a [layout](https://docs.asp.net/en/latest/mvc/views/layout.html) to define the general structure of your site, and the individual page templates will be injected into the overall layout.
+
+### Forms
+
+The ASP.NET MVC framework provides many conventions and helpers that make building forms easier, and are bound to view models, much the same way that you used Angular to bind form fields in a partial to variables and/or objects in a controller.
 
 ## Requirements
 

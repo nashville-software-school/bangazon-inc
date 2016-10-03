@@ -36,7 +36,7 @@ Once all teams have built the initial version of the API, it will then be up to 
 
 You may work on any project, in any order.
 
-Once you have decided on a project, your management team will ensure that you have the proper training in the skills, concepts, and tools needed to complete the project, and then you will fulfill the requirements for the project until you are done, as defined in the [Bangazon Definition of Done](./EMPLOYEE_HANDBOOK#definition-of-done).
+Once you have decided on a project, your management team will ensure that you have the proper training in the skills, concepts, and tools needed to complete the project, and then you will fulfill the requirements for the project until you are done, as defined in the [Bangazon Definition of Done](https://github.com/nashville-software-school/bangazon-inc/blob/master/EMPLOYEE_HANDBOOK.md#definition-of-done).
 
 
 
