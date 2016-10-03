@@ -74,7 +74,7 @@ To use the "System.Text" name space. You will also modify the payment due date t
             var sb=new StringBuilder();
             sb.Append("Hello ");
             sb.Append(formalName);
-            sb.Append(" " );
+            sb.Append(" ");
             sb.Append(message);
 
             Console.WriteLine(sb.ToString());
@@ -101,7 +101,7 @@ Our main method is starting to get messy. Lets move the logic we created to disp
             var sb=new StringBuilder();
             sb.Append("Hello ");
             sb.Append(formalName);
-            sb.Append(" " );
+            sb.Append(" ");
             sb.Append(message);
             return sb.ToString();
         }
