@@ -21,7 +21,7 @@ At this point the main method only writes out the phrase "Hello World".
 
 Notice the namespace. In this case it is called "ConsoleApplication", lets rename it "HelloBangazon". 
 
-Lets have our app write out a more interesting message the user. 
+Let's have our app write out a more interesting message the user. 
 Modify the code to look like this:
 ```
 public static void Main(string[] args)
