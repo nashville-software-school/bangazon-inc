@@ -5,12 +5,22 @@ You will about the application structure and code for a simple command line appl
 
 ###Main Method
 All command line applications use the Main method as their entry point to an application. Arguments can be passed to the Main Method.
-You can find more information regarding namespaces here: https://msdn.microsoft.com/en-us/library/0d941h9d.aspx
+
 ```
       public static void Main(string[] args)
         {
             Console.WriteLine(CustomerGreeting().ToString());
         }
+```
+
+Here is an example of a main method that accepts an argument.
+In this case we are passing a date. 
+```
+dotnet run 1/1/2017
+```
+This is how the passed in date is used by the application. 
+```
+
 ```
  
 ###Program.cs
