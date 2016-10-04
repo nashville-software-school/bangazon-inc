@@ -11,7 +11,7 @@
 
 * [ASP.NET MVC](https://docs.asp.net/en/latest/mvc/overview.html)
 * Migrations
-* View templates/Layouts
+* [View templates/Layouts](https://docs.asp.net/en/latest/mvc/views/overview.html)
 * Forms
 * Controllers
 * ERD development
