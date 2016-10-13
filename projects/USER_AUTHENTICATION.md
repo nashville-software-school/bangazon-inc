@@ -17,7 +17,7 @@
 
 ### Local DB
 
-Migrating from SQLite (if needed) to using SQL Server Local Db for storing data. 
+Migrating from SQLite (if needed) to using SQL Server Local Db for storing data.
 
 ### Authentication
 
@@ -29,4 +29,4 @@ You will learn how to use the built-in authentication and authorization Identity
 1. Require registration or login when user wants to purchase a product.
 
 ## Resources
-
+[Updated Twilio SMS](https://www.twilio.com/docs/libraries/csharp#installation-nextgen)
