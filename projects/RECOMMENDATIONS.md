@@ -56,3 +56,4 @@ This looks complex at first blush, but you'll discover that the steps with becom
 ## Resources
 
 * The [Jaccard similarity coefficient](https://en.wikipedia.org/wiki/Jaccard_index)
+* [Article](https://www.toptal.com/algorithms/predicting-likes-inside-a-simple-recommendation-engine) describing the general process, but with Node.js.
