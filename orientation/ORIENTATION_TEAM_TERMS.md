@@ -55,9 +55,6 @@ The KISS principle states that most systems work best if they are kept simple ra
 ####YAGNI (You Arent Gonna Need It)
 The idea of not implementing a feature until it is truly needed. When prematurely implementing solutions wrong assumptions will be made. Wait until the feature or code change is truly a required. http://www.c2.com/cgi/wiki?YouArentGonnaNeedIt
 
-####Pair Programming
-Pair programming is an agile software development technique in which two programmers work together at one workstation. One, the driver, writes code while the other, the observer or navigator,reviews each line of code as it is typed in. The two programmers switch roles frequently.
-
 ####Definition of Done
 A shared understanding of expectations that software must live up to in order to be releasable into production. Managed by the Development Team. It is difficult to have a definition of done when acceptance criteria are not clear. It is the task of the development team to clarify the definiton of done, without this the team is uncertain what to test and it is easy for new requirements to get added a feature. There will be misunderstandings if the team is not sure what requirement must be met. 
 
@@ -65,7 +62,7 @@ A shared understanding of expectations that software must live up to in order to
 Refers to uncontrolled changes or continuous growth in a project’s scope. This can occur when the scope of a project is not properly defined, documented, or controlled. It is generally considered harmful. https://en.wikipedia.org/wiki/Scope_creep
 
 ####Pair Programming
- is an agile software development technique in which two programmers work together at one workstation. One, the driver, writes code while the other, the observer, reviews each line of code as it is typed in. The two programmers switch roles frequently.
+Pair programming is an agile software development technique in which two programmers work together at one workstation. One, the driver, writes code while the other, the observer, reviews each line of code as it is typed in. The two programmers switch roles frequently.
 
 While reviewing, the observer also considers the "strategic" direction of the work, coming up with ideas for improvements and likely future problems to address. This frees the driver to focus all of his or her attention on the "tactical" aspects of completing the current task, using the observer as a safety net and guide. https://en.wikipedia.org/wiki/Pair_programming
 
