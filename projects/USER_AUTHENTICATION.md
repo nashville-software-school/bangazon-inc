@@ -25,8 +25,18 @@ You will learn how to use the built-in authentication and authorization Identity
 
 ## Requirements
 
-1. Enable Identity in the application.
-1. Require registration or login when user wants to purchase a product.
+#### Enable Identity in the application.
+
+1. Users should be able to register and login with an email address and password.
+1. Instead of the active customer select element from the Initial Bangazon Site project:
+  - When logged out, a register and login link should appear.
+  - When logged in, "Hello [username]" and a logout link should appear.
+
+#### Require registration or login when user wants to purchase a product.
+
+1. Users should be informed they need to be logged in to complete the action if they:
+  - Click the add to order button without being logged in.
+  - Attempt to view the current order without being logged in.
 
 ## Resources
 [Updated Twilio SMS](https://www.twilio.com/docs/libraries/csharp#installation-nextgen)
