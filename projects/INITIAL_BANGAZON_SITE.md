@@ -29,7 +29,7 @@ You will understand how to implement and modify a CORS policy for your applicati
 
 ### Producing an MVC Server-Generated Site
 
-You will be building a basic Angular client that will consume the resources that you have defined in your Bangazon Platform API.
+You will be building a server generated HTML site instead of building a single page application like the ones you built in the front end part of the course.
 
 ## Requirements
 
@@ -64,6 +64,10 @@ Make sure you produce a [layout](https://docs.asp.net/en/latest/mvc/views/layout
 
 
 ## Resources
+
+### ASP.NET Views Overview
+
+[Views Overview](https://docs.asp.net/en/latest/mvc/views/overview.html)
 
 ### CORS Policies
 
