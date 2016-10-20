@@ -65,6 +65,10 @@ Make sure you produce a [layout](https://docs.asp.net/en/latest/mvc/views/layout
 
 ## Resources
 
+### Getting Started
+
+[Getting started with ASP.NET Core MVC and Entity Framework Core](https://docs.asp.net/en/latest/data/ef-mvc/intro.html)
+
 ### ASP.NET Views Overview
 
 [Views Overview](https://docs.asp.net/en/latest/mvc/views/overview.html)
