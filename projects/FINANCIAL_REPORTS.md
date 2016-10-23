@@ -68,6 +68,10 @@ BANGAZON FINANCIAL REPORTS
 
 ## Resources
 
+### Current Repository
+
+The [current project](https://github.com/nashville-software-school/Bangazon-Financials) can be retrieved from Github.
+
 ### Initial Data
 
 > **Note:** Any SQL that you need to populate your database needs to be checked into source control. Your database file should **never** be in source control - only the migrations.
