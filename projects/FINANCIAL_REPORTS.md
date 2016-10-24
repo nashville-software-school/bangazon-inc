@@ -29,13 +29,16 @@ For this project, all core logic of the application must have a failing unit tes
 
 ### Refactoring Poorly Designed Code
 
-This project was originally contracted to a developer in a European country through a freelancing web site. The developer was chosen because the rate for the project was the lowest of all people who placed a bid. After realizing how poor the quality of code was, we realized that you get what you pay for. You are now responsible to implementing the requirement with best practices.
+This project was originally contracted to a developer in a European country through a freelancing web site. The developer was chosen because the rate for the project was the lowest of all people who placed a bid. After realizing how poor the quality of code was, we realized that you get what you pay for. You are now responsible for implementing the requirements with best practices.
 
 ## Requirements
 
-> **Unit Testing**: Management will not accept a project for which implmentation code was written before a unit test. If you have questions about this, you need to speak with your manager.
+> **Unit Testing**: Management will not accept a project for which implementation code was written before a unit test. If you have questions about this, you need to speak with your manager.
 
-Your team must build a customer service application that allows our customer service representatives keep track of customer issues. There will be several menus of options to navigate, and you will also be writing a report that customer service managers will be using to keep track of trends.
+1. Author a unit test suite that verifies core logic of application
+1. All data must be stored in a SQL Server database
+1. Create a process to seed the database with the data that currently exists in the `DatabaseGenerator` class.
+1. Review the menu system described below and refactor the project to use
 
 ### Main Menu
 
