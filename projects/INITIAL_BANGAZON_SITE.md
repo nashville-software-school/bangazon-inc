@@ -41,6 +41,7 @@ Modify the CORS policy in your application that allows all of your teammates' co
 
 ### Models
 
+1. Products will be created by customers, so make sure that you have a column on the `Product` model to store which customer created it.
 1. Add a new model named `ProductType`. Add a foreign key to `ProductType` in the `Product` model. It must be non-nullable, which means that you will likely need to provide a default value for your migration to work. The only fields needed are the primary key, and `Label`.
 1. Add a model named `PaymentType`.
 1. A `Customer` can have many payment types.
@@ -69,9 +70,9 @@ Make sure you produce a [layout](https://docs.asp.net/en/latest/mvc/views/layout
 
 [Getting started with ASP.NET Core MVC and Entity Framework Core](https://docs.asp.net/en/latest/data/ef-mvc/intro.html)
 
-### ASP.NET Views Overview
+### ASP.NET Views
 
-[Views Overview](https://docs.asp.net/en/latest/mvc/views/overview.html)
+Begin reading the [Views Overview](https://docs.asp.net/en/latest/mvc/views/overview.html) documentation, and make sure you read about the [Partial Views](https://docs.asp.net/en/latest/mvc/views/partial.html), as it will help you with a crucial feature of the application.
 
 ### CORS Policies
 

@@ -264,3 +264,9 @@ INSERT INTO IncidentType (Label) VALUES ('Request For Information');
 INSERT INTO IncidentType (Label) VALUES ('Fraudulent Charge');
 INSERT INTO IncidentType (Label) VALUES ('Shipping Info Update');
 ```
+
+### Unit Testing
+
+* If your team is using VS Code to write the application, use [`dotnet test`](https://docs.microsoft.com/en-us/dotnet/articles/core/testing/unit-testing-with-dotnet-test) 
+* If your team is using Visual Studio to write the application, use [MSTest](https://docs.microsoft.com/en-us/dotnet/articles/core/testing/using-mstest-on-windows)
+
