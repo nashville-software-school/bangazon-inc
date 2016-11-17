@@ -17,7 +17,7 @@
 
 ### Local DB
 
-Migrating from SQLite (if needed) to using SQL Server Local Db for storing data.
+Migrating from SQLite (if needed) to using SQL Server Local DB for storing data.
 
 ### Authentication
 
@@ -38,5 +38,10 @@ You will learn how to use the built-in authentication and authorization Identity
   - Click the add to order button without being logged in.
   - Attempt to view the current order without being logged in.
 
+#### Stretch goals
+
+1. Enable email confirmation for account creation.
+1. Enable two-factor authentication via SMS using Twilio
+
 ## Resources
-[Updated Twilio SMS](https://www.twilio.com/docs/libraries/csharp#installation-nextgen)
+[Updated Twilio SMS](https://www.twilio.com/docs/libraries/csharp#installation-nextgen) - Using Twilio with .NET Core
