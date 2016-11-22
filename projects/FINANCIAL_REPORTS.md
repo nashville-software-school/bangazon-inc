@@ -10,7 +10,7 @@
 ## Prerequisites
 
 * [DB Browser for SQLite](http://sqlitebrowser.org/).
-* Completed the [Chinook SQL exercise](https://github.com/nashville-software-school/csharp-dotnet-milestones/blob/master/3-database-driven-applications/exercises/database/DBS_SQL_LEARNING-THRU-DOING.md) 
+* Completed the [Chinook SQL exercise](https://github.com/nashville-software-school/csharp-dotnet-milestones/blob/master/3-database-driven-applications/exercises/database/DBS_SQL_LEARNING-THRU-DOING.md)
 * Introduction to unit testing
 
 ## What You Will Be Learning
@@ -145,7 +145,7 @@ BANGAZON FINANCIAL REPORTS
 
 CUSTOMER REVENUE REPORT
 
-Customer                     Revenue
+Product                      Revenue
 -----------------------------------------
 Television                   $14112.47
 Bicycle                      $9521.55
@@ -158,30 +158,3 @@ Spatula                      $955.33
 ### Current Repository
 
 The [current project](https://github.com/nashville-software-school/Bangazon-Financials) can be retrieved from Github.
-
-### Initial Data
-
-> **Note:** Any SQL that you need to populate your database needs to be checked into source control. Your database file should **never** be in source control - only the migrations.
-
-Save the following SQL statements into a `populate.sql` file in your project directory. Run the statements against your database to have some initial data. You may add more departments or incident types if you wish.
-
-```
-/*
-Add some default departments
- */
-INSERT INTO Department (Label) VALUES ('Apparel');
-INSERT INTO Department (Label) VALUES ('Electronics');
-INSERT INTO Department (Label) VALUES ('Toys & Games');
-INSERT INTO Department (Label) VALUES ('Books');
-INSERT INTO Department (Label) VALUES ('Home Furnishings');
-
-/*
-Add some default incident types
- */
-INSERT INTO IncidentType (Label) VALUES ('Defective Product');
-INSERT INTO IncidentType (Label) VALUES ('Product Not Delivered');
-INSERT INTO IncidentType (Label) VALUES ('Unhappy With Product');
-INSERT INTO IncidentType (Label) VALUES ('Request For Information');
-INSERT INTO IncidentType (Label) VALUES ('Fraudulent Charge');
-INSERT INTO IncidentType (Label) VALUES ('Shipping Info Update');
-```
