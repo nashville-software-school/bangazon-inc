@@ -158,3 +158,9 @@ Spatula                      $955.33
 ### Current Repository
 
 The [current project](https://github.com/nashville-software-school/Bangazon-Financials) can be retrieved from Github.
+
+### Testing Controllers
+
+You can create unit tests for yor controllers in an MVC application to ensure that a controller method returns the correct view, the correct data, or the correct action is performed.
+
+[Creating Unit Tests for ASP.NET MVC Applications](https://www.asp.net/mvc/overview/older-versions-1/unit-testing/creating-unit-tests-for-asp-net-mvc-applications-cs)
