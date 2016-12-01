@@ -19,10 +19,12 @@ Your first two weeks on the job will be you orientation to the technical languag
 1. Overview of server-side development ecosystem
 1. How the Internet works
 1. Inheritance, composition, and aggregation
+1. Entity relationships
+1. Structured Query Language (SQL)
+1. Querying databases with LINQ
 
-At the end of your orientation, you will be tasked with showing the management team the level of enlightenment that you have achieved for the basics. To do that, you will all, individually, work on the Koans of Elnightenment.
 
-Your demonstration of Enlightenment will be used by your management team to determine which Development Team you will be assigned to for the next three months.
+At the end of your orientation, your management team will determine which Development Team you will be assigned to for the next three months.
 
 ## Bangazon API
 
@@ -38,7 +40,11 @@ You may work on any project, in any order.
 
 Once you have decided on a project, your management team will ensure that you have the proper training in the skills, concepts, and tools needed to complete the project, and then you will fulfill the requirements for the project until you are done, as defined in the [Bangazon Definition of Done](https://github.com/nashville-software-school/bangazon-inc/blob/master/EMPLOYEE_HANDBOOK.md#definition-of-done).
 
+# Learning Objectives
 
+While you are building out the Bangazon Platform, your leadership team will ensure that the following foundational skills are developed by each team, and by each individual on the team.
+
+![Learning objectives](./learning-objectives.png)
 
 
 
