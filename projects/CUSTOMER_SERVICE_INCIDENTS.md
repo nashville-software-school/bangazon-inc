@@ -148,13 +148,6 @@ Enter resolution:
 >
 ```
 
-Make sure you have a class definition for each type of incident in your database. Use inheritance to share common properties, and implement the correct interfaces on the appropriate types.
-
-1. `Defective Product` and `Product Not Delivered` incident types are replaceable.
-1. `Defective Product` and `Product Not Delivered`, and `Fraud` incident types are refundable.
-1. `Request for Information` and `Shipping Info Update` incident types are non-transactional (i.e. just for information and not complaints).
-
-Based on which interface the specific incident type implements will determine which label(s) are displayed on the incident screen above (see the `Labels` section).
 
 ### List Incidents
 
