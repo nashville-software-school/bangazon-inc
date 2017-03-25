@@ -1,6 +1,6 @@
-#Bangazon Inc Coding Standards
+# Bangazon Inc Coding Standards
 
-###Bangazon Inc Developement Teams will Establish Common Standards for the Following Reasons:
+### Bangazon Inc Developement Teams will Establish Common Standards for the Following Reasons:
 Experienced developers follow numerous programming practices or rules of thumb, which typically derived from hard-learned lessons.
 The practices listed below are not all-inclusive, and should not be used without due consideration.
 Veteran programmers deviate from these practices on occasion, but not without careful consideration of the potential
