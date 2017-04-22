@@ -9,10 +9,8 @@
 
 ## Prerequisites
 
-* .NET Core [installed](https://www.microsoft.com/net/core#macos).
-* [Visual Studio Code](https://code.visualstudio.com/), or [Visual Studio Community Edition](https://www.visualstudio.com/vs/community/) installed for existing Windows users.
-* For Code users, [install the C# extension](#installing-c-extension-for-code).
-* Yeoman, and the ASP.NET generator, [installed](#installing-yeoman-and-the-aspnet-generator) 
+* [Visual Studio Community Edition](https://www.visualstudio.com/vs/community/) installed for existing Windows users.
+
 
 ## What You Will Be Learning
 
@@ -20,125 +18,38 @@
 
 Entity Relationship Diagrams are visual representations of your database structure, and relationships between data. You will build an ERD that represents the first version of your database.
 
-### project.json
+### Attribute Routing
 
-With the release of .NET Core, the .NET platform now more closely adheres to conventions that have been adopted by the OSS community. Once of those conventions is storing project-related settings and configuration in JSON format instead of XML format.
+ASP.NET makes heavy use of [attribute routing](https://docs.microsoft.com/en-us/aspnet/web-api/overview/web-api-routing-and-actions/attribute-routing-in-web-api-2) to abstract away much of the heavy lifting that is required to build an API. By using these Magical Abstractions, far less coding and configuration is needed from an API developer.
 
-You will understand the structure of the [`project.json`](https://docs.microsoft.com/en-us/dotnet/articles/core/tools/project-json) file, and how to use it to install dependencies for your project, along with the `dotnet restore` command.
+### Dependency Injection / Inversion of Control
 
+Dependency Injection allows you to depend solely on abstractions in your classes.  This enhances testability and lets you focus on writing the code for just the class you're currently working on.  It also allows you to abstract away a lot of the configuration of how to build things.  You will use [StructureMap](http://structuremap.github.io/documentation/) to inject dependencies into all your classes.  
 
-### Annotations, Routing and DI
-
-ASP.NET makes heavy use of [annotations](https://docs.asp.net/en/latest/data/ef-mvc/complex-data-model.html?highlight=annotation), [routing](https://docs.asp.net/en/latest/mvc/controllers/routing.html) and [dependency injection](https://docs.asp.net/en/latest/mvc/controllers/dependency-injection.html) to abstract away much of the heavy lifting that is required to build an API. By using these Magical Abstractions, far less coding and configuration is needed from an API developer.
+Install the StructureMap.WebApi2 package to get started.
 
 ### Models
 
-You will define models, which are abstractions to the actual database. The model defines a table, validations on the columns in the table, and also the relationship between tables.
+You will define models, which are abstractions to the actual database. The model reflects the underlying table's columns and structure
 
-### Migrations
-
-You will be using [migrations](https://docs.asp.net/en/latest/data/ef-mvc/migrations.html#migrations) in Entity Framework to handle changes and updates to your database.
-
-### Controllers
+### WebApi Controllers
 
 You will learn about what role a controller has in an API, how it uses models and validates a request against the model, and an introduction to LINQ to get data from your database.
 
+
 ## Requirements
 
-1. Use the Yeoman generator to build a basic Web API project.
-1. Define models and controllers for the following resources.
+1. Create an empty Web API project.
+1. Define tables, models and controllers for the following resources.
     1. Customer
     1. Order
     1. Product
     1. LineItem
-1. Ensure that you have annotations on your models to verify the data.
-1. Ensure that you have the correct relationships established between your models using [navigation properties](https://docs.asp.net/en/latest/data/ef-mvc/complex-data-model.html?highlight=annotation#the-courses-and-officeassignment-navigation-properties).
+1. Ensure that you have annotations on your models to verify the model is valid when it comes into the API.
+1. Create repositories for data access.
 
+## Optional Powerups
 
-## Resources
+### Use Dapper for Data Access
 
-### Installing C# Extension for Code
-
-You install this extension by pressing `F1` to open the VS Code palette. Type `ext install` to see the list of extensions. Select the C# extension.
-
-### Installing Yeoman and the ASPNET Generator
-
-Both of these are `npm` packages, and global installations at that, so run this command in your terminal.
-
-```
-npm install -g yo generator-aspnet
-```
-
-### Starter Configuration
-
-> project.json
-
-```json
-{
-  "dependencies": {
-    "Microsoft.NETCore.App": {
-      "version": "1.0.0",
-      "type": "platform"
-    },
-    "Microsoft.AspNetCore.Mvc": "1.0.0",
-    "Microsoft.AspNetCore.Server.IISIntegration": "1.0.0",
-    "Microsoft.AspNetCore.Server.Kestrel": "1.0.0",
-    "Microsoft.Extensions.Configuration.EnvironmentVariables": "1.0.0",
-    "Microsoft.Extensions.Configuration.FileExtensions": "1.0.0",
-    "Microsoft.Extensions.Configuration.Json": "1.0.0",
-    "Microsoft.Extensions.Configuration.CommandLine": "1.0.0",
-    "Microsoft.Extensions.Logging": "1.0.0",
-    "Microsoft.Extensions.Logging.Console": "1.0.0",
-    "Microsoft.Extensions.Logging.Debug": "1.0.0",
-    "Microsoft.EntityFrameworkCore.Sqlite": "1.0.0",
-    "Microsoft.Extensions.Options.ConfigurationExtensions": "1.0.0",
-    "Microsoft.EntityFrameworkCore.Design": {
-      "version": "1.0.0-preview2-final",
-      "type": "build" 
-    }
-  },
-
-  "tools": {
-    "Microsoft.AspNetCore.Server.IISIntegration.Tools": "1.0.0-preview2-final",
-    "Microsoft.EntityFrameworkCore.Tools": "1.0.0-preview2-final"
-  },
-
-  "frameworks": {
-    "netcoreapp1.0": {
-      "imports": [
-        "dotnet5.6",
-        "portable-net45+win8"
-      ]
-    }
-  },
-
-  "buildOptions": {
-    "emitEntryPoint": true,
-    "preserveCompilationContext": true
-  },
-
-  "runtimeOptions": {
-    "configProperties": {
-      "System.GC.Server": true
-    }
-  },
-
-  "publishOptions": {
-    "include": [
-      "wwwroot",
-      "Views",
-      "Areas/**/Views",
-      "appsettings.json",
-      "web.config"
-    ]
-  },
-
-  "scripts": {
-    "postpublish": [ "dotnet publish-iis --publish-folder %publish:OutputPath% --framework %publish:FullTargetFramework%" ]
-  },
-
-  "tooling": {
-    "defaultNamespace": "lol"
-  }
-}
-```
+[Dapper](https://github.com/StackExchange/Dapper/blob/master/Readme.md) is a Micro ORM that allows you to interact more directly with the database than Entity Framework, but still will map your query results into objects for you, saving you from a lot of ExecuteReader madness.  Use Dapper by taking a dependency on an IDbConnection and using the Dapper extension methods.
