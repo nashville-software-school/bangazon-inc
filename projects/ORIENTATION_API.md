@@ -5,7 +5,7 @@
 1. [Prerequisites](#prerequisites)
 1. [What You Will Be Learning](#what-you-will-be-learning)
 1. [Requirements](#requirements)
-1. [Resources](#resources)
+1. [PowerUps](#powerups)
 
 ## Prerequisites
 
@@ -48,7 +48,7 @@ You will learn about what role a controller has in an API, how it uses models an
 1. Ensure that you have annotations on your models to verify the model is valid when it comes into the API.
 1. Create repositories for data access.
 
-## Optional Powerups
+## Powerups
 
 ### Use Dapper for Data Access
 
