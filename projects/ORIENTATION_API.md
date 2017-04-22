@@ -34,7 +34,7 @@ You will define models, which are abstractions to the actual database. The model
 
 ### WebApi Controllers
 
-You will learn about what role a controller has in an API, how it uses models and validates a request against the model, and an introduction to LINQ to get data from your database.
+You will learn about what role a controller has in an API, how it uses models and validates a request against the model, and returning data from your database to the internets.
 
 
 ## Requirements
