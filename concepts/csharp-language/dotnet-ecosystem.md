@@ -1,21 +1,7 @@
 # .NET Overview
 
-## Model
-* Data Annotations & Regex
-* ORM / Entity Framework / Repository
-* Testing (including Mocks)
-* Patterns
-*
-## View / Controller
-*	Action Results
-*	RESTful APIs
-*	Helper Methods
-*	Migrations
-*	UI/UX, Design
-*	Styling UI
+### .NET Core
 
-### Gaines' Basic Intro to .NET Concepts
-Gaines' demo illustrating alternate paths to data:
-1) Direct SQL Connection (through SQL Express Server)
-2) Via Entity Framework
-https://github.com/gaines/nss/tree/master/day-cohort-10/20151123
+Newest version of the .NET Framework that is open-source, cross-platform, and comes with a CLI tool. Most large scale employers haven’t started using .NET Core for their enterprise solutions, but don’t let that part scare you. 99% of what you learn will be the same as older versions of .NET.
+
+[About .NET Core from the Microsoft Team](https://www.microsoft.com/net/core/platform)
