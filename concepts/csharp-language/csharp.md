@@ -43,7 +43,21 @@ int animalName () {
 
 ### Native Types
 
+Here's a few:
+byte, short, int, long, float, decimal, char, string, bool, object 
+
 Please review the [MSDN article](https://msdn.microsoft.com/en-us/library/ya5y69ds.aspx) that lists the C# built-in types. Click on each one to read its description and see some example usage.
+
+### High Level Overview on Types
+
+A data type is a classification of data which tells the compiler or interpreter how the programmer intends to use the data.
+The types affect how the data is stored (in memory or on disk).
+
+All of your custom classes inherit from the built in C# `object` type, so all of your custom classes are also data types in C#.
+
+A type system is a collection of rules that assign a property called type to various constructs a computer program consists of, such as variables, functions, or expressions.
+
+The main purpose of a type system is to reduce possibilities for bugs in computer programs by defining interfaces between different parts of a computer program, and then checking that the parts have been connected in a consistent way.
 
 ## Classes
 
