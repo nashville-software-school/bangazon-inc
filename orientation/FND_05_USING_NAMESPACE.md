@@ -1,78 +1,49 @@
-# Types and Objects
+# Namespace for Organizing Code
 
-Everything is an object in Python.
+The `namespace` keyword is used for organizing related classes into a common package. Here's a simple example.
 
-```
->>> type(True)
-<class 'bool'>
->>> type(1)
-<class 'int'>
->>> def test():
-...   print("hello, world")
-... 
->>> type(test)
-<class 'function'>
->>> type(humansizes)
-<class 'module'>
->>> dictionary = { "color":"blue", "size":9090 }
->>> type(dictionary)
-<class 'dict'>
->>> atuple = ( "blue", 9090 )
->>> type(atuple)
-<class 'tuple'>
->>> reindeer = ["dasher", "dancer", "prancer", "vixen", "olive"]
->>> type(reindeer)
-<class 'list'>
->>> boy_bands = { "nsync", "one direction", "boyz II men" }
->>> type(boy_bands)
-<class 'set'>
+> `Product.cs`
+
+```cs
+using System;
+
+namespace Bangazon.Products
+{
+    public class Product {}
+}
 ```
 
-## Lists
+> `Order.cs`
 
-A [Python list](https://docs.python.org/3.6/tutorial/datastructures.html) is like an array in JavaScript. Just an unordered, untyped collection of any values. The example below is storing strings, an integer, and even another list inside a list.
+```cs
+using System;
 
-```python
-junk = list()
-junk = ['carrots', 'celery', 'kale', 2, ['peas', 'corn']] 
-junk.insert(1, 'kidney beans')
-junk.extend([True, 'tornado'])
-junk.append('hurricane')
-print(junk)
+/*
+    Providing the additional namespace to the classes makes it easier
+    for other developers to understand where the code is coming from
+    and how it fits into the mental context of the code base.
+*/
+using Bangazon.Products.Product;
+using Bangazon.Products.ProductType;
+
+namespace Bangazon.Orders
+{
+    public class Order {}
+}
 ```
 
-## Dictionary
+> `AccountOverview.cs`
 
-A dictionary is like a literal object in JavaScript. A collection of key/value pairs.
+```cs
+using System;
+using Bangazon.Products.Product;
+using Bangazon.Orders.Order;
 
-```python
-junk = dict()
-junk = { 'name': 'Steve', 'age': 47, 'role': 'Head Coach' } 
-junk['kids'] = 2
-print(junk)
+namespace Bangazon.Account
+{
+    public class AccountOverview {}
+}
 ```
 
-## Set
-
-A is sort of like a list, except that each item is enforced to be unique. If you try to add an item that already exists in the set, no operation occurs.
-
-```python
-junk = set()
-junk.add('Scott')
-print(junk)
-{ 'Scott' }
-
-junk.add('Scott')
-print(junk)
-{ 'Scott' }
-```
-
-## Tuple
-
-A tuple is like a list except that it's immutable. You can't add or remove things from it. What makes them useful is that iterating over the elements is faster than a list.
-
-```python
-junk = tuple()
-junk = ('Joe', 'Instructor', 'Awesome')
-print(junk)
-```
+> **Resource:** [Namespaces (C# Programming Guide)
+](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/namespaces/)
