@@ -138,11 +138,11 @@ foreach (string product in products) {
 Luckily, the `if-then` syntax works exactly like it did in JavaScript. Let's put a condition around what products get displayed. Only products that have a length of 5, or greater.
 
 ```cs
-    foreach (string product in products) {
-        if (product.Length > 5) {
-            Console.WriteLine(product);
-        }
+foreach (string product in products) {
+    if (product.Length > 5) {
+        Console.WriteLine(product);
     }
+}
 ```
 
 
