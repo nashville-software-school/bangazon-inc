@@ -71,15 +71,15 @@ class PaymentType
 
 # Return Value vs. No Return Value
 
-If a method returns a value, you must explicitly tell the compiler the return value's type (`string`, `int`, `decimal`, etc.). If the method has no return value, then you must tell the compiler that with `void`.
+If a method returns a value, you must explicitly tell the compiler the return value's type (`string`, `int`, `decimal`, `double`, etc.). If the method has no return value, then you must tell the compiler that with `void`.
 
 ```cs
 // This method performs a calculation and returns the calculated value
-public decimal finalPrice (decimal unitPrice, 
-                           decimal stateTaxRate, 
-                           decimal shippingCharge)
+public decimal finalPrice (double unitPrice, 
+                           double stateTaxRate, 
+                           double shippingCharge)
 {
-    decimal basePrice = unitPrice + shippingCharge;
+    double basePrice = unitPrice + shippingCharge;
     return basePrice + (basePrice * stateTaxRate);
 }
 

@@ -7,17 +7,16 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 
-```cs
 public class Product 
 {
 	/*
 	  Properties
 	*/
 	public string Title { get; set; }
-	public decimal Price { get; set; }
+	public double Price { get; set; }
 
     // Constructor method
-    public Product (string title, decimal price)
+    public Product (string title, double price)
     {
         this.Title = title;
         this.Price = price;
@@ -35,13 +34,13 @@ public class Program
             new Product("Pocket Watch", 584.00)
         };
 
-        IEnumerable<string> inexpensive = from product in shoppingCart 
+        IEnumerable<Product> inexpensive = from product in shoppingCart 
             where product.Price < 100.00
             orderby product.Price
             select product;
 
     foreach (Product p in inexpensive)
-        Console.WriteLine("{0} ${1}", p.Title, p.Price);
+        Console.WriteLine("{0} ${1:f2}", p.Title, p.Price);
     }
 }
 ```

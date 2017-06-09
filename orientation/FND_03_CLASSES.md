@@ -233,7 +233,7 @@ public class Product
 	*/
 	private string title;
 	private string description;
-	private decimal price;
+	private double price;
 	private int quantity;
 
 	/*
@@ -241,7 +241,7 @@ public class Product
 	*/
 	public string Title { get; set; }
 	public string Description { get; set; }
-	public decimal Price { get; set; }
+	public double Price { get; set; }
 	public int Quantity { get; set; }
 
 	/*
