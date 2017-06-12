@@ -80,22 +80,17 @@ namespace bangazon
             string lastName="Smith"; 
 
             /*
-                C# now supports dynamic typing of a variable as well,
-                but be careful with it because it will change the 
-                type depending on the value assignment.
+                C# now supports implicit typing of a variable as well.
+                The type of the variable will be based on the initial 
+                value assignment.
             */
             var firstName="Bill";
 
             /* 
-              The String.Format() function syntax allows you to
-              build the final string, with placeholders, and
-              then provide comma-delimited list of variables to
-              use in the placeholders.
+              C# string interpolation syntax allows you to
+              build a string with embedded c# variables.
             */
-            Console.WriteLine("{0} {1} purchased on {2}", 
-                firstName, 
-                lastName, 
-                purchaseDate);
+            Console.WriteLine($"{firstName} {lastName} purchased on {purchaseDate}");
         }
     }
 }
