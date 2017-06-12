@@ -1,8 +1,8 @@
 # User Defined Types
 
-A class is a blueprint, or a template, for creating an object instance in memory. Just as `int`, `string`, and `bool` are primitive types in C#, you can create your own type.
+A class is a blueprint, or a template, for creating an object instance in memory. C# and the .Net Framework define many type, such as `int`, `decimal`, and `bool` ([value types](https://docs.microsoft.com/en-us/dotnet/visual-basic/programming-guide/language-features/data-types/value-types-and-reference-types)), and `Array`, `string`, and `Object` ([reference types](https://docs.microsoft.com/en-us/dotnet/visual-basic/programming-guide/language-features/data-types/value-types-and-reference-types)) in C#, you can create your own types.
 
-You do that with a class.
+You create a reference type with a class.
 
 ```cs
 public class Writer
@@ -23,7 +23,7 @@ author.write(output);
 
 # Accessibility Levels
 
-In C#, there are five accessibility levels that can be applied to Classes, Methods, Properties and Data Members:
+In C#, there are five accessibility levels that can be applied to Types, Methods, Properties and Data Members:
 
 - public
 - private
@@ -140,7 +140,7 @@ class Car : Automobile {
 Car stella = new Car();
 
 // UseEmergencyBreak method can use the protected SqueezeBreakPads from the Automobile class.
-Console.WriteLine("Applying the break: {0}", stella.UseEmergencyBreak());
+Console.WriteLine($"Applying the break: {stella.UseEmergencyBreak()}");
 ```
 
 ## Internal
@@ -212,7 +212,7 @@ public class Customer
 	public string FullName {
 		get
 		{
-			return string.Format("{0} {1}", firstName, lastName);
+			return $"{firstName} {lastName}";
 		}
 	}
 }
