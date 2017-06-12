@@ -34,13 +34,11 @@ public class Program
             new Product("Pocket Watch", 584.00)
         };
 
-        IEnumerable<Product> inexpensive = from product in shoppingCart 
-            where product.Price < 100.00
-            orderby product.Price
-            select product;
+    IEnumerable<Product> inexpensive = shoppingCart.Where(product => product.Price < 100)
+						   .OrderBy(product => product.Price);
 
     foreach (Product p in inexpensive)
-        Console.WriteLine("{0} ${1:f2}", p.Title, p.Price);
+        Console.WriteLine($"{p.Title} ${p.Price:f2}");
     }
 }
 ```
