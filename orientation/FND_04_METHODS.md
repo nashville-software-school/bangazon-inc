@@ -7,13 +7,13 @@ Public method are available for use by external code that creates an instance of
 ```cs
 class PaymentType
 {
-    private string cardNumber;
-    private string CVV;
-    private string cardHolderName;
+    private string _cardNumber;
+    private string _cvv;
+    private string _cardHolderName;
 
-    public string toString ()
+    public string ToString ()
     {
-        return string.Format("{0} {1} {2}", )
+        return $"{cardNumber} {_cvv} {_cardHolderName}", )
     }
 }
 ```
@@ -25,9 +25,9 @@ Private methods are used by the class for perform calculations or change its int
 ```cs
 class PaymentType
 {
-    private string cardNumber;
-    private string CVV;
-    private string cardHolderName;
+    private string _cardNumber;
+    private string _cvv;
+    private string _cardHolderName;
 
     /*
         Provide a public interface to external code to perform a high
@@ -37,32 +37,32 @@ class PaymentType
         - Information hiding
         - Encapsulation
     */
-    public string processPayment (decimal amount)
+    public string ProcessPayment (decimal amount)
     {
-        connectToProvider();
+        ConnectToProvider();
 
-        if (verifyDetails(cardNumber, CVV) && confirmPayment(amount))
+        if (VerifyDetails(cardNumber, CVV) && ConfirmPayment(amount))
         {
-            createEscrowEntry(amount);
+            CreateEscrowEntry(amount);
         }
     }
 
-    private void connectToProvider()
+    private void ConnectToProvider()
     {
         ...
     }
 
-    private bool confirmPayment()
+    private bool ConfirmPayment()
     {
         ...
     }
 
-    private void createEscrowEntry()
+    private void CreateEscrowEntry()
     {
         ...
     }
 
-    private bool verifyDetails()
+    private bool VerifyDetails()
     {
         ...
     }
@@ -75,7 +75,7 @@ If a method returns a value, you must explicitly tell the compiler the return va
 
 ```cs
 // This method performs a calculation and returns the calculated value
-public decimal finalPrice (double unitPrice, 
+public decimal FinalPrice (double unitPrice, 
                            double stateTaxRate, 
                            double shippingCharge)
 {
@@ -84,9 +84,9 @@ public decimal finalPrice (double unitPrice,
 }
 
 // This method sets the value of a field, and has no return value
-public void setContainerSize (int width, int height, int depth)
+public void SetContainerSize (int width, int height, int depth)
 {
-    shippingContainerVolume = width * height * depth;
+    _shippingContainerVolume = width * height * depth;
 }
 ```
 
