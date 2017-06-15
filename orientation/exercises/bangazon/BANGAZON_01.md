@@ -1,4 +1,8 @@
-# Bangazon Orientation - Defining Your Departments
+# Bangazon Orientation
+
+## Defining Your Departments
+
+---
 
 ## Setup
 
