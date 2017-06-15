@@ -80,7 +80,7 @@ namespace bangazon
             string lastName="Smith"; 
 
             /*
-                C# now supports dynamic typing of a variable as well,
+                C# now supports implicitly typing of a variable as well,
                 but be careful with it because it will change the 
                 type depending on the value assignment.
             */

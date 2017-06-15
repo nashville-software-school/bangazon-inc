@@ -1,4 +1,8 @@
-# Bangazon Orientation - Multiple Inheritance
+# Bangazon Orientation
+
+## Interfaces
+
+---
 
 ## Instructions
 

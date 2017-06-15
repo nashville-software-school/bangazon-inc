@@ -158,6 +158,7 @@ Classes and Methods that have tagged with the `internal` keyword allow access fr
 
 # Fields
 
+> Add this usually private properties
 
 > **Resource:** [Fields (C# Programming Guide)](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/fields)
 
@@ -212,7 +213,7 @@ public class Customer
 	public string FullName {
 		get
 		{
-			return string.Format("{0} {1}", firstName, lastName);
+			return string.Format($"{firstName} {lastName}");
 		}
 	}
 }
