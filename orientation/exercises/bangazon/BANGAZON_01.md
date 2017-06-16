@@ -69,7 +69,7 @@ public class HumanResources: Department
         For example, it would look like this in JavaScript.
         [{'vacation':'Unlimited vacation for everyone!!'}]
     */
-    private List<KeyValuePair<string, string>> _policies = new List<KeyValuePair<string, string>>();
+    private Dictionary<string, string> _policies = new Dictionary<string, string>();
 
     /*
         Since the parent class defined a constructor with three
@@ -91,7 +91,7 @@ public class HumanResources: Department
             reference a KeyValuePair, you have to use the angle
             brackets, and type keywords.
         */
-        _policies.Add(new KeyValuePair<string, string>(title, text));
+        _policies.Add(title, text);
 
         foreach(KeyValuePair<string, string> policy in _policies)
         {
