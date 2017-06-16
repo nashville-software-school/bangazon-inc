@@ -1,16 +1,19 @@
-# Bangazon Orientation - Aggregation
+# Bangazon Orientation
+
+## Aggregation
+
+---
 
 ## Instructions
 
-For this exercise, you need to modify the Department class so that Employees can be aggregated into them. In its constructor, initialize an empty set named `self.employees`.
+For this exercise, you need to modify the Department class so that Employees can be aggregated into them. In your Department class, create a field `_employees` and a property, `Employees`, that defines only a `get`, and returns a list of employees currently assigned to the department.
 
-Create three new methods.
+Create two new methods.
 
-1. `add_employee(self, employee)` - Add an employee to the set. The `employee` parameter accepts an existing instance of an employee.
-1. `remove_employee(self, employee)` - Removes an employee from the set. The `employee` parameter accepts an existing instance of an employee.
-1. `get_employees(self)` - Returns the set of employees.
+1. `AddEmployee(Employee employee)` - Add an employee to the set. The `employee` parameter accepts an existing instance of an employee.
+1. `RemoveEmployee(Employee employee)` - Removes an employee from the set. The `employee` parameter accepts an existing instance of an employee.
 
-Write a module that creates an instance of each of your Departments that you have defined. Then create two or three Employee instances for each Department, and add them to the appropriate Department instance.
+In your `Main` method, create an instance of each of your Departments that you have defined. Then create two or three Employee instances for each Department, and add them to the appropriate Department instance.
 
 Once you have defined all of your Employees and Departments, write logic to output the name of each Department, and the first/last name of each employee it contains to the command line.
 

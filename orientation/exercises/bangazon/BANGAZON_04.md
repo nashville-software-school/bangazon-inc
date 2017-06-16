@@ -6,44 +6,86 @@
 
 ## Instructions
 
-Your job is to think about additional classes that can be inherited by certain groups of your other classes. For example, some employees may be part-time and others may be full-time. 
+Your job is to think about interfaces that can be used by certain groups of your classes. For example, some employees may be part-time and others may be full-time. 
 
-To avoid a long, brittle inheritance tree where you create a `PartTimeEmployee`, and a `FullTimeEmployee` that both inherit from `Employee`, and then having a `PartTimeHumanResourcesEmployee` and `FullTimeHumanResourcesEmployee` - ad naseum - break up the behaviors and properties that describe the different types.
+The purpose of this exercise is to avoid a long, brittle inheritance tree where you create a `PartTimeEmployee`, and a `FullTimeEmployee` that both inherit from `Employee`, and then defining a `FullTimeHumanResourcesEmployee` type just to get the properties and methods of both types.
 
-```python
-class FullTime():
-  """Describes full-time employees"""
-  
-  def __init__(self):
-    self.hours_per_week = 40
+```
+              -------------------
+             |                   |
+             |     Employee      |
+             |                   |
+              -------------------
+                       |
+                       |
+                      \|/
+          ---------------------------
+         |                           |
+         |     FullTimeEmployee      |
+         |                           |
+          ---------------------------
+                       |
+                       |
+                      \|/
+          ---------------------------
+         |                           |
+         |  HumanResourcesEmployee   |
+         |                           |
+          ---------------------------
+
 ```
 
-```python
-class PartTime():
-  """Describes part-time employees"""
+```cs
+// Describes full-time employees
+public interface IFullTime
+{
+    double Salary;
+}
 
-  def __init__(self):
-    self.hours_per_week = 24
+// Describes part-time employees
+public interface IPartTime
+{
+    double HourlyRate;
+}
 ```
 
-```python
-class HumanResources(Employee, FullTime):
-  """Describes human resources employees"""
+```cs
+public class HumanResourcesEmployee: Employee, IFullTime
+{
+    // Private field
+    private double _salary;
 
-  def __init__(self, first_name, last_name):
-    super().__init__(first_name, last_name) # super is Employee
-    FullTime.__init__(self)
+    // Public property with accessor/mutator
+    public double Salary
+    {
+        get { return _salary; }
+        set 
+        {
+            // We pay HR people between $10/hr and $35/hr
+            if (value >= 10 && value <= 35)
+            {
+                _salary = value;
+            } else {
+                // If the value is not in the required range, throw
+                // and exception that the external code and catch
+                throw new ArgumentOutOfRangeException("Cannot set salary to value specified");
+
+            }
+        }
+    }
+}
 ```
 
-By breaking up your code this way, we've separated the inherent properties of an Employee from the properties that describe their employment status. Assume that there is a `Shipping` class that derives from `Employee` and those people work part time. However, a year from now, the company decides to make shipping people full-time employees.
+By breaking up your code this way, we've separated the inherent properties of an Employee from the properties that describe their employment status. This is a very fine-grained example of the [Single Responsibility Principle](../../concepts/solid/SINGLE_RESPONSIBILITY_PRINCIPLE.md).
 
-Then the development team simply need to change the `PartTime` class to `FullTime` in the definition, and their weekly hours are changed.
 
-Conversely, assume that there are currently 8 different classes that inherit from `PartTime`. The company changes the policy for part-time workers, bumping them from 24 hours/week to 28 hours/week.
+Assume that there is a `Shipping` class that derives from `Employee` and those people work part time. However, a year from now, the company decides to make shipping people full-time employees.
 
-One developer goes into the code and changes the value in the `PartTime` class and all inherited classes get the change immediately, while the `Employee` class remains unchanged.
+Then the development team simply need to change the `IPartTime` interface to `IFullTime` in the definition, implement the required property, and the change is complete.
 
-## Suggestions for Changes
+## Example for You to Implement
 
 1. Consider separating the location of a department from its inherent properties. Perhaps one location needs an access card, while others don't. One may require people to check in with security and others don't.
 1. Consider the possibility that some Employees may have a physical handicap that changes their working conditions. Some handicaps are temporary, and others may be added after the Employees is hired. You don't want those reflected in the base Employee inheritance chain, but in a separate chain altogether.
+1. Some employees are seasonal employees with a pre-determined length of employment, while others are not.
+1. Some employees will work the day shift, and some, the night shift.
