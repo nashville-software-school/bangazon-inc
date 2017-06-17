@@ -2,9 +2,13 @@
 
 ## Setup
 
+We're going to use `ValueTuple` that was mentioned in the [tuple exercise](./02_TUPLES.md).
+
 ```
 mkdir -p ~/workspace/csharp/exercises/dictionaries && cd $_
 dotnet new console
+dotnet add package System.ValueTuple
+dotnet restore
 ```
 
 ## References
@@ -32,40 +36,44 @@ To find a value in a Dictionary, you can use square bracket notation much like J
 string GM = stocks["GM"];   <--- "General Motors"
 ```
 
-Create another dictionary that represents stock purchases. The key will be the ticker symbol and the value will be the number of shares purchased.
+Create list of ValueTuples that represents stock purchases. Properties will be `ticker`, `shares`, `price`.
+
+```cs
+List<(string ticker, int shares, double price)> purchases = new List<(string, int, double)>();
+```
 
 ##### Example
 
 ```cs
-Dictionary<string, int> purchases = new Dictionary<string, int>();
-purchases.Add("GE", 150);
-purchases.Add("AAPL", 13);
-purchases.Add("CAT", 55);
-purchases.Add("GE", 79);
-purchases.Add("CAT", 55);
-purchases.Add("APPL", 21);
+purchases.Add((ticker: "GE", shares: 150, price: 23.21));
+purchases.Add((ticker: "GE", shares: 32, price: 17.87));
+purchases.Add((ticker: "GE", shares: 80, price: 19.02));
 // Add more for each stock you added to the stocks dictionary
 ```
 
-Create a total ownership report that computes the total amount of each stock that you have purchased. This is the basic relational database join algorithm between two tables.
+Create a total ownership report that computes the total value of each stock that you have purchased. This is the basic relational database join algorithm between two tables.
 
 ```cs
 /* 
     Define a new Dictionary to hold the aggregated purchase information.
     - The key should be a string that is the full company name.
-    - The value will be the aggregate of all stock owned for the company
+    - The value will be the valuation of each stock (price*amount)
 
     {
-        "General Electric": 229,
-        "AAPL": 34,
+        "General Electric": 35900,
+        "AAPL": 8445,
         ...
     }
 */
 
 // Iterate over the purchases and 
-foreach (KeyValuePair<string, int> purchase in purchases)
+foreach ((string ticker, int shares, double price) purchase in purchases)
 {
-    // 
+    // Does the company name key already exist in the report dictionary?
+
+    // If it does, update the total valuation
+
+    // If not, add the new key and set its value
 }
 ```
 
