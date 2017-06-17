@@ -8,7 +8,7 @@ For this exercise, we'll be using a `ValueTuple` which must be installed from Nu
 dotnet add package System.ValueTuple
 ```
 
-# Transaction Tuples
+# Exercise 1: Transaction Tuples
 
 Tuples are like Lists, but are immutable, and can store different types of values. They can't be modified once defined. They can be very useful when you need a simple object that can store multiple values but do not deem it necessary to create a custom type in your system.
 
