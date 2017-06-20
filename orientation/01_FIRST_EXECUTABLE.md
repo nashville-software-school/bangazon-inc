@@ -80,9 +80,9 @@ namespace bangazon
             string lastName="Smith"; 
 
             /*
-                C# now supports implicitly typing of a variable as well,
-                but be careful with it because it will change the 
-                type depending on the value assignment.
+                C# now supports implicitly typing of a variable. The
+                type of the variable will be determined, by the 
+                compiler, at compile time.
             */
             var firstName="Bill";
 
@@ -92,10 +92,7 @@ namespace bangazon
               then provide comma-delimited list of variables to
               use in the placeholders.
             */
-            Console.WriteLine("{0} {1} purchased on {2}", 
-                firstName, 
-                lastName, 
-                purchaseDate);
+            Console.WriteLine($"{firstName} {lastName} purchased on {purchaseDate}");
         }
     }
 }
