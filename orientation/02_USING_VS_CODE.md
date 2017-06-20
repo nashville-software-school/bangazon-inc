@@ -43,6 +43,7 @@ The explorer panel is just like the file explorer panel in every other editor yo
 
 ### Debugger
 
+Watch these videos for an overview of using the debugger tool. You'll learn this more in-depth during class.
 
-
-### Finder
+* [Visual Studio Code -- C# Dev Using .NET Core](https://youtu.be/B-v58Yf07RE?t=481)
+* [NSS Learning Team: Using Visual Studio Code](https://www.youtube.com/watch?v=ibLRROlkio4&index=2&list=PLX0ucpUE_qINmrJY4MasublSjpvljkqNS). You can also jump directly to the part where we [discuss the debugger](https://youtu.be/ibLRROlkio4?list=PLX0ucpUE_qINmrJY4MasublSjpvljkqNS&t=810).
