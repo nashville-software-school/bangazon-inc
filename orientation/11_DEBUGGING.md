@@ -7,4 +7,3 @@ The staff will walk you through how to use all the most useful parts of Code whe
 ## Visual Studio
 
 The staff will walk you through how to use all the most useful parts of Visual Studio when debugging an application. If you want to gain greater powers, read the [Getting Started with the Debugger](https://msdn.microsoft.com/en-us/library/k0k771bt.aspx) guide.
-

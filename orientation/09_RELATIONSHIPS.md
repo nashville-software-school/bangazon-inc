@@ -124,4 +124,3 @@ foreach (Customer cust in FTCustomers)
 ```
 
 In this last example, the Customer you created would not cease to exist should the Bank in which it had an account went bankrupt and closed.
-
