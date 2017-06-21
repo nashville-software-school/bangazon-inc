@@ -2,6 +2,8 @@
 
 .NET Language-Integrated Query defines a set of general purpose standard query operators that allow traversal, filter, and projection operations to be expressed in a direct yet declarative way in any .NET-based programming language. The standard query operators allow queries to be applied to any `IEnumerable<T>`-based information source.
 
+## Selecting Items from a Collection
+
 ```cs
 using System;
 using System.Linq;
@@ -39,6 +41,8 @@ public class Program
     }
 }
 ```
+
+## Using Aggregation Methods
 
 There are also helper methods that let you do aggregate calculations on collections, such as getting the sum of all numbers, or finding the maximum value. Let's looks at some examples.
 
@@ -80,6 +84,8 @@ There were 4 ideally sized cohorts
 There have been 9 total cohorts
 ```
 
+## Selecting Using Properties of Objects
+
 It's not just for built-in types. In the following code, I define a custom type for representing products in the system. I can then use LINQ to filter a collection based on the properties of the type.
 
 ```cs
@@ -109,22 +115,20 @@ public class Program
     public static void Main() {
         /*
             We can use curly braces to create instances of objects
-            and immediately inject them into the array.
-
-            Also, arrays in C# cannot be added to dynamically like in
-            JavaScript. In the code below, I'm initializing it to hold
-            4 things and 4 things only.
+            and immediately inject them into the List.
         */
-        List<Product> shoppingCart = new List<Product>{ 
+        List<Product> shoppingCart = new List<Product>(){ 
             new Product("Bike", 109.99),
             new Product("Mittens", 6.49),
             new Product("Lollipop", 0.50),
             new Product("Pocket Watch", 584.00)
         };
 
-        // IEnumerable is an interface, which we'll get to later,
-        // that we're using here to create a collection of Products
-        // that we can iterate over.
+        /*
+            IEnumerable is an interface, which we'll get to later,
+            that we're using here to create a collection of Products
+            that we can iterate over.
+        */
         IEnumerable<Product> inexpensive = from product in shoppingCart 
             where product.Price < 100.00
             orderby product.Price descending
@@ -133,5 +137,60 @@ public class Program
         foreach (Product p in inexpensive)
             Console.WriteLine($"{p.Title} ${p.Price:f2}");
         }
+
+        /*
+            You can also use `var` when creating LINQ collections. The 
+            following variable will still be typed as List<Product> by
+            the compiler, but you don't need to type that all out.
+        */
+        var expensive = from product in shoppingCart 
+            where product.Price >= 100.00
+            orderby product.Price descending
+            select product;
+
 }
 ```
+
+## LINQ and Lambdas
+
+Remember your anonymous function syntax that you learned about in the client-side course? It was nice, clean syntax to pass a function to another function, such as `forEach()` or `map()`, or `filter()` on an array.
+
+```js
+// Given this JavaScript array of numbers
+const numbers = [9, -59, 23, 71, -74, 13, 52, 44, 2]
+
+/*
+    Use filter() method to build a new array of numbers that 
+    match two conditions. Then chain the sort() method to order
+    them ascending
+*/
+let smallPositiveNumbers = numbers.filter(n => n < 40 && n > 0).sort((f, s) => f - s)
+```
+
+Luckily for you, you can use lambdas in C#, and the syntax is almost identical using LINQ.
+
+```cs
+// Give this C# List of numbers
+List<int> numbers = new List<int>(){ 9, -59, 23, 71, -74, 13, 52, 44, 2 };
+
+/*
+    Use the IEnumerable Where() method to build a new array of
+    numbers that match two conditions. Then chain the OrderBy()
+    method to order them ascending
+*/
+var smallPositiveNumbers = numbers.Where(n => n < 40 && n > 0).OrderBy(n => n);
+
+/*
+    Use All() to see if every item in the collection passes the
+    provided conditions.
+*/
+var allBetweenLarge = numbers.All(n => n > -100 && n < 400);  // true
+var allBetweenSmall = numbers.All(n => n > -5 && n < 39);  // false
+```
+
+## First Matching Item
+
+```cs
+List<string>
+
+
