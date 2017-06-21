@@ -26,19 +26,11 @@ Your first two weeks on the job will be you orientation to the technical languag
 
 At the end of your orientation, your management team will determine which Development Team you will be assigned to for the next three months.
 
-## Bangazon API
-
-Once you have been assigned to your team, the entire team will build the initial version of the Bangazon Application Programming Interface. This API will be used by much of the rest of the platform, and by our customers to buy & sell products. You will use all of the Magical Abstractions and conventions that the development ecosystem provides to build the API.
-
-As you build subsequent projects, you will learn much of the foundational technologies, tools and concepts that the Magical Abstrations do for you.
-
 ## Platform Development
 
-Once all teams have built the initial version of the API, it will then be up to the team to determine which of the remaining projects will be built next. In fact, all the work that you do for the next three months will be determined by you and your teammates, collectively.
+You will work on four different [Sprints](https://www.scruminc.com/sprint/) while you build the products that Bangazon Corporation needs in order to operate as a modern business. On each of these sprints, you will build features that your product owner has defined in the [Backlog](http://www.mountaingoatsoftware.com/agile/scrum/scrum-tools/product-backlog).
 
-You may work on any project, in any order.
-
-Once you have decided on a project, your management team will ensure that you have the proper training in the skills, concepts, and tools needed to complete the project, and then you will fulfill the requirements for the project until you are done, as defined in the [Bangazon Definition of Done](https://github.com/nashville-software-school/bangazon-inc/blob/master/EMPLOYEE_HANDBOOK.md#definition-of-done).
+Your management team will ensure that you have the proper training in the skills, concepts, and tools needed to complete the projects, and then you will fulfill the requirements for the project until you are done, as defined in the [Bangazon Definition of Done](https://github.com/nashville-software-school/bangazon-inc/blob/master/EMPLOYEE_HANDBOOK.md#definition-of-done).
 
 # Learning Objectives
 
