@@ -1,22 +1,13 @@
 # Kill Nickelback
 
-In this exercises, you're going to use a conditional statement inside a comprehension. Let's look at a basic example.
-
-```python
-nums = range(10)
-small_numbers = [num for num in nums if num < 6]
-# Only add numbers to the new list if the value is less than 6
-
-words = ['big', 'red', 'dog', 'ate', 'his', 'food']
-three_letters_words = [ word.title() for word in words if len(word) == 3 ]
-# len(stringVariable) is equivalent to stringVariable.length in JavaScript
-```
+In this exercise, you're going to use a sets, tuples, and lists.
 
 ## Setup
 
 ```
-mkdir -p ~/workspace/python/exercises/sets && cd $_
-touch nickelback.py
+mkdir -p ~/workspace/csharp/exercises/nickelback && cd $_
+dotnet new console
+dotnet restore
 ```
 
 ## Instructions
