@@ -1,6 +1,6 @@
 # Collections and Iteration
 
-C#, provides you with a variety of contructs that allow you to store and access data with respect to traditional Data Structures. Below are the main types of collections/ways to store data:
+C#, provides you with a variety of constructs that allow you to store and access data with respect to traditional Data Structures. Below are the main types of collections/ways to store data:
 
 - Array
 - List
