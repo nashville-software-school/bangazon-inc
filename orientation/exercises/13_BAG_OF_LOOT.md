@@ -1,12 +1,13 @@
 # Bag o' Loot
 
-This exercise is your introduction to writing command line applications that interact with the user. You may want to review the [Command Line User Input](../13_CLI_IO.md) tutorial again before starting on this one.
+This exercise is your introduction to writing command line applications that interact with the user, and store their data in a persistent SQLite database. You may want to review the [Command Line User Input](../13_CLI_IO.md) tutorial again before starting on this one.
 
 ## Setup
 
 ```
 mkdir -p ~/workspace/csharp/exercises/bagoloot/BagOLoot && cd $_
 dotnet new console
+dotnet add package System.Data.SQLite
 dotnet restore
 mkdir ../BagOLoot.Tests && cd $_
 dotnet new xunit

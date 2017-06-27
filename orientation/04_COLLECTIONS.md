@@ -1,14 +1,18 @@
 # Collections and Iteration
 
-C#, provides you with a variety of contructs that allow you to store and access data with respect to traditional Data Structures. Below are the main types of collections/ways to store data:
+C#, provides you with a variety of contructs that allow you to store and access data with respect to traditional Data Structures. Below are the main types of collections/ways to store data that we will cover during orientation.
 
 - Array
 - List
-- Stack
-- Queue
+- Tuple
 - Dictionary
 
-Each of the types in the bulleted list above are implemented as `generics`. Generic data structures, allow you to declare a container specifying what objects it will hold.
+There are other collection types that we won't cover during orientation.
+
+- Stack
+- Queue
+
+Each of these collection types are implemented as `generics`. Generic data structures, allow you to declare a container specifying what objects it will hold.
 
 The `List` and `Array` classes implement the IEnumerable interface. IEnumerable defines a blueprint that allows a developer to use the `foreach` keyword to cycle through all the elements.
 
@@ -35,13 +39,13 @@ myListOfIntegers.Add(108);
 ```cs
 using System.Collections.Generic;
 
-List<double> decimals = new List<double>();
-decimals.Add(1.3);
-decimals.Add(8.2);
-decimals.Add(0.4);
-decimals.Add(12.1);
+List<double> doublePrecisionNumbers = new List<double>();
+doublePrecisionNumbers.Add(1.3);
+doublePrecisionNumbers.Add(8.2);
+doublePrecisionNumbers.Add(0.4);
+doublePrecisionNumbers.Add(12.1);
 
-foreach (double d in decimals)
+foreach (double d in doublePrecisionNumbers)
 {
     Console.WriteLine(d);
 }
