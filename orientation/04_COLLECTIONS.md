@@ -11,12 +11,13 @@ There are other collection types that we won't cover during orientation.
 
 - Stack
 - Queue
+- SortedList
 
 Each of these collection types are implemented as `generics`. Generic data structures, allow you to declare a container specifying what objects it will hold.
 
 The `List` and `Array` classes implement the IEnumerable interface. IEnumerable defines a blueprint that allows a developer to use the `foreach` keyword to cycle through all the elements.
 
-### List
+## List
 
 List contains *n* items of the same type.
 
@@ -51,7 +52,35 @@ foreach (double d in doublePrecisionNumbers)
 }
 ```
 
-### Dictionary
+## Tuple
+
+A tuple is a way to define a very lightweight, custom type, with a limited interface for working with value in it. You could think of it as a very simplistic JavaScript object. In order to use them, you have to install the `System.ValueTuple` package.
+
+```
+dotnet new console
+dotnet add package System.ValueTuple
+dotnet restore
+```
+
+Here's an example `Program.cs` file for using a Tuple.
+
+```cs
+using System;
+
+namespace TreeFarm
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            (string label, int quantity, double price) x = ("Yo-yo", 1, 9.04);
+            Console.WriteLine($"{x.label} {x.quantity} {x.price} ");
+        }
+    }
+}
+```
+
+## Dictionary
 
 A [dictionary](https://msdn.microsoft.com/en-us/library/xfhwa508.aspx) is a collection of key/value pairs, just like an object in JavaScript. The big difference is that the key can be any type. One thing to remember is that you can't add the same key to a Dictionary more than once.
 
