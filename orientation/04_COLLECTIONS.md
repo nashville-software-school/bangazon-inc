@@ -54,11 +54,10 @@ foreach (double d in doublePrecisionNumbers)
 
 ## Tuple
 
-A tuple is a way to define a very lightweight, custom type, with a limited interface for working with value in it. You could think of it as a very simplistic JavaScript object. In order to use them, you have to install the `System.ValueTuple` package.
+A tuple is a way to define a very lightweight, custom type, with a limited interface for working with value in it. You could think of it as a very simplistic JavaScript object. 
 
 ```
 dotnet new console
-dotnet add package System.ValueTuple
 dotnet restore
 ```
 
@@ -67,17 +66,63 @@ Here's an example `Program.cs` file for using a Tuple.
 ```cs
 using System;
 
-namespace TreeFarm
+namespace Sample
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
-            (string label, int quantity, double price) x = ("Yo-yo", 1, 9.04);
-            Console.WriteLine($"{x.label} {x.quantity} {x.price} ");
+            var product = Tuple.Create("Yo-yo", 1, 9.04);
+            Console.WriteLine($"{product.Item1} {product.Item2} {product.Item3} ");
         }
     }
 }
+```
+
+### ValueTuple
+
+The ValueTuple type gets us close to a POJO by letting us name the values anything we want instead of being stuck with `Item1...Item7`. In order to use them, you have to install the `System.ValueTuple` package.
+
+```
+dotnet add package System.ValueTuple
+dotnet restore
+```
+
+```cs
+using System;
+
+namespace Sample
+{
+    class Program
+    {
+        static void Main()
+        {
+            /*
+                In JavaScript, the equivalent of the statement below would be:
+
+                const product = {
+                    name: "Yo-yo",
+                    quantity: 1,
+                    price: 9.04
+                }
+            */
+            (string name, int quantity, double price) product = ("Yo-yo", 1, 9.04);
+
+            // Now you can use appropriately named properties on the object
+            Console.WriteLine($"{product.label} {product.quantity} {product.price} ");
+        }
+    }
+}
+```
+
+Unlike some other languages that utilize tuples, in C# they are not immutable, so you can change a property's value after it has been set.
+
+```cs
+(string name, int quantity, double price) product = ("Yo-yo", 1, 9.04);
+Console.WriteLine($"{product.quantity}");  // 1
+
+product.quantity = 2;
+Console.WriteLine($"{product.quantity}");  // 2
 ```
 
 ## Dictionary

@@ -8,9 +8,9 @@ For this exercise, we'll be using a `ValueTuple` which must be installed from Nu
 dotnet add package System.ValueTuple
 ```
 
-# Exercise 1: Transaction Tuples
+# Transaction Tuples
 
-Tuples are like Lists, but are immutable, and can store different types of values. They can't be modified once defined. They can be very useful when you need a simple object that can store multiple values but do not deem it necessary to create a custom type in your system.
+Tuples are very lightweight types that you can define without the need of a `class`. They can be very useful when you need a simple object that can store multiple values but do not deem it necessary to create a custom type in your system.
 
 ## Setup
 
@@ -33,11 +33,17 @@ dotnet restore
     List<(string product, double amount, int quantity)> transactions = new List<(string, double, int)>();
     ```
 1. Add 5, or more, transactions to the list.
-1. Determine if an animal is in your tuple by using `for value in tuple`.
 1. Iterate over the list of tuples and calculate how many total products you sold today, and what your total revenue was.
     ```cs
     foreach ((string product, double amount, int quantity) t in transactions)
     {
         // Logic goes here to look up quantity and amount in each transaction
     }
+    ```
+
+Sample output
+
+```
+Items sold today: 23
+Total revenue: $3011.76
 ```
