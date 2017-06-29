@@ -3,22 +3,25 @@
 ## Setup
 
 ```
-mkdir -p ~/workspace/python/exercises/lists && cd $_
-touch random_squared.py
+mkdir -p ~/workspace/csharp/exercises/random && cd $_
+dotnet new console
+dotnet restore
 ```
 
 ## References
 
-* [Random module](https://docs.python.org/3.6/library/random.html)
+* [Random class](https://msdn.microsoft.com/en-us/library/system.random(v=vs.110).aspx)
 * [Python Lists](https://docs.python.org/3.6/tutorial/datastructures.html)
 
 ## Instructions
 
-1. Using the `random` module and the `range` method, generate a list of 20 random numbers between 0 and 49.
-    ```
-    import random
+1. Using the `Random` class, generate a list of 20 random numbers that are in the range of 1-50.
 
-    random_numbers = [...insert awesome code here...]
-    print(random_numbers)
+    ```cs
+    Random random = new Random();
+    // Create a list
+    // Populate the list
     ```
-2. With the resulting list, use a list comprehension to build a new list that contains each number squared. For example, if the original list is `[2, 5]`, the final list will be `[4, 25]`.
+
+1. With the resulting List, populate a new List that contains each number squared. For example, if the original list is `2, 5, 3, 15`, the final list will be `4, 25, 9, 225`.
+1. Then remove any number that is odd from the list of squared numbers.
