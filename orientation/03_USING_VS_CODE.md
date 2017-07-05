@@ -47,3 +47,28 @@ Watch these videos for an overview of using the debugger tool. You'll learn this
 
 * [Visual Studio Code -- C# Dev Using .NET Core](https://youtu.be/B-v58Yf07RE?t=481)
 * [NSS Learning Team: Using Visual Studio Code](https://www.youtube.com/watch?v=ibLRROlkio4&index=2&list=PLX0ucpUE_qINmrJY4MasublSjpvljkqNS). You can also jump directly to the part where we [discuss the debugger](https://youtu.be/ibLRROlkio4?list=PLX0ucpUE_qINmrJY4MasublSjpvljkqNS&t=810).
+
+## Useful Keyboard Shortcuts
+
+All keyboard shortcuts can be found in *File > Preferences > Keyboard Shortcuts*. If you want to overwrite any of the preexisting shortcuts, you can edit the keybindings.json file. 
+
+* Move a line of code up or down
+`alt + down` or `alt + up`
+
+* Make a duplicate of a line of code
+`shift + alt + down` or `shift + alt + up`
+
+* Toggle sidebar 
+`cmd b` 
+
+* Integrated terminal
+`ctrl ~`
+
+* Switch between files
+`cmd + shift + f`
+
+* Select all occurrences
+`shift + cmd L`
+
+* Select a few occurrences
+`cmd d`
