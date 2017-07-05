@@ -52,23 +52,23 @@ Watch these videos for an overview of using the debugger tool. You'll learn this
 
 All keyboard shortcuts can be found in *File > Preferences > Keyboard Shortcuts*. If you want to overwrite any of the preexisting shortcuts, you can edit the keybindings.json file. 
 
-Move a line of code up or down
+* Move a line of code up or down
 `alt + down` or `alt + up`
 
-Make a duplicate of a line of code
+* Make a duplicate of a line of code
 `shift + alt + down` or `shift + alt + up`
 
-Toggle sidebar 
+* Toggle sidebar 
 `cmd b` 
 
-Integrated terminal
+* Integrated terminal
 `ctrl ~`
 
-Switch between files
+* Switch between files
 `cmd + shift + f`
 
-Select all occurances
+* Select all occurances
 `shift + cmd L`
 
-Select occurances
+* Select occurances
 `cmd d`
