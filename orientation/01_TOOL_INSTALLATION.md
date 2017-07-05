@@ -1,5 +1,17 @@
 # Installing required software
 
+## SQLite
+
+### For OSX Users
+
+```
+brew install sqlite
+```
+
+### For Windows Users
+
+Visit the [SQLite downloads](https://www.sqlite.org/download.html) and download the 64-bit DLL (x64) for SQLite version, unzip and install it.
+
 ## SQL Browser
 
 The [DB browser for SQLite](http://sqlitebrowser.org/) will let you view, query and manage your databases during the course.

@@ -17,11 +17,4 @@ You will learn how to use the basics of the SQL language to add a table to a dat
 * [Create Table](https://www.techonthenet.com/sqlite/tables/create_table.php)
 * [Insert](https://www.techonthenet.com/sqlite/insert.php)
 * [Select](https://www.techonthenet.com/sqlite/select.php)
-
-## Intro to LINQ
-
-You will start with a minimal ASP.NET Web API and use LINQ to accomplish the same tasks you learned how to do with SQL.
-
-### Additional Resources
-
-[Language-Integrated Query (LINQ) (C#)](https://msdn.microsoft.com/en-us/library/mt693024.aspx)
+* [Delete](https://www.techonthenet.com/sqlite/delete.php)
