@@ -67,8 +67,8 @@ All keyboard shortcuts can be found in *File > Preferences > Keyboard Shortcuts*
 * Switch between files
 `cmd + shift + f`
 
-* Select all occurances
+* Select all occurrences
 `shift + cmd L`
 
-* Select occurances
+* Select a few occurrences
 `cmd d`
