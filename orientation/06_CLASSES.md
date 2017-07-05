@@ -1,8 +1,9 @@
 # User Defined Types
 
-A class is a blueprint, or a template, for creating an object instance in memory. Just as `int`, `string`, and `bool` are primitive types in C#, you can create your own type. Read more about [Types in C# Programming](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/types/).
+A class is a blueprint, or a template, for creating an object instance in memory. C# and the .Net Framework define many type, such as `int`, `decimal`, and `bool` ([value types](https://docs.microsoft.com/en-us/dotnet/visual-basic/programming-guide/language-features/data-types/value-types-and-reference-types)), and `Array`, `string`, and `Object` ([reference types](https://docs.microsoft.com/en-us/dotnet/visual-basic/programming-guide/language-features/data-types/value-types-and-reference-types)) in C#, you can create your own types.
 
-You do that with a class.
+
+You create a new reference type with a class.
 
 ```cs
 public class Writer

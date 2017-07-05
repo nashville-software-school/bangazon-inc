@@ -15,7 +15,7 @@ dotnet restore
 
 * [C# dictionaries](https://msdn.microsoft.com/en-us/library/xfhwa508(v=vs.110).aspx#Anchor_8)
 * [Dictionary in C#](http://www.c-sharpcorner.com/UploadFile/219d4d/dictionary-in-C-Sharp-language/)
-* [DotNet Perls - Dictionary](https://www.dotnetperls.com/dictionary)
+* [Interactive C# Dictionaries](http://www.learncs.org/en/Dictionaries)
 
 
 ## Instructions
