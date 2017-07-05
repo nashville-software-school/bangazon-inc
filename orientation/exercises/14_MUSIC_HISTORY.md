@@ -3,7 +3,7 @@
 ## Setup
 
 ```
-mkdir -p ~/workspace/python/exercises/music-sql && cd $_
+mkdir -p ~/workspace/csharp/exercises/music-sql && cd $_
 touch queries.sql
 ```
 

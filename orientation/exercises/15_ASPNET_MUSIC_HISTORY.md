@@ -3,7 +3,7 @@
 ## Setup
 
 ```
-mkdir -p ~/workspace/python/exercises/djangomusic && cd $_
+mkdir -p ~/workspace/csharp/exercises/musichistory && cd $_
 ```
 
 ## Instructions
