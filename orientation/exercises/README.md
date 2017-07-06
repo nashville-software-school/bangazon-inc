@@ -25,7 +25,6 @@ This is a suggested order for completing the exercises in orientation:
 
 1. We will work through the [introduction to data relationships](./14_MUSIC_HISTORY.md) as a team in class.
 1. [Bangazon](./15_SQL_BANGAZON.md)
-1. [Chinook](./17_SQL_BANGAZON.md)
 
 ### Online SQL Tutorial
 
