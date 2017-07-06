@@ -11,7 +11,7 @@ This is a suggested order for completing the exercises in orientation:
 
 ## Intermediate exercises
 1. [Simpler Methods](./06_EXPRESSION_FN_MEMBERS.md)
-1. [Linq List](./07_LINQ_LIST.md)
+1. [LINQ List](./07_LINQ_LIST.md)
 1. [Family Dictionary](./08_FAMILY_DICTIONARY.md)
 1. [Kill Nickelback](./09_KILL_NICKELBACK.md)
 1. [RandomSquared](./10_RANDOMSQUARED.md)
