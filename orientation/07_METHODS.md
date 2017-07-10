@@ -135,3 +135,44 @@ In this case, you don't need an instance of Utilities.
 ```cs
 var result = Utilities.AddTwoNumbers(56, 32);
 ```
+
+## Expression Bodied Functions
+
+Consider the following simple class.
+
+```cs
+class TextGenerator
+{
+    private List<string> _words = new List<string>();
+
+    public void AddWords(List<string> words)
+    {
+        _words.AddRange(words);
+    }
+
+    public string Sentence()
+    {
+        return String.Join(" ", _words);
+    }
+}
+```
+
+Here's a quick implementation.
+
+```cs
+var t = new TextGenerator();
+t.AddWords(new List<string>(){"the", "lazy", "brown", "fox"});
+Console.WriteLine($"Full sentence: {t.Sentence()}");
+```
+
+Since the `Sentence` method returns a string that is all the words joined together, and performs no other logic, this is a great place to use an expression bodied function. You can rewrite the code like this.
+
+```cs
+public string Sentence => String.Join(" ", _words);
+```
+
+And it's implementation change from a method call to a property.
+
+```cs
+Console.WriteLine($"Full sentence: {t.Sentence}");
+```
