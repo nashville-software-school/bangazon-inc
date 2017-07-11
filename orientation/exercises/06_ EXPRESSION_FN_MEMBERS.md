@@ -47,8 +47,8 @@ public class Bug
     {
         this.Name = name;
         this.Species = species;
-        this.Predators.Concat(predators);
-        this.Prey.Concat(prey);
+        this.Predators = predators;
+        this.Prey = prey;
     }
 
     // Convert this method to an expression member
