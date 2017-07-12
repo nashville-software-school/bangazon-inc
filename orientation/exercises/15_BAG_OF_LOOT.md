@@ -106,26 +106,17 @@ Kelly
 ```
 
 
-## Requirements
+## Testing Requirements
 
-**Write a test before you write implementation code**
-
-```cs
-# This is only an example. If I find this code in your project
-#  I will make you go back and delete it and write your own test.
-def test_toys_for_child_can_be_added_to_bag ()
-{
-    lootBag = Bag()
-    lootBag.add_toy_for_child("kite", "suzy");
-    self.assertEqual("kite", lootBag.child_items("suzy")[0]);
-}
-```
+> **Write tests before you write implementation code!!!!!**
 
 1. Items can be added to bag, and assigned to a child.
-1. Items can be removed from bag, per child. Removing `ball` from the bag should not be allowed. A child's name must be specified.
+1. Items can be removed from bag, per child. Removing `Ball`, for example, from the bag should not be allowed. A child's name must be specified.
 1. Must be able to list all children who are getting a toy.
 1. Must be able to list all toys for a given child's name.
 1. Must be able to set the *delivered* property of a child, which defaults to `false` to `true`.
+
+There are a couple unit tests to get your started in the boilerplate code repo.
 
 ## Persistent Storage
 
