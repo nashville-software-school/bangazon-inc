@@ -135,7 +135,7 @@ public class Program
 ```cs
 /* 
     Given the same customer set, display how many millionaires per bank.
-    Ref: https://code.msdn.microsoft.com/LINQ-to-DataSets-Grouping-c62703ea
+    Ref: https://stackoverflow.com/questions/7325278/group-by-in-linq
 
     Example Output:
     WF 2
