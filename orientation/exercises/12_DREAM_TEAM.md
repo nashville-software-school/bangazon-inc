@@ -27,7 +27,7 @@ Once you're done, you should have 6 different types in total, each with the prop
     ```cs
     serverSide.Add(Ed);
     serverSide.Add(Eliza);
-    serverSide.Add(Kathleen);
+    serverSide.Add(Kathy);
 
     clientSide.Add(Preeti);
     clientSide.Add(Mitchell);
