@@ -57,15 +57,22 @@ Let's build some basic code for these features. We will start with behaviors and
 ```cs
 namespace TreeFarm
 {
-    class Tree
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Hello World!");
+        }
+    }
+    public class Tree
     {
         public double Height { get; set; } = 0;
         public string Location { get; set; } = "";
         public string Type { get; set; } = "";
 
-        public void Move (string newLocation)
+        public string Move (string newLocation)
         {
-            if (newLocation !== this.Location)
+            if (newLocation != this.Location)
             {
                 this.Location = newLocation;
             }
