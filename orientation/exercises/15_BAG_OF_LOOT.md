@@ -116,7 +116,7 @@ Kelly
 1. Must be able to list all toys for a given child's name.
 1. Must be able to set the *delivered* property of a child, which defaults to `false` to `true`.
 
-There are a couple unit tests to get your started in the boilerplate code repo.
+There are a couple unit tests to get your started in the boilerplate code repo that your instructor will assign to you via Github Classroom.
 
 ## Persistent Storage
 
