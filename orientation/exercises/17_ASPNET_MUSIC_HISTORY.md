@@ -1,4 +1,4 @@
-# Quick Django Web Application
+# Quick ASP.NET Web Application
 
 ## Setup
 

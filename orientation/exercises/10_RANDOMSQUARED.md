@@ -11,7 +11,6 @@ dotnet restore
 ## References
 
 * [Random class](https://msdn.microsoft.com/en-us/library/system.random(v=vs.110).aspx)
-* [Python Lists](https://docs.python.org/3.6/tutorial/datastructures.html)
 
 ## Instructions
 

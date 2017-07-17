@@ -55,6 +55,8 @@ So what are the behaviors of the system?
 Let's build some basic code for these features. We will start with behaviors and properties of a Tree.
 
 ```cs
+using System;
+
 namespace TreeFarm
 {
     class Program
