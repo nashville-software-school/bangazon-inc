@@ -4,8 +4,14 @@
 
 ```
 mkdir -p ~/workspace/csharp/exercises/MusicHistory && cd $_
-dotnet new webapi
+dotnet new sln -n MusicHistory
+mkdir src && cd $_
+dotnet new webapi -n MusicHistory
 dotnet restore
+mkdir -p ../test/MusicHistory.Tests && cd $_
+dotnet new xunit
+dotnet restore
+cd ../..
 code .
 ```
 
