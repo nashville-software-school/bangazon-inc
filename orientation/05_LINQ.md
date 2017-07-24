@@ -190,7 +190,7 @@ var allBetweenSmall = numbers.All(n => n > -5 && n < 39);  // false
 
 Here's some more examples of how JavaScript Array methods and LINQ are similar:
 
-```
+```cs
 var sampleNumbers = [18, 9, 5, 6, 84, 2, 5, 13];
 
 //JAVASCRIPT
