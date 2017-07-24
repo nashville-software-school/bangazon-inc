@@ -203,10 +203,10 @@ var areAllEven = sampleNumbers.all(number => number % 2 == 0);
 //Limit an array to the items that meet a criteria
 
 //JAVASCRIPT
-var onlyEvens = sampleNumbers.filter(value => value % 2 == 0);
+var onlyEvens = sampleNumbers.filter(number => number % 2 == 0);
 
 //LINQ
-var onlyEvens = sampleNumbers.where(value => value % 2 == 0);
+var onlyEvens = sampleNumbers.where(number => number % 2 == 0);
 
 //  perform an action on each item in an array
 
@@ -219,7 +219,7 @@ onlyEvens.ToList().ForEach(evenValue => Console.WriteLine(evenValue + " is an ev
 // transforms each value in an array 
 
 //JAVASCRIPT
-var sampleNumbersSquared = sampleNumbers.map(value => value * value);
+var sampleNumbersSquared = sampleNumbers.map(number => number * number);
 
 //LINQ
 var sampleNumbersSquared = sampleNumbers.select(number => number * number);
