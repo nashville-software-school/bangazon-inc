@@ -188,6 +188,43 @@ var allBetweenLarge = numbers.All(n => n > -100 && n < 400);  // true
 var allBetweenSmall = numbers.All(n => n > -5 && n < 39);  // false
 ```
 
+Here's some more examples of how JavaScript Array methods and LINQ are similar:
+
+```cs
+var sampleNumbers = [18, 9, 5, 6, 84, 2, 5, 13];
+
+//JAVASCRIPT
+var allAreEven = sampleNumbers.every(number => number % 2 == 0 );
+
+//LINQ
+var areAllEven = sampleNumbers.all(number => number % 2 == 0);
+
+
+//Limit an array to the items that meet a criteria
+
+//JAVASCRIPT
+var onlyEvens = sampleNumbers.filter(number => number % 2 == 0);
+
+//LINQ
+var onlyEvens = sampleNumbers.where(number => number % 2 == 0);
+
+//  perform an action on each item in an array
+
+//JAVASCRIPT
+onlyEvens.forEach(evenValue => { console.log(evenValue + " is an even value"); });
+
+//LINQ
+onlyEvens.ToList().ForEach(evenValue => Console.WriteLine(evenValue + " is an even value"));
+
+// transforms each value in an array 
+
+//JAVASCRIPT
+var sampleNumbersSquared = sampleNumbers.map(number => number * number);
+
+//LINQ
+var sampleNumbersSquared = sampleNumbers.select(number => number * number);
+```
+
 ## First Matching Item
 
 ```cs
