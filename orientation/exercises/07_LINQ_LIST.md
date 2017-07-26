@@ -22,7 +22,7 @@ Given the collections of items shown below, use LINQ to build the requested coll
 
 ```cs
 // Find the words in the collection that start with the letter 'L'
-List<string> fruits = new List<string>() {'Lemon', 'Apple', 'Orange', 'Lime', 'Watermelon', 'Loganberry'};
+List<string> fruits = new List<string>() {"Lemon", "Apple", "Orange", "Lime", "Watermelon", "Loganberry"};
 
 var LFruits = from fruit in fruits ...
 ```
@@ -32,7 +32,7 @@ var LFruits = from fruit in fruits ...
 List<int> numbers = new List<int>()
 {
     15, 8, 21, 24, 32, 13, 30, 12, 7, 54, 48, 4, 49, 96
-}
+};
 
 var fourSixMultiples = numbers.Where();
 ```
@@ -48,7 +48,7 @@ List<string> names = new List<string>()
     "Theodora", "William", "Svetlana", "Charisse", "Yolanda",
     "Gregorio", "Jean-Paul", "Evangelina", "Viktor", "Jacqueline",
     "Francisco", "Tre" 
-}
+};
 
 var descend = ...
 ```
@@ -58,7 +58,7 @@ var descend = ...
 List<int> numbers = new List<int>()
 {
     15, 8, 21, 24, 32, 13, 30, 12, 7, 54, 48, 4, 49, 96
-}
+};
 ```
 
 ### Aggregate Operations
@@ -68,7 +68,7 @@ List<int> numbers = new List<int>()
 List<int> numbers = new List<int>()
 {
     15, 8, 21, 24, 32, 13, 30, 12, 7, 54, 48, 4, 49, 96
-}
+};
 ```
 
 ```cs
@@ -76,7 +76,7 @@ List<int> numbers = new List<int>()
 List<double> purchases = new List<double>()
 {
     2340.29, 745.31, 21.76, 34.03, 4786.45, 879.45, 9442.85, 2454.63, 45.65
-}
+};
 ```
 
 ```cs
@@ -84,7 +84,7 @@ List<double> purchases = new List<double>()
 List<double> prices = new List<double>()
 {
     879.45, 9442.85, 2454.63, 45.65, 2340.29, 34.03, 4786.45, 745.31, 21.76
-}
+};
 ```
 
 ### Partitioning Operations
@@ -99,7 +99,7 @@ List<double> prices = new List<double>()
 List<int> wheresSquaredo = new List<int>()
 {
     66, 12, 8, 27, 82, 34, 7, 50, 19, 46, 81, 23, 30, 4, 68, 14
-}
+};
 ```
 
 ### Using Custom Types
