@@ -29,7 +29,6 @@ That file **is** the database. It contains all of the tables and data. You can n
 ## Instructions
 
 1. In your cohort's Github account, create a github repository for your answers. If your instructor is using Github Classroom, the repository will be created for you. If not, name your repository `chinook-{your Github username]`.
-1. If you are using the Firefox Add On, and you have trouble opening it once it has been installed, try opening Firefox, selecting "customize" at the bottom of the hamberger menu at the top right of the page. You can then drag SQLite Manager onto the toolbar where it will be easily accessible.
 1. Go ahead and click around a little bit to familarize yourself with the database
 1. **Recommended:** Draw an ERD of the Chinook database. Make sure to label primary keys, foreign keys, and indicate the type of relationship (one to one, one to many, many to many, etc) for each relationship. Use draw.io.
 1. When you're ready to start the exercise, click the tab labeled "Execute SQL", type in your query and run it.
