@@ -24,6 +24,8 @@ Build an ERD to define the properties of the following resources and the relatio
 * Track when a computer was purchased by the company
 * Track when a computer was decommissioned by the company
 * A computer can only be assigned to one employee at a time
+* If the IT manager buys a brand new laptop for someone who quits in 3 months, he doesn't throw away the computer
+* An employee's computer may malfunction
 
 #### Training Programs
 * A training program must have a start date
@@ -38,6 +40,7 @@ Build an ERD to define the properties of the following resources and the relatio
 * A product has a price
 * A product has a title
 * A product has a description
+* A product has a quantity (e.g. Trey is selling 3 computers)
 * Products will be created by customers, so make sure that you have the appropriate column on the Product table
 
 #### Orders
