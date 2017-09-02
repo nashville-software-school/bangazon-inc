@@ -4,6 +4,7 @@
 
 1. Install [Oracle VirtualBox](https://www.virtualbox.org/wiki/Downloads). Make sure you click on the OSX Hosts link.
 1. Install [Vagrant](https://www.vagrantup.com/)
+1. Install [Git Bash](https://git-scm.com/downloads)
 
 ## Windows Installation
 
