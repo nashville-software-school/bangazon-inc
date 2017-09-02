@@ -125,5 +125,3 @@ Using the above pattern, `Nov 10, 2007` would result in 3 dictionary with the re
     "year":  "2007"
 }
 ```
-
-## Zero-Width Assertions (Advanced Material)

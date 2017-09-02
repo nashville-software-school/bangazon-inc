@@ -35,23 +35,26 @@ A constructor method's access modifier must be `public` and the name of the meth
 class Car
 {
     // Simple public properties
-    public int wheels { get; set; }
-    public string color { get; set; }
-    public string make { get; set; }
-    public string model { get; set; }
+    public int Wheels { get; set; }
+    public string Color { get; set; }
+    public string Make { get; set; }
+    public string Model { get; set; }
 
     // Constructor method for every Car
     public Car () 
     {
-        this.wheels = 4;
+        this.Wheels = 4;
     }
 
 }
 ```
 
-Hey, look!  It's the `this` keyword again! It means the same thing here as it did in JavaScript. `this` is a reference to the object you created, so this constructor method will set the value of the `wheels` property to 4 for every Car.
+Hey, look!  It's the `this` keyword again! It is a reference to the object you created, so this constructor method will set the value of the `Wheels` property to 4 for every Car.
 
 ```cs
 Car accord = new Car();
 Console.WriteLine(accord.wheels); // This will output 4
+
+Car jaguar = new Car();
+Console.WriteLine(jaguar.wheels); // Also 4
 ```

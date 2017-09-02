@@ -30,6 +30,15 @@ At the end of your orientation, your management team will determine which Develo
 
 You will work on four different [Sprints](https://www.scruminc.com/sprint/) while you build the products that Bangazon Corporation needs in order to operate as a modern business. On each of these sprints, you will build features that your product owner has defined in the [Backlog](http://www.mountaingoatsoftware.com/agile/scrum/scrum-tools/product-backlog).
 
+### Applications
+
+These are the applications you will be developing during your time working at Bangazon.
+
+1. ASP.NET MVC Web API for the [Bangazon Platform](https://github.com/nashville-software-school/csharp-bangazonapi-boilerplate)
+1. [Command line application](https://github.com/nashville-software-school/csharp-bangazoncli-boilerplate) using Test Driven Development
+1. ASP.NET MVC Web Application for [workforce management](https://github.com/nashville-software-school/csharp-workforce-boilerplate)
+1. ASP.NET MVC Web Application for the [Bangazon public facing site](https://github.com/nashville-software-school/csharp-bangazonmvc-boilerplate)
+
 Your management team will ensure that you have the proper training in the skills, concepts, and tools needed to complete the projects, and then you will fulfill the requirements for the project until you are done, as defined in the [Bangazon Definition of Done](https://github.com/nashville-software-school/bangazon-inc/blob/master/EMPLOYEE_HANDBOOK.md#definition-of-done).
 
 # Learning Objectives

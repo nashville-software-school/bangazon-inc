@@ -9,7 +9,6 @@
 
 ## Prerequisites
 
-* Before starting this project, your team must have completed the [authentication](./USER_AUTHENTICATION.md) project for the Bangazon site.
 * Set Theory
 * ERD Development
 * Migrations

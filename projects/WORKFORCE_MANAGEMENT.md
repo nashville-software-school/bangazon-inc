@@ -7,17 +7,6 @@
 1. [Requirements](#requirements)
 1. [Resources](#resources)
 
-## Prerequisites
-
-* [ASP.NET MVC](https://docs.asp.net/en/latest/mvc/overview.html)
-* Migrations
-* [View templates/Layouts](https://docs.asp.net/en/latest/mvc/views/overview.html)
-* Forms
-* Controllers
-* ERD development
-* Routing
-* Yeoman, and the ASP.NET generator, [installed](#installing-yeoman-and-the-aspnet-generator)
-
 ## What You Will Be Learning
 
 ### Server Generated Application

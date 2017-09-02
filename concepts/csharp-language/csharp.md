@@ -6,8 +6,8 @@ Unlike JavaScript, which will store any value, in any variable, C# requires that
 
 Here's an example of a method that returns a `string` that contains a variable that will also store a `string`.
 
-```c#
-string animalName () {
+```cs
+public string AnimalName () {
     string name = "Lizard";
     return name;
 }
@@ -19,8 +19,8 @@ With this method, you are telling the C# compiler that `animalName()` will alway
 
 ##### Incorrect return type
 
-```c#
-string animalName () {
+```cs
+public string animalName () {
     string name = "Lizard";
     return 1;
 }
@@ -35,7 +35,7 @@ If you try to run that code, the compiler will provide a message stating that wh
 In order for the compiler to accept your code and compile the program would be to change the signature of the method to be of type `int`.
 
 ```c#
-int animalName () {
+public int AnimalName () {
     string name = "Lizard";
     return 1;
 }
@@ -44,7 +44,8 @@ int animalName () {
 ### Native Types
 
 Here's a few:
-byte, short, int, long, float, decimal, char, string, bool, object 
+
+`byte`, `short`, `int`, `long`, `float`, `decimal`, `char`, `string`, `bool`, `object`
 
 Please review the [MSDN article](https://msdn.microsoft.com/en-us/library/ya5y69ds.aspx) that lists the C# built-in types. Click on each one to read its description and see some example usage.
 

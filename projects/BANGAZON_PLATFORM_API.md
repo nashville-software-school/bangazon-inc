@@ -1,4 +1,4 @@
-# Bangazon Orientation API
+# Bangazon Platform API
 
 ## Table of Contents
 
@@ -6,11 +6,6 @@
 1. [What You Will Be Learning](#what-you-will-be-learning)
 1. [Requirements](#requirements)
 1. [PowerUps](#powerups)
-
-## Prerequisites
-
-* [Visual Studio Community Edition](https://www.visualstudio.com/vs/community/) installed for existing Windows users.
-
 
 ## What You Will Be Learning
 

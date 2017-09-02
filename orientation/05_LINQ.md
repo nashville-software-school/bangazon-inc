@@ -11,7 +11,6 @@ using System.Collections.Generic;
 
 public class Program
 {
-
     public static void Main() {
         /*
             Start with a collection that is of type IEnumerable, which
