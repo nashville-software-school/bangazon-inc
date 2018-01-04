@@ -154,13 +154,7 @@ Classes and Methods that have tagged with the `internal` keyword allow access fr
 
 > **Resource:** [Access Modifiers (C# Programming Guide)](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/access-modifiers)
 
-# Fields
-
-> Add this usually private properties
-
-> **Resource:** [Fields (C# Programming Guide)](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/fields)
-
-# Properties
+# Properties and Fields
 
 Class properties are the interface you provide to external code to get, and modify, the values of the private fields.
 
@@ -172,6 +166,7 @@ public class Customer
     */
     private string firstName;
     private string lastName;
+    public int age = 42;  // Don't EVER do this. This is a public field. Use properties.
 
     /*
     Properties
