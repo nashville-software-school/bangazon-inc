@@ -17,7 +17,6 @@ dotnet restore
 * [Dictionary in C#](http://www.c-sharpcorner.com/UploadFile/219d4d/dictionary-in-C-Sharp-language/)
 * [Interactive C# Dictionaries](http://www.learncs.org/en/Dictionaries)
 
-
 ## Instructions
 
 A block of publicly traded stock has a variety of attributes, we'll look at a few of them. A stock has a ticker symbol and a company name. Create a simple dictionary with ticker symbols and company names in the `Main` method.
@@ -32,6 +31,7 @@ stocks.Add("CAT", "Caterpillar");
 ```
 
 To find a value in a Dictionary, you can use square bracket notation much like JavaScript object key lookups.
+
 ```cs
 string GM = stocks["GM"];   <--- "General Motors"
 ```
