@@ -8,7 +8,6 @@ Use the **Ctrl+`** keyboard shortcut to open up the [integrated terminal](https:
 
 ![](./assets/code-terminal.gif)
 
-
 ## The Lightbulb
 
 A yellow lightbulb will appear in the left gutter of your editor when when the C# compiler determines that there is a task that it can help you with. For example, if you misspell a variable name, it can help you fix it.
@@ -50,25 +49,32 @@ Watch these videos for an overview of using the debugger tool. You'll learn this
 
 ## Useful Keyboard Shortcuts
 
-All keyboard shortcuts can be found in *File > Preferences > Keyboard Shortcuts*. If you want to overwrite any of the preexisting shortcuts, you can edit the keybindings.json file. 
+All keyboard shortcuts can be found in *File > Preferences > Keyboard Shortcuts*. If you want to overwrite any of the preexisting shortcuts, you can edit the keybindings.json file.
 
-* Move a line of code up or down
+### Move a line of code up or down
+
 `alt + down` or `alt + up`
 
-* Make a duplicate of a line of code
+### Make a duplicate of a line of code
+
 `shift + alt + down` or `shift + alt + up`
 
-* Toggle sidebar 
-`cmd b` 
+### Toggle sidebar
 
-* Integrated terminal
+`cmd b`
+
+### Integrated terminal
+
 `ctrl ~`
 
-* Switch between files
+### Switch between files
+
 `cmd + shift + f`
 
-* Select all occurrences
+### Select all occurrences
+
 `shift + cmd L`
 
-* Select a few occurrences
+###
+ Select a few occurrences
 `cmd d`

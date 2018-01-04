@@ -6,20 +6,20 @@ We're going to get your first C# console application setup and running so that w
 
 Create a directory to hold the application.
 
-```
+```sh
 mkdir ~/workspace/csharp/intro && cd $_
 ```
 
 Create a new console application with the `dotnet` command line utility.
 
-```
+```sh
 dotnet new console
 ```
 
 This will create two files in the directory
 
 1. `bangazoncli.csproj` - This file holds all the packages that you application will be using. It's the `package.json` for C#.
-2. `Program.cs` - This is the file that holds your logic. Think of it as your `app.js` from Angular. It's where the logic of your application starts.
+1. `Program.cs` - This is the file that holds your logic. Think of it as your `app.js` from Angular. It's where the logic of your application starts.
 
 Copy this code into your Program.cs, replacing everything there.
 
@@ -39,18 +39,17 @@ namespace bangazoncli
 
 ```
 
-
 > ☞ Unike JavaScript, C# is a compiled language, meaning that you need a compiler to read the source code, parse all the logic, and then construct a new executable file.
 
 Next, you compile the program.
 
-```
+```sh
 dotnet build
 ```
 
 Now that you have verified that the program will compile without errors, you can execute it.
 
-```
+```sh
 dotnet run
 ```
 
@@ -73,20 +72,20 @@ namespace bangazon
             DateTime purchaseDate=DateTime.Now;
 
             /*
-                string is the type of the lastName variable. It 
+                string is the type of the lastName variable. It
                 tells the compiler that the lastName variable can
                 ONLY hold a string value.
             */
-            string lastName="Smith"; 
+            string lastName="Smith";
 
             /*
                 C# now supports implicitly typing of a variable. The
-                type of the variable will be determined, by the 
+                type of the variable will be determined, by the
                 compiler, at compile time.
             */
             var firstName="Bill";
 
-            /* 
+            /*
               The String.Format() function syntax allows you to
               build the final string, with placeholders, and
               then provide comma-delimited list of variables to
@@ -106,9 +105,9 @@ We'll look at a very simple type of collection first - an array of strings. Add 
 
 ```cs
 /*
-    Not only do you have to say what type the variable is, you also 
+    Not only do you have to say what type the variable is, you also
     have to instantiate that exact same type of object on assignment.
-    This may seem redundant, but it's part of the C# language compiler's 
+    This may seem redundant, but it's part of the C# language compiler's
     type checking constraints.
 */
 string[] products = new string[] {
@@ -121,7 +120,7 @@ string[] products = new string[] {
 
 /*
     This syntax should look very similar to what you did in an Angular
-    partial's ng-repeat directive. However, once again you have to 
+    partial's ng-repeat directive. However, once again you have to
     explicitly say what type of variable product is. Since the products
     array holds strings, then its type must be string.
 */
@@ -141,7 +140,6 @@ foreach (string product in products) {
     }
 }
 ```
-
 
 # Resources
 

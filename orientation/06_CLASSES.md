@@ -2,16 +2,15 @@
 
 A class is a blueprint, or a template, for creating an object instance in memory. C# and the .Net Framework define many types, such as `int`, `decimal`, and `bool` ([value types](https://docs.microsoft.com/en-us/dotnet/visual-basic/programming-guide/language-features/data-types/value-types-and-reference-types)), and `Array`, `string`, and `Object` ([reference types](https://docs.microsoft.com/en-us/dotnet/visual-basic/programming-guide/language-features/data-types/value-types-and-reference-types)) in C#, you can also create your own types.
 
-
 You create a new reference type with a class.
 
 ```cs
 public class Writer
 {
-	public void write (string message)
-	{
-		Console.WriteLine(message);
-	}
+    public void write (string message)
+    {
+        Console.WriteLine(message);
+    }
 }
 
 // The output variable's type is `string` -- a built in type
@@ -22,7 +21,7 @@ Writer author = new Writer();
 author.write(output);
 ```
 
-# Accessibility Levels
+## Accessibility Levels
 
 In C#, there are five accessibility levels that can be applied to Classes, Methods, Properties and Data Members:
 
@@ -49,8 +48,7 @@ class Automobile {
 }
 
 // Derived class
-class Car : Automobile {
-}
+class Car : Automobile { }
 ```
 
 > `Program.cs`:
@@ -68,7 +66,6 @@ Console.WriteLine("Cars go {0}", stella.Accelerate());
 Classes and Methods that have tagged with the `private` keyword are only accessible from within the class where it's defined. This means that private methods can not be called from anywhere outside the class, including derived classes (children).
 
 Private methods are intended to be internal functionality. Consider the classes below:
-
 
 ```cs
 // Base class
@@ -92,7 +89,6 @@ Console.WriteLine("Automobiles go {0}", generic_auto.Accelerate());
 // However, the following line of code does not compile
 generic_auto.InjectFuel();
 ```
-
 
 ```cs
 // Given a Derived class, the follow code does not compile
@@ -153,6 +149,7 @@ Classes and Methods that have tagged with the `internal` keyword allow access fr
 `protected internal` is the only allowed combination of multiple access modifiers.
 
 ## Resources
+
 * https://msdn.microsoft.com/en-us/library/ba0a1yw2.aspx
 
 > **Resource:** [Access Modifiers (C# Programming Guide)](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/access-modifiers)
@@ -168,58 +165,57 @@ Classes and Methods that have tagged with the `internal` keyword allow access fr
 Class properties are the interface you provide to external code to get, and modify, the values of the private fields.
 
 ```cs
-public class Customer 
+public class Customer
 {
-	/*
-	Fields
-	*/
-	private string firstName;
-	private string lastName;
+    /*
+    Fields
+    */
+    private string firstName;
+    private string lastName;
 
-	/*
-	Properties
-	*/
+    /*
+    Properties
+    */
 
-	// Simple property that doesn't allow blank values for first name
-	public string FirstName {
-		get
-		{
-			return firstName;
-		}
-		set
-		{
-			if (value != "")
-			{
-				firstName = value;
-			}
-		}
-	}
+    // Simple property that doesn't allow blank values for first name
+    public string FirstName {
+        get
+        {
+            return firstName;
+        }
+        set
+        {
+            if (value != "")
+            {
+                firstName = value;
+            }
+        }
+    }
 
-	// Simple property that doesn't allow blank values for last name
-	public string LastName {
-		get
-		{
-			return lastName;
-		}
-		set
-		{
-			if (value != "")
-			{
-				lastName = value;
-			}
-		}
-	}
+    // Simple property that doesn't allow blank values for last name
+    public string LastName {
+        get
+        {
+            return lastName;
+        }
+        set
+        {
+            if (value != "")
+            {
+                lastName = value;
+            }
+        }
+    }
 
-	// Calculated property that has no mutator (setter)
-	public string FullName {
-		get
-		{
-			return string.Format($"{firstName} {lastName}");
-		}
-	}
+    // Calculated property that has no mutator (setter)
+    public string FullName {
+        get
+        {
+            return string.Format($"{firstName} {lastName}");
+        }
+    }
 }
 ```
-
 
 > **Resource:** [Properties (C# Programming Guide)](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/properties)
 
@@ -228,7 +224,7 @@ public class Customer
 Methods are the new name for functions. They are code blocks on a class that performs a series of logic. Think of them as the behaviors of your custom type.
 
 ```cs
-public class Product 
+public class Product
 {
 	/*
 	  Fields

@@ -21,7 +21,6 @@ The `List` and `Array` classes implement the IEnumerable interface. IEnumerable 
 
 List contains *n* items of the same type.
 
-
 ```cs
 using System.Collections.Generic // Namespace containing data structures
 
@@ -54,9 +53,9 @@ foreach (double d in doublePrecisionNumbers)
 
 ## Tuple
 
-A tuple is a way to define a very lightweight, custom type, with a limited interface for working with value in it. You could think of it as a very simplistic JavaScript object. 
+A tuple is a way to define a very lightweight, custom type, with a limited interface for working with value in it. You could think of it as a very simplistic JavaScript object.
 
-```
+```sh
 dotnet new console
 dotnet restore
 ```
@@ -83,7 +82,7 @@ namespace Sample
 
 The ValueTuple type gets us close to a POJO by letting us name the values anything we want instead of being stuck with `Item1...Item7`. In order to use them, you have to install the `System.ValueTuple` package.
 
-```
+```sh
 dotnet add package System.ValueTuple
 dotnet restore
 ```

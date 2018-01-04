@@ -14,7 +14,7 @@ public class Program
     public static void Main() {
         /*
             Start with a collection that is of type IEnumerable, which
-            List is and initialize it with some values. This is the 
+            List is and initialize it with some values. This is the
             class sizes for a selection of NSS cohorts.
         */
         List<int> cohortStudentCount = new List<int>()
@@ -27,7 +27,7 @@ public class Program
             of acceptable size - between 20 and 26 students. Also, sort
             the new enumerable collection in ascending order.
         */
-        IEnumerable<int> idealSizes = from count in cohortStudentCount 
+        IEnumerable<int> idealSizes = from count in cohortStudentCount
             where count < 27 && count > 19
             orderby count ascending
             select count;
@@ -54,7 +54,7 @@ Console.WriteLine($"Largest cohort was {cohortStudentCount.Max()}");
 Console.WriteLine($"Smallest cohort was {cohortStudentCount.Min()}");
 Console.WriteLine($"Total students is {cohortStudentCount.Sum()}");
 
-IEnumerable<int> idealSizes = from count in cohortStudentCount 
+IEnumerable<int> idealSizes = from count in cohortStudentCount
     where count < 27 && count > 19
     orderby count ascending
     select count;
@@ -69,7 +69,7 @@ There have been {cohortStudentCount.Count()} total cohorts");
 
 This produces the following output.
 
-```
+```sh
 Largest cohort was 28
 Smallest cohort was 11
 Total students is 193
@@ -92,13 +92,13 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 
-public class Product 
+public class Product
 {
-	/*
-	  Properties
-	*/
-	public string Title { get; set; }
-	public double Price { get; set; }
+    /*
+    Properties
+    */
+    public string Title { get; set; }
+    public double Price { get; set; }
 
     // Constructor method
     public Product (string title, double price)
@@ -116,7 +116,7 @@ public class Program
             We can use curly braces to create instances of objects
             and immediately inject them into the List.
         */
-        List<Product> shoppingCart = new List<Product>(){ 
+        List<Product> shoppingCart = new List<Product>(){
             new Product("Bike", 109.99),
             new Product("Mittens", 6.49),
             new Product("Lollipop", 0.50),
@@ -128,7 +128,7 @@ public class Program
             that we're using here to create a collection of Products
             that we can iterate over.
         */
-        IEnumerable<Product> inexpensive = from product in shoppingCart 
+        IEnumerable<Product> inexpensive = from product in shoppingCart
             where product.Price < 100.00
             orderby product.Price descending
             select product;
@@ -138,11 +138,11 @@ public class Program
         }
 
         /*
-            You can also use `var` when creating LINQ collections. The 
+            You can also use `var` when creating LINQ collections. The
             following variable will still be typed as List<Product> by
             the compiler, but you don't need to type that all out.
         */
-        var expensive = from product in shoppingCart 
+        var expensive = from product in shoppingCart
             where product.Price >= 100.00
             orderby product.Price descending
             select product;
@@ -159,7 +159,7 @@ Remember your anonymous function syntax that you learned about in the client-sid
 const numbers = [9, -59, 23, 71, -74, 13, 52, 44, 2]
 
 /*
-    Use filter() method to build a new array of numbers that 
+    Use filter() method to build a new array of numbers that
     match two conditions. Then chain the sort() method to order
     them ascending
 */
@@ -192,35 +192,35 @@ Here's some more examples of how JavaScript Array methods and LINQ are similar:
 ```cs
 var sampleNumbers = [18, 9, 5, 6, 84, 2, 5, 13];
 
-//JAVASCRIPT
+// JavaScript
 var allAreEven = sampleNumbers.every(number => number % 2 == 0 );
 
-//LINQ
+// LINQ
 var areAllEven = sampleNumbers.all(number => number % 2 == 0);
 
 
-//Limit an array to the items that meet a criteria
+// Limit an array to the items that meet a criteria
 
-//JAVASCRIPT
+// JavaScript
 var onlyEvens = sampleNumbers.filter(number => number % 2 == 0);
 
-//LINQ
+// LINQ
 var onlyEvens = sampleNumbers.where(number => number % 2 == 0);
 
-//  perform an action on each item in an array
+//   perform an action on each item in an array
 
-//JAVASCRIPT
+// JavaScript
 onlyEvens.forEach(evenValue => { console.log(evenValue + " is an even value"); });
 
-//LINQ
+// LINQ
 onlyEvens.ToList().ForEach(evenValue => Console.WriteLine(evenValue + " is an even value"));
 
-// transforms each value in an array 
+//  transforms each value in an array
 
-//JAVASCRIPT
+// JavaScript
 var sampleNumbersSquared = sampleNumbers.map(number => number * number);
 
-//LINQ
+// LINQ
 var sampleNumbersSquared = sampleNumbers.select(number => number * number);
 ```
 

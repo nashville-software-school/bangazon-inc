@@ -75,8 +75,8 @@ If a method returns a value, you must explicitly tell the compiler the return va
 
 ```cs
 // This method performs a calculation and returns the calculated value
-public decimal FinalPrice (double unitPrice, 
-                           double stateTaxRate, 
+public decimal FinalPrice (double unitPrice,
+                           double stateTaxRate,
                            double shippingCharge)
 {
     double basePrice = unitPrice + shippingCharge;
@@ -90,11 +90,11 @@ public void SetContainerSize (int width, int height, int depth)
 }
 ```
 
-# Static vs. Instance
+## Static vs. Instance
 
 Instance methods require that a new instance exists in order to use the method.
 
-## Instance Methods
+### Instance Methods
 
 ```cs
 public class Box
@@ -116,7 +116,7 @@ cardboardBox.Open();
 cardboardBox.Close();
 ```
 
-## Static Methods
+### Static Methods
 
 If a a series of logic needs to be performed, but an object instance isn't required, then the method should be defined as `static`.
 
