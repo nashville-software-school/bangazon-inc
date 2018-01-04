@@ -133,7 +133,7 @@ public class Program
             orderby product.Price descending
             select product;
 
-        foreach (Product p in inexpensive)
+        foreach (Product p in inexpensive) {
             Console.WriteLine($"{p.Title} ${p.Price:f2}");
         }
 
@@ -146,7 +146,7 @@ public class Program
             where product.Price >= 100.00
             orderby product.Price descending
             select product;
-
+    }
 }
 ```
 
