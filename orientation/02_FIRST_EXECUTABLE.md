@@ -18,7 +18,7 @@ dotnet new console
 
 This will create two files in the directory
 
-1. `bangazoncli.csproj` - This file holds all the packages that you application will be using. It's the `package.json` for C#.
+1. `intro.csproj` - This file holds all the packages that you application will be using. It's the `package.json` for C#.
 1. `Program.cs` - This is the file that holds your logic. Think of it as your `app.js` from Angular. It's where the logic of your application starts.
 
 Copy this code into your Program.cs, replacing everything there.
