@@ -7,7 +7,7 @@ We're going to get your first C# console application setup and running so that w
 Create a directory to hold the application.
 
 ```sh
-mkdir ~/workspace/csharp/intro && cd $_
+mkdir -p ~/workspace/csharp/intro && cd $_
 ```
 
 Create a new console application with the `dotnet` command line utility.
