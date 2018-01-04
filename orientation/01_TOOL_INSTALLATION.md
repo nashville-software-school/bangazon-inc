@@ -4,13 +4,13 @@
 
 ### For OSX Users
 
-```
+```sh
 brew install sqlite
 ```
 
 ### For Windows Users
 
-Visit the [SQLite downloads](https://www.sqlite.org/download.html) and download the 64-bit DLL (x64) for SQLite version, unzip and install it.
+Follow the installation steps for your OS on the [SQLite installation](https://www.tutorialspoint.com/sqlite/sqlite_installation.htm) page.
 
 ## SQL Browser
 
@@ -29,7 +29,7 @@ https://www.microsoft.com/net/core#windows
   1. Click the link to download the .NET Core SDK for Windows (https://go.microsoft.com/fwlink/?LinkID=827524)
   2. Once installed open a command line app to intialize some code.
   3. Make a directory for your app: mkdir HelloWorld
-  4. Move to the newly created directory. : cd 
+  4. Move to the newly created directory. : cd
   HelloWorld
   5. Create a new app: dotnet new
   5. Build the app and restore any get any missing libraries (packages) : dotnet restore
