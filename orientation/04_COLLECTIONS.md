@@ -108,7 +108,7 @@ namespace Sample
             (string name, int quantity, double price) product = ("Yo-yo", 1, 9.04);
 
             // Now you can use appropriately named properties on the object
-            Console.WriteLine($"{product.label} {product.quantity} {product.price} ");
+            Console.WriteLine($"{product.name} {product.quantity} {product.price} ");
         }
     }
 }
