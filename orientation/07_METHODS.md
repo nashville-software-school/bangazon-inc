@@ -69,7 +69,7 @@ class PaymentType
 }
 ```
 
-# Return Value vs. No Return Value
+## Return Value vs. No Return Value
 
 If a method returns a value, you must explicitly tell the compiler the return value's type (`string`, `int`, `decimal`, `double`, etc.). If the method has no return value, then you must tell the compiler that with `void`.
 
@@ -191,27 +191,34 @@ class Animal {
     public int Legs { get; set; }
 
     // Public method that can be redefined by derived classes
-    public virtual void Walk () {
-        Console.WriteLine("Animal class walk method");
+    public void Walk () {
         Speed = Speed + (0.1 * Legs);
+        Console.WriteLine($"Animal class walk method ({Speed})");
     }
 
-    public virtual void Walk (double speed, int legs) {
-        Console.WriteLine("Animal class walk method that accepts parameters");
-
+    public void Walk (double speed, int legs) {
         // Set the object instance properties to the parameter values
         Legs = legs;
         Speed = Speed + (0.1 * Legs);
+        Console.WriteLine($"Animal class walk method that accepts parameters ({Speed})");
     }
 }
 
-Animal abilgail = new Animal(){
+Animal abigail = new Animal(){
     Speed = 0.44,
     Legs = 2
 };
-abigail.walk();  // This works because the properties have values
+abigail.Walk();
 
 Animal aaron = new Animal();
-aaron.walk();  // This will throw an exception because the properties are null
-aaron.walk(0.38, 4);  // This will work
+aaron.Walk();
+aaron.Walk(0.38, 4);
+```
+
+> Output
+
+```sh
+Animal class walk method (0.64)
+Animal class walk method (0)
+Animal class walk method that accepts parameters (0.4)
 ```
