@@ -24,7 +24,7 @@ Given the collections of items shown below, use LINQ to build the requested coll
 // Find the words in the collection that start with the letter 'L'
 List<string> fruits = new List<string>() {"Lemon", "Apple", "Orange", "Lime", "Watermelon", "Loganberry"};
 
-var LFruits = from fruit in fruits ...
+List<string> LFruits = from fruit in fruits ...
 ```
 
 ```cs
@@ -34,7 +34,7 @@ List<int> numbers = new List<int>()
     15, 8, 21, 24, 32, 13, 30, 12, 7, 54, 48, 4, 49, 96
 };
 
-var fourSixMultiples = numbers.Where();
+List<int> fourSixMultiples = numbers.Where();
 ```
 
 ### Ordering Operations
@@ -47,10 +47,10 @@ List<string> names = new List<string>()
     "Kathleen", "Sophia", "Amir", "Douglas", "Zarley", "Beatrice",
     "Theodora", "William", "Svetlana", "Charisse", "Yolanda",
     "Gregorio", "Jean-Paul", "Evangelina", "Viktor", "Jacqueline",
-    "Francisco", "Tre" 
+    "Francisco", "Tre"
 };
 
-var descend = ...
+List<string> descend = ...
 ```
 
 ```cs
@@ -133,7 +133,7 @@ public class Program
 ```
 
 ```cs
-/* 
+/*
     Given the same customer set, display how many millionaires per bank.
     Ref: https://stackoverflow.com/questions/7325278/group-by-in-linq
 
@@ -210,9 +210,9 @@ public class Program
             new Customer(){ Name="Sid Brown", Balance=49582.68, Bank="CITI"}
         };
 
-        var millionaireReport = ...
+        List<Customer> millionaireReport = ...
 
-        foreach (var customer in millionaireReport)
+        foreach (Customer customer in millionaireReport)
         {
             Console.WriteLine($"{customer.Name} at {customer.Bank}");
         }
