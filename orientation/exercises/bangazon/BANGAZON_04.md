@@ -6,7 +6,7 @@
 
 ## Instructions
 
-Your job is to think about interfaces that can be used by certain groups of your classes. For example, some employees may be part-time and others may be full-time. 
+Your job is to think about interfaces that can be used by certain groups of your classes. For example, some employees may be part-time and others may be full-time.
 
 The purpose of this exercise is to avoid a long, brittle inheritance tree where you create a `PartTimeEmployee`, and a `FullTimeEmployee` that both inherit from `Employee`, and then defining a `FullTimeHumanResourcesEmployee` type just to get the properties and methods of both types.
 
@@ -59,7 +59,7 @@ public class HumanResourcesEmployee: Employee, IFullTime
     public double Salary
     {
         get { return _salary; }
-        set 
+        set
         {
             // We pay HR people between $10/hr and $35/hr
             if (value >= 10 && value <= 35)
@@ -76,7 +76,7 @@ public class HumanResourcesEmployee: Employee, IFullTime
 }
 ```
 
-By breaking up your code this way, we've separated the inherent properties of an Employee from the properties that describe their employment status. This is a very fine-grained example of the [Single Responsibility Principle](../../concepts/solid/SINGLE_RESPONSIBILITY_PRINCIPLE.md).
+By breaking up your code this way, we've separated the inherent properties of an Employee from the properties that describe their employment status. This is a very fine-grained example of the [Single Responsibility Principle](../../concepts/solid/SINGLE_RESPONSIBILITY_PRINCIPLE.md) and the [Interface Segregation Principle](../../solid/INTERFACE_SEGREGATION_PRINCIPLE.md).
 
 
 Assume that there is a `Shipping` class that derives from `Employee` and those people work part time. However, a year from now, the company decides to make shipping people full-time employees.

@@ -11,7 +11,8 @@
 1. Choose one of the general methods that you created in the `Department` class for overriding. For example, let's assume you created a `meet()` method which handles the logic of how teammates in that department gather for a meeting.
 1. Override that method in all of your derived classes, giving each a more specialized implementation. For example, you could output a different meeting place for each department.
 
-### Override, if needed
+### Override, If Needed
+
 1. Now make a virtual method on `Department` named `SetBudget(double budget)`. It will set, and return, the base budget that each department gets each year.
 1. Override that method in any derived classes that require an adjustment to that base budget. Add, or subtract, from that base budget inside the derived class' override method to adjust that specific department's budget.
     ```cs

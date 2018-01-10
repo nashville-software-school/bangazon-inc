@@ -2,7 +2,7 @@
 
 ## Setup
 
-```
+```sh
 mkdir -p ~/workspace/csharp/exercises/sets && cd $_
 dotnet new console
 dotnet restore

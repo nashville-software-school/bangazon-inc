@@ -6,17 +6,17 @@
 
 ## Setup
 
-```
+```sh
 mkdir -p workspace/csharp/orientation/bangazon && cd $_
 ```
 
 ## Instructions
 
 1. Create a new console application.
-1. In `Program.cs`, create a *Department* class.
+1. In `Department.cs`, create a *Department* class.
 1. Create some simple properties and methods on Department. You are going to create some derived classes that inherit from Department, so make sure that the properties/methods you add are general to **all** Departments (e.g. name, supervisor, employee_count, etc).
 
-  ##### Example property/method definition
+##### Example property/method definition
 
 ```cs
 // Parent class for all departments
@@ -40,10 +40,10 @@ public class Department
 ```
 
 1. After you are happy with your Department class, create a derived class that defines a particular Department. Create some properties that apply **only** to that department.
-  
-  The classes should, at the very least, set the initial value for the properties that you defined in the base class inside the constructor.
 
-  Examples, include HR, IT, Marketing, Sales, etc.
+The classes should, at the very least, set the initial value for the properties that you defined in the base class inside the constructor.
+
+Examples, include HR, IT, Marketing, Sales, etc.
 
 ```cs
 /*
@@ -62,8 +62,8 @@ public class HumanResources: Department
         To relate back to your JavaScript knowledge, this code
         is creating an array that holds objects.
 
-        The keywords are telling the compiler that each item in 
-        the List will have a key of type string, and a value of 
+        The keywords are telling the compiler that each item in
+        the List will have a key of type string, and a value of
         type string.
 
         For example, it would look like this in JavaScript.
@@ -100,7 +100,7 @@ public class HumanResources: Department
     }
 
     // Overriding the default toString() method for each object instance
-    public string toString() 
+    public string toString()
     {
         return $"{_name} {_supervisor} {_employee_count}";
     }
@@ -127,7 +127,7 @@ public class Program
         // Add derived departments to the list
         departments.Add(hr);
 
-        // Iterate over all items in the list and output a string 
+        // Iterate over all items in the list and output a string
         // representation of the class
         foreach(Department d in departments)
         {
