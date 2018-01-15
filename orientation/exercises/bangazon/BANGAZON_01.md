@@ -107,11 +107,10 @@ public class HumanResources: Department
 }
 ```
 
-
 1. Create 2 more classes for departments of your choosing.
 1. Create some instances of each department in the `Main` method.
 1. Assign values to the properties of each instance.
-1. Call come of the methods on the instances to verify their operation.
+1. Call some of the methods on the instances to verify their operation.
 1. Add all derived departments to a List of type Department.
 
 ```cs

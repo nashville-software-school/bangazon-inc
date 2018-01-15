@@ -17,8 +17,8 @@ do
 {
     enteredKey = Console.ReadKey();
     Console.WriteLine($"You pressed the {enteredKey.Key.toString()} key");
-    
-} while (enteredKey.Key != ConsoleKeyInfo.Escape);
+
+} while (enteredKey.Key != ConsoleKey.Escape);
 ```
 
 ## Console.ReadLine()
@@ -33,6 +33,6 @@ do
     Console.WriteLine("Type in a sentence. Press enter when done.");
     sentence = Console.ReadLine();
     Console.WriteLine($"You entered the sentence: {sentence}");
-    
+
 } while (sentence != "quit");
 ```
