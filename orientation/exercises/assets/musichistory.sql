@@ -46,7 +46,7 @@ CREATE TABLE `Song` (
 	FOREIGN KEY(`GenreId`) REFERENCES `Genre`(`GenreId`),
 	FOREIGN KEY(`ArtistId`) REFERENCES `Artist`(`ArtistId`),
 	FOREIGN KEY(`AlbumId`) REFERENCES `Album`(`AlbumId`)
-	
+
 );
 
 INSERT INTO Genre VALUES (null, 'Soul');
@@ -97,63 +97,63 @@ INSERT INTO Artist VALUES (null, "Avett Brothers", 2000);
 
 
 
-INSERT INTO Album 
-	SELECT null, 
-		   "True Sadness", 
-		   '6/24/2016', 
+INSERT INTO Album
+	SELECT null,
+		   "True Sadness",
+		   '6/24/2016',
 		   SUBSTR(ABS(RANDOM())||'', 0, 5),
-		   'American', 
+		   'American',
 		   ArtistId,
 		   g.GenreId
 	FROM Artist a, Genre g WHERE a.ArtistName = "Avett Brothers" AND g.Label = "Folk";
 
-INSERT INTO Album 
-	SELECT null, 
-		   "I and Love and You", 
-		   '11/29/2009', 
+INSERT INTO Album
+	SELECT null,
+		   "I and Love and You",
+		   '11/29/2009',
 		   SUBSTR(ABS(RANDOM())||'', 0, 5),
-		   'American', 
+		   'American',
 		   ArtistId,
 		   g.GenreId
 	FROM Artist a, Genre g WHERE a.ArtistName = "Avett Brothers" AND g.Label = "Folk";
 
-INSERT INTO Album 
-	SELECT null, 
-		   "The Black Album", 
-		   '11/14/2003', 
+INSERT INTO Album
+	SELECT null,
+		   "The Black Album",
+		   '11/14/2003',
 		   SUBSTR(ABS(RANDOM())||'', 0, 5),
-		   'Def Jam', 
+		   'Def Jam',
 		   ArtistId,
 		   g.GenreId
 	FROM Artist a, Genre g WHERE a.ArtistName = "Jay Z" AND g.Label = "Rap";
 
-	
-INSERT INTO Album 
-	SELECT null, 
-		   "A Strange Arrangement", 
-		   '09/08/2009', 
-		   2082, 
-		   'Stones Throw Records', 
+
+INSERT INTO Album
+	SELECT null,
+		   "A Strange Arrangement",
+		   '09/08/2009',
+		   2082,
+		   'Stones Throw Records',
 		   ArtistId,
 		   g.GenreId
 	FROM Artist a, Genre g WHERE a.ArtistName = "Mayer Hawthorne" AND g.Label = "Soul";
 
-INSERT INTO Album 
-	SELECT null, 
-		   "How Do You Do", 
-		   '10/11/2011', 
-		   2357, 
-		   'Stones Throw Records', 
+INSERT INTO Album
+	SELECT null,
+		   "How Do You Do",
+		   '10/11/2011',
+		   2357,
+		   'Stones Throw Records',
 		   ArtistId,
 		   g.GenreId
 	FROM Artist a, Genre g WHERE a.ArtistName = "Mayer Hawthorne" AND g.Label = "Soul";
 
-INSERT INTO Album 
-	SELECT null, 
-		   "Where Does This Door Go", 
-		   '06/16/2013', 
-		   3114, 
-		   'Stones Throw Records', 
+INSERT INTO Album
+	SELECT null,
+		   "Where Does This Door Go",
+		   '06/16/2013',
+		   3114,
+		   'Stones Throw Records',
 		   a.ArtistId,
 		   g.GenreId
 	FROM Artist a, Genre g WHERE a.ArtistName = "Mayer Hawthorne" AND g.Label = "Soul";
@@ -176,19 +176,19 @@ INSERT INTO Album VALUES (null, "Moanin' in the Moonlight", '05/14/1959', 2033, 
 INSERT INTO Album VALUES (null, "Howlin' Wolf", '10/21/1957', 1917, 'Chess', 7, 3);
 INSERT INTO Album VALUES (null, "The Howlin' Wolf Album", '09/02/1969', 2459, 'Chess', 7, 3);
 
-INSERT INTO Album 
-  SELECT null, "Eliminator", '3/23/1983', 2668, 'Warner Bros.', 
+INSERT INTO Album
+  SELECT null, "Eliminator", '3/23/1983', 2668, 'Warner Bros.',
     a.ArtistId, g.GenreId
 FROM Artist a, Genre g
 WHERE a.ArtistName = "ZZTop" AND g.Label = "Rock";
 
-INSERT INTO Album 
+INSERT INTO Album
 SELECT null, "Afterburner", '1/1/2011', SUBSTR(ABS(RANDOM())||'', 0, 4),
 		'Warner Bros.', ArtistId, GenreId
 FROM Artist a, Genre g
 WHERE a.ArtistName = "ZZTop" AND g.Label = "Rock";
 
-INSERT INTO Album 
+INSERT INTO Album
 SELECT null, "Tres Hombres", '6/14/1979', SUBSTR(ABS(RANDOM())||'', 0, 4),
 		'Warner Bros.', ArtistId, GenreId
 FROM Artist a, Genre g
@@ -203,10 +203,10 @@ INSERT INTO Album VALUES (null, "Everything Went Black", '12/03/1982', 3718, 'SS
 
 
 INSERT INTO Song
-	SELECT null, 
-		   "Revenge", 
-		   61, 
-		   '12/03/1982', 
+	SELECT null,
+		   "Revenge",
+		   61,
+		   '12/03/1982',
 		   g.GenreId,
 		   a.ArtistId,
 		   al.AlbumId
@@ -214,10 +214,10 @@ INSERT INTO Song
 	WHERE a.ArtistName = "Black Flag" AND g.Label = "Punk" AND al.Title = "Everything Went Black";
 
 INSERT INTO Song
-	SELECT null, 
-		   "White Minority", 
-		   69, 
-		   '12/03/1982', 
+	SELECT null,
+		   "White Minority",
+		   69,
+		   '12/03/1982',
 		   g.GenreId,
 		   a.ArtistId,
 		   al.AlbumId
@@ -225,10 +225,10 @@ INSERT INTO Song
 	WHERE a.ArtistName = "Black Flag" AND g.Label = "Punk" AND al.Title = "Everything Went Black";
 
 INSERT INTO Song
-	SELECT null, 
-		   "Gimme Gimme Gimme", 
-		   120, 
-		   '12/03/1982', 
+	SELECT null,
+		   "Gimme Gimme Gimme",
+		   120,
+		   '12/03/1982',
 		   g.GenreId,
 		   a.ArtistId,
 		   al.AlbumId
@@ -236,10 +236,10 @@ INSERT INTO Song
 	WHERE a.ArtistName = "Black Flag" AND g.Label = "Punk" AND al.Title = "Everything Went Black";
 
 INSERT INTO Song
-	SELECT null, 
-		   "No Values", 
-		   118, 
-		   '12/03/1982', 
+	SELECT null,
+		   "No Values",
+		   118,
+		   '12/03/1982',
 		   g.GenreId,
 		   a.ArtistId,
 		   al.AlbumId
@@ -247,10 +247,10 @@ INSERT INTO Song
 	WHERE a.ArtistName = "Black Flag" AND g.Label = "Punk" AND al.Title = "Everything Went Black";
 
 INSERT INTO Song
-	SELECT null, 
-		   "TV Party", 
-		   232, 
-		   '06/12/1982', 
+	SELECT null,
+		   "TV Party",
+		   232,
+		   '06/12/1982',
 		   g.GenreId,
 		   a.ArtistId,
 		   al.AlbumId
@@ -258,10 +258,10 @@ INSERT INTO Song
 	WHERE a.ArtistName = "Black Flag" AND g.Label = "Punk" AND al.Title = "TV Party";
 
 INSERT INTO Song
-	SELECT null, 
-		   "I've Got To Run", 
-		   105, 
-		   '06/12/1982', 
+	SELECT null,
+		   "I've Got To Run",
+		   105,
+		   '06/12/1982',
 		   g.GenreId,
 		   a.ArtistId,
 		   al.AlbumId
@@ -269,10 +269,10 @@ INSERT INTO Song
 	WHERE a.ArtistName = "Black Flag" AND g.Label = "Punk" AND al.Title = "TV Party";
 
 INSERT INTO Song
-	SELECT null, 
-		   "My Rules", 
-		   71, 
-		   '06/12/1982', 
+	SELECT null,
+		   "My Rules",
+		   71,
+		   '06/12/1982',
 		   g.GenreId,
 		   a.ArtistId,
 		   al.AlbumId
@@ -280,10 +280,10 @@ INSERT INTO Song
 	WHERE a.ArtistName = "Black Flag" AND g.Label = "Punk" AND al.Title = "TV Party";
 
 INSERT INTO Song
-	SELECT null, 
-		   "Gimme All Your Lovin", 
+	SELECT null,
+		   "Gimme All Your Lovin",
 		   SUBSTR(ABS(RANDOM())||'', 0, 4),
-		   '3/23/1983', 
+		   '3/23/1983',
 		   g.GenreId,
 		   a.ArtistId,
 		   al.AlbumId
@@ -291,10 +291,10 @@ INSERT INTO Song
 	WHERE a.ArtistName = "ZZTop" AND g.Label = "Rock" AND al.Title = "Eliminator";
 
 INSERT INTO Song
-	SELECT null, 
-		   "Sharp Dressed Man", 
+	SELECT null,
+		   "Sharp Dressed Man",
 		   SUBSTR(ABS(RANDOM())||'', 0, 4),
-		   '3/23/1983', 
+		   '3/23/1983',
 		   g.GenreId,
 		   a.ArtistId,
 		   al.AlbumId
@@ -302,10 +302,10 @@ INSERT INTO Song
 	WHERE a.ArtistName = "ZZTop" AND g.Label = "Rock" AND al.Title = "Eliminator";
 
 INSERT INTO Song
-	SELECT null, 
-		   "Legs", 
+	SELECT null,
+		   "Legs",
 		   SUBSTR(ABS(RANDOM())||'', 0, 4),
-		   '3/23/1983', 
+		   '3/23/1983',
 		   g.GenreId,
 		   a.ArtistId,
 		   al.AlbumId
@@ -313,10 +313,10 @@ INSERT INTO Song
 	WHERE a.ArtistName = "ZZTop" AND g.Label = "Rock" AND al.Title = "Eliminator";
 
 INSERT INTO Song
-	SELECT null, 
-		   "I Need You Tonight", 
+	SELECT null,
+		   "I Need You Tonight",
 		   SUBSTR(ABS(RANDOM())||'', 0, 4),
-		   '3/23/1983', 
+		   '3/23/1983',
 		   g.GenreId,
 		   a.ArtistId,
 		   al.AlbumId
@@ -324,10 +324,10 @@ INSERT INTO Song
 	WHERE a.ArtistName = "ZZTop" AND g.Label = "Rock" AND al.Title = "Eliminator";
 
 INSERT INTO Song
-	SELECT null, 
-		   "TV Dinners", 
+	SELECT null,
+		   "TV Dinners",
 		   SUBSTR(ABS(RANDOM())||'', 0, 4),
-		   '3/23/1983', 
+		   '3/23/1983',
 		   g.GenreId,
 		   a.ArtistId,
 		   al.AlbumId
@@ -335,10 +335,10 @@ INSERT INTO Song
 	WHERE a.ArtistName = "ZZTop" AND g.Label = "Rock" AND al.Title = "Eliminator";
 
 INSERT INTO Song
-	SELECT null, 
-		   "Thug", 
+	SELECT null,
+		   "Thug",
 		   SUBSTR(ABS(RANDOM())||'', 0, 4),
-		   '3/23/1983', 
+		   '3/23/1983',
 		   g.GenreId,
 		   a.ArtistId,
 		   al.AlbumId
@@ -347,10 +347,10 @@ INSERT INTO Song
 
 
 INSERT INTO Song
-	SELECT null, 
-		   "Taxman", 
+	SELECT null,
+		   "Taxman",
        SUBSTR(ABS(RANDOM())||'', 0, 4),
-		   '8/5/1966', 
+		   '8/5/1966',
 		   g.GenreId,
 		   a.ArtistId,
 		   al.AlbumId
@@ -358,10 +358,10 @@ INSERT INTO Song
 	WHERE a.ArtistName = "Beatles" AND g.Label = "Pop" AND al.Title = "Revolver";
 
 INSERT INTO Song
-	SELECT null, 
-		   "Eleanor Rigby", 
+	SELECT null,
+		   "Eleanor Rigby",
        SUBSTR(ABS(RANDOM())||'', 0, 4),
-		   '8/5/1966', 
+		   '8/5/1966',
 		   g.GenreId,
 		   a.ArtistId,
 		   al.AlbumId
@@ -369,10 +369,10 @@ INSERT INTO Song
 	WHERE a.ArtistName = "Beatles" AND g.Label = "Pop" AND al.Title = "Revolver";
 
 INSERT INTO Song
-	SELECT null, 
-		   "Good Day Sunshine", 
+	SELECT null,
+		   "Good Day Sunshine",
        SUBSTR(ABS(RANDOM())||'', 0, 4),
-		   '8/5/1966', 
+		   '8/5/1966',
 		   g.GenreId,
 		   a.ArtistId,
 		   al.AlbumId
@@ -380,23 +380,23 @@ INSERT INTO Song
 	WHERE a.ArtistName = "Beatles" AND g.Label = "Pop" AND al.Title = "Revolver";
 
 INSERT INTO Song
-	SELECT null, 
-		   "Got To Get You Into My Life", 
+	SELECT null,
+		   "Got To Get You Into My Life",
        SUBSTR(ABS(RANDOM())||'', 0, 4),
-		   '8/5/1966', 
+		   '8/5/1966',
 		   g.GenreId,
 		   a.ArtistId,
 		   al.AlbumId
 	FROM Artist a, Genre g, Album al
 	WHERE a.ArtistName = "Beatles" AND g.Label = "Pop" AND al.Title = "Revolver";
 
-	
 
-	
+
+
 
 INSERT INTO Song
-	SELECT null, 
-		   "Interlude", 
+	SELECT null,
+		   "Interlude",
        SUBSTR(ABS(RANDOM())||'', 0, 4),
 		   '12/03/1982',
 		   g.GenreId,
@@ -406,10 +406,10 @@ INSERT INTO Song
 	WHERE a.ArtistName = "Jay Z" AND g.Label = "Rap" AND al.Title = "The Black Album";
 
 INSERT INTO Song
-	SELECT null, 
-		   "What More Can I Say", 
+	SELECT null,
+		   "What More Can I Say",
        SUBSTR(ABS(RANDOM())||'', 0, 4),
-		   '12/03/1982', 
+		   '12/03/1982',
 		   g.GenreId,
 		   a.ArtistId,
 		   al.AlbumId
@@ -417,10 +417,10 @@ INSERT INTO Song
 	WHERE a.ArtistName = "Jay Z" AND g.Label = "Rap" AND al.Title = "The Black Album";
 
 INSERT INTO Song
-	SELECT null, 
-		   "Encore", 
+	SELECT null,
+		   "Encore",
            SUBSTR(ABS(RANDOM())||'', 0, 4),
-		   '12/03/1982', 
+		   '12/03/1982',
 		   g.GenreId,
 		   a.ArtistId,
 		   al.AlbumId
@@ -428,10 +428,10 @@ INSERT INTO Song
 	WHERE a.ArtistName = "Jay Z" AND g.Label = "Rap" AND al.Title = "The Black Album";
 
 INSERT INTO Song
-	SELECT null, 
-		   "Dirt Off Your Shoulder", 
+	SELECT null,
+		   "Dirt Off Your Shoulder",
        SUBSTR(ABS(RANDOM())||'', 0, 4),
-		   '12/03/1982', 
+		   '12/03/1982',
 		   g.GenreId,
 		   a.ArtistId,
 		   al.AlbumId
@@ -441,8 +441,8 @@ INSERT INTO Song
 
 
 SELECT s.Title 'Song', s.SongLength 'Duration',
-	   al.Title 'Album', 
-       a.ArtistName 'Artist', 
+	   al.Title 'Album',
+       a.ArtistName 'Artist',
 	   g.Label 'Genre'
 FROM Song s
 JOIN Album al ON s.AlbumId = al.AlbumId
@@ -452,8 +452,8 @@ JOIN Genre g ON s.GenreId = g.GenreId;
 
 /* List all songs with album information */
 SELECT a.Title 'Album', s.Title 'Song'
-From Song s
-left join Album a on s.AlbumId = a.AlbumId
+FROM Song s
+LEFT JOIN Album a ON s.AlbumId = a.AlbumId
 
 
 /* Find Albums with no songs */

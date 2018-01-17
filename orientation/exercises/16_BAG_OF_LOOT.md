@@ -7,11 +7,11 @@ This exercise is your introduction to writing command line applications that int
 ```
 mkdir -p ~/workspace/csharp/exercises/bagoloot/BagOLoot && cd $_
 dotnet new console
-dotnet add package System.Data.SQLite
+dotnet add package Microsoft.Data.SQLite --version 2.0.0
 dotnet restore
 mkdir ../BagOLoot.Tests && cd $_
 dotnet new xunit
-dotnet add reference ../BagOLoot/BagOLoot.csproj 
+dotnet add reference ../BagOLoot/BagOLoot.csproj
 dotnet restore
 cd ..
 code .
