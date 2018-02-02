@@ -2,7 +2,7 @@
 
 ## Setup
 
-```
+```sh
 mkdir -p ~/workspace/csharp/exercises/music-sql && cd $_
 touch queries.sql
 ```
@@ -13,13 +13,13 @@ touch queries.sql
 
 To get started, type the following command to check if you already have SQLite installed.
 
-```bash
+```sh
 $ sqlite3
 ```
 
 And you should see:
 
-```
+```sh
 SQLite version 3.7.15.2 2014-08-15 11:53:05
 Enter ".help" for instructions
 Enter SQL statements terminated with a ";"
@@ -56,7 +56,14 @@ $make install
 
 ## Downloading the Database Files
 
-Download the [musichistory.db](./assets/musichistory.db) file, and then copy it to the folder that you created for this exercise. That file **is** the database. It contains all of the tables and data. 
+Download the [musichistory.db](./assets/musichistory.db) file, and then copy it to the folder that you created for this exercise. That file **is** the database. It contains all of the tables and data.
+
+## References
+
+* [SQLBolt Learn SQL with simple, interactive exercises.](https://sqlbolt.com/)
+* [Introductory SQL tutorial](http://www.sqlcourse.com/)
+* [W3schools interactive SQL tutorial](https://www.w3schools.com/sql/sql_intro.asp)
+* [Online SQLite tutorial](http://www.sqlitetutorial.net/)
 
 ## Instructions
 
