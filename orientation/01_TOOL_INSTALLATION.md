@@ -12,17 +12,17 @@ brew install sqlite
 
 Follow the installation steps for your OS on the [SQLite installation](https://www.tutorialspoint.com/sqlite/sqlite_installation.htm) page.
 
-## SQL Browser
+## TablePlus
 
-The [DB browser for SQLite](http://sqlitebrowser.org/) will let you view, query and manage your databases during the course.
+[TablePlus](https://tableplus.io/) will let you view, query and manage your SQLite databases during the course.
 
 ## Visual Studio Code
 
 [Visual Studio Code](https://code.visualstudio.com/download) is Microsoft's cross-platform editor that we'll be using during orientation for writing C# and building .NET applications. Make sure you add the [C# extension](https://code.visualstudio.com/Docs/languages/csharp) immediately after installation completes.
 
-## Windows
+## Install .NET Core
 
-### Install .NET Core
+### Windows
 
 https://www.microsoft.com/net/core#windows
 
@@ -36,16 +36,13 @@ https://www.microsoft.com/net/core#windows
   1. You should see the test "Hello World".
   1. Navigate to the folder where the app was created and https://docs.asp.net/en/latest/getting-started.html
 
-## OSX
-
-### Install .NET Core
+### OSX
 
 https://www.microsoft.com/net/core#macos
 
 Create and run an ASP.NET application using .NET Core
 
 https://docs.asp.net/en/latest/getting-started.html
-
 
 ### Review .NET Core Documentation
 

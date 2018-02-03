@@ -40,13 +40,13 @@ Add `C:\sqlite` to your [PATH environment variable](http://dustindavis.me/update
 
 First, try to install via Homebrew:
 
-```
+```sh
 brew install sqlite3
 ```
 
 If not, download the package from above. After downloading the files, follow these steps:
 
-```
+```sh
 $tar -xvzf sqlite-autoconf-3071502.tar.gz
 $cd sqlite-autoconf-3071502
 $./configure --prefix=/usr/local
