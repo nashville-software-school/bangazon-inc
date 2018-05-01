@@ -6,6 +6,10 @@
 
 [List of all LINQ methods](https://docs.microsoft.com/en-us/dotnet/framework/data/adonet/ef/language-reference/supported-and-unsupported-linq-methods-linq-to-entities)
 
+### Visualization of LINQ methods
+
+![linq methods chart](./assets/linq.jpg)
+
 ## Selecting Items from a Collection
 
 ```cs
