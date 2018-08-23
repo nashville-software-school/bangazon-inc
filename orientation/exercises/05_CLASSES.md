@@ -8,24 +8,39 @@ dotnet new console
 dotnet restore
 ```
 
+## Practice - List employees working at a company
+
+Using C# classes, you need to create custom types to represent an **`Employee`** and a **`Company`**. Then you will create some employees, hire them into the company and then display a simple report showing the employee names and their titles.
+
+![employee list](./assets/AXf6v0ajv6.gif)
+
 ## Instructions
 
-1. Copy this `Company` class into your `Program.cs` file.
+1. Create a custom type for `Employee`. An employee has the following properties.
+    1. First name (_string_)
+    1. Last name (_string_)
+    1. Title (_string_)
+    1. Start date (_DateTime_)
+1. Create a custom type for `Company`. A company has the following properties.
+    1. Date founded (_DateTime_)
+    1. Company name (_string_)
+    1. Employees (_List\<Employee\>_)
+1. The `Company` class should also have a `ListEmployees()` method which outputs the name of each employee to the console.
+1. In the `Main` method of your console application, create a new instance of Company, and three instances of Employee. Then assign the employees to the company.
+
+---
+
+Copy this `Company` class into your `Program.cs` file to get started. You will define the `Employee` type.
 
 ```cs
 public class Company
 {
-    /*
-        Some readonly properties
-    */
+
+    // Some readonly properties (let's talk about gets, baby)
     public string Name { get; }
     public DateTime CreatedOn { get; }
 
-    // Create a property for holding a list of current employees
-
-    // Create a method that allows external code to add an employee
-
-    // Create a method that allows external code to remove an employee
+    // Create a public property for holding a list of current employees
 
     /*
         Create a constructor method that accepts two arguments:
@@ -35,8 +50,21 @@ public class Company
         The constructor will set the value of the public properties
     */
 }
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        // Create an instance of a company. Name it whatever you like.
+
+        // Create three employees
+
+        // Assign the employees to the company
+
+        /*
+            Iterate the company's employee list and generate the
+            simple report shown above
+        */
+    }
+}
 ```
-1. Create a class that contains information about employees of a company and define methods to get/set employee name, job title, and start date.
-1. Consider the concept of [aggregation](../09_RELATIONSHIPS.md#aggregation), and modify the `Company` class so that you assign employees to a company. 
-1. In the `Main` method, create a company, and three employees, and then assign the employees to the company.
-1. Update the `Company` class to write the name of each employee to the console. Consider a method named `ListEmployees()`.
