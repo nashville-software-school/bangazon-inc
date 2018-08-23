@@ -41,7 +41,7 @@ In some `Automobile.cs`:
 
 ```cs
 // Base class
-class Automobile {
+public class Automobile {
 
     public string Accelerate() {
         return "zoom!";
@@ -50,7 +50,7 @@ class Automobile {
 }
 
 // Derived class
-class Car : Automobile { }
+public class Car : Automobile { }
 ```
 
 > `Program.cs`:
@@ -71,7 +71,7 @@ Private methods are intended to be internal functionality. Consider the classes 
 
 ```cs
 // Base class
-class Automobile {
+public class Automobile {
 
     public string Accelerate() {
         this.InjectFuel();
@@ -94,7 +94,7 @@ generic_auto.InjectFuel();
 
 ```cs
 // Given a Derived class, the follow code does not compile
-class Car : Automobile {
+public class Car : Automobile {
 
     public string CallAPrivateParentMethod {
         this.InjectFuel(); // Can not call InjectFuel b/c it's listed as private its parent class, Automobile
@@ -114,7 +114,7 @@ Classes and Methods that have tagged with the `protected` keyword prevent access
 
 ```cs
 // Base class
-class Automobile {
+public class Automobile {
 
     public string Break() {
         this.SqueezeBreakPads();
@@ -127,7 +127,7 @@ class Automobile {
 }
 
 // Derived class
-class Car : Automobile {
+public class Car : Automobile {
 
     public string UseEmergencyBreak() {
         this.SqueezeBreakPads();
