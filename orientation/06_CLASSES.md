@@ -1,8 +1,10 @@
 # User Defined Types
 
-A class is a blueprint, or a template, for creating an object instance in memory. C# and the .Net Framework define many types, such as `int`, `decimal`, and `bool` ([value types](https://docs.microsoft.com/en-us/dotnet/visual-basic/programming-guide/language-features/data-types/value-types-and-reference-types)), and `Array`, `string`, and `Object` ([reference types](https://docs.microsoft.com/en-us/dotnet/visual-basic/programming-guide/language-features/data-types/value-types-and-reference-types)) in C#, you can also create your own types.
+A class is a blueprint, or a template, for creating an object instance in memory. C# and the .NET Framework define many types, such as `int`, `decimal`,  `bool`, `class`, `string`, and `interface`. In C#, you can also create your own, custom reference types.
 
 You create a new reference type with a class.
+
+> **Further reading:** [Types in C#](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/types)
 
 ```cs
 public class Writer
@@ -162,14 +164,13 @@ Class properties are the interface you provide to external code to get, and modi
 public class Customer
 {
     /*
-    Fields
+        Fields should have private accessibility
     */
     private string firstName;
     private string lastName;
-    public int age = 42;  // Don't EVER do this. This is a public field. Use properties.
 
     /*
-    Properties
+        Properties should have public accessibility
     */
 
     // Simple property that doesn't allow blank values for first name
@@ -216,38 +217,138 @@ public class Customer
 
 # Methods
 
-Methods are the new name for functions. They are code blocks on a class that performs a series of logic. Think of them as the behaviors of your custom type.
+Methods are the new name for functions. They are code blocks on a class that performs a series of logic. Think of them as the behaviors of your custom type. Copy pasta this example code into your `Program.cs` file.
 
 ```cs
-public class Product
+using System;
+using System.Collections.Generic;
+
+namespace Classes
 {
-	/*
-	  Fields
-	*/
-	private string title;
-	private string description;
-	private double price;
-	private int quantity;
+    public class Customer
+    {
+        private string firstName;
+        private string lastName;
 
-	/*
-	  Properties
-	*/
-	public string Title { get; set; }
-	public string Description { get; set; }
-	public double Price { get; set; }
-	public int Quantity { get; set; }
+        public string FirstName
+        {
+            get
+            {
+                return firstName;
+            }
+            set
+            {
+                if (value != "")
+                {
+                    firstName = value;
+                }
+            }
+        }
 
-	/*
-	  Methods
-	*/
-	public void ship (Customer customer, DeliveryService service)
-	{
-		if (!customer.isLocal)
-		{
-			service.deliver(this, customer);
-		}
-	}
+        public string LastName
+        {
+            get
+            {
+                return lastName;
+            }
+            set
+            {
+                if (value != "")
+                {
+                    lastName = value;
+                }
+            }
+        }
+
+        public bool IsLocal { get; set; } = false;
+
+        public string FullName
+        {
+            get
+            {
+                return string.Format($"{firstName} {lastName}");
+            }
+        }
+    }
+
+    public enum TransitType
+    {
+        Train,
+        Plane,
+        Truck
+    }
+
+    public class DeliveryService
+    {
+        /*
+          Properties
+        */
+        public string Name { get; set; }
+
+        public TransitType Transit { get; set; }
+
+        /*
+          Methods
+        */
+        public void Deliver(Product product, Customer customer)
+        {
+            Console.WriteLine($"Product delivered by {this.Transit} to {customer.FullName}");
+        }
+    }
+
+    public class Product
+    {
+        /*
+          Properties
+        */
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public double Price { get; set; }
+        public int Quantity { get; set; }
+
+        /*
+          Methods
+        */
+        public void Ship(Customer customer, DeliveryService service)
+        {
+            if (!customer.IsLocal)
+            {
+                service.Deliver(this, customer);
+            }
+        }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+
+
+            Product tinkerToys = new Product()
+            {
+                Title = "Tinker Toys",
+                Description = "You can build anything you want",
+                Price = 32.49,
+                Quantity = 25
+            };
+
+            tinkerToys.Ship(
+                new Customer()
+                {
+                    FirstName = "Marcus",
+                    LastName = "Fulbright",
+                    IsLocal = false
+                },
+                new DeliveryService()
+                {
+                    Name = "UPS",
+                    Transit = TransitType.Train
+                }
+            );
+        }
+    }
 }
+
 ```
 
 > **Resource:** [Properties (C# Programming Guide)](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/properties)
