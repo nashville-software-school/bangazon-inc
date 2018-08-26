@@ -11,16 +11,20 @@ This book builds a strong foundation in the syntax, data structures, and valuabl
 * Chapter 5 - [Custom Data Structures with Classes](./chapters/CLASSES_INTRO.md)
 * Chapter 6 - [Wrangling Data with LINQ](./chapters/LINQ_INTRO.md)
 * Chapter 7 - [ASP.NET](./chapters/ASPNET_INTRO.md)
-* Chapter 7 - [Tourist Trap Part 1](./chapters/TOURIST_TRAP_ASPNET.md)
-* Chapter 8 - [The Github Workflow](./chapters/GIT_WORKFLOW.md)
-* Chapter 9 - [Daily Journal - Part 1](./chapters/DAILY_JOURNAL_STATIC_LAYOUT.md)
+* Chapter 8 - [Tourist Trap - Part 1](./chapters/TOURIST_TRAP_ASPNET.md)
+* Chapter 9 - [Writing Integration Tests](./chapters/XUNIT_INTRO.md)
+* Chapter 10 - [Tourist Trap - Part 2](./chapters/TOURIST_TRAP_TESTING.md)
+* Chapter 11 - [Introduction to SQL](./chapters/SQL_INTRO.md)
+* Chapter 12 - [Using SQL in a Web Application](./chapters/ADO_NET_INTRO.md)
+* Chapter 13 - [Tourist Trap - Part 3](./chapters/TOURIST_TRAP_DATABASE.md)
 
-> ### __Sprint 1__ - Celebrity Tribute
+> ### __Sprint 1__ - Bangazon Workforce Management
 
 ## Supplementary Content
 
-* Supplement - [Core Software Design Principles](./chapters/DESIGN_PRINCIPLES.md)
-* Supplement - [Data and Metadata](./chapters/METADATA.md)
-* Supplement - [Publish Site with Github Pages](./chapters/GITHUB_PAGES.md)
-
-Once you are strong on these foundational concepts, you will move along to [Book 3 - The Neophyte](../book-3-the-neophyte/README.md).
+* Supplement - [Interfaces](./chapters/INTERFACES_INTRO.md)
+* Supplement - [SOLID: Single Responsibility Principle](./chapters/SINGLE_RESPONSIBILITY_PRINCIPLE.md)
+* Supplement - [SOLID: Open/Closed Principle](./chapters/OPEN_CLOSED_PRINCIPLE.md)
+* Supplement - [SOLID: Liskov Substitution Principle](./chapters/LISKOV_SUBSTITUTION_PRINCIPLE.md)
+* Supplement - [SOLID: Interface Segregation Principle](./chapters/INTERFACE_SEGREGATION_PRINCIPLE.md)
+* Supplement - [SOLID: Dependency Inversion Principle](./chapters/DEPENDENCY_INVERSION_PRINCIPLE.md)

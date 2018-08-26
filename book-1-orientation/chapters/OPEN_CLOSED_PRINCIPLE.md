@@ -1,10 +1,10 @@
 # Open - Closed Principle
 
 #### Technical Explanation
-> A satisfactory modular decomposition technique must satisfy one more requirement: 
-> 
+> A satisfactory modular decomposition technique must satisfy one more requirement:
+>
 > It should yield modules that are both **open** and **closed**.
-> 
+>
 > * A module will be said to be **open** if it is available for extension. For example, it should be possible to add fields to the data structures it contains, or new elements to the set of functions it performs.
 > * A module will be said to be **closed** if is available for use by other modules. This assumes that the module has been given a well-defined, stable description (the interface in the sense of information hiding). In the case of a programming language module, a **closed** module is one that may be compiled and stored in a library, for others to use. In the case of a design or specification module, closing a module simply means having it approved by management, adding it to the project's official repository of accepted software items (often called the project baseline), and publishing its interface for the benefit of other module designers.
 
@@ -20,7 +20,7 @@ Ever installed a plugin that provides the ability to do something in the editor 
 
 What's amazing about this kind of architecture is that the plugins have the ability to know about much of the architecture of the core system, and yet the core system has zero knowledge of the plugins.
 
-![](./open-closed-viz.png)
+![open closed principle](./images/open-closed-viz.png)
 
 Let's take a look at a much simpler case study of the Open-Closed Principle. The code below involves two modules that represent a bank account, and a bank teller that is the interface between the account and a customer.
 
@@ -189,7 +189,7 @@ Cool, it halts execution, awaiting the user to enter in a number.
 ```bash
 1. Add money
 2. Withdraw money
->> 
+>>
 ```
 
 So how do we define what logic should be executed when a user selects one of the options? Again, we're not going to put a giant if/else statement in this class to handle all possible options like it was done in the original `Teller` class above. That violates the OCP because it would require us to constantly modify this class whenever a new feature is added.
