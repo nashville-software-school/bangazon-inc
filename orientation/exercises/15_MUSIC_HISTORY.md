@@ -84,9 +84,12 @@ For each of the following exercises, provide the appropriate query. Yes, even th
     SELECT a.Title, s.Title FROM Album a LEFT JOIN Song s ON s.AlbumId = a.AlbumId;
     SELECT a.Title, s.Title FROM Song s LEFT JOIN Album a ON s.AlbumId = a.AlbumId;
     ```
+1. Using `SELECT` and `LEFT JOIN`, write a query that displays the song title, the song duration, the album label, and the genre name for every song.
+1. Using a `WHERE` clause, modify the previous query to only show the information for songs that have a duration of 250 or greater.
 1. Write a `SELECT` statement to display how many songs exist for each album. You'll need to use the `COUNT()` function and the `GROUP BY` keyword sequence.
 1. Write a `SELECT` statement to display how many songs exist for each artist. You'll need to use the `COUNT()` function and the `GROUP BY` keyword sequence.
 1. Write a `SELECT` statement to display how many songs exist for each genre. You'll need to use the `COUNT()` function and the `GROUP BY` keyword sequence.
+1. Write a `SELECT` statement to display how many artists exist for each genre. You'll need to use the `COUNT()` function and the `GROUP BY` keyword sequence.
 1. Using `MAX()` function, write a select statement to find the album with the longest duration. The result should display the album title and the duration.
 1. Using `MAX()` function, write a select statement to find the song with the longest duration. The result should display the song title and the duration.
 1. Modify the previous query to also display the title of the album.
