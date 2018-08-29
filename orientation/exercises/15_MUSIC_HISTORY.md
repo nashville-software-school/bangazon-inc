@@ -56,7 +56,7 @@ $make install
 
 ## Downloading the Database Files
 
-Download the [musichistory.db](./assets/musichistory.db) file, and then copy it to the folder that you created for this exercise. That file **is** the database. It contains all of the tables and data.
+Download the [musichistory.db](https://github.com/nashville-software-school/bangazon-inc/blob/master/orientation/exercises/assets/musichistory.db?raw=true) file, and then copy it to the folder that you created for this exercise. That file **is** the database. It contains all of the tables and data.
 
 ## References
 
