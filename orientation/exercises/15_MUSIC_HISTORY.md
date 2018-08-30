@@ -93,3 +93,23 @@ For each of the following exercises, provide the appropriate query. Yes, even th
 1. Using `MAX()` function, write a select statement to find the album with the longest duration. The result should display the album title and the duration.
 1. Using `MAX()` function, write a select statement to find the song with the longest duration. The result should display the song title and the duration.
 1. Modify the previous query to also display the title of the album.
+
+## SQL Challenge
+
+You can limit the results of a query using the `LIMIT` keyword.
+
+```sql
+SELECT Title
+FROM Song
+LIMIT 1
+```
+
+This will only return the first row of the results.
+
+Your challenge is to write a query to answer the following questions from the sales team.
+
+1. Which album has the most songs?
+1. Which genre has been assigned to the most songs?
+1. Which record label has released the most albums?
+
+To accomplish this, you will need to use the `MAX()` aggregation function, the `GROUP BY` clause, the `ORDER BY` clause, and the `LIMIT` keyword.
