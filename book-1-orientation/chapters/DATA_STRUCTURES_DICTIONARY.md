@@ -17,17 +17,28 @@ Here's how that would look in C# as a **`Dictionary`**.
 
 ```cs
 Dictionary<string, int> toysSold = new Dictionary<string, int>() {
-    {"hotWheels", 344},
-    {"legos", 763},
-    {"gamingConsoles", 551},
-    {"boardGames", 298}
+    {"Hot Wheels", 344},
+    {"Legos", 763},
+    {"Gaming Consoles", 551},
+    {"Board Games", 298}
 };
 ```
 
 You can also use the `Add()` method to add more key/value pairs to a dictionary.
 
 ```cs
-toysSold.Add("Bicycle", 87);
+toysSold.Add("Bicycles", 87);
+```
+
+## Iterating a Dictionary
+
+If you want to see all the toys and how many were sold, you can use a `foreach` to iterate over all of the `KeyValuePair` items in the dictionary.
+
+```cs
+foreach(KeyValuePair<string, int> toy in toysSold)
+{
+    Console.WriteLine($"We sold {toy.Value} units of {toy.Key}");
+}
 ```
 
 # Practice: Stock Purchase Dictionaries
@@ -117,6 +128,15 @@ foreach (KeyValuePair<?, ?> purchase in purchases)
         the value of "GE" in the `stocks` dictionary
         to get the value of "General Electric"?
     */
+}
+```
+
+Now that the report dictionary is populated, display the final results.
+
+```cs
+foreach(KeyValuePair<?, ?> item in stockReport)
+{
+    Console.WriteLine($"The position in {display the key} is worth {display the value}");
 }
 ```
 
