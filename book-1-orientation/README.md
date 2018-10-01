@@ -16,16 +16,9 @@ This book builds a strong foundation in the syntax, data structures, and valuabl
 * Chapter 10 - [Student Exercises - Part 2](./chapters/STUDENT_EXERCISES_LINQ.md)
 * Chapter 11 - [Introduction to SQL](./chapters/SQL_INTRO.md)
 * Chapter 12 - [Student Exercises - Part 3](./chapters/STUDENT_EXERCISES_SQL.md)
-* Chapter 13 - [Object Relational Mapping (ORM) with Dapper](./chapters/DAPPER_INTRO.md)
-* Chapter 12 - [Student Exercises - Part 4](./chapters/STUDENT_EXERCISES_DAPPER.md)
-* Chapter 14 - [Introduction to ASP.NET Web Applications](./chapters/ASPNET_INTRO.md)
-* Chapter 15 - [Student Exercises - Part 5](./chapters/STUDENT_EXERCISES_ASPNET.md)
-* Chapter 16 - [Writing Integration Tests](./chapters/XUNIT_INTRO.md)
-* Chapter 17 - [Student Exercises - Part 6](./chapters/STUDENT_EXERCISES_TESTING.md)
-* Chapter 18 - [Using SQL &amp; Dapper in a Web Application](./chapters/ADO_NET_INTRO.md)
-* Chapter 19 - [Student Exercises - Part 7](./chapters/STUDENT_EXERCISES_DAPPER_ASPNET.md)
-
-> ### __Sprint 1__ - Bangazon Workforce Management
+* Chapter 13 - [C# Data Models](./chapters/SQL_INTRO.md)
+* Chapter 14 - [Object Relational Mapping (ORM) with Dapper](./chapters/DAPPER_INTRO.md)
+* Chapter 15 - [Student Exercises - Part 4](./chapters/STUDENT_EXERCISES_DAPPER.md)
 
 ## Supplementary Content
 

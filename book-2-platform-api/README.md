@@ -4,16 +4,20 @@ This book prepares you for building the Bangazon Platform API
 
 ## Chapters
 
-* Chapter 1 - [Installations](./chapters/INSTALLATIONS.md)
+* Chapter 1 - [Web API Intro](./chapters/API_OVERVIEW.md)
 * Chapter 2 - [Debugging in Visual Studio](./chapters/DEBUGGING_VS.md)
-* Chapter 3 - [Models and Controllers](./chapters/API_MODELS_CONTROLLERS.md)
-* Chapter 4 - [Student Exercises API](./chapters/NSS_API_INTRO.md)
-* Chapter 4 - [Route and Query String Parameters](./chapters/DATA_STRUCTURES.md)
-* Chapter 4 - [Student Exercises API: Custom Requests](./chapters/NSS_API_PARAMS.md)
-* Chapter 5 - [Validating with ModelState and Annotations](./chapters/MODEL_VALIDATION.md)
-* Chapter 4 - [Student Exercises API: Validating Requests](./chapters/NSS_API_VALIDATION.md)
+* Chapter 3 - [API Controllers](./chapters/API_MODELS_CONTROLLERS.md)
+* Chapter 4 - [Student Exercises - Part 5](./chapters/STUDENT_EXERCISES_API.md)
+* Chapter 5 - [Route and Query String Parameters](./chapters/CONTROLLER_PARAMETERS.md)
+* Chapter 6 - [Student Exercises - Part 6](./chapters/STUDENT_EXERCISES_PARAMS.md)
+* Chapter 7 - [Validating with ModelState and Annotations](./chapters/MODEL_VALIDATION.md)
+* Chapter 8 - [Student Exercises - Part 7](./chapters/STUDENT_EXERCISES_MODELSTATE.md)
+* Chapter 9 - [Bangazon ERD](./chapters/BANGAZON_ERD.md)
 
 > ### __Sprint 1__ - Bangazon Platform API
+
+* Chapter 10 - [JSON Web Tokens](./chapters/JWT.md)
+* Chapter 11 - [Student Exercises React Client](./chapters/STUDENT_EXERCISES_REACT_CLIENT.md)
 
 ## Supplementary Content
 
