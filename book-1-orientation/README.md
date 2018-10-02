@@ -16,7 +16,7 @@ This book builds a strong foundation in the syntax, data structures, and valuabl
 * Chapter 10 - [Student Exercises - Part 2](./chapters/STUDENT_EXERCISES_LINQ.md)
 * Chapter 11 - [Introduction to SQL](./chapters/SQL_INTRO.md)
 * Chapter 12 - [Student Exercises - Part 3](./chapters/STUDENT_EXERCISES_SQL.md)
-* Chapter 13 - [C# Data Models](./chapters/SQL_INTRO.md)
+* Chapter 13 - [C# Data Models](./chapters/DATA_MODELS_INTRO.md)
 * Chapter 14 - [Object Relational Mapping (ORM) with Dapper](./chapters/DAPPER_INTRO.md)
 * Chapter 15 - [Student Exercises - Part 4](./chapters/STUDENT_EXERCISES_DAPPER.md)
 
