@@ -16,6 +16,10 @@ Follow the installation steps for your OS on the [SQLite installation](https://w
 
 [TablePlus](https://tableplus.io/) will let you view, query and manage your SQLite databases during the course.
 
+## dbdiagram.io
+
+Please bookmark the [dbdiagram.io](http://dbdiagram.io) web application for creating ERDs (Entity Relationship Diagrams).
+
 ## Visual Studio Code
 
 [Visual Studio Code](https://code.visualstudio.com/download) is Microsoft's cross-platform editor that we'll be using during orientation for writing C# and building .NET applications. Make sure you add the [C# extension](https://code.visualstudio.com/Docs/languages/csharp) immediately after installation completes.
