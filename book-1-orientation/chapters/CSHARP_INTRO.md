@@ -1,5 +1,9 @@
 # Not Hello, World
 
+## Getting Started Guide
+
+Please read and complete the steps in the official [Get Started with C# and Visual Studio Code](https://docs.microsoft.com/en-us/dotnet/core/tutorials/with-visual-studio-code) guide.
+
 ## Setup
 
 We're going to get your first C# console application setup and running so that we can review some basics of the language.
