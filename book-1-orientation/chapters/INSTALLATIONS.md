@@ -10,11 +10,24 @@ brew install sqlite
 
 ### For Windows Users
 
-Follow the installation steps for your OS on the [SQLite installation](https://www.tutorialspoint.com/sqlite/sqlite_installation.htm) page.
+1. Create the directory `C:\sqlite` on your hard drive.
+1. Browser to the [SQLite downloads](https://sqlite.org/download.html)
+1. Focus on the **Precompiled Binaries for Windows** section.
+1. Download the `sqlite-dll-win64-x64-3250200.zip` file.
+1. Download the `sqlite-tools-win32-x86-3250200.zip` file.
+1. Uncompress both of them.
+1. Copy the resulting contents of both files into the `C:\sqlite` directory.
+1. [Follow these directions](https://www.computerhope.com/issues/ch000549.htm#windows8) to add the `C:\sqlite` directory to your system path.
 
 ## TablePlus
 
+#### Windows and Mac Users
+
 [TablePlus](https://tableplus.io/) will let you view, query and manage your SQLite databases during the course.
+
+#### Linux Users
+
+We do not recommend Linux for students at NSS, but if you are a Linux user, you can install [DB Browser for SQLite](http://sqlitebrowser.org/);
 
 ## dbdiagram.io
 
