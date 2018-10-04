@@ -16,12 +16,7 @@ List<int> yearsBorn = new List<int>() {
 };
 ```
 
-```cs
-// Also rad code
-List<int> yearsBorn = new List<int>() {
-    1967, 1969, 1972
-};
-```
+This code will produce red squiggles under 1967 and 1972. C# has no default way to convert a string into an integer, and it will tell you that.
 
 ```cs
 // Bogus code

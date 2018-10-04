@@ -47,4 +47,11 @@ You must define a type for representing an exercise in code. An exercise can be 
 
 The learning objective of this exercise is to practice creating instances of custom types that you defined with `class`, establishing the relationships between them, and practicing basic data structures in C#.
 
+Once you have defined all of your custom types, go to your `Main()` method in `Program.cs` and implement the following logic.
+
+1. Create 4, or more, exercises.
+1. Create 3, or more, cohorts.
+1. Create 4, or more, students and assign them to one of the cohorts.
+1. Create 3, or more, instructors and assign them to one of the cohorts.
+1. Have each instructor assign 2 exercises to each of the students.
 

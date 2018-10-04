@@ -75,10 +75,10 @@ To find a value in a Dictionary, you can use square bracket notation much like J
 string GM = stocks["GM"];   <--- "General Motors"
 ```
 
-Next, create another dictionary to hold stock purchases by an investor.
+Next, create a list to hold stock purchases by an investor. The list will contain dictionaries.
 
 ```cs
-Dictionary<string, double> purchases = new Dictionary<string, double>();
+List<Dictionary<string, double>> purchases = new List<Dictionary<string, double>>();
 ```
 
 Then add some purchases.
@@ -86,9 +86,9 @@ Then add some purchases.
 ##### Example
 
 ```cs
-purchases.Add("GE", 230.21));
-purchases.Add("GE", 580.98));
-purchases.Add("GE", 406.34));
+purchases.Add (new Dictionary<string, double>(){ {"GE", 230.21} });
+purchases.Add (new Dictionary<string, double>(){ {"GE", 580.98} });
+purchases.Add (new Dictionary<string, double>(){ {"GE", 406.34} });
 
 // Add more purchases for each stock
 ```
@@ -116,18 +116,21 @@ Dictionary<?, ?> stockReport = new Dictionary<?, ?>();
    Iterate over the purchases and record the valuation
    for each stock.
 */
-foreach (KeyValuePair<?, ?> purchase in purchases)
+foreach (Dictionary<string, double> purchase in purchases) {
 {
-    // Does the company name key already exist?
+    foreach (KeyValuePair<string, double> stock in purchase)
+    {
+        // Does the company name key already exist?
 
-    // If it does, update the total valuation
+        // If it does, update the total valuation
 
-    /*
-        If not, add the new key and set its value.
-        You have the value of "GE", so how can you look
-        the value of "GE" in the `stocks` dictionary
-        to get the value of "General Electric"?
-    */
+        /*
+            If not, add the new key and set its value.
+            You have the value of "GE", so how can you look
+            the value of "GE" in the `stocks` dictionary
+            to get the value of "General Electric"?
+        */
+    }
 }
 ```
 
