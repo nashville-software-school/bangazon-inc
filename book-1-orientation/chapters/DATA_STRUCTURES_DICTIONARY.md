@@ -120,7 +120,7 @@ foreach (Dictionary<string, double> purchase in purchases) {
 {
     foreach (KeyValuePair<string, double> stock in purchase)
     {
-        // Does the company name key already exist?
+        // Does the full company name key already exist in the `stockReport`?
 
         // If it does, update the total valuation
 
