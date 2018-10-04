@@ -22,6 +22,7 @@ This book builds a strong foundation in the syntax, data structures, and valuabl
 
 ## Supplementary Content
 
+* Supplement - [Windows Installations](./chapters/WINDOWS_PRO_INSTALLS.md)
 * Supplement - [Interfaces](./chapters/INTERFACES_INTRO.md)
 * Supplement - [SOLID: Single Responsibility Principle](./chapters/SINGLE_RESPONSIBILITY_PRINCIPLE.md)
 * Supplement - [SOLID: Open/Closed Principle](./chapters/OPEN_CLOSED_PRINCIPLE.md)
