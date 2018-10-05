@@ -8,12 +8,12 @@ First, build an ERD based on these requirements using [dbdiagram.io](https://dbd
 
 ## Setup
 
-> **Note:** Make sure that each class you define is in its own file.
+> **Note:** Make sure that each class you define is in its own file. Also make sure each class is in the `StudentExercises` namespace.
 
 ```sh
-mkdir -p ~/workspace/csharp/studentexercises && cd $_
-dotnet new console
+mkdir -p ~/workspace/csharp/StudentExercises && cd $_
 touch Student.cs Cohort.cs Instructor.cs Exercise.cs
+dotnet new console
 ```
 
 
@@ -65,4 +65,17 @@ Once you have defined all of your custom types, go to your `Main()` method in `P
 1. Create 4, or more, students and assign them to one of the cohorts.
 1. Create 3, or more, instructors and assign them to one of the cohorts.
 1. Have each instructor assign 2 exercises to each of the students.
+
+## Challenge
+
+1. Create a list of students. Add all of the student instances to it.
+    ```cs
+    List<Student> students = new List<Student>();
+    ```
+1. Create a list of exercises. Add all of the exercise instances to it.
+    ```cs
+    List<Exercise> exercises = new List<Exercise>();
+    ```
+
+Generate a report that displays which students are working on which exercises.
 
