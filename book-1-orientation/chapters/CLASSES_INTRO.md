@@ -74,7 +74,7 @@ Private methods are intended to be internal functionality. Consider the classes 
 public class Automobile {
 
     public string Accelerate() {
-        this.InjectFuel();
+        InjectFuel();
         return "zoom";
     }
 
@@ -117,7 +117,7 @@ Classes and Methods that have tagged with the `protected` keyword prevent access
 public class Automobile {
 
     public string Break() {
-        this.SqueezeBreakPads();
+        SqueezeBreakPads();
         return "skuuuuuur";
     }
 
@@ -130,7 +130,7 @@ public class Automobile {
 public class Car : Automobile {
 
     public string UseEmergencyBreak() {
-        this.SqueezeBreakPads();
+        SqueezeBreakPads();
         return "skreeech!";
     }
 }
@@ -156,7 +156,7 @@ Classes and Methods that have tagged with the `internal` keyword allow access fr
 
 > **Resource:** [Access Modifiers (C# Programming Guide)](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/access-modifiers)
 
-# Properties and Fields
+# Properties
 
 Class properties are the interface you provide to external code to get, and modify, the values of the private fields.
 
@@ -164,50 +164,17 @@ Class properties are the interface you provide to external code to get, and modi
 public class Customer
 {
     /*
-        Fields should have private accessibility
-    */
-    private string firstName;
-    private string lastName;
-
-    /*
         Properties should have public accessibility
     */
+    public string FirstName { get; set; }
 
-    // Simple property that doesn't allow blank values for first name
-    public string FirstName {
-        get
-        {
-            return firstName;
-        }
-        set
-        {
-            if (value != "")
-            {
-                firstName = value;
-            }
-        }
-    }
+    public string LastName { get; set; }
 
-    // Simple property that doesn't allow blank values for last name
-    public string LastName {
-        get
-        {
-            return lastName;
-        }
-        set
-        {
-            if (value != "")
-            {
-                lastName = value;
-            }
-        }
-    }
-
-    // Calculated property that has no mutator (setter)
+    // Calculated property that has no setter. It is readonly.
     public string FullName {
         get
         {
-            return string.Format($"{firstName} {lastName}");
+            return $"{firstName} {lastName}";
         }
     }
 }
@@ -227,40 +194,10 @@ namespace Classes
 {
     public class Customer
     {
-        private string firstName;
-        private string lastName;
+        // Public Properties
+        public string FirstName { get; set; }
 
-        public string FirstName
-        {
-            get
-            {
-                return firstName;
-            }
-            set
-            {
-                if (value != "")
-                {
-                    firstName = value;
-                }
-            }
-        }
-
-        public string LastName
-        {
-            get
-            {
-                return lastName;
-            }
-            set
-            {
-                if (value != "")
-                {
-                    lastName = value;
-                }
-            }
-        }
-
-        public bool IsLocal { get; set; } = false;
+        public string LastName { get; set; }
 
         public string FullName
         {
@@ -271,21 +208,12 @@ namespace Classes
         }
     }
 
-    public enum TransitType
-    {
-        Train,
-        Plane,
-        Truck
-    }
-
     public class DeliveryService
     {
         /*
           Properties
         */
         public string Name { get; set; }
-
-        public TransitType Transit { get; set; }
 
         /*
           Methods
@@ -302,8 +230,11 @@ namespace Classes
           Properties
         */
         public string Title { get; set; }
+
         public string Description { get; set; }
+
         public double Price { get; set; }
+
         public int Quantity { get; set; }
 
         /*
@@ -322,8 +253,6 @@ namespace Classes
     {
         static void Main(string[] args)
         {
-
-
             Product tinkerToys = new Product()
             {
                 Title = "Tinker Toys",
@@ -332,26 +261,31 @@ namespace Classes
                 Quantity = 25
             };
 
-            tinkerToys.Ship(
-                new Customer()
-                {
-                    FirstName = "Marcus",
-                    LastName = "Fulbright",
-                    IsLocal = false
-                },
-                new DeliveryService()
-                {
-                    Name = "UPS",
-                    Transit = TransitType.Train
-                }
-            );
+            Customer marcus = new Customer()
+            {
+                FirstName = "Marcus",
+                LastName = "Fulbright",
+                IsLocal = false
+            };
+
+            DeliveryService UPS = new DeliveryService()
+            {
+                Name = "UPS",
+                Transit = TransitType.Train
+            };
+
+            // Ship the tinker toys to Marcus using UPS
+            tinkerToys.Ship(marcus, UPS);
         }
     }
 }
-
 ```
 
-> **Resource:** [Properties (C# Programming Guide)](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/properties)
+## Resources
+
+* [C# Classes Tutorial](https://youtu.be/ZqDtPFrUonQ?t=139)
+* [How to program in C# - CLASSES - Beginner Tutorial](https://youtu.be/s2hHjpZaSyI?t=117)
+* [Properties (C# Programming Guide)](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/properties)
 
 
 

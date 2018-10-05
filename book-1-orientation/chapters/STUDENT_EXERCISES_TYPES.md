@@ -6,6 +6,17 @@ You are going to build a console application that tracks exercises that are assi
 
 First, build an ERD based on these requirements using [dbdiagram.io](https://dbdiagram.io).
 
+## Setup
+
+> **Note:** Make sure that each class you define is in its own file.
+
+```sh
+mkdir -p ~/workspace/csharp/studentexercises && cd $_
+dotnet new console
+touch Student.cs Cohort.cs Instructor.cs Exercise.cs
+```
+
+
 ## Student
 
 You must define a type for representing a student in code. A student can only be in one cohort at a time. A student can be working on many exercises at a time.
