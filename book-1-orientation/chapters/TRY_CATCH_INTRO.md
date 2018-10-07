@@ -51,7 +51,7 @@ try
     int answer = calculator.Divide(42, 0); 
     Console.WriteLine($"The answer is {answer}");
 }
-catch (Exception ex)
+catch (DivideByZeroException ex)
 {
     Console.WriteLine("Something went wrong!");
 }
@@ -77,7 +77,7 @@ Why? Because the line above it resulted in an exception. When an exception occur
 
 So what does C# do? It stops running the code at the place where the exception occurred and starts looking for a `try/catch` block to handle the exception. If it finds a `try/catch` block, it will run the code in the `catch` block. If it doesn't, it will end the program and display an eror messagge that describes the exception.
 
-## Error Messages and  Stacktraces
+## Error Messages and Stacktraces
 
 Now let's take another look at the error message we saw earlier.
 
@@ -153,7 +153,68 @@ Employee #0 is Pete Shackleton.
 Unhandled Exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection.
 Parameter name: index
    at System.Collections.Generic.List`1.get_Item(Int32 index)
-   at trycatch.Company.GetEmployeeById(Int32 id) in /home/tgwtg/programming/nss/trycatch/Program.cs:line 89
-   at trycatch.Program.Main(String[] args) in /home/tgwtg/programming/nss/trycatch/Program.cs:line 40
+   at TryCatch.Company.GetEmployeeById(Int32 id) in /home/tgwtg/programming/nss/trycatch/Program.cs:line 89
+   at TryCatch.Program.Main(String[] args) in /home/tgwtg/programming/nss/trycatch/Program.cs:line 40
+```
+
+We see the output for Employee #0, but then the program ends due to an exception.
+
+Let's change the code that generates the report to handle the exception.
+
+```csharp
+try 
+{
+    List<int> employeeIds = new List<int>() { 0, 11, 2 };
+    foreach(int id in employeeIds)
+    {
+        Employee employee = chickenShack.GetEmployeeById(id);
+        Console.WriteLine($"Employee #{id} is {employee.FirstName} {employee.LastName}.");
+    }
+} 
+catch (ArgumentOutOfRangeException ex) 
+{
+    Console.WriteLine("Something went wrong while finding employees");
+}
+```
+
+Now we see
 
 ```
+Employee #0 is Pete Shackleton.
+Something went wrong while finding employees
+```
+
+We wrapped our code in a `try/catch` block and now our program has been improved. Our users will no longer see a scary error message.
+
+But we can do better.
+
+```csharp
+List<int> employeeIds = new List<int>() { 0, 11, 2 };
+foreach(int id in employeeIds)
+{
+    try 
+    {
+        Employee employee = chickenShack.GetEmployeeById(id);
+        Console.WriteLine($"Employee #{id} is {employee.FirstName} {employee.LastName}.");
+    } 
+    catch (ArgumentOutOfRangeException ex) 
+    {
+        Console.WriteLine($"Employee #{id} was not found in the company.");
+    }
+}
+```
+
+Now when we run the program we see
+
+```
+Employee #0 is Pete Shackleton.
+Employee #11 was not found in the company.
+Employee #2 is Pat Buttersmith.
+```
+
+By placing our `try/catch` block inside the loop, we are able to continue looping even after one of our employee lookups fails. Plus, we're able to print a better error message because we now have the ID that caused the exception.
+
+## Resources
+* [Handling and throwing exceptions in .NET](https://docs.microsoft.com/en-us/dotnet/standard/exceptions/index)
+* [How to use the try/catch block to catch exceptions](https://docs.microsoft.com/en-us/dotnet/standard/exceptions/how-to-use-the-try-catch-block-to-catch-exceptions)
+* [How to use specific exceptions in a catch block](https://docs.microsoft.com/en-us/dotnet/standard/exceptions/how-to-use-specific-exceptions-in-a-catch-block)
