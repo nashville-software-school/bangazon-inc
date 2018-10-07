@@ -38,11 +38,11 @@ Since dividing by zero is a no-no, our code has _thrown an **exception**_.
 An exception is thrown when something unexpected happens in a program. You might say it happens in "exceptional circumstances".
 
 
-##Try/Catch
+## Try/Catch
 
 Fortunately, C# gives us a tool for handling exceptions. We can `try` code that might throw an exception and `catch` an exception that is thrown.
 
-We could rewrite the code above to `try` calling `Divide()` and `catch` an exception.
+We could rewrite the code above to `try` calling `Divide()` and `catch` the exception.
 
 ```csharp
 try 
@@ -65,7 +65,7 @@ Something went wrong!
 
 ## Exceptions Stop Normal Program Execution
 
-Take another look at the exaple above. notice the line after the call to `Divide()`
+Take another look at the example above. notice the line after the call to `Divide()`
 
 ```csharp
 Console.WriteLine($"The answer is {answer}");
@@ -91,7 +91,7 @@ You'll notice that this error gives you quite a lot of information.
 
 The first line tells you the name of the exception, `System.DivideByZeroException`, and also gives you a brief description of the error, `Attempted to divide by zero.`
 
-The next lines help you find where the error occurred in your code. This is known as a _stacktrace_. The topmost line tells you the method, file and line number where the exception was thrown. In our case, it tells us the exception was thrown in the `Example.Calculator.Divide` method. The next line tells you where in your code the `Divide` method was called.
+The next few lines help you find where the error occurred in your code. This is known as a _stacktrace_. The topmost line tells you the method, file and line number where the exception was thrown. In our case, it tells us the exception was thrown in the `Example.Calculator.Divide` method. The next line tells you where in your code the `Divide` method was called.
 
 ## A Larger Example
 
@@ -159,7 +159,7 @@ Parameter name: index
 
 We see the output for Employee #0, but then the program ends due to an exception.
 
-Let's change the code that generates the report to handle the exception.
+Let's change the code to handle the exception.
 
 ```csharp
 try 
