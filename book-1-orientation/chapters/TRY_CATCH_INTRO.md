@@ -73,9 +73,9 @@ Console.WriteLine($"The answer is {answer}");
 
 This line is never executed.
 
-Why? Because the line above it resulted in an exception. When an exception occurs, the program has moved into an "exceptional state". C# knows something has gone wrong, but it doesn't know what to do about it. It won't just keep going as if nothing bad happened because that might lead to een worse things. 
+Why? Because the line above it resulted in an exception. When an exception occurs, the program has moved into an "exceptional state". C# knows something has gone wrong, but it doesn't know what to do about it. It won't just keep going as if nothing bad happened because that might lead to even worse things. 
 
-So what does C# do? It stops running the code at the place where the exception occurred and starts looking for a `try/catch` block to handle the exception. If it finds a `try/catch` block, it will run the code in the `catch` block. If it doesn't, it will end the program and display an eror messagge that describes the exception.
+So what does C# do? It stops running the code at the place where the exception occurred and starts looking for a `try/catch` block to handle the exception. If it finds a `try/catch` block, it will run the code in the `catch` block. If it doesn't, it will end the program and display an error message that describes the exception.
 
 ## Error Messages and Stacktraces
 
