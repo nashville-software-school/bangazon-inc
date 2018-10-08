@@ -4,7 +4,7 @@
 
 In software sometimes things don't go as planned. Maybe the database you want to read from isn't available. Maybe that list you want to add something to wasn't instantiated. 
 
-Maybe we have a simple Calculator class...
+Here's simple Calculator class...
 
 ```csharp
 public class Calculator
@@ -17,7 +17,7 @@ public class Calculator
 }
 ```
 
-...and another programmer tries doing something mischievous with it.
+...let's suppose another programmer tries doing something mischievous with it, such as...
 
 ```csharp
 Calculator calculator = new Calculator();
@@ -35,7 +35,7 @@ Unhandled Exception: System.DivideByZeroException: Attempted to divide by zero.
 
 Since dividing by zero is a no-no, our code has _thrown an **exception**_.
 
-An exception is thrown when something unexpected happens in a program. You might say it happens in "exceptional circumstances".
+An exception is thrown when something abnormal happens in a program. You might say it happens in "exceptional circumstances".
 
 
 ## Try/Catch
@@ -92,6 +92,26 @@ You'll notice that this error gives you quite a lot of information.
 The first line tells you the name of the exception, `System.DivideByZeroException`, and also gives you a brief description of the error, `Attempted to divide by zero.`
 
 The next few lines help you find where the error occurred in your code. This is known as a _stacktrace_. The topmost line tells you the method, file and line number where the exception was thrown. In our case, it tells us the exception was thrown in the `Example.Calculator.Divide` method. The next line tells you where in your code the `Divide` method was called.
+
+## Handle _Expected Exceptions_
+
+An _expected exception_ is one that you can anticipate happening - it's something that you know _might_ happen.
+
+For example the following code makes no sense.
+
+```csharp
+try
+{
+    List<int> intList = new List<int>();
+    intList.Add(42);
+}
+catch (DivideByZeroException ex) 
+{
+    Console.WriteLine("Adding to a list will never divide by zero");
+}
+```
+
+The important thing to remember is that `try/catch` blocks are not band-aids to wrap around code that isn't behaving. You should only handle Exceptions that you know may happen AND that you know how to handle.
 
 ## A Larger Example
 
