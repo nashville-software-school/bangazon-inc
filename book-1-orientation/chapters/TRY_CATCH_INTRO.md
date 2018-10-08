@@ -179,6 +179,16 @@ Parameter name: index
 
 We see the output for Employee #0, but then the program ends due to an exception.
 
+What caused the exception? Look closely at this line:
+
+```csharp
+List<int> employeeIds = new List<int>() { 0, 11, 2 };
+```
+
+The `employeeIds` is a list of employee IDs. The ID of an employee is the _index_ of that employee in the company's `_employees` list. However, notice the second element in `employeeIds` is `11`, but the only valid indexes in the company's `_employees` list are `0, 1, and 2`. This means when we look for an employee with ID `11`, we are looking for an employee that doesn't exist...therefor, we get an exception.
+
+<br>
+
 Let's change the code to handle the exception.
 
 ```csharp
