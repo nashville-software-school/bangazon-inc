@@ -2,7 +2,7 @@
 
 ## Exceptions
 
-In software sometimes things don't go as planned. Maybe the database you want to read from isn't available. Maybe that list you want to add something to wasn't instantiated. 
+In software sometimes things don't go as planned. Maybe the database you want to read from isn't available. Maybe that list you want to add something to wasn't instantiated.
 
 Here's simple Calculator class...
 
@@ -21,7 +21,7 @@ public class Calculator
 
 ```csharp
 Calculator calculator = new Calculator();
-int answer = calculator.Divide(42, 0); 
+int answer = calculator.Divide(42, 0);
 Console.WriteLine($"The answer is {answer}");
 ```
 
@@ -45,10 +45,10 @@ Fortunately, C# gives us a tool for handling exceptions. We can `try` code that 
 We could rewrite the code above to `try` calling `Divide()` and `catch` the exception.
 
 ```csharp
-try 
+try
 {
     Calculator calculator = new Calculator();
-    int answer = calculator.Divide(42, 0); 
+    int answer = calculator.Divide(42, 0);
     Console.WriteLine($"The answer is {answer}");
 }
 catch (DivideByZeroException ex)
@@ -73,7 +73,7 @@ Console.WriteLine($"The answer is {answer}");
 
 This line is never executed.
 
-Why? Because the line above it resulted in an exception. When an exception occurs, the program has moved into an "exceptional state". C# knows something has gone wrong, but it doesn't know what to do about it. It won't just keep going as if nothing bad happened because that might lead to even worse things. 
+Why? Because the line above it resulted in an exception. When an exception occurs, the program has moved into an "exceptional state". C# knows something has gone wrong, but it doesn't know what to do about it. It won't just keep going as if nothing bad happened because that might lead to even worse things.
 
 So what does C# do? It stops running the code at the place where the exception occurred and starts looking for a `try/catch` block to handle the exception. If it finds a `try/catch` block, it will run the code in the `catch` block. If it doesn't, it will end the program and display an error message that describes the exception.
 
@@ -105,7 +105,7 @@ try
     List<int> intList = new List<int>();
     intList.Add(42);
 }
-catch (DivideByZeroException ex) 
+catch (DivideByZeroException ex)
 {
     Console.WriteLine("Adding to a list will never divide by zero");
 }
@@ -141,7 +141,7 @@ namespace TryCatch
         }
     }
 
-    public class Company 
+    public class Company
     {
         private List<Employee> _employees = new List<Employee>();
         public string Name { get; set; }
@@ -192,7 +192,7 @@ The `employeeIds` is a list of employee IDs. The ID of an employee is the _index
 Let's change the code to handle the exception.
 
 ```csharp
-try 
+try
 {
     List<int> employeeIds = new List<int>() { 0, 11, 2 };
     foreach(int id in employeeIds)
@@ -200,8 +200,8 @@ try
         Employee employee = chickenShack.GetEmployeeById(id);
         Console.WriteLine($"Employee #{id} is {employee.FirstName} {employee.LastName}.");
     }
-} 
-catch (ArgumentOutOfRangeException ex) 
+}
+catch (ArgumentOutOfRangeException ex)
 {
     Console.WriteLine("Something went wrong while finding employees");
 }
@@ -222,12 +222,12 @@ But we can do better.
 List<int> employeeIds = new List<int>() { 0, 11, 2 };
 foreach(int id in employeeIds)
 {
-    try 
+    try
     {
         Employee employee = chickenShack.GetEmployeeById(id);
         Console.WriteLine($"Employee #{id} is {employee.FirstName} {employee.LastName}.");
-    } 
-    catch (ArgumentOutOfRangeException ex) 
+    }
+    catch (ArgumentOutOfRangeException ex)
     {
         Console.WriteLine($"Employee #{id} was not found in the company.");
     }
@@ -261,7 +261,7 @@ class Program
 {
     /*
         1. Add the required classes to make the following code compile.
-        HINT: Use a Dictionary in the AddressBook class to store Contacts
+        HINT: Use a Dictionary in the AddressBook class to store Contacts. The key should be the contact's email address.
 
         2. Run the program and observe the exception.
 
@@ -288,7 +288,7 @@ class Program
             Address = "888 Easy St, Testville, TN 11111"
         };
 
-        
+
         // Create an AddressBook and add some contacts to it
         AddressBook addressBook = new AddressBook();
         addressBook.AddContact(bob);

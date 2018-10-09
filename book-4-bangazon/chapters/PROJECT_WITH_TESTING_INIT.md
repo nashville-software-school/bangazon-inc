@@ -1,6 +1,6 @@
 # Starting a Project with a Test Suite
 
-Perform all of these steps on a branch before you submit a pull request.
+Choose one teammate to perform all of these steps on a branch. No one else on the team should do **ANY WORK** until this entire procedure is completed.
 
 ## Create Github Repo
 
@@ -14,18 +14,22 @@ Replace `<url>` below with the connection string from Github. Also note that the
 ```sh
 mkdir ~/workspace/csharp/BangazonSite && cd $_
 git clone <url> .
-dotnet new mvc -n Bangazon
+dotnet new mvc -n Bangazon --auth Individual
 dotnet new xunit -n BangazonTests
 dotnet new sln -n Bangazon -o .
 dotnet sln Bangazon.sln add Bangazon/Bangazon.csproj
 dotnet sln Bangazon.sln add BangazonTests/BangazonTests.csproj
 ```
 
-[![](./assets/projectsetup.png)](https://youtu.be/sI2SMfG7DiU)
-
 ## appsettings.json Template
 
 Your `appsettings.json` should be ignored since each teammate's connection string will be different. By copying the file as template, this ensures that each person who clones your repository will get a file to be modified for their own machine.
+
+```sh
+cp Bangazon/appsettings.json Bangazon/appsettings.json.template
+echo 'appsettings.json' >> .gitignore
+echo '*.db' >> .gitignore
+```
 
 Just make sure you include instructions on how to do this in your README.
 
@@ -35,8 +39,31 @@ For example...
 >
 >    `cp appsettings.json.template appsettings.json`
 
-```sh
-cp Bangazon/appsettings.json Bangazon/appsettings.json.template
-echo 'appsettings.json' >> .gitignore
+
+By default, your `appsettings.json` file has a connection string to a SQLite database. Update it to connect to your SQL Server instance.
+
+```json
+{
+  "ConnectionStrings": {
+    "DefaultConnection": "DefaultConnection": "Server=YourServerHere\\SQLEXPRESS;Database=BangazonSite;Trusted_Connection=True;"
+  },
+  "Logging": {
+    "LogLevel": {
+      "Default": "Warning"
+    }
+  },
+  "AllowedHosts": "*"
+}
 ```
 
+## Add Entity Framework Tooling
+
+In order to create your database from the command line, you need to install a specific package from NuGet.
+
+```sh
+cd Bangazon
+dotnet add package Microsoft.EntityFrameworkCore.Tools.DotNet
+dotnet ef database update
+```
+
+Once those commands are run, then you will have a basic database structure that enabled user authentication.
