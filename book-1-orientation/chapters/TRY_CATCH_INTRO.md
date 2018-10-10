@@ -261,8 +261,7 @@ class Program
 {
     /*
         1. Add the required classes to make the following code compile.
-        HINT: Use a Dictionary in the AddressBook class to store Contacts.
-        The key should be the contact's email address.
+        HINT: Use a Dictionary in the AddressBook class to store Contacts. The key should be the contact's email address.
 
         2. Run the program and observe the exception.
 
