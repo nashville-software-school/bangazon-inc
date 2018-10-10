@@ -274,7 +274,7 @@ Given the collections of items shown below, use LINQ to build the requested coll
 // Find the words in the collection that start with the letter 'L'
 List<string> fruits = new List<string>() {"Lemon", "Apple", "Orange", "Lime", "Watermelon", "Loganberry"};
 
-List<string> LFruits = from fruit in fruits ...
+IEnumerable<string> LFruits = from fruit in fruits ...
 ```
 
 ```cs
@@ -284,7 +284,7 @@ List<int> numbers = new List<int>()
     15, 8, 21, 24, 32, 13, 30, 12, 7, 54, 48, 4, 49, 96
 };
 
-List<int> fourSixMultiples = numbers.Where();
+IEnumerable<int> fourSixMultiples = numbers.Where();
 ```
 
 ### Ordering Operations
