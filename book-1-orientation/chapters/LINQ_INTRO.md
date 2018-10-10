@@ -456,11 +456,22 @@ public class Program
             new Customer(){ Name="Sid Brown", Balance=49582.68, Bank="CITI"}
         };
 
-        List<Customer> millionaireReport = ...
+        /*
+            You will need to use the `Where()`
+            and `Select()` methods to generate
+            instances of the following class.
 
-        foreach (Customer customer in millionaireReport)
+            public class ReportItem
+            {
+                public string CustomerName { get; set; }
+                public string BankName { get; set; }
+            }
+        */
+        List<ReportItem> millionaireReport = ...
+
+        foreach (var item in millionaireReport)
         {
-            Console.WriteLine($"{customer.Name} at {customer.Bank}");
+            Console.WriteLine($"{item.CustomerName} at {item.BankName}");
         }
     }
 }
