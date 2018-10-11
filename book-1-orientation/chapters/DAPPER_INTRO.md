@@ -3,7 +3,7 @@
 Mapping the relationships between objects in C# that represent the relationships you established in your database.
 
 ```
-mkdir -p ~/workspace/csharp/exercises/dapperdepartments && cd $_
+mkdir -p ~/workspace/csharp/exercises/DapperDepartments && cd $_
 dotnet new console
 dotnet add package Dapper
 dotnet add package Microsoft.Data.Sqlite
@@ -53,7 +53,7 @@ VALUES
 #### Models/Department.cs
 
 ```cs
-namespace dapperdepartment
+namespace DapperDepartments
 {
     // C# representation of the Department table
     public class Department
@@ -68,7 +68,7 @@ namespace dapperdepartment
 #### Models/Employee.cs
 
 ```cs
-namespace dapperdepartment
+namespace DapperDepartments
 {
     // C# representation of the Employee table
     public class Employee
@@ -105,7 +105,7 @@ using Microsoft.Data.Sqlite;
 using System.Collections;
 using Dapper;
 
-namespace nss.Data
+namespace DapperDepartments.Data
 {
     public class DatabaseInterface
     {
@@ -113,7 +113,7 @@ namespace nss.Data
         {
             get
             {
-                string _connectionString = $"Data Source=/change/me/to/path/to/your/project/nss.db";
+                string _connectionString = $"Data Source=/change/me/to/path/to/your/project/Departments.db";
                 return new SqliteConnection(_connectionString);
             }
         }
@@ -199,7 +199,7 @@ using System.Text;
         3. `dotnet restore`
  */
 
-namespace nss
+namespace DapperDepartments
 {
     class Program
     {
