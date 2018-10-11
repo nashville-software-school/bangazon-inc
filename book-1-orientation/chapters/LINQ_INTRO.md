@@ -245,6 +245,143 @@ const small = sampleNumber.find(n => n < 5);
 int small = sampleNumbers.Single(n => n < 5);
 ```
 
+## Select Using a Custom Type
+
+```cs
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace linqExample
+{
+    public class Person 
+    {
+        public string FirstName {get; set;}
+        public string LastName {get; set;}
+        public DateTime DOB {get; set;}
+        public List<string> NickNames {get; set;}
+    }
+    internal class ReportEntry
+    {
+        public string FullName { get; set; }
+        public DateTime DOB { get; set; }
+        public int NickNameCount { get; set; }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            List<Person> people = new List<Person>(){
+                new Person(){
+                    FirstName = "Ed", LastName = "Reed", DOB = new DateTime(1970, 04, 10),
+                    NickNames = new List<string>(){
+                        "Ed", "Goose", "Beast"
+                    }
+                },
+                new Person(){
+                    FirstName = "Dwayne", LastName = "Johnson", DOB = new DateTime(1966, 10, 11),
+                    NickNames = new List<string>(){
+                        "The Rock"
+                    }
+                },
+                new Person(){
+                    FirstName = "Bob", LastName = "Smith", DOB = new DateTime(1944, 12, 25),
+                    NickNames = new List<string>(){
+                        "Robby", "Smitty", "Bud", "The Tiger"
+                    }
+                },
+
+            };
+
+            //Use LINQ to generate a report a report that includes the pesron's name, their DOB and the number of nicknames they have
+            // For example: Bob Smith (12/25/44) has 4 Nickname(s)
+
+            List<ReportEntry> nickNameReport = people.Select(p => 
+                new ReportEntry {
+                    FullName = $"{p.FirstName} {p.LastName}",
+                    DOB = p.DOB,
+                    NickNameCount = p.NickNames.Count
+                }
+            ).ToList();
+
+            foreach (ReportEntry re in nickNameReport)
+            {
+                Console.WriteLine($"{re.FullName} ({re.DOB.ToShortDateString()}) has {re.NickNameCount} Nickname(s)");
+            }
+
+
+        }
+    }
+}
+```
+
+## Using a `group by`
+
+```cs
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace linqGroupBy
+{
+    public class SalesReportEntry
+    {
+        public string ReportNeighborhood { get; set; }
+        public double ReportTotalSales { get; set; }
+    }
+    public class Kid {
+        public string FullName {get; set;}
+        public string Neighborhood {get; set;}
+        public double Sales {get; set;}
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            List<Kid> kids = new List<Kid>(){
+                new Kid(){
+                    FullName = "Billy Smith", Neighborhood = "Nolensville", Sales = 67.16
+                },
+                new Kid(){
+                    FullName = "Jason Sync", Neighborhood = "North Nashville", Sales = 13.16
+                },
+                new Kid(){
+                    FullName = "Kyle Edwards", Neighborhood = "Nolensville", Sales = 117.10
+                },
+                new Kid(){
+                    FullName = "Avery Barkley", Neighborhood = "The Nations", Sales = 97.16
+                },
+                new Kid(){
+                    FullName = "Audrey Ellington", Neighborhood = "Nolensville", Sales = 57.18
+                },
+                new Kid(){
+                    FullName = "Juanita Voss", Neighborhood = "North Nashville", Sales = 147.12
+                },
+                new Kid(){
+                    FullName = "Scott Avett", Neighborhood = "North Nashville", Sales = 56.11
+                }
+            };
+
+             List<SalesReportEntry> salesReport = (from kid in kids
+             //dealing with kids list
+                group kid by kid.Neighborhood into neighborhoodGroup
+            //now dealing with neighborhoodGroup list
+                select new SalesReportEntry {
+                    ReportNeighborhood = neighborhoodGroup.Key, 
+                    ReportTotalSales = neighborhoodGroup.Sum(kidObj => kidObj.Sales)
+                }).OrderByDescending(sr => sr.ReportTotalSales).ToList();
+
+            foreach(SalesReportEntry entry in salesReport)
+            {
+                Console.WriteLine($"{entry.ReportNeighborhood}, {entry.ReportTotalSales}");
+            }
+        }
+    }
+}
+```
+
+
 ## Practice: LINQed List
 
 ### Setup
