@@ -22,9 +22,9 @@ Download the [musichistory.db](./assets/musichistory.db) file, and then copy it 
 
 ## Instructions
 
-1. Open up the database file in the *DB Browser for SQLite* application to see it.
-1. Go ahead and click around a little bit to familarize yourself with the database.
-1. When you're ready to start the exercise, click the tab labeled "Execute SQL", type in your query and run it.
+1. Open up the database file in the database management tool you installed on day 1 (*TablePlus* or *DB Browser for SQLite*).
+1. Examine the tables, columns, and foreign keys of the database.
+1. Using the `dbdiagram.io` site, create an ERD for the database.
 
 For each of the following exercises, provide the appropriate query. Yes, even the ones that are expressed in the form of questions. Everything from class and the [Sqlite](http://www.sqlite.org/) documentation for SQL [keywords](https://www.sqlite.org/lang.html) and [functions](https://www.sqlite.org/lang_corefunc.html) is fair game.
 
