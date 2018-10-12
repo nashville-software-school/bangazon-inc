@@ -8,6 +8,8 @@ Once you complete that short tutorial, you should skip directly to the [Add cust
 
 ## Scaffolding for ASP.NET Core 2.1
 
+### Scaffolding Identity Assets
+
 ```sh
 dotnet tool install -g dotnet-aspnet-codegenerator
 dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
@@ -37,3 +39,24 @@ dotnet aspnet-codegenerator identity -u ApplicationUser -fi Account.Manage.Index
     1. Update `InputModel` with corresponding properties
     1. Update `OnPostAsync` with corresponding properties
 1. Update `Views/Shared/_LoginPartial.cshtml` to use the `ApplicationUser` instead of `IdentityUser`
+
+
+### Scaffolding Controllers
+
+You can scaffold a controller with its corresponding Razor views on the command line now. Type in the following command to see all of the options.
+
+```sh
+dotnet aspnet-codegenerator controller --help
+```
+
+Here's an example if you have a `Pet` data model, an `ApplicationDbContext` file, and want to generate a `Controllers.PetController.cs` file with the following views.
+
+* /Views/Payment/Create.cshtml
+* /Views/Payment/Edit.cshtml
+* /Views/Payment/Details.cshtml
+* /Views/Payment/Delete.cshtml
+* /Views/Payment/Index.cshtml
+
+```sh
+dotnet aspnet-codegenerator controller -name PetsController -actions -m Pet -dc ApplicationDbContext -outDir Controllers
+```
