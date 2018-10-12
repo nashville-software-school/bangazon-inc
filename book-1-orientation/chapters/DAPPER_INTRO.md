@@ -26,7 +26,7 @@ CREATE TABLE `Employee` (
     `FirstName`    TEXT NOT NULL,
     `LastName`    TEXT NOT NULL,
     `DepartmentId`    INTEGER NOT NULL,
-    FOREIGN KEY(`DepartmentId`) REFERENCES `Department`(`Id`),
+    FOREIGN KEY(`DepartmentId`) REFERENCES `Department`(`Id`)
 );
 
 INSERT INTO Department (DeptName) VALUES ('Marketing');
@@ -47,13 +47,12 @@ INSERT INTO Employee
     (FirstName, LastName, DepartmentId)
 VALUES
     ('Jamal', 'Ross', 3);
-
 ```
 
 #### Models/Department.cs
 
 ```cs
-namespace DapperDepartments
+namespace DapperDepartments.Models
 {
     // C# representation of the Department table
     public class Department
@@ -68,7 +67,7 @@ namespace DapperDepartments
 #### Models/Employee.cs
 
 ```cs
-namespace DapperDepartments
+namespace DapperDepartments.Models
 {
     // C# representation of the Employee table
     public class Employee
@@ -104,6 +103,7 @@ using System.Linq;
 using Microsoft.Data.Sqlite;
 using System.Collections;
 using Dapper;
+using DapperDepartments.Models;
 
 namespace DapperDepartments.Data
 {
@@ -113,7 +113,7 @@ namespace DapperDepartments.Data
         {
             get
             {
-                string _connectionString = $"Data Source=/change/me/to/path/to/your/project/Departments.db";
+                string _connectionString = $"Data Source=./departments.db";
                 return new SqliteConnection(_connectionString);
             }
         }
@@ -164,7 +164,7 @@ namespace DapperDepartments.Data
                         `FirstName`    TEXT NOT NULL,
                         `LastName`    TEXT NOT NULL,
                         `DepartmentId`    INTEGER NOT NULL,
-                        FOREIGN KEY(`DepartmentId`) REFERENCES `Department`(`Id`),
+                        FOREIGN KEY(`DepartmentId`) REFERENCES `Department`(`Id`)
                     )");
 
                     db.Execute($@"
@@ -188,9 +188,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Data.Sqlite;
-using nss.Data;
-using Dapper;
 using System.Text;
+using Dapper;
+using DapperDepartments.Data;
+using DapperDepartments.Models;
 
 /*
     To install required packages from NuGet
@@ -220,7 +221,7 @@ namespace DapperDepartments
             // Chaining LINQ statements together
             db.Query<Employee>(@"SELECT * FROM Employee")
               .ToList()
-              .ForEach(emp => Console.WriteLine($"{emp.FirstName} {emp.LastName"));
+              .ForEach(emp => Console.WriteLine($"{emp.FirstName} {emp.LastName}"));
 
 
 
@@ -228,7 +229,7 @@ namespace DapperDepartments
             /*
                 Query the database for each employee, and join in the employee's department
                 Since an employee is only assigned to one department at a time, you can simply
-                assign the corresponding deparment as a property on the instance of the
+                assign the corresponding department as a property on the instance of the
                 Employee class that is created by Dapper.
              */
             db.Query<Employee, Department, Employee>(@"
@@ -241,12 +242,12 @@ namespace DapperDepartments
                 JOIN Department d ON d.Id = e.DepartmentId
             ", (employee, department) =>
             {
-                employee.Cohort = department;
+                employee.Department = department;
                 return employee;
             })
             .ToList()
-            .ForEach(emp => Console.WriteLine($"{emp.FirstName} {emp.LastName} works in the  {emp.Deparment.DeptName}"));
+            .ForEach(emp => Console.WriteLine($"{emp.FirstName} {emp.LastName} works in the  {emp.Department.DeptName}"));
         }
     }
 }
-```
+``
