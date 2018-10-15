@@ -19,6 +19,7 @@ This book builds a strong foundation in the syntax, data structures, and valuabl
 * Chapter 13 - [Student Exercises - Part 3](./chapters/STUDENT_EXERCISES_SQL.md)
 * Chapter 14 - [Object Relational Mapping (ORM) with Dapper](./chapters/DAPPER_INTRO.md)
 * Chapter 15 - [Student Exercises - Part 4](./chapters/STUDENT_EXERCISES_DAPPER.md)
+* Chapter 16 - [Bangazon ERD](./chapters/BANGAZON_ERD.md)
 
 ## Supplementary Content
 
