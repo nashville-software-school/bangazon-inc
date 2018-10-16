@@ -8,11 +8,11 @@ For example, if someone wants to buy a product from Bangazon, the software can s
 
 1. Is there enough inventory left for the product?
 1. If not, reject the request with an error message.
-1. If there is, check if the customer already have an order in the system that hasn't been paid for?
+1. If there is, check if the customer already has an order in the system that hasn't been paid for.
 1. If so, insert data into the `OrderProduct`
 1. If not, create a new order in the database and then insert data into the `OrderProduct` table.
 
-That's some complex logic that your API will handle instead of making the client software developer make all those checks.
+That's some complex logic that your API will handle instead of forcing the client software developer make all those checks. Which is what you would have had to do before with a React client and a simple JSON API using `json-server`.
 
 ## Resources
 
