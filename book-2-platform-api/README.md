@@ -5,13 +5,14 @@ This book prepares you for building the Bangazon Platform API
 ## Chapters
 
 * Chapter 1 - [Web API Intro](./chapters/API_OVERVIEW.md)
-* Chapter 2 - [Debugging in Visual Studio](./chapters/DEBUGGING_VS.md)
-* Chapter 3 - [API Controllers](./chapters/API_MODELS_CONTROLLERS.md)
-* Chapter 4 - [Student Exercises - Part 5](./chapters/STUDENT_EXERCISES_API.md)
-* Chapter 5 - [Route and Query String Parameters](./chapters/CONTROLLER_PARAMETERS.md)
-* Chapter 6 - [Student Exercises - Part 6](./chapters/STUDENT_EXERCISES_PARAMS.md)
-* Chapter 7 - [Validating with ModelState and Annotations](./chapters/MODEL_VALIDATION.md)
-* Chapter 8 - [Student Exercises - Part 7](./chapters/STUDENT_EXERCISES_MODELSTATE.md)
+* Chapter 2 - [Intro to Visual Studio](./chapters/DEBUGGING_VS.md)
+* Chapter 3 - [Debugging in Visual Studio](./chapters/VISUAL_STUDIO.md)
+* Chapter 4 - [API Controllers](./chapters/API_MODELS_CONTROLLERS.md)
+* Chapter 5 - [Student Exercises - Part 5](./chapters/STUDENT_EXERCISES_API.md)
+* Chapter 6 - [Route and Query String Parameters](./chapters/CONTROLLER_PARAMETERS.md)
+* Chapter 7 - [Student Exercises - Part 6](./chapters/STUDENT_EXERCISES_PARAMS.md)
+* Chapter 8 - [Validating with ModelState and Annotations](./chapters/MODEL_VALIDATION.md)
+* Chapter 9 - [Student Exercises - Part 7](./chapters/STUDENT_EXERCISES_MODELSTATE.md)
 
 > ### __Sprint 1__ - Bangazon Platform API
 
