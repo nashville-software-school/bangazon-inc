@@ -1,32 +1,35 @@
-# Debugging in Visual Studio
+# Visual Studio
+
+## Some Important Parts of Visual Studio
+
+1. Solution Explorer
+1. Code Editor
+1. Standard Toolbar
+
+## Solution Explorer
+
+The _Solution Explorer_ is used to navigate the components of your application. Just like the file explorer in Visual Studio Code, this includes the files and folders that make up your application, but the Solution Explorer also includes your Nuget and npm dependencies, gives you access to graphical tools for editing your project files, and gives you the ability to drill into `*.cs` files, revealing the classes, methods and properties contained within them.
+
+To open a file for editing, navigate to it within the Solution Explorer and double-click it.
+
+To display the classes, methods and properties of a `*.cs` file, click the "triangle" next to the filename.
 
 
+## Code Editor
+
+Editing code in Visual Studio is very similar to editing in Visual Studio Code. In Visual Studio you'll find similar syntax highlighting and intellisense. And, most importantly, when you type a key on the keyboard, it appears on the screen!
+
+Open files will appear as tabs across the top of the editor pane.
+
+#### Edit Mode vs Preview Mode
+
+When you single-click on a file in the Solution Explorer, the file is open in _preview mode_. Only one file may be open at a time in preview mode. The currently open filename will be displayed in a tab on the far right side of the tab bar. Preview mode is handy for reading through several code files that you do not wish to edit.
+
+As soon as you attempt to edit a file that's open it preview mode, it will move the file into edit mode.
 
 
-## Starting in Debug Mode
+## Standard Toolbar
 
-Your instruction team will show you how to start your application is debug mode. You should also read the [Navigate Code with the Visual Studio Debugger](https://docs.microsoft.com/en-us/visualstudio/debugger/navigating-through-code-with-the-debugger?view=vs-2017) to read more about it.
+Toolbars appear below the Visual Studio menu and above the code editor. Here you'll find standard editor options such as `copy`, `paste`, `undo`, `redo`, `save`, etc... Twoard the middle of the toolbar you'll find a big green "play" button. Clicking this button will run your application.
 
-## Breakpoints
 
-Your instruction team will show you how to set breakpoints to pause the execution of your code on a particular line, but you can also read the [Use Breakpoints in the Visual Studio Debugger](https://docs.microsoft.com/en-us/visualstudio/debugger/using-breakpoints?view=vs-2017) article.
-
-## Autos and Locals Window
-
-When you are stopped on a breakpoint in Visual Studio, you can view either all variables in the current scope, or just the variables on the current and preceding lines.
-
-These are displayed in the [Autos and Locals Windows](https://docs.microsoft.com/en-us/visualstudio/debugger/autos-and-locals-windows?view=vs-2017).
-
-## Immediate Window
-
-The Immediate window is used to debug and evaluate expressions, execute statements, print variable values, and so forth. It allows you to enter expressions to be evaluated or executed by the development language during debugging.
-
-Your instruction team will show you how to use this window, but you learn more by reading the [Immediate Window](https://docs.microsoft.com/en-us/visualstudio/ide/reference/immediate-window?view=vs-2017) article.
-
-## Call Stack
-
-View the entire path to the code you are looking at using the [Call Stack Window](https://docs.microsoft.com/en-us/visualstudio/debugger/how-to-use-the-call-stack-window?view=vs-2017).
-
-## Exhausting List of Debugging Windows
-
-There are more windows that you can use while debugging your application. To see the entire list, and read more about each one, read the [Learn about Debugger Windows in Visual Studio](https://docs.microsoft.com/en-us/visualstudio/debugger/debugger-windows?view=vs-2017) article.
