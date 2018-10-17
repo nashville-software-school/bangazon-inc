@@ -14,5 +14,5 @@
 1. Insert a new exercise into the database.
 1. Find all instructors in the database. Include each instructor's cohort.
 1. Insert a new instructor into the database. Assign the instructor to an existing cohort.
-1. Find all the students in the database. Include each student's cohort AND each student's list of exercises.
 1. Assign an existing exercise to an existing student.
+1. **Challenge** - Find all the students in the database. Include each student's cohort AND each student's list of exercises.
