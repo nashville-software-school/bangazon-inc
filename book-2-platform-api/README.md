@@ -5,8 +5,8 @@ This book prepares you for building the Bangazon Platform API
 ## Chapters
 
 * Chapter 1 - [Web API Intro](./chapters/API_OVERVIEW.md)
-* Chapter 2 - [Intro to Visual Studio](./chapters/DEBUGGING_VS.md)
-* Chapter 3 - [Debugging in Visual Studio](./chapters/VISUAL_STUDIO.md)
+* Chapter 2 - [Intro to Visual Studio](./chapters/VISUAL_STUDIO.md)
+* Chapter 3 - [Debugging in Visual Studio](./chapters/DEBUGGING_VS.md)
 * Chapter 4 - [API Controllers](./chapters/API_MODELS_CONTROLLERS.md)
 * Chapter 5 - [Student Exercises - Part 5](./chapters/STUDENT_EXERCISES_API.md)
 * Chapter 6 - [Route and Query String Parameters](./chapters/CONTROLLER_PARAMETERS.md)
