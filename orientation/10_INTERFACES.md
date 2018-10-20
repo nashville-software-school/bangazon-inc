@@ -1,6 +1,6 @@
 # Interfaces
 
-An interface in C# is a construct that you define for classes to implement. Think of it as a contract for a class. If a class implements an interface, then it must define a method, property, or event for each one defined in the interface. 
+An interface in C# is a construct that you define for classes to implement. Think of it as a contract for a class. If a class implements an interface, then it must define a method, property, or event for each one defined in the interface.
 
 ## Resources
 
@@ -30,7 +30,7 @@ public interface IAquatic
 {
     int MaximumDepth {get;}
     void swim();
-    void land();
+    void float();
 }
 ```
 
@@ -91,18 +91,18 @@ class FlyingSquirrel : IAmbulatory, IFlying
     public void land()
     {
         Console.WriteLine("Animal is now on the ground");
-    }	
+    }
 }
 ```
 
 Let's look at another example of a class that would implement all three of the interfaces. Since this is orientation, and you're learning to use Visual Studio Code, we've included an animation that shows you how you can quickly implement interfaces for a class with some boilerplate code.
 
-Paste this code into `Program.cs`, and the interfaces should now be underlined in red. 
+Paste this code into `Program.cs`, and the interfaces should now be underlined in red.
 
 ```cs
 public class Seagull: IAquatic, IAmbulatory, IFlying
 {
-    
+
 }
 ```
 

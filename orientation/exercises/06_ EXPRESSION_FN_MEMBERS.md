@@ -10,7 +10,7 @@ dotnet restore
 
 ## References
 
-* [Expression-bodied function members](https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-6)
+* [Expression-bodied function members](https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-6#expression-bodied-function-members)
 * [Automatic property initializers](https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-6#auto-property-initializers)
 * [C# ternary operator](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/conditional-operator)
 
