@@ -1,7 +1,11 @@
 # Things to Install for Development on Windows
 
 1. Chrome
-1. [Git for Windows](https://gitforwindows.org/) - Accept all defaults during installation
+1. [Git for Windows](https://gitforwindows.org/) - Accept all defaults during installation.
+1. Once the installation is complete, open Git Bash and enter in the following command.
+    ```sh
+    git config --system core.longpaths true
+    ```
 1. [Create an SSH key](https://github.com/nashville-software-school/client-side-mastery/tree/master/book-1-setup#create-ssh-key) on your Windows VM, and add it to your Github profile.
 1. [Postman](https://www.getpostman.com/)
 1. [SQL Server Express](https://www.microsoft.com/en-us/sql-server/sql-server-editions-express)
