@@ -10,7 +10,8 @@
 1. [Postman](https://www.getpostman.com/)
 1. [SQL Server Express](https://www.microsoft.com/en-us/sql-server/sql-server-editions-express)
 1. [SQL Server Management Studio](https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-2017). Make sure you get the General Availability release, not any preview version.
-1. Visual Studio Community Edition (_latest version_)
+1. [Visual Studio Community Edition](https://visualstudio.microsoft.com/vs/community/)
+1. [Visual Studio Code](https://code.visualstudio.com/)
 
 ## Visual Studio Workloads
 
