@@ -32,12 +32,19 @@ Well, those days are over while you learn C#. Below you will see an example of h
     ```cs
     Dictionary<string, Dictionary<string, string>> myFamily = new Dictionary<string, Dictionary<string, string>>();
 
-    myFamily.Add("sister", new Dictionary<string, string>(){ 
+    myFamily.Add("sister", new Dictionary<string, string>(){
         {"name", "Krista"},
         {"age", "42"}
     });
     ```
-2. Next, iterate over each item in `myFamily` and produce the following output.
+2. Next, iterate over each item in `myFamily` and produce the following output. Remember that you can use square bracket notation to get to the value of a key, and that a dictionary has a `Key` and a `Value` property.
+    ```cs
+    foreach(KeyValuePair<string, Dictionary<string, string>> familyMember in myFamily)
+    {
+        ... your code here
+    }
     ```
+
+    ```sh
     Krista is my sister and is 42 years old
     ```
