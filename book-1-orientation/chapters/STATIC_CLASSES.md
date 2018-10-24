@@ -1,6 +1,6 @@
 # Static classes, methods and properties
 
-In C# all your code must be inside a `class`. Normally a class acts as a blueprint for creating objects within your program. However, there are times when you don't need to create a new object in order get your work done. Sometimes you just need a function or a property without the "context" of an object.
+In C# a `class` normally acts as a blueprint for creating objects within your program. However, there are times when you don't need to create a new object in order get your work done. Sometimes you just need a function or a property without the "context" of an object.
 
 This is where the `static` classes come in.
 
