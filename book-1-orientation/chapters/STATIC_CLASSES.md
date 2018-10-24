@@ -46,7 +46,7 @@ To access a static property or method, prefix it with the name of the class foll
 
 ## Static methods and properties on non-static classes
 
-A non-static class may contain static methods and properties.
+A non-static class may contain sttic methods and properties.
 
 ```cs
 public class Person {
@@ -73,6 +73,22 @@ Person olderPerson = Person.WhoIsOlder(kidRay, oldRoy);
 ```
 
 > **NOTE:** **All** methods and properties of a `static class` **must** also be marked as `static`.
+
+## Examples of static methods and properties from the .NET Framework
+
+You may be surprised to learn that there are a number of static methods and properties that you've already used.
+
+```cs
+// A few static methods
+Console.Write()
+Console.WriteLine()
+String.IsNullOrWhiteSpace()
+
+// a few static properties
+DateTime.Now;
+DateTime.Today;
+String.Empty;
+```
 
 ## Practice
 
