@@ -4,14 +4,13 @@ The best way to learn a tool like Visual Studio is to use it. We'll start our ex
 
 ## Loading the Student Exercises Application in Visual Studio
 
-1. If you have been using Mac or Linux, the first step is to get your StudentExercise project into Winddows.
+1. If you have been using Mac or Linux, the first step is to get your StudentExercise project into Windows.
     1. Push your changes to Github
     1. Switch to your Windows virtual machine
-    1. Using git in Windows, pull your project from Github
+    1. Using git in Windows, clone your project from Github
     > **Note:** The remaining steps should all be completed in Windows.
 1. Open the `Git Bash` terminal.
 1. Change directories to your Student Exercise folder. This is the folder that contains your StudentExercises.csproj.
-1. Create a new "solution" to contain our Student Exercise project.
 1. Create a new solution.
     ```
     dotnet new sln -n StudentExercises -o .
