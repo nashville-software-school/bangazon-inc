@@ -9,54 +9,10 @@ touch queries.sql
 
 > **Note:** The `.sql` extension is common practice for files storing SQL queries
 
-### Installation of SQLite (if needed)
-
-To get started, type the following command to check if you already have SQLite installed.
-
-```sh
-$ sqlite3
-```
-
-And you should see:
-
-```sh
-SQLite version 3.7.15.2 2014-08-15 11:53:05
-Enter ".help" for instructions
-Enter SQL statements terminated with a ";"
-sqlite>
-```
-
-If you do not see above result, then it means you do not have SQLite installed on your machine. Follow the appropriate instructions below.
-
-#### For Windows
-
-Go to [SQLite Download page](http://www.sqlite.org/download.html) and download the precompiled binaries for your machine. You will need to download `sqlite-shell-win32-*.zip` and `sqlite-dll-win32-*.zip` zipped files.
-
-Create a folder `C:\sqlite` and unzip the files in this folder which will give you `sqlite3.def`, `sqlite3.dll` and `sqlite3.exe` files.
-
-Add `C:\sqlite` to your [PATH environment variable](http://dustindavis.me/update-windows-path-without-rebooting/) and finally go to the command prompt and issue `sqlite3` command.
-
-#### For Mac
-
-First, try to install via Homebrew:
-
-```sh
-brew install sqlite3
-```
-
-If not, download the package from above. After downloading the files, follow these steps:
-
-```sh
-$tar -xvzf sqlite-autoconf-3071502.tar.gz
-$cd sqlite-autoconf-3071502
-$./configure --prefix=/usr/local
-$make
-$make install
-```
 
 ## Downloading the Database Files
 
-Download the [musichistory.db](./assets/musichistory.db) file, and then copy it to the folder that you created for this exercise. That file **is** the database. It contains all of the tables and data.
+Download the [musichistory.db](https://github.com/nashville-software-school/bangazon-inc/blob/master/orientation/exercises/assets/musichistory.db?raw=true) file, and then copy it to the folder that you created for this exercise. That file **is** the database. It contains all of the tables and data.
 
 ## References
 
@@ -84,9 +40,41 @@ For each of the following exercises, provide the appropriate query. Yes, even th
     SELECT a.Title, s.Title FROM Album a LEFT JOIN Song s ON s.AlbumId = a.AlbumId;
     SELECT a.Title, s.Title FROM Song s LEFT JOIN Album a ON s.AlbumId = a.AlbumId;
     ```
+1. Using `SELECT` and `LEFT JOIN`, write a query that displays the song title, the song duration, the album label, and the genre name for every song.
+1. Using a `WHERE` clause, modify the previous query to only show the information for songs that have a duration of 250 or greater.
 1. Write a `SELECT` statement to display how many songs exist for each album. You'll need to use the `COUNT()` function and the `GROUP BY` keyword sequence.
 1. Write a `SELECT` statement to display how many songs exist for each artist. You'll need to use the `COUNT()` function and the `GROUP BY` keyword sequence.
 1. Write a `SELECT` statement to display how many songs exist for each genre. You'll need to use the `COUNT()` function and the `GROUP BY` keyword sequence.
+1. Write a `SELECT` statement to display how many artists exist for each genre. You'll need to use the `COUNT()` function and the `GROUP BY` keyword sequence.
 1. Using `MAX()` function, write a select statement to find the album with the longest duration. The result should display the album title and the duration.
 1. Using `MAX()` function, write a select statement to find the song with the longest duration. The result should display the song title and the duration.
 1. Modify the previous query to also display the title of the album.
+
+## SQL Challenge
+
+You can limit the results of a query using the `LIMIT` keyword.
+
+```sql
+SELECT Title
+FROM Song
+LIMIT 1
+```
+
+This will only return the first row of the results.
+
+Your challenge is to write a query to answer the following questions from the sales team.
+
+1. Which album has the most songs?
+1. Which genre has been assigned to the most songs?
+1. Which record label has released the most albums?
+
+To accomplish this, you will need to use the `MAX()` aggregation function, the `GROUP BY` clause, the `ORDER BY` clause, and the `LIMIT` keyword.
+
+## Additional Practice
+
+🦊 🦏 🐴  🐼
+
+Do tutorials 1-10 on [SQL Zoo](https://sqlzoo.net/)
+
+🐷 🐏 🐰 🐧
+

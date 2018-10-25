@@ -15,11 +15,13 @@ This book builds a strong foundation in the syntax, data structures, and valuabl
 * Chapter 9 - [Exceptions and Try/Catch](./chapters/TRY_CATCH_INTRO.md)
 * Chapter 10 - [Wrangling Data with LINQ](./chapters/LINQ_INTRO.md)
 * Chapter 11 - [Student Exercises - Part 2](./chapters/STUDENT_EXERCISES_LINQ.md)
-* Chapter 12 - [Introduction to SQL](./chapters/SQL_INTRO.md)
-* Chapter 13 - [Student Exercises - Part 3](./chapters/STUDENT_EXERCISES_SQL.md)
-* Chapter 14 - [Object Relational Mapping (ORM) with Dapper](./chapters/DAPPER_INTRO.md)
-* Chapter 15 - [Student Exercises - Part 4](./chapters/STUDENT_EXERCISES_DAPPER.md)
-* Chapter 16 - [Bangazon ERD](./chapters/BANGAZON_ERD.md)
+* Chapter 12 - [The Family Dictionary](./chapters/FAMILY_DICTIONARY.md)
+* Chapter 13 - [Kill Nickelback](./chapters/KILL_NICKELBACK.md)
+* Chapter 14 - [Introduction to SQL](./chapters/SQL_INTRO.md)
+* Chapter 15 - [Student Exercises - Part 3](./chapters/STUDENT_EXERCISES_SQL.md)
+* Chapter 16 - [Object Relational Mapping (ORM) with Dapper](./chapters/DAPPER_INTRO.md)
+* Chapter 17 - [Student Exercises - Part 4](./chapters/STUDENT_EXERCISES_DAPPER.md)
+* Chapter 18 - [Bangazon ERD](./chapters/BANGAZON_ERD.md)
 
 ## Supplementary Content
 

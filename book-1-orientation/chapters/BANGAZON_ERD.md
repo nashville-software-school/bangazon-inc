@@ -8,7 +8,7 @@ You need to build the ERD for the Bangazon, Inc. organization. This will be the 
 
 ### ERD
 
-Build an ERD to define the properties of the following resources and the relationships between them. 
+Build an ERD to define the properties of the following resources and the relationships between them.
 
 > **Note:** These are the main resources that are needed in the database and is *not* an all-inclusive list of tables that should be created.
 
@@ -60,3 +60,12 @@ Build an ERD to define the properties of the following resources and the relatio
 * The date that a customer created an account must be tracked
 * If a customer does not interact with the system for over 240 days, they will be marked as inactive
 
+
+## Populating the Database
+
+Once you have have built the ERD and had it approved by one of the instruction team, you must write a SQL script for populating a couple rows in each table.
+
+1. Start with DELETE statements to wipe out the data in the tables.
+1. Then DROP TABLE statements to remove the tables.
+1. Next should be your CREATE TABLE statements with the CONSTRAINT keywords for the foreign keys.
+1. Last should be the INSERT statements for seeding the database with data.
