@@ -4,19 +4,26 @@ The best way to learn a tool like Visual Studio is to use it. We'll start our ex
 
 ## Loading the Student Exercises Application in Visual Studio
 
-1. The first step is to create a new "solution" to contain our console application project. this will create a *.sln file. In the terminal, go to the folder that contains your Student Exercises application. This is the folder that has the `studentExercises.csproj` file.
+1. If you have been using Mac or Linux, the first step is to get your StudentExercise project into Windows.
+    1. Push your changes to Github
+    1. Switch to your Windows virtual machine
+    1. Using git in Windows, clone your project from Github
+    > **Note:** The remaining steps should all be completed in Windows.
+1. Open the `Git Bash` terminal.
+1. Change directories to your Student Exercise folder. This is the folder that contains your StudentExercises.csproj.
 1. Create a new solution.
     ```
-    dotnet new sln StudentExercises -o .
+    dotnet new sln -n StudentExercises -o .
     ```
-1. Add your *.csproj file to the solution.
+    >This will create a **`StudentExercises.sln`** file
+1. Add your StudentExercises.csproj file to the solution.
     ```
     dotnet sln add StudentExercises.csproj
     ```
-1. If you are NOT already using Windows...
-    1. Push your changes to Github
-    1. Switch to your Windows virtual machine
-    1. Using git in Windows, pull your project from Github
+1. Restore dependencies.
+    ```
+    dotnet restore StudentExercises.csproj
+    ```
 1. Start Visual Studio.
 1. From the `File` menu select `Open -> Project/Solution...`, then use the file explorer to find and select your `StudentExercises.sln` file.
 
