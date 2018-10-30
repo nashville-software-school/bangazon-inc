@@ -11,7 +11,7 @@ This book prepares you for building the Bangazon Platform API
 * Chapter 5 - [Student Exercises - Part 5](./chapters/STUDENT_EXERCISES_API.md)
 * Chapter 6 - [Route and Query String Parameters](./chapters/CONTROLLER_PARAMETERS.md)
 * Chapter 7 - [Student Exercises - Part 6](./chapters/STUDENT_EXERCISES_PARAMS.md)
-* Chapter 8 - [Validating with ModelState and Annotations](./chapters/MODEL_VALIDATION.md)
+* Chapter 8 - [Validating Data with Annotations](./chapters/MODEL_VALIDATION.md)
 * Chapter 9 - [Student Exercises - Part 7](./chapters/STUDENT_EXERCISES_MODELSTATE.md)
 
 > ### __Sprint 1__ - Bangazon Platform API
