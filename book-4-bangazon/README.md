@@ -14,6 +14,8 @@ This book prepares you to build the e-commerce application that serves our custo
 
 > ### __Sprint 3__ - Bangazon Web Site
 
+* Chapter 10 - [JSON Web Tokens](./chapters/JWT.md)
+
 ## Supplementary Content
 
 * Supplement - [Deploy to Azure](./chapters/AZURE_DEPLOY.md)

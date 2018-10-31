@@ -94,7 +94,7 @@ namespace CoffeeShop.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get(string language)
+        public async Task<IActionResult> Get()
         {
             using (IDbConnection conn = Connection)
             {
