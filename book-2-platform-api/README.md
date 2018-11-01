@@ -17,6 +17,7 @@ This book prepares you for building the Bangazon Platform API
 
 > ### __Sprint 1__ - Bangazon Platform API
 
+* Chapter 12 - [Chinook SQL Practice](./chapters/CHINOOK.md)
 * Chapter 11 - [Student Exercises React Client](./chapters/STUDENT_EXERCISES_REACT_CLIENT.md)
 
 ## Supplementary Content
