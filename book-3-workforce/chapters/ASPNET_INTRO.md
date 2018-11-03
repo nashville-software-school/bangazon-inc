@@ -109,3 +109,10 @@ using (IDbConnection conn = Connection)
 
 ![adding the list view](./images/kwmY6yUqlx.gif)
 
+## Viewing the List of Students
+
+Now you start the project, and visit [http://localhost:5000/students](http://localhost:5000/students) in your browser to see the HTML representation of student you have in your database.
+
+## Adding the Other Views
+
+The next step is to create the `Details` view, the `Create` view, the `Edit` view, and the `Delete` view. Use the scaffolding for _MVC View_ to create the Razor templates for each one.
