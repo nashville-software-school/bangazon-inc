@@ -2,7 +2,7 @@
 
 ## Downloading the Database Files
 
-Click the big download button from the [Chinook Database](http://chinookdatabase.codeplex.com/) site. Know which directory that it's being downloaded to.
+Click the download button from the [Chinook Database](https://github.com/lerocha/chinook-database/blob/master/ChinookDatabase/DataSources/Chinook_Sqlite.sqlite) github page and then open the database with DB browser and get querying! 
 
 ## Moving the SQLite Database to Your Workspace
 
