@@ -11,6 +11,8 @@ This book prepares you to build the e-commerce application that serves our custo
 * Chapter 5 - [Travel Itinerary - Part 1](./chapters/TRAVEL_EF_IF.md)
 * Chapter 6 - [Integration Tests](./chapters/XUNIT_FORMS.md)
 * Chapter 7 - [Travel Itinerary - Part 2](./chapters/TRAVEL_TESTING_DATA.md)
+* Chapter 8 - [View Components](./chapters/VIEW_COMPONENTS.md)
+
 
 > ### __Sprint 3__ - Bangazon Web Site
 
