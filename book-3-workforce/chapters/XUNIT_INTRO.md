@@ -30,5 +30,18 @@ We will be covering integration tests in this chapter.
 https://docs.microsoft.com/en-us/aspnet/core/test/integration-tests?view=aspnetcore-2.1
 
 
+> **NOTE:** The example below will only make sense after you read the li
+
 ### Example
+
+Consider the process of creating a new student.
+
+1. Navigate to the create page at `/students/create`
+1. Enter the first and last names, and slack handle.
+1. Select a cohort from the dropdown.
+1. Click the `Create` button.
+1. Wait for the index page to appear and note the new student in the list.
+
+![Create Student](./images/CreateStudent.gif)
+
 
