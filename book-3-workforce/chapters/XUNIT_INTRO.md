@@ -47,15 +47,6 @@ Consider the process of creating a new student.
 What's happening during this process?
 1. An HTTP client sends a `GET` request to `/students/create`.
 1. The `Create()` method of the `StudentsController` is called. This method creates a ViewModel that contains the list of Cohorts for the Create view's cohort dropdown, and passes that ViewModel to the Create view.
-    ```cs
-    // GET: Students/Create
-    public ActionResult Create()
-    {
-        // NOTE: _config cointains the DB connection string
-        var model = new StudentCreateViewModel(_config);
-        return View(model);
-    }
-    ```
 1. The Create view, `create.cshtml`, uses the ViewModel to generate HTML that is sent to the client.
 1. A user fills out the HTML form and clicks the `Create` button.
 1. The HTTP client sends a `POST` request to `/students/create`.
