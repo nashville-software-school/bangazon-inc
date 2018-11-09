@@ -27,12 +27,14 @@ We will be covering integration tests in this chapter.
 
 ## Integration Testing in ASP<span></span>.NET Core MVC
 
+It's true that a human _could_ open a web browser and manually perform all the steps necessary to test all parts of a web application, but - like with many things - a computer can do it faster, with fewer mistakes, and without complaining about how boring it is to test and retest the same app all the time.
+
 https://docs.microsoft.com/en-us/aspnet/core/test/integration-tests?view=aspnetcore-2.1
 
 
 > **NOTE:** The example below will only make sense after you read the documentation linked above.
 
-### Example
+## Example
 
 Consider the process of creating a new student.
 
@@ -56,4 +58,7 @@ What's happening during this process?
 1. The user sees that the Student they added is in the list of all students.
 
 > **NOTE:** The above process is clearly a **lot**, but it's worth taking some time to read through it. Once you grasp this process, you'll have a solid foundation for understanding web applications.
+
+### An Integration Test for Creating a Student
+
 
