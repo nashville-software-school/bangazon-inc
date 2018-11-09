@@ -30,7 +30,7 @@ We will be covering integration tests in this chapter.
 https://docs.microsoft.com/en-us/aspnet/core/test/integration-tests?view=aspnetcore-2.1
 
 
-> **NOTE:** The example below will only make sense after you read the li
+> **NOTE:** The example below will only make sense after you read the documentation linked above.
 
 ### Example
 
@@ -44,4 +44,25 @@ Consider the process of creating a new student.
 
 ![Create Student](./images/CreateStudent.gif)
 
+What's happening during this process?
+1. An HTTP client sends a `GET` request to `/students/create`.
+1. The `Create()` method of the `StudentsController` is called. This method creates a ViewModel that contains the list of Cohorts for the Create view's cohort dropdown, and passes that ViewModel to the Create view.
+    ```cs
+    // GET: Students/Create
+    public ActionResult Create()
+    {
+        // NOTE: _config cointains the DB connection string
+        var model = new StudentCreateViewModel(_config);
+        return View(model);
+    }
+    ```
+1. The Create view, `create.cshtml`, uses the ViewModel to generate HTML that is sent to the client.
+1. A user fills out the HTML form and clicks the `Create` button.
+1. The HTTP client sends a `POST` request to `/students/create`.
+1. The `Create(StudentCreateViewModel model)` method of the `StudentController` is called. This method inserts a new Student into the database, then redirects the HTTP client to the `/students` URL.
+1. The request to `/students` causes the `Index()` method of the `StudentsController` to be called. This method gets all students from the database and passes them to the Index view.
+1. The Index view `index.cshtml` uses the list of Students to generate HTML that is sent to the client.
+1. The user sees that the Student they added is in the list of all students.
+
+> **NOTE:** The above process is clearly a **lot**, but it's worth taking some time to read through it. Once you grasp this process, you'll have a solid foundation for understanding web applications.
 
