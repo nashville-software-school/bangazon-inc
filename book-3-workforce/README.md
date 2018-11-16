@@ -4,7 +4,7 @@ This book prepares you for building the web application that Bangazon employees 
 
 ## Chapters
 
-* Chapter 1 - [Models and Controllers](./chapters/API_MODELS_CONTROLLERS.md)
+* Chapter 1 - [Models and Controllers](./chapters/MODELS_CONTROLLERS.md)
 * Chapter 2 - [Introduction to ASP.NET Web Applications](./chapters/ASPNET_INTRO.md)
 * Chapter 3 - [Creating a Student with View Models](./chapters/VIEWMODELS.md)
 * Chapter 4 - [Student Exercises - Part 8](./chapters/STUDENT_EXERCISES_COHORTS.md)
