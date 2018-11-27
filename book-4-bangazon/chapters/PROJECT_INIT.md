@@ -1,4 +1,4 @@
-# Starting a Project with a Test Suite
+# Starting a Project
 
 Choose one teammate to perform all of these steps on a branch. No one else on the team should do **ANY WORK** until this entire procedure is completed.
 
@@ -12,13 +12,11 @@ Choose one teammate to perform all of these steps on a branch. No one else on th
 Replace `<url>` below with the connection string from Github. Also note that the period at the end of the `git clone` command is **not a mistake**.
 
 ```sh
-mkdir ~/workspace/csharp/BangazonSite && cd $_
+mkdir ~/workspace/csharp/StudentExercisesIdentity && cd $_
 git clone <url> .
-dotnet new mvc -n Bangazon --auth Individual
-dotnet new xunit -n BangazonTests
-dotnet new sln -n Bangazon -o .
-dotnet sln Bangazon.sln add Bangazon/Bangazon.csproj
-dotnet sln Bangazon.sln add BangazonTests/BangazonTests.csproj
+dotnet new mvc -n StudentExercisesIdentity --auth Individual
+dotnet new sln -n StudentExercisesIdentity -o .
+dotnet sln StudentExercisesIdentity.sln add StudentExercisesIdentity/StudentExercisesIdentity.csproj
 ```
 
 ## appsettings.json Template
@@ -45,7 +43,7 @@ By default, your `appsettings.json` file has a connection string to a SQLite dat
 ```json
 {
   "ConnectionStrings": {
-    "DefaultConnection": "DefaultConnection": "Server=YourServerHere\\SQLEXPRESS;Database=BangazonSite;Trusted_Connection=True;"
+    "DefaultConnection": "Server=YourServerHere\\SQLEXPRESS;Database=BangazonSite;Trusted_Connection=True;"
   },
   "Logging": {
     "LogLevel": {

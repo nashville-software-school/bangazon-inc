@@ -4,6 +4,7 @@ Identity Framework in .NET allows you to easily add authentication and user-rela
 
 When you create a new project in Visual Studio, you need to make sure that during the setup that you click the button labeled `Change Authentication` and select _Individual User Accounts_.
 
+Your instruction team will live-code setting up a project with Identity Framework enabled and how it looks and works by default.
 
 ## Customizing User Accounts
 
