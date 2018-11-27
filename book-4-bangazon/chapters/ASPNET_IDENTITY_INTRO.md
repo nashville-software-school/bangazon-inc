@@ -1,12 +1,15 @@
 # Identity Framework
 
-Identity Framework in .NET allows you to easily add authentication to your ASP.NET MVC application.
+Identity Framework in .NET allows you to easily add authentication and user-related data to your ASP.NET MVC application.
 
-Follow the steps in the [Introduction to Identity on ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/security/authentication/identity?view=aspnetcore-2.1&tabs=visual-studio) tutorial to see how easily you can create an application that has register, log in, and log out automatically scaffolded for you.
+When you create a new project in Visual Studio, you need to make sure that during the setup that you click the button labeled `Change Authentication` and select _Individual User Accounts_.
 
-Once you complete that short tutorial, you should skip directly to the [Add custom user data to the Identity DB](https://docs.microsoft.com/en-us/aspnet/core/security/authentication/add-user-data?view=aspnetcore-2.1&tabs=visual-studio#add-custom-user-data-to-the-identity-db) section to see how to _extend_ the basic **`IdentityUser`** model to add more information.
 
-## Scaffolding for ASP.NET Core 2.1
+## Customizing User Accounts
+
+By default the only information that is captured about the user by Identity Framework is their username and password. Often, your application will want to capture more information about the user - such as their name, address, phone number, etc.
+
+To do that you need to override the default code that Identity provides for registering a new user. You cannot modify that code directly, so you need to generate your own files in your project, and that will override the default behavior.
 
 ### Scaffolding Identity Assets
 
@@ -33,9 +36,9 @@ dotnet aspnet-codegenerator identity -u ApplicationUser -fi Account.Manage.Index
 
 1. Remove the `Areas/Identity/Pages/Data` directory
 1. Remove the `Areas/Identity/ProjectStart.cs` file
-1. Create `Models.ApplicationUser` and add the additional properties.
-1. Update `Register.cshtml.cs`, `Register.cs` with
-    1. Update `using` statement to your Models namespace
+1. Create `Models.ApplicationUser` (_see below_) and add the additional properties.
+1. Update `Register.cshtml.cs` with
+    1. Replace every instance of `IdentityUser` with `ApplicationUser` and use the lightbulb to include the correct namespace.
     1. Update `InputModel` with corresponding properties
     1. Update `OnPostAsync` with corresponding properties
 1. Update `Views/Shared/_LoginPartial.cshtml` to use the `ApplicationUser` instead of `IdentityUser`
@@ -59,4 +62,83 @@ Here's an example if you have a `Pet` data model, an `ApplicationDbContext` file
 
 ```sh
 dotnet aspnet-codegenerator controller -name PetsController -actions -m Pet -dc ApplicationDbContext -outDir Controllers
+```
+
+## References
+
+### ApplicationUser
+
+Identity Framework provides a default `IdentityUser` class to represent user that authenticate with your system, but it only captures user name and password. If you want to capture more information, you need to define a custom type that inherits from that type.
+
+In the class below, you extend the `IdentityUser` so that you can also capture the following information and store it in the `AspNetUsers` table in the database.
+
+* First name
+* Last name
+* Street address
+
+> Models/ApplicationUser.cs
+
+```cs
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Identity;
+
+namespace StudentExercises.Models
+{
+    // Add profile data for application users by adding properties to the ApplicationUser class
+    public class ApplicationUser : IdentityUser
+    {
+        public ApplicationUser() { }
+
+        [Required]
+        [Display(Name ="First Name")]
+        public string FirstName { get; set; }
+
+        [Required]
+        [Display(Name ="Last Name")]
+        public string LastName { get; set; }
+
+        [Required]
+        [Display(Name ="Street Address")]
+        public string StreetAddress { get; set; }
+
+
+        // Set up PK -> FK relationships to other objects
+        public virtual ICollection<Product> Products { get; set; }
+
+        public virtual ICollection<Order> Orders { get; set; }
+
+        public virtual ICollection<PaymentType> PaymentTypes { get; set; }
+    }
+}
+```
+
+Then ensure that you add a `DBSet` in your `ApplicationDbContext` for this custom type.
+
+```cs
+public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+```
+
+### Startup.cs
+
+To enable EF model-first migrations, and enable Identity Framework for your project, this is what your `ConfigureServices` method should be in the `Startup.cs` file.
+
+```cs
+public void ConfigureServices (IServiceCollection services) {
+    services.Configure<CookiePolicyOptions> (options => {
+        // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+        options.CheckConsentNeeded = context => true;
+        options.MinimumSameSitePolicy = SameSiteMode.None;
+    });
+
+    services.AddDbContext<ApplicationDbContext> (options =>
+        options.UseSqlServer (
+            Configuration.GetConnectionString ("DefaultConnection")));
+
+    services.AddDefaultIdentity<ApplicationUser> ()
+        .AddEntityFrameworkStores<ApplicationDbContext> ()
+        .AddDefaultTokenProviders ();
+
+    services.AddMvc ().SetCompatibilityVersion (CompatibilityVersion.Version_2_1);
+}
 ```
