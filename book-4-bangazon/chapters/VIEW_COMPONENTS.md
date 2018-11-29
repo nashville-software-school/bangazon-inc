@@ -2,6 +2,9 @@
 
 [View Components](https://docs.microsoft.com/en-us/aspnet/core/mvc/views/view-components?view=aspnetcore-2.1) allow you to create small, independant HTML components that can be used in any other Razor template in your system. The philosophy and architecture behind View Components in Razor is very much like React components.
 
+View components are lesser-known features of ASP.NET Core Razor views. Unlike tag-helpers and HTML helpers - both of which generate single HTML elements - view components are a bit different.
+
+They contain business logic - just like a controller - but the scope is generally contained to a single, reusable component rather than an entire view.
 
 ## Defining the Component Logic
 
@@ -10,7 +13,13 @@ A view component acts very much like a controller for your application. In the c
 1. OrderCountViewModel
 1. OrderCountViewComponent
 
-OrderCountViewComponent is the controller-like logic. Unlike controllers, there are not standard methods like `Index`, `Create`, `Edit`, and `Delete`. Instead there is one method named `InvokeAsync` that contains all of the logic required to get required data and produce HTML from a `cshtml` file.
+OrderCountViewComponent is the controller-like logic except that this class inherits from `ViewModel` instead of `Controller`.
+
+```cs
+public class OrderCountViewComponent : ViewComponent
+```
+
+Also unlike controllers, there are no standard methods like `Index`, `Create`, `Edit`, and `Delete`. Instead there is one method named `InvokeAsync` that contains all of the logic required to execute the business logics produce HTML from a `cshtml` file.
 
 Like controllers, you can use dependency inject to get access to `ApplicationDbContext` - so you can query your database - and to the `UserManager` service - so you can get information about the currently authenticated user.
 
