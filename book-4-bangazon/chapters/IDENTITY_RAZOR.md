@@ -7,6 +7,7 @@ There are often times that you want to display certain information in a Razor te
 First, you need to inject the `UserManager` and the `SignInManager` tools into the Razor template. If you are using a custom user model, then you also need to include a `using` statement for the namespace of your models.
 
 ```cs
+@using Microsoft.AspNetCore.Identity
 @using Bangazon.Models
 
 @inject SignInManager<ApplicationUser> SignInManager
