@@ -143,3 +143,50 @@ public void ConfigureServices (IServiceCollection services) {
     services.AddMvc ().SetCompatibilityVersion (CompatibilityVersion.Version_2_1);
 }
 ```
+
+## Accessing the Authenticated User
+
+In any of your controllers that need to access the currently authenticated user, for example the Order Summary screen or the New Product Form, you need to inject the `UserManager` into the controller. Here's the relevant code that you need.
+
+Add a private field to your controller.
+
+```cs
+private readonly UserManager<ApplicationUser> _userManager;
+```
+
+In the constructor, inject the `UserManager` service.
+
+```cs
+public ProductsController(ApplicationDbContext ctx,
+                          UserManager<ApplicationUser> userManager)
+{
+    _userManager = userManager;
+    _context = ctx;
+}
+```
+
+Then add the following private method to the controller.
+
+```cs
+private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
+```
+
+Once that is defined, any method that needs to see who the user is can invoke the method. Here's an example of when someone clicks the Purchase button for a product.
+
+```cs
+[Authorize]
+public async Task<IActionResult> Purchase([FromRoute] int id)
+{
+    // Find the product requested
+    Product productToAdd = await _context.Product.SingleOrDefaultAsync(p => p.ProductId == id);
+
+    // Get the current user
+    var user = await GetCurrentUserAsync();
+
+    // See if the user has an open order
+    var openOrder = await _context.Order.SingleOrDefaultAsync(o => o.User == user && o.PaymentTypeId == null);
+
+
+    // If no order, create one, else add to existing order
+}
+```
