@@ -86,3 +86,25 @@ While the simpler syntax may seem like a breath of fresh air, and much easier to
 ## Tutorial
 
 Please do the [ASP.NET Core MVC with Entity Framework Core - Tutorial](https://docs.microsoft.com/en-us/aspnet/core/data/ef-mvc/intro?view=aspnetcore-2.1) in which you will build a small web application using EF. It shows you how to configure your application for using it, how to set up a database context, and how to use that database context with LINQ statements to interact with a database.
+
+## References
+
+### Startup.cs
+
+To enable EF model-first migrations, and enable Identity Framework for your project, this is what your `ConfigureServices` method should be in the `Startup.cs` file.
+
+```cs
+public void ConfigureServices (IServiceCollection services) {
+    services.Configure<CookiePolicyOptions> (options => {
+        // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+        options.CheckConsentNeeded = context => true;
+        options.MinimumSameSitePolicy = SameSiteMode.None;
+    });
+
+    services.AddDbContext<ApplicationDbContext> (options =>
+        options.UseSqlServer (
+            Configuration.GetConnectionString ("DefaultConnection")));
+
+    services.AddMvc ().SetCompatibilityVersion (CompatibilityVersion.Version_2_1);
+}
+```
