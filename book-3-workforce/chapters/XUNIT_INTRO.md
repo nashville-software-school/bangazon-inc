@@ -17,7 +17,7 @@ How do you know your code does what you think it does?
 _You Test It!_
 
 There are two basic approaches to testing.
-1. Manual Testing - You or _**someone else**_ use the application and verify that it does what it's supposed to do.
+1. Manual Testing - You or _**someone else**_ uses the application and verify that it does what it's supposed to do.
 1. Automated Testing - You _**write code**_ that runs your application and verifies that it does what it's supposed to do.
 
 The trend in the industry is toward automated testing.
@@ -26,7 +26,7 @@ The trend in the industry is toward automated testing.
 
 There are two main types of automated testing.
 1. Unit Testing - Testing individual classes or methods.
-1. Integration Testing - Testing a complete request/response cycle. An integration test will use a literally visit a URL in the web application. It will fill out HTML forms, click buttons and follow links to make things happen in your application. Data will be read from and written to the database.
+1. Integration Testing - Testing a complete request/response cycle. An integration test will use and literally visit a URL in the web application. It will fill out HTML forms, click buttons and follow links to make things happen in your application. Data will be read from and written to the database.
 
 We will be covering integration tests in this chapter.
 
