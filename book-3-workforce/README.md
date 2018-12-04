@@ -1,4 +1,4 @@
-# Book 2 - Bangazon Workforce Management
+# Book 3 - Bangazon Workforce Management
 
 This book prepares you for building the web application that Bangazon employees will use to manage employees, departments, computers, and training programs.
 
