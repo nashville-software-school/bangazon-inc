@@ -31,7 +31,7 @@ Then restore the packages and run the generator to create your user class and co
 
 ```sh
 dotnet restore
-dotnet aspnet-codegenerator identity -u StudentExercises.Models.ApplicationUser -dc StudentExercises.Data.ApplicationDbContext --files "Account.Register;Account.Login;Account.Logout"
+dotnet aspnet-codegenerator identity -dc StudentExercises.Data.ApplicationDbContext --files "Account.Register;Account.Login;Account.Logout"
 ```
 
 1. Remove the `Areas/Identity/Pages/Data` directory
