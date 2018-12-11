@@ -13,6 +13,64 @@ touch queries.sql
 
 Download the [musichistory.db](./assets/musichistory.db) file, and then copy it to the folder that you created for this exercise. That file **is** the database. It contains all of the tables and data.
 
+## Querying Data
+
+Querying the database is how you ask for data that is stored in it. Here's some starter examples.
+
+In the Music History database, there is a list of songs stored in the `Song` table. Here is how you would ask to see all of the rows in that table. You can specify every column in a table.
+
+```sql
+SELECT
+    SongId,
+    Title,
+    SongLength,
+    ReleaseDate,
+    GenreId,
+    ArtistId,
+    AlbumId
+FROM Song;
+```
+
+However, if you only need information from a smaller set of columns, you can specify only those.
+
+```sql
+SELECT
+    SongId,
+    Title,
+    ReleaseDate
+FROM Song;
+```
+
+A shortcut that you can use during development (but never in the final production code) is the asterisk - which mean select all columns. The following query is will return that same set of results that the first query above returned.
+
+```sql
+SELECT * FROM Song;
+```
+
+## Creating New Data
+
+Create a new row in the `Genre` table to represent techno music.
+
+```sql
+INSERT INTO Genre (Label) VALUES ('Techno');
+```
+
+## Updating Existing Data
+
+Change the length (in seconds) for one of the songs.
+
+```sql
+select * from Song where SongId = 18;
+> 664
+
+update Song
+set SongLength = 515
+where SongId = 18;
+
+select * from Song where SongId = 18;
+> 515
+```
+
 ## References
 
 * [SQLBolt Learn SQL with simple, interactive exercises.](https://sqlbolt.com/)
