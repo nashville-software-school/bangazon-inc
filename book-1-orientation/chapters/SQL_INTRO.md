@@ -47,6 +47,25 @@ A shortcut that you can use during development (but never in the final productio
 SELECT * FROM Song;
 ```
 
+## Filtering Queries
+
+The `WHERE` clause on a SQL query will filter the results. If you want to find songs that have a duration greater than 100 seconds, you would use the following query.
+
+```sql
+SELECT
+    SongId,
+    Title,
+    SongLength,
+    ReleaseDate,
+    GenreId,
+    ArtistId,
+    AlbumId
+FROM Song
+WHERE SongLength > 100
+;
+```
+
+
 ## Creating New Data
 
 Create a new row in the `Genre` table to represent techno music.
@@ -70,6 +89,22 @@ where SongId = 18;
 select * from Song where SongId = 18;
 > 515
 ```
+
+## Deleting Data
+
+You can use the `DELETE` keyword to remove rows from your database tables.
+
+```sql
+delete from Song where SongId = 18;
+```
+
+Be wary of leaving off the `WHERE` clause. The following SQL statement will remove **ALL ROWS** from the table.
+
+```sql
+delete from Song;
+```
+
+
 
 ## References
 
