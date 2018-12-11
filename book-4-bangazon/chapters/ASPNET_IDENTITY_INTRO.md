@@ -15,7 +15,7 @@ To do that you need to override the default code that Identity provides for regi
 ### Scaffolding Identity Assets
 
 ```sh
-dotnet tool install -g dotnet-aspnet-codegenerator
+dotnet tool install --global dotnet-aspnet-codegenerator --version 2.1.6
 dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
 ```
 
