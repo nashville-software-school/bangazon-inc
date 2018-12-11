@@ -42,6 +42,7 @@ dotnet aspnet-codegenerator identity -dc StudentExercises.Data.ApplicationDbCont
     1. Update `InputModel` with corresponding properties
     1. Update `OnPostAsync` with corresponding properties
 1. Update `Views/Shared/_LoginPartial.cshtml` to use the `ApplicationUser` instead of `IdentityUser`
+1. Also make sure that you change `Startup.cs` to replace `Identity` with `ApplicationUser`.
 
 
 ### Scaffolding Controllers
