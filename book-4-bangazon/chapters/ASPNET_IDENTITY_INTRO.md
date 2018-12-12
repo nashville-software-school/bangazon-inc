@@ -27,7 +27,7 @@ Then open your `.csproj` file and add the following section.
 </ItemGroup>
 ```
 
-Then restore the packages and run the generator to create your user class and corresponding views.
+Then restore the packages and run the generator to create your user class and corresponding views. Make sure you change the namespace from `StudentExercises` to your application's namespace.
 
 ```sh
 dotnet restore
@@ -42,10 +42,12 @@ dotnet aspnet-codegenerator identity -dc StudentExercises.Data.ApplicationDbCont
     1. Update `InputModel` with corresponding properties
     1. Update `OnPostAsync` with corresponding properties
 1. Update `Views/Shared/_LoginPartial.cshtml` to use the `ApplicationUser` instead of `IdentityUser`
-1. Also make sure that you change `Startup.cs` to replace `Identity` with `ApplicationUser`.
+1. Also make sure that you change `Startup.cs` to replace `IdentityUser` with `ApplicationUser`.
 
 
 ### Scaffolding Controllers
+
+In Visual Studio, you can use the scaffolding tool by right-clicking on the Controllers directory and choosing `Add > New Scaffolded Item`.
 
 You can scaffold a controller with its corresponding Razor views on the command line now. Type in the following command to see all of the options.
 
@@ -69,7 +71,7 @@ dotnet aspnet-codegenerator controller -name PetsController -actions -m Pet -dc 
 
 ### ApplicationUser
 
-Identity Framework provides a default `IdentityUser` class to represent user that authenticate with your system, but it only captures user name and password. If you want to capture more information, you need to define a custom type that inherits from that type.
+Identity Framework provides a default `IdentityUser` class to represent the user that authenticate with your system, but it only captures user name and password. If you want to capture more information, you need to define a custom type that inherits from that type.
 
 In the class below, you extend the `IdentityUser` so that you can also capture the following information and store it in the `AspNetUsers` table in the database.
 
