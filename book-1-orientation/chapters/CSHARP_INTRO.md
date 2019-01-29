@@ -23,7 +23,7 @@ dotnet new console
 This will create two files in the directory
 
 1. `intro.csproj` - This file holds all the packages that you application will be using. It's the `package.json` for C#.
-1. `Program.cs` - This is the file that holds your logic. Think of it as your `app.js` from Angular. It's where the logic of your application starts.
+1. `Program.cs` - This is the file that holds your logic. Think of it as your `main.js`. It's where the logic of your application starts.
 
 Copy this code into your Program.cs, replacing everything there.
 
@@ -123,10 +123,12 @@ string[] products = new string[] {
 };
 
 /*
-    This syntax should look very similar to what you did in an Angular
-    partial's ng-repeat directive. However, once again you have to
-    explicitly say what type of variable product is. Since the products
-    array holds strings, then its type must be string.
+    A foreach loop is used to iterate over a collection.
+
+    The code below is roughly equivalent to the following JavaScript:
+    products.forEach(product => {
+        console.log(product);
+    });
 */
 foreach (string product in products) {
     Console.WriteLine(product);
