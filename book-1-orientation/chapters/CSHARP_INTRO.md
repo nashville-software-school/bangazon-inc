@@ -90,10 +90,11 @@ namespace bangazon
             var firstName="Bill";
 
             /*
-              The String.Format() function syntax allows you to
-              build the final string, with placeholders, and
-              then provide comma-delimited list of variables to
-              use in the placeholders.
+                String interpolation in C# is similar to string interpolation in JavaScript,
+                but there is a different syntax.
+
+                An equivalent statement in JavaScript would be:
+                console.log(`${firstName} ${lastName} purchased on ${purchaseDate}`);
             */
             Console.WriteLine($"{firstName} {lastName} purchased on {purchaseDate}");
         }
@@ -137,12 +138,17 @@ foreach (string product in products) {
 
 # C# Conditions
 
-Luckily, the `if-then` syntax works exactly like it did in JavaScript. Let's put a condition around what products get displayed. Only products that have a length of 5, or greater.
+Luckily, the `if-then` syntax works exactly like it did in JavaScript. 
+Let's display a different message based on on the length of a product.
 
 ```cs
 foreach (string product in products) {
-    if (product.Length > 5) {
-        Console.WriteLine(product);
+    if (product.Length < 5) {
+        Console.WriteLine($"{product} has a short name");
+    } else if (product.Length < 10) {
+        Console.WriteLine($"{product} has a medium-sized name");
+    } else {
+        Console.WriteLine($"{product} has a long name");
     }
 }
 ```
