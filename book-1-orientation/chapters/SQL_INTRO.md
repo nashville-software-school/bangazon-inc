@@ -1,0 +1,140 @@
+# Introduction to SQL with Music History
+
+## Setup
+
+```sh
+mkdir -p ~/workspace/csharp/exercises/music-sql && cd $_
+touch queries.sql
+```
+
+> **Note:** The `.sql` extension is common practice for files storing SQL queries
+
+## Downloading the Database Files
+
+Download the [musichistory.db](./assets/musichistory.db) file, and then copy it to the folder that you created for this exercise. That file **is** the database. It contains all of the tables and data.
+
+## Querying Data
+
+Querying the database is how you ask for data that is stored in it. Here's some starter examples.
+
+In the Music History database, there is a list of songs stored in the `Song` table. Here is how you would ask to see all of the rows in that table. You can specify every column in a table.
+
+```sql
+SELECT
+    SongId,
+    Title,
+    SongLength,
+    ReleaseDate,
+    GenreId,
+    ArtistId,
+    AlbumId
+FROM Song;
+```
+
+However, if you only need information from a smaller set of columns, you can specify only those.
+
+```sql
+SELECT
+    SongId,
+    Title,
+    ReleaseDate
+FROM Song;
+```
+
+A shortcut that you can use during development (but never in the final production code) is the asterisk - which mean select all columns. The following query is will return that same set of results that the first query above returned.
+
+```sql
+SELECT * FROM Song;
+```
+
+## Filtering Queries
+
+The `WHERE` clause on a SQL query will filter the results. If you want to find songs that have a duration greater than 100 seconds, you would use the following query.
+
+```sql
+SELECT
+    SongId,
+    Title,
+    SongLength,
+    ReleaseDate,
+    GenreId,
+    ArtistId,
+    AlbumId
+FROM Song
+WHERE SongLength > 100
+;
+```
+
+
+## Creating New Data
+
+Create a new row in the `Genre` table to represent techno music.
+
+```sql
+INSERT INTO Genre (Label) VALUES ('Techno');
+```
+
+## Updating Existing Data
+
+Change the length (in seconds) for one of the songs.
+
+```sql
+select * from Song where SongId = 18;
+> 664
+
+update Song
+set SongLength = 515
+where SongId = 18;
+
+select * from Song where SongId = 18;
+> 515
+```
+
+## Deleting Data
+
+You can use the `DELETE` keyword to remove rows from your database tables.
+
+```sql
+delete from Song where SongId = 18;
+```
+
+Be wary of leaving off the `WHERE` clause. The following SQL statement will remove **ALL ROWS** from the table.
+
+```sql
+delete from Song;
+```
+
+
+
+## References
+
+* [SQLBolt Learn SQL with simple, interactive exercises.](https://sqlbolt.com/)
+* [Introductory SQL tutorial](http://www.sqlcourse.com/)
+* [W3schools interactive SQL tutorial](https://www.w3schools.com/sql/sql_intro.asp)
+* [Online SQLite tutorial](http://www.sqlitetutorial.net/)
+
+## Instructions
+
+1. Open up the database file in the database management tool you installed on day 1 (*TablePlus* or *DB Browser for SQLite*).
+1. Examine the tables, columns, and foreign keys of the database.
+1. Using the `dbdiagram.io` site, create an ERD for the database.
+
+For each of the following exercises, provide the appropriate query. Yes, even the ones that are expressed in the form of questions. Everything from class and the [Sqlite](http://www.sqlite.org/) documentation for SQL [keywords](https://www.sqlite.org/lang.html) and [functions](https://www.sqlite.org/lang_corefunc.html) is fair game.
+
+1. Query all of the entries in the `Genre` table
+1. Using the `INSERT` statement, add one of your favorite artists to the `Artist` table.
+1. Using the `INSERT` statement, add one, or more, albums by your artist to the `Album` table.
+1. Using the `INSERT` statement, add some songs that are on that album to the `Song` table.
+1. Write a `SELECT` query that provides the song titles, album title, and artist name for all of the data you just entered in. Use the [`LEFT JOIN`](https://www.tutorialspoint.com/sql/sql-using-joins.htm) keyword sequence to connect the tables, and the `WHERE` keyword to filter the results to the album and artist you added.
+    > **Reminder:** Direction of join matters. Try the following statements and see the difference in results.
+
+    ```
+    SELECT a.Title, s.Title FROM Album a LEFT JOIN Song s ON s.AlbumId = a.AlbumId;
+    SELECT a.Title, s.Title FROM Song s LEFT JOIN Album a ON s.AlbumId = a.AlbumId;
+    ```
+1. Write a `SELECT` statement to display how many songs exist for each album. You'll need to use the `COUNT()` function and the `GROUP BY` keyword sequence.
+1. Write a `SELECT` statement to display how many songs exist for each artist. You'll need to use the `COUNT()` function and the `GROUP BY` keyword sequence.
+1. Write a `SELECT` statement to display how many songs exist for each genre. You'll need to use the `COUNT()` function and the `GROUP BY` keyword sequence.
+1. Using `MAX()` function, write a select statement to find the album with the longest duration. The result should display the album title and the duration.
+1. Using `MAX()` function, write a select statement to find the song with the longest duration. The result should display the song title and the duration.
+1. Modify the previous query to also display the title of the album.
