@@ -104,43 +104,34 @@ List<string> planetList = new List<string>(){"Mercury", "Mars"};
 1. Now that all the planets are in the list, slice the list using `GetRange()` in order to extract the rocky planets into a new list called `rockyPlanets`. The rocky planets will remain in the original planets list.
 1. Being good amateur astronomers, we know that Pluto is now a dwarf planet, so use the `Remove()` method to eliminate it from the end of `planetList`.
 
-## Iterating over planets
+#Practice: Random Numbers
 
-> **Ref:** [List of Solar System probes](https://en.wikipedia.org/wiki/List_of_Solar_System_probes)
 
-1. Create another list containing dictionaries. Each dictionary will hold the name of a spacecraft that we have launched, and the name of the planet that it has visited. If it visited more than one planet, just pick one.
+## Instructions
+1. Use the following code to create a list of random numbers. Each number will be between 0 and 9.
     ```cs
-    List<Dictionary<string, string>> probes = new List<Dictionary<string, string>>();
+    Random random = new Random();
+    List<int> numbers = new List<int> {
+        random.Next(10),
+        random.Next(10),
+        random.Next(10),
+        random.Next(10),
+        random.Next(10),
+    };
     ```
-1. Iterate over your list of planets from above, and inside that loop, iterate over the list of dictionaries. Write to the console, for each planet, which satellites have visited which planet.
-    ```cs
-    foreach () // iterate planets
-    {
-        List<string> matchingProbes = new List<string>();
-
-        foreach() // iterate probes
-        {
-            /*
-                Does the current Dictionary contain the key of
-                the current planet? Investigate the ContainsKey()
-                method on a Dictionary.
-
-                If so, add the current spacecraft to `matchingProbes`.
-            */
-        }
-
-        /*
-            Use String.Join(",", matchingProbes) as part of the
-            solution to get the output below. It's the C# way of
-            writing `array.join(",")` in JavaScript.
-        */
-        Console.WriteLine($"{}: {}");
-    }
-    ```
+1. Use a `for` loop to iterate over all numbers between `0` and `numbers.Count - 1`. 
+1. Inside the body of the `for` loop determine if the current loop index is contained inside of the `numbers` list. Print a message to the console indicating whether the index is in the list.
 
 #### Example Output in the Terminal
-
 ```sh
-Mars: Viking, Opportunity, Curiosity
-Venus: Mariner, Venera
+numbers list contains 0
+numbers list does not contain 1
+numbers list does not contain 2
+numbers list contains 3
+numbers list contains 4
 ```
+**NOTE:** Each run will produce different output.
+
+ 
+> **Further Reading**
+> [Random class in .net](https://docs.microsoft.com/en-us/dotnet/api/system.random?view=netframework-4.7.2)
