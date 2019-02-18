@@ -341,7 +341,11 @@ public class Store {
 ```
 We call a constructor when we use the `new` keyword.
 ```cs
-List<string> inventory = new List<string> { "batteries", "golf tees", "zippers", "cabin accessories" };
+List<string> inventory = new List<string>();
+inventory.Add("batteries");
+inventory.Add("golf tees");
+inventory.Add("zippers");
+inventory.Add("cabin accessories"};
 
 // Make a new instance of a Store
 Store myStore = new Store("Stuff 'n' Things", inventory);
