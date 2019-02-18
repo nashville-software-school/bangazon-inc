@@ -300,7 +300,7 @@ namespace Classes
 
 ## Fields
 
-Much like properties, Fields are use to store values in an object. Unlike properties fields are usually private and cannot be accessed outside the object. The private data is referred to as "encapsulation".
+Much like properties, Fields are use to store values in an object. Unlike properties fields are usually private and cannot be accessed outside the object. The concept of storing private data that is only accessible inside the object is referred to as "encapsulation".
 
 ```cs
 public class Box {
