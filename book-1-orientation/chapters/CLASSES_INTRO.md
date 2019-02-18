@@ -36,7 +36,7 @@ author.Write(output);
 The above code would print the following:
 
     I do declare: Nashville Software School
-    That's right, I said:: Nashville Software School
+    That's right, I said: Nashville Software School
 
 ## Accessibility Levels
 
@@ -72,10 +72,10 @@ public class Car : Automobile { }
 
 ```cs
 Automobile generic_auto = new Automobile();
-Console.WriteLine("Automobiles go {0}", generic_auto.Accelerate());
+Console.WriteLine($"Automobiles go {generic_auto.Accelerate()}");
 
 Car stella = new Car();
-Console.WriteLine("Cars go {0}", stella.Accelerate());
+Console.WriteLine($"Cars go {stella.Accelerate()}");
 ```
 
 ## Private
@@ -101,7 +101,7 @@ public class Automobile {
 // Usage Example in a Program.cs file somewhere
 
 Automobile generic_auto = new Automobile();
-Console.WriteLine("Automobiles go {0}", generic_auto.Accelerate());
+Console.WriteLine($"Automobiles go {generic_auto.Accelerate()}");
 
 // However, the following line of code does not compile
 generic_auto.InjectFuel();
@@ -154,7 +154,7 @@ public class Car : Automobile {
 Car stella = new Car();
 
 // UseEmergencyBreak method can use the protected SqueezeBreakPads from the Automobile class.
-Console.WriteLine("Applying the break: {0}", stella.UseEmergencyBreak());
+Console.WriteLine($"Applying the break: {stella.UseEmergencyBreak()}"); 
 ```
 
 ## Internal
@@ -300,7 +300,7 @@ namespace Classes
 
 ## Fields
 
-Much like properties, Fields are use to store values in an object. Unlike properties fields are usually private and cannot be accessed outside the object. The concept of storing private data that is only accessible inside the object is referred to as "encapsulation".
+Much like **properties**, **Fields** are use to store values in an object. Unlike properties fields are usually private and cannot be accessed outside the object. The concept of storing private data that is only accessible inside the object is referred to as **encapsulation**.
 
 ```cs
 public class Box {
