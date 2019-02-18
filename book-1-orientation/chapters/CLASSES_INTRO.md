@@ -1,17 +1,25 @@
 # User Defined Types
 
-A class is a blueprint, or a template, for creating an object instance in memory. C# and the .NET Framework define many types, such as `int`, `decimal`,  `bool`, `class`, `string`, and `interface`. In C#, you can also create your own, custom reference types.
+In a programming language a **type** is a blueprint, or a template, for creating an object instance in memory. A type defines the capabilities of an object. C# and the .NET Framework provide many types, such as `int`, `decimal`, `bool`, `Datetime`, `string`, `Dictionary`, `List`, etc... There are literally thousands of them!
 
-You create a new reference type with a class.
+While these types provide a lot of functionality, each C# application must also provide its own, custom types to do the specific work it needs to do.
+
+In C# the most common way to create a new type is with a `class`.
 
 > **Further reading:** [Types in C#](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/types)
 
 ```cs
 public class Writer
 {
-    public void write (string message)
+    public Writer(string prefix) {
+        Prefix = prefix;
+    }
+
+    public string Prefix {get; set;}
+
+    public void Write (string message)
     {
-        Console.WriteLine(message);
+        Console.WriteLine(Prefix + message);
     }
 }
 
@@ -19,9 +27,16 @@ public class Writer
 string output = "Nashville Software School";
 
 // The author variable's type is Writer -- a custom type you defined
-Writer author = new Writer();
-author.write(output);
+Writer author = new Writer("I do declare: ");
+author.Write(output);
+
+author.Prefix = "That's right, I said: ";
+author.Write(output);
 ```
+The above code would print the following:
+
+    I do declare: Nashville Software School
+    That's right, I said:: Nashville Software School
 
 ## Accessibility Levels
 
@@ -156,7 +171,9 @@ Classes and Methods that have tagged with the `internal` keyword allow access fr
 
 > **Resource:** [Access Modifiers (C# Programming Guide)](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/access-modifiers)
 
-# Properties
+# Parts of a Class
+
+## Properties
 
 Class properties are the interface you provide to external code to get, and modify, the values of the private fields.
 
@@ -182,7 +199,7 @@ public class Customer
 
 > **Resource:** [Properties (C# Programming Guide)](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/properties)
 
-# Methods
+## Methods
 
 Methods are the new name for functions. They are code blocks on a class that performs a series of logic. Think of them as the behaviors of your custom type. Copy pasta this example code into your `Program.cs` file.
 
@@ -280,6 +297,58 @@ namespace Classes
     }
 }
 ```
+
+## Fields
+
+Much like properties, Fields are use to store values in an object. Unlike properties fields are usually private and cannot be accessed outside the object. The private data is referred to as "encapsulation".
+
+```cs
+public class Box {
+    private string _secret = "Sometimes I sing Aretha Franklin songs in the shower.";
+
+    public string GetSecret(string magicWord) {
+        if (magicWord == "please") {
+            return _secret;
+        } else {
+            return "I'm not telling you!";
+        }
+    }
+}
+```
+```cs
+Box box = new Box();
+// The following line would cause an error. _secret is not accessible.
+// Console.WriteLine(box._secret); 
+
+// But public methods and properties can access a private fields.
+Console.WriteLine(box.GetSecret("please));
+```
+
+## Constructors
+
+A constructor is special method in a class that is called when a new instance of the class is created. The role of a constructor is to make sure the new object is setup and ready for use immediately after it is created.
+
+```cs
+public class Store {
+    public Store(string name, List<string> initialInventory) {
+        Name = name;
+        Inventory = initialInventory;
+    }
+
+    public sting Name {get; set;}
+    public List<string> Inventory {get; set;}
+}
+```
+We call a constructor when we use the `new` keyword.
+```cs
+List<string> inventory = new List<string> { "batteries", "golf tees", "zippers", "cabin accessories" };
+
+// Make a new instance of a Store
+Store myStore = new Store("Stuff 'n' Things", inventory);
+```
+
+A constructor is not required in a class. If a class does not have a constructor it will be given a hidden, "default" constructor that accepts no parameters and does nothing.
+
 
 ## Resources
 
