@@ -55,3 +55,4 @@ There are more windows that you can use while debugging your application. To see
 ## Further Reading
 * https://tutorials.visualstudio.com/vs-get-started/debugging
 * https://docs.microsoft.com/en-us/visualstudio/debugger/navigating-through-code-with-the-debugger?view=vs-2017 
+* [Getting Started with the Debugger](https://msdn.microsoft.com/en-us/library/k0k771bt.aspx).
