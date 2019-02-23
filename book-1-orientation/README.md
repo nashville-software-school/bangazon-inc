@@ -22,7 +22,7 @@ This book builds a strong foundation in the syntax, data structures, and valuabl
 * Chapter 16 - [Debugging in Visual Studio](./chapters/DEBUGGING_VS.md)
 * Chapter 17 - [Introduction to SQL](./chapters/SQL_INTRO.md)
 * Chapter 18 - [Student Exercises - Part 3](./chapters/STUDENT_EXERCISES_SQL.md)
-* Chapter 19 - [Using SQL in a .NET Application](./chapters/ADONET_INTRO.md)
+* Chapter 19 - [Using ADO.NET and SQL](./chapters/ADONET_INTRO.md)
 * Chapter 20 - [Student Exercises - Part 4](./chapters/STUDENT_EXERCISES_DAPPER.md)
 * Chapter 21 - [Bangazon ERD](./chapters/BANGAZON_ERD.md)
 
