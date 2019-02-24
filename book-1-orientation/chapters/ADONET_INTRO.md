@@ -663,12 +663,12 @@ namespace DapperDepartments
 
 ## Supplemental: Comparison of data access tools
 
-_ | <span>ADO.NET</span> | Micro-ORM (Dapper) | Full ORM (Entity Frameework)
-- | - | - | - |
-**Dev Writes SQL** | yes | yes | no 
-**Boilerplate Code** | yes | minimal | no 
-**Automatic Model Binding** | no | yes | yes
-**Degree of "Magic"** | none | a little | a lot
-**Pros** | Full control<br/>Most preferment | Balance between control and ease of use | Ease of use<br/>Rapid development
-**Cons** | Lots of code to write | Can lead to writing more code than is needed | Too much magic<br/>Performance can suffer
+_                           | <span>ADO.NET</span>          | Micro-ORM (Dapper)                           | Full ORM (Entity Framework)
+--------------------------- | ----------------------------- | -------------------------------------------- | -------------------------------------- |
+**Dev Writes SQL**          | yes                           | yes                                          | no 
+**Boilerplate Code**        | yes                           | minimal                                      | no 
+**Automatic Model Binding** | no                            | yes                                          | yes
+**Degree of "Magic"**       | none                          | a little                                     | a lot
+**Pros**                    | Full control, Most preferment | Balance between control and ease of use      | Ease of use, Rapid development
+**Cons**                    | Lots of code to write         | Can lead to writing more code than is needed | Too much magic, Performance can suffer
 
