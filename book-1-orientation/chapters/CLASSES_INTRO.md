@@ -321,7 +321,7 @@ Box box = new Box();
 // Console.WriteLine(box._secret); 
 
 // But public methods and properties can access a private fields.
-Console.WriteLine(box.GetSecret("please));
+Console.WriteLine(box.GetSecret("please"));
 ```
 
 ## Constructors
