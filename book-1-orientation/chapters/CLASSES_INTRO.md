@@ -167,9 +167,8 @@ Classes and Methods that have tagged with the `internal` keyword allow access fr
 
 ## Resources
 
-* https://msdn.microsoft.com/en-us/library/ba0a1yw2.aspx
-
-> **Resource:** [Access Modifiers (C# Programming Guide)](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/access-modifiers)
+> [Accessibility Levels (C# Reference)](https://msdn.microsoft.com/en-us/library/ba0a1yw2.aspx)
+> [Access Modifiers (C# Programming Guide)](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/access-modifiers)
 
 # Parts of a Class
 
