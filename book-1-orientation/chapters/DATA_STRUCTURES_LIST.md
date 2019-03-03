@@ -104,7 +104,7 @@ List<string> planetList = new List<string>(){"Mercury", "Mars"};
 1. Now that all the planets are in the list, slice the list using `GetRange()` in order to extract the rocky planets into a new list called `rockyPlanets`. The rocky planets will remain in the original planets list.
 1. Being good amateur astronomers, we know that Pluto is now a dwarf planet, so use the `Remove()` method to eliminate it from the end of `planetList`.
 
-#Practice: Random Numbers
+# Practice: Random Numbers
 
 
 ## Instructions
