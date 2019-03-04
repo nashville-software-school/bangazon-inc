@@ -43,6 +43,8 @@ The `List` collection in C# has the following methods that an array does not.
 * [Find()](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1.find?view=netcore-2.1)
 * [Remove()](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1.remove?view=netcore-2.1)
 * [Contains()](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1.contains?view=netcore-2.1)
+* [ForEach()](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1.foreach?view=netcore-2.1)
+* [Count](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1.count?view=netcore-2.1)
 
 ```cs
 using System.Collections.Generic;
@@ -104,7 +106,7 @@ List<string> planetList = new List<string>(){"Mercury", "Mars"};
 1. Now that all the planets are in the list, slice the list using `GetRange()` in order to extract the rocky planets into a new list called `rockyPlanets`. The rocky planets will remain in the original planets list.
 1. Being good amateur astronomers, we know that Pluto is now a dwarf planet, so use the `Remove()` method to eliminate it from the end of `planetList`.
 
-#Practice: Random Numbers
+# Practice: Random Numbers
 
 
 ## Instructions

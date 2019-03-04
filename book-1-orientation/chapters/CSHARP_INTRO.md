@@ -102,11 +102,11 @@ namespace bangazon
 }
 ```
 
-# C# Collections
+# C# Collections and Loops
 
 The C# language has many ways to store a collection of items. You'll quickly see that C# is much more verbose when you write your source code, because the developer needs to provide all of the instructions to the compiler, unlike JavaScript or other dynamically typed languages.
 
-We'll look at a very simple type of collection first - an array of strings. Add the following code to your `Main` method.
+We'll look at a simple type of collection first - list of strings. Add the following code to your `Main` method.
 
 ```cs
 /*
@@ -115,7 +115,7 @@ We'll look at a very simple type of collection first - an array of strings. Add 
     This may seem redundant, but it's part of the C# language compiler's
     type checking constraints.
 */
-string[] products = new string[] {
+List<string> products = new List<string>() {
     "Motorcycle",
     "Sofa",
     "Sandals",
@@ -133,6 +133,15 @@ string[] products = new string[] {
 */
 foreach (string product in products) {
     Console.WriteLine(product);
+}
+
+/*
+    Like JavaScript, C# has a for() loop
+
+    This code is equivalent to the foreach loop above.
+*/
+for (int i=0; i<products.Count; i++) {
+    Console.WriteLine(products[i]);
 }
 ```
 
