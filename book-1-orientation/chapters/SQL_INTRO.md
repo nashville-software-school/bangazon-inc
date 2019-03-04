@@ -1,17 +1,26 @@
 # Introduction to SQL with Music History
 
+## What is SQL?
+
+**Structured Query Language** (**SQL**) is the language for interacting with relational databases. It has commands for all the CRUD operations.
+
+* **INSERT**: Create a new record in a table
+* **SELECT**: Read records from a table or combination of joined tables
+* **UPDATE**: Update records in a table
+* **DELETE**: Delete records from a table
+
+What is a **relational database**? A relational database is one that stores data in tables and allows you to specify the relationships between records in those tables.
+
+
+
 ## Setup
 
-```sh
-mkdir -p ~/workspace/csharp/exercises/music-sql && cd $_
-touch queries.sql
-```
+1. Open **SQL Server Management Studio** (**SSMS**).
+1. Create a new database called `MusicHistory`.
+1. Run [this script](./assets/musichistory.sqlserver.sql) inside SSMS to create and populate tables.
+1. In the SSMS toolbar click the "New Query" button to create a new query window.
 
 > **Note:** The `.sql` extension is common practice for files storing SQL queries
-
-## Downloading the Database Files
-
-Download the [musichistory.db](./assets/musichistory.db) file, and then copy it to the folder that you created for this exercise. That file **is** the database. It contains all of the tables and data.
 
 ## Querying Data
 
@@ -111,15 +120,14 @@ delete from Song;
 * [SQLBolt Learn SQL with simple, interactive exercises.](https://sqlbolt.com/)
 * [Introductory SQL tutorial](http://www.sqlcourse.com/)
 * [W3schools interactive SQL tutorial](https://www.w3schools.com/sql/sql_intro.asp)
-* [Online SQLite tutorial](http://www.sqlitetutorial.net/)
+* [SQL Server Functions](https://www.w3schools.com/sqL/sql_ref_sqlserver.asp)
 
 ## Instructions
 
-1. Open up the database file in the database management tool you installed on day 1 (*TablePlus* or *DB Browser for SQLite*).
-1. Examine the tables, columns, and foreign keys of the database.
+1. Using the **Object Explorer** in SSMS, examine the tables, columns, and foreign keys of the database.
 1. Using the `dbdiagram.io` site, create an ERD for the database.
 
-For each of the following exercises, provide the appropriate query. Yes, even the ones that are expressed in the form of questions. Everything from class and the [Sqlite](http://www.sqlite.org/) documentation for SQL [keywords](https://www.sqlite.org/lang.html) and [functions](https://www.sqlite.org/lang_corefunc.html) is fair game.
+For each of the following exercises, provide the appropriate query. Yes, even the ones that are expressed in the form of questions. Everything from class and the references listed above is fair game.
 
 1. Query all of the entries in the `Genre` table
 1. Using the `INSERT` statement, add one of your favorite artists to the `Artist` table.
