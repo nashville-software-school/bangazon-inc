@@ -116,7 +116,7 @@ Dictionary<?, ?> stockReport = new Dictionary<?, ?>();
    Iterate over the purchases and record the valuation
    for each stock.
 */
-foreach (Dictionary<string, double> purchase in purchases) {
+foreach (Dictionary<string, double> purchase in purchases)
 {
     foreach (KeyValuePair<string, double> stock in purchase)
     {
