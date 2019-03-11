@@ -24,7 +24,7 @@ This book builds a strong foundation in the syntax, data structures, and valuabl
 * Chapter 18 - [Debugging in Visual Studio](./chapters/DEBUGGING_VS.md)
 * Chapter 19 - [Introduction to SQL](./chapters/SQL_INTRO.md)
 * Chapter 20 - [Student Exercises - Part 3](./chapters/STUDENT_EXERCISES_SQL.md)
-* Chapter 21 - [Object Relational Mapping (ORM) with Dapper](./chapters/DAPPER_INTRO.md)
+* Chapter 21 - [Using ADO.NET and SQL](./chapters/ADONET_INTRO.md)
 * Chapter 22 - [Student Exercises - Part 4](./chapters/STUDENT_EXERCISES_DAPPER.md)
 * Chapter 23 - [Bangazon ERD](./chapters/BANGAZON_ERD.md)
 

@@ -186,11 +186,13 @@ public class Customer
 
     public string LastName { get; set; }
 
+    public bool IsLocal { get; set; }
+
     // Calculated property that has no setter. It is readonly.
     public string FullName {
         get
         {
-            return $"{firstName} {lastName}";
+            return $"{FirstName} {LastName}";
         }
     }
 }
@@ -215,11 +217,13 @@ namespace Classes
 
         public string LastName { get; set; }
 
+        public bool IsLocal { get; set; }
+
         public string FullName
         {
             get
             {
-                return string.Format($"{firstName} {lastName}");
+                return $"{FirstName} {LastName}";
             }
         }
     }
@@ -231,12 +235,14 @@ namespace Classes
         */
         public string Name { get; set; }
 
+        public string TransitType { get; set; }
+
         /*
           Methods
         */
         public void Deliver(Product product, Customer customer)
         {
-            Console.WriteLine($"Product delivered by {this.Transit} to {customer.FullName}");
+            Console.WriteLine($"Product delivered by {this.TransitType} to {customer.FullName}");
         }
     }
 
@@ -287,7 +293,7 @@ namespace Classes
             DeliveryService UPS = new DeliveryService()
             {
                 Name = "UPS",
-                Transit = TransitType.Train
+                TransitType = "train"
             };
 
             // Ship the tinker toys to Marcus using UPS
