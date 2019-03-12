@@ -20,6 +20,13 @@ The results panel displayes a grid containing query results from the most recent
 
 The messages panel shows confirmation and/or error messages from the most recently run SQL command or query.
 
+### Handy Keyboard Shortcuts
+
+* **`F5`** - Execute the SQL in the current query window. If only a portion of the SQL is selected, only that portion will be executed.
+* **`ctrl+N`** - Open a new query window.
+* **`ctrl+space`** - Trigger intellisense.
+* In addition to the above all the "normal" Windows shortcut keys should work. `ctrl+v`, `ctrl+c`, `ctrl+x`, `ctrl+z`, `ctrl+y`, `ctrl+s`, etc...
+
 ## Further Study
 
 For more information about using SSMS, please see the following tutorial.
