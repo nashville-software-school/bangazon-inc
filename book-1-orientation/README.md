@@ -22,7 +22,7 @@ This book builds a strong foundation in the syntax, data structures, and valuabl
 * Chapter 16 - [Windows Installations](./chapters/WINDOWS_PRO_INSTALLS.md)
 * Chapter 17 - [Intro to Visual Studio](./chapters/VISUAL_STUDIO.md)
 * Chapter 18 - [Debugging in Visual Studio](./chapters/DEBUGGING_VS.md)
-- Chapter 19 - [Introduction to SSMS](./chapters/SSMS_INTRO.md)
+* Chapter 19 - [Introduction to SSMS](./chapters/SSMS_INTRO.md)
 * Chapter 20 - [Introduction to SQL](./chapters/SQL_INTRO.md)
 * Chapter 21 - [Student Exercises - Part 3](./chapters/STUDENT_EXERCISES_SQL.md)
 * Chapter 22 - [Using ADO.NET and SQL](./chapters/ADONET_INTRO.md)
