@@ -15,14 +15,12 @@ Click the download button from the [Chinook Database](https://github.com/lerocha
     cp Chinook_SqlServer.sql ~/workspace/chinook
     ```
 
-That file **is** the database. It contains all of the tables and data. You can now open up that file in the SQLite Browser application to see it.
-
 ## Setting up the Chinook Database
 
 1. Open SQL Server Management Studio
 2. Open and execute the `Chinook_SqlServer.sql` file
 
-This file will create the `Chinook` database and populate it with data when you execute it.
+This file will create the `Chinook` database _**and**_ populate it with data when you execute it.
 
 ## Instructions
 
