@@ -6,7 +6,7 @@
     ```sh
     git config --system core.longpaths true
     ```
-1. [Create an SSH key](https://github.com/nashville-software-school/client-side-mastery/tree/master/book-1-setup#create-ssh-key) on your Windows VM, and add it to your Github profile.
+1. [Create an SSH key](https://help.github.com/en/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent#platform-windows) on your Windows VM, and add it to your Github profile.
 1. [Postman](https://www.getpostman.com/)
 1. [SQL Server Express](https://www.microsoft.com/en-us/sql-server/sql-server-editions-express)
 1. [SQL Server Management Studio](https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-2017). Make sure you get the General Availability release, not any preview version.
