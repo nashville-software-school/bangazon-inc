@@ -4,7 +4,7 @@
 1. [Git for Windows](https://gitforwindows.org/) - Accept all defaults during installation.
 1. Once the installation is complete, open Git Bash and enter in the following command.
     ```sh
-    git config --system core.longpaths true
+    git config --global core.longpaths true
     ```
 1. [Create an SSH key](https://help.github.com/en/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent#platform-windows) on your Windows VM, and add it to your Github profile.
 1. [Postman](https://www.getpostman.com/)
