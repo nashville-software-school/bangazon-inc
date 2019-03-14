@@ -30,7 +30,7 @@ In the Music History database, there is a list of songs stored in the `Song` tab
 
 ```sql
 SELECT
-    SongId,
+    Id,
     Title,
     SongLength,
     ReleaseDate,
@@ -44,7 +44,7 @@ However, if you only need information from a smaller set of columns, you can spe
 
 ```sql
 SELECT
-    SongId,
+    Id,
     Title,
     ReleaseDate
 FROM Song;
@@ -62,7 +62,7 @@ The `WHERE` clause on a SQL query will filter the results. If you want to find s
 
 ```sql
 SELECT
-    SongId,
+    Id,
     Title,
     SongLength,
     ReleaseDate,
@@ -88,14 +88,14 @@ INSERT INTO Genre (Label) VALUES ('Techno');
 Change the length (in seconds) for one of the songs.
 
 ```sql
-select * from Song where SongId = 18;
+select * from Song where Id = 18;
 > 664
 
 update Song
 set SongLength = 515
-where SongId = 18;
+where Id = 18;
 
-select * from Song where SongId = 18;
+select * from Song where Id = 18;
 > 515
 ```
 
@@ -104,7 +104,7 @@ select * from Song where SongId = 18;
 You can use the `DELETE` keyword to remove rows from your database tables.
 
 ```sql
-delete from Song where SongId = 18;
+delete from Song where Id = 18;
 ```
 
 Be wary of leaving off the `WHERE` clause. The following SQL statement will remove **ALL ROWS** from the table.
