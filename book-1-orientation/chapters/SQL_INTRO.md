@@ -74,6 +74,19 @@ WHERE SongLength > 100
 ;
 ```
 
+## Joining Tables
+
+Use `JOIN`s to combine tables together into one result set.
+
+```sql
+SELECT s.Title,
+       a.ArtistName
+  FROM Song s
+       LEFT JOIN Artist a on s.ArtistId = a.id;
+```
+
+### SQL Joins Visualized
+![SQL Joins](./images/SQL_Joins.svg)
 
 ## Creating New Data
 
