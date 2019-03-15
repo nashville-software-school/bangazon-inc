@@ -1,14 +1,10 @@
-# Exploring Student Exercises in the database using Dapper
+# Exploring Student Exercises in the database using <span>ADO</span>.NET
 
 ## Instructions
 
-1. Add packages for Dapper and Sqlite to your Student Exercises project
-    ```
-    dotnet add package Dapper
-    dotnet add package Microsoft.Data.Sqlite
-    dotnet restore
-    ```
-1. Create a `DatabaseInterface` class to interact with your `StudentExercises.db` database.
+1. Create a new "**Console App (.NET Core)**" project.
+1. Add the `System.Data.SqlClient` nuget package to your project.
+1. Create a `Repository` class to interact with the `StudentExercises` database you created in Student Exercises Part 3.
 1. Query the database for all the Exercises.
 1. Fnd all the exercises in the database where the language is JavaScript.
 1. Insert a new exercise into the database.
