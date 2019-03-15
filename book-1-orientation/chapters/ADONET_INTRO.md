@@ -117,7 +117,7 @@ namespace DapperDepartments.Data
             get
             {
                 // This is "address" of the database
-                string _connectionString = "Server=ACOLLINS-PC\\SQLEXPRESS;Database=DepartmentsAndEmployees;Trusted_Connection=True;";
+                string _connectionString = "___YOUR CONNNECTION STRING HERE____";
                 return new SqlConnection(_connectionString);
             }
         }
