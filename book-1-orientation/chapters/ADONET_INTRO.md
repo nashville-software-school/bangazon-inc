@@ -8,7 +8,7 @@ This will be an interactive lesson. Your instructor will lead you through follow
 1. Execute the `DepartmentsAndEmployees.sql` script (listed below) to create the database tables, keys and to setup some data
 1. In Visual Studio, create a new console application called `DepartmentsAndEmployees`.
 1. Create or update the `*.cs` files with the code found below.
-1. In `Repository.cs`, replace `__YOUR CONNECTION STRING__` with the connection string to your `DepartmentsAndEmployees` database.
+1. In `Repository.cs`, replace `___YOUR CONNNECTION STRING HERE____` with the connection string to your `DepartmentsAndEmployees` database.
 1. Run the application, fix any compiler errors (if any).
 1. In `Program.cs`, complete the `PrintDepartmentReport(string title, List<Department> departments)`.
 1. Run the application, note the printed reports.
