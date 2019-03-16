@@ -59,6 +59,24 @@ VALUES
 
 ```
 
+## Project file
+
+**DepartmentsAndEmployees.csproj**
+```xml
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Data.SqlClient" Version="4.6.0" />
+  </ItemGroup>
+
+</Project>
+```
+
 ## C# files
 
 **Models/Department.cs**
