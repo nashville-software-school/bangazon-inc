@@ -7,18 +7,24 @@
 1. Create a `Repository` class to interact with the `StudentExercises` database you created in Student Exercises Part 3.
 1. Write the necessary C# code in `Repository.cs` and `Program.cs` to perform the following actions. Make sure to print results of each action to the console.
     1. Query the database for all the Exercises.
-    1. Fnd all the exercises in the database where the language is JavaScript.
+    1. Find all the exercises in the database where the language is JavaScript.
     1. Insert a new exercise into the database.
     1. Find all instructors in the database. Include each instructor's cohort.
     1. Insert a new instructor into the database. Assign the instructor to an existing cohort.
     1. Assign an existing exercise to an existing student.
-    1. **Challenge**: Find all the students in the database. Include each student's cohort AND each student's list of exercises.
-    1. **Challenge**: Write a method in the `Repository` class that accepts an `Exercise` and a `Cohort` and assigns that exercise to each student in the cohort IF and ONLY IF the student has not already been assigned the exercise.
 
-### Further Challenge
+## Challenges
+
+1. Add the following to your program:
+    1. Find all the students in the database. Include each student's cohort AND each student's list of exercises.
+    1. Write a method in the `Repository` class that accepts an `Exercise` and a `Cohort` and assigns that exercise to each student in the cohort IF and ONLY IF the student has not already been assigned the exercise.
+
+## Advanced Challenge
+
 >**NOTE**: _Only work on this challenge if you've completed ALL the other exercises assigned during Orientation._
-1. Modify your program to create a menu and accept input from the user using the [Console.ReadLine()](https://docs.microsoft.com/en-us/dotnet/api/system.console.readline?redirectedfrom=MSDN&view=netframework-4.7.2#System_Console_ReadLine) method.
-    User the following program as an example for creating a menu.
+
+1. Modify your program to present the user with a menu and accept input from the user using the [Console.ReadLine()](https://docs.microsoft.com/en-us/dotnet/api/system.console.readline?redirectedfrom=MSDN&view=netframework-4.7.2#System_Console_ReadLine) method.
+    Use the following program as an example for creating a menu.
     ```cs
     using System;
     using System.Linq;
@@ -64,7 +70,7 @@
         }
     }
     ```
-1. Create menu options to allow the user to perform the following tasks:
+     Create menu options to allow the user to perform the following tasks:
     1. Display all students.
     1. Display all instructors.
     1. Display all exercises.
