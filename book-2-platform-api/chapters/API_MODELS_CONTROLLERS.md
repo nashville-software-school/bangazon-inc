@@ -115,7 +115,7 @@ VALUES ('Cappuccino', 'Guatemalan');
     },
     "AllowedHosts": "*",
     "ConnectionStrings": {
-        "DefaultConnection": "Server={{Insert your server name here}}\\SQLEXPRESS;Database=Coffee;Trusted_Connection=True;"
+        "DefaultConnection": "Server=localhost\\SQLEXPRESS;Database=Coffee;Trusted_Connection=True;"
     }
 }
 ```
@@ -163,11 +163,11 @@ namespace CoffeeShop.Controllers
                 conn.Open();
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = $"SELECT Id, Title, BeanType FROM Coffee";
+                    cmd.CommandText = "SELECT Id, Title, BeanType FROM Coffee";
                     SqlDataReader reader = cmd.ExecuteReader();
                     List<Coffee> coffees = new List<Coffee>();
 
-                    if (reader.Read())
+                    while (reader.Read())
                     {
                         Coffee coffee = new coffee
                         {
@@ -236,7 +236,7 @@ namespace CoffeeShop.Controllers
                     cmd.Parameters.Add(new SqlParameter("@id", id));
 
                     cmd.ExecuteNonQuery();
-                    Int32 newId = (Int32) cmd.ExecuteScalar();
+                    int newId = (int) cmd.ExecuteScalar();
                     coffee.Id = newId;
                 }
             }
@@ -357,7 +357,7 @@ Your instruction team will get you started on converting your student exercises 
         },
         "AllowedHosts": "*",
         "ConnectionStrings": {
-            "DefaultConnection": "Server={{Insert your server name here}}\\SQLEXPRESS;Database=StudentExercises;Trusted_Connection=True;"
+            "DefaultConnection": "Server=localhost\\SQLEXPRESS;Database=StudentExercises;Trusted_Connection=True;"
         }
     }
     ```
