@@ -155,17 +155,34 @@ Now we'll combine Dictionaries with the Lists we learned in the [previous chapte
     List<string> planetList = new List<string>(){"Mercury", "Venus", "Earth", ...};
     ```
 
-1. Create another list containing dictionaries. Each dictionary will hold the name of a spacecraft that we have launched, and the name of the planet that it has visited. If it visited more than one planet, just pick one.
+1. Create another list containing dictionaries. Each dictionary will hold the name of a spacecraft that we have launched, and the name of a planet that it has visited. The key of the dictionary will be the planet name, and the value will be the spacecraft.
     ```cs
-    List<Dictionary<string, string>> probes = new List<Dictionary<string, string>>();
+    List<Dictionary<string, string>> planetProbes = new List<Dictionary<string, string>>();
+    ```
+
+    This would be the equivalent of an having an array of objects in JavaScript.
+
+    ```js
+    const planetProbes = [
+        {
+            "Mars": "Viking 1"
+        },
+        {
+            "Venus": "Mariner 1"
+        },
+        {
+            "Mars": "Viking 2"
+        }
+    ]
     ```
 1. Iterate over `planetList`, and inside that loop, iterate over the list of dictionaries. Write to the console, for each planet, which satellites have visited which planet.
     ```cs
-    foreach () // iterate planets
+    // iterate planets
+    foreach (string planet in planetList)
     {
         List<string> matchingProbes = new List<string>();
 
-        foreach() // iterate probes
+        foreach() // iterate planetProbes
         {
             /*
                 Does the current Dictionary contain the key of
