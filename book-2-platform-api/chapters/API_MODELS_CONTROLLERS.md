@@ -229,8 +229,7 @@ namespace CoffeeShop.Controllers
                 {
                     cmd.CommandText = @"INSERT INTO Coffee (Title, BeanType)
                                         OUTPUT INSERTED.Id
-                                        VALUES (@title, @beanType);
-                                        select MAX(Id) from Coffee";
+                                        VALUES (@title, @beanType)";
                     cmd.Parameters.Add(new SqlParameter("@title", coffee.Title));
                     cmd.Parameters.Add(new SqlParameter("@beanType", coffee.BeanType));
                     cmd.Parameters.Add(new SqlParameter("@id", id));
