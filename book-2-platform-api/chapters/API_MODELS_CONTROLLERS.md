@@ -36,12 +36,36 @@ public class AppliancesController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> Get()
     {
-        using (IDbConnection conn = Connection)
+        using (SqlConnection conn = Connection)
         {
-            string sql = "SELECT * FROM Exercise";
+            conn.Open();
+            using (SqlCommand cmd = conn.CreateCommand())
+            {
+                cmd.CommandText = $"SELECT Id, Manufacturer, Model FROM Appliance";
+                SqlDataReader reader = cmd.ExecuteReader();
 
-            IEnumerable<Appliance> appliances = await conn.QueryAsync<Appliance>(sql);
-            return Ok(appliances);
+                IEnumerable<Appliance> appliances = new IEnumerable<Appliance>();
+
+                if (reader.Read())
+                {
+                    Appliance appliance = new appliance
+                    {
+                        Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                        Manufacturer = reader.GetString(reader.GetOrdinal("Manufacturer")),
+                        Model = reader.GetString(reader.GetOrdinal("Model"))
+                    };
+                    appliances.Add(appliance)
+                }
+                reader.Close();
+
+                /*
+                    The Ok() method is an abstraction that constructs
+                    a new HTTP response with a 200 status code, and converts
+                    your IEnumerable into a JSON string to be sent back to
+                    the requessting client application.
+                */
+                return Ok(appliances);
+            }
         }
     }
 }
@@ -59,6 +83,45 @@ dotnet new webapi -n CoffeeShop
 
 The default scaffolding provides you with a `ValuesController`. It's very basic, and your instruction team will discuss HTTP verbs of GET, POST, PUT, DELETE. Then you will construct a simple coffee shop database, some data models, and a more complex controller that handles CRUD actions for coffee.
 
+### Starter SQL
+
+```sql
+DROP TABLE IF EXISTS Coffee;
+
+CREATE TABLE Coffee (
+    Id INTEGER NOT NULL PRIMARY KEY IDENTITY,
+    Title VARCHAR(50) NOT NULL
+    BeanType VARCHAR(50) NOT NULL
+);
+
+INSERT INTO Coffee (Title, BeanType)
+VALUES ('Espresso', 'Brazilian');
+
+INSERT INTO Coffee (Title, BeanType)
+VALUES ('Cafe Con Leche', 'Costa Rican');
+
+INSERT INTO Coffee (Title, BeanType)
+VALUES ('Cappuccino', 'Guatemalan');
+```
+
+### App Settings
+
+```json
+{
+    "Logging": {
+        "LogLevel": {
+            "Default": "Warning"
+        }
+    },
+    "AllowedHosts": "*",
+    "ConnectionStrings": {
+        "DefaultConnection": "Server=localhost\\SQLEXPRESS;Database=Coffee;Trusted_Connection=True;"
+    }
+}
+```
+
+### Coffee Controller
+
 ```cs
 using System;
 using System.Collections.Generic;
@@ -68,7 +131,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using Dapper;
 using CoffeeShop.Models;
 using Microsoft.AspNetCore.Http;
 
@@ -85,7 +147,7 @@ namespace CoffeeShop.Controllers
             _config = config;
         }
 
-        public IDbConnection Connection
+        public SqlConnection Connection
         {
             get
             {
@@ -96,70 +158,119 @@ namespace CoffeeShop.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            using (IDbConnection conn = Connection)
+            using (SqlConnection conn = Connection)
             {
-                string sql = "SELECT * FROM Coffee";
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = "SELECT Id, Title, BeanType FROM Coffee";
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    List<Coffee> coffees = new List<Coffee>();
 
-                var coffees = await conn.QueryAsync<Exercise>(sql);
-                return Ok(coffees);
+                    while (reader.Read())
+                    {
+                        Coffee coffee = new coffee
+                        {
+                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                            Title = reader.GetString(reader.GetOrdinal("Title")),
+                            BeanType = reader.GetString(reader.GetOrdinal("BeanType"))
+                        };
+
+                        coffees.Add(coffee);
+                    }
+                    reader.Close();
+
+                    return Ok(coffees);
+                }
             }
-
         }
 
         [HttpGet("{id}", Name = "GetCoffee")]
         public async Task<IActionResult> Get([FromRoute] int id)
         {
-            using (IDbConnection conn = Connection)
+            using (SqlConnection conn = Connection)
             {
-                string sql = $"SELECT * FROM Coffee WHERE Id = {id}";
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        SELECT
+                            Id, Title, BeanType
+                        FROM Coffee
+                        WHERE Id = @id";
+                    cmd.Parameters.Add(new SqlParameter("@id", id));
+                    SqlDataReader reader = cmd.ExecuteReader();
 
-                var singleCoffee = (await conn.QueryAsync<Coffee>(sql)).Single();
-                return Ok(singleCoffee);
+                    Coffee coffee = null;
+
+                    if (reader.Read())
+                    {
+                        coffee = new coffee
+                        {
+                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                            Title = reader.GetString(reader.GetOrdinal("Title")),
+                            BeanType = reader.GetString(reader.GetOrdinal("BeanType"))
+                        };
+                    }
+                    reader.Close();
+
+                    return Ok(coffee);
+                }
             }
         }
 
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] Coffee coffee)
         {
-            string sql = $@"INSERT INTO Coffee
-            (Title, BeanType)
-            VALUES
-            ('{coffee.Title}', '{coffee.BeanType}');
-            select MAX(Id) from Coffee";
-
-            using (IDbConnection conn = Connection)
+            using (SqlConnection conn = Connection)
             {
-                var newId = (await conn.QueryAsync<int>(sql)).Single();
-                coffee.Id = newId;
-                return CreatedAtRoute("GetCoffee", new { id = newId }, coffee);
-            }
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"INSERT INTO Coffee (Title, BeanType)
+                                        OUTPUT INSERTED.Id
+                                        VALUES (@title, @beanType)";
+                    cmd.Parameters.Add(new SqlParameter("@title", coffee.Title));
+                    cmd.Parameters.Add(new SqlParameter("@beanType", coffee.BeanType));
+                    cmd.Parameters.Add(new SqlParameter("@id", id));
 
+                    int newId = (int) cmd.ExecuteScalar();
+                    coffee.Id = newId;
+                }
+            }
+            return CreatedAtRoute("GetCoffee", new { id = newId }, coffee);
         }
 
         [HttpPut("{id}")]
         public async Task<IActionResult> Put([FromRoute] int id, [FromBody] Coffee coffee)
         {
-            string sql = $@"
-            UPDATE Coffee
-            SET Title = '{coffee.Title}',
-                BeanType = '{coffee.BeanType}'
-            WHERE Id = {id}";
-
             try
             {
-                using (IDbConnection conn = Connection)
+                using (SqlConnection conn = Connection)
                 {
-                    int rowsAffected = await conn.ExecuteAsync(sql);
-                    if (rowsAffected > 0)
+                    conn.Open();
+                    using (SqlCommand cmd = conn.CreateCommand())
                     {
-                        return new StatusCodeResult(StatusCodes.Status204NoContent);
+                        cmd.CommandText = @"UPDATE Coffee
+                                            SET Title = @title,
+                                                BeanType = @beanType
+                                            WHERE Id = @id";
+                        cmd.Parameters.Add(new SqlParameter("@title", coffee.Title));
+                        cmd.Parameters.Add(new SqlParameter("@beanType", coffee.BeanType));
+                        cmd.Parameters.Add(new SqlParameter("@id", id));
+
+                        int rowsAffected = cmd.ExecuteNonQuery();
+                        if (rowsAffected > 0)
+                        {
+                            return new StatusCodeResult(StatusCodes.Status204NoContent);
+                        }
+                        throw new Exception("No rows affected");
                     }
-                    throw new Exception("No rows affected");
                 }
             }
             catch (Exception)
             {
-                if (!ExerciseExists(id))
+                if (!CoffeeExists(id))
                 {
                     return NotFound();
                 }
@@ -173,26 +284,54 @@ namespace CoffeeShop.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
-            string sql = $@"DELETE FROM Coffee WHERE Id = {id}";
-
-            using (IDbConnection conn = Connection)
+            try
             {
-                int rowsAffected = await conn.ExecuteAsync(sql);
-                if (rowsAffected > 0)
+                using (SqlConnection conn = Connection)
                 {
-                    return new StatusCodeResult(StatusCodes.Status204NoContent);
-                }
-                throw new Exception("No rows affected");
-            }
+                    conn.Open();
+                    using (SqlCommand cmd = conn.CreateCommand())
+                    {
+                        cmd.CommandText = @"DELETE FROM Coffee WHERE Id = @id";
+                        cmd.Parameters.Add(new SqlParameter("@id", id));
 
+                        int rowsAffected = cmd.ExecuteNonQuery();
+                        if (rowsAffected > 0)
+                        {
+                            return new StatusCodeResult(StatusCodes.Status204NoContent);
+                        }
+                        throw new Exception("No rows affected");
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                if (!CoffeeExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
         }
 
         private bool CoffeeExists(int id)
         {
-            string sql = $"SELECT Id, Title, BeanType FROM Coffee WHERE Id = {id}";
-            using (IDbConnection conn = Connection)
+            using (SqlConnection conn = Connection)
             {
-                return conn.Query<Coffee>(sql).Count() > 0;
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        SELECT Id, Title, BeanType
+                        FROM Coffee
+                        WHERE Id = @id";
+                    cmd.Parameters.Add(new SqlParameter("@id", id));
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    return reader.Read();
+                }
             }
         }
     }
@@ -206,8 +345,6 @@ Your instruction team will get you started on converting your student exercises 
 ### Setting up Database
 
 1. Generate a new Web API with `dotnet new webapi -o StudentExercises`
-1. Copy the `StudentExercises.db` file from your command line application into the new `StudentExercises` directory that got created in the last step.
-1. Use SQL Server Management Studio to create your tables for the student exercises database.
 1. Update `appsettings.json`
     ```json
     {
@@ -218,7 +355,7 @@ Your instruction team will get you started on converting your student exercises 
         },
         "AllowedHosts": "*",
         "ConnectionStrings": {
-            "DefaultConnection": "Server=YourSQLServerName\\SQLEXPRESS;Database=StudentExercises;Trusted_Connection=True;"
+            "DefaultConnection": "Server=localhost\\SQLEXPRESS;Database=StudentExercises;Trusted_Connection=True;"
         }
     }
     ```

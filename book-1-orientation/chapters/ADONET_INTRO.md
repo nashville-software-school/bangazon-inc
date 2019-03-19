@@ -152,7 +152,7 @@ namespace DapperDepartments.Data
         {
             // We must "use" the database connection.
             //  Because a database is a shared resource (other applications may be using it too) we must
-            //  be careful about how we interact with it. Specifically, we Open() connections when we need to 
+            //  be careful about how we interact with it. Specifically, we Open() connections when we need to
             //  interact with the database and we Close() them when we're finished.
             //  In C#, a "using" block ensures we correctly disconnect from a resource even if there is an error.
             //  For database connections, this means the connection will be properly closed.
@@ -239,7 +239,7 @@ namespace DapperDepartments.Data
 
         /// <summary>
         ///  Add a new department to the database
-        ///   NOTE: This method sends data to the database, 
+        ///   NOTE: This method sends data to the database,
         ///   it does not get anything from the database, so there is nothing to return.
         /// </summary>
         public void AddDepartment(Department department)
@@ -351,7 +351,7 @@ namespace DapperDepartments.Data
                 conn.Open();
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
-                    
+
                     /*
                      * TODO: Complete this method
                      */
@@ -373,7 +373,7 @@ namespace DapperDepartments.Data
                 conn.Open();
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
-                    
+
                     /*
                      * TODO: Complete this method
                      *  Look at GetAllEmployeesWithDepartmentByDepartmentId(int departmentId) for inspiration.
@@ -433,7 +433,7 @@ namespace DapperDepartments.Data
 
         /// <summary>
         ///  Add a new employee to the database
-        ///   NOTE: This method sends data to the database, 
+        ///   NOTE: This method sends data to the database,
         ///   it does not get anything from the database, so there is nothing to return.
         /// </summary>
         public void AddEmployee(Employee employee)
@@ -636,8 +636,8 @@ namespace DapperDepartments
         ///  Prints a simple report with the given title and employee information.
         /// </summary>
         /// <remarks>
-        ///  Each line of the report should include the 
-        ///   Employee's ID, First Name, Last Name, 
+        ///  Each line of the report should include the
+        ///   Employee's ID, First Name, Last Name,
         ///   and department name IF AND ONLY IF the department is not null.
         /// </remarks>
         /// <param name="title">Title for the report</param>
@@ -683,8 +683,8 @@ namespace DapperDepartments
 
 _                           | <span>ADO.NET</span>          | Micro-ORM (Dapper)                           | Full ORM (Entity Framework)
 --------------------------- | ----------------------------- | -------------------------------------------- | -------------------------------------- |
-**Dev Writes SQL**          | yes                           | yes                                          | no 
-**Boilerplate Code**        | yes                           | minimal                                      | no 
+**Dev Writes SQL**          | yes                           | yes                                          | no
+**Boilerplate Code**        | yes                           | minimal                                      | no
 **Automatic Model Binding** | no                            | yes                                          | yes
 **Degree of "Magic"**       | none                          | a little                                     | a lot
 **Pros**                    | Full control, Most preferment | Balance between control and ease of use      | Ease of use, Rapid development
