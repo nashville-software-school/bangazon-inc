@@ -294,7 +294,7 @@ namespace CoffeeShop.Controllers
                         cmd.CommandText = @"DELETE FROM Coffee WHERE Id = @id";
                         cmd.Parameters.Add(new SqlParameter("@id", id));
 
-                        int rowsAffected = await cmd.ExecuteNonQuery();
+                        int rowsAffected = cmd.ExecuteNonQuery();
                         if (rowsAffected > 0)
                         {
                             return new StatusCodeResult(StatusCodes.Status204NoContent);
