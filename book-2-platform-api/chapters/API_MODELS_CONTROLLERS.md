@@ -14,12 +14,14 @@ This code requests the `/appliance` resource from your API.
 
 ```js
 fetch("http://localhost:5000/appliances")
-    .then(res => res.json())
-    .then(appliances => {
-        appliances.forEach(appliance => {
-            document.querySelector(".applianceList").innerHTML += `<p>${appliance.name}</p>`
-        })
-    })
+  .then(res => res.json())
+  .then(appliances => {
+    appliances.forEach(appliance => {
+      document.querySelector(".applianceList").innerHTML += `<p>${
+        appliance.name
+      }</p>`;
+    });
+  });
 ```
 
 ### C# Controller Method
@@ -108,15 +110,15 @@ VALUES ('Cappuccino', 'Guatemalan');
 
 ```json
 {
-    "Logging": {
-        "LogLevel": {
-            "Default": "Warning"
-        }
-    },
-    "AllowedHosts": "*",
-    "ConnectionStrings": {
-        "DefaultConnection": "Server=localhost\\SQLEXPRESS;Database=Coffee;Trusted_Connection=True;"
+  "Logging": {
+    "LogLevel": {
+      "Default": "Warning"
     }
+  },
+  "AllowedHosts": "*",
+  "ConnectionStrings": {
+    "DefaultConnection": "Server=localhost\\SQLEXPRESS;Database=Coffee;Trusted_Connection=True;"
+  }
 }
 ```
 
@@ -232,13 +234,12 @@ namespace CoffeeShop.Controllers
                                         VALUES (@title, @beanType)";
                     cmd.Parameters.Add(new SqlParameter("@title", coffee.Title));
                     cmd.Parameters.Add(new SqlParameter("@beanType", coffee.BeanType));
-                    cmd.Parameters.Add(new SqlParameter("@id", id));
 
                     int newId = (int) cmd.ExecuteScalar();
                     coffee.Id = newId;
+                    return CreatedAtRoute("GetCoffee", new { id = newId }, coffee);
                 }
             }
-            return CreatedAtRoute("GetCoffee", new { id = newId }, coffee);
         }
 
         [HttpPut("{id}")]
@@ -346,19 +347,19 @@ Your instruction team will get you started on converting your student exercises 
 
 1. Generate a new Web API with `dotnet new webapi -o StudentExercises`
 1. Update `appsettings.json`
-    ```json
-    {
-        "Logging": {
-            "LogLevel": {
-                "Default": "Warning"
-            }
-        },
-        "AllowedHosts": "*",
-        "ConnectionStrings": {
-            "DefaultConnection": "Server=localhost\\SQLEXPRESS;Database=StudentExercises;Trusted_Connection=True;"
-        }
-    }
-    ```
+   ```json
+   {
+     "Logging": {
+       "LogLevel": {
+         "Default": "Warning"
+       }
+     },
+     "AllowedHosts": "*",
+     "ConnectionStrings": {
+       "DefaultConnection": "Server=localhost\\SQLEXPRESS;Database=StudentExercises;Trusted_Connection=True;"
+     }
+   }
+   ```
 
 ### Exercise Model
 
