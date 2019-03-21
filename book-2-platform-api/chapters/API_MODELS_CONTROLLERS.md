@@ -46,7 +46,7 @@ public class AppliancesController : ControllerBase
                 cmd.CommandText = $"SELECT Id, Manufacturer, Model FROM Appliance";
                 SqlDataReader reader = cmd.ExecuteReader();
 
-                IEnumerable<Appliance> appliances = new IEnumerable<Appliance>();
+                List<Appliance> appliances = new List<Appliance>();
 
                 while (reader.Read())
                 {
