@@ -2,7 +2,7 @@
 
 ## Example Repo
 
-https://github.com/nashville-software-school/csharp-mvc-integration-tessting
+https://github.com/nashville-software-school/csharp-api-integration-testing
 
 The above repository contains a solution with two projects
 
@@ -18,8 +18,14 @@ How do you know your code does what you think it does?
 _You Test It!_
 
 There are two basic approaches to testing.
-1. Manual Testing - You or _**someone else**_ uses the application and verify that it does what it's supposed to do.
-1. Automated Testing - You _**write code**_ that runs your application and verifies that it does what it's supposed to do.
+
+### Manual Testing
+
+You or _**someone else**_ uses the application and verify that it does what it's supposed to do. Usually a QA person will have a giant checklist of fetures to test and they will click, scroll and type into your app to make sure each feature works.
+
+### Automated Testing
+
+You _**write code**_ that runs your application and verifies that it does what it's supposed to do.
 
 The trend in the industry is toward automated testing.
 
@@ -90,75 +96,66 @@ The following test will mimic a client completing the create process and ensure 
 
 ```cs
 [Fact]
-public async Task Post_CreateMakesNewComeidan()
+public async Task Test_Create_Student()
 {
-    // Arrange
+    /*
+        Generate a new instance of an HttpClient that you can
+        use to generate HTTP requests to your API controllers.
+        The `using` keyword will automatically dispose of this
+        instance of HttpClient once your code is done executing.
+    */
+    using (var client = new APIClientProvider().Client)
+    {
+        /*
+            ARRANGE
+        */
 
-    // Get a group from the database
-    //  This will be the new comedian's group.
-    Group group = Database.GetAllGroups().First();
+        // Construct a new student object to be sent to the API
+        Student helen = new Student
+        {
+            FirstName = "Helen",
+            LastName = "Chalmers",
+            CohortId = 1,
+            SlackHandle = "Helen Chalmers"
+        };
 
-    // Create variables containing the new comedian's data.
-    // NOTE: all of the variables MUST be strings
-
-    // We use Guids in order to ensure that the first and last names will be
-    //  unique in the database. A Guid is a "globally unique identifier".
-    string firstName = "firstname-" + Guid.NewGuid().ToString();
-    string lastName = "lastname-" + Guid.NewGuid().ToString();
-
-    // For dates we use the .ToString("s") to create "sortable" DateTime strings.
-    //  This is the format that the AngleSharp library expects and may be different
-    //  from the format you use when manually filling out the form.
-    //  The DateTime string will be something like: "1918-11-23T00:00:00"
-    string birthDate = DateTime.Today.AddYears(-100).ToString("s");
-    string deathDate = DateTime.Today.AddYears(-20).ToString("s");
-
-    // String representation of the group's id.
-    string groupId = group.Id.ToString();
-    // We'll use the group name in our assertions below.
-    string groupName = group.Name;
-
-    // Make a GET request to get the page that contains the Create form.
-    //  We must have the create form in order to make the POST request later.
-    string url = "/Comedian/Create";
-    HttpResponseMessage createResponse = await _client.GetAsync(url);
-    IHtmlDocument createDom = await HtmlHelpers.GetDocumentAsync(createResponse);
+        // Serialize the C# object into a JSON string
+        var helenAsJSON = JsonConvert.SerializeObject(helen);
 
 
-    // Act
+        /*
+            ACT
+        */
 
-    // Make the POST request providing the create form and the values for the form inputs.
-    //  The values for the form inputs are passed in as a Dictionary whose keys and values
-    //   are strings.
-    //  The keys of the dictionary are the HTML IDs of the input. Use your browser's
-    //   developer tools to find the ID for each input.
-    HttpResponseMessage response = await _client.SendAsync(
-        createDom,
-        new Dictionary<string, string> {
-            { "Comedian_FirstName", firstName },
-            { "Comedian_LastName", lastName },
-            { "Comedian_BirthDate", birthDate },
-            { "Comedian_DeathDate", deathDate },
-            { "Comedian_GroupId", groupId },
-        }
-    );
+        // Use the client to send the request and store the response
+        var response = await client.PostAsync(
+            "/api/students",
+            new StringContent(helenAsJSON, Encoding.UTF8, "application/json")
+        );
 
-    // The response object above should be the comedian's index page.
+        // Store the JSON body of the response
+        string responseBody = await response.Content.ReadAsStringAsync();
 
-    // Assert
-    // Convert the repose to the index page DOM-like object.
-    IHtmlDocument indexDom = await HtmlHelpers.GetDocumentAsync(response);
+        // Deserialize the JSON into an instance of Student
+        var newHelen = JsonConvert.DeserializeObject<Student>(responseBody);
 
-    // Verify that there is a <td> on the page that contains the data for the
-    //  newly inserted comedian.
-    Assert.Contains(
-        indexDom.QuerySelectorAll("td"),
-        td => td.TextContent.Contains(firstName));
-    Assert.Contains(
-        indexDom.QuerySelectorAll("td"),
-        td => td.TextContent.Contains(lastName));
-    Assert.Contains(
-        indexDom.QuerySelectorAll("td"),
-        td => td.TextContent.Contains(groupName));
+
+        /*
+            ASSERT
+        */
+
+        Assert.Equal(HttpStatusCode.Created, response.StatusCode);
+        Assert.Equal("Helen", newHelen.FirstName);
+        Assert.Equal("Chalmers", newHelen.LastName);
+        Assert.Equal("Helen Chalmers", newHelen.SlackHandle);
+    }
 }
 ```
+
+## Always Run the Tests
+
+Now that you have a test that verifies that your create process works, it becomes trivial to run your test suite once you've built a new feature, or fixed a bug, and ensure that your changes did not break the application. Running the test suite in Visual Studio is as easy as opening the Test Explorer, clicking _Run all_ and seeing if your app still works as expected.
+
+So before you submit a PR for your current feature branch, **always** run your test suite.
+
+_Insert gif for running tests in Test Explorer_
