@@ -48,7 +48,7 @@ public class AppliancesController : ControllerBase
 
                 IEnumerable<Appliance> appliances = new IEnumerable<Appliance>();
 
-                if (reader.Read())
+                while (reader.Read())
                 {
                     Appliance appliance = new appliance
                     {
