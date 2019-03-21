@@ -171,7 +171,7 @@ namespace CoffeeShop.Controllers
 
                     while (reader.Read())
                     {
-                        Coffee coffee = new coffee
+                        Coffee coffee = new Coffee
                         {
                             Id = reader.GetInt32(reader.GetOrdinal("Id")),
                             Title = reader.GetString(reader.GetOrdinal("Title")),
@@ -207,7 +207,7 @@ namespace CoffeeShop.Controllers
 
                     if (reader.Read())
                     {
-                        coffee = new coffee
+                        coffee = new Coffee
                         {
                             Id = reader.GetInt32(reader.GetOrdinal("Id")),
                             Title = reader.GetString(reader.GetOrdinal("Title")),
