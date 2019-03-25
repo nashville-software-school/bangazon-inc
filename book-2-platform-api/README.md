@@ -11,6 +11,8 @@ This book prepares you for building the Bangazon Platform API
 * Chapter 5 - [Student Exercises - Part 6](./chapters/STUDENT_EXERCISES_PARAMS.md)
 * Chapter 6 - [Validating Data with Annotations](./chapters/MODEL_VALIDATION.md)
 * Chapter 7 - [Student Exercises - Part 7](./chapters/STUDENT_EXERCISES_MODELSTATE.md)
+* Chapter 8 - [Integration Tests](./chapters/INTEGRATION_TESTS.md)
+* Chapter 9 - [Student Exercises - Part 8](./chapters/STUDENT_EXERCISES_TESTING.md)
 * Chapter 8 - [Starting your Sprint](./chapters/HOW_TO_START.md)
 
 > ### __Sprint 1__ - Bangazon Platform API
