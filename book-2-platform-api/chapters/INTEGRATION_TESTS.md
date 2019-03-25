@@ -1,16 +1,5 @@
 # Automated Testing
 
-## Example Repo
-
-https://github.com/nashville-software-school/csharp-api-integration-testing
-
-The above repository contains a solution with two projects
-
-* An MVC application project
-* An integration test project
-
-Pull down the repo, run the application, run the tests, and read through the code. You'll find lots of comments in the Integration Test project that should describe what's going on.
-
 ## Overview
 
 How do you know your code does what you think it does?
