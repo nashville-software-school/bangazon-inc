@@ -68,9 +68,7 @@ fetch("http://localhost:3000/animals", {
 })
 ```
 
-Now, you haven't built a React client to interact with this Kennel API, so you can use Postman to do the same operation now.
-
-_insert gif of using Postman here_
+## Process
 
 What's happening during this process?
 
@@ -85,7 +83,7 @@ The following test will mimic a client completing the create process and ensure 
 
 ```cs
 [Fact]
-public async Task Test_Create_Student()
+public async Task Test_Create_Animal()
 {
     /*
         Generate a new instance of an HttpClient that you can
@@ -100,16 +98,16 @@ public async Task Test_Create_Student()
         */
 
         // Construct a new student object to be sent to the API
-        Student helen = new Student
+        Student jack = new Student
         {
-            FirstName = "Helen",
-            LastName = "Chalmers",
-            CohortId = 1,
-            SlackHandle = "Helen Chalmers"
+            Name = "Jack",
+            Breed = "Cocker Spaniel",
+            Age = 4,
+            HasShots = true
         };
 
         // Serialize the C# object into a JSON string
-        var helenAsJSON = JsonConvert.SerializeObject(helen);
+        var jackAsJSON = JsonConvert.SerializeObject(jack);
 
 
         /*
@@ -118,15 +116,15 @@ public async Task Test_Create_Student()
 
         // Use the client to send the request and store the response
         var response = await client.PostAsync(
-            "/api/students",
-            new StringContent(helenAsJSON, Encoding.UTF8, "application/json")
+            "/api/animals",
+            new StringContent(jackAsJSON, Encoding.UTF8, "application/json")
         );
 
         // Store the JSON body of the response
         string responseBody = await response.Content.ReadAsStringAsync();
 
-        // Deserialize the JSON into an instance of Student
-        var newHelen = JsonConvert.DeserializeObject<Student>(responseBody);
+        // Deserialize the JSON into an instance of Animal
+        var newJack = JsonConvert.DeserializeObject<Animal>(responseBody);
 
 
         /*
@@ -134,17 +132,102 @@ public async Task Test_Create_Student()
         */
 
         Assert.Equal(HttpStatusCode.Created, response.StatusCode);
-        Assert.Equal("Helen", newHelen.FirstName);
-        Assert.Equal("Chalmers", newHelen.LastName);
-        Assert.Equal("Helen Chalmers", newHelen.SlackHandle);
+        Assert.Equal("Jack", newJack.Name);
+        Assert.Equal("Cocker Spaniel", newJack.Breed);
+        Assert.Equal(4, newJack.Age);
     }
 }
 ```
+
+## Get All Animals
+
+Testing GET operations are more straightforward. Perform a `GetAsync()` request to a resource URL, convert the response to C# and write a corresponding assertion
+
+```cs
+[Fact]
+public async Task Test_Get_All_Animals()
+{
+
+    using (var client = new APIClientProvider().Client)
+    {
+        /*
+            ARRANGE
+        */
+
+
+        /*
+            ACT
+        */
+        var response = await client.GetAsync("/api/animals");
+
+
+        string responseBody = await response.Content.ReadAsStringAsync();
+        var animalList = JsonConvert.DeserializeObject<List<Animal>>(responseBody);
+
+        /*
+            ASSERT
+        */
+        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        Assert.True(animalList.Count > 0);
+    }
+}
+```
+
+## Modify an Animal
+
+To modify a resource with a PUT operation, you need to construct a new object instance that has the modified properties. Then you must convert that object into JSON and invoke the `PutAsync()` method to make the change.
+
+In the example code below, the PUT operation is followed by a GET operation to ensure that the change was made.
+
+```cs
+[Fact]
+public async Task Test_Modify_Animal()
+{
+    // New last name to change to and test
+    int newAge = 5;
+
+    using (var client = new APIClientProvider().Client)
+    {
+        /*
+            PUT section
+        */
+        Animal modifiedJack = new Animal
+        {
+            Name = "Jack",
+            Breed = "Cocker Spaniel",
+            Age = newAge,
+            HasShots = true
+        };
+        var modifiedJackAsJSON = JsonConvert.SerializeObject(modifiedJack);
+
+        var response = await client.PutAsync(
+            "/api/animals/1",
+            new StringContent(modifiedJackAsJSON, Encoding.UTF8, "application/json")
+        );
+        string responseBody = await response.Content.ReadAsStringAsync();
+
+        Assert.Equal(HttpStatusCode.NoContent, response.StatusCode);
+
+
+        /*
+            GET section
+            Verify that the PUT operation was successful
+        */
+        var getJack = await client.GetAsync("/api/animals/1");
+        getJack.EnsureSuccessStatusCode();
+
+        string getJackBody = await getJack.Content.ReadAsStringAsync();
+        Student newJack = JsonConvert.DeserializeObject<Animal>(getJackBody);
+
+        Assert.Equal(HttpStatusCode.OK, getJack.StatusCode);
+        Assert.Equal(newAge, newJack.Age);
+    }
+}
+```
+
 
 ## Always Run the Tests
 
 Now that you have a test that verifies that your create process works, it becomes trivial to run your test suite once you've built a new feature, or fixed a bug, and ensure that your changes did not break the application. Running the test suite in Visual Studio is as easy as opening the Test Explorer, clicking _Run all_ and seeing if your app still works as expected.
 
 So before you submit a PR for your current feature branch, **always** run your test suite.
-
-_Insert gif for running tests in Test Explorer_
