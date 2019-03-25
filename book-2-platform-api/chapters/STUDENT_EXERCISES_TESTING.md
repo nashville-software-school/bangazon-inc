@@ -4,7 +4,7 @@
 
 You need to create integration tests for the following features of your Student Exercises API.
 
-1. Basic CRUD for Exercises
+1. Basic CRUD for Students
 1. Basic CRUD for Cohorts
 1. Basic CRUD for Instructors
 1. Basic CRUD for Exercises

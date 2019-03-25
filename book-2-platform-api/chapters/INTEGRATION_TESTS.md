@@ -33,7 +33,7 @@ We will be covering integration tests in this chapter.
 * Assert - What should be true, or what state should an object be in when code is executed.
 
 
-## Integration Testing in ASP.NET Core MVC
+## Integration Testing in ASP.NET Core Web API
 
 It's true that a human _could_ open a web browser and manually perform all the steps necessary to test all parts of a web application, but - like with many things - a computer can do it faster, with fewer mistakes, and without complaining about how boring it is to test and retest the same app all the time.
 
@@ -68,6 +68,8 @@ fetch("http://localhost:3000/animals", {
 })
 ```
 
+You are going to mimic, and automate, this process _as if you were a web browser_. Your test code will generate the data necessary and then make an HTTP request instead of a user initiating the entire process.
+
 ## Process
 
 What's happening during this process?
@@ -98,7 +100,7 @@ public async Task Test_Create_Animal()
         */
 
         // Construct a new student object to be sent to the API
-        Student jack = new Student
+        Animal jack = new Animal
         {
             Name = "Jack",
             Breed = "Cocker Spaniel",
@@ -149,11 +151,11 @@ The following class should be added to your integration testing project for use 
 
 ```cs
 using Microsoft.AspNetCore.Mvc.Testing;
-using StudentExercisesAPI;
+using KennelAPI;
 using System.Net.Http;
 using Xunit;
 
-namespace TestStudentExercisesAPI
+namespace TestAnimalAPI
 {
     class APIClientProvider : IClassFixture<WebApplicationFactory<Startup>>
     {
@@ -263,7 +265,7 @@ public async Task Test_Modify_Animal()
         getJack.EnsureSuccessStatusCode();
 
         string getJackBody = await getJack.Content.ReadAsStringAsync();
-        Student newJack = JsonConvert.DeserializeObject<Animal>(getJackBody);
+        Animal newJack = JsonConvert.DeserializeObject<Animal>(getJackBody);
 
         Assert.Equal(HttpStatusCode.OK, getJack.StatusCode);
         Assert.Equal(newAge, newJack.Age);
