@@ -139,6 +139,52 @@ public async Task Test_Create_Animal()
 }
 ```
 
+## What is that ClientProvider?
+
+Since these tests are being created and executed by Visual Studio, you need a client in order to make an HTTP request. Normally this is done via Chrome or Postman - both clients for an API. ASP.NET and C# provides some classes that allow you to create a client that can perform HTTP requests.
+
+The following class should be added to your integration testing project for use in your testing classes.
+
+> APIClientProvider.cs
+
+```cs
+using Microsoft.AspNetCore.Mvc.Testing;
+using StudentExercisesAPI;
+using System.Net.Http;
+using Xunit;
+
+namespace TestStudentExercisesAPI
+{
+    class APIClientProvider : IClassFixture<WebApplicationFactory<Startup>>
+    {
+        public HttpClient Client { get; private set; }
+        private readonly WebApplicationFactory<Startup> _factory = new WebApplicationFactory<Startup>();
+
+        public APIClientProvider()
+        {
+            Client = _factory.CreateClient();
+        }
+
+        public void Dispose()
+        {
+            _factory?.Dispose();
+            Client?.Dispose();
+        }
+    }
+}
+```
+
+## Required Packages
+
+The following packages are needed to run integration tests with this code. You can use the command line (e.g. `dotnet add package Microsoft.AspNetCore.HttpsPolicy`) or use the Visual Studio window for managing packages.
+
+```sh
+Microsoft.AspNetCore
+Microsoft.AspNetCore.HttpsPolicy
+Microsoft.AspNetCore.Mvc
+Microsoft.AspNetCore.Mvc.Testing
+```
+
 ## Get All Animals
 
 Testing GET operations are more straightforward. Perform a `GetAsync()` request to a resource URL, convert the response to C# and write a corresponding assertion
