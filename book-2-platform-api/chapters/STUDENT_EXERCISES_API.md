@@ -27,9 +27,9 @@ Your task is to continue to build out the Student Exercises API.
         "firstName": "Jisie",
         "lastName": "David",
         "slackHandle": "@jisie",
-        "cohortId": 4,
+        "cohortId": 2,
         "cohort": {
-            "id": 4,
+            "id": 2,
             "name": "Cohort 29",
             "students": [],
             "instructors": []
@@ -47,12 +47,7 @@ Your task is to continue to build out the Student Exercises API.
                 "lastName": "Brewer",
                 "slackHandle": "@dan",
                 "cohortId": 2,
-                "cohort": {
-                    "id": 2,
-                    "name": "Cohort 29",
-                    "students": [],
-                    "instructors": []
-                },
+                "cohort": null,
                 "exercises": []
             },
             {
@@ -61,54 +56,7 @@ Your task is to continue to build out the Student Exercises API.
                 "lastName": "Wheeler",
                 "slackHandle": "@jd",
                 "cohortId": 2,
-                "cohort": {
-                    "id": 2,
-                    "name": "Cohort 29",
-                    "students": [],
-                    "instructors": []
-                },
-                "exercises": []
-            },
-            {
-                "id": 6,
-                "firstName": "Joel",
-                "lastName": "Mondesir",
-                "slackHandle": "@joel",
-                "cohortId": 4,
-                "cohort": {
-                    "id": 4,
-                    "name": "Cohort 31",
-                    "students": [],
-                    "instructors": []
-                },
-                "exercises": []
-            },
-            {
-                "id": 7,
-                "firstName": "Jameka",
-                "lastName": "Echols",
-                "slackHandle": "@jameka",
-                "cohortId": 4,
-                "cohort": {
-                    "id": 4,
-                    "name": "Cohort 31",
-                    "students": [],
-                    "instructors": []
-                },
-                "exercises": []
-            },
-            {
-                "id": 8,
-                "firstName": "Mo",
-                "lastName": "Silvera",
-                "slackHandle": "@mo",
-                "cohortId": 3,
-                "cohort": {
-                    "id": 3,
-                    "name": "Cohort 30",
-                    "students": [],
-                    "instructors": []
-                },
+                "cohort": null,
                 "exercises": []
             }
         ],
@@ -118,26 +66,16 @@ Your task is to continue to build out the Student Exercises API.
                 "firstName": "Jisie",
                 "lastName": "David",
                 "slackHandle": "@jisie",
-                "cohortId": 4,
-                "cohort": {
-                    "id": 4,
-                    "name": "Cohort 29",
-                    "students": [],
-                    "instructors": []
-                }
+                "cohortId": 2,
+                "cohort": null
             },
             {
                 "id": 2,
                 "firstName": "Andy",
                 "lastName": "Collins",
                 "slackHandle": "@andy",
-                "cohortId": 4,
-                "cohort": {
-                    "id": 4,
-                    "name": "Cohort 29",
-                    "students": [],
-                    "instructors": []
-                }
+                "cohortId": 2,
+                "cohort": null
             }
         ]
     }
