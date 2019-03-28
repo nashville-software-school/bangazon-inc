@@ -3,7 +3,7 @@
 > **Alert:** One teammate should complete this entire setup process before anyone else does anything.
 
 
-## Via Visual Studio Code
+## Via Visual Studio
 
 ### Create API Project and Solution
 
