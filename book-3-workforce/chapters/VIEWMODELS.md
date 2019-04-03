@@ -102,7 +102,6 @@ namespace StudentExercises.Models.ViewModels
             }
         }
 
-
         private void GetAllInstructors ()
         {
             using (SqlConnection conn = Connection)
@@ -227,24 +226,43 @@ namespace StudentExercises.Models.ViewModels
         public StudentCreateViewModel(IConfiguration config)
         {
 
-            using (IDbConnection conn = new SqlConnection(config.GetConnectionString("DefaultConnection")))
-            {
-                Cohorts = conn.Query<Cohort>(@"
-                    SELECT Id, Name FROM Cohort;
-                ")
+            Cohorts = GetAllCohorts()
                 .Select(li => new SelectListItem
                 {
                     Text = li.Name,
                     Value = li.Id.ToString()
-                }).ToList();
-                ;
-            }
+                })
+                .Insert(0, new SelectListItem
+                {
+                    Text = "Choose cohort...",
+                    Value = "0"
+                });
+        }
 
-            Cohorts.Insert(0, new SelectListItem
+        private List<Cohort> GetAllCohorts ()
+        {
+            using (SqlConnection conn = Connection)
             {
-                Text = "Choose cohort...",
-                Value = "0"
-            });
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = "SELECT Id, Name FROM Cohort";
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    List<Cohort> cohorts = new List<Cohort>();
+                    if (reader.Read())
+                    {
+                        cohorts.Add(new Cohort {
+                            Id = reader.GetString(reader.GetOrdinal("Id")),
+                            Name = reader.GetString(reader.GetOrdinal("Name")),
+                        });
+                    }
+
+                    reader.Close();
+
+                    return cohorts;
+                }
+            }
         }
     }
 }
