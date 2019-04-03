@@ -212,6 +212,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 
+
 namespace StudentExercises.Models.ViewModels
 {
     public class StudentCreateViewModel
@@ -225,7 +226,6 @@ namespace StudentExercises.Models.ViewModels
 
         public StudentCreateViewModel(IConfiguration config)
         {
-
             Cohorts = GetAllCohorts()
                 .Select(li => new SelectListItem
                 {
@@ -349,21 +349,23 @@ Since the view model was used to provide data for the form to use, you must capt
 [ValidateAntiForgeryToken]
 public async Task<ActionResult> Create(StudentCreateViewModel model)
 {
-    string sql = $@"INSERT INTO Student
-    (FirstName, LastName, SlackHandle, CohortId)
-    VALUES
-    (
-        '{model.student.FirstName}'
-        ,'{model.student.LastName}'
-        ,'{model.student.SlackHandle}'
-        ,{model.student.CohortId}
-    );";
-
-    using (IDbConnection conn = Connection)
+    using (SqlConnection conn = Connection)
     {
-        await conn.ExecuteAsync(sql);
-        return RedirectToAction(nameof(Index));
-    }
+        conn.Open();
+        using (SqlCommand cmd = conn.CreateCommand())
+        {
+            cmd.CommandText = @"INSERT INTO Student
+                ( FirstName, LastName, SlackHandle, CohortId )
+                VALUES
+                ( @firstName, @lastName, @slackHandle, @cohortId )";
+            cmd.Parameters.Add(new SqlParameter("@firstName", model.student.FirstName));
+            cmd.Parameters.Add(new SqlParameter("@lastName", model.student.LastName));
+            cmd.Parameters.Add(new SqlParameter("@slackHandle", model.student.SlackHandle));
+            cmd.Parameters.Add(new SqlParameter("@cohortId", model.student.CohortId));
+            cmd.ExecuteNonQuery();
 
+            return RedirectToAction(nameof(Index));
+        }
+    }
 }
 ```
