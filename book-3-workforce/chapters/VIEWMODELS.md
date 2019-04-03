@@ -51,33 +51,89 @@ namespace StudentExercises.Models.ViewModels
 {
     public class StudentInstructorViewModel
     {
+
         public IEnumerable<Student> Students { get; set; }
         public IEnumerable<Instructor> Instructors { get; set; }
 
-        /*
-            Need to pass along the IConfiguration to get our
-            database connection string
-         */
-        public StudentInstructorViewModel(IConfiguration config)
+        private SqlConnection Connection
         {
-            using (IDbConnection conn = new SqlConnection (_config.GetConnectionString ("DefaultConnection"))) {
-                Students = conn.Query<Student> (@"
-                    SELECT
-                        Id,
-                        FirstName,
-                        LastName,
-                        SlackHandle
-                    FROM Student"));
+            get
+            {
+                string _connectionString = "___YOUR CONNNECTION STRING HERE____";
+                return new SqlConnection(_connectionString);
+            }
+        }
 
-                Instructors = conn.Query<Instructor> (@"
-                    SELECT
-                        Id,
-                        FirstName,
-                        LastName,
-                        SlackHandle,
-                        Specialty
-                    FROM Instructor"));
+        public StudentInstructorViewModel()
+        {
+            GetAllStudents();
+            GetAllInstructors();
+        }
 
+        private void GetAllStudents ()
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        SELECT
+                            Id,
+                            FirstName,
+                            LastName,
+                            SlackHandle
+                        FROM Student";
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    Students = new List<Student>();
+                    if (reader.Read())
+                    {
+                        Students.Add(new Student {
+                            Id = reader.GetString(reader.GetOrdinal("Id")),
+                            FirstName = reader.GetString(reader.GetOrdinal("FirstName")),
+                            LastName = reader.GetString(reader.GetOrdinal("LastName")),
+                            SlackHandle = reader.GetString(reader.GetOrdinal("SlackHandle")),
+                        });
+                    }
+
+                    reader.Close();
+                }
+            }
+        }
+
+
+        private void GetAllInstructors ()
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                            SELECT
+                            Id,
+                            FirstName,
+                            LastName,
+                            SlackHandle,
+                            Specialty
+                        FROM Instructor";
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    Instructors = new List<Instructor>();
+                    if (reader.Read())
+                    {
+                        Instructors.Add(new Instructor {
+                            Id = reader.GetString(reader.GetOrdinal("Id")),
+                            FirstName = reader.GetString(reader.GetOrdinal("FirstName")),
+                            LastName = reader.GetString(reader.GetOrdinal("LastName")),
+                            SlackHandle = reader.GetString(reader.GetOrdinal("SlackHandle")),
+                            Specialty = reader.GetString(reader.GetOrdinal("Specialty")),
+                        });
+                    }
+
+                    reader.Close();
+                }
             }
         }
     }
@@ -293,5 +349,3 @@ public async Task<ActionResult> Create(StudentCreateViewModel model)
 
 }
 ```
-
-
