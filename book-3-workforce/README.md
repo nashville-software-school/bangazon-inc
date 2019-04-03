@@ -15,3 +15,4 @@ This book prepares you for building the web application that Bangazon employees 
 
 ## Supplementary Content
 
+* Supplement - [Writing Web Application Integration Tests](./chapters/XUNIT_INTRO.md)
