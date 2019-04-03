@@ -55,17 +55,19 @@ namespace StudentExercises.Models.ViewModels
         public IEnumerable<Student> Students { get; set; }
         public IEnumerable<Instructor> Instructors { get; set; }
 
+        private string _connectionString;
+
         private SqlConnection Connection
         {
             get
             {
-                string _connectionString = "___YOUR CONNNECTION STRING HERE____";
                 return new SqlConnection(_connectionString);
             }
         }
 
-        public StudentInstructorViewModel()
+        public StudentInstructorViewModel(string connectionString)
         {
+            _connectionString = connectionString;
             GetAllStudents();
             GetAllInstructors();
         }
@@ -201,7 +203,6 @@ To create a new student, you need data from two tables
 Here's how you would implement a view model to store that information for the Razor template to use.
 
 ```cs
-using Dapper;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Configuration;
 using StudentExercisesAPI.Data;
@@ -217,15 +218,25 @@ namespace StudentExercises.Models.ViewModels
 {
     public class StudentCreateViewModel
     {
-        private readonly IConfiguration _config;
-
         public List<SelectListItem> Cohorts { get; set; }
         public Student student { get; set; }
 
+        private string _connectionString;
+
+        private SqlConnection Connection
+        {
+            get
+            {
+                return new SqlConnection(_connectionString);
+            }
+        }
+
         public StudentCreateViewModel() { }
 
-        public StudentCreateViewModel(IConfiguration config)
+        public StudentCreateViewModel(string connectionString)
         {
+            _connectionString = connectionString;
+
             Cohorts = GetAllCohorts()
                 .Select(li => new SelectListItem
                 {
