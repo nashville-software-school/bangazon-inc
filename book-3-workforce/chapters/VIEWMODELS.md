@@ -51,33 +51,90 @@ namespace StudentExercises.Models.ViewModels
 {
     public class StudentInstructorViewModel
     {
+
         public IEnumerable<Student> Students { get; set; }
         public IEnumerable<Instructor> Instructors { get; set; }
 
-        /*
-            Need to pass along the IConfiguration to get our
-            database connection string
-         */
-        public StudentInstructorViewModel(IConfiguration config)
+        private string _connectionString;
+
+        private SqlConnection Connection
         {
-            using (IDbConnection conn = new SqlConnection (_config.GetConnectionString ("DefaultConnection"))) {
-                Students = conn.Query<Student> (@"
-                    SELECT
-                        Id,
-                        FirstName,
-                        LastName,
-                        SlackHandle
-                    FROM Student"));
+            get
+            {
+                return new SqlConnection(_connectionString);
+            }
+        }
 
-                Instructors = conn.Query<Instructor> (@"
-                    SELECT
-                        Id,
-                        FirstName,
-                        LastName,
-                        SlackHandle,
-                        Specialty
-                    FROM Instructor"));
+        public StudentInstructorViewModel(string connectionString)
+        {
+            _connectionString = connectionString;
+            GetAllStudents();
+            GetAllInstructors();
+        }
 
+        private void GetAllStudents ()
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        SELECT
+                            Id,
+                            FirstName,
+                            LastName,
+                            SlackHandle
+                        FROM Student";
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    Students = new List<Student>();
+                    if (reader.Read())
+                    {
+                        Students.Add(new Student {
+                            Id = reader.GetString(reader.GetOrdinal("Id")),
+                            FirstName = reader.GetString(reader.GetOrdinal("FirstName")),
+                            LastName = reader.GetString(reader.GetOrdinal("LastName")),
+                            SlackHandle = reader.GetString(reader.GetOrdinal("SlackHandle")),
+                        });
+                    }
+
+                    reader.Close();
+                }
+            }
+        }
+
+        private void GetAllInstructors ()
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                            SELECT
+                            Id,
+                            FirstName,
+                            LastName,
+                            SlackHandle,
+                            Specialty
+                        FROM Instructor";
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    Instructors = new List<Instructor>();
+                    if (reader.Read())
+                    {
+                        Instructors.Add(new Instructor {
+                            Id = reader.GetString(reader.GetOrdinal("Id")),
+                            FirstName = reader.GetString(reader.GetOrdinal("FirstName")),
+                            LastName = reader.GetString(reader.GetOrdinal("LastName")),
+                            SlackHandle = reader.GetString(reader.GetOrdinal("SlackHandle")),
+                            Specialty = reader.GetString(reader.GetOrdinal("Specialty")),
+                        });
+                    }
+
+                    reader.Close();
+                }
             }
         }
     }
@@ -146,7 +203,6 @@ To create a new student, you need data from two tables
 Here's how you would implement a view model to store that information for the Razor template to use.
 
 ```cs
-using Dapper;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Configuration;
 using StudentExercisesAPI.Data;
@@ -157,38 +213,67 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 
+
 namespace StudentExercises.Models.ViewModels
 {
     public class StudentCreateViewModel
     {
-        private readonly IConfiguration _config;
-
         public List<SelectListItem> Cohorts { get; set; }
         public Student student { get; set; }
 
+        private string _connectionString;
+
+        private SqlConnection Connection
+        {
+            get
+            {
+                return new SqlConnection(_connectionString);
+            }
+        }
+
         public StudentCreateViewModel() { }
 
-        public StudentCreateViewModel(IConfiguration config)
+        public StudentCreateViewModel(string connectionString)
         {
+            _connectionString = connectionString;
 
-            using (IDbConnection conn = new SqlConnection(config.GetConnectionString("DefaultConnection")))
-            {
-                Cohorts = conn.Query<Cohort>(@"
-                    SELECT Id, Name FROM Cohort;
-                ")
+            Cohorts = GetAllCohorts()
                 .Select(li => new SelectListItem
                 {
                     Text = li.Name,
                     Value = li.Id.ToString()
-                }).ToList();
-                ;
-            }
+                })
+                .Insert(0, new SelectListItem
+                {
+                    Text = "Choose cohort...",
+                    Value = "0"
+                });
+        }
 
-            Cohorts.Insert(0, new SelectListItem
+        private List<Cohort> GetAllCohorts ()
+        {
+            using (SqlConnection conn = Connection)
             {
-                Text = "Choose cohort...",
-                Value = "0"
-            });
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = "SELECT Id, Name FROM Cohort";
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    List<Cohort> cohorts = new List<Cohort>();
+                    if (reader.Read())
+                    {
+                        cohorts.Add(new Cohort {
+                            Id = reader.GetString(reader.GetOrdinal("Id")),
+                            Name = reader.GetString(reader.GetOrdinal("Name")),
+                        });
+                    }
+
+                    reader.Close();
+
+                    return cohorts;
+                }
+            }
         }
     }
 }
@@ -275,23 +360,23 @@ Since the view model was used to provide data for the form to use, you must capt
 [ValidateAntiForgeryToken]
 public async Task<ActionResult> Create(StudentCreateViewModel model)
 {
-    string sql = $@"INSERT INTO Student
-    (FirstName, LastName, SlackHandle, CohortId)
-    VALUES
-    (
-        '{model.student.FirstName}'
-        ,'{model.student.LastName}'
-        ,'{model.student.SlackHandle}'
-        ,{model.student.CohortId}
-    );";
-
-    using (IDbConnection conn = Connection)
+    using (SqlConnection conn = Connection)
     {
-        await conn.ExecuteAsync(sql);
-        return RedirectToAction(nameof(Index));
-    }
+        conn.Open();
+        using (SqlCommand cmd = conn.CreateCommand())
+        {
+            cmd.CommandText = @"INSERT INTO Student
+                ( FirstName, LastName, SlackHandle, CohortId )
+                VALUES
+                ( @firstName, @lastName, @slackHandle, @cohortId )";
+            cmd.Parameters.Add(new SqlParameter("@firstName", model.student.FirstName));
+            cmd.Parameters.Add(new SqlParameter("@lastName", model.student.LastName));
+            cmd.Parameters.Add(new SqlParameter("@slackHandle", model.student.SlackHandle));
+            cmd.Parameters.Add(new SqlParameter("@cohortId", model.student.CohortId));
+            cmd.ExecuteNonQuery();
 
+            return RedirectToAction(nameof(Index));
+        }
+    }
 }
 ```
-
-
