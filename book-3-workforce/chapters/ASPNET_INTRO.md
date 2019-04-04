@@ -33,7 +33,7 @@ Open your `appsettings.json` file and add your connection string. If you copy th
 
 ```json
 "ConnectionStrings": {
-    "DefaultConnection": "Your-Server-Here\\SQLEXPRESS;Database=StudentExercises;Trusted_Connection=True;"
+    "DefaultConnection": "localhost\\SQLEXPRESS;Database=StudentExercises;Trusted_Connection=True;"
 }
 ```
 
@@ -68,7 +68,7 @@ public StudentsController(IConfiguration config)
     _config = config;
 }
 
-public IDbConnection Connection
+public SqlConnection Connection
 {
     get
     {
@@ -84,19 +84,41 @@ public IDbConnection Connection
 Your `Index` method in a web application should return a list of the corresponding resource. Modify your method to contain the following code.
 
 ```cs
-using (IDbConnection conn = Connection)
+using (SqlConnection conn = Connection)
 {
-    var students = await conn.QueryAsync<Student>(@"
-        SELECT s.Id
-            s.FirstName,
-            s.LastName,
-            s.SlackHandle,
-            s.CohortId
-        FROM Student s
-    ");
-    return View(students);
-}
+    conn.Open();
+    using (SqlCommand cmd = conn.CreateCommand())
+    {
+        cmd.CommandText = @"
+            SELECT s.Id
+                s.FirstName,
+                s.LastName,
+                s.SlackHandle,
+                s.CohortId
+            FROM Student s
+        ";
+        SqlDataReader reader = cmd.ExecuteReader();
 
+        List<Student> students = new List<Student>();
+        while (reader.Read())
+        {
+            Student student = new Student
+            {
+                Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                FirstName = reader.GetString(reader.GetOrdinal("FirstName")),
+                LastName = reader.GetString(reader.GetOrdinal("LastName")),
+                SlackHandle = reader.GetString(reader.GetOrdinal("SlackHandle")),
+                CohortId = reader.GetInt32(reader.GetOrdinal("CohortId"))
+            };
+
+            students.Add(student);
+        }
+
+        reader.Close();
+
+        return View(students);
+    }
+}
 ```
 
 ## Student List Razor Template
@@ -106,8 +128,6 @@ using (IDbConnection conn = Connection)
 1. In the window that appears, choose _MVC View_. Then click the _Add_ button.
 1. In the window that appears, provide a name of `Index`, template is `List`, and then choose the `Student` model.
 1. Click `Add` and wait for the Razor template to be generated.
-
-![adding the list view](./images/kwmY6yUqlx.gif)
 
 ## Viewing the List of Students
 
