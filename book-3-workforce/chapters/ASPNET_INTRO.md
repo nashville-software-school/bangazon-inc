@@ -33,7 +33,7 @@ Open your `appsettings.json` file and add your connection string. If you copy th
 
 ```json
 "ConnectionStrings": {
-    "DefaultConnection": "localhost\\SQLEXPRESS;Database=StudentExercises;Trusted_Connection=True;"
+    "DefaultConnection": "Server=localhost\\SQLEXPRESS;Database=StudentExercises;Trusted_Connection=True;"
 }
 ```
 
