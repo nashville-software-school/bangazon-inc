@@ -123,9 +123,8 @@ using (SqlConnection conn = Connection)
 
 ## Student List Razor Template
 
-1. Right click on the `Views` directory in your Solution Explorer.
-1. Choose `Add > Scaffolded item`.
-1. In the window that appears, choose _MVC View_. Then click the _Add_ button.
+1. Right click on the `Index` method in your `StudentsController`.
+1. Choose `Add View..`.
 1. In the window that appears, provide a name of `Index`, template is `List`, and then choose the `Student` model.
 1. Click `Add` and wait for the Razor template to be generated.
 
