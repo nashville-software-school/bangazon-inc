@@ -144,7 +144,7 @@ namespace StudentExercises.Models.ViewModels
 You now have a new view model whose specific purpose is to hold data for a Razor template that will list all students and all instructors. Open your _Views > Home > Index.cshtml_ file and place the following code into it.
 
 ```cs
-@model StudentExercises.Models.ViewModels
+@model StudentExercises.Models.ViewModels.StudentInstructorViewModel
 
 @{
     ViewData["Title"] = "Students &amp; Instructors";
@@ -243,6 +243,7 @@ namespace StudentExercises.Models.ViewModels
                     Text = li.Name,
                     Value = li.Id.ToString()
                 })
+                .ToList()
                 .Insert(0, new SelectListItem
                 {
                     Text = "Choose cohort...",
