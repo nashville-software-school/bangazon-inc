@@ -41,22 +41,103 @@ foreach(KeyValuePair<string, int> toy in toysSold)
 }
 ```
 
-# Practice: Stock Purchase Dictionaries
+---
 
-## Setup
+## Practice: Dictionary of Words
+
+
+## Practice: List of Dictionaries about Words
+
+
+## Practice: English Idioms
+
+Create a new console application and paste the following code into your `Main()` method. Then write a `foreach` loop to produce the output in the image below.
+
+```cs
+Dictionary<string, List<string>> idioms = new Dictionary<string, List<string>>();
+idioms.Add("Penny", new List<string> { "A", "penny", "for", "your", "thoughts" });
+idioms.Add("Injury", new List<string> { "Add", "insult", "to", "injury" });
+idioms.Add("Moon", new List<string> { "Once", "in", "a", "blue", "moon" });
+idioms.Add("Grape", new List<string> { "I", "heard", "it", "through", "the", "grapevine" });
+idioms.Add("Murder", new List<string> { "Kill", "two", "birds", "with", "one", "stone" });
+idioms.Add("Limbs", new List<string> { "It", "costs", "an", "arm", "and", "a", "leg" });
+idioms.Add("Grain", new List<string> { "Take","what","someone","says","with","a","grain","of","salt" });
+idioms.Add("Fences", new List<string> { "I'm", "on", "the", "fence", "about", "it" });
+idioms.Add("Sheep", new List<string> { "Pulled", "the", "wool", "over", "his", "eyes" });
+idioms.Add("Lucifer", new List<string> { "Speak", "of", "the", "devil" });
+```
+
+![idioms output](./images/idioms-output.png)
+
+> Reference: [String.Join() method](https://docs.microsoft.com/en-us/dotnet/api/system.string.join?view=netframework-4.7.2)
+
+## Practice: Randall's Car Lot in C#
+
+Take the following JavaScript data structure that represents car sales and convert it to C# Lists and Dictionaries.
+
+```js
+"vehicles": [
+    {
+        "vehicle": {
+            "year": 2008,
+            "model": "Damfresh",
+            "make": "Biotraxquote",
+            "color": "sky magenta"
+        },
+        "sales_id": "ecb1c841-1a43-4a7c-896e-712d2ec39c71",
+        "sales_agent": {
+            "mobile": "(896) 478-6975",
+            "last_name": "Botsford",
+            "first_name": "Shaina",
+            "emails": ["beatae_sonny@hotmail.com", "shaina@aol.com"]
+        },
+        "purchase_date": "2017-11-15",
+        "gross_profit": 871.26,
+        "credit": {
+            "credit_provider": "J.P.Morgan Chase & Co",
+            "account": "601109582720302"
+        }
+    },
+    {
+        "vehicle": {
+            "year": 2010,
+            "model": "Hotquadtrax",
+            "make": "Transtintechno",
+            "color": "robin egg blue"
+        },
+        "sales_id": "a2f80554-bd9d-4ea1-8229-01fd4cf220a8",
+        "sales_agent": {
+            "mobile": "562.300.2912",
+            "last_name": "Davis",
+            "first_name": "Gerardo",
+            "emails": ["girl70@hotmail.com", "jova43@gmail.com"]
+        },
+        "purchase_date": "2017-04-28",
+        "gross_profit": 156.02,
+        "credit": {
+            "credit_provider": "PNC Financial Services",
+            "account": "34578280562836"
+        }
+    }
+]
+```
+
+## Practice: Stock Purchase Dictionaries
+
+### Setup
 
 ```
 mkdir -p ~/workspace/csharp/exercises/dictionaries && cd $_
 dotnet new console
 ```
 
-## References
+### References
 
 * [C# dictionaries](https://msdn.microsoft.com/en-us/library/xfhwa508(v=vs.110).aspx#Anchor_8)
 * [Dictionary in C#](http://www.c-sharpcorner.com/UploadFile/219d4d/dictionary-in-C-Sharp-language/)
 * [Interactive C# Dictionaries](http://www.learncs.org/en/Dictionaries)
 
-## Instructions
+### Instructions
 
 A block of publicly traded stock has a variety of attributes, we'll look at a few of them. A stock has a ticker symbol and a company name. Create a simple dictionary with ticker symbols and company names in the `Main` method.
 
@@ -145,11 +226,12 @@ foreach(KeyValuePair<?, ?> item in stockReport)
 }
 ```
 ---
-# Practice: Iterating over planets
+
+## Practice: Iterating over planets
 
 Now we'll combine Dictionaries with the Lists we learned in the [previous chapter](./DATA_STRUCTURES_LIST.md).
 
-## Instructions
+### Instructions
 > **Ref:** [List of Solar System probes](https://en.wikipedia.org/wiki/List_of_Solar_System_probes)
 
 1. Use the list of planets you created in the previous chapter or create a new one with all eight planets.
