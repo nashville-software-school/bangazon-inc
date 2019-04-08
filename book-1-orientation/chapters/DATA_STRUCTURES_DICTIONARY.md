@@ -214,9 +214,9 @@ Take the following JavaScript data structure that represents car sales and conve
 ]
 ```
 
-## Challenge: Iterating over planets
+## Challenge: Planets and Probes and KeyValue Pairs
 
-Now we'll combine Dictionaries with the Lists we learned in the [previous chapter](./DATA_STRUCTURES_LIST.md).
+In this exercise, you are going to directly use KeyValuePairs instead of Dictionaries.
 
 ### Instructions
 > **Ref:** [List of Solar System probes](https://en.wikipedia.org/wiki/List_of_Solar_System_probes)
@@ -226,41 +226,45 @@ Now we'll combine Dictionaries with the Lists we learned in the [previous chapte
     List<string> planetList = new List<string>(){"Mercury", "Venus", "Earth", ...};
     ```
 
-1. Create another list containing dictionaries. Each dictionary will hold the name of a spacecraft that we have launched, and the name of a planet that it has visited. The key of the dictionary will be the planet name, and the value will be the spacecraft.
+1. Create a list containing KeyValuePairs. Each KeyValuePair will hold the name of a spacecraft that we have launched, and the name of a planet that it has visited. The key of the KeyValuePair will be the probe name, and the value will be the planet it visited.
     ```cs
-    List<Dictionary<string, string>> planetProbes = new List<Dictionary<string, string>>();
+    List<KeyValuePair<string, string>> probeDestinations = new List<KeyValuePair<string, string>>();
+    // Add some planet/probe combinations to the list
     ```
 
     This would be the equivalent of an having an array of objects in JavaScript.
 
     ```js
-    const planetProbes = [
+    const probeDestinations = [
         {
-            "Mars": "Viking 1"
+            "Viking 1": "Mars",
         },
         {
-            "Venus": "Mariner 1"
+            "Mariner 1": "Venus"
         },
         {
-            "Mars": "Viking 2"
+            "Voyager 1": "Jupiter"
+        },
+        {
+            "Voyager 1": "Saturn"
         }
     ]
     ```
-1. Iterate over `planetList`, and inside that loop, iterate over the list of dictionaries. Write to the console, for each planet, which satellites have visited which planet.
+1. Iterate over `probeDestinations`, and inside that loop, iterate over the list of dictionaries. Write to the console, for each planet, which probes have visited it.
     ```cs
-    // iterate planets
+    // Iterate planets
     foreach (string planet in planetList)
     {
+        // List to store probes that visited the planet
         List<string> matchingProbes = new List<string>();
 
-        foreach() // iterate planetProbes
+        // Iterate probeDestinations
+        foreach()
         {
             /*
-                Does the current Dictionary contain the key of
-                the current planet? Investigate the ContainsKey()
-                method on a Dictionary.
-
-                If so, add the current spacecraft to `matchingProbes`.
+                Does the current probe's destination
+                match the value of the `planet` variable?
+                If so, add it to the list.
             */
         }
 
