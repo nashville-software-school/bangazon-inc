@@ -116,8 +116,7 @@ namespace StudentExercises.Models.ViewModels
                             Id,
                             FirstName,
                             LastName,
-                            SlackHandle,
-                            Specialty
+                            SlackHandle
                         FROM Instructor";
                     SqlDataReader reader = cmd.ExecuteReader();
 
@@ -129,7 +128,6 @@ namespace StudentExercises.Models.ViewModels
                             FirstName = reader.GetString(reader.GetOrdinal("FirstName")),
                             LastName = reader.GetString(reader.GetOrdinal("LastName")),
                             SlackHandle = reader.GetString(reader.GetOrdinal("SlackHandle")),
-                            Specialty = reader.GetString(reader.GetOrdinal("Specialty")),
                         });
                     }
 
