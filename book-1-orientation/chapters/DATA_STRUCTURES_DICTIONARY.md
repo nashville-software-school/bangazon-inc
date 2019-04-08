@@ -41,13 +41,105 @@ foreach(KeyValuePair<string, int> toy in toysSold)
 }
 ```
 
+## References
+
+* [C# dictionaries](https://msdn.microsoft.com/en-us/library/xfhwa508(v=vs.110).aspx#Anchor_8)
+* [Dictionary in C#](http://www.c-sharpcorner.com/UploadFile/219d4d/dictionary-in-C-Sharp-language/)
+* [Interactive C# Dictionaries](http://www.learncs.org/en/Dictionaries)
+
+
+
 ---
 
 ## Practice: Dictionary of Words
 
+You are going to buid a C# Dictionary to represent an actual dictionary. Each KeyValuePair within the Dictionary will contain a single word as the key, and a definition as the value. Below is some starter code. You need to add a few more words and definitions to the dictionary.
+
+After you have added them, use square bracket notation to output the definition of two of the words to the console.
+
+Lastly, use the `foreach` loop to iterate over the KeyValuePairs and display the entire dictionary to the console.
+
+```cs
+/*
+    Create a dictionary with key value pairs to
+    represent words (key) and its definition (value)
+*/
+Dictionary<string, string> wordsAndDefinitions = new Dictionary<string, string>();
+
+// Add several more words and their definitions
+wordsAndDefinitions.Add("Awesome", "The feeling of students when they are learning C#");
+
+/*
+    Use square bracket lookup to get the definition two
+    words and output them to the console
+*/
+
+/*
+    Loop over dictionary to get the following output:
+        The definition of [WORD] is [DEFINITION]
+        The definition of [WORD] is [DEFINITION]
+        The definition of [WORD] is [DEFINITION]
+*/
+foreach (KeyValuePair<string, string> word in wordsAndDefinitions)
+{
+}
+```
+
 
 ## Practice: List of Dictionaries about Words
 
+Now, you are going to refactor the structure of our data. Instead of one C# Dictionary with key value pairs for words and definitions. You want to track more than just the word and its definition, so we are going to build a list of dictionaries.
+
+
+```cs
+// Make a new list
+List<Dictionary<string, string>> dictionaryOfWords = new List<Dictionary<string, string>>();
+
+/*
+    You want to track the following about each word:
+        word, definition, part of speech, example sentence
+
+    Example of one dictionary in the list:
+    {
+        "word": "excited",
+        "definition": "having, showing, or characterized by a heightened state of energy, enthusiasm, eagerness",
+        "part of speech": "adjective",
+        "example sentence": "I am excited to learn C#!"
+    }
+*/
+
+// Create dictionary to represent a few word
+Dictionary<string, string> excitedWord = new Dictionary<string, string>();
+
+// Add each of the 4 bits of data about the word to the Dictionary
+excitedWord.Add();
+
+// Add Dictionary to your `dictionaryOfWords` list
+
+
+// create another Dictionary and add that to the list
+
+
+/*
+    Iterate your list of dictionaries and output the data
+
+    Example output for one word in the list of dictionaries:
+        word: excited
+        definition: having, showing, or characterized by a heightened state of energy, enthusiasm, eagerness
+        part of speech: adjective
+        example sentence: I am excited to learn C#!
+*/
+
+// Iterate the List of Dictionaries
+foreach ()
+{
+    // Iterate the KeyValuePairs of the Dictionary
+    foreach ()
+    {
+        Console.WriteLine($"{wordData.Key}: {wordData.Value}");
+    }
+}
+```
 
 ## Practice: English Idioms
 
@@ -71,7 +163,7 @@ idioms.Add("Lucifer", new List<string> { "Speak", "of", "the", "devil" });
 
 > Reference: [String.Join() method](https://docs.microsoft.com/en-us/dotnet/api/system.string.join?view=netframework-4.7.2)
 
-## Practice: Randall's Car Lot in C#
+## Challenge: Randall's Car Lot in C#
 
 Take the following JavaScript data structure that represents car sales and convert it to C# Lists and Dictionaries.
 
@@ -122,112 +214,7 @@ Take the following JavaScript data structure that represents car sales and conve
 ]
 ```
 
-## Practice: Stock Purchase Dictionaries
-
-### Setup
-
-```
-mkdir -p ~/workspace/csharp/exercises/dictionaries && cd $_
-dotnet new console
-```
-
-### References
-
-* [C# dictionaries](https://msdn.microsoft.com/en-us/library/xfhwa508(v=vs.110).aspx#Anchor_8)
-* [Dictionary in C#](http://www.c-sharpcorner.com/UploadFile/219d4d/dictionary-in-C-Sharp-language/)
-* [Interactive C# Dictionaries](http://www.learncs.org/en/Dictionaries)
-
-### Instructions
-
-A block of publicly traded stock has a variety of attributes, we'll look at a few of them. A stock has a ticker symbol and a company name. Create a simple dictionary with ticker symbols and company names in the `Main` method.
-
-##### Example
-
-```cs
-Dictionary<string, string> stocks = new Dictionary<string, string>();
-stocks.Add("GM", "General Motors");
-stocks.Add("CAT", "Caterpillar");
-// Add a few more of your favorite stocks
-```
-
-To find a value in a Dictionary, you can use square bracket notation much like JavaScript object key lookups.
-
-```cs
-string GM = stocks["GM"];   <--- "General Motors"
-```
-
-Next, create a list to hold stock purchases by an investor. The list will contain dictionaries.
-
-```cs
-List<Dictionary<string, double>> purchases = new List<Dictionary<string, double>>();
-```
-
-Then add some purchases.
-
-##### Example
-
-```cs
-purchases.Add (new Dictionary<string, double>(){ {"GE", 230.21} });
-purchases.Add (new Dictionary<string, double>(){ {"GE", 580.98} });
-purchases.Add (new Dictionary<string, double>(){ {"GE", 406.34} });
-
-// Add more purchases for each stock
-```
-
-Create a total ownership report that computes the total value of each stock that you have purchased. This is the basic relational database join algorithm between two tables.
-
-![stock report output](./images/stock-report-output.gif)
-
-> **Helpful Links:** [ContainsKey](https://msdn.microsoft.com/en-us/library/kw5aaea4(v=vs.110).aspx), [Add](https://msdn.microsoft.com/en-us/library/k7z0zy8k(v=vs.110).aspx)
-
-```cs
-/*
-    Define a new Dictionary to hold the aggregated purchase information.
-    - The key should be a string that is the full company name.
-    - The value will be the total valuation of each stock
-
-
-    From the three purchases above, one of the entries
-    in this new dictionary will be...
-        {"General Electric", 1217.53}
-
-    Replace the questions marks below with the correct types.
-*/
-Dictionary<?, ?> stockReport = new Dictionary<?, ?>();
-
-/*
-   Iterate over the purchases and record the valuation
-   for each stock.
-*/
-foreach (Dictionary<string, double> purchase in purchases)
-{
-    foreach (KeyValuePair<string, double> stock in purchase)
-    {
-        // Does the full company name key already exist in the `stockReport`?
-
-        // If it does, update the total valuation
-
-        /*
-            If not, add the new key and set its value.
-            You have the value of "GE", so how can you look
-            the value of "GE" in the `stocks` dictionary
-            to get the value of "General Electric"?
-        */
-    }
-}
-```
-
-Now that the report dictionary is populated, display the final results.
-
-```cs
-foreach(KeyValuePair<?, ?> item in stockReport)
-{
-    Console.WriteLine($"The position in {display the key} is worth {display the value}");
-}
-```
----
-
-## Practice: Iterating over planets
+## Challenge: Iterating over planets
 
 Now we'll combine Dictionaries with the Lists we learned in the [previous chapter](./DATA_STRUCTURES_LIST.md).
 
@@ -291,4 +278,64 @@ Now we'll combine Dictionaries with the Lists we learned in the [previous chapte
 ```sh
 Mars: Viking, Opportunity, Curiosity
 Venus: Mariner, Venera
+```
+
+## Advanced Challenge: Stock Purchase Report
+
+### Setup
+
+```
+mkdir -p ~/workspace/csharp/exercises/stocks && cd $_
+dotnet new console
+```
+
+### Instructions
+
+A block of publicly traded stock has a variety of attributes, we'll look at a few of them. A stock has a ticker symbol and a company name. Create a simple dictionary with ticker symbols and company names in the `Main` method.
+
+##### Example
+
+```cs
+Dictionary<string, string> stocks = new Dictionary<string, string>();
+stocks.Add("GM", "General Motors");
+stocks.Add("CAT", "Caterpillar");
+// Add a few more of your favorite stocks
+```
+
+To find a value in a Dictionary, you can use square bracket notation much like JavaScript object key lookups.
+
+```cs
+string GM = stocks["GM"];   <--- "General Motors"
+```
+
+Next, create a data structure to record how many stock purchases were made for each company over time. In this Dictionary, the key will be the ticker symbol, and the value will be a collection of numbers representing how much the investor paid.
+
+#### JavaScript Equivalent
+
+```js
+{
+    "AAPL": [1214.90, 2881.95],
+    "GM": [4892.12],
+    "MSFT": [934.21, 9025.23, 4013.89],
+    "TWTR": [180.44, 298.01, 9092.45],
+}
+```
+
+How would you define this structure using C# data types? Once you've determined how to define the data structure, you need to add purchases for a few companies. Start with three companies, and 1-3 purchases for each one.
+
+Once you've added your stocks and purchases, produce a total ownership report that computes the total amount of money spent by the investor on each stock. Note that the final report has the full company name, not the ticker symbol. You must use the ticker symbol and square bracket notation to get the full company name from the `stocks` Dictionary.
+
+This is the basic relational database join algorithm between two tables.
+
+![stock report output](./images/stock-report-output.gif)
+
+```cs
+Dictionary<string, string> stocks = new Dictionary<string, string>();
+stocks.Add("GM", "General Motors");
+// Add a few more of your favorite stocks
+
+foreach (var stock in portfolio)
+{
+    Console.WriteLine($"Investor has spent a total of {total spend} on the stock for {display the full business name}");
+}
 ```
