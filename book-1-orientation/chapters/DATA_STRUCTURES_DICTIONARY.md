@@ -95,6 +95,8 @@ purchases.Add (new Dictionary<string, double>(){ {"GE", 406.34} });
 
 Create a total ownership report that computes the total value of each stock that you have purchased. This is the basic relational database join algorithm between two tables.
 
+![stock report output](./images/stock-report-output.gif)
+
 > **Helpful Links:** [ContainsKey](https://msdn.microsoft.com/en-us/library/kw5aaea4(v=vs.110).aspx), [Add](https://msdn.microsoft.com/en-us/library/k7z0zy8k(v=vs.110).aspx)
 
 ```cs
