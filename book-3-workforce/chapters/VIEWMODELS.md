@@ -89,10 +89,10 @@ namespace StudentExercises.Models.ViewModels
                     SqlDataReader reader = cmd.ExecuteReader();
 
                     Students = new List<Student>();
-                    if (reader.Read())
+                    while (reader.Read())
                     {
                         Students.Add(new Student {
-                            Id = reader.GetString(reader.GetOrdinal("Id")),
+                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
                             FirstName = reader.GetString(reader.GetOrdinal("FirstName")),
                             LastName = reader.GetString(reader.GetOrdinal("LastName")),
                             SlackHandle = reader.GetString(reader.GetOrdinal("SlackHandle")),
@@ -121,10 +121,10 @@ namespace StudentExercises.Models.ViewModels
                     SqlDataReader reader = cmd.ExecuteReader();
 
                     Instructors = new List<Instructor>();
-                    if (reader.Read())
+                    while (reader.Read())
                     {
                         Instructors.Add(new Instructor {
-                            Id = reader.GetString(reader.GetOrdinal("Id")),
+                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
                             FirstName = reader.GetString(reader.GetOrdinal("FirstName")),
                             LastName = reader.GetString(reader.GetOrdinal("LastName")),
                             SlackHandle = reader.GetString(reader.GetOrdinal("SlackHandle")),
