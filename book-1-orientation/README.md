@@ -17,17 +17,19 @@ This book builds a strong foundation in the syntax, data structures, and valuabl
 * Chapter 11 - [Student Exercises - Part 2](./chapters/STUDENT_EXERCISES_LINQ.md)
 * Chapter 12 - [Object Relationships](./chapters/RELATIONSHIPS.md)
 * Chapter 13 - [Interfaces](./chapters/INTERFACES_INTRO.md)
-* Chapter 14 - [The Family Dictionary](./chapters/FAMILY_DICTIONARY.md)
-* Chapter 15 - [Kill Nickelback](./chapters/KILL_NICKELBACK.md)
-* Chapter 16 - [Windows Installations](./chapters/WINDOWS_PRO_INSTALLS.md)
-* Chapter 17 - [Intro to Visual Studio](./chapters/VISUAL_STUDIO.md)
-* Chapter 18 - [Debugging in Visual Studio](./chapters/DEBUGGING_VS.md)
-* Chapter 19 - [Introduction to SSMS](./chapters/SSMS_INTRO.md)
-* Chapter 20 - [Introduction to SQL](./chapters/SQL_INTRO.md)
-* Chapter 21 - [Student Exercises - Part 3](./chapters/STUDENT_EXERCISES_SQL.md)
-* Chapter 22 - [Using ADO.NET and SQL](./chapters/ADONET_INTRO.md)
-* Chapter 23 - [Student Exercises - Part 4](./chapters/STUDENT_EXERCISES_ADONET.md)
-* Chapter 24 - [Bangazon ERD](./chapters/BANGAZON_ERD.md)
+* Chapter 14 - [Student Exercises - Part 3](./chapters/STUDENT_EXERCISES_INTERFACES.md)
+
+> ### __Group Project__ - Zoolandia
+
+* Chapter 14 - [Windows Installations](./chapters/WINDOWS_PRO_INSTALLS.md)
+* Chapter 15 - [Intro to Visual Studio](./chapters/VISUAL_STUDIO.md)
+* Chapter 16 - [Debugging in Visual Studio](./chapters/DEBUGGING_VS.md)
+* Chapter 17 - [Introduction to SSMS](./chapters/SSMS_INTRO.md)
+* Chapter 18 - [Introduction to SQL](./chapters/SQL_INTRO.md)
+* Chapter 19 - [Student Exercises - Part 3](./chapters/STUDENT_EXERCISES_SQL.md)
+* Chapter 20 - [Using ADO.NET and SQL](./chapters/ADONET_INTRO.md)
+* Chapter 21 - [Student Exercises - Part 4](./chapters/STUDENT_EXERCISES_ADONET.md)
+* Chapter 22 - [Bangazon ERD](./chapters/BANGAZON_ERD.md)
 
 ## Supplementary Content
 
