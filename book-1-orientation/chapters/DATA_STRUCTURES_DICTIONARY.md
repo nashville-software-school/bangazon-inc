@@ -165,7 +165,7 @@ idioms.Add("Lucifer", new List<string> { "Speak", "of", "the", "devil" });
 
 ## Challenge: Randall's Car Lot in C#
 
-Take the following JavaScript data structure that represents car sales and convert it to C# Lists and Dictionaries.
+Take the following JavaScript data structure that represents car sales and convert it to C# Lists and Dictionaries. Make sure that all of your variable names conform to the C# standard of [Camel Case](https://en.wikipedia.org/wiki/Camel_case) instead of [Snake Case](https://en.wikipedia.org/wiki/Snake_case).
 
 ```js
 "vehicles": [
