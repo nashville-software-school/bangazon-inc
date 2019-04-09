@@ -25,6 +25,7 @@ The messages panel shows confirmation and/or error messages from the most recent
 * **`F5`** - Execute the SQL in the current query window. If only a portion of the SQL is selected, only that portion will be executed.
 * **`ctrl+N`** - Open a new query window.
 * **`ctrl+space`** - Trigger intellisense.
+* **`ctrl+shift+r`** - Refresh intellisense (a.k.a. Make the red squigglies go away)
 * In addition to the above all the "normal" Windows shortcut keys should work. `ctrl+v`, `ctrl+c`, `ctrl+x`, `ctrl+z`, `ctrl+y`, `ctrl+s`, etc...
 
 ## Further Study

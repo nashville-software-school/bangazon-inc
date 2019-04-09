@@ -373,7 +373,7 @@ A constructor is not required in a class. If a class does not have a constructor
 
 ```sh
 mkdir -p ~/workspace/csharp/exercises/planner && cd $_
-dotnet new console -n Planner
+dotnet new console -n Planner -o .
 touch Building.cs
 ```
 
