@@ -2,6 +2,27 @@
 
 An interface in C# is a construct that you define for classes to implement. Think of it as a contract for a class. If a class implements an interface, then it must define a method, property, or event for each one defined in the interface.
 
+You use interfaces to provide much more flexibility to your project to work with disparate types. Here's an example.
+
+You work for a company that sells all kinds of motorized vehicles.
+
+1. Scooter
+1. Car
+1. Jetski
+1. RV
+1. Motorcycle
+1. Boat
+1. Truck
+
+Now, all of these types of things have some attributes and behaviors in common.
+
+* They all have an engine
+* They all use gas
+* They all carry one, or more, passenger
+* They all move
+* They all have a gas tank
+* They all accelerate in any direction
+
 ## Resources
 
 * [Interface-based programming](https://en.wikipedia.org/wiki/Interface-based_programming)
@@ -14,7 +35,7 @@ An interface in C# is a construct that you define for classes to implement. Thin
 Imagine a scenario in which you are writing an application in which you need to classify any animal species as ground-based, air-based, or water-based. Also consider that animal species can be any combination of those classifications. To make our code base as flexible as possible, we define the properties and behaviors of each classification (or description) into an interface.
 
 ```cs
-public interface IAmbulatory
+public interface IWalking
 {
     void run();
     void walk();
@@ -26,7 +47,7 @@ public interface IFlying
     void land();
 }
 
-public interface IAquatic
+public interface ISwimming
 {
     int MaximumDepth {get;}
     void swim();
@@ -37,7 +58,7 @@ public interface IAquatic
 We've defined three interfaces. One for land animals, one for aquatic animals, and one for flying animals. Here's how you would specify that a class must implement an interface.
 
 ```cs
-public class PaintedDog : IAmbulatory
+public class PaintedDog : IWalking
 {
 }
 ```
@@ -45,7 +66,7 @@ public class PaintedDog : IAmbulatory
 Since it is a contract, we must implement the methods that were defined in the interface.
 
 ```cs
-public class PaintedDog : IAmbulatory
+public class PaintedDog : IWalking
 {
     public void run()
     {
@@ -63,7 +84,7 @@ public class PaintedDog : IAmbulatory
 The `PaintedDog` class has now implemented the two methods required by the inteface that was designated. If you had not written the `walk()` function, the code would not compile and you would get a message like this.
 
 ```
-'PaintedDog' does not implement interface member 'IAmbulatory.walk()'
+'PaintedDog' does not implement interface member 'IWalking.walk()'
 ```
 
 ### Multiple Interfaces
@@ -71,7 +92,7 @@ The `PaintedDog` class has now implemented the two methods required by the intef
 A class can implement more than one interface. Let's use a flying squirrel as an example. They don't truly fly (they glide) but it's close enough for an example.
 
 ```cs
-class FlyingSquirrel : IAmbulatory, IFlying
+class FlyingSquirrel : IWalking, IFlying
 {
     public void run()
     {
@@ -100,7 +121,7 @@ Let's look at another example of a class that would implement all three of the i
 Paste this code into `Program.cs`, and the interfaces should now be underlined in red.
 
 ```cs
-public class Seagull: IAquatic, IAmbulatory, IFlying
+public class Seagull: ISwimming, IWalking, IFlying
 {
 
 }
@@ -141,7 +162,7 @@ public class AnimalControl
     public string LastName { get; set; }
     public double HourlyRate { get; set; }
 
-    public void Capture (IAmbulatory animal)
+    public void Capture (IWalking animal)
     {
         // Logic to contain, sedate, and return any ground-based animal
     }
