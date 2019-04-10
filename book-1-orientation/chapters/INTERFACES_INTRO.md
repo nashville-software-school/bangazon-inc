@@ -4,7 +4,9 @@ An interface in C# is a construct that you define for classes to implement. Thin
 
 You use interfaces to provide much more flexibility to your project to work with disparate types. Here's an example.
 
-You work for a company that sells all kinds of motorized vehicles.
+## Gary's Wholesale Garage
+
+You work for a company that sells all kinds of motorized vehicles - **Gary's Wholesale Garage**.
 
 1. Scooter
 1. Car
@@ -13,15 +15,123 @@ You work for a company that sells all kinds of motorized vehicles.
 1. Motorcycle
 1. Boat
 1. Truck
+1. Light aircraft
 
 Now, all of these types of things have some attributes and behaviors in common.
 
 * They all have an engine
-* They all use gas
 * They all carry one, or more, passenger
 * They all move
-* They all have a gas tank
 * They all accelerate in any direction
+
+There are other attributes and behaviors that **some** specific kinds of these vehicles share, but others don't.
+
+* Some use gas
+* Some are electric
+* Some use a propeller to move
+* Some have wheels
+* Some have doors
+* Some use a jet to move
+
+## Gas Fueling Problem
+
+Consider the following four classes representing some of these vehicles.
+
+```cs
+public class Zero {  // Electric motorcycle
+    public double BatteryKWh { get; set; }
+    public string MainColor { get; set; }
+    public string MaximumOccupancy { get; set; }
+
+    public void ChargeBattery () { ... }
+}
+```
+
+```cs
+public class Cessna {  // Propellor light aircraft
+    public double FuelCapacity { get; set; }
+    public string MainColor { get; set; }
+    public string MaximumOccupancy { get; set; }
+
+    public void RefuelTank () { ... }
+}
+```
+
+```cs
+public class Tesla {  // Electric car
+    public double BatteryKWh { get; set; }
+    public string MainColor { get; set; }
+    public string MaximumOccupancy { get; set; }
+
+    public void ChargeBattery () { ... }
+}
+```
+
+```cs
+public class Ram {  // Gas powered truck
+    public double FuelCapacity { get; set; }
+    public string MainColor { get; set; }
+    public string MaximumOccupancy { get; set; }
+
+    public void RefuelTank () { ... }
+}
+```
+
+So you have two vehicles that are electric-powered and two that are standard gasoline-powered. You want to write code to send the correct vehicles to the correct fueling stations. Gas-powered go to the fuel pump, and the electric-powered go to the charging tower.
+
+How do you put them into a single collection? Remember that a `List<>` can only contain things of a single type.
+
+```cs
+Zero fxs = new Zero();
+Zero fx = new Zero();
+Tesla modelS = new Tesla();
+
+/*
+    This can only hold individual motorcycles. You can't
+    add the Tesla to this list. It's a different type.
+*/
+List<Zero> zeroMotorcycles = new List<Zero>() { fx, fxs };
+```
+
+## Fuel Interfaces
+
+This is where you can use the power of interfaces. First, you determine what each of the items you want to group together have in common. For the electric vehicles, they share the `BatteryKWh` property and the `ChargeBattery()` method. You and your team agree that every electric-powered vehicle must have those two things on them - it's what makes them eletric vehicles. They can't be ommitted.
+
+You create an interface that every eletric vehicle class must implement.
+
+```cs
+namespace Garage {
+    public interface IElectricPowered {
+        double BatteryKHw { get; set; }
+
+        void ChargeBattery ();
+    }
+}
+```
+
+You tell the compiler that a class must implement an interface by putting a colon after the class name, followed by the interface.
+
+```cs
+public class ClassName : InterfaceToImplement {}
+```
+
+Now you need to refactor the `Zero` and the `Tesla` classes to implement your new interface.
+
+```cs
+namespace Garage {
+    public class Zero :IElectricPowered {
+        public double BatteryKHw { get; set; }
+        public string MainColor { get; set; }
+        public string MaximumOccupancy { get; set; }
+
+        public void ChargeBattery () {  }
+    }
+}
+```
+
+The compiler make sure that the developer implements everything in the interface, or the code won't compile. Watch what happens when I remove the `ChargeBattery()` method from my `Zero` class. I'm immediately informed by the compiler that my code has an exception because I didn't implement something in the interface.
+
+![interface implementation exception example](./images/interface-implementation-exception.gif)
 
 ## Resources
 
