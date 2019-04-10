@@ -227,7 +227,13 @@ namespace Garage {
 
 ## Zoological Zaniness
 
-Imagine a scenario in which you are writing an application in which you need to classify any animal species as ground-based, air-based, or water-based. Also consider that animal species can be any combination of those classifications. To make our code base as flexible as possible, we define the properties and behaviors of each classification (or description) into an interface.
+Imagine a scenario in which you are writing an application in which you need to classify any animal species as ground-based, air-based, or water-based. Also consider that animal species can be any combination of those classifications.
+
+For example, a platypus is both ground and water. Most birds are both air and ground. Cats are ground only. Dolphins are water only. Seagulls are air, ground, and water (they can dive to amazing depths and are great swimmers). So many possible combinations of behavior in the animal kingdom!
+
+🐯 🦅 🐎 🦈 🙎🏾‍♀️ 🦉
+
+To make our code base as flexible as possible, we define the properties and behaviors of each classification (or description) into an interface.
 
 ```cs
 public interface IWalking
@@ -348,7 +354,20 @@ public class AnimalControl
 
 This certainly solves the problem at hand so we can perform the behavior of capturing an escaped dog. However, the experienced developer that has knowlede of, and practice in, the SOLID principles understand that *in the future*, it is highly like that the animal control specialist will be needed to capture other ground-based animals.
 
-Therefore, the `Capture()` method must be rewritten to allow external code to pass in any ambulatory animal. This is the Dependency Inversion Principle.
+```cs
+AnimalControl kirren = new AnimalControl();
+
+PaintedDog muffles = new PaintedDog();
+Kangaroo mike = new Kangaroo();
+
+muffles.EscapeEnclosure()
+mike.EscapeEnclosure()
+
+kirren.Capture(muffles);  // Works fine. Muffles is of correct type.
+kirren.Capture(mike);     // This throws an exception. Mike is not a dog.
+```
+
+Therefore, the `Capture()` method must be rewritten to allow external code to pass in any ground-based animal. This is the Dependency Inversion Principle.
 
 ```cs
 public class AnimalControl
@@ -364,6 +383,21 @@ public class AnimalControl
 }
 ```
 
+Now you can create an object instance to represent this person and have her capture different types of animals.
+
+```cs
+AnimalControl kirren = new AnimalControl();
+
+PaintedDog muffles = new PaintedDog();
+Kangaroo mike = new Kangaroo();
+
+muffles.EscapeEnclosure()
+mike.EscapeEnclosure()
+
+kirren.Capture(mike);     // Kangaroo implements IWalking
+kirren.Capture(muffles);  // PaintedDog implements IWalking
+```
+
 Now, any object instance based on the `AnimalControl` class can capture any ground-based animal. In the previous code, they were locked into capturing dogs only.
 
 ## Resources
@@ -373,3 +407,156 @@ Now, any object instance based on the `AnimalControl` class can capture any grou
 * [The Dependency Inversion Principle](https://code.tutsplus.com/tutorials/solid-part-4-the-dependency-inversion-principle--net-36872)
 * [Interface segregation principle](https://en.wikipedia.org/wiki/Interface_segregation_principle)
 
+## Practice: Cleaning Gary's Garage
+
+1. Use your knowledge of the Interface Segregation Principle and the Dependency Inversion Principle to convert the code below into a system that is more flexible and extensible to accomodate any kind of vehicle class. Each class should only implement code that it needs.
+1. Create at least two types of each vehicle (water based, ground based, and air based). I've given you one of each kind.
+1. Complete the tasks in the comments of the `Main()` method below.
+
+```cs
+using System;
+using System.Linq;
+using System.Collections.Generic;
+
+
+public interface IVehicle
+{
+    int Wheels { get; set; }
+    int Doors { get; set; }
+    int PassengerCapacity { get; set; }
+    bool Winged { get; set; }
+    string TransmissionType { get; set; }
+    double EngineVolume { get; set; }
+    double MaxWaterSpeed { get; set; }
+    double MaxLandSpeed { get; set; }
+    double MaxAirSpeed { get; set; }
+    void Start();
+    void Stop();
+    void Drive();
+    void Fly();
+}
+
+public class JetSki : IVehicle
+{
+    public int Wheels { get; set; }
+    public int Doors { get; set; }
+    public int PassengerCapacity { get; set; }
+    public bool Winged { get; set; }
+    public string TransmissionType { get; set; }
+    public double EngineVolume { get; set; }
+    public double MaxWaterSpeed { get; set; }
+    public double MaxLandSpeed { get; set; }
+    public double MaxAirSpeed { get; set; }
+
+    public void Drive()
+    {
+        Console.WriteLine("The jetski zips through the waves with the greatest of ease");
+    }
+
+    public void Fly()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void Start()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void Stop()
+    {
+        throw new NotImplementedException();
+    }
+}
+
+public class Motorcycle : IVehicle
+{
+    public int Wheels { get; set; } = 2;
+    public int Doors { get; set; } = 0;
+    public int PassengerCapacity { get; set; }
+    public bool Winged { get; set; } = false;
+    public string TransmissionType { get; set; } = "Manual";
+    public double EngineVolume { get; set; } = 1.3;
+    public double MaxWaterSpeed { get; set; }
+    public double MaxLandSpeed { get; set; } = 160.4;
+    public double MaxAirSpeed { get; set; }
+
+    public void Drive()
+    {
+        Console.WriteLine("The motorcycle screams down the highway");
+    }
+
+    public void Fly()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void Start()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void Stop()
+    {
+        throw new NotImplementedException();
+    }
+}
+
+public class Cessna : IVehicle
+{
+  public int Wheels { get; set; } = 3;
+  public int Doors { get; set; } = 3;
+  public int PassengerCapacity { get; set; } = 113;
+  public bool Winged { get; set; } = true;
+  public string TransmissionType { get; set; } = "None";
+  public double EngineVolume { get; set; } = 31.1;
+  public double MaxWaterSpeed { get; set; }
+  public double MaxLandSpeed { get; set; }
+  public double MaxAirSpeed { get; set; } = 309.0;
+
+  public void Drive()
+  {
+    throw new NotImplementedException();
+  }
+
+  public void Fly()
+  {
+    Console.WriteLine("The Cessna effortlessly glides through the clouds like a gleaming god of the Sun");
+  }
+
+  public void Start()
+  {
+    throw new NotImplementedException();
+  }
+
+  public void Stop()
+  {
+    throw new NotImplementedException();
+  }
+}
+
+
+public class Program
+{
+
+    public static void Main() {
+
+        // Build a collection of all vehicles that fly
+
+        // With a single `foreach`, have each vehicle Fly()
+
+
+
+        // Build a collection of all vehicles that operate on roads
+
+        // With a single `foreach`, have each road vehicle Drive()
+
+
+
+        // Build a collection of all vehicles that operate on water
+
+        // With a single `foreach`, have each water vehicle Drive()
+    }
+
+}
+```
