@@ -89,37 +89,53 @@ Tesla modelS = new Tesla();
 /*
     This can only hold individual motorcycles. You can't
     add the Tesla to this list. It's a different type.
+    This is invalid code. The `modelS` is not of type Zero.
 */
-List<Zero> zeroMotorcycles = new List<Zero>() { fx, fxs };
+List<Zero> electricVehicles = new List<Zero>() { fx, fxs, modelS };
 ```
+
+![invalid type in list exception](./images/invalid-type-in-list.png)
 
 ## Fuel Interfaces
 
 This is where you can use the power of interfaces. First, you determine what each of the items you want to group together have in common. For the electric vehicles, they share the `BatteryKWh` property and the `ChargeBattery()` method. You and your team agree that every electric-powered vehicle must have those two things on them - it's what makes them eletric vehicles. They can't be ommitted.
 
-You create an interface that every eletric vehicle class must implement.
+You create an interface that every eletric vehicle class must implement. It's important to note that you **cannot** put logic in an interface. An interface simply lists the rules, or the contract, that a class must abide by. **_How_** the class abides by the rules is up to the individual class.
+
+For example, this interface says that any class that implements it **must** have a `BatteryKHw` property. The developer can choose...
+
+* If it is public or private
+* If it has a getter and setter
+* If the getter/setter have specific logic
+
+Those are implementation details that an `interface` doesn't care about.
 
 ```cs
 namespace Garage {
     public interface IElectricPowered {
-        double BatteryKHw { get; set; }
+        double BatteryKHw;
 
         void ChargeBattery ();
     }
 }
 ```
 
+Likewise, the `ChargeBattery()` method can be implemented completely differently for a `Zero` and a `Tesla`. The interface doesn't care. It only cares that the classes have the method.
+
+### Implementing IElectricPowered Interface
+
 You tell the compiler that a class must implement an interface by putting a colon after the class name, followed by the interface.
 
+#### Example Pattern
 ```cs
-public class ClassName : InterfaceToImplement {}
+public class YourClassName : InterfaceToImplement {}
 ```
 
 Now you need to refactor the `Zero` and the `Tesla` classes to implement your new interface.
 
 ```cs
 namespace Garage {
-    public class Zero :IElectricPowered {
+    public class Zero : IElectricPowered {
         public double BatteryKHw { get; set; }
         public string MainColor { get; set; }
         public string MaximumOccupancy { get; set; }
@@ -129,7 +145,19 @@ namespace Garage {
 }
 ```
 
-The compiler make sure that the developer implements everything in the interface, or the code won't compile. Watch what happens when I remove the `ChargeBattery()` method from my `Zero` class. I'm immediately informed by the compiler that my code has an exception because I didn't implement something in the interface.
+```cs
+namespace Garage {
+    public class Tesla : IElectricPowered {
+        public double BatteryKHw { get; set; }
+        public string MainColor { get; set; }
+        public string MaximumOccupancy { get; set; }
+
+        public void ChargeBattery () {  }
+    }
+}
+```
+
+The compiler will make sure that the developer implements everything in the interface, or the code won't compile. Watch what happens when I remove the `ChargeBattery()` method from my `Zero` class. I'm immediately informed by the compiler that my code has an exception because I didn't implement something in the interface.
 
 ![interface implementation exception example](./images/interface-implementation-exception.gif)
 
@@ -138,19 +166,63 @@ Now, once you implement everything in the interface in your class, something ver
 Check this out. This is valid code now.
 
 ```cs
-List<IElectricPowered> electricVehicles = new List<IElectricPowered>();
+using System;
+using System.Collections.Generic;
 
-electricVehicles.Add(Zero);
-electricVehicles.Add(Tesla);
+namespace Garage {
+    class Program {
+        static void Main (string[] args) {
+            Zero fxs = new Zero ();
+            Zero fx = new Zero ();
+            Tesla modelS = new Tesla ();
+
+            List<IElectricPowered> electricVehicles = new List<IElectricPowered>();
+
+            electricVehicles.Add(fx);
+            electricVehicles.Add(fxs);
+            electricVehicles.Add(modelS);
+        }
+    }
+}
 ```
 
 You are now able to add objects of completely different types, because they both now share another type of `IElectricPowered`!! That's pretty cool. Now you are able to group together electric vehicles in one list and gas vehicle in another.
 
 ```cs
-List<IGasPowered> gasVehicles = new List<IGasPowered>();
+namespace Garage {
+    class Program {
+        static void Main (string[] args) {
+            /*
+                Create some electric vehicles, add them to a List
+                and then iterate the List to charge all of their
+                batteries.
+            */
+            Zero fxs = new Zero ();
+            Zero fx = new Zero ();
+            Tesla modelS = new Tesla ();
 
-gasVehicles.Add(Ram);
-gasVehicles.Add(Cessna);
+            List<IElectricPowered> electricVehicles = new List<IElectricPowered>() {
+                fx, fxs, modelS
+            };
+
+            gasVehicles.ForEach(gv => gv.ChargeBattery());
+
+            /*
+                Create some gas vehicles, add them to a List
+                and then iterate the List to fill all of their
+                fuel tanks.
+            */
+            Ram ram = new Ram ();
+            Cessna cessna150 = new Cessna ();
+
+            List<IGasPowered> gasVehicles = new List<IGasPowered>() {
+                ram, cessna150
+            };
+
+            gasVehicles.ForEach(gv => gv.RefuelTank());
+        }
+    }
+}
 ```
 
 ## Zoological Zaniness
