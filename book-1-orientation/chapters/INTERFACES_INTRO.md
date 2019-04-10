@@ -133,14 +133,27 @@ The compiler make sure that the developer implements everything in the interface
 
 ![interface implementation exception example](./images/interface-implementation-exception.gif)
 
-## Resources
+Now, once you implement everything in the interface in your class, something very cool emerges from that process. The `IElectricPowered` interface is **_also a type, just like `Zero` is_**.
 
-* [Interface-based programming](https://en.wikipedia.org/wiki/Interface-based_programming)
-* [Understanding Interface-based Programming](https://msdn.microsoft.com/en-us/library/aa260635(v=vs.60).aspx)
-* [The Dependency Inversion Principle](https://code.tutsplus.com/tutorials/solid-part-4-the-dependency-inversion-principle--net-36872)
-* [Interface segregation principle](https://en.wikipedia.org/wiki/Interface_segregation_principle)
+Check this out. This is valid code now.
 
-## Examples
+```cs
+List<IElectricPowered> electricVehicles = new List<IElectricPowered>();
+
+electricVehicles.Add(Zero);
+electricVehicles.Add(Tesla);
+```
+
+You are now able to add objects of completely different types, because they both now share another type of `IElectricPowered`!! That's pretty cool. Now you are able to group together electric vehicles in one list and gas vehicle in another.
+
+```cs
+List<IGasPowered> gasVehicles = new List<IGasPowered>();
+
+gasVehicles.Add(Ram);
+gasVehicles.Add(Cessna);
+```
+
+## Zoological Zaniness
 
 Imagine a scenario in which you are writing an application in which you need to classify any animal species as ground-based, air-based, or water-based. Also consider that animal species can be any combination of those classifications. To make our code base as flexible as possible, we define the properties and behaviors of each classification (or description) into an interface.
 
@@ -239,7 +252,7 @@ public class Seagull: ISwimming, IWalking, IFlying
 
 Watch how to generate the boilerplate code.
 
-![](./assets/interface-implementation.gif)
+![](./images/interface-implementation.gif)
 
 # Dependency Inversion
 
@@ -280,3 +293,11 @@ public class AnimalControl
 ```
 
 Now, any object instance based on the `AnimalControl` class can capture any ground-based animal. In the previous code, they were locked into capturing dogs only.
+
+## Resources
+
+* [Interface-based programming](https://en.wikipedia.org/wiki/Interface-based_programming)
+* [Understanding Interface-based Programming](https://msdn.microsoft.com/en-us/library/aa260635(v=vs.60).aspx)
+* [The Dependency Inversion Principle](https://code.tutsplus.com/tutorials/solid-part-4-the-dependency-inversion-principle--net-36872)
+* [Interface segregation principle](https://en.wikipedia.org/wiki/Interface_segregation_principle)
+
