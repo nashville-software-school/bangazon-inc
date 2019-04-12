@@ -2,11 +2,69 @@
 
 You want your interfaces to be as focused and specific as possible. A trap that some developers fall into is making interfaces that are too generic and broad in scope.
 
-Consider the interfaces you've written so far for your animals.
+Consider the interfaces you've written so far for your animals. A naïve interface implementation that some developer could make would be an `IAnimal` interface.
+
+```cs
+public interface IAnimal
+{
+    int MaximumDepth {get;}
+
+    void run();
+    void walk();
+    void swim();
+    void fly();
+    void dig();
+}
+```
+
+This interface definitely describes common behaviors and properties for animals. The result, however, is that every specific animal class become what is called a "fat" class. Each would be forced to implement methods that would never be used.
+
+```cs
+public class Snake : IAnimal
+{
+    public void Fly()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void Walk()
+    {
+        // Only useful implementation since snakes slither (i.e. "walk")
+    }
+
+    public void Run()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void Swim()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void Dig()
+    {
+        throw new NotImplementedException();
+    }
+}
+```
+
+This is bad because every time a snake is created, memory has to be allocated for each of those unused methods.
+
+Avoiding this problem by breaking down your interfaces to be as specific as possible is an implementation of a SOLID Principle - the [Interface Segregation Principle](https://en.wikipedia.org/wiki/Interface_segregation_principle).
 
 ## Practice: Cleaning Gary's Garage
 
-1. Use your knowledge of the Interface Segregation Principle and the Dependency Inversion Principle to convert the code below into a system that is more flexible and extensible to accomodate any kind of vehicle class. Each class should only implement code that it needs.
+Use your knowledge of the Interface Segregation Principle and the Dependency Inversion Principle to convert the code below into a system that is more flexible and extensible to accomodate any kind of vehicle class. Each class should only implement code that it needs.
+
+### Setup
+
+```sh
+mkdir -p ~/workspace/csharp/exercises/vehicle-interfaces && cd $_
+dotnet new console -n Garage -o .
+touch JetSki.cs Motorcycle.cs Cessna.cs
+```
+
 1. Create at least two types of each vehicle (water based, ground based, and air based). I've given you one of each kind.
 1. Complete the tasks in the comments of the `Main()` method below.
 
