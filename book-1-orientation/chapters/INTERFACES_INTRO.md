@@ -315,8 +315,6 @@ Watch how to generate the boilerplate code.
 
 * [Interface-based programming](https://en.wikipedia.org/wiki/Interface-based_programming)
 * [Understanding Interface-based Programming](https://msdn.microsoft.com/en-us/library/aa260635(v=vs.60).aspx)
-* [The Dependency Inversion Principle](https://code.tutsplus.com/tutorials/solid-part-4-the-dependency-inversion-principle--net-36872)
-* [Interface segregation principle](https://en.wikipedia.org/wiki/Interface_segregation_principle)
 
 ## Practice: Diggers and Fliers
 

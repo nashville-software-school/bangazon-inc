@@ -17,7 +17,7 @@ public interface IAnimal
 }
 ```
 
-This interface definitely describes common behaviors and properties for animals. The result, however, is that every specific animal class become what is called a "fat" class. Each would be forced to implement methods that would never be used.
+This interface definitely describes common behaviors and properties for animals. The result, however, is that every specific animal class becomes what is called a "fat" class. Each would be forced to implement methods that would never be used.
 
 ```cs
 public class Snake : IAnimal

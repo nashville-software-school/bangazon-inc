@@ -145,3 +145,55 @@ public static void Main () {
     kirren.Capture(mike);
 }
 ```
+
+## Resources
+
+* [The Dependency Inversion Principle](https://code.tutsplus.com/tutorials/solid-part-4-the-dependency-inversion-principle--net-36872)
+
+## Practice: Von Rimmersmark - The Monster Killer
+
+Erich Von Rimmersmark is a world-reknowned hunter of things that go bump in the night. You job is to complete the code below by adding interfaces and thinking about dependency inversion to allow Erich to kill monsters that have common weaknesses.
+
+```cs
+public class Hunter
+{
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+
+    public List<string> Weapons { get; } = new List<string>() {
+        "Silver", "Fire", "Holy Water"
+    };
+
+    public SplashWater (Wight wight) {
+        wight.Douse();  // Kills with holy water
+    }
+
+    public Ignite (Mummy mummy) {
+        mummy.SetFire("fire");  // Kills with fire
+    }
+
+    public WieldSilver (Vampire vamp) {
+        vamp.Kill();   // Stabs with silver knife
+    }
+}
+```
+
+Here's a list of monsters and what Erich can use to kill them.
+
+| Vampire | Mummy | Ghoul | Ghast | Wight | Demon | Zombie |
+|---|---|---|---|---|---|---|
+| Silver | Fire | Holy water | Fire | Silver | Holy water | Fire |
+| Fire | | Silver | Holy water | | Silver | |
+| | | | | | Fire | |
+
+Here's some starter code for `Mummy` to get you started.
+
+```cs
+public class Mummy : ICombustable
+{
+    public void Kill (string attack)
+    {
+        if (attack)
+    }
+}
+```
