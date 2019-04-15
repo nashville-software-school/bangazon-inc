@@ -17,9 +17,9 @@ This book builds a strong foundation in the syntax, data structures, and valuabl
 * Chapter 11 - [Object Relationship Vocabulary Terms](./chapters/RELATIONSHIPS.md)
 * Chapter 12 - [Interfaces](./chapters/INTERFACES_INTRO.md)
 * Chapter 13 - [Inheritance](./chapters/INHERITANCE_INTRO.md)
-* Chapter 14 - [Dependency Inversion](./chapters/DEPENDENCY_INVERSION.md)
-* Chapter 15 - [Interface Segregation](./chapters/INTERFACE_SEGREGATION.md)
-* Chapter 14 - [Student Exercises - Part 3](./chapters/STUDENT_EXERCISES_INTERFACES.md)
+* Chapter 14 - [Student Exercises - Part 3](./chapters/STUDENT_EXERCISES_INHERITANCE.md)
+* Chapter 15 - [Dependency Inversion](./chapters/DEPENDENCY_INVERSION.md)
+* Chapter 16 - [Interface Segregation](./chapters/INTERFACE_SEGREGATION.md)
 
 > ### __Group Project__ - Trestlebridge Farms
 

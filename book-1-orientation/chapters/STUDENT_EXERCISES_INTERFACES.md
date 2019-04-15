@@ -4,7 +4,7 @@
 
 You use inheritance when you have 2+ types and **all of them** share a common set of properties and methods.
 
-## Intefaces
+## Interfaces
 
 You use interfaces when you have many types in your system and **some of them** share a common methods and behaviors, but the separate classes can't inherit from a common parent.
 
