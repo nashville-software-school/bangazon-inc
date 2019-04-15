@@ -164,16 +164,25 @@ public class Hunter
         "Silver", "Fire", "Holy Water"
     };
 
-    public SplashWater (Wight wight) {
+    public Hunter (string first, string last) {
+        FirstName = first;
+        LastName = last;
+    }
+
+    public void SplashWater (Wight wight) {
         wight.Douse();  // Kills with holy water
     }
 
-    public Ignite (Mummy mummy) {
-        mummy.SetFire("fire");  // Kills with fire
+    public void Ignite (Mummy mummy) {
+        mummy.Burn("Fire");  // Kills with fire
     }
 
-    public WieldSilver (Vampire vamp) {
-        vamp.Kill();   // Stabs with silver knife
+    public void WieldSilver (Vampire vamp) {
+        vamp.Stab();   // Stabs with silver knife
+    }
+
+    public override string ToString () {
+        return $"{FirstName} {LastName} kills monsters with the following weapons: {String.Join(", ", Weapons)}";
     }
 }
 ```
@@ -188,12 +197,38 @@ Here's a list of monsters and what Erich can use to kill them.
 
 Here's some starter code for `Mummy` to get you started.
 
+#### Interface
+
+```cs
+public interface ICombustable
+{
+    void Burn (string attack);
+}
+```
+
+#### Implementing Class
+
 ```cs
 public class Mummy : ICombustable
 {
-    public void Kill (string attack)
+    public void Burn (string attack)
     {
-        if (attack)
+        if (attack === "Fire") {
+            Console.WriteLine("You just killed the Mummy");
+        }
     }
+}
+```
+
+#### Program
+
+```cs
+public static void Main()
+{
+    Hunter VonRimmersmark = new Hunter("Erich", "Von Rimmersmark");
+
+    Mummy tuts = new Mummy();
+
+    VonRimmersmark.Burn(tuts);
 }
 ```
