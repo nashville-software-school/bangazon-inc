@@ -2,7 +2,16 @@
 
 An interface in C# is a construct that you define for classes to implement. Think of it as a contract for a class. If a class implements an interface, then it must define a method, property, or event for each one defined in the interface.
 
-You use interfaces to provide much more flexibility to your project to work with disparate types. Here's an example.
+## Why Are You Learning This?
+
+You will use interfaces to provide much more flexibility to your project to work with disparate types. It's one of the most powerful features of the C# language, and languages like it (e.g. Java).
+
+You will also likely be asked about interfaces during the interview process. After working with interfaces during your time at Nashville Software School, you should be able to describe interfaces in the following ways.
+
+1. Interfaces are a mechanism to introduce polymorphism into your system. They provide additional types to your classes.
+1. They allow you to define common properties and behaviors among different classes in your system so that you can group them together into collections.
+1. They are contracts that you and your team decide upon to ensure consistency and quality in the classes that you author.
+1. Interfaces define what your class **should** do, but they can't specify **how** your class will do it.
 
 ## Gary's Wholesale Garage
 
