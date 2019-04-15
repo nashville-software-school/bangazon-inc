@@ -195,9 +195,11 @@ Here's a list of monsters and what Erich can use to kill them.
 | Fire | | Silver | Holy water | | Silver | |
 | | | | | | Fire | |
 
-Here's some starter code for `Mummy` to get you started.
+Here's some code to get you started.
 
 #### Interface
+
+> Interfaces/ICombustable.cs
 
 ```cs
 public interface ICombustable
@@ -207,6 +209,8 @@ public interface ICombustable
 ```
 
 #### Implementing Class
+
+> Models/Mummy.cs
 
 ```cs
 public class Mummy : ICombustable
@@ -220,7 +224,9 @@ public class Mummy : ICombustable
 }
 ```
 
-#### Program
+#### Main Logic
+
+> Program.cs
 
 ```cs
 public static void Main()
