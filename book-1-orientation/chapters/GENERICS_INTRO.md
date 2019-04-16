@@ -49,6 +49,91 @@ public interface IFactory<T>
 }
 ```
 
+## Titan of Industry
+
+You work for H.E. Pennypacker, an industry titan that has ammassed a business empire consisting of 5 different factories that produce the following goods. H.E. has diversified the empire to make the company as recession proof as possible.
+
+1. Steel
+1. Automobiles
+1. Chicken nuggets
+1. Insulin
+1. Taffy
+
+In each of these factories, potential employees must have a very specialized skillset before they are hired. Here are the coresponding skillsets, represented as types.
+
+1. `SteelWorker`
+1. `AutoWorker`
+1. `FoodProcessor`
+1. `LabTechnician`
+1. `Confectioner`
+
+Now, since you are in charge of building a command line application to help the Global HR department manage the hiring of employees for all factories, you want to ensure that each factory has the same properties and the same behaviors _(i.e. methods)_. This means you need an interface.
+
+* Each factory should have a minimum employee count.
+* Each factory should have a maximum employee count.
+* Each factory should have a method for hiring an employee. Name it `HireEmployee()` per above code.
+* Each factory should have a method for hiring multiple employees. Name it `HireEmployees()`.
+
+Since the `HireEmployee()` of each factory must limit the type of employee being hired, it requires that the interface be defined as more dynamic.
+
+1. Steel - `HireEmployee(SteelWorker employee)`
+1. Automobiles - `HireEmployee(AutoWorker employee)`
+1. Chicken nuggets - `HireEmployee(FoodProcessor employee)`
+1. Insulin - `HireEmployee(LabTechnician employee)`
+1. Taffy - `HireEmployee(Confectioner employee)`
+
+Since interfaces must also define the arity of a method (if it has one), we run into a roadbloack. If you tightly bind the argument type to a single custom type, then the other factories can hire the right employees.
+
+```cs
+public interface IFactory
+{
+    void HireEmployee (SteelWorker employee);
+}
+```
+
+The Taffy factory can't implement this interface. It needs to hire **`Confectioner`** type people.
+
+```cs
+public class TaffyFactory : IFactory
+{
+    public List<Confectioner> employees { get; set; } = new List<Confectioner>();
+
+    /*
+        Compiler error. Can't convert type Confectioner to type SteelWorker.
+    */
+    public void HireEmployee (Confectioner employee)
+    {
+        employees.add(employee);
+    }
+}
+```
+
+Therefore, the interface must generically define the type of employee being hired. This is where Generics come into play. Look at this new syntax.
+
+```cs
+public interface IFactory<T>
+{
+    void HireEmployee (T employee);
+}
+```
+
+By using generics, the variable of `T` gets replaced by whatever the implemeting class passes in as the type argument. Look at the first line of code below. You will notice that `<Confectioner>` has been added as a type argument to send to the interface. That type will get stored in the variable `T`, which then means that the `employee` argument for `HireEmployee` will be typed appropriately.
+
+```cs
+public class TaffyFactory : IFactory<Confectioner>
+{
+    public List<Confectioner> employees { get; set; } = new List<Confectioner>();
+
+    /*
+        Compiler error. Can't convert type Confectioner to type SteelWorker.
+    */
+    public void HireEmployee (Confectioner employee)
+    {
+        employees.add(employee);
+    }
+}
+```
+
 ## Practice: Refueling Stations for Gary's Wholesale Garage
 
 1. Create a **`GasStation`** type for gas-powered vehicles.
