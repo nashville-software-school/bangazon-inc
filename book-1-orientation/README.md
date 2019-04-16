@@ -20,18 +20,19 @@ This book builds a strong foundation in the syntax, data structures, and valuabl
 * Chapter 14 - [Student Exercises - Part 3](./chapters/STUDENT_EXERCISES_INHERITANCE.md)
 * Chapter 15 - [Dependency Inversion](./chapters/DEPENDENCY_INVERSION.md)
 * Chapter 16 - [Interface Segregation](./chapters/INTERFACE_SEGREGATION.md)
+* Chapter 17 - [Generics](./chapters/GENERICS_INTRO.md)
 
 > ### __Group Project__ - Trestlebridge Farms
 
-* Chapter 14 - [Windows Installations](./chapters/WINDOWS_PRO_INSTALLS.md)
-* Chapter 15 - [Intro to Visual Studio](./chapters/VISUAL_STUDIO.md)
-* Chapter 16 - [Debugging in Visual Studio](./chapters/DEBUGGING_VS.md)
-* Chapter 17 - [Introduction to SSMS](./chapters/SSMS_INTRO.md)
-* Chapter 18 - [Introduction to SQL](./chapters/SQL_INTRO.md)
-* Chapter 19 - [Student Exercises - Part 3](./chapters/STUDENT_EXERCISES_SQL.md)
-* Chapter 20 - [Using ADO.NET and SQL](./chapters/ADONET_INTRO.md)
-* Chapter 21 - [Student Exercises - Part 4](./chapters/STUDENT_EXERCISES_ADONET.md)
-* Chapter 22 - [Bangazon ERD](./chapters/BANGAZON_ERD.md)
+* Chapter 17 - [Windows Installations](./chapters/WINDOWS_PRO_INSTALLS.md)
+* Chapter 18 - [Intro to Visual Studio](./chapters/VISUAL_STUDIO.md)
+* Chapter 19 - [Debugging in Visual Studio](./chapters/DEBUGGING_VS.md)
+* Chapter 20 - [Introduction to SSMS](./chapters/SSMS_INTRO.md)
+* Chapter 21 - [Introduction to SQL](./chapters/SQL_INTRO.md)
+* Chapter 22 - [Student Exercises - Part 4](./chapters/STUDENT_EXERCISES_SQL.md)
+* Chapter 23 - [Using ADO.NET and SQL](./chapters/ADONET_INTRO.md)
+* Chapter 24 - [Student Exercises - Part 5](./chapters/STUDENT_EXERCISES_ADONET.md)
+* Chapter 25 - [Bangazon ERD](./chapters/BANGAZON_ERD.md)
 
 ## Supplementary Content
 

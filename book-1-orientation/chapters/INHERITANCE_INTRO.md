@@ -129,6 +129,7 @@ mx410.Drive();
 To have each vehicle make its own sound, you need to do two things.
 
 1. Define the `Drive()` method as virtual.
+
     ```cs
     public class Vehicle
     {
@@ -141,8 +142,9 @@ To have each vehicle make its own sound, you need to do two things.
     }
     ```
 1. Override the method in the child class.
+
     ```cs
-    public class Cessna {
+    public class Cessna : Vehicle {
         public double FuelCapacity { get; set; }
 
         public void RefuelTank () { ... }

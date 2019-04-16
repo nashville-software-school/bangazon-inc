@@ -295,7 +295,7 @@ A class can implement more than one interface. Let's use a Sea Turtle as an exam
 ```cs
 class SeaTurtle : IWalking, ISwimming
 {
-    int MaximumDepth {get;} = 100;
+    int MaximumDepth { get; } = 100;
 
     public void Run()
     {
