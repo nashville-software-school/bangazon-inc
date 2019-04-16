@@ -164,6 +164,7 @@ Now you can run the program again and the Cessna will make a different noise.
 1. Define a different value for each vehicle's properties.
 1. Create a `Drive()` method in the **`Vehicle`** class.
 1. Override the `Drive()` method in all the other vehicle classes. Include the vehicle's color in the message _(i.e. "The blue Ram drives past. RRrrrrrummbbble!")_.
+    ![output of all vehicles driving](./images/all-vehicles-driving.gif)
 1. Create a `Turn(string direction)` mathod, and a `Stop()` method on **`Vehicle`**. Define a basic implementation of each.
 1. Override all three of those methods on some of the vehicles. For example, the `Stop()` method for a plane would be to output the message _"The white Cessna rolls to a stop after rolling a mile down the runway."_
 1. Make your vehicle instances perform all three behaviors.
