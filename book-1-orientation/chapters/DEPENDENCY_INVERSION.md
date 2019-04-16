@@ -245,8 +245,8 @@ Erich has travelled the Earth many times in his quest to rid the world of evil. 
 
 _"Ye that desires to banish the evilkind of this worldly realm need only to brandish a poultice of non-sensical liquid that defies the Unalterable Law of Sir Isaac."_
 
-For hundreds of years, Erich scoured literature and sought the wisest of philosophers and clergy hoping for a clue as to what this substance might be. At last, after fighting off a den of vampire near Midland, Michigan, Erich stumbled upon the answer as he drove out of town. At once, he drove to the nearest toy store and bought as much as he could.
+For hundreds of years, Erich scoured literature and sought the wisest of philosophers and clergy hoping for a clue as to what this substance might be. At last, after fighting off a den of vampire near Midland, Michigan, Erich stumbled upon the answer as he drove out of town. At once, he drove to the nearest store and bought as much as he could.
 
-Over the next few months, he tried it on every monster he fought, and to his delight discovered that no monster could withstand the onslought of this new, mighty, bouncy weapon.
+Over the next few months, he tried it on every monster he fought, and to his delight discovered that no monster could withstand the onslought of this new, mighty weapon.
 
 Once you are able to decipher the puzzle, then you can refactor your application and use the Power of Inheritance to allow Erich to kill **any** monster with this substance.
