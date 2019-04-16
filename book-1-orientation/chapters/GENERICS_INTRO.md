@@ -125,7 +125,7 @@ public class TaffyFactory : IFactory<Confectioner>
     public List<Confectioner> employees { get; set; } = new List<Confectioner>();
 
     /*
-        Compiler error. Can't convert type Confectioner to type SteelWorker.
+        No compiler error.
     */
     public void HireEmployee (Confectioner employee)
     {
