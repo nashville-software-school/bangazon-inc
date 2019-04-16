@@ -61,7 +61,7 @@ public class Ram {  // Gas powered truck
 
 That's right. They all share `MainColor` and `MaximumOccupancy`.
 
-As you add more vehicle types to your system, it would get very tedious to keep defining those properties in each of those classes. It would also increase the possibililty of bugs being introduced. If you team decided to change the `MainColor` property to renamed to `BaseColor`, all of the classes would need to be changed. Since human being are highly prone to error, a class could be missed during refactoring.
+As you add more vehicle types to your system, it would get very tedious to keep defining those properties in each of those classes. It would also increase the possibililty of bugs being introduced. If your team decided to change the `MainColor` property to renamed to `BaseColor`, all of the classes would need to be changed. Since human beings are highly prone to error, a class could be missed during refactoring.
 
 To avoid these kinds of problems, you are going to create a more general type in your system and then have all vehicles inherit from it.
 
@@ -164,6 +164,8 @@ Now you can run the program again and the Cessna will make a different noise.
 1. Define a different value for each vehicle's properties.
 1. Create a `Drive()` method in the **`Vehicle`** class.
 1. Override the `Drive()` method in all the other vehicle classes. Include the vehicle's color in the message _(i.e. "The blue Ram drives past. RRrrrrrummbbble!")_.
-1. Create a `TurnLeft()`, `TurnRight()`, and `Stop()` method on **`Vehicle`**. Define a basic implementation of each.
-1. Override all three of those methods on some of the vehicles.
+1. Create a `Turn(string direction)` mathod, and a `Stop()` method on **`Vehicle`**. Define a basic implementation of each.
+1. Override all three of those methods on some of the vehicles. For example, the `Stop()` method for a plane would be to output the message _"The white Cessna rolls to a stop after rolling a mile down the runway."_
 1. Make your vehicle instances perform all three behaviors.
+
+![](./images/inheritance-vehicles-drive.gif)

@@ -2,6 +2,8 @@
 
 An interface in C# is a construct that you define for classes to implement. Think of it as a contract for a class. If a class implements an interface, then it must define a method, property, or event for each one defined in the interface.
 
+> **Instructor Note:** Have students read chapter first. Then lightning exercises leading to Flower Shop. Then cover lesson.
+
 ## Why Are You Learning This?
 
 You will use interfaces to provide much more flexibility to your project to work with disparate types. It's one of the most powerful features of the C# language, and languages like it (e.g. Java).
@@ -122,7 +124,7 @@ Those are implementation details that an `interface` doesn't care about.
 ```cs
 namespace Garage {
     public interface IElectricPowered {
-        double BatteryKHw;
+        double BatteryKWh;
 
         void ChargeBattery ();
     }
@@ -145,7 +147,7 @@ Now you need to refactor the `Zero` and the `Tesla` classes to implement your ne
 ```cs
 namespace Garage {
     public class Zero : IElectricPowered {
-        public double BatteryKHw { get; set; }
+        public double BatteryKWh { get; set; }
         public string MainColor { get; set; }
         public string MaximumOccupancy { get; set; }
 
@@ -157,7 +159,7 @@ namespace Garage {
 ```cs
 namespace Garage {
     public class Tesla : IElectricPowered {
-        public double BatteryKHw { get; set; }
+        public double BatteryKWh { get; set; }
         public string MainColor { get; set; }
         public string MaximumOccupancy { get; set; }
 
@@ -247,14 +249,14 @@ To make our code base as flexible as possible, we define the properties and beha
 ```cs
 public interface IWalking
 {
-    void run();
-    void walk();
+    void Run();
+    void Walk();
 }
 
 public interface ISwimming
 {
     int MaximumDepth {get;}
-    void swim();
+    void Swim();
 }
 ```
 
@@ -271,12 +273,12 @@ Since it is a contract, we must implement the methods that were defined in the i
 ```cs
 public class PaintedDog : IWalking
 {
-    public void run()
+    public void Run()
     {
         Console.WriteLine("Animal is now running");
     }
 
-    public void walk()
+    public void Walk()
     {
         Console.WriteLine("Animal is now walking");
     }
@@ -295,17 +297,17 @@ class SeaTurtle : IWalking, ISwimming
 {
     int MaximumDepth {get;} = 100;
 
-    public void run()
+    public void Run()
     {
         Console.WriteLine("Animal is now running");
     }
 
-    public void walk()
+    public void Walk()
     {
         Console.WriteLine("Animal is now walking");
     }
 
-    public void swim()
+    public void Swim()
     {
         Console.WriteLine("Animal is now swimming");
     }
@@ -313,12 +315,6 @@ class SeaTurtle : IWalking, ISwimming
 ```
 
 Because you specified two interfaces, you had to provide an implementation for the properties and methods from both of them.
-
-Watch how to generate the boilerplate code.
-
-![](./images/interface-implementation.gi)
-
-
 
 ## Resources
 
