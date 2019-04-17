@@ -1,6 +1,6 @@
 # Seeding the Database
 
-In ASP.NET version 2.1+ you can seed your database by adding instructions in your `ApplicationDbContext.cs` file with an `OnModelCreating` method. Once you've defined some objects in this method, when you generate a new migration with `Add-Migration DescriptiveLabel`, then instructions will be added to the migration file to insert the data.
+You can seed your database by adding instructions in your `ApplicationDbContext.cs` file with an `OnModelCreating` method. Once you've defined some objects in this method, when you generate a new migration with `Add-Migration DescriptiveLabel`, then instructions will be added to the migration file to insert the data.
 
 When the `Update-Database` instruction is given, then the items will be added to your database.
 
