@@ -144,3 +144,9 @@ public class TaffyFactory : IFactory<Confectioner>
 1. In your main method, make sure you have a list of electric vehicles, and a list of gas vehicles.
 1. Create an instance of **`BatteryStation`** and **`GasStation`**.
 1. Refuel all the vehicles by sending them to the correct refueling station.
+
+## Advanced Challenge: Station Inheritance
+
+> **Note:** Advanced challenges should only be attempted once you complete the practice exercise and feel comfortable with the concept.
+
+Can you create a **`Station`** class from which both **`BatteryStation`** and **`GasStation`** inherit the `Refuel()` method?
