@@ -82,7 +82,7 @@ Since the `HireEmployee()` of each factory must limit the type of employee being
 1. Insulin - `HireEmployee(LabTechnician employee)`
 1. Taffy - `HireEmployee(Confectioner employee)`
 
-Since interfaces must also define the arity of a method (if it has one), we run into a roadbloack. If you tightly bind the argument type to a single custom type, then the other factories can hire the right employees.
+Since interfaces must also define the arity of a method (if it has one), we run into a roadbloack. If you tightly bind the argument type to a single custom type, then the other factories cannot hire the right employees.
 
 ```cs
 public interface IFactory
