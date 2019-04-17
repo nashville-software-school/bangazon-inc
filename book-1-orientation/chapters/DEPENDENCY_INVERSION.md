@@ -203,7 +203,7 @@ Here's a list of monsters and what Erich can use to kill them.
 
 Here's some code to get you started.
 
-#### Interface
+### Interface
 
 > Interfaces/ICombustable.cs
 
@@ -214,7 +214,7 @@ public interface ICombustable
 }
 ```
 
-#### Implementing Class
+### Implementing Class
 
 > Models/Mummy.cs
 
@@ -230,7 +230,7 @@ public class Mummy : ICombustable
 }
 ```
 
-#### Main Logic
+### Main Logic
 
 > Program.cs
 
@@ -245,6 +245,10 @@ public static void Main()
 }
 ```
 
+### Sample Output
+
+![monster killer output](./images/dependency-inversion-output.gif)
+
 ## Puzzle Challenge: The One Weapon To Kill Them All
 
 Erich has travelled the Earth many times in his quest to rid the world of evil. He has gathered wisdom from hunters far and wide, and studied the lore of ancient civilizations that wrote of such creatures. During his studies he came across a cryptic passage.
@@ -256,3 +260,7 @@ For hundreds of years, Erich scoured literature and sought the wisest of philoso
 Over the next few months, he tried it on every monster he fought, and to his delight discovered that no monster could withstand the onslought of this new, mighty weapon.
 
 Once you are able to decipher the puzzle, then you can refactor your application and use the Power of Inheritance to allow Erich to kill **any** monster with this substance.
+
+![](./images/ultimate-weapon.gif)
+
+> **Tip:** Ultimate Weapon is not the name of the weapon.
