@@ -1,6 +1,6 @@
 # Dependency Inversion
 
-In the last chapter, you built interfaces to allow your application to have much more flexibility in how your different types of objects can be grouped together and break out of the initial restriction that a `List<>` can only contain one type of thing. Now it's not a restriction because you can use interface to add multiple types to a specific object - not just the initial type defined by its class.
+In the last chapter, you built interfaces to allow your application to have much more flexibility in how your different types of objects can be grouped together and break out of the initial restriction that a `List<>` can only contain one type of thing. Now it's not a restriction because you can use interfaces to add multiple types to a specific object - not just the initial type defined by its class.
 
 #### With No Interfaces
 
@@ -79,7 +79,7 @@ public class GroundAnimalControlSpecialist
 }
 ```
 
-This certainly solves the problem at hand so we can perform the behavior of capturing an escaped dog. However, the experienced developer that has knowlede of, and practice in, the SOLID principles understand that *in the future*, it is highly like that the animal control specialist will be needed to capture other ground-based animals.
+This certainly solves the problem at hand so we can perform the behavior of capturing an escaped dog. However, as the zoo has more animals escaping, the specialist must capture those and you must write the logic in your application to record that process.
 
 Time to write more methods to capture the Monkeys, Wolverines, Gazelles, and Camels that escape.
 
@@ -102,7 +102,13 @@ public class GroundAnimalControlSpecialist
 }
 ```
 
-You might imagine how cumbersome this could become, both to the developer writing and maintaining this class, but also to other developers who need to use it. You could end up with dozens of individual methods, each for capturing a specific animal.
+You might imagine how cumbersome this could become, both to the developer writing and maintaining this class, but also to other developers who need to use it. You could end up with dozens of individual methods, each for capturing a specific animal. In developer-speak, what this code has done is create tight couplings between the methods and the concrete types.
+
+The **`GroundAnimalControlSpecialist`** class is tightly coupled to PaintedDog, Monkey, Camel, Gazelle and Wolverine. If one of those animal classes is removed from the system, it forces the development team to refactor the **`GroundAnimalControlSpecialist`** to remove the corresponding method. All of these classes should be able to evolve independently of each other.
+
+> **Vocabulary:** In software engineering, coupling is the degree of interdependence between software modules, or the strength of the relationships between modules.
+>
+> Coupling is usually contrasted with cohesion. Low coupling often correlates with high cohesion, and vice versa. Low coupling is often a sign of a well-structured computer system and a good design, and when combined with high cohesion, supports the general goals of high readability and maintainability.
 
 Could you instead write a single method and pass **_any_** ground based animal in as a parameter? Why, yes... yes you can. You do it by specifying the interface as the type for the argument.
 
