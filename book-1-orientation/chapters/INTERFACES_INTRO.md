@@ -124,7 +124,7 @@ Those are implementation details that an `interface` doesn't care about.
 ```cs
 namespace Garage {
     public interface IElectricPowered {
-        double BatteryKWh;
+        double BatteryKWh { get; set; }
 
         void ChargeBattery ();
     }
