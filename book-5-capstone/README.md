@@ -1,11 +1,8 @@
 # Book 5 - Plan and Execute your Capstone
 
-## Chapters
+## Resources
 
-* Chapter 1 - [Idea Submission](./chapters/EF_INTRO.md)
-* Chapter 2 - [Issue Tickets](./chapters/ASPNET_IDENTITY_INTRO.md)
-* Chapter 3 - [Defining MVP](./chapters/EF_MIGRATIONS.md)
-* Chapter 4 - [Checking In](./chapters/TRAVEL_EF_IF.md)
-* Chapter 5 - [Tracking your Job Search](./chapters/JOBTRACK_IO.md)
+* [Factors for a Successful Capstone](https://docs.google.com/presentation/d/1sYpDqY2lpErS4wD4Gu_qXFrKBlG6NOa-g4jQ9rsqhzc/present?token=AC4w5Vj9of8CxUVvLASpfLHaB3edFrFqoQ%3A1555681112349&includes_info_params=1&eisi=CKDs1-Cj3OECFQQeygodEOwNyA#slide=id.p)
 
-> ### __Demo Day__
+* [Design Thinking & Capstones](https://docs.google.com/presentation/d/1yND0ZBCrKyz5PnDujtE1IL74MQ5D_xNNzwtzpOAmOLo/present?token=AC4w5VgWjVNQqf0p7jx44HqzhRWIaQtEeA%3A1555681121160&includes_info_params=1&eisi=CMTR8eSj3OECFU8KyAod170KoA#slide=id.p)
+
