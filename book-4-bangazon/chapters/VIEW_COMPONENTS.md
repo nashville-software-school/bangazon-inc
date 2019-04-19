@@ -13,7 +13,7 @@ A view component acts very much like a controller for your application. In the c
 1. OrderCountViewModel
 1. OrderCountViewComponent
 
-OrderCountViewComponent is the controller-like logic except that this class inherits from `ViewModel` instead of `Controller`.
+OrderCountViewComponent is the controller-like logic except that this class inherits from `ViewComponent` instead of `Controller`.
 
 ```cs
 public class OrderCountViewComponent : ViewComponent
