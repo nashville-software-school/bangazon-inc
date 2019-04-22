@@ -8,7 +8,7 @@ An interface in C# is a construct that you define for classes to implement. Thin
 
 You will use interfaces to provide much more flexibility to your project to work with disparate types. It's one of the most powerful features of the C# language, and languages like it (e.g. Java).
 
-You will also likely be asked about interfaces during the interview process. After working with interfaces during your time at Nashville Software School, you should be able to describe interfaces in the following ways.
+You will also likely be asked about interfaces during the interview process. After working with interfaces during your time at NewForce, you should be able to describe interfaces in the following ways.
 
 1. Interfaces are a mechanism to introduce polymorphism into your system. They provide additional types to your classes.
 1. They allow you to define common properties and behaviors among different classes in your system so that you can group them together into collections.
