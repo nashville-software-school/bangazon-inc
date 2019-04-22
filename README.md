@@ -15,7 +15,7 @@ Your first two weeks on the job will be you orientation to the technical languag
 1. Installation of required tools.
 1. Introduction to the language.
 1. Concepts of sustainable, scalable, object-oriented software development.
-1. Test driven development
+1. Integration testing
 1. Overview of server-side development ecosystem
 1. How the Internet works
 1. Inheritance, composition, and aggregation
@@ -28,14 +28,13 @@ At the end of your orientation, your management team will determine which Develo
 
 ## Platform Development
 
-You will work on four different [Sprints](https://www.scruminc.com/sprint/) while you build the products that Bangazon Corporation needs in order to operate as a modern business. On each of these sprints, you will build features that your product owner has defined in the [Backlog](http://www.mountaingoatsoftware.com/agile/scrum/scrum-tools/product-backlog).
+You will work on three different [Sprints](https://www.scruminc.com/sprint/) while you build the products that Bangazon Corporation needs in order to operate as a modern business. On each of these sprints, you will build features that your product owner has defined in the [Backlog](http://www.mountaingoatsoftware.com/agile/scrum/scrum-tools/product-backlog).
 
 ### Applications
 
 These are the applications you will be developing during your time working at Bangazon.
 
 1. ASP.NET MVC Web API for the [Bangazon Platform](https://github.com/nashville-software-school/csharp-bangazonapi-boilerplate)
-1. [Command line application](https://github.com/nashville-software-school/csharp-bangazoncli-boilerplate) using Test Driven Development
 1. ASP.NET MVC Web Application for [workforce management](https://github.com/nashville-software-school/csharp-workforce-boilerplate)
 1. ASP.NET MVC Web Application for the [Bangazon public facing site](https://github.com/nashville-software-school/csharp-bangazonmvc-boilerplate)
 
@@ -74,7 +73,7 @@ student = new List<string>();
 You get the following message back from the compiler.
 
 ```
-Program.cs(12,19): error CS0029: Cannot implicitly convert type 'System.Collections.Generic.List<string>' to 'string' 
+Program.cs(12,19): error CS0029: Cannot implicitly convert type 'System.Collections.Generic.List<string>' to 'string'
 
 The build failed. Please fix the build errors and run again.
 ```

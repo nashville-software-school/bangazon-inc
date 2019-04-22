@@ -1,6 +1,6 @@
 # Tracking Student Exercises: Custom Types
 
-You are going to build a console application that tracks exercises that are assigned to students at Nashville Software School. These are the constraints and requirements for your application.
+You are going to build a console application that tracks exercises that are assigned to students at NewForce. These are the constraints and requirements for your application.
 
 ## Entity Relationship Diagram
 
