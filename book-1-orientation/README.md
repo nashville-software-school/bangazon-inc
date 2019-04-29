@@ -19,10 +19,11 @@ This book builds a strong foundation in the syntax, data structures, and valuabl
 * Chapter 13 - [Inheritance](./chapters/INHERITANCE_INTRO.md)
 * Chapter 14 - [Student Exercises - Part 3](./chapters/STUDENT_EXERCISES_INHERITANCE.md)
 * Chapter 15 - [Dependency Inversion](./chapters/DEPENDENCY_INVERSION.md)
-* Chapter 16 - [Interface Segregation](./chapters/INTERFACE_SEGREGATION.md)
-* Chapter 17 - [Generics](./chapters/GENERICS_INTRO.md)
+* Chapter 16 - [Generics](./chapters/GENERICS_INTRO.md)
 
-> ### __Group Project__ - Trestlebridge Farms
+> ## __Group Project__ - Trestlebridge Farms
+
+> #### Let's Talk About C#
 
 * Chapter 17 - [Windows Installations](./chapters/WINDOWS_PRO_INSTALLS.md)
 * Chapter 18 - [Intro to Visual Studio](./chapters/VISUAL_STUDIO.md)
@@ -36,8 +37,5 @@ This book builds a strong foundation in the syntax, data structures, and valuabl
 
 ## Supplementary Content
 
-* Supplement - [SOLID: Single Responsibility Principle](./chapters/SINGLE_RESPONSIBILITY_PRINCIPLE.md)
 * Supplement - [SOLID: Open/Closed Principle](./chapters/OPEN_CLOSED_PRINCIPLE.md)
-* Supplement - [SOLID: Liskov Substitution Principle](./chapters/LISKOV_SUBSTITUTION_PRINCIPLE.md)
 * Supplement - [SOLID: Interface Segregation Principle](./chapters/INTERFACE_SEGREGATION_PRINCIPLE.md)
-* Supplement - [SOLID: Dependency Inversion Principle](./chapters/DEPENDENCY_INVERSION_PRINCIPLE.md)
