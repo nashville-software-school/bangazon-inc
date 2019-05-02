@@ -4,11 +4,15 @@ This will be an interactive lesson. Your instructor will lead you through follow
 
 ## Instructions
 
-1. Create a new database called `DepartmentsAndEmployees` in SQL Server.
-1. Execute the `DepartmentsAndEmployees.sql` script (listed below) to create the database tables, keys and to setup some data
-1. In Visual Studio, create a new console application called `DepartmentsAndEmployees`.
+1. Open the [departments and employees](./assets/departments-employees.sql) SQL script and copy it into Azure Data Studio. Select the entire contents of the file and run it. This will create the database, and the tables, and insert some data.
+1. In Visual Studio, create a new console application called `DepartmentsEmployees`.
+1. In your terminal, navigate to the directory where you created your project. The directory will have a `DepartmentsEmployees.sln` file in it.
+1. Run the following commands. This imports the required package needed to have your C# code connect to a SQL Server database.
+    ```sh
+    dotnet add package System.Data.SqlClient
+    dotnet restore
+    ```
 1. Create or update the `*.cs` files with the code found below.
-1. In `Repository.cs`, replace `___YOUR CONNNECTION STRING HERE____` with the connection string to your `DepartmentsAndEmployees` database.
 1. Run the application, fix any compiler errors (if any).
 1. In `Program.cs`, complete the `PrintDepartmentReport(string title, List<Department> departments)`.
 1. Run the application, note the printed reports.
@@ -17,35 +21,11 @@ This will be an interactive lesson. Your instructor will lead you through follow
 1. Review the methods in `Repository.cs`.
 1. Complete the unfinished methods in `Repository.cs`. _Remember to test your work along the way!_
 
-## Database Script
-
-**DepartmentsAndEmployees.sql**
-
-Open the [departments and employees](./assets/departments-employees.sql) SQL scripts and copy it into Azue Data Studio. Select the entire contents of the file and run it.
-
-## Project file
-
-**DepartmentsAndEmployees.csproj**
-```xml
-<Project Sdk="Microsoft.NET.Sdk">
-
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="System.Data.SqlClient" Version="4.6.0" />
-  </ItemGroup>
-
-</Project>
-```
-
 ## C# files
 
 **Models/Department.cs**
 ```cs
-namespace DapperDepartments.Models
+namespace DepartmentsEmployees.Models
 {
     // C# representation of the Department table
     public class Department
@@ -58,7 +38,7 @@ namespace DapperDepartments.Models
 
 **Models/Employee.cs**
 ```cs
-namespace DapperDepartments.Models
+namespace DepartmentsEmployees.Models
 {
     // C# representation of the Employee table
     public class Employee
@@ -80,9 +60,9 @@ namespace DapperDepartments.Models
 ```cs
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using DapperDepartments.Models;
+using DepartmentsEmployees.Models;
 
-namespace DapperDepartments.Data
+namespace DepartmentsEmployees.Data
 {
     /// <summary>
     ///  An object to contain all database interactions.
@@ -99,7 +79,7 @@ namespace DapperDepartments.Data
             get
             {
                 // This is "address" of the database
-                string _connectionString = "___YOUR CONNNECTION STRING HERE____";
+                string _connectionString = "Data Source=localhost\\SQLEXPRESS;Initial Catalog=DepartmentsEmployees;Integrated Security=True";
                 return new SqlConnection(_connectionString);
             }
         }
@@ -440,10 +420,10 @@ namespace DapperDepartments.Data
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using DapperDepartments.Data;
-using DapperDepartments.Models;
+using DepartmentsEmployees.Data;
+using DepartmentsEmployees.Models;
 
-namespace DapperDepartments
+namespace DepartmentsEmployees
 {
     class Program
     {
@@ -635,7 +615,7 @@ namespace DapperDepartments
         {
             Console.WriteLine();
             Console.Write("Press any key to continue...");
-            Console.ReadKey();
+            Console.ReadLine();
             Console.WriteLine();
             Console.WriteLine();
         }

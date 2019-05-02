@@ -6,7 +6,7 @@ IF NOT EXISTS (
     FROM sys.databases
     WHERE [name] = N'DepartmentsEmployees'
 )
-CREATE DATBASE DepartmentsEmployees
+CREATE DATABASE DepartmentsEmployees
 GO
 
 USE DepartmentsEmployees
