@@ -20,44 +20,8 @@ This will be an interactive lesson. Your instructor will lead you through follow
 ## Database Script
 
 **DepartmentsAndEmployees.sql**
-```sql
-DROP TABLE IF EXISTS Employee;
-DROP TABLE IF EXISTS Department;
 
-
-CREATE TABLE Department (
-    Id INTEGER NOT NULL PRIMARY KEY IDENTITY,
-    DeptName VARCHAR(50) NOT NULL
-);
-
-CREATE TABLE Employee (
-    Id INTEGER NOT NULL PRIMARY KEY IDENTITY,
-    FirstName VARCHAR(50) NOT NULL,
-    LastName VARCHAR(50) NOT NULL,
-    DepartmentId INT NOT NULL,
-    CONSTRAINT FK_EmployeeDepartment FOREIGN KEY(DepartmentId) REFERENCES Department(Id)
-);
-
-INSERT INTO Department (DeptName) VALUES ('Marketing');
-INSERT INTO Department (DeptName) VALUES ('Engineering');
-INSERT INTO Department (DeptName) VALUES ('Design');
-
-INSERT INTO Employee
-    (FirstName, LastName, DepartmentId)
-VALUES
-    ('Margorie', 'Klingerman', 1);
-
-INSERT INTO Employee
-    (FirstName, LastName, DepartmentId)
-VALUES
-    ('Sebastian', 'Lefebvre', 2);
-
-INSERT INTO Employee
-    (FirstName, LastName, DepartmentId)
-VALUES
-    ('Jamal', 'Ross', 3);
-
-```
+Open the [departments and employees](./assets/departments-employees.sql) SQL scripts and copy it into Azue Data Studio. Select the entire contents of the file and run it.
 
 ## Project file
 
