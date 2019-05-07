@@ -183,6 +183,22 @@ In order for your Web API to connect to this database, you are going to put the 
 }
 ```
 
+### Coffee Model
+
+Create a `Models` directory in your project and add a new class named `Coffee` in that directory. Put the following code in that file.
+
+```cs
+namespace CoffeeShop.Models
+{
+    public class Coffee
+    {
+        public int Id { get; set; }
+        public string Title { get; set; }
+        public string BeanType { get; set; }
+    }
+}
+```
+
 ### Coffee Controller
 
 Create a new controller file named `CoffeesController.cs` in the **`Controllers`** directory in your project. Replace the contents of that new file with the code below.
