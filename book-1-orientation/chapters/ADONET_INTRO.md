@@ -631,6 +631,6 @@ _                           | <span>ADO.NET</span>          | Micro-ORM (Dapper)
 **Boilerplate Code**        | yes                           | minimal                                      | no
 **Automatic Model Binding** | no                            | yes                                          | yes
 **Degree of "Magic"**       | none                          | a little                                     | a lot
-**Pros**                    | Full control, Most preferment | Balance between control and ease of use      | Ease of use, Rapid development
+**Pros**                    | Full control, best performance | Balance between control and ease of use      | Ease of use, Rapid development
 **Cons**                    | Lots of code to write         | Can lead to writing more code than is needed | Too much magic, Performance can suffer
 
