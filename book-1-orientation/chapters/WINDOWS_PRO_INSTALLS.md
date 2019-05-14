@@ -7,16 +7,11 @@
     git config --global core.longpaths true
     ```
 1. [Create an SSH key](https://help.github.com/en/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent#platform-windows) on your Windows VM, and add it to your Github profile.
-1. [Postman](https://www.getpostman.com/)
-1. [SQL Server Express](https://www.microsoft.com/en-us/sql-server/sql-server-editions-express)
-1. [SQL Server Management Studio](https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-2017). Make sure you get the General Availability release, not any preview version.
-1. [Visual Studio Community Edition](https://visualstudio.microsoft.com/vs/community/)
-1. [Visual Studio Code](https://code.visualstudio.com/)
-
-## Visual Studio Workloads
-
-When installing Visual Studio, you will be presented with a variety of [Workloads](https://visualstudio.microsoft.com/vs/support/selecting-workloads-visual-studio-2017/). Select these workloads.
-
-1. ASP.NET and web development
-1. .NET Core cross-platform development
-
+1. [Postman](https://www.getpostman.com/) for testing APIs.
+1. [SQL Server Express](https://www.microsoft.com/en-us/sql-server/sql-server-editions-express). This is the database tool where all your data will be stored for the server-side course.
+1. Read and follow the steps to [Download and install Azure Data Studio](https://docs.microsoft.com/en-us/sql/azure-data-studio/download?view=sql-server-2017) from the Microsoft documentation site.
+1. [Visual Studio Code](https://code.visualstudio.com/) for when you need to open files that have nothing to do with your code. The full Visual Studio IDE can be overkill for editing simple text files.
+1. [Visual Studio Community Edition](https://visualstudio.microsoft.com/vs/community/). This will be your main code authoring tool for the server-side course.
+    > **INFO:** When installing Visual Studio, you will be presented with a variety of workloads. Select the following workloads.
+    > * ASP.NET and web development
+    > * .NET Core cross-platform development

@@ -16,6 +16,7 @@ This book prepares you to build the e-commerce application that serves our custo
 
 ## Supplementary Content
 
+* Supplement - [Introduction to SSMS](./chapters/SSMS_INTRO.md)
 * Supplement - [How to Start a New Project](./chapters/PROJECT_INIT.md)
 * Supplement - [Deploy to Azure](./chapters/AZURE_DEPLOY.md)
 * Supplement - [Deploy to Linux](./chapters/LINUX_DEPLOY.md)
