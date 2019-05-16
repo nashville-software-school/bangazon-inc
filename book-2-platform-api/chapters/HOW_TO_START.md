@@ -7,18 +7,18 @@
 
 ### Create API Project and Solution
 
+1. Clone down the boilerplate files. Remember where you cloned them.
 1. Launch Visual Studio
 1. File > New > Project...
 1. Select **.NET Core** on the left menu.
 1. Select **ASP.NET Core Web Application** from the list of options that appears.
-1. Check `Create Git repository`
 1. In the name field, type `BangazonAPI`, then click Next.
-1. Uncheck `Configure for HTTPS`
+1. Select the directory where you cloned down the boilerplate files. Your goal here is to create the API inside the boilerplate directory.
 1. Choose **API** from the current list of options, then click Ok.
 
 ### Update appsettings
 
-Replace what's in your `appsettings.json` file with this.
+Replace what's in your `appsettings.json` file with this. Make sure that the actual name of your database and the name in this file match.
 
 ```json
 {
