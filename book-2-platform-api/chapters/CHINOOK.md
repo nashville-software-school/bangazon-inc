@@ -17,14 +17,13 @@ Click the download button from the [Chinook Database](https://github.com/lerocha
 
 ## Setting up the Chinook Database
 
-1. Open SQL Server Management Studio
-2. Open and execute the `Chinook_SqlServer.sql` file
-
-This file will create the `Chinook` database _**and**_ populate it with data when you execute it.
+1. Open Azure Data Studio
+1. Connect to your master database
+1. Open the `Chinook_SqlServer.sql` file and run it to create the database, the tables, and the data.
 
 ## Instructions
 
-1. Create a github repository for your answers to this exercise. Name your repository `chinook-{your Github username]`.
+1. Create a Github repository for your answers to this exercise. Name your repository `chinook-{your Github username]`.
 1. Go ahead and click around a little bit to familarize yourself with the database
 1. Draw an ERD of the Chinook database with [dbdiagram.io](http://www.dbdiagram.io). Make sure to label primary keys, foreign keys, and indicate the type of relationship (one to one, one to many, many to many, etc) for each relationship.
 1. Once you get a SQL statement working for one of the exercises, copy the SQL statement and paste it into the corresponding file for the exercise (_see below_). If your query doesn't return the expected results, try try again.

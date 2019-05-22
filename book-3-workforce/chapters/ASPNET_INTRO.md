@@ -90,7 +90,7 @@ using (SqlConnection conn = Connection)
     using (SqlCommand cmd = conn.CreateCommand())
     {
         cmd.CommandText = @"
-            SELECT s.Id
+            SELECT s.Id,
                 s.FirstName,
                 s.LastName,
                 s.SlackHandle,
