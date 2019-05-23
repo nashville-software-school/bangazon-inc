@@ -38,9 +38,6 @@ We will be covering integration tests in this chapter.
 It's true that a human _could_ open a web browser and manually perform all the steps necessary to test all parts of a web application, but - like with many things - a computer can do it faster, with fewer mistakes, and without complaining about how boring it is to test and retest the same app all the time.
 
 
-https://docs.microsoft.com/en-us/aspnet/core/test/integration-tests?view=aspnetcore-2.1
-
-
 ## Example
 
 Think waaaaaay back to when you learned React and consider the process of creating a new `Animal` resource in your `json-server` API.
