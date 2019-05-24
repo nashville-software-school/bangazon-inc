@@ -1,6 +1,7 @@
 # Assigning Cohort to Instructor
 
-## Editing
+## Editing an Instructor
+
 > **Note:** You will need a custom view model for this task _(e.g. `InstructorEditViewModel`)_
 
 Modify your Instructor edit form to display all cohorts in a select element. The user should be able to select one of the cohorts in the dropdown. When the user submits the form, then the corresponding row in the `Instructor` table in your database should have its `CohortId` column value updated.

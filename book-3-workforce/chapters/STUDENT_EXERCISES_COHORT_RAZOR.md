@@ -1,6 +1,6 @@
 # Assigning Cohort to Student
 
-## Editing
+## Editing a Student's Cohort and Exercises
 
 Take the work you did in the last exercise of assigning a cohort to an instructor and do the same for the student edit form. When you are done with this exercise, you should be able to successfully do the following actions when editing a student.
 
