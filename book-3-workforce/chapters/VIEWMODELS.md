@@ -52,8 +52,8 @@ namespace StudentExercises.Models.ViewModels
     public class StudentInstructorViewModel
     {
 
-        public IEnumerable<Student> Students { get; set; }
-        public IEnumerable<Instructor> Instructors { get; set; }
+        public List<Student> Students { get; set; }
+        public List<Instructor> Instructors { get; set; }
 
         private string _connectionString;
 

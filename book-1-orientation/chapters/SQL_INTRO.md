@@ -11,16 +11,17 @@
 
 What is a **relational database**? A relational database is one that stores data in tables and allows you to specify the relationships between records in those tables.
 
-
-
 ## Setup
 
-1. Open **SQL Server Management Studio** (**SSMS**).
-1. Create a new database called `MusicHistory`.
-1. Run [this script](./assets/musichistory.sqlserver.sql) inside SSMS to create and populate tables.
-1. In the SSMS toolbar click the "New Query" button to create a new query window.
+1. Open **Azue Data Studio**.
+1. Connect to the master database.
+1. Run [this SQL script](./assets/musichistory_create.sql) inside ADS to create a new database named `MusicHistory`.
+1. Delete the SQL from the previous step, and run [this SQL script](./assets/musichistory.sqlserver.sql) inside ADS to create tables in your database and insert some seed data.
+1. Type `ctrl+G` to view your connections.
+1. Right click your connection and choose _New Query_
+    ![open a new query window](./images/ads_newquery.gif)
 
-> **Note:** The `.sql` extension is common practice for files storing SQL queries
+You will be writing your SQL statements in this new, blank query window.
 
 ## Querying Data
 

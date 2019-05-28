@@ -77,22 +77,79 @@ You can read the [Handle requests with controllers in ASP.NET Core MVC](https://
 
 ## HTTP Verbs Overview
 
-When you generate a new Web API with the following command...
+### Create a new Web API via the command line
 
 ```sh
+mkdir -p ~/workspace/csharp/webapi/coffee
+cd ~/workspace/csharp/webapi/coffee
+dotnet new sln -n CoffeeShop -o .
 dotnet new webapi -n CoffeeShop
+dotnet sln add CoffeeShop/CoffeeShop.csproj
+cd CoffeeShop
+dotnet add package System.Data.SqlClient
+dotnet restore
+cd ..
+start CoffeeShop.sln
 ```
+
+### Create a new Web API via Visual Studio
+
+1. Click the File menu > New > Project...
+1. Type in "api" into the search bar
+1. Choose the _ASP .NET Core Web Application_ option
+1. Click _Next_
+1. Project name: CoffeeShop
+1. Choose where you want to create the project
+1. Click _Create_
+1. Choose _API_ on the next screen
+1. Uncheck the _Configure for HTTS_ checkbox
+1. Once the project is loaded click the Tools menu > NuGet Package Manager > Manage NuGet Packages for Solution
+1. Click the Browse tab at the top
+1. Enter "system.data.sqlclient" in the search bar
+1. Click that package in the search results
+1. Make sure you check the box for your project on the right
+1. Click the _Install_ button on the right of the screen
+1. Click _Ok_ in the preview window that appears
+1. Then you can close the NuGet Package Manager window
+
 
 The default scaffolding provides you with a `ValuesController`. It's very basic, and your instruction team will discuss HTTP verbs of GET, POST, PUT, DELETE. Then you will construct a simple coffee shop database, some data models, and a more complex controller that handles CRUD actions for coffee.
 
 ### Starter SQL
+
+1. Open Azure Data Studio.
+1. `ctrl+N` to create a new query window.
+1. Click the connect icon at the top of the query window.
+1. Choose the `master` data from the list of recent connections.
+1. Once the connection is established, paste the following SQL into the query window to create a new database and use it.
+
+```sql
+USE MASTER
+GO
+
+IF NOT EXISTS (
+    SELECT [name]
+    FROM sys.databases
+    WHERE [name] = N'CoffeeShop'
+)
+CREATE DATABASE CoffeeShop
+GO
+
+USE CoffeeShop
+GO
+```
+
+1. Now you will see `CoffeeShop` as an option in the dropdown menu.
+1. Select that database.
+1. Remove the SQL in the query window and replace it with the following SQL.
+1. `ctrl+A` to select all of the statements and run them with `alt+ENTER` or by clicking the run icon at the top of the query window.
 
 ```sql
 DROP TABLE IF EXISTS Coffee;
 
 CREATE TABLE Coffee (
     Id INTEGER NOT NULL PRIMARY KEY IDENTITY,
-    Title VARCHAR(50) NOT NULL
+    Title VARCHAR(50) NOT NULL,
     BeanType VARCHAR(50) NOT NULL
 );
 
@@ -106,7 +163,11 @@ INSERT INTO Coffee (Title, BeanType)
 VALUES ('Cappuccino', 'Guatemalan');
 ```
 
+Now you have a new database with one table that contains three rows of data.
+
 ### App Settings
+
+In order for your Web API to connect to this database, you are going to put the connection string in the `appsettings.json` file in your project. Open that file and replace the contents with the following configuration.
 
 ```json
 {
@@ -117,12 +178,30 @@ VALUES ('Cappuccino', 'Guatemalan');
   },
   "AllowedHosts": "*",
   "ConnectionStrings": {
-    "DefaultConnection": "Server=localhost\\SQLEXPRESS;Database=Coffee;Trusted_Connection=True;"
+    "DefaultConnection": "Server=localhost\\SQLEXPRESS;Database=CoffeeShop;Trusted_Connection=True;"
   }
 }
 ```
 
+### Coffee Model
+
+Create a `Models` directory in your project and add a new class named `Coffee` in that directory. Put the following code in that file.
+
+```cs
+namespace CoffeeShop.Models
+{
+    public class Coffee
+    {
+        public int Id { get; set; }
+        public string Title { get; set; }
+        public string BeanType { get; set; }
+    }
+}
+```
+
 ### Coffee Controller
+
+Create a new controller file named `CoffeesController.cs` in the **`Controllers`** directory in your project. Replace the contents of that new file with the code below.
 
 ```cs
 using System;
@@ -343,9 +422,12 @@ namespace CoffeeShop.Controllers
 
 Your instruction team will get you started on converting your student exercises command line app into an API that will respond to HTTP requests.
 
-### Setting up Database
+### Create the Project
 
-1. Generate a new Web API with `dotnet new webapi -o StudentExercises`
+Follow the steps from the beginning of the lesson to start a new Web API project from Visual Studio or the command line - whichever is your preference. Name the project `StudentExercisesAPI`.
+
+### Connecting to Database
+
 1. Update `appsettings.json`
    ```json
    {

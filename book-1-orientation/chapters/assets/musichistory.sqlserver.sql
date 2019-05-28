@@ -1,15 +1,3 @@
-
--- If we are re-running this script, make sure to clean up the old
---  tables before we attempt to re-create them.
-
-DROP TABLE IF EXISTS Song;
-DROP TABLE IF EXISTS Album;
-DROP TABLE IF EXISTS Artist;
-DROP TABLE IF EXISTS Genre;
-
-
--- Create new tables
-
 CREATE TABLE Genre (
     Id INTEGER NOT NULL PRIMARY KEY IDENTITY,
     Label VARCHAR(55) NOT NULL
@@ -137,3 +125,4 @@ INSERT INTO Song (Title, SongLength, ReleaseDate, GenreId, ArtistId, AlbumId) VA
 INSERT INTO Song (Title, SongLength, ReleaseDate, GenreId, ArtistId, AlbumId) VALUES ('Encore', 260, '12/03/1982', 13, 27, 1);
 INSERT INTO Song (Title, SongLength, ReleaseDate, GenreId, ArtistId, AlbumId) VALUES ('Dirt Off Your Shoulder', 851, '12/03/1982', 13, 27, 1);
 
+-- BLOCK: CREATE TABLES AND DATA
