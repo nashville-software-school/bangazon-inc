@@ -10,7 +10,7 @@ This book prepares you for building the web application that Bangazon employees 
 * Chapter 4 - [Student Exercises MVC - Part 1](./chapters/STUDENT_EXERCISES_WEBAPP.md)
 * Chapter 5 - [Razor Templating Power](./chapters/RAZOR_FEATURES.md)
 * Chapter 6 - [Student Exercises MVC - Part 2](./chapters/INSTRUCTOR_COHORT_RAZOR.md)
-* Chapter 8 - [Student Exercises MVC - Part 3](./chapters/STUDENT_EXERCISES_MULTISELECT.md)
+* Chapter 7 - [Student Exercises MVC - Part 3](./chapters/STUDENT_EXERCISES_MULTISELECT.md)
 
 > [__Sprint 2__ - Bangazon Workforce Management](./chapters/GROUP_PROJECT.md)
 
