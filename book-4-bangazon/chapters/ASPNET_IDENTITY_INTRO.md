@@ -12,35 +12,30 @@ By default the only information that is captured about the user by Identity Fram
 
 To do that you need to override the default code that Identity provides for registering a new user. You cannot modify that code directly, so you need to generate your own files in your project, and that will override the default behavior.
 
+Create `Models.ApplicationUser` (_see the code further down in the chapter_). By default, this adds first name, last name and street address as properties of the users of your system. If you want to capture even more data, add the properties to that class.
+
 ### Scaffolding Identity Assets
 
-```sh
-dotnet tool install --global dotnet-aspnet-codegenerator --version 2.1.6
-dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
-```
+As of .NET Core 2.1, the Razor pages that are used by Identity Framework for user management have been compiled into a Razor Page Archives, which means you can't see the `.cshtml` files in Solution Explorer. To override the template in the Archive, follow this process.
 
-Then open your `.csproj` file and add the following section.
+1. Right-click on your project in Solution Explorer
+1. Choose _Add -> Scaffolded Item_
+1. Select _Identity_ on the left
+1. Click next
+1. Choose `Login` and `Register` from the list of items that appear
+1. Choose your `ApplicationDbContext` file in the drop-down below the list of files
 
-```xml
-<ItemGroup>
-    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.1.0-preview1-final" />
-</ItemGroup>
-```
+Once that's complete, look in your Solution Explorer. You will see a new directory structure of `Areas -> Identity -> Pages -> Account`. In that directory, you will find the `Login.cshtml` and `Register.cshtml` files.
 
-Then restore the packages and run the generator to create your user class and corresponding views. Make sure you change the namespace from `StudentExercises` to your application's namespace.
+Click on the arrow next to each and it will show you that each of those files has a related `.cs` file. Open both of those `.cs` files.
 
-```sh
-dotnet restore
-dotnet aspnet-codegenerator identity -dc StudentExercises.Data.ApplicationDbContext --files "Account.Register;Account.Login;Account.Logout"
-```
-
-1. Remove the `Areas/Identity/Pages/Data` directory
-1. Remove the `Areas/Identity/ProjectStart.cs` file
-1. Create `Models.ApplicationUser` (_see below_) and add the additional properties.
-1. Update `Register.cshtml.cs` with
+1. Update `Register.cshtml.cs` and...
     1. Replace every instance of `IdentityUser` with `ApplicationUser` and use the lightbulb to include the correct namespace.
-    1. Update `InputModel` with corresponding properties
-    1. Update `OnPostAsync` with corresponding properties
+    1. Update `InputModel` to include all of the properties of `ApplicationUser`.
+    1. Update `OnPostAsync` so that the new instance of `ApplicationUser` has all of the properties being submitted in the form.
+1. Update `Register.cshtml` to include all of the HTML input fields for each of the properties on your `ApplicationUser`.
+1. Update `Login.cshtml.cs` and...
+    1. Replace every instance of `IdentityUser` with `ApplicationUser` and use the lightbulb to include the correct namespace.
 1. Update `Views/Shared/_LoginPartial.cshtml` to use the `ApplicationUser` instead of `IdentityUser`
 1. Also make sure that you change `Startup.cs` to replace `IdentityUser` with `ApplicationUser`.
 
@@ -49,23 +44,7 @@ dotnet aspnet-codegenerator identity -dc StudentExercises.Data.ApplicationDbCont
 
 In Visual Studio, you can use the scaffolding tool by right-clicking on the Controllers directory and choosing `Add > New Scaffolded Item`.
 
-You can scaffold a controller with its corresponding Razor views on the command line now. Type in the following command to see all of the options.
-
-```sh
-dotnet aspnet-codegenerator controller --help
-```
-
-Here's an example if you have a `Pet` data model, an `ApplicationDbContext` file, and want to generate a `Controllers.PetController.cs` file with the following views.
-
-* /Views/Payment/Create.cshtml
-* /Views/Payment/Edit.cshtml
-* /Views/Payment/Details.cshtml
-* /Views/Payment/Delete.cshtml
-* /Views/Payment/Index.cshtml
-
-```sh
-dotnet aspnet-codegenerator controller -name PetsController -actions -m Pet -dc ApplicationDbContext -outDir Controllers
-```
+Then choose the model you want your controller to handle and it will generate one with all of the Entity Framework statements required to interact with the database.
 
 ## References
 
@@ -120,30 +99,6 @@ Then ensure that you add a `DBSet` in your `ApplicationDbContext` for this custo
 
 ```cs
 public DbSet<ApplicationUser> ApplicationUsers { get; set; }
-```
-
-### Startup.cs
-
-To enable EF model-first migrations, and enable Identity Framework for your project, this is what your `ConfigureServices` method should be in the `Startup.cs` file.
-
-```cs
-public void ConfigureServices (IServiceCollection services) {
-    services.Configure<CookiePolicyOptions> (options => {
-        // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-        options.CheckConsentNeeded = context => true;
-        options.MinimumSameSitePolicy = SameSiteMode.None;
-    });
-
-    services.AddDbContext<ApplicationDbContext> (options =>
-        options.UseSqlServer (
-            Configuration.GetConnectionString ("DefaultConnection")));
-
-    services.AddDefaultIdentity<ApplicationUser> ()
-        .AddEntityFrameworkStores<ApplicationDbContext> ()
-        .AddDefaultTokenProviders ();
-
-    services.AddMvc ().SetCompatibilityVersion (CompatibilityVersion.Version_2_1);
-}
 ```
 
 ## Accessing the Authenticated User
