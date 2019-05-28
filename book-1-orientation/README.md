@@ -1,6 +1,6 @@
 # Book 1 - Bangazon Orientation
 
-This book builds a strong foundation in the syntax, data structures, and valuable methods available in the C# language. You will also strengthen your knowledge of data relationships through code and in a relational database system by learning SQL. You will be introduced to the concept and practice of writing tests to protect yourself, and your team, from dangerous code making it into production.
+This book builds a strong foundation in the syntax, data structures, and valuable methods available in the C# language. You will also strengthen your knowledge of data relationships through code and in a relational database system by learning SQL.
 
 ## Chapters
 
