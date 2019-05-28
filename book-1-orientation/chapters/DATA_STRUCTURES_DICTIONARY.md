@@ -70,12 +70,12 @@ Dictionary<string, string> wordsAndDefinitions = new Dictionary<string, string>(
 wordsAndDefinitions.Add("Awesome", "The feeling of students when they are learning C#");
 
 /*
-    Use square bracket lookup to get the definition two
-    words and output them to the console
+    Use square brackets to get the definition of two of the
+    words and then output them to the console
 */
 
 /*
-    Loop over dictionary to get the following output:
+    Below, loop over the wordsAndDefinitions dictionary to get the following output:
         The definition of [WORD] is [DEFINITION]
         The definition of [WORD] is [DEFINITION]
         The definition of [WORD] is [DEFINITION]
@@ -108,7 +108,7 @@ List<Dictionary<string, string>> dictionaryOfWords = new List<Dictionary<string,
     }
 */
 
-// Create dictionary to represent a few word
+// Create dictionary to represent a few words
 Dictionary<string, string> excitedWord = new Dictionary<string, string>();
 
 // Add each of the 4 bits of data about the word to the Dictionary
@@ -121,7 +121,7 @@ excitedWord.Add();
 
 
 /*
-    Iterate your list of dictionaries and output the data
+    Iterate your list of dictionaries and output the data, You can use the two foreach() loops below to help you start your iteration.
 
     Example output for one word in the list of dictionaries:
         word: excited
