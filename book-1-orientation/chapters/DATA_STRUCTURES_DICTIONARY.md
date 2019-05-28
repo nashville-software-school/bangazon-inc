@@ -78,7 +78,7 @@ wordsAndDefinitions.Add("Awesome", "The feeling of students when they are learni
     Below, loop over the wordsAndDefinitions dictionary to get the following output:
         The definition of (WORD) is (DEFINITION)
         The definition of (WORD) is (DEFINITION)
-        The definition of (WORD) is (DEFINITION)        The definition of [WORD] is [DEFINITION]
+        The definition of (WORD) is (DEFINITION)
 */
 foreach (KeyValuePair<string, string> word in wordsAndDefinitions)
 {
