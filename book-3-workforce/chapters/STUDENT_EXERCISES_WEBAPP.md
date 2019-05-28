@@ -2,7 +2,7 @@
 
 ## Displaying a List of Cohorts
 
-Your first task for this exercise is to start a new Visual Studio Web Application (MVC) project named `StudentExercisesMVC`. Then make a controller and corresponding Razor templates in order to manage the cohorts for your database.
+Open up your `StudentExercisesMVC` web app. Then make a controller and corresponding Razor templates in order to manage the cohorts for your database.
 
 Use scaffolding to...
 

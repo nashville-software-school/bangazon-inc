@@ -29,7 +29,7 @@ In a Web Application, you will be using the Razor templating system in .NET Core
 
 ## Configuration
 
-Open your `appsettings.json` file and add your connection string. If you copy the text below, make sure you change it to contain your server name.
+Open your `appsettings.json` file and add your connection string.
 
 ```json
 "ConnectionStrings": {
@@ -135,5 +135,7 @@ Now you start the project, and visit [http://localhost:5000/students](http://loc
 ## Adding the Other Views
 
 The next step is to create the `Details` view, the `Edit` view, and the `Delete` view. Use the scaffolding for _MVC View_ to create the Razor templates for each one. Don't attempt to build the create view until you get to the next chapter about View Models.
+
+If you finish early, you can skip ahead to Chapter 4 - [Student Exercises MVC - Part 1](./chapters/STUDENT_EXERCISES_WEBAPP.md) and build out views for each resource.
 
 

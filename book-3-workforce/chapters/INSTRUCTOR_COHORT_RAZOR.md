@@ -1,4 +1,5 @@
-# Assigning Cohort to Instructor
+# Assigning Cohorts in the Edit View
+
 
 ## Editing an Instructor
 
@@ -90,3 +91,9 @@ Use the follow tag helper in your Razor template for instructor edit.
     <select asp-for="Instructor.CohortId" asp-items="@Model.Cohorts"></select>
 </div>
 ```
+
+## Editing a student
+1. Now add the same functionality for students.
+1. You will need to create a `StudentEditViewModel`.
+1. When you edit a student, you should see a dropdown of all cohorts. The student's current cohort should be auto-selected.
+1. You should be able to select any cohort from the dropdown to reassign a student to a different cohort.
