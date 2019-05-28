@@ -6,11 +6,11 @@ Here's a JavaScript object to represent toys sold by a business.
 
 ```js
 const toysSold = {
-    "hotWheels": 344,
-    "legos": 763,
-    "gamingConsoles": 551,
-    "boardGames": 298
-}
+  hotWheels: 344,
+  legos: 763,
+  gamingConsoles: 551,
+  boardGames: 298
+};
 ```
 
 Here's how that would look in C# as a **`Dictionary`**.
@@ -43,11 +43,9 @@ foreach(KeyValuePair<string, int> toy in toysSold)
 
 ## References
 
-* [C# dictionaries](https://msdn.microsoft.com/en-us/library/xfhwa508(v=vs.110).aspx#Anchor_8)
-* [Dictionary in C#](http://www.c-sharpcorner.com/UploadFile/219d4d/dictionary-in-C-Sharp-language/)
-* [Interactive C# Dictionaries](http://www.learncs.org/en/Dictionaries)
-
-
+- [C# dictionaries](<https://msdn.microsoft.com/en-us/library/xfhwa508(v=vs.110).aspx#Anchor_8>)
+- [Dictionary in C#](http://www.c-sharpcorner.com/UploadFile/219d4d/dictionary-in-C-Sharp-language/)
+- [Interactive C# Dictionaries](http://www.learncs.org/en/Dictionaries)
 
 ---
 
@@ -70,26 +68,25 @@ Dictionary<string, string> wordsAndDefinitions = new Dictionary<string, string>(
 wordsAndDefinitions.Add("Awesome", "The feeling of students when they are learning C#");
 
 /*
-    Use square bracket lookup to get the definition two
-    words and output them to the console
+    Use square brackets to get the definition of two of the
+    words and then output them to the console
 */
 
+
 /*
-    Loop over dictionary to get the following output:
-        The definition of [WORD] is [DEFINITION]
-        The definition of [WORD] is [DEFINITION]
-        The definition of [WORD] is [DEFINITION]
+    Below, loop over the wordsAndDefinitions dictionary to get the following output:
+        The definition of (WORD) is (DEFINITION)
+        The definition of (WORD) is (DEFINITION)
+        The definition of (WORD) is (DEFINITION)
 */
 foreach (KeyValuePair<string, string> word in wordsAndDefinitions)
 {
 }
 ```
 
-
 ## Practice: List of Dictionaries about Words
 
 Now, you are going to refactor the structure of our data. Instead of one C# Dictionary with key value pairs for words and definitions. You want to track more than just the word and its definition, so we are going to build a list of dictionaries.
-
 
 ```cs
 // Make a new list
@@ -108,7 +105,7 @@ List<Dictionary<string, string>> dictionaryOfWords = new List<Dictionary<string,
     }
 */
 
-// Create dictionary to represent a few word
+// Create dictionary to represent a few words
 Dictionary<string, string> excitedWord = new Dictionary<string, string>();
 
 // Add each of the 4 bits of data about the word to the Dictionary
@@ -163,7 +160,7 @@ idioms.Add("Lucifer", new List<string> { "Speak", "of", "the", "devil" });
 
 > Reference: [String.Join() method](https://docs.microsoft.com/en-us/dotnet/api/system.string.join?view=netframework-4.7.2)
 
-## Challenge: Randall's Car Lot in C#
+## Challenge: Randall's Car Lot in C
 
 Take the following JavaScript data structure that represents car sales and convert it to C# Lists and Dictionaries. Make sure that all of your variable names conform to the C# standard of [Camel Case](https://en.wikipedia.org/wiki/Camel_case) instead of [Snake Case](https://en.wikipedia.org/wiki/Snake_case).
 
@@ -227,15 +224,15 @@ Oh, the Glory Days of JavaScript, when creating an object that contains another 
 
 ```js
 const myFamily = {
-    'sister': {
-        'name': 'Krista',
-        'age': 42
-    },
-    'mother': {
-        'name': 'Cathie',
-        'age': 70
-    }
-}
+  sister: {
+    name: "Krista",
+    age: 42
+  },
+  mother: {
+    name: "Cathie",
+    age: 70
+  }
+};
 ```
 
 Well, those days are over while you learn C#. Below you will see an example of how you will do that with a Dictionary.
@@ -244,89 +241,95 @@ Well, those days are over while you learn C#. Below you will see an example of h
 
 1. Define a Dictionary that contains information about several members of your family. Use the following example as a template.
 
-    ```cs
-    Dictionary<string, Dictionary<string, string>> myFamily = new Dictionary<string, Dictionary<string, string>>();
+   ```cs
+   Dictionary<string, Dictionary<string, string>> myFamily = new Dictionary<string, Dictionary<string, string>>();
 
-    myFamily.Add("sister", new Dictionary<string, string>(){
-        {"name", "Krista"},
-        {"age", "42"}
-    });
-    ```
+   myFamily.Add("sister", new Dictionary<string, string>(){
+       {"name", "Krista"},
+       {"age", "42"}
+   });
+   ```
+
 2. Next, iterate over each item in `myFamily` and produce the following output. Remember that you can use square bracket notation to get to the value of a key, and that a dictionary has a `Key` and a `Value` property.
-    ```cs
-    foreach(KeyValuePair<string, Dictionary<string, string>> familyMember in myFamily)
-    {
-        ... your code here
-    }
-    ```
 
-    ```sh
-    Krista is my sister and is 42 years old
-    ```
+   ```cs
+   foreach(KeyValuePair<string, Dictionary<string, string>> familyMember in myFamily)
+   {
+       ... your code here
+   }
+   ```
 
+   ```sh
+   Krista is my sister and is 42 years old
+   ```
 
 ## Challenge: Planets and Probes and KeyValuePairs
 
 In this exercise, you are going to directly use KeyValuePairs instead of Dictionaries.
 
 ### Instructions
+
 > **Ref:** [List of Solar System probes](https://en.wikipedia.org/wiki/List_of_Solar_System_probes)
 
 1. Use the list of planets you created in the previous chapter or create a new one with all eight planets.
-    ```cs
-    List<string> planetList = new List<string>(){"Mercury", "Venus", "Earth", ...};
-    ```
+
+   ```cs
+   List<string> planetList = new List<string>(){"Mercury", "Venus", "Earth", ...};
+   ```
 
 1. Create a list containing KeyValuePairs. Each KeyValuePair will hold the name of a spacecraft that we have launched, and the name of a planet that it has visited. The key of the KeyValuePair will be the probe name, and the value will be the planet it visited.
-    ```cs
-    List<KeyValuePair<string, string>> probeDestinations = new List<KeyValuePair<string, string>>();
-    // Add some planet/probe combinations to the list
-    ```
 
-    This would be the equivalent of an having an array of objects in JavaScript.
+   ```cs
+   List<KeyValuePair<string, string>> probeDestinations = new List<KeyValuePair<string, string>>();
+   // Add some planet/probe combinations to the list
+   ```
 
-    ```js
-    const probeDestinations = [
-        {
-            "Viking 1": "Mars",
-        },
-        {
-            "Mariner 1": "Venus"
-        },
-        {
-            "Voyager 1": "Jupiter"
-        },
-        {
-            "Voyager 1": "Saturn"
-        }
-    ]
-    ```
+   This would be the equivalent of an having an array of objects in JavaScript.
+
+   ```js
+   const probeDestinations = [
+     {
+       "Viking 1": "Mars"
+     },
+     {
+       "Mariner 1": "Venus"
+     },
+     {
+       "Voyager 1": "Jupiter"
+     },
+     {
+       "Voyager 1": "Saturn"
+     }
+   ];
+   ```
+
 1. Iterate over `probeDestinations`, and inside that loop, iterate over the list of dictionaries. Write to the console, for each planet, which probes have visited it.
-    ```cs
-    // Iterate planets
-    foreach (string planet in planetList)
-    {
-        // List to store probes that visited the planet
-        List<string> matchingProbes = new List<string>();
 
-        // Iterate probeDestinations
-        foreach()
-        {
-            /*
-                Does the current probe's destination
-                match the value of the `planet` variable?
-                If so, add it to the list.
-            */
-        }
+   ```cs
+   // Iterate planets
+   foreach (string planet in planetList)
+   {
+       // List to store probes that visited the planet
+       List<string> matchingProbes = new List<string>();
 
-        /*
-            Use String.Join(",", matchingProbes) as part of the
-            solution to get the output below. It's the C# way of
-            writing `array.join(",")` in JavaScript.
-        */
-        Console.WriteLine($"{}: {}");
-    }
-    ```
+       // Iterate probeDestinations
+       foreach()
+       {
+           /*
+               Does the current probe's destination
+               match the value of the `planet` variable?
+               If so, add it to the list.
+           */
+       }
+
+       /*
+           Use String.Join(",", matchingProbes) as part of the
+           solution to get the output below. It's the C# way of
+           writing `array.join(",")` in JavaScript.
+       */
+       Console.WriteLine($"{}: {}");
+   }
+   ```
 
 #### Example Output in the Terminal
 
