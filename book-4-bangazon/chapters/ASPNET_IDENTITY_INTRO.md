@@ -14,7 +14,7 @@ To do that you need to override the default code that Identity provides for regi
 
 Create `Models.ApplicationUser` (_see the code further down in the chapter_). By default, this adds first name, last name and street address as properties of the users of your system. If you want to capture even more data, add the properties to that class.
 
-### Scaffolding Identity Assets
+## Scaffolding Identity Assets
 
 As of .NET Core 2.1, the Razor pages that are used by Identity Framework for user management have been compiled into a Razor Page Archives, which means you can't see the `.cshtml` files in Solution Explorer. To override the template in the Archive, follow this process.
 
@@ -29,18 +29,70 @@ Once that's complete, look in your Solution Explorer. You will see a new directo
 
 Click on the arrow next to each and it will show you that each of those files has a related `.cs` file. Open both of those `.cs` files.
 
-1. Update `Register.cshtml.cs` and...
-    1. Replace every instance of `IdentityUser` with `ApplicationUser` and use the lightbulb to include the correct namespace.
-    1. Update `InputModel` to include all of the properties of `ApplicationUser`.
-    1. Update `OnPostAsync` so that the new instance of `ApplicationUser` has all of the properties being submitted in the form.
+### Adding More Fields for Registration
+
+1. Open `Register.cshtml.cs`
+1. Replace every instance of `IdentityUser` with `ApplicationUser` and use the lightbulb to include the correct namespace.
+1. Update `InputModel` to include all of the properties of `ApplicationUser`.
+    ```cs
+    // Example
+    [Required]
+    [Display(Name = "First Name")]
+    public string FirstName { get; set; }
+
+    [Required]
+    [Display(Name = "Last Name")]
+    public string LastName { get; set; }
+
+    [Required]
+    [Display(Name = "Street Address")]
+    public string StreetAddress { get; set; }
+    ```
+1. Update `OnPostAsync` so that the new instance of `ApplicationUser` has all of the properties being submitted in the form.
+    ```cs
+    // Example
+    var user = new ApplicationUser {
+        UserName = Input.Email,
+        FirstName = Input.FirstName,
+        LastName = Input.LastName,
+        StreetAddress = Input.StreetAddress,
+        Email = Input.Email
+    };
+    ```
 1. Update `Register.cshtml` to include all of the HTML input fields for each of the properties on your `ApplicationUser`.
-1. Update `Login.cshtml.cs` and...
-    1. Replace every instance of `IdentityUser` with `ApplicationUser` and use the lightbulb to include the correct namespace.
+    ```html
+    <div class="form-group">
+        <label asp-for="Input.FirstName"></label>
+        <input asp-for="Input.FirstName" class="form-control" />
+        <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Input.LastName"></label>
+        <input asp-for="Input.LastName" class="form-control" />
+        <span asp-validation-for="Input.LastName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Input.StreetAddress"></label>
+        <input asp-for="Input.StreetAddress" class="form-control" />
+        <span asp-validation-for="Input.StreetAddress" class="text-danger"></span>
+    </div>
+    ```
+
+### Make Login use ApplicationUser
+
+1. Open `Login.cshtml.cs`.
+1. Replace every instance of `IdentityUser` with `ApplicationUser` and use the lightbulb to include the correct namespace.
+
+## Make LoginPartial use ApplicationUser
+
 1. Update `Views/Shared/_LoginPartial.cshtml` to use the `ApplicationUser` instead of `IdentityUser`
-1. Also make sure that you change `Startup.cs` to replace `IdentityUser` with `ApplicationUser`.
+
+## Specify that ApplicationUser is the Default User
+
+1. Open `Startup.cs` and replace `IdentityUser` with `ApplicationUser`.
 
 
-### Scaffolding Controllers
+## Scaffolding Controllers
 
 In Visual Studio, you can use the scaffolding tool by right-clicking on the Controllers directory and choosing `Add > New Scaffolded Item`.
 
@@ -65,9 +117,12 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Identity;
 
-namespace StudentExercises.Models
+namespace YourApplicationNamespaceHere.Models
 {
-    // Add profile data for application users by adding properties to the ApplicationUser class
+    /*
+        Add profile data for application users by adding
+        properties to the ApplicationUser class
+    */
     public class ApplicationUser : IdentityUser
     {
         public ApplicationUser() { }
@@ -84,13 +139,12 @@ namespace StudentExercises.Models
         [Display(Name ="Street Address")]
         public string StreetAddress { get; set; }
 
-
-        // Set up PK -> FK relationships to other objects
+        /*
+            Which resources are related to the User? The code
+            below handles a case where a user can create many
+            products.
+        */
         public virtual ICollection<Product> Products { get; set; }
-
-        public virtual ICollection<Order> Orders { get; set; }
-
-        public virtual ICollection<PaymentType> PaymentTypes { get; set; }
     }
 }
 ```
@@ -98,7 +152,7 @@ namespace StudentExercises.Models
 Then ensure that you add a `DBSet` in your `ApplicationDbContext` for this custom type.
 
 ```cs
-public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+public DbSet<ApplicationUser> Users { get; set; }
 ```
 
 ## Accessing the Authenticated User
