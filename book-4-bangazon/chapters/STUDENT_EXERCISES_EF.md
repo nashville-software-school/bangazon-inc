@@ -48,6 +48,6 @@ Read over the [segment of your tutorial on search functionality](https://docs.mi
 1. Add a new item to your nav bar called "Reports".
 1. When the user navigates to this view, they should see a dropdown of all cohorts.
 1. When the user selects a cohort, they should see a report with the following data about that cohort:
-        * *Top Three In Progress Exercises*- this should be exercises that are assigned to students in that cohort but not completed
-        * *Top Three Busiest Students* - students with the most completed exercises
-        * *Top Three Laziest Students* - students with the most incomplete exercises
+    - *Top Three In Progress Exercises*- this should be exercises that are assigned to students in that cohort but not completed
+     - *Top Three Busiest Students* - students with the most completed exercises
+    - *Top Three Laziest Students* - students with the most incomplete exercises
