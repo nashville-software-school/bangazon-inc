@@ -5,6 +5,7 @@ This book prepares you to build the e-commerce application that serves our custo
 ## Chapters
 
 * Chapter 1 - [Entity Framework](./chapters/EF_INTRO.md)
+* Chapter 2 - [Student Exercises with Entity Framework](./chapters/STUDENT_EXERCISES_EF.md)
 * Chapter 2 - [Identity Framework](./chapters/ASPNET_IDENTITY_INTRO.md)
 * Chapter 3 - [Seeding Database](./chapters/EF_SEEDING.md)
 * Chapter 4 - [Accessing User Data in Razor Templates](./chapters/IDENTITY_RAZOR.md)
