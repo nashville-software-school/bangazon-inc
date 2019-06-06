@@ -18,7 +18,7 @@ Once you have completed the "Getting Started" portion of the Entity Framework tu
 1. Your Entity scaffolding uses `ViewData` to render the dropdowns of related data in create forms. Anywhere you see `ViewData` in your scaffolding, you should refactor it and create a view model instead.
 
 ## Viewing Related Data
-#### Cohort Detail View
+### Cohort Detail View
 1. When the user navigates to the detail view for a cohort, they should see a list of all students and all instructors currently in that cohort.
 
 ### Students Detail View
@@ -32,7 +32,7 @@ Once you have completed the "Getting Started" portion of the Entity Framework tu
 Read over the [segment of your tutorial on search functionality](https://docs.microsoft.com/en-us/aspnet/core/data/ef-mvc/sort-filter-page?view=aspnetcore-2.2)
 1. Implement a search bar in your student index view. The user should be able to search by first or last name. Searches should not be case sensitive.
 
-## Challenges
+# Challenges
 
 ### Assigning Exercises to Students
 1. Add a multi-select to the student edit view. Users should be able to assign one or many exercises to each student. Exercises that are already assigned should be pre-selected when the edit form renders.
