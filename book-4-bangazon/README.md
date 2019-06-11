@@ -10,7 +10,7 @@ This book prepares you to build the e-commerce application that serves our custo
 * Chapter 4 - [Seeding Database](./chapters/EF_SEEDING.md)
 * Chapter 5 - [Accessing User Data in Razor Templates](./chapters/IDENTITY_RAZOR.md)
 * Chapter 6 - [Travel Planner App](./chapters/TRAVEL_PLANNER_IF_EF.md)
-* Chapter 7 - [View Components](./chapters/VIEW_COMPONENTS.md)
+
 
 > ### __Sprint 3__ - Bangazon Web Site
 
@@ -18,6 +18,7 @@ This book prepares you to build the e-commerce application that serves our custo
 
 ## Supplementary Content
 
+* Supplement - [View Components](./chapters/VIEW_COMPONENTS.md)
 * Supplement - [Introduction to SSMS](./chapters/SSMS_INTRO.md)
 * Supplement - [How to Start a New Project](./chapters/PROJECT_INIT.md)
 * Supplement - [Deploy to Azure](./chapters/AZURE_DEPLOY.md)
