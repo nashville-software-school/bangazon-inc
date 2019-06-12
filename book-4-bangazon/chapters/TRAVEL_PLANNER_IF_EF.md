@@ -15,7 +15,7 @@ You're going to build an app to help travel agents keep track of clients and the
 1. Under "Authentication", select "Individaul User Accounts"
 1. Create your own model for an `ApplicationUser` to override the default Identity user.
 1. Your `ApplicationUser` will represent a travel agent and should have a first name and a last name. It should inherit from `IdentityUser`.
-1. Change references to `IdentityUser` so that they reference `Applicationuser` instead.
+1. Follow the steps in [the Identity Framework chapter](./chapters/ASPNET_IDENTITY_INTRO.md) to override your app's default `IdentityUser` with your new `ApplicationUser`.
 
 ## Build your database
 1. Use the business logic above to build an ERD
@@ -49,7 +49,7 @@ You're going to build an app to help travel agents keep track of clients and the
 ## Advanced Challenges
 Refactor your database to reflect the following business logic:
 
-1. Your travel agency has restructured. Now, instead of selling individual trips to clients, you also sell group trips. This means that many clients can be on one trip.
+1. Your travel agency has restructured. Now, instead of selling individual trips to clients, you also sell group trips. This means that many clients can be on any given trip. Clients can still go on multiple trips.
 1. You also want to keep track of the locations visited on each trip. Each trip can have many locations, and any given location might be included in many trips.
 1. Travel agents should be able to create, update, and delete locations.
 1. When travel agents create a trip, they should be able to select from a multi-select of both locations and clients.
