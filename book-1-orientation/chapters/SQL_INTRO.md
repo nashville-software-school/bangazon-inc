@@ -13,7 +13,7 @@ What is a **relational database**? A relational database is one that stores data
 
 ## Setup
 
-1. Open **Azue Data Studio**.
+1. Open **Azure Data Studio**.
 1. Connect to the master database.
 1. Run [this SQL script](./assets/musichistory_create.sql) inside ADS to create a new database named `MusicHistory`.
 1. Delete the SQL from the previous step, and run [this SQL script](./assets/musichistory.sqlserver.sql) inside ADS to create tables in your database and insert some seed data.
@@ -138,7 +138,7 @@ delete from Song;
 
 ## Instructions
 
-1. Using the **Object Explorer** in SSMS, examine the tables, columns, and foreign keys of the database.
+1. Using the **Object Explorer** in Azure Data Studio, examine the tables, columns, and foreign keys of the database.
 1. Using the `dbdiagram.io` site, create an ERD for the database.
 
 For each of the following exercises, provide the appropriate query. Yes, even the ones that are expressed in the form of questions. Everything from class and the references listed above is fair game.
