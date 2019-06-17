@@ -15,32 +15,25 @@ touch StudentExercises.sql
 
 ## Open the Database Script for Editing
 
-1. Open SSMS.
-1. Using the "File" menu, open the `StudentExercises.sql` file.
-
-![open sql file](./images/ssms_open_file.gif)
+1. Open Azure Data Studio.
+1. Connect to your `master` database by double clicking the connection in the Connections window.
+1. Click on "New Query" when it connects.
 
 ## Create a new Database
 
-1. In the Object Explorer, right-click the Databases node.
-1. Click "New Database" in the pop-up menu.
-1. Enter a name for the new database.
-1. Click "Ok".
-
-![create new database](./images/ssms_create_database.gif)
-
+1. Start typing in "create" and a menu will appear with helpful snippets you can choose.
+1. Choose the `sqlCreateDatabase` snippet and some boilerplate code will appear.
+1. Type `StudentExercises` and it will fill in the statement as you type.
+1. Press `Escape` key.
+1. Then click the Run button at the top and your database will be created.
 
 ## Creating Data
 
-1. Ensure that your database is selected in the database dropdown located above the Object Explorer.
-1. In the Query Window, enter the SQL to create all of your tables, columns, and foreign key constraints.
+In the Query Window, enter the SQL to create all of your tables, columns, and foreign key constraints.
 
-![create table](./images/ssms_create_tables.gif)
+Use `CREATE TABLE` statements to create the tables and columns. Make sure you put in the foreign key `CONSTRAINT` statements where needed.
 
 Then use `INSERT` statements to create data in your tables.
-
-![insert data](./images/ssms_insert_data.gif)
-
 
 ## Instructions
 
