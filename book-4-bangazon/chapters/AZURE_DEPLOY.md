@@ -26,9 +26,7 @@ Follow the steps in the [Quickstart: Azure SQL Database: Use SQL Server Manageme
 1. Navigate to your database
 1. Right click and select _Tasks > Deploy Database to Microsoft Azure_
 1. Follow the steps in the tool that appears.
-  - In the first window that pops up, select "App Service" from the menu bar on the left.
-  - Select "Create New"
-  - In the next view, the resource group that you created when you created your sample database should show up. Select it from the dropdown.
+
 
 ## Connect your Application to your Azure Database
 
@@ -48,6 +46,9 @@ Start your application and make sure it connects correctly to your SQL Server da
 
 1. In Visual Studio, right click your project and select _Publish_ from the menu.
 1. Follow the steps in the deployment tool that appears.
+    - In the first window that pops up, select "App Service" from the menu bar on the left.
+    - Select "Create New"
+    - In the next view, the resource group that you created when you created your sample database should show up. Select it from the dropdown.
 1. When complete, you can click on the `Site URL` it created for you.
 
 That's it. Your application is now deployed.
