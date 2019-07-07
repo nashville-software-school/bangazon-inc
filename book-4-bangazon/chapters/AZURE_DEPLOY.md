@@ -10,7 +10,9 @@ First you sign for a free tier account on [azure.microsoft.com](https://azure.mi
 
 Next, you will deploy your database from SQL Server Management Studio (SSMS).
 
-Go to [portal.azure.com](https://portal.azure.com) and once you are signed in, click on _**SQL Databases**_ on the left. Click the _Add_ button at the top and complete all of the steps for creating a new SQL Server.
+[You may need to update SSMS first](https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-2017).
+
+Go to [portal.azure.com](https://portal.azure.com) and once you are signed in, click on _**SQL Databases**_ on the left. Click the _Add_ button at the top and complete all of the steps for creating a new SQL Server. This can just be a sample database-- it doesn't have to be named the same thing as your capstone. You're basically just using this databse to create a new instance of a SQL Server.
 
 > **Reference:** [Quickstart: Create an Azure SQL database in the Azure portal](https://docs.microsoft.com/en-us/azure/sql-database/sql-database-get-started-portal)
 
@@ -24,6 +26,9 @@ Follow the steps in the [Quickstart: Azure SQL Database: Use SQL Server Manageme
 1. Navigate to your database
 1. Right click and select _Tasks > Deploy Database to Microsoft Azure_
 1. Follow the steps in the tool that appears.
+  - In the first window that pops up, select "App Service" from the menu bar on the left.
+  - Select "Create New"
+  - In the next view, the resource group that you created when you created your sample database should show up. Select it from the dropdown.
 
 ## Connect your Application to your Azure Database
 
@@ -31,8 +36,9 @@ Follow the steps in the [Quickstart: Azure SQL Database: Use SQL Server Manageme
 1. Select your new database
 1. Select the _Connection Strings_ item from the sub-menu
 1. Copy the connection string and paste it into your `appsettings.json` file in your project.
-1. Replace `{your_username}` with the username you created for the database.
+1. Replace `{your_username}` with the username you created for the database. 
 1. Replace `{your_password}` with the password you created for the database.
+1. In both previous steps, don't forget to take out the curly braces!
 
 ## Testing your Azure Database
 
