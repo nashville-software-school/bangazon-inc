@@ -293,7 +293,7 @@ In this exercise, you are going to directly use KeyValuePairs instead of Diction
         }
     ]
     ```
-1. Iterate over `probeDestinations`, and inside that loop, iterate over the list of dictionaries. Write to the console, for each planet, which probes have visited it.
+1. Iterate over `planetList`, and inside that loop, iterate over the list of key-value pairs. Write to the console, for each planet, which probes have visited it.
     ```cs
     // Iterate planets
     foreach (string planet in planetList)
