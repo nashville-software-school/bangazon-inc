@@ -2,7 +2,7 @@
 
 The first line in any Razor template that uses data from your database is a reference to the type of data that the view will render. In the code below, `@model StudentExercisesAPI.Data.Student` is the view model. This allows ASP.NET to use that class to display data in the correct format, and validate user input (_if needed_).
 
-```cs
+```html+razor
 @model StudentExercisesAPI.Data.Student
 
 @{
@@ -141,7 +141,7 @@ namespace StudentExercises.Models.ViewModels
 
 You now have a new view model whose specific purpose is to hold data for a Razor template that will list all students and all instructors. Open your _Views > Home > Index.cshtml_ file and place the following code into it.
 
-```cs
+```html+razor
 @model StudentExercises.Models.ViewModels.StudentInstructorViewModel
 
 @{
@@ -280,7 +280,7 @@ namespace StudentExercises.Models.ViewModels
 
 This view model will automatically store a list of all cohorts when it's constructed by the controller. They are in a list of `SelectListItem`, which the ASP.NET representation of an `<option>` element that is a child of a `<select>`. Now you can use this view model in the student creation Razor template at _`Views > Students > Create.cshtml`_.
 
-```cs
+```html+razor
 @model StudentExercises.Models.ViewModels.StudentCreateViewModel
 
 @{
@@ -331,7 +331,7 @@ This view model will automatically store a list of all cohorts when it's constru
 
 One special thing you should note in this template is the tag helper for `<select>`.
 
-```html
+```html+razor
 <select asp-for="student.CohortId" asp-items="@Model.Cohorts"></select>
 ```
 
