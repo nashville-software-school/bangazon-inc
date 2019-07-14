@@ -91,7 +91,7 @@ namespace Bangazon.ViewComponents
 
 > Views/Shared/Components/OrderCount/Default.cshtml
 
-```html
+```html+razor
 @model Bangazon.ViewComponents.OrderCountViewModel
 
 <span href="#" id="nav-shopping-cart">Cart (@Model.OrderCount)</span>
@@ -103,6 +103,6 @@ Once you have the logic for the component written, and have created the `cshtml`
 
 > Views/Shared/_LoginPartial.cshtml
 
-```html
+```html+razor
 <li>@await Component.InvokeAsync("OrderCount")</li>
 ```
