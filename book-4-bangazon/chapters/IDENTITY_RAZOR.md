@@ -6,7 +6,7 @@ There are often times that you want to display certain information in a Razor te
 
 First, you need to inject the `UserManager` and the `SignInManager` tools into the Razor template. If you are using a custom user model, then you also need to include a `using` statement for the namespace of your models.
 
-```cs
+```html+razor
 @using Microsoft.AspNetCore.Identity
 @using Bangazon.Models
 
@@ -16,7 +16,7 @@ First, you need to inject the `UserManager` and the `SignInManager` tools into t
 
 Now you can use those tools to determine if the user is authenticated, and get their information.
 
-```html
+```html+razor
 @if (SignInManager.IsSignedIn(User))
 {
     Hello @UserManager.GetUserAsync(User).Result.FirstName @UserManager.GetUserAsync(User).Result.LastName
