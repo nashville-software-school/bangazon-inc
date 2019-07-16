@@ -16,6 +16,8 @@ namespace StudentExercises.Data {
         public DbSet<Student> Students { get; set; }
 
     protected override void OnModelCreating (ModelBuilder modelBuilder) {
+        base.OnModelCreating(modelBuilder);
+        
         // Create a new user for Identity Framework
         ApplicationUser user = new ApplicationUser {
             FirstName = "admin",
