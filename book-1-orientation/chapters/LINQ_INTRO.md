@@ -534,8 +534,6 @@ As a light introduction to working with relational databases, this example works
 
 This is called joining the collections together.
 
-This exercise is also an introduction to producing anonymous objects as the result of the LINQ statement.
-
 Read the [Group Join](https://code.msdn.microsoft.com/LINQ-Join-Operators-dabef4e9#groupjoin) example to get started.
 > **NOTE**: You might also find these pages on the Microsoft Docs site helpful.
 > * [Enumerable.GroupJoin Method](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.groupjoin?view=netframework-4.8#System_Linq_Enumerable_GroupJoin__4_System_Collections_Generic_IEnumerable___0__System_Collections_Generic_IEnumerable___1__System_Func___0___2__System_Func___1___2__System_Func___0_System_Collections_Generic_IEnumerable___1____3__)
@@ -616,4 +614,3 @@ public class Program
     }
 }
 ```
-

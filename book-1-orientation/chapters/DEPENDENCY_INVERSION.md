@@ -223,7 +223,7 @@ public class Mummy : ICombustable
 {
     public void Burn (string attack)
     {
-        if (attack === "Fire") {
+        if (attack == "Fire") {
             Console.WriteLine("You just killed the Mummy");
         }
     }
@@ -241,7 +241,7 @@ public static void Main()
 
     Mummy tuts = new Mummy();
 
-    VonRimmersmark.Burn(tuts);
+    VonRimmersmark.Ignite(tuts);
 }
 ```
 
