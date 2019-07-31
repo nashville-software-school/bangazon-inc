@@ -7,6 +7,7 @@ This will be an interactive lesson. Your instructor will lead you through follow
 1. Open the [departments and employees](./assets/departments-employees.sql) SQL script and copy it into Azure Data Studio. Select the entire contents of the file and run it. This will create the database, and the tables, and insert some data.
 1. In Visual Studio, create a new console application called `DepartmentsEmployees`.
 1. In your terminal, navigate to the directory where you created your project. The directory will have a `DepartmentsEmployees.sln` file in it.
+1. `cd` into your project directory. When you list what's in the directory, you should see your `Program.cs`.
 1. Run the following commands. This imports the required package needed to have your C# code connect to a SQL Server database.
     ```sh
     dotnet add package System.Data.SqlClient
@@ -633,4 +634,3 @@ _                           | <span>ADO.NET</span>          | Micro-ORM (Dapper)
 **Degree of "Magic"**       | none                          | a little                                     | a lot
 **Pros**                    | Full control, best performance | Balance between control and ease of use      | Ease of use, Rapid development
 **Cons**                    | Lots of code to write         | Can lead to writing more code than is needed | Too much magic, Performance can suffer
-
