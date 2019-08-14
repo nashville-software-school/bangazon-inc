@@ -4,12 +4,12 @@
 -- IF NOT EXISTS (
 --     SELECT [name]
 --     FROM sys.databases
---     WHERE [name] = N'Bangazon'
+--     WHERE [name] = N'BangazonWorkforce'
 -- )
--- CREATE DATABASE Bangazon
+-- CREATE DATABASE BangazonWorkforce
 -- GO
 
--- USE Bangazon
+-- USE BangazonWorkforce
 -- GO
 
 -- DELETE FROM OrderProduct;
@@ -112,14 +112,16 @@ CREATE TABLE ProductType (
 CREATE TABLE Customer (
 	Id INTEGER NOT NULL PRIMARY KEY IDENTITY,
 	FirstName VARCHAR(55) NOT NULL,
-	LastName VARCHAR(55) NOT NULL
+	LastName VARCHAR(55) NOT NULL,
+	CreationDate DATETIME NOT NULL,
+	LastActiveDate DATETIME NOT NULL
 );
 
 CREATE TABLE Product (
 	Id INTEGER NOT NULL PRIMARY KEY IDENTITY,
 	ProductTypeId INTEGER NOT NULL,
 	CustomerId INTEGER NOT NULL,
-	Price INTEGER NOT NULL,
+	Price MONEY NOT NULL,
 	Title VARCHAR(255) NOT NULL,
 	[Description] VARCHAR(255) NOT NULL,
 	Quantity INTEGER NOT NULL,
