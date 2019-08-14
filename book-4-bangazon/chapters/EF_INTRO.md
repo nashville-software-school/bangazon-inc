@@ -46,7 +46,8 @@ public ActionResult Index()
 ```cs
 public async Task<IActionResult> Index()
 {
-    return View(await _context.Department.ToListAsync());
+    List<Department> departments = await _context.Department.ToListAsync();
+    return View(departments);
 }
 ```
 
@@ -94,6 +95,127 @@ public async Task<IActionResult> Create(Department department)
     }
     return View(department);
 }
+```
+
+### DbContext
+In Entity Framework we don't directly use a `SqlConnection` object like we did in ADO.<span>NET</span>. Instead we use an instance of ` Microsoft.EntityFrameworkCore.DbContext`.
+
+In the examples above you'll notice the `_context` variable. This private field is the instance of our `DbContext` that we use in our controller to interact with the database.
+
+The first step in creating a `DbContext` is to make a new class that inherits from it. This class is commonly called `ApplicationDbContext`. Because every database is different, Microsoft could not make a generic `DbContext` to cover everything. The `DbContext` EF provides is a base class that we extend with the specifics of our database.
+
+Here is a partial implementation of an `ApplicationDbContext` for Bangazon's Workforce Application.
+
+```cs
+using Bangazon.Models;
+using Microsoft.EntityFrameworkCore;
+
+namespace Bangazon.Data {
+    public class ApplicationDbContext : DbContext {
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
+
+        public DbSet<Employee> Employee { get; set; }
+        public DbSet<Department> Department { get; set; }
+    }
+}
+```
+In order to get an instance of our `ApplicationDbContext` class in our controller, we use dependency injection. By creating a parameter in the controller's constructor, we're telling ASP.<span>NET</span> to give us an instance.
+
+```cs
+namespace Bangazon.Controllers {
+    public class DepartmentsController : Controller {
+        private readonly ApplicationDbContext _context;
+
+        public DepartmentsController(ApplicationDbContext context) {
+            _context = context;
+        }
+
+        // ...controller actions that use the _context field...
+    }
+}
+```
+
+### DbSet&lt;T&gt;
+
+Notice the `DbSet<T>` properties in `ApplicationDbContext`. `DbSet<T>`s are the link between models and database tables. The `ApplicationDbContext` above implies that we have `Employee` and `Department` model classes AND `Employee` and `Department` database tables.
+
+Take another look at this line from the department query example above:
+
+```cs
+List<Department> departments = await _context.Department.ToListAsync();
+```
+We are accessing the `Department` property on the instance of our `ApplicationDbContext` in order to query the `Department` database table.
+
+### CRUD with Entity Framework
+
+#### Create
+
+To insert a record into a database table use the context's `Add()` method followed by `SaveChangesAsync()`
+
+```cs
+Department dept = new Department() {
+    Name = "Public Relations",
+    Budget = 500_000
+};
+_context.Add(dept);
+await _context.SaveChangesAsync();
+```
+
+> **NOTE:** the `Add` method only "stages" the insert action. The database is not updated until `SaveChangesAsync()` is called.
+
+> **NOTE:** We do NOT set the department's `Id` property. The database will provide the new department id.
+
+#### Read
+
+To query a database table use LINQ queries on the appropriate `DbSet<T>`. In EF we have the full power of LINQ along with some additional capabilities that LINQ does not provide.
+
+```cs
+// Get all Employees
+await _context.Employee.ToListAsync();
+
+// Get an individual Employee by id
+await _context.Employee.FindAsync(id);
+// or
+await _context.Employee.FirstOrDefaultAsync(e => e.id == id);
+
+// Get all Employees with the last name of Garcia
+// ordered by their first name
+await _context.Employee
+              .Where(e => e.LastName == 'Garcia')
+              .OrderBy(e => e.FirstName)
+              .ToListAsync();
+
+// Get All supervisors and their departments
+// "Include()" is the way to do simple SQL JOINS
+await _context.Employee
+              .Include(e => e.Department)
+              .Where(e => e.IsSupervisor)
+              .ToListAsync();
+```
+
+> **NOTE:** The query is not executed in the database until one of the "Async" methods is called. (e.g. `ToListAsync(), FindAsync(), FirstOrDefaultAsync()`)
+
+#### Update
+
+Update a record with the `Update()` method.
+
+```cs
+Employee emp = await _context.Employee.FirstOrDefaultAsync(e => e.FirstName == "Betty");
+
+emp.FirstName = "Liz";
+
+_context.Update(emp);
+await _context.SaveChangesAsync();
+```
+
+#### Delete
+
+Delete a record with the `Remove()` method.
+
+```cs
+Department dept = _context.Department.FindAsync(id);
+_context.Remove(dept);
+await _context.SaveChangesAsync();
 ```
 
 ## References
