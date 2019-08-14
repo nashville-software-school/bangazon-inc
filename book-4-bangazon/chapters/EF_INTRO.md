@@ -251,4 +251,10 @@ While the simpler syntax may seem like a breath of fresh air, and much easier to
 
 ## Tutorial
 
-Please do the [ASP.NET Core MVC with Entity Framework Core - Tutorial](https://docs.microsoft.com/en-us/aspnet/core/data/ef-mvc/?view=aspnetcore-2.2) in which you will build a small web application using EF. It shows you how to configure your application for using it, how to set up a database context, and how to use that database context with LINQ statements to interact with a database.
+Please complete, _at least_, the first four parts of the [ASP.NET Core MVC with Entity Framework Core](https://docs.microsoft.com/en-us/aspnet/core/data/ef-mvc/?view=aspnetcore-2.2) Tutorial.
+
+
+> **NOTE:** This tutorial is challenging and will include new concepts beyond those specifically related to Entity Framework, but stick with it. It's an important part of your education to practice learning from online documentation. This will not be the last time you find yourself needing to learn something from docs.
+
+> **NOTE:** It is easy race through the tutorial without reading and understanding what is being discussed. Do NOT make this mistake. Read the text don't just copy and paste the code.
+
