@@ -139,7 +139,73 @@ namespace StudentExercises.Models.ViewModels
 }
 ```
 
-You now have a new view model whose specific purpose is to hold data for a Razor template that will list all students and all instructors. Open your _Views > Home > Index.cshtml_ file and place the following code into it.
+You now have a new view model whose specific purpose is to hold data for a Razor template that will list all students and all instructors. We'll want to create an instance of this view model in `HomeController` so that we can pass it to the view. To be able to create an instance, we'll need to pass the connection string to the view model's constructor. To access the connection string, paste this inside the `HomeController` class.
+
+```cs
+private readonly IConfiguration _config;
+
+public HomeController(IConfiguration config)
+{
+    _config = config;
+}
+```
+
+Your `HomeController` class should now look like this:
+
+```cs
+public class HomeController : Controller
+{
+    private readonly IConfiguration _config;
+
+    public HomeController(IConfiguration config)
+    {
+        _config = config;
+    }
+
+    public IActionResult Index()
+    {
+        return View();
+    }
+
+    public IActionResult About()
+    {
+        ViewData["Message"] = "Your application description page.";
+
+        return View();
+    }
+
+    public IActionResult Contact()
+    {
+        ViewData["Message"] = "Your contact page.";
+
+        return View();
+    }
+
+    public IActionResult Privacy()
+    {
+        return View();
+    }
+
+    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+    public IActionResult Error()
+    {
+        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+    }
+}
+```
+
+Now we can create an instance of a `StudentInstructorViewModel` in the controller's `Index` method and pass it to the view.
+
+```cs
+public IActionResult Index()
+{
+    var viewModel = new StudentInstructorViewModel(_config.GetConnectionString("DefaultConnection"));
+    return View(viewModel);
+}
+```
+
+
+Open your _Views > Home > Index.cshtml_ file and place the following code into it.
 
 ```cs
 @model StudentExercises.Models.ViewModels.StudentInstructorViewModel
@@ -241,8 +307,9 @@ namespace StudentExercises.Models.ViewModels
                     Text = li.Name,
                     Value = li.Id.ToString()
                 })
-                .ToList()
-                .Insert(0, new SelectListItem
+                .ToList();
+
+            Cohorts.Insert(0, new SelectListItem
                 {
                     Text = "Choose cohort...",
                     Value = "0"
