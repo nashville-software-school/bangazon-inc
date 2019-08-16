@@ -15,6 +15,9 @@ This book prepares you for building the web application that Bangazon employees 
 
 > [__Sprint 2__ - Bangazon Workforce Management](./chapters/GROUP_PROJECT.md)
 
+
+* Chapter 9 - [More SQL Exercises](./chapters/SQL_EXERCISES.md)
+
 ## Supplementary Content
 
 * Supplement - [Additional Student Exercises MVC Features](./chapters/STUDENT_EXERCISES_CHALLENGES.md)
