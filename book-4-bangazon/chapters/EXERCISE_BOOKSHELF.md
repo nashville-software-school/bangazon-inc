@@ -10,7 +10,7 @@ Your instruction team will demonstrate creating the initial structure of this ap
 
 The goal of this application is to allow users to keep track of the books they have on their bookshelf, as well as the authors of those books.
 
-This application should be build in ASP.<span>NET</span> Core MVC with Entity and Identity Frameworks and use a SQL Server database to store data.
+This application should be built in ASP.<span>NET</span> Core MVC with Entity and Identity Frameworks and use a SQL Server database to store data.
 
 
 ### Data Entities
