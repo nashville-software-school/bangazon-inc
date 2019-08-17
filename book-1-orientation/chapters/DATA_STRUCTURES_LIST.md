@@ -47,6 +47,7 @@ The `List` collection in C# has the following methods that an array does not.
 * [Count](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1.count?view=netcore-2.1)
 
 ```cs
+using System;
 using System.Collections.Generic;
 
 namespace NSSOrientation
@@ -59,7 +60,7 @@ namespace NSSOrientation
                 "Megan", "Damon", "Chase", "Tekisha",
                 "Castle", "Mark", "Keith", "Adam",
                 "Patrick", "Hannah", "Mike"
-            }
+            };
 
             // Can't do this easily with a base array
             students.Add("Melanie");

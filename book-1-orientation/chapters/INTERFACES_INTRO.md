@@ -111,11 +111,10 @@ List<Zero> electricVehicles = new List<Zero>() { fx, fxs, modelS };
 
 This is where you can use the power of interfaces. First, you determine what each of the items you want to group together have in common. For the electric vehicles, they share the `BatteryKWh` property and the `ChargeBattery()` method. You and your team agree that every electric-powered vehicle must have those two things on them - it's what makes them eletric vehicles. They can't be ommitted.
 
-You create an interface that every eletric vehicle class must implement. It's important to note that you **cannot** put logic in an interface. An interface simply lists the rules, or the contract, that a class must abide by. **_How_** the class abides by the rules is up to the individual class.
+You create an interface that every electric vehicle class must implement. It's important to note that you **cannot** put logic in an interface. An interface simply lists the rules, or the contract, that a class must abide by. **_How_** the class abides by the rules is up to the individual class.
 
 For example, this interface says that any class that implements it **must** have a `BatteryKHw` property. The developer can choose...
 
-* If it is public or private
 * If it has a getter and setter
 * If the getter/setter have specific logic
 
@@ -260,7 +259,7 @@ public interface ISwimming
 }
 ```
 
-Now you can define a class an implement the interface for a walking animal. You can start with an African Painted Dog.
+Now you can define a class as an implemention of the interface for a walking animal. You can start with an African Painted Dog.
 
 ```cs
 public class PaintedDog : IWalking

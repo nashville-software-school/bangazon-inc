@@ -102,14 +102,17 @@ INSERT INTO Genre (Label) VALUES ('Techno');
 Change the length (in seconds) for one of the songs.
 
 ```sql
-select * from Song where Id = 18;
-> 664
+select SongLength from Song where Id = 18;
+
+-- The following is the output you get when you run the query above.
+> 237
 
 update Song
 set SongLength = 515
 where Id = 18;
 
-select * from Song where Id = 18;
+-- Once you run the update statement, in order to make sure the value has changed, we run the select query again.
+select SongLength from Song where Id = 18;
 > 515
 ```
 
@@ -151,8 +154,8 @@ For each of the following exercises, provide the appropriate query. Yes, even th
     > **Reminder:** Direction of join matters. Try the following statements and see the difference in results.
 
     ```
-    SELECT a.Title, s.Title FROM Album a LEFT JOIN Song s ON s.AlbumId = a.AlbumId;
-    SELECT a.Title, s.Title FROM Song s LEFT JOIN Album a ON s.AlbumId = a.AlbumId;
+    SELECT a.Title, s.Title FROM Album a LEFT JOIN Song s ON s.AlbumId = a.Id;
+    SELECT a.Title, s.Title FROM Song s LEFT JOIN Album a ON s.AlbumId = a.Id;
     ```
 1. Write a `SELECT` statement to display how many songs exist for each album. You'll need to use the `COUNT()` function and the `GROUP BY` keyword sequence.
 1. Write a `SELECT` statement to display how many songs exist for each artist. You'll need to use the `COUNT()` function and the `GROUP BY` keyword sequence.
