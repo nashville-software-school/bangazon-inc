@@ -8,13 +8,13 @@ This book prepares you to build the e-commerce application that serves our custo
 * Chapter 2 - [Identity Framework](./chapters/ASPNET_IDENTITY_INTRO.md)
 * Chapter 3 - [Seeding Database](./chapters/EF_SEEDING.md)
 * Chapter 4 - [View Components](./chapters/VIEW_COMPONENTS.md)
+* Chapter 5 - [Exercise - BookShelf App](./chapters/EXERCISE_BOOKSHELF.md)
 
 > ### __Sprint 3__ - Bangazon Web Site
 
-* Chapter 5 - [JSON Web Tokens](./chapters/JWT.md)
-
 ## Supplementary Content
 
+* Supplement - [JSON Web Tokens](./chapters/JWT.md)
 * Supplement - [Introduction to SSMS](./chapters/SSMS_INTRO.md)
 * Supplement - [How to Start a New Project](./chapters/PROJECT_INIT.md)
 * Supplement - [Deploy to Azure](./chapters/AZURE_DEPLOY.md)
