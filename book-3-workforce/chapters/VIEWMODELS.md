@@ -44,9 +44,11 @@ Since Razor views are strongly typed by the view model, imagine that your produc
 
 You don't. Therefore, you need to create a new, custom view model for that particular Razor template.
 
-Create a new directory inside your `Models` directory named `ViewModels`. Then create a new class inside that directory named `StudentInstructorViewModel.cs`. Then place the following code inside of it.using System.Collections.Generic;
+Create a new directory inside your `Models` directory named `ViewModels`. Then create a new class inside that directory named `StudentInstructorViewModel.cs`. Then place the following code inside of it.
 
 ```cs
+using System.Collections.Generic;
+
 namespace StudentExercises.Models.ViewModels
 {
     public class StudentInstructorViewModel
