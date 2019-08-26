@@ -118,7 +118,7 @@ Click on the arrow next to the `Register.cshtml` file and you will see a related
 ### Adding More Fields for Registration
 
 1. Open `Register.cshtml.cs`
-1. Update type parameters on `SignInManager` and `UserManager` from `IdentityUser` to `ApplicationUser` on lines 19, 20, 25 & 26
+1. Change `SignInManager<IdentityUser>` and `UserManager<IdentityUser>` to instead be `SignInManager<ApplicationUser>` and `UserManager<ApplicationUser>` on lines 19, 20, 25 & 26
 1. Update `InputModel` to include all of the properties of `ApplicationUser`.
     ```cs
     // Example
