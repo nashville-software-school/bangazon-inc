@@ -95,7 +95,7 @@ Put a breakpoint at the start of the `Main` method and step through. If we Step 
 
 ## Autos and Locals Window
 
-When you are stopped on a breakpoint Studio, instead of hovering over every variable name, you can also view the values of all your variables with the Autos and Locals windows.
+When you are stopped on a breakpoint, instead of hovering over every variable name, you can also view the values of all your variables with the Autos and Locals windows.
 
 ![Autos and Locals](./images/autos_locals.gif)
 
