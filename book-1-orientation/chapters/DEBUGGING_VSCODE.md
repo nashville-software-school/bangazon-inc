@@ -1,5 +1,9 @@
 # Debugging
 
+_To follow along with the example code below, clone this repo_
+
+[VS Code Debugging Example](https://github.com/nashville-software-school/vscode-csharp-debug-demo)
+
 ## Visual Studio Code
 
 When first opening a C# project in VS Code, you may be presented with a dialog asking if you'd like to add assets that are required for debugging. Select Yes.
@@ -10,7 +14,7 @@ If you aren't presented with that window, you can select the Debugger icon on th
 
 ![VS Code Debug Start](./images/DebugLaunchSettings.gif)
 
-This will create a `.vs` folder in your project that contains a `launch.json` and a `tasks.json` file. 
+This will create a `.vscode` folder in your project that contains a `launch.json` and a `tasks.json` file. 
 
 Open the `launch.json` file and find the "console" property. This propety can have 1 of 3 values
 
@@ -30,7 +34,7 @@ For debugging most applications, you'll find the _intergratedTerminal_ option to
 
 Now that your project is set up for debugging, you can enable breakpoints. Breakpoints are spots in your code where execution will be paused. Once your application is paused in one of these breakpoints, you can easily debug your application by doing things like inspecting all the variables that are in scope, and stepping through the execution of your code line by line. To place a breakpoint in VS Code, hover your cursor to the left of the line number where you'd like to place it and click to add a red dot at the edge of the editor. To remove it, click the red dot again.
 
-![VS Code Debug Start](./images/VsCodeBreakpoints.gif)
+![VS Code Setting Breakpoints](./images/VsCodeBreakpoints.gif)
 
 When in a breakpoint, you can hover over any variable that's in scope to find out its value. If hovering over a complex object, you can drill down into its individual properties to see their values as well.
 
@@ -38,7 +42,7 @@ When in a breakpoint, you can hover over any variable that's in scope to find ou
 
 You can also get a quick look at the values of all variables in the *Locals* window of your sidebar
 
-![VS Code Hover to Debug](./images/VsCodeDebuggingLocals.png)
+![VS Code Locals Windows](./images/VsCodeDebuggingLocals.png)
 
 You can step through the execution of your code using the controls that appear at the top of VS Code when paused in a breakpoint. The controls allow you to:
 
@@ -51,4 +55,4 @@ You can step through the execution of your code using the controls that appear a
 
 While in a breakpoint, you can also execute any C# code by typing into the Debug Console at the bottom of your editor. This is the same as the console tab of you browser devtools
 
-![VS Code Hover to Debug](./images/VsCodeDebugConsole.gif)
+![VS Code Debug Console](./images/VsCodeDebugConsole.gif)
