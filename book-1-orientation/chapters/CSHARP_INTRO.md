@@ -65,6 +65,7 @@ Now replace your source code with the following.
 
 ```cs
 using System;
+using System.Collections.Generic;
 
 namespace bangazon
 {
@@ -147,7 +148,7 @@ for (int i=0; i<products.Count; i++) {
 
 # C# Conditions
 
-Luckily, the `if-then` syntax works exactly like it did in JavaScript. 
+Luckily, the `if-then` syntax works exactly like it did in JavaScript.
 Let's display a different message based on on the length of a product.
 
 ```cs
