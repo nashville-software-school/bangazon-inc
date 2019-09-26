@@ -32,8 +32,8 @@ A few important notes, before we begin:
 
 1. In the dropdown menu next to the **SELECT** button, select **DOWNLOAD**, and then click the **DOWNLOAD** button.
 1. Ensure that the selected version is ***Windows 10*** and continue.
-1. which build works?
-1. which edition?
+1. Select release **_19H1 (Build 18362.30 - 2019.05)_** and continue.
+1. Select edition **_Windows 100 Home/Pro_** and continue.
 1. Select your chosen language and continue.
 1. Select the architecture ***x64***
 1. Check the box next to ***Download using a browser***. Using the browser's built-in Downloads page allows for better control over downloading the nearly 5 GB file.
