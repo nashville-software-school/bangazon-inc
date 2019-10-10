@@ -537,9 +537,8 @@ As a light introduction to working with relational databases, this example works
 This is called joining the collections together.
 
 Read the [Cross Join](https://code.msdn.microsoft.com/LINQ-Join-Operators-dabef4e9#crossjoin) example to get started.
-> **NOTE**: You might also find these pages on the Microsoft Docs site helpful.
+> **NOTE**: You might also find this page on the Microsoft Docs site helpful.
 > * [Enumerable.Join Method ](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.join?view=netframework-4.8#System_Linq_Enumerable_Join__4_System_Collections_Generic_IEnumerable___0__System_Collections_Generic_IEnumerable___1__System_Func___0___2__System_Func___1___2__System_Func___0___1___3__)
-> * [Enumerable.GroupJoin Method](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.groupjoin?view=netframework-4.8#System_Linq_Enumerable_GroupJoin__4_System_Collections_Generic_IEnumerable___0__System_Collections_Generic_IEnumerable___1__System_Func___0___2__System_Func___1___2__System_Func___0_System_Collections_Generic_IEnumerable___1____3__)
 
 ```cs
 /*
