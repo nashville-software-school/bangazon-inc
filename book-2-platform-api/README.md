@@ -22,4 +22,4 @@ This book prepares you for building the Bangazon Platform API
 
 ## Supplementary Content
 
-* Supplement - [Web API Tutorial](https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-web-api?view=aspnetcore-2.1)
+* Supplement - [Web API Tutorial](https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-web-api?view=aspnetcore-3.0)
