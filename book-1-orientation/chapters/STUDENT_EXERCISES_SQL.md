@@ -8,7 +8,7 @@ You will use `CREATE TABLE` statements and `INSERT` statements to create all the
 
 ### Create a new Database
 
-1. Open Visaul STudio
+1. Open Visual Studio
 1. Open the SQL Server Object Explorer
 1. Right-click the `Databases` node beneath your SQLEXPRESS SQL Server Instance. Select `Add New Database`.
 1. Name the database `StudentExercises`.
