@@ -14,12 +14,14 @@ What is a **relational database**? A relational database is one that stores data
 ## Setup
 
 1. Open **Visual Studio**.
-1. Connect to your SQL Server instance.
-1. Create a new database named `MusicHistory`.
+1. At the start screen select `Continue without code`.
+1. Open the `View` menu and select `SQL Server Object Explorer`.
+1. Expand the node for your SQL Server instance.
+1. Right-click on "Databases" and select `Add new database`.
+1. Name the new database `MusicHistory`.
+1. Right click the `MusicHistory` database and choose `New Query`.
 1. Run [this SQL script](./assets/musichistory.sqlserver.sql) to create tables in your database and insert some seed data.
-1. Right click the `MusicHistory` database and choose _New Query_
-
-You will be writing your SQL statements in this new, blank query window.
+1. Create a new query window You will be writing your SQL statements in this new, blank query window.
 
 ## Querying Data
 
