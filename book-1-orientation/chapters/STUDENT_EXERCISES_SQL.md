@@ -6,28 +6,16 @@ You will use `CREATE TABLE` statements and `INSERT` statements to create all the
 
 ## Setup
 
-### Create the Database Script File
+### Create a new Database
 
-```sh
-cd ~/workspace/csharp/StudentExercises
-touch StudentExercises.sql
-```
+1. Open Visaul STudio
+1. Open the SQL Server Object Explorer
+1. Right-click the `Databases` node beneath your SQLEXPRESS SQL Server Instance. Select `Add New Database`.
+1. Name the database `StudentExercises`.
+1. Right-click the new database and select `New Query...`.
+1. Click `File` -> `Save SQLQuery1.sql`. Navigate to an approprate directory save the file as `StudentExercises.sql`.
 
-## Open the Database Script for Editing
-
-1. Open Azure Data Studio.
-1. Connect to your `master` database by double clicking the connection in the Connections window.
-1. Click on "New Query" when it connects.
-
-## Create a new Database
-
-1. Start typing in "create" and a menu will appear with helpful snippets you can choose.
-1. Choose the `sqlCreateDatabase` snippet and some boilerplate code will appear.
-1. Type `StudentExercises` and it will fill in the statement as you type.
-1. Press `Escape` key.
-1. Then click the Run button at the top and your database will be created.
-
-## Creating Data
+### Creating Data
 
 In the Query Window, enter the SQL to create all of your tables, columns, and foreign key constraints.
 
