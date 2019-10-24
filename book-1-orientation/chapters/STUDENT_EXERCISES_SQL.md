@@ -27,4 +27,14 @@ Then use `INSERT` statements to create data in your tables.
 
 1. Create tables from each entity in the Student Exercises ERD.
 1. Populate each table with data. You should have 2-3 cohorts, 5-10 students, 4-8 instructors,  2-5 exercises and each student should be assigned 1-2 exercises.
+1. Write a query to return all student first and last names with their cohort's name.
+1. Write a query to return student first and last names with their cohort's name only for a single cohort.
+1. Write a query to return all instructors ordered by their last name.
+    > **NOTE:** SQL offers the ability to [order by](https://www.w3schools.com/SQL/sql_orderby.asp) columns in a table.
+1. Write a query to return a list of unique instructor specialties.
+    > **NOTE:** Take a look at [SQL SELECT DISTINCT Statement](https://www.w3schools.com/Sql/sql_distinct.asp) for some guidance.
+1. Write a query to return a list of **all** student names along with the names of the exercises they have been assigned. If an exercise has not been assigned, it should **not** be in the result.
+    > **NOTE:** sometimes you need to join more than two tables in a query.
+1. Return a list of student names along with the count of exercises assigned to each student.
+    > **NOTE:** SQL has a [group by](https://www.w3schools.com/sql/sql_groupby.asp) just like LINQ does.
 
