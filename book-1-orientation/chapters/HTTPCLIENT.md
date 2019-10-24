@@ -1,10 +1,16 @@
 # HttpClient
 
-You've already experienced making http requests from your browser via `fetch`. While building web applications, we often want to make those requests from our server side code. .NET provides us with the `HttpClient` class that allows us to do that. 
+You've already experienced making http requests from your browser via `fetch`. While building web applications, we often want to make those requests from our server side code. .NET provides us with the `HttpClient` class that allows us to do that.
+
+We'll first need to install an additional package to make this work. Run the following command in your project (NOTE: This is required only if you are in a Console application. If you are in an ASP.NET project, this is not necessary):
+
+```sh
+dotnet add package Microsoft.AspNet.WebApi.Client
+```
 
 
 ## Why Make Requests on the Server?
-In a full stack web application, we know we can make requests to 3rd party APIs from the our client side javascript code. So why would we instead make those calls from our server side code? Some of the benefits of making Http requests server side as opposed to client side are:
+In a full stack web application, we know we can make requests to 3rd party APIs from the our client side javascript code. So why would we instead choose to make those calls from our server side code? Some of the benefits of making Http requests server side as opposed to client side are:
 
 - Avoid CORS issues
 - Secure sensitive credentials like keys and passwords by not exposing them in your client side code
@@ -15,114 +21,133 @@ In a full stack web application, we know we can make requests to 3rd party APIs 
 Making a request is fairly simple:
 
 ```csharp
+var uri = "https://icanhazdadjoke.com/search?term=cat";
 var client = new HttpClient();
-var uri = "http://api.github.com/users/adamsheaffer/";
+
+// Set request header to accept JSON
+client.DefaultRequestHeaders
+    .Accept
+    .Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
 var response = await client.GetAsync(uri);
 ```
 
-The Github API will return a JSON response. When this response comes back, .NET will automatically convert it from JSON to a C# object for us. To prepare for this, we need to create a C# class in the shape of the data we expect. Let's look at the raw JSON response that comes back from Github:
+The Joke API will return a JSON response. When this response comes back, .NET will automatically convert it from JSON to a C# object for us. To prepare for this, we need to create a C# class in the shape of the data we expect. Let's look at the raw JSON response that comes back from the API:
 
 ```json
-[
-    {
-        "id": "10552217170",
-        "type": "PushEvent",
-        "actor": {
-            "id": 9039241,
-            "login": "AdamSheaffer",
-            "display_login": "AdamSheaffer",
-            "gravatar_id": "",
-            "url": "https://api.github.com/users/AdamSheaffer",
+{
+    "current_page": 1,
+    "limit": 20,
+    "next_page": 1,
+    "previous_page": 1,
+    "results": [
+        {
+            "id": "haMJRfF6hFd",
+            "joke": "How do you fix a broken pizza? With tomato paste."
         },
-        "repo": {
-            "id": 212260122,
-            "name": "nss-day-cohort-32/HeistPartDeux",
-            "url": "https://api.github.com/repos/nss-day-cohort-32/HeistPartDeux"
+        {
+            "id": "xc21Lmbxcib",
+            "joke": "How did the hipster burn the roof of his mouth? He ate the pizza before it was cool."
         },
-        "payload": {
-            "push_id": 4107356582,
-            "size": 1,
-            "distinct_size": 1,
-            "ref": "refs/heads/master",
-            "head": "a4ef37d73c3f055d7268debd59cee962b6983b49",
-            "before": "13230d7489fe108c15c8230c55dd0cc6b45a7d5a",
-            "commits": [
-                {
-                    "sha": "a4ef37d73c3f055d7268debd59cee962b6983b49",
-                    "author": {
-                        "email": "adam.sheaffer@nashvillesoftwareschool.com",
-                        "name": "Adam"
-                    },
-                    "message": "fix spelling. prepopulate rolodex",
-                    "distinct": true,
-                    "url": "https://api.github.com/repos/nss-day-cohort-32/HeistPartDeux/commits/a4ef37d73c3f055d7268debd59cee962b6983b49"
-                }
-            ]
+        {
+            "id": "51DAA5Tfaxc",
+            "joke": "What did Romans use to cut pizza before the rolling cutter was invented? Lil Caesars"
         },
-        "public": true,
-        "created_at": "2019-10-03T14:46:27Z",
-        "org": {
-            "id": 49160972,
-            "login": "nss-day-cohort-32",
-            "gravatar_id": "",
-            "url": "https://api.github.com/orgs/nss-day-cohort-32"
+        {
+            "id": "rc2E6EdiNe",
+            "joke": "Want to hear my pizza joke? Never mind, it's too cheesy."
         }
-    },
-    {
-        "id": "10539452209",
-        "type": "CreateEvent",
-        "actor": {
-            "id": 9039241,
-            "login": "AdamSheaffer",
-            "display_login": "AdamSheaffer",
-            "gravatar_id": "",
-            "url": "https://api.github.com/users/AdamSheaffer"
-        },
-        "repo": {
-            "id": 212260122,
-            "name": "nss-day-cohort-32/HeistPartDeux",
-            "url": "https://api.github.com/repos/nss-day-cohort-32/HeistPartDeux"
-        },
-        "payload": {
-            "ref": "master",
-            "ref_type": "branch",
-            "master_branch": "master",
-            "description": null,
-            "pusher_type": "user"
-        },
-        "public": true,
-        "created_at": "2019-10-02T05:11:49Z",
-        "org": {
-            "id": 49160972,
-            "login": "nss-day-cohort-32",
-            "gravatar_id": "",
-            "url": "https://api.github.com/orgs/nss-day-cohort-32"
-        }
-    }
-]
+    ],
+    "search_term": "pizza",
+    "status": 200,
+    "total_jokes": 4,
+    "total_pages": 1
+}
 ```
 
-Given the shape of this data, create a new C# class (or classes) that matches these properties. You can also ignore any properties that you don't care about:
+Given the shape of this data, create a new C# class (or classes) that matches these properties.
 
 ```csharp
-public class GithubEvent
+public class JokeReponse
+{
+    [JsonProperty("current_page")]
+    public int CurrentPage { get; set; }
+
+    public int Limit { get; set; }
+
+    [JsonProperty("next_page")]
+    public int NextPage { get; set; }
+
+    [JsonProperty("previous_page")]
+    public int PreviousPage { get; set; }
+
+    public List<JokeResult> Results { get; set; }
+
+    [JsonProperty("search_term")]
+    public string SearchTerm { get; set; }
+
+    [JsonProperty("status")]
+    public int Status { get; set; }
+
+    [JsonProperty("total_jokes")]
+    public int TotalJokes { get; set; }
+
+    [JsonProperty("total_pages")]
+    public int TotalPages { get; set; }
+}
+
+public class JokeResult
 {
     public string Id { get; set; }
-    public Actor Actor { get; set; }
-    public bool Public { get; set; }
-
-    [JsonProperty("created_at")]
-    public DateTime CreatedAt { get; set; }
-    public Actor Org { get; set; }
-}
-
-public class Actor
-{
-    public long Id { get; set; }
-    public string Login { get; set; }
-    public string DisplayLogin { get; set; }
-    public string GravatarId { get; set; }
-    public Uri Url { get; set; }
-    public Uri AvatarUrl { get; set; }
+    public string Joke { get; set; }
 }
 ```
+
+A couple notes about these classes:
+
+- If there is data in the JSON response you don't care about, you do not have to include it in your C# class. For example, if you did not care about the `status` in the previous JSON response, you could leave out the `Status` property in the `JokeResponse` class.
+
+- Not all API's use the same naming conventions. One might use camelCase (i.e. `currentPage`) while another might use snake_case (i.e. `current_page`). By default, the .NET HttpClient is set format responses that use camelCase. If you encounter an API like this one--one that uses a different naming convention--you can handle this by adding a `JsonProperty` annotation above your property names.
+
+```csharp
+[JsonProperty("total_jokes")]
+public int TotalJokes { get; set; }
+```
+
+If creating classes for API responses seems like a tedious process, there are online tools available to help you. Sites like [QuickType](https://quicktype.io/) allow you to paste in an example of your json response and have your C# classes generated for you.
+
+## Handling Responses
+
+Now that we've seen how to make a request, let's looks at how to handle a response back from an API. Here is the full example:
+
+```csharp
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        var uri = "https://icanhazdadjoke.com/search?term=cat";
+        var httpClient = new HttpClient();
+
+        // Set request header to accept JSON
+        httpClient.DefaultRequestHeaders
+            .Accept
+            .Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+        var response = await httpClient.GetAsync(uri);
+        if (response.IsSuccessStatusCode)
+        {
+            var data = await response.Content.ReadAsAsync<JokeReponse>();
+            foreach (var result in data.Results)
+            {
+                Console.WriteLine(result.Joke);
+            }
+        }
+    }
+}
+```
+
+## What are `async` and `await` doing?
+
+Unsurprisingly, the `GetAsync` method performs an asynchronous operation (same as when we made `fetch` calls in Javascript). While in Javascript we dealt with Promises, .NET uses something similar called Tasks. It might be helpful to think of a Task as data that's not immediately available, but will be at some point in the future. By using the `await` keyword, we can tell the program to wait for a task to be completed before capturing the returned data and continuing.
+
+The `async` keyword is only needed in the method's signature. It doesn't do anything on its own. All it does is make the `await` keyword available in the method.
