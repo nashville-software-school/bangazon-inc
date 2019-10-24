@@ -16,6 +16,4 @@ That's some complex logic that your API will handle instead of forcing the clien
 
 ## Resources
 
-1. [Create a Web API with ASP.NET Core and Visual Studio](https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-web-api?view=aspnetcore-2.1) - This tutorial uses Entity Framework, not Dapper, but still is a good tutorial to see how everything works.
-1. Video: [Building Web APIs with ASP.NET Core 2.0](https://www.youtube.com/watch?v=aIkpVzqLuhA)
-1. Video: [ASP.NET Core 2.0: Building a Simple Web API](https://www.youtube.com/watch?v=lv43vrCo2fg)
+1. [Create a Web API with ASP.NET Core and Visual Studio](https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-web-api?view=aspnetcore-3.0) - This tutorial uses Entity Framework (which we will cover later), but still is a good tutorial to see how everything works.

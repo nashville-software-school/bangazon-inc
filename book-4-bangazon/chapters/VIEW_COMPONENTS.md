@@ -1,6 +1,6 @@
 # View Components
 
-[View Components](https://docs.microsoft.com/en-us/aspnet/core/mvc/views/view-components?view=aspnetcore-2.1) allow you to create small, independant HTML components that can be used in any other Razor template in your system. The philosophy and architecture behind View Components in Razor is very much like React components.
+[View Components](https://docs.microsoft.com/en-us/aspnet/core/mvc/views/view-components?view=aspnetcore-3.0) allow you to create small, independant HTML components that can be used in any other Razor template in your system. The philosophy and architecture behind View Components in Razor is very much like React components.
 
 View components are lesser-known features of ASP.NET Core Razor views. Unlike tag-helpers and HTML helpers - both of which generate single HTML elements - view components are a bit different.
 

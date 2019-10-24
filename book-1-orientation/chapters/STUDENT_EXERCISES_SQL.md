@@ -6,28 +6,16 @@ You will use `CREATE TABLE` statements and `INSERT` statements to create all the
 
 ## Setup
 
-### Create the Database Script File
+### Create a new Database
 
-```sh
-cd ~/workspace/csharp/StudentExercises
-touch StudentExercises.sql
-```
+1. Open Visual Studio
+1. Open the SQL Server Object Explorer
+1. Right-click the `Databases` node beneath your SQLEXPRESS SQL Server Instance. Select `Add New Database`.
+1. Name the database `StudentExercises`.
+1. Right-click the new database and select `New Query...`.
+1. Click `File` -> `Save SQLQuery1.sql`. Navigate to an approprate directory save the file as `StudentExercises.sql`.
 
-## Open the Database Script for Editing
-
-1. Open Azure Data Studio.
-1. Connect to your `master` database by double clicking the connection in the Connections window.
-1. Click on "New Query" when it connects.
-
-## Create a new Database
-
-1. Start typing in "create" and a menu will appear with helpful snippets you can choose.
-1. Choose the `sqlCreateDatabase` snippet and some boilerplate code will appear.
-1. Type `StudentExercises` and it will fill in the statement as you type.
-1. Press `Escape` key.
-1. Then click the Run button at the top and your database will be created.
-
-## Creating Data
+### Creating Data
 
 In the Query Window, enter the SQL to create all of your tables, columns, and foreign key constraints.
 
@@ -39,4 +27,14 @@ Then use `INSERT` statements to create data in your tables.
 
 1. Create tables from each entity in the Student Exercises ERD.
 1. Populate each table with data. You should have 2-3 cohorts, 5-10 students, 4-8 instructors,  2-5 exercises and each student should be assigned 1-2 exercises.
+1. Write a query to return all student first and last names with their cohort's name.
+1. Write a query to return student first and last names with their cohort's name only for a single cohort.
+1. Write a query to return all instructors ordered by their last name.
+    > **NOTE:** SQL offers the ability to [order by](https://www.w3schools.com/SQL/sql_orderby.asp) columns in a table.
+1. Write a query to return a list of unique instructor specialties.
+    > **NOTE:** Take a look at [SQL SELECT DISTINCT Statement](https://www.w3schools.com/Sql/sql_distinct.asp) for some guidance.
+1. Write a query to return a list of **all** student names along with the names of the exercises they have been assigned. If an exercise has not been assigned, it should **not** be in the result.
+    > **NOTE:** sometimes you need to join more than two tables in a query.
+1. Return a list of student names along with the count of exercises assigned to each student.
+    > **NOTE:** SQL has a [group by](https://www.w3schools.com/sql/sql_groupby.asp) just like LINQ does.
 
