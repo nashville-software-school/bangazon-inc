@@ -25,7 +25,7 @@ Then use `INSERT` statements to create data in your tables.
 
 ## Instructions
 
-1. Create tables from each entity in the Student Exercises ERD.
+1. Create tables for each entity. These should match the dbdiagram ERD you created in [Student Exercises Part 1](./STUDENT_EXERCISES_TYPES.md).
 1. Populate each table with data. You should have 2-3 cohorts, 5-10 students, 4-8 instructors,  2-5 exercises and each student should be assigned 1-2 exercises.
 1. Write a query to return all student first and last names with their cohort's name.
 1. Write a query to return student first and last names with their cohort's name only for a single cohort.
