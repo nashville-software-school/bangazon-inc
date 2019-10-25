@@ -161,8 +161,8 @@ namespace DepartmentsEmployees.Data
                 conn.Open();
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
-                    // String interpolation lets us inject the id passed into this method.
-                    cmd.CommandText = $"SELECT DeptName FROM Department WHERE Id = {id}";
+                    cmd.CommandText = "SELECT DeptName FROM Department WHERE Id = @id";
+                    cmd.Parameters.Add(new SqlParameter("@id", id));
                     SqlDataReader reader = cmd.ExecuteReader();
 
                     Department department = null;
@@ -194,8 +194,10 @@ namespace DepartmentsEmployees.Data
                 conn.Open();
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
-                    // More string interpolation
-                    cmd.CommandText = $"INSERT INTO Department (DeptName) Values ('{department.DeptName}')";
+                    // These SQL parameters are annoying. Why can't we use string interpolation?
+                    // ... sql injection attacks!!!
+                    cmd.CommandText = "INSERT INTO Department (DeptName) Values (@deptName)";
+                    cmd.Parameters.Add(new SqlParameter("@deptName", department.DeptName));
                     cmd.ExecuteNonQuery();
                 }
             }
@@ -213,17 +215,11 @@ namespace DepartmentsEmployees.Data
                 conn.Open();
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
-                    // Here we do something a little different...
-                    //  We're using a "parameterized" query to avoid SQL injection attacks.
-                    //  First, we add variable names with @ signs in our SQL.
-                    //  Then, we add SqlParamters for each of those variables.
                     cmd.CommandText = @"UPDATE Department
                                            SET DeptName = @deptName
                                          WHERE Id = @id";
                     cmd.Parameters.Add(new SqlParameter("@deptName", department.DeptName));
                     cmd.Parameters.Add(new SqlParameter("@id", id));
-
-                    // Maybe we should refactor our other SQL to use parameters
 
                     cmd.ExecuteNonQuery();
                 }
@@ -342,10 +338,10 @@ namespace DepartmentsEmployees.Data
                 conn.Open();
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = $@"SELECT e.Id, e.FirstName, e.LastName, e.DepartmentId,
-                                                d.DeptName
-                                           FROM Employee e INNER JOIN Department d ON e.DepartmentID = d.id
-                                          WHERE d.id = @departmentId";
+                    cmd.CommandText = @"SELECT e.Id, e.FirstName, e.LastName, e.DepartmentId,
+                                               d.DeptName
+                                          FROM Employee e INNER JOIN Department d ON e.DepartmentID = d.id
+                                         WHERE d.id = @departmentId";
                     cmd.Parameters.Add(new SqlParameter("@departmentId", departmentId));
                     SqlDataReader reader = cmd.ExecuteReader();
 
