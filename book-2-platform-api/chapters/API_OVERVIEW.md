@@ -1,6 +1,6 @@
 # ASP.NET Web API
 
-In the client side course, you learned how to create a JSON based API using `json-server`. You also, likely, consumed a third-party API for your client side capstone project. Organizations provide APIs so that software developers can build interesting products based on their data.
+In the client side course, you learned how to create a JSON based API using `json-server`. You also may have consumed a third-party API for your client side capstone project. Organizations provide APIs so that software developers can build interesting products based on their data.
 
 With ASP.NET, you can use the Web API project type to actually build business logic into your API. `json-server` was severely limited in that it could only create, update, and read JavaScript objects in arrays in your JSON file. In the upcoming sprint, you can perform multiple actions in response to a request from a client.
 
