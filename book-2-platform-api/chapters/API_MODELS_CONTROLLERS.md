@@ -115,34 +115,10 @@ start CoffeeShop.sln
 
 The default scaffolding provides you with a `ValuesController`. It's very basic, and your instruction team will discuss HTTP verbs of GET, POST, PUT, DELETE. Then you will construct a simple coffee shop database, some data models, and a more complex controller that handles CRUD actions for coffee.
 
-### Starter SQL
+### The Database
 
-1. Open Azure Data Studio.
-1. `ctrl+N` to create a new query window.
-1. Click the connect icon at the top of the query window.
-1. Choose the `master` data from the list of recent connections.
-1. Once the connection is established, paste the following SQL into the query window to create a new database and use it.
-
-```sql
-USE MASTER
-GO
-
-IF NOT EXISTS (
-    SELECT [name]
-    FROM sys.databases
-    WHERE [name] = N'CoffeeShop'
-)
-CREATE DATABASE CoffeeShop
-GO
-
-USE CoffeeShop
-GO
-```
-
-1. Now you will see `CoffeeShop` as an option in the dropdown menu.
-1. Select that database.
-1. Remove the SQL in the query window and replace it with the following SQL.
-1. `ctrl+A` to select all of the statements and run them with `alt+ENTER` or by clicking the run icon at the top of the query window.
+1. Create a new SQL Server databased called `CoffeeShop`.
+1. Use this script to create a table and populate it with some starter data.
 
 ```sql
 DROP TABLE IF EXISTS Coffee;
