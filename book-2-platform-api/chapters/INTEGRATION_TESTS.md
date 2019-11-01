@@ -178,7 +178,7 @@ namespace TestKennelAPI
 1. Clone the [KennelAPI](https://github.com/nss-day-cohort-34/IntegrationTesting-KennelAPI) repo.
 1. Create a `KennelDB` database using the script provided in the `KennelAPI` repo.
 1. Open `KennelAPI` in Visual Studio.
-1. Ricght click the solution and select `Add` / `New Project...`.
+1. Right click the **solution** _(.sln file)_ and select `Add` / `New Project...`.
 1. Use the `xUnit Test Project (.NET Core)` template to create a test project.
 1. Name the project "TestKennelAPI"
 1. Add the `Microsoft.AspNetCore.Mvc.Testing` nuget package to the test project.
