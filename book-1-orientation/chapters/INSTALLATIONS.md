@@ -7,10 +7,7 @@
 
 ## 2. Install [SQL Server Express](https://www.microsoft.com/en-us/sql-server/sql-server-editions-express)
 
-##  3. Install [SQL Server Management Studio](https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-2017).
-Make sure you get the General Availability release, not any preview version.
-
-## 4. Install [Visual Studio Community Edition](https://visualstudio.microsoft.com/vs/community/)
+## 3. Install [Visual Studio Community Edition](https://visualstudio.microsoft.com/vs/community/)
 
 #### Visual Studio Workloads
 
@@ -19,9 +16,9 @@ When installing Visual Studio, you will be presented with a variety of [Workload
 1. ASP.NET and web development
 1. .NET Core cross-platform development
 
-## 5. Install the [Visual Studio Code C# Extension](https://code.visualstudio.com/Docs/languages/csharp)
+## 4. Install the [Visual Studio Code C# Extension](https://code.visualstudio.com/Docs/languages/csharp)
 
-## 6. Bookmark the Following Sites
+## 5. Bookmark the Following Sites
 
  [dbdiagram.io](http://dbdiagram.io) - for creating ERDs (Entity Relationship Diagrams).
 
