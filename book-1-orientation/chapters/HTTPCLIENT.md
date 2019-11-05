@@ -15,10 +15,9 @@ In a full stack web application, we know we can make requests to 3rd party APIs 
 - Avoid CORS issues
 - Secure sensitive credentials like keys and passwords by not exposing them in your client side code
 - Users can already have external data available as soon as your page loads
+- Cache data on server to avoid lots of database calls
 
 ## Making an Http Request
-
-Making a request is fairly simple:
 
 ```csharp
 var uri = "https://icanhazdadjoke.com/search?term=cat";
@@ -68,31 +67,33 @@ The Joke API will return a JSON response. When this response comes back, .NET wi
 Given the shape of this data, create a new C# class (or classes) that matches these properties.
 
 ```csharp
-public class JokeReponse
+public class JokeResponse
 {
-    [JsonProperty("current_page")]
+    [JsonPropertyName("current_page")]
     public int CurrentPage { get; set; }
 
+    [JsonPropertyName("limit")]
     public int Limit { get; set; }
 
-    [JsonProperty("next_page")]
+    [JsonPropertyName("next_page")]
     public int NextPage { get; set; }
 
-    [JsonProperty("previous_page")]
+    [JsonPropertyName("previous_page")]
     public int PreviousPage { get; set; }
 
+    [JsonPropertyName("results")]
     public List<JokeResult> Results { get; set; }
 
-    [JsonProperty("search_term")]
+    [JsonPropertyName("search_term")]
     public string SearchTerm { get; set; }
 
-    [JsonProperty("status")]
+    [JsonPropertyName("status")]
     public int Status { get; set; }
 
-    [JsonProperty("total_jokes")]
+    [JsonPropertyName("total_jokes")]
     public int TotalJokes { get; set; }
 
-    [JsonProperty("total_pages")]
+    [JsonPropertyName("total_pages")]
     public int TotalPages { get; set; }
 }
 
@@ -107,14 +108,16 @@ A couple notes about these classes:
 
 - If there is data in the JSON response you don't care about, you do not have to include it in your C# class. For example, if you did not care about the `status` in the previous JSON response, you could leave out the `Status` property in the `JokeResponse` class.
 
-- Not all API's use the same naming conventions. One might use camelCase (i.e. `currentPage`) while another might use snake_case (i.e. `current_page`). By default, the .NET HttpClient is set format responses that use camelCase. If you encounter an API like this one--one that uses a different naming convention--you can handle this by adding a `JsonProperty` annotation above your property names.
+- Not all API's use the same naming conventions. One might use camelCase (i.e. `currentPage`) while another might use snake_case (i.e. `current_page`). By default, the .NET HttpClient is set format responses that use camelCase. If you encounter an API like this one--one that uses a different naming convention--you can handle this by adding a `JsonPropertyName` annotation above your property names. 
 
 ```csharp
-[JsonProperty("total_jokes")]
+[JsonPropertyName("total_jokes")]
 public int TotalJokes { get; set; }
 ```
 
-If creating classes for API responses seems like a tedious process, there are online tools available to help you. Sites like [QuickType](https://quicktype.io/) allow you to paste in an example of your json response and have your C# classes generated for you.
+> _Alternatively, you could pass in a `JsonSerializerOptions` object to the `Deserialize` method that is used below (but we will not be doing that in this example)._
+
+If creating classes for API responses seems like a tedious process, Visual studio can handle a lot of this for you by [generating classes for you based off of JSON](https://dailydotnettips.com/did-you-know-you-can-automatically-create-classes-from-json-or-xml-in-visual-studio/). If you're not using visual studio (and maybe using VSCode) there are online tools like [QuickType](https://quicktype.io/) available to help you.
 
 ## Handling Responses
 
@@ -127,8 +130,6 @@ class Program
     {
         var uri = "https://icanhazdadjoke.com/search?term=cat";
         var httpClient = new HttpClient();
-
-        // Set request header to accept JSON
         httpClient.DefaultRequestHeaders
             .Accept
             .Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -136,8 +137,10 @@ class Program
         var response = await httpClient.GetAsync(uri);
         if (response.IsSuccessStatusCode)
         {
-            var data = await response.Content.ReadAsAsync<JokeReponse>();
-            foreach (var result in data.Results)
+            var json = await response.Content.ReadAsStreamAsync();
+            var jokeData = await JsonSerializer.DeserializeAsync<JokeResponse>(json);
+
+            foreach (var result in jokeData.Results)
             {
                 Console.WriteLine(result.Joke);
             }
