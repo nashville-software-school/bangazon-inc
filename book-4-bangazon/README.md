@@ -14,6 +14,7 @@ This book prepares you to build the e-commerce application that serves our custo
 
 ## Supplementary Content
 
+* Supplement - [HttpClient & 3rd Party APIs](./chapters/HTTPCLIENT.md)
 * Supplement - [JSON Web Tokens](./chapters/JWT.md)
 * Supplement - [Introduction to SSMS](./chapters/SSMS_INTRO.md)
 * Supplement - [How to Start a New Project](./chapters/PROJECT_INIT.md)
