@@ -21,6 +21,13 @@ Run the script below to create the BangazonSqlExercise database (The tables shou
 1. List all employees along with their current computer information make and manufacturer combined into a field entitled `ComputerInfo`. If they do not have a computer, this field should say "N/A".
 1. List all computers that were purchased before July 2019 that are have not been decommissioned.
 1. List all employees along with the total number of computers they have ever had.
+1. List the number of customers using each payment type
+1. List the 10 most expensive products and the names of the seller
+1. List the 10 most purchased products and the names of the seller
+1. Find the 3 most purchased products in Q4 of 2018
+1. Find the name of the customer who has made the most purchases
+1. List the amount of total sales by product type
+1. List the total amount made from all sellers
 
 ```sql
 USE MASTER
