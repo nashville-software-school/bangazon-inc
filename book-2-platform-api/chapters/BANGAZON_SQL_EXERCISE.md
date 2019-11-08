@@ -24,7 +24,6 @@ Run the script below to create the BangazonSqlExercise database (The tables shou
 1. List the number of customers using each payment type
 1. List the 10 most expensive products and the names of the seller
 1. List the 10 most purchased products and the names of the seller
-1. Find the 3 most purchased products in Q4 of 2018
 1. Find the name of the customer who has made the most purchases
 1. List the amount of total sales by product type
 1. List the total amount made from all sellers
