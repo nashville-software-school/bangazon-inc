@@ -1,6 +1,6 @@
 # View Models
 
-The first line in any Razor template that uses data from your database is a reference to the type of data that the view will render. In the code below, `@model StudentExercises.Data.Student` is the view model. This allows ASP.NET to use that class to display data in the correct format, and validate user input (_if needed_).
+The first line in any Razor template that uses data from your database is a reference to the type of data that the view will render. In the code below, `@model StudentExercises.Data.Student` is the view model. This allows ASP.NET to use that class to display data in the correct format and validate user input (_if needed_).
 
 ```html+razor
 @model StudentExercises.Data.Student
@@ -40,11 +40,11 @@ The first line in any Razor template that uses data from your database is a refe
 </div>
 ```
 
-Since Razor views are strongly typed by the view model, imagine that your product owner wants a view in the application that lists all students, and all instructors. Which type do you already have in your system that holds an `IEnumerable<Student>` and `IEnumerable<Instructor>`?
+Since Razor views are strongly typed by the view model, imagine that your product owner wants a view in the application that lists all students and all instructors. Which type do you already have in your system that holds an `IEnumerable<Student>` and `IEnumerable<Instructor>`?
 
-You don't. Therefore, you need to create a new, custom view model for that particular Razor template.
+You don't. Therefore, you need to create a new custom view model for that particular Razor template.
 
-Create a new directory inside your `Models` directory named `ViewModels`. Then create a new class inside that directory named `StudentInstructorViewModel.cs`. Then place the following code inside of it.
+Create a new directory inside your `Models` directory named `ViewModels`. Then create a new class inside that directory named `StudentInstructorViewModel.cs`. Then place the following code inside of it:
 
 ```cs
 using System.Collections.Generic;
@@ -69,7 +69,7 @@ public IActionResult Index()
 }
 ```
 
-By default, the lists of Students and Instructors on `viewModel` will be null. What you'll need to do next, is get that data from the database. Replace your `HomeController` with the following code. These changes add two helper methods called `GetAllStudents` and `GetAllInstructors`, as well as the configuration properties that allow us to connect to the database.
+By default, the lists of Students and Instructors on `viewModel` will be null. What you'll need to do next, is get that data from the database. Replace your `HomeController` with the following code. These changes add two helper methods called `GetAllStudents` and `GetAllInstructors` as well as the configuration properties that allow us to connect to the database.
 
 ```cs
 using System;
@@ -220,8 +220,8 @@ public IActionResult Index()
 }
 ```
 
-Now your view template can have access to both the list of students and instructors. 
-Open your _Views > Home > Index.cshtml_ file and place the following code into it.
+Now your view template can have access to both the list of students and instructors.
+Open your _Views > Home > Index.cshtml_ file and place the following code into it:
 
 ```html+razor
 @model StudentExercises.Models.ViewModels.StudentInstructorViewModel
@@ -280,7 +280,7 @@ To create a new student, you need data from two tables
 * Student - Display the form fields to accept user input for all of the student properties.
 * Cohort - A `<select>` element to list all cohorts so that the student can be assigned to one.
 
-Here's how you would implement a view model to store that information for the Razor template to use.
+Here's how you would implement a view model to store that information for the Razor template to use:
 
 ```cs
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -296,7 +296,7 @@ namespace StudentExercises.Models.ViewModels
 }
 ```
 
-Notice that `Cohorts` is not represented by a `List<Cohort>`. They are in a list of `SelectListItem`, which is the ASP.NET representation of an `<option>` element that is a child of a `<select>`. 
+Notice that `Cohorts` is not represented by a `List<Cohort>`. They are in a list of `SelectListItem`, which is the ASP.NET representation of an `<option>` element that is a child of a `<select>`.
 
 Start by creating an instance of the `StudentCreateViewModel` and passing it to the view.
 
