@@ -387,23 +387,23 @@ Now you can use this view model in the student creation Razor template at _`View
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="student.FirstName" class="control-label"></label>
-                <input asp-for="student.FirstName" class="form-control" />
-                <span asp-validation-for="student.FirstName" class="text-danger"></span>
+                <label asp-for="Student.FirstName" class="control-label"></label>
+                <input asp-for="Student.FirstName" class="form-control" />
+                <span asp-validation-for="Student.FirstName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="student.LastName" class="control-label"></label>
-                <input asp-for="student.LastName" class="form-control" />
-                <span asp-validation-for="student.LastName" class="text-danger"></span>
+                <label asp-for="Student.LastName" class="control-label"></label>
+                <input asp-for="Student.LastName" class="form-control" />
+                <span asp-validation-for="Student.LastName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="student.SlackHandle" class="control-label"></label>
-                <input asp-for="student.SlackHandle" class="form-control" />
-                <span asp-validation-for="student.SlackHandle" class="text-danger"></span>
+                <label asp-for="Student.SlackHandle" class="control-label"></label>
+                <input asp-for="Student.SlackHandle" class="form-control" />
+                <span asp-validation-for="Student.SlackHandle" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Cohorts" class="control-label"></label>
-                <select asp-for="student.CohortId" asp-items="@Model.Cohorts"></select>
+                <select asp-for="Student.CohortId" asp-items="@Model.Cohorts"></select>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default" />
@@ -424,7 +424,7 @@ Now you can use this view model in the student creation Razor template at _`View
 One special thing you should note in this template is the tag helper for `<select>`.
 
 ```html+razor
-<select asp-for="student.CohortId" asp-items="@Model.Cohorts"></select>
+<select asp-for="Student.CohortId" asp-items="@Model.Cohorts"></select>
 ```
 
 This helper builds an `<option>` for each item in the `StudentCreateViewModel.Cohorts` list.
@@ -460,10 +460,10 @@ public async Task<ActionResult> Create(StudentCreateViewModel model)
                 ( FirstName, LastName, SlackHandle, CohortId )
                 VALUES
                 ( @firstName, @lastName, @slackHandle, @cohortId )";
-            cmd.Parameters.Add(new SqlParameter("@firstName", model.student.FirstName));
-            cmd.Parameters.Add(new SqlParameter("@lastName", model.student.LastName));
-            cmd.Parameters.Add(new SqlParameter("@slackHandle", model.student.SlackHandle));
-            cmd.Parameters.Add(new SqlParameter("@cohortId", model.student.CohortId));
+            cmd.Parameters.Add(new SqlParameter("@firstName", model.Student.FirstName));
+            cmd.Parameters.Add(new SqlParameter("@lastName", model.Student.LastName));
+            cmd.Parameters.Add(new SqlParameter("@slackHandle", model.Student.SlackHandle));
+            cmd.Parameters.Add(new SqlParameter("@cohortId", model.Student.CohortId));
             cmd.ExecuteNonQuery();
 
             return RedirectToAction(nameof(Index));
