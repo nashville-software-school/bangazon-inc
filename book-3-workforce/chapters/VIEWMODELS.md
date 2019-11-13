@@ -343,7 +343,7 @@ private List<Cohort> GetAllCohorts()
 }
 ```
 
-Now use this helper method to populate the data in your ViewModel. Change your `Create` method to look like the following code. Notice you have to convert the `List<Cohort>` to a `List<SelectListItem>`
+Now use this helper method to populate the data in your ViewModel. Change your `Create` method to look like the following code. Notice that the `List<Cohort>` has been converted to a `List<SelectListItem>`
 
 ```cs
 // GET: Students/Create
