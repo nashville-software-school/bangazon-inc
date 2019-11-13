@@ -1,9 +1,9 @@
 # View Models
 
-The first line in any Razor template that uses data from your database is a reference to the type of data that the view will render. In the code below, `@model StudentExercises.Data.Student` is the view model. This allows ASP.NET to use that class to display data in the correct format and validate user input (_if needed_).
+The first line in any Razor template that uses data from your database is a reference to the type of data that the view will render. In the code below, `@model StudentExercises.Models.Student` is the view model. This allows ASP.NET to use that class to display data in the correct format and validate user input (_if needed_).
 
 ```html+razor
-@model StudentExercises.Data.Student
+@model StudentExercises.Models.Student
 
 @{
     ViewData["Title"] = "Student Details";
