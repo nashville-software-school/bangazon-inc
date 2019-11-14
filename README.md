@@ -10,7 +10,7 @@ In order to become a profitable, and sustainable organization, we need you to bu
 
 ## Orientation
 
-Your first two weeks on the job will be you orientation to the technical languages that you'll be using, and to the processes and procedures that you will need to follow to ensure high communication and high productivity for your team.
+Your first four weeks on the job will be you orientation to the technical languages that you'll be using, and to the processes and procedures that you will need to follow to ensure high communication and high productivity for your team.
 
 1. Installation of required tools.
 1. Introduction to the language.
@@ -28,14 +28,13 @@ At the end of your orientation, your management team will determine which Develo
 
 ## Platform Development
 
-You will work on four different [Sprints](https://www.scruminc.com/sprint/) while you build the products that Bangazon Corporation needs in order to operate as a modern business. On each of these sprints, you will build features that your product owner has defined in the [Backlog](http://www.mountaingoatsoftware.com/agile/scrum/scrum-tools/product-backlog).
+You will work on three different [Sprints](https://www.scruminc.com/sprint/) while you build the products that Bangazon Corporation needs in order to operate as a modern business. On each of these sprints, you will build features that your product owner has defined in the [Backlog](http://www.mountaingoatsoftware.com/agile/scrum/scrum-tools/product-backlog).
 
 ### Applications
 
 These are the applications you will be developing during your time working at Bangazon.
 
 1. ASP.NET MVC Web API for the [Bangazon Platform](https://github.com/nashville-software-school/csharp-bangazonapi-boilerplate)
-1. [Command line application](https://github.com/nashville-software-school/csharp-bangazoncli-boilerplate) using Test Driven Development
 1. ASP.NET MVC Web Application for [workforce management](https://github.com/nashville-software-school/csharp-workforce-boilerplate)
 1. ASP.NET MVC Web Application for the [Bangazon public facing site](https://github.com/nashville-software-school/csharp-bangazonmvc-boilerplate)
 
