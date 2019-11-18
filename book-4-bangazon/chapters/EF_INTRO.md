@@ -218,11 +218,27 @@ _context.Remove(dept);
 await _context.SaveChangesAsync();
 ```
 
-## References
+## Project Setup
+
+Before you can use any of the Entity Framework goodness, you have to do a little bit of setup in your project.
+
+### Nuget Package References
+
+By default an ASP<span>.Net</span> project does not include the classes needed to use EF with SQL Server. You'll need to add these nuget packages.
+
+* **Microsoft.EntityFrameworkCore**
+    * The foundational EF library
+* **Microsoft.EntityFrameworkCore.SqlServer**
+    * Specific bits for connecting EF with SQL Server
+* **Microsoft.EntityFrameworkCore.Tool**
+    * Used for working with database "migrations"
+ 
 
 ### Startup.cs
 
-To configure EF, this is what your `ConfigureServices` method should be in the `Startup.cs` file.
+To configure EF, you must call `services.AddDbContext()` in the `ConfigureServices` method of the `Startup` class.
+
+For example, if you would like to use EF in an MVC project, your `ConfigureServices` method would look something like this.
 
 ```cs
 public void ConfigureServices(IServiceCollection services)
@@ -231,6 +247,25 @@ public void ConfigureServices(IServiceCollection services)
         options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
     services.AddControllersWithViews();
+}
+```
+
+### ApplicationDbContext
+
+You will need to create a DbContext as described above.
+
+```cs
+using DepartmentsEmployeesEF.Models;
+using Microsoft.EntityFrameworkCore;
+
+namespace MyProjectName.Data
+{
+    public class ApplicationDbContext : DbContext
+    {
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
+
+        // TODO: Add "DbSet<T>"s here...
+    }
 }
 ```
 
