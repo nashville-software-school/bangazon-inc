@@ -222,21 +222,15 @@ await _context.SaveChangesAsync();
 
 ### Startup.cs
 
-To enable EF model-first migrations, this is what your `ConfigureServices` method should be in the `Startup.cs` file.
+To configure EF, this is what your `ConfigureServices` method should be in the `Startup.cs` file.
 
 ```cs
-public void ConfigureServices (IServiceCollection services) {
-    services.Configure<CookiePolicyOptions> (options => {
-        // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-        options.CheckConsentNeeded = context => true;
-        options.MinimumSameSitePolicy = SameSiteMode.None;
-    });
+public void ConfigureServices(IServiceCollection services)
+{
+    services.AddDbContext<ApplicationDbContext>(options =>
+        options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-    services.AddDbContext<ApplicationDbContext> (options =>
-        options.UseSqlServer (
-            Configuration.GetConnectionString ("DefaultConnection")));
-
-    services.AddMvc ().SetCompatibilityVersion (CompatibilityVersion.Version_2_2);
+    services.AddControllersWithViews();
 }
 ```
 
@@ -249,10 +243,9 @@ While the simpler syntax may seem like a breath of fresh air, and much easier to
 
 > **NOTE:** [Dapper](https://github.com/StackExchange/Dapper) is a popular "light-weight" ORM. It's an alternative to EF and ADO<span>.NET</span>. We won't be discussing Dapper in this course.
 
-## Tutorial
+## Supplemental Tutorial
 
-Please complete, _at least_, the first four parts of the [ASP.NET Core MVC with Entity Framework Core](https://docs.microsoft.com/en-us/aspnet/core/data/ef-mvc/?view=aspnetcore-2.2) Tutorial.
-
+You may find the first four parts of this tutorial helpful. [ASP.NET Core MVC with Entity Framework Core](https://docs.microsoft.com/en-us/aspnet/core/data/ef-mvc/?view=aspnetcore-2.2).
 
 > **NOTE:** This tutorial is challenging and will include new concepts beyond those specifically related to Entity Framework, but stick with it. It's an important part of your education to practice learning from online documentation. This will not be the last time you find yourself needing to learn something from docs.
 
