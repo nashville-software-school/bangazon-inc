@@ -35,7 +35,7 @@ This book builds a strong foundation in the syntax, data structures, and valuabl
 * Chapter 24 - [Bangazon ERD](./chapters/BANGAZON_ERD.md)
 
 ## Supplementary Content
-* Supplement - [SQL Challenge: Chinook](./chpaters/CHINOOK.md)
+* Supplement - [SQL Challenge: Chinook](./chapters/CHINOOK.md)
 * Supplement - [SOLID: Dependency Inversion](./chapters/DEPENDENCY_INVERSION.md)
 * Supplement - [SOLID: Open/Closed Principle](./chapters/OPEN_CLOSED_PRINCIPLE.md)
 * Supplement - [SOLID: Interface Segregation Principle](./chapters/INTERFACE_SEGREGATION_PRINCIPLE.md)
