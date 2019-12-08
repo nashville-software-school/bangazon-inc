@@ -10,7 +10,7 @@ This will be an interactive lesson. Your instructor will lead you through follow
 1. `cd` into your project directory. When you list what's in the directory, you should see your `DepartmentsEmployees.csproj` and `Program.cs`.
 1. Run the following commands. This imports the required package needed to have your C# code connect to a SQL Server database.
    ```sh
-   dotnet add package System.Data.SqlClient
+   dotnet add package Microsoft.Data.SqlClient
    dotnet restore
    ```
 1. Make a folder in your project called `Models`. This folder will contain classes that represent tables in our database.
@@ -160,14 +160,14 @@ This will be an interactive lesson. Your instructor will lead you through follow
    ```csharp
    static void Main(string[] args)
    {
-       var departmentRepo = new DepartmentRepository();
+       DepartmentRepository departmentRepo = new DepartmentRepository();
 
        Console.WriteLine("Getting All Departments:");
        Console.WriteLine();
 
-       var allDepartments = departmentRepo.GetAllDepartments();
+       List<Department> allDepartments = departmentRepo.GetAllDepartments();
 
-       foreach (var dept in allDepartments)
+       foreach (Department dept in allDepartments)
        {
            Console.WriteLine($"{dept.Id} {dept.DeptName}");
        }
@@ -187,7 +187,7 @@ This will be an interactive lesson. Your instructor will lead you through follow
            conn.Open();
            using (SqlCommand cmd = conn.CreateCommand())
            {
-               cmd.CommandText = "SELECT DeptName FROM Department WHERE Id     = @id";
+               cmd.CommandText = "SELECT DeptName FROM Department WHERE Id = @id";
                cmd.Parameters.Add(new SqlParameter("@id", id));
                SqlDataReader reader = cmd.ExecuteReader();
 
@@ -217,12 +217,12 @@ This will be an interactive lesson. Your instructor will lead you through follow
    Console.WriteLine("----------------------------");
    Console.WriteLine("Getting Department with Id 1");
 
-   var singleDepartment = departmentRepo.GetDepartmentById(1);
+   Department singleDepartment = departmentRepo.GetDepartmentById(1);
 
    Console.WriteLine($"{singleDepartment.Id} {singleDepartment.DeptName}");
    ```
 
-1. Now that we've read data from our database, let's look at how we can add new records. Create a new method in the `DepartmentRepository` and name it `AddDepartment`. It should accept a single `Department dept` parameter and not return anything.
+1. Now that we've read data from our database, let's look at how we can add new records. Create a new method in the `DepartmentRepository` and name it `AddDepartment`. It should accept a single `Department dept` parameter and also return a Department object.
 
    ```csharp
    /// <summary>
@@ -230,31 +230,37 @@ This will be an interactive lesson. Your instructor will lead you through follow
    ///   NOTE: This method sends data to the database,
    ///   it does not get anything from the database, so there is nothing to return.
    /// </summary>
-   public void AddDepartment(Department department)
+   public Department AddDepartment(Department department)
    {
        using (SqlConnection conn = Connection)
        {
            conn.Open();
            using (SqlCommand cmd = conn.CreateCommand())
            {
-               // These SQL parameters are annoying. Why can't we use  string interpolation?
+               // These SQL parameters are annoying. Why can't we use string interpolation?
                // ... sql injection attacks!!!
-               cmd.CommandText = "INSERT INTO Department (DeptName) Values (@deptName)";
+               cmd.CommandText = "INSERT INTO Department (DeptName) OUTPUT INSERTED.Id Values (@deptName)";
                cmd.Parameters.Add(new SqlParameter("@deptName", department.DeptName));
-               cmd.ExecuteNonQuery();
+               int id = (int) cmd.ExecuteScalar();
+
+               department.Id = id;
+
+               return department;
            }
        }
 
-       // when this method is finished we can look in the database and see the new department.
+   // when this method is finished we can look in the database and see the new department.
    }
    ```
 
-   Notice that instead of calling `cmd.ExecuteReader` we're calling `cmd.ExecuteNonQuery`. This is because we're not reading anything from the database--we're only telling it to insert a new record.
+   You may be wondering why we return the same object that gets passed in as a parameter. Remember that the database is where each department's Id gets created. The department parameter that gets passed into the method doesn't have an Id when the method begins, but once it gets returned the Id will be included. Notice this part of the SQL command: `OUTPUT INSERTED.Id`. Normally, when we issue an INSERT statement to our database, no records come back and nothing gets returned. The addition of this `OUTPUT` statement means that we'd also like to get back the ID of the department that we just inserted.
+
+   The `cmd.ExecuteScalar` method does two things: First, it executes the SQL command against the database. Then it looks at the first thing that the database sends back (in our case this is just the ID it created for the department) and returns it.
 
 1. Update `Program.Main` to create a new instance of Department and pass it into the `AddDepartment` method.
 
    ```csharp
-   var legalDept = new Department
+   Department legalDept = new Department
    {
        DeptName = "Legal"
    };
@@ -264,6 +270,33 @@ This will be an interactive lesson. Your instructor will lead you through follow
    Console.WriteLine("-------------------------------");
    Console.WriteLine("Added the new Legal Department!");
    ```
+
+1. Now add the following method to the repository that allows us to update a department in the database. This method should be called `UpdateDepartment`. It should take two parameters--an `int id` and a `Department updatedDepartment`, and should not return anything
+
+   ```csharp
+    /// <summary>
+    ///  Updates the department with the given id
+    /// </summary>
+    public void UpdateDepartment(int id, Department department)
+    {
+        using (SqlConnection conn = Connection)
+        {
+            conn.Open();
+            using (SqlCommand cmd = conn.CreateCommand())
+            {
+                cmd.CommandText = @"UPDATE Department
+                                        SET DeptName = @deptName
+                                        WHERE Id = @id";
+                cmd.Parameters.Add(new SqlParameter("@deptName", department.DeptName));
+                cmd.Parameters.Add(new SqlParameter("@id", id));
+
+                cmd.ExecuteNonQuery();
+            }
+        }
+    }
+   ```
+
+   The only difference here is we're calling a method called `cmd.ExecuteNonQuery`. We use this method when we want to execute a SQL command, but we don't expect anything back from the database.
 
 1. Lastly let's create a method that allows us to delete a department. Update `DepartmentRepository` to include a method called `DeleteDepartment`. It should take in an `int id` as a parameter and not return anything.
 
