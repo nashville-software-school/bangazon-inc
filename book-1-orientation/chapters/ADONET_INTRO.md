@@ -225,32 +225,30 @@ This will be an interactive lesson. Your instructor will lead you through follow
 1. Now that we've read data from our database, let's look at how we can add new records. Create a new method in the `DepartmentRepository` and name it `AddDepartment`. It should accept a single `Department dept` parameter and also return a Department object.
 
    ```csharp
-   /// <summary>
-   ///  Add a new department to the database
-   ///   NOTE: This method sends data to the database,
-   ///   it does not get anything from the database, so there is nothing to return.
-   /// </summary>
-   public Department AddDepartment(Department department)
-   {
-       using (SqlConnection conn = Connection)
-       {
-           conn.Open();
-           using (SqlCommand cmd = conn.CreateCommand())
-           {
-               // These SQL parameters are annoying. Why can't we use string interpolation?
-               // ... sql injection attacks!!!
-               cmd.CommandText = "INSERT INTO Department (DeptName) OUTPUT INSERTED.Id Values (@deptName)";
-               cmd.Parameters.Add(new SqlParameter("@deptName", department.DeptName));
-               int id = (int) cmd.ExecuteScalar();
+    /// <summary>
+    ///  Add a new department to the database
+    ///   NOTE: This method sends data to the database,
+    ///   it does not get anything from the database, so there is nothing to return.
+    /// </summary>
+    public void AddDepartment(Department department)
+    {
+        using (SqlConnection conn = Connection)
+        {
+            conn.Open();
+            using (SqlCommand cmd = conn.CreateCommand())
+            {
+                // These SQL parameters are annoying. Why can't we use string interpolation?
+                // ... sql injection attacks!!!
+                cmd.CommandText = "INSERT INTO Department (DeptName) OUTPUT INSERTED.Id Values (@deptName)";
+                cmd.Parameters.Add(new SqlParameter("@deptName", department.DepartmentName));
+                int id = (int)cmd.ExecuteScalar();
 
-               department.Id = id;
+                department.Id = id;
+            }
+        }
 
-               return department;
-           }
-       }
-
-   // when this method is finished we can look in the database and see the new department.
-   }
+        // when this method is finished we can look in the database and see the new department.
+    }
    ```
 
    You may be wondering why we return the same object that gets passed in as a parameter. Remember that the database is where each department's Id gets created. The department parameter that gets passed into the method doesn't have an Id when the method begins, but once it gets returned the Id will be included. Notice this part of the SQL command: `OUTPUT INSERTED.Id`. Normally, when we issue an INSERT statement to our database, no records come back and nothing gets returned. The addition of this `OUTPUT` statement means that we'd also like to get back the ID of the department that we just inserted.
