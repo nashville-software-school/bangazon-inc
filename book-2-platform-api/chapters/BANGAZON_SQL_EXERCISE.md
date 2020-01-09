@@ -332,7 +332,6 @@ INSERT INTO EmployeeTraining (EmployeeId, TrainingProgramId) VALUES (1, 3);
 INSERT INTO EmployeeTraining (EmployeeId, TrainingProgramId) VALUES (2, 2);
 INSERT INTO EmployeeTraining (EmployeeId, TrainingProgramId) VALUES (2, 3);
 INSERT INTO EmployeeTraining (EmployeeId, TrainingProgramId) VALUES (20, 8);
-INSERT INTO EmployeeTraining (EmployeeId, TrainingProgramId) VALUES (20, 8);
 INSERT INTO EmployeeTraining (EmployeeId, TrainingProgramId) VALUES (1, 9);
 INSERT INTO EmployeeTraining (EmployeeId, TrainingProgramId) VALUES (2, 9);
 INSERT INTO EmployeeTraining (EmployeeId, TrainingProgramId) VALUES (3, 9);
