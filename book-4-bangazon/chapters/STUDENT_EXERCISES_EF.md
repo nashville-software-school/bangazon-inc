@@ -4,7 +4,7 @@ Once you have completed the "Getting Started" portion of the Entity Framework tu
 
 ## Setting up your project
 1. Create a new database. Call it `StudentExercises-EF`.
-1. In Visual Studio, create a new MVC Web App with ASP.NET.
+1. In Visual Studio, create a new MVC Web App with ASP.NET. Make sure you select "Individual User Accounts" for Authentication.
 
 ## Building your database
 1. Copy your models from your previous Student Exercise project. You'll want to go through your models again before you do anything else and make sure that they represent every relationship in the database.
