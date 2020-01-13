@@ -1,6 +1,5 @@
 # Student Exercises with Entity Framework
 
-Once you have completed the "Getting Started" portion of the Entity Framework tutorial, you can begin to rebuild your Student Exercises app with Entity.
 
 ## Setting up your project
 1. Create a new database. Call it `StudentExercises-EF`.
