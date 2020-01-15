@@ -61,7 +61,7 @@ namespace YourApplicationNamespaceHere.Models
 
 Identity Framework works hand-in-hand with Entity framework. When we create a new Identity Framework project, VS even gives us an initial `ApplicationDbContext`, a migration and a connection string in `appSettings.json`. These scaffolded items are a good starting point, but we need to make a few changes.
 
-1. Delete the `Data/Migrations` folder. It was nice of VS to give us an initial migration, but that migration wasn't built with our custom `ApplicationUser` class.
+1. If you're starting a new project, you can delete the `Data/Migrations` folder. It was nice of VS to give us an initial migration, but that migration wasn't built with our custom `ApplicationUser` class. If you're overriding the `ApplicationUser` in a project that already exists, you don't need to delete the `Migrations` folder. 
     > **NOTE:** Do NOT delete the `Data` folder, only the `Migration` folder inside of it.
 1. Update the connection string in your appsettings file to point to a new database in your local SQLExpress database server.
 1. Tell Identity and Entity about your custom `ApplicationUser` class by updating the `ApplicationDbContext` to inherit from `IdentityDbContext<ApplicationUser>`
