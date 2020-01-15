@@ -7,11 +7,12 @@ This book prepares you to build the e-commerce application that serves our custo
 * Chapter 1 - [Entity Framework](./chapters/EF_INTRO.md)
 * Chapter 2 - [Student Exercises with Entity Framework](./chapters/STUDENT_EXERCISES_EF.md)
 * Chapter 3 - [Seeding Database](./chapters/EF_SEEDING.md)
+* Chapter 4 - [Customizing User Data with Identity Framework](./chapters/ASPNET_IDENTITY_INTRO.md)
+* Chapter 5 - [Accessing User Data in Razor Templates](./chapters/IDENTITY_RAZOR.md)
 
 > ### __Sprint 3__ - Bangazon Web Site
 
-* Chapter 4 - [Customizing User Data with Identity Framework](./chapters/ASPNET_IDENTITY_INTRO.md)
-* Chapter 5 - [Accessing User Data in Razor Templates](./chapters/IDENTITY_RAZOR.md)
+
 
 ## Supplementary Content
 
