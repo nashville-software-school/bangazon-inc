@@ -14,7 +14,7 @@ Maybe you could write a C# program to help you?
 
 ## The Exercise
 
-This program will be written in phases. Along the way you will use methods, dictionaries and lists.
+This program will be written in phases. Along the way you will get some practice with classes, methods, properties, loops, dictionaries, lists, and more...
 
 ### Phase One
 
