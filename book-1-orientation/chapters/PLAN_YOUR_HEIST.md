@@ -14,14 +14,14 @@ Maybe you could write a C# program to help you?
 
 ## The Exercise
 
-This program will be written in phases. Along the way you will get some practice with classes, methods, properties, loops, dictionaries, lists, and more...
+This program will be written in phases. Along the way you will get some practice with loops, dictionaries, lists, and more...
 
 ### Phase One
 
 The program should...
 
 1. Print the message "Plan Your Heist!".
-1. Create a way to store a single team member. A team member will have a _name_, a  _skill Level_ and a _courage factor_. The _skill Level_ will be a positive integer and the _courage factor_ will be a decimal between 0.0 and 2.0.
+1. Create a way to store a single team member. A team member will have a _name_, a _skill Level_ and a _courage factor_. The _skill Level_ will be a positive integer and the _courage factor_ will be a decimal between 0.0 and 2.0.
 1. Prompt the user to enter a team member's name and save that name.
 1. Prompt the user to enter a team member's skill level and save that skill level with the name.
 1. Prompt the user to enter a team member's courage factor and save that courage factor with the name.
@@ -53,8 +53,8 @@ The program should be updated to...
 1. Create a random number between -10 and 10 for the heist's _luck value_.
 1. Add this number to the bank's difficulty level.
 1. Before displaying the success or failure message, display a report that shows.
-    * The team's combined skill level
-    * The bank's difficulty level
+   - The team's combined skill level
+   - The bank's difficulty level
 
 ### Phase Five
 
