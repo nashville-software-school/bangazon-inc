@@ -74,7 +74,8 @@ You should notice that your drive now has your more meaningful name like below. 
 
 ![Boot to EFI Boot](images/Windows-To-Go/Boot-to-EFI-Boot.jpg)
 
-- You should soon see the blue Windows 10 logo and a spinning loading icon.
+- You should soon see the blue Windows 10 logo and a spinning loading icon. 
+- If you get a security error read this article: https://www.ninjastik.com/support/2018-macbook-pro-boot-from-usb/
 - You'll be walked through the normal Windows 10 setup process. This is your computer. Set it up however you like.
 
 	This may or may not be where you discover you need that USB hub. Alternatively, if your mouse works then you should have access to the on-screen accessibility keyboard.
