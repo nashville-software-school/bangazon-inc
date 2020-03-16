@@ -79,7 +79,7 @@
     1. Search for walkers who live in a neighborhood.
     1. Create a new owner.
     1. Create a new dog and assign them to an existing owner.
-    1. Create a new walk and assign them to an existing dog.
+    1. Create a new walk for a given dog and walker.
     1. Display all dogs in a given walk.
     1. Move an existing dog to another existing owner.
     1. List the walks for a given dog.
