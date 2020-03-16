@@ -17,7 +17,7 @@
 
 1. Add the following to your program:
     1. Find all the dog owners in the database. Include each owner's neighborhood AND each owner's list of dogs.
-    1. Write a method in the `Repository` class that accepts four arguments:  a `Walker`, an `Owner`, a `Date` and a `Duration`. The walker will walk each dog belonging to the owner ONLY if the dog has not been walked.
+    1. Write a method in the `Repository` class that accepts four arguments:  a `Walker`, an `Owner`, a `Date` and a `Duration`. The walker will walk each dog belonging to the owner ONLY if the dog has not been walked that day.
 
 ## Advanced Challenge
 
@@ -76,13 +76,13 @@
     1. Display all neighborhoods.
     1. Display all walks.
     1. Display all owners.
-    1. Search walkers by last name.
+    1. Search for walkers who live in a neighborhood.
     1. Create a new owner.
     1. Create a new dog and assign them to an existing owner.
     1. Create a new walk and assign them to an existing dog.
     1. Display all dogs in a given walk.
     1. Move an existing dog to another existing owner.
     1. List the walks for a given dog.
-    1. Assign an existing exercise to an existing student.
+ 
 
 >**NOTE**: C#'s [switch statement](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/switch) may simplify your menu code.
