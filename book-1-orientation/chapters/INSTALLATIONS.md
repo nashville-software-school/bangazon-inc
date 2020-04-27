@@ -20,3 +20,9 @@ Please bookmark the [dbdiagram.io](http://dbdiagram.io) web application for crea
 https://docs.asp.net/en/latest/getting-started.html
 
 https://docs.microsoft.com/en-us/dotnet/
+
+#### .NET on YouTube
+
+* **Main page**: https://www.youtube.com/channel/UCvtT19MZW8dq5Wwfu6B0oxw
+* **C# 101**: https://www.youtube.com/watch?v=BM4CHBmAPh4&list=PLdo4fOZ0oVxKLQCHpiUWun7vlJJvUiN
+* **.NET Core 101**: https://www.youtube.com/watch?v=eIHKZfgddLM&list=PLdo4fOcmZ0oWoazjhXQzBKMrFuArxpW80
