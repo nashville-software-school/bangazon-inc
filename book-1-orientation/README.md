@@ -4,35 +4,46 @@ This book builds a strong foundation in the syntax, data structures, and valuabl
 
 ## Chapters
 
-* Chapter 1 - [Installations](./chapters/INSTALLATIONS.md)
-* Chapter 2 - [Windows Installations](./chapters/WINDOWS_PRO_INSTALLS.md)
-* Chapter 3 - [Introduction to C#](./chapters/CSHARP_INTRO.md)
-  * [Anatomy of a C# Program](./chapters/ANATOMY_OF_CSHARP_APP.md)
-  * [Debugging C# in Visual Studio Code](./chapters/DEBUGGING_VSCODE.md)
-  * [Control Flow](./chapters/CONTROL_FLOW.md)
-  * [Strongly Typed Variables](./chapters/STRONGLY_TYPED_VARIABLES.md)
-  * [User Defined Types with Classes](./chapters/CLASS_BASICS.md)
-  * [Exceptions and Try/Catch](./chapters/TRY_CATCH_INTRO.md)
-  * [Writing to and Reading from the Console](./chapters/CONSOLE.md)
-  * [Collections](./chapters/COLLECTIONS.md)
-  * [Wrangling Data with LINQ](./chapters/LINQ_INTRO.md)
-* Chapter 4 - [Exercise - Plan Your Heist](./chapters/PLAN_YOUR_HEIST.md)
+* Chapter X - [Installations](./chapters/INSTALLATIONS.md)
+* Chapter X - [Windows Installations](./chapters/WINDOWS_PRO_INSTALLS.md)
 
-* Chapter 5 - [SQL Server using Visual Studio](./chapters/SQL_SERVER_AND_VISUAL_STUDIO.md)
-* Chapter 6 - [Introduction to SQL](./chapters/SQL_INTRO.md)
-* Chapter 7 - [Some SQL Exercise like this, but not this](https://gist.github.com/askingalot/3e145c634a5f09978ea84382d1b90a35)
+**Part 1: C#**
 
-* Chapter 8 - [Advanced C#](/chapters/CLASS_ADVANCED.md)
-  * [Object Relationship Vocabulary Terms](./chapters/RELATIONSHIPS.md)
-  * [Interfaces](./chapters/INTERFACES_INTRO.md)
-  * [Inheritance](./chapters/INHERITANCE_INTRO.md)
-  * [Generics](./chapters/GENERICS_INTRO.md)
+* Chapter X - [Introduction to C#](./chapters/CSHARP_INTRO.md)
+* Chapter X - [C# for the JavaScript Developer](./chapters/CSHARP_JAVASCRIPT_COMPARISON.md)
+* Chapter X - [Exercise - Hands on C#/JavaScript Translation](./chapters/TRANSLATE_CSHARP_JAVASCRIPT.md)
+* Chapter X - [Anatomy of a C# Program](./chapters/ANATOMY_OF_CSHARP_APP.md)
+* Chapter X - [Debugging C# in Visual Studio Code](./chapters/DEBUGGING_VSCODE.md)
+* Chapter X - [Control Flow](./chapters/CONTROL_FLOW.md)
+* Chapter X - [Strongly Typed Variables](./chapters/STRONGLY_TYPED_VARIABLES.md)
+* Chapter X - [User Defined Types with Classes](./chapters/CLASS_BASICS.md)
+* Chapter X - [Exceptions and Try/Catch](./chapters/TRY_CATCH_INTRO.md)
+* Chapter X - [Writing to and Reading from the Console](./chapters/CONSOLE.md)
+* Chapter X - [Collections](./chapters/COLLECTIONS.md)
+* Chapter X - [Wrangling Data with LINQ](./chapters/LINQ_INTRO.md)
 
-* Chapter 9 - [Intro to Visual Studio](./chapters/VISUAL_STUDIO.md)
-* Chapter 10 - [Debugging in Visual Studio](./chapters/DEBUGGING_VS.md)
-* Chapter 11 - [Using ADO.NET and SQL](./chapters/ADONET_INTRO.md)
+* Chapter X - [Exercise - Plan Your Heist](./chapters/PLAN_YOUR_HEIST.md)
 
-> ## __Group Project__ - Trestlebridge Farms
+**Part 2: SQL**
+
+* Chapter X - [SQL Server using Visual Studio](./chapters/SQL_SERVER_AND_VISUAL_STUDIO.md)
+* Chapter X - [Introduction to SQL](./chapters/SQL_INTRO.md)
+* Chapter X - [Exercise - Poems by Kids](./chapters/SQL_EXERCISE_POKI.md)
+
+**Part 3: C# Class Relationships**
+
+* Chapter X -  [Inheritance](./chapters/INHERITANCE_INTRO.md)
+* Chapter X -  [Interfaces](./chapters/INTERFACES_INTRO.md)
+* Chapter X -  [Object Relationship Vocabulary Terms](./chapters/RELATIONSHIPS.md)
+* Chapter X -  [Generics](./chapters/GENERICS_INTRO.md)
+
+**Part 4: C# and SQL with ADO<span>.NET</span>**
+
+* Chapter X - [Intro to Visual Studio](./chapters/VISUAL_STUDIO.md)
+* Chapter X - [Debugging in Visual Studio](./chapters/DEBUGGING_VS.md)
+* Chapter X - [Using ADO.NET and SQL](./chapters/ADONET_INTRO.md)
+
+**Part 5: Tabloid CLI Group Project**
 
 ## Supplementary Content
 
