@@ -4,8 +4,8 @@ This book builds a strong foundation in the syntax, data structures, and valuabl
 
 ## Chapters
 
-* Chapter X - [Installations](./chapters/INSTALLATIONS.md)
-* Chapter X - [Windows Installations](./chapters/WINDOWS_PRO_INSTALLS.md)
+* Chapter 1 - [Installations](./chapters/INSTALLATIONS.md)
+* Chapter 2 - [Windows Installations](./chapters/WINDOWS_PRO_INSTALLS.md)
 
 **Part 1: C#**
 
