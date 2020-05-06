@@ -15,7 +15,7 @@
 1. Open the SQL Server Object Explorer and expand the `Databases` node beneath your SQL Express instance. You should see a new database named `PoKi`
 10. Open a new query window to the `PoKi` database. Use this editor window to write SQL to answer the questions below.
 
-## PoKI ERD
+## PoKi ERD
 
 ![poki erd](./assets/PoKi.png)
 
