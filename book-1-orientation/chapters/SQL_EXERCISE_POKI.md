@@ -5,19 +5,19 @@
 
 ## Setup
 
-1. Download these SQL scripts
-    * one
-    * two
-    * three
+1. Download [this SQL script](./assets/poki.sql)
 1. Open Visual Studio
 1. From Visual Studio's main menu, Select the `File` -> `Open` -> `File` menu option
-1. Use the file explorer to navigated to and select the first file you downloaded in _step 1_
+1. Use the file explorer to navigated to and select the file you downloaded in _step 1_
 1. The file will open in an editor window. Find and click the `Connect` near the upper-left of the editor 
 1. In the `Connect` window, find and select your SQL Express database instance and click the `Connect` button
 1. Back in the editor window click the `Execute` button or use the `Ctrl + SHift + E` shortcut to run the script
-1. Repeat _steps 4 - 7_ for the remaining sql scripts
 1. Open the SQL Server Object Explorer and expand the `Databases` node beneath your SQL Express instance. You should see a new database named `PoKi`
 10. Open a new query window to the `PoKi` database. Use this editor window to write SQL to answer the questions below.
+
+## PoKI ERD
+
+![poki erd](./assets/PoKi.png)
 
 ## Investigating the Data
 
