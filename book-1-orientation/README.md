@@ -23,7 +23,8 @@ This book builds a strong foundation in the syntax, data structures, and valuabl
 * Chapter 14 - [Collections](./chapters/COLLECTIONS.md)
 * Chapter 15 - [Wrangling Data with LINQ](./chapters/LINQ_INTRO.md)
 * Chapter 16 - [Exercise - Translate Part 3](./chapters/TRANSLATE_CSHARP_JAVASCRIPT1.md)
-* Chapter 17 - [Exercise - Plan Your Heist](./chapters/PLAN_YOUR_HEIST.md)
+* Chapter 17a - [Exercise - Plan Your Heist](./chapters/PLAN_YOUR_HEIST.md)
+* Chapter 17b - [Exercise - Heist Part II](./chapters/CLASSIC_HEIST.md)
 
 **Part 2: SQL**
 
