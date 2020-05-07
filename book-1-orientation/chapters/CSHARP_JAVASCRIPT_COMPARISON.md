@@ -364,5 +364,5 @@ const people = getPeopleFromSomeplace();
 const names = people.map(p => p.Name);
 const person = people.find(p => p.Name == "Selam");
 const isAnyoneNamedPhil = people.some(p => p,Name == "Phil");
-const doesEveryoneHaveAHobby = people.every(p => p.Hobbies.Count > 0);
+const doesEveryoneHaveAHobby = people.every(p => p.Hobbies.length > 0);
 ```
