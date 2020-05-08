@@ -1,6 +1,6 @@
-# Book 3 - Bangazon Workforce Management
+# Book 2 - <span>ASP.</span>NET Core MVC
 
-This book prepares you for building the web application that Bangazon employees will use to manage employees, departments, computers, and training programs.
+This book prepares you for building the web application that will be a prototype of the Tabloid blog platform.
 
 ## Chapters
 
@@ -13,7 +13,7 @@ This book prepares you for building the web application that Bangazon employees 
 * Chapter 7 - [Student Exercises MVC - Part 3](./chapters/INSTRUCTOR_COHORT_RAZOR.md)
 * Chapter 8 - [Student Exercises MVC - Part 4](./chapters/STUDENT_EXERCISES_COHORT_RAZOR.md)
 
-> [__Sprint 2__ - Bangazon Workforce Management](./chapters/GROUP_PROJECT.md)
+> [__Sprint_ - Tabloid Web App Prototype](./chapters/GROUP_PROJECT.md)
 
 
 * Chapter 9 - [More SQL Exercises](./chapters/SQL_EXERCISES.md)
