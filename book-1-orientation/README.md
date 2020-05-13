@@ -34,9 +34,9 @@ This book builds a strong foundation in the syntax, data structures, and valuabl
 
 **Part 3: C# Class Relationships**
 
-* Chapter 21 -  [Advanced Classes](./chapters/CLASS_ADVANCED.md)
+* Chapter 21 -  [Interfaces](./chapters/INTERFACES_INTRO.md)
 * Chapter 22 -  [Inheritance](./chapters/INHERITANCE_INTRO.md)
-* Chapter 23 -  [Interfaces](./chapters/INTERFACES_INTRO.md)
+* Chapter 23 -  [More about Classes](./chapters/CLASS_ADVANCED.md)
 * Chapter 24 -  [Object Relationship Vocabulary Terms](./chapters/RELATIONSHIPS.md)
 * Chapter 25 -  [Generics](./chapters/GENERICS_INTRO.md)
 
