@@ -2,6 +2,8 @@
 
 So far we've learned a lot about the power of classes in C#. This includes most of what you'll use on a regular basis, but there are a few more features of classes that you need to understand.
 
+**add something about generics**
+
 ## Static
 
 The `static` keyword is used to make class methods and properties usable without creating an instance of the class.

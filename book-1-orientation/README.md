@@ -23,8 +23,7 @@ This book builds a strong foundation in the syntax, data structures, and valuabl
 * Chapter 14 - [Collections](./chapters/COLLECTIONS.md)
 * Chapter 15 - [Wrangling Data with LINQ](./chapters/LINQ_INTRO.md)
 * Chapter 16 - [Exercise - Translate Part 3](./chapters/TRANSLATE_CSHARP_JAVASCRIPT1.md)
-* Chapter 17a - [Exercise - Plan Your Heist](./chapters/PLAN_YOUR_HEIST.md)
-* Chapter 17b - [Exercise - Heist Part II](./chapters/CLASSIC_HEIST.md)
+* Chapter 17 - [Exercise - Plan Your Heist](./chapters/PLAN_YOUR_HEIST.md)
 
 **Part 2: SQL**
 
@@ -34,11 +33,11 @@ This book builds a strong foundation in the syntax, data structures, and valuabl
 
 **Part 3: C# Class Relationships**
 
-* Chapter 21 -  [Interfaces](./chapters/INTERFACES_INTRO.md)
-* Chapter 22 -  [Inheritance](./chapters/INHERITANCE_INTRO.md)
-* Chapter 23 -  [More about Classes](./chapters/CLASS_ADVANCED.md)
-* Chapter 24 -  [Object Relationship Vocabulary Terms](./chapters/RELATIONSHIPS.md)
-* Chapter 25 -  [Generics](./chapters/GENERICS_INTRO.md)
+* Chapter 21 - [Inheritance](./chapters/INHERITANCE_INTRO.md)
+* Chapter 22 - [Interfaces](./chapters/INTERFACES_INTRO.md)
+* Chapter 23 - [Object Relationship Vocabulary Terms](./chapters/RELATIONSHIPS.md)
+* Chapter 24 - [More about Classes](./chapters/CLASS_ADVANCED.md)
+* Chapter 25 - [Exercise - Heist Part II](./chapters/CLASSIC_HEIST.md)
 
 **Part 4: C# and SQL with ADO<span>.NET</span>**
 
@@ -50,6 +49,7 @@ This book builds a strong foundation in the syntax, data structures, and valuabl
 
 ## Supplementary Content
 
+* Supplement - [Generics](./chapters/GENERICS_INTRO.md)
 * Supplement - [SOLID: Dependency Inversion](./chapters/DEPENDENCY_INVERSION.md)
 * Supplement - [SOLID: Open/Closed Principle](./chapters/OPEN_CLOSED_PRINCIPLE.md)
 * Supplement - [SOLID: Interface Segregation Principle](./chapters/INTERFACE_SEGREGATION_PRINCIPLE.md)
