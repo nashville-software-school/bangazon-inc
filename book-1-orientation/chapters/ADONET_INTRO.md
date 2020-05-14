@@ -1,236 +1,315 @@
 # Using SQL in a .NET Application
 
-This will be an interactive lesson. Your instructor will lead you through following the instructions.
+Sometimes money is tight. Sometimes when money is tight, it becomes an unavoidable truth that we must live with other people. We call these people _Roommates_.
+
+Your task is to build a command line application to manage a house full of roommates. You should persist data in a SQL Server database.
+
+> **NOTE:** This will begin as an interactive lesson. Your instructor will lead you through following the instructions.
 
 ## Instructions
 
-1. Use the [departments and employees](./assets/departments-employees.sql) SQL script to create a `DepartmentsEmployees` database.
-1. In Visual Studio, create a new console application called `DepartmentsEmployees`.
-1. In your terminal, navigate to the directory where you created your project. The directory will have a `DepartmentsEmployees.sln` file in it.
-1. `cd` into your project directory. When you list what's in the directory, you should see your `DepartmentsEmployees.csproj` and `Program.cs`.
+1. Use the [Roommates](./assets/roommates.sql) SQL script to create a `DepartmentsEmployees` database.
+1. In Visual Studio, create a new console application called `Roommates`.
+1. In your terminal, navigate to the directory where you created your project. The directory will have a `Roommates.sln` file in it.
+1. `cd` into your project directory. When you list what's in the directory, you should see your `Roommates.csproj` and `Program.cs`.
 1. Run the following commands. This imports the required package needed to have your C# code connect to a SQL Server database.
+
    ```sh
    dotnet add package Microsoft.Data.SqlClient
    dotnet restore
    ```
+
 1. Make a folder in your project called `Models`. This folder will contain classes that represent tables in our database.
-1. In the `Models` folder, create a `Department.cs` file and `Employee.cs` file. Copy in the following code
+1. In the `Models` folder, create `Room.cs`, `Roommate.cs` and `Chore.cs` file. Copy in the following code
 
    ## C# files
 
-   **Models/Department.cs**
+   **Models/Room.cs**
 
-   ```cs
-   namespace DepartmentsEmployees.Models
-   {
-       // C# representation of the Department table
-       public class Department
-       {
-           public int Id { get; set; }
-           public string DeptName { get; set; }
-       }
-   }
-   ```
+    ```cs
+    namespace Roommates.Models
+    {
+        // C# representation of the Room table
+        public class Room
+        {
+            public int Id { get; set; }
+            public string Name { get; set; }
+            public int MaxOccupancy { get; set; }
+        }
+    }
+    ```
 
-   **Models/Employee.cs**
 
-   ```cs
-   namespace DepartmentsEmployees.Models
-   {
-       // C# representation of the Employee table
-       public class Employee
-       {
-           public int Id { get; set; }
-           public string FirstName { get; set; }
-           public string LastName { get; set; }
+   **Models/Roommate.cs**
 
-           //T his is to hold the actual foreign key integer
-           public int DepartmentId { get; set; }
+    ```cs
+    using System;
 
-           // This property is for storing the C# object representing the department
-           public Department Department { get; set; }
-       }
-   }
-   ```
+    namespace Roommates.Models
+    {
+        // C# representation of the Roommate table
+        public class Roommate
+        {
+            public int Id { get; set; }
+            public string Firstname { get; set; }
+            public string Lastname { get; set; }
+            public int RentPortion { get; set; }
+            public DateTime MovedInDate { get; set; }
+            public Room Room { get; set; }
+        }
+    }
+    ```
 
-1. Create a new folder called `Data`. This folder will contain classes that will be responsible for getting data out of our database and creating C# objects from that data. We typically call classes with this responsibility a Repository. Add two new files to it called `DepartmentRepository.cs` and `EmployeeRepository.cs`.
-1. Copy the following starter code into `DepartmentRepository.cs`
+   **Models/Chore.cs**
 
-   ```csharp
-   using System.Collections.Generic;
-   using System.Data.SqlClient;
-   using DepartmentsEmployees.Models;
+    ```cs
+    namespace Roommates.Models
+    {
+        // C# representation of the Chore table
+        public class Chore
+        {
+            public int Id { get; set; }
+            public string Name { get; set; }
+        }
+    }
+    ```
 
-   namespace DepartmentsEmployees.Data
-   {
-       /// <summary>
-       ///  An object to contain all database interactions.
-       /// </summary>
-       public class DepartmentRepository
-       {
-           /// <summary>
-           ///  Represents a connection to the database.
-           ///   This is a "tunnel" to connect the application to the database.
-           ///   All communication between the application and database passes through this connection.
-           /// </summary>
-           public SqlConnection Connection
-           {
-               get
-               {
-                   // This is "address" of the database
-                   string _connectionString = "Data Source=localhost\\SQLEXPRESS;Initial Catalog=DepartmentsEmployees;Integrated Security=True";
-                   return new SqlConnection(_connectionString);
-               }
-           }
 
-       }
-   }
-
-   ```
-
-   The DepartmentRepository you just added contains a single, computed property called `Connection`. The type of this property is `SqlConnection`. It represents a connection from your C# application to your SQL Server database. Think of it like a two-way tunnel that all communication passes through. Since the property is computed, it means that any time the `Connection` property gets referenced in our code, it will create a new tunnel. Typically, this tunnel stays open only long enough to execute a single command (i.e. a `SELECT` or `INSERT` statement). Once the command is executed, we close the connection and effectively destroy that tunnel. Then when we want to execute another command, we do the same thing again and create a new tunnel.
-
-1. Let's see how we can get data out of our Department table and convert it into a `List<Department>`. Add the following method to your `DepartmentRepository` class
+1. Create a new folder called `Repositories`. This folder will contain classes that will be responsible for getting data out of our database and creating C# objects from that data. We typically call classes with this responsibility a Repository. Add two new files to it called `BaseRepository.cs` and `RoomRepository.cs`.
+1. Copy the following code into `BaseRepository.cs`
 
    ```csharp
-   /// <summary>
-   ///  Returns a list of all departments in the database
-   /// </summary>
-   public List<Department> GetAllDepartments()
-   {
-       //  We must "use" the database connection.
-       //  Because a database is a shared resource (other applications may be using it too) we must
-       //  be careful about how we interact with it. Specifically, we Open() connections when we need to
-       //  interact with the database and we Close() them when we're finished.
-       //  In C#, a "using" block ensures we correctly disconnect from a resource even if there is an error.
-       //  For database connections, this means the connection will be properly closed.
-       using (SqlConnection conn = Connection)
-       {
-           // Note, we must Open() the connection, the "using" block   doesn't do that for us.
-           conn.Open();
+    using Microsoft.Data.SqlClient;
 
-           // We must "use" commands too.
-           using (SqlCommand cmd = conn.CreateCommand())
-           {
-               // Here we setup the command with the SQL we want to execute before we execute it.
-               cmd.CommandText = "SELECT Id, DeptName FROM Department";
+    namespace Roommates.Repositories
+    {
+        /// <summary>
+        ///  A base class for every other Repository class to inherit from.
+        ///  This class is responsible for providing a database connection to each of the repository subclasses
+        /// </summary>
+        public class BaseRepository
+        {
+            /// <summary>
+            ///  A "connection string" is the address of the database.
+            /// </summary>
+            private string _connectionString;
 
-               // Execute the SQL in the database and get a "reader" that will give us access to the data.
-               SqlDataReader reader = cmd.ExecuteReader();
 
-               // A list to hold the departments we retrieve from the database.
-               List<Department> departments = new List<Department>();
+            /// <summary>
+            ///  This constructor will be invoked by subclasses.
+            ///  It will save the connection string for later use.
+            /// </summary>
+            public BaseRepository(string connectionString)
+            {
+                _connectionString = connectionString;
+            }
 
-               // Read() will return true if there's more data to read
-               while (reader.Read())
-               {
-                   // The "ordinal" is the numeric position of the column in the query results.
-                   //  For our query, "Id" has an ordinal value of 0 and "DeptName" is 1.
-                   int idColumnPosition = reader.GetOrdinal("Id");
 
-                   // We user the reader's GetXXX methods to get the value for a particular ordinal.
-                   int idValue = reader.GetInt32(idColumnPosition);
+            /// <summary>
+            ///  Represents a connection to the database.
+            ///   This is a "tunnel" to connect the application to the database.
+            ///   All communication between the application and database passes through this connection.
+            /// </summary>
+            protected SqlConnection Connection => new SqlConnection(_connectionString);
+        }
+    }
 
-                   int deptNameColumnPosition = reader.GetOrdinal("DeptName");
-                   string deptNameValue = reader.GetString (deptNameColumnPosition);
-
-                   // Now let's create a new department object using the data from the database.
-                   Department department = new Department
-                   {
-                       Id = idValue,
-                       DeptName = deptNameValue
-                   };
-
-                   // ...and add that department object to our list.
-                   departments.Add(department);
-               }
-
-               // We should Close() the reader. Unfortunately, a "using" block won't work here.
-               reader.Close();
-
-               // Return the list of departments who whomever called this method.
-               return departments;
-           }
-       }
-   }
    ```
 
-   To test this, let's call this method from the `Program.Main` method. Create a new instance of a `DepartmentRepository` and call `GetAllDepartments`. Run the application.
+   The BaseRepository you just added contains a single, computed property called `Connection`. The type of this property is `SqlConnection`. It represents a connection from your C# application to your SQL Server database. Think of it like a two-way tunnel that all communication passes through. Since the property is computed, it means that any time the `Connection` property gets referenced in our code, it will create a new tunnel. Typically, this tunnel stays open only long enough to execute a single command (i.e. a `SELECT` or `INSERT` statement). Once the command is executed, we close the connection and effectively destroy that tunnel. Then when we want to execute another command, we do the same thing again and create a new tunnel.
+
+1. Copy the following code into `RoomRepository.cs`
+
+    ```cs
+    using Microsoft.Data.SqlClient;
+    using Roommates.Models;
+    using System.Collections.Generic;
+
+    namespace Roommates.Repositories
+    {
+        /// <summary>
+        ///  This class is responsible for interacting with Room data.
+        ///  It inherits from the BaseRepository class so that it can use the BaseRepository's Connection property
+        /// </summary>
+        public class RoomRepository : BaseRepository
+        {
+            /// <summary>
+            ///  When new RoomRespository is instantiated, pass the connection string along to the BaseRepository
+            /// </summary>
+            public RoomRepository(string connectionString) : base(connectionString) { }
+
+            // ...We'll add some methods shortly...
+        }
+    }
+    ```
+
+
+1. Let's see how we can get data out of our Room table and convert it into a `List<Room>`. Add the following method to your `RoomRepository` class
 
    ```csharp
-   static void Main(string[] args)
-   {
-       DepartmentRepository departmentRepo = new DepartmentRepository();
+    /// <summary>
+    ///  Get a list of all Rooms in the database
+    /// </summary>
+    public List<Room> GetAll()
+    {
+        //  We must "use" the database connection.
+        //  Because a database is a shared resource (other applications may be using it too) we must
+        //  be careful about how we interact with it. Specifically, we Open() connections when we need to
+        //  interact with the database and we Close() them when we're finished.
+        //  In C#, a "using" block ensures we correctly disconnect from a resource even if there is an error.
+        //  For database connections, this means the connection will be properly closed.
+        using (SqlConnection conn = Connection)
+        {
+            // Note, we must Open() the connection, the "using" block doesn't do that for us.
+            conn.Open();
 
-       Console.WriteLine("Getting All Departments:");
-       Console.WriteLine();
+            // We must "use" commands too.
+            using (SqlCommand cmd = conn.CreateCommand())
+            {
+                // Here we setup the command with the SQL we want to execute before we execute it.
+                cmd.CommandText = "SELECT Id, Name, MaxOccupancy FROM Room";
 
-       List<Department> allDepartments = departmentRepo.GetAllDepartments();
+                // Execute the SQL in the database and get a "reader" that will give us access to the data.
+                SqlDataReader reader = cmd.ExecuteReader();
 
-       foreach (Department dept in allDepartments)
-       {
-           Console.WriteLine($"{dept.Id} {dept.DeptName}");
-       }
-   }
+                // A list to hold the rooms we retrieve from the database.
+                List<Room> rooms = new List<Room>();
+
+                // Read() will return true if there's more data to read
+                while (reader.Read())
+                {
+                    // The "ordinal" is the numeric position of the column in the query results.
+                    //  For our query, "Id" has an ordinal value of 0 and "Name" is 1.
+                    int idColumnPosition = reader.GetOrdinal("Id");
+
+                    // We user the reader's GetXXX methods to get the value for a particular ordinal.
+                    int idValue = reader.GetInt32(idColumnPosition);
+
+                    int nameColumnPosition = reader.GetOrdinal("Name");
+                    string nameValue = reader.GetString(nameColumnPosition);
+
+                    int maxOccupancyColunPosition = reader.GetOrdinal("MaxOccupancy");
+                    int maxOccupancy = reader.GetInt32(maxOccupancyColunPosition);
+
+                    // Now let's create a new room object using the data from the database.
+                    Room room = new Room
+                    {
+                        Id = idValue,
+                        Name = nameValue,
+                        MaxOccupancy = maxOccupancy,
+                    };
+
+                    // ...and add that room object to our list.
+                    rooms.Add(room);
+                }
+
+                // We should Close() the reader. Unfortunately, a "using" block won't work here.
+                reader.Close();
+
+                // Return the list of rooms who whomever called this method.
+                return rooms;
+            }
+        }
+    }
    ```
 
-1. Now create another method in `DepartmentRepository` that will get a single department by its Id. The method should accept an `int id` as a paramter and return a single `Department` object.
+   To test this, let's call this method from the `Program.Main` method. Create a new instance of a `RoomRepository` and call `GetAll()`. Run the application.
+
+    **Program.cs**
+
+    ```csharp
+    using System;
+    using System.Collections.Generic;
+    using Roommates.Models;
+    using Roommates.Repositories;
+
+    namespace Roommates
+    {
+        class Program
+        {
+            /// <summary>
+            ///  This is the address of the database.
+            ///  We define it here as a constant since it will never change.
+            /// </summary>
+            private const string CONNECTION_STRING = @"server=localhost\\SQLExpress;database=Roommates;integrated security=true";
+
+            static void Main(string[] args)
+            {
+                RoomRepository roomRepo = new RoomRepository(CONNECTION_STRING);
+
+                Console.WriteLine("Getting All Rooms:");
+                Console.WriteLine();
+
+                List<Room> allRooms = roomRepo.GetAll();
+
+                foreach (Room room in allRooms)
+                {
+                    Console.WriteLine($"{room.Id} {room.Name} {room.MaxOccupancy}");
+                }
+
+            }
+        }
+    }
+    ```
+
+1. Now create another method in `RoomRepository` that will get a single room by its Id. The method should accept an `int id` as a parameter and return a single `Room` object.
 
    ```csharp
-   /// <summary>
-   ///  Returns a single department with the given id.
-   /// </summary>
-   public Department GetDepartmentById(int id)
-   {
-       using (SqlConnection conn = Connection)
-       {
-           conn.Open();
-           using (SqlCommand cmd = conn.CreateCommand())
-           {
-               cmd.CommandText = "SELECT DeptName FROM Department WHERE Id = @id";
-               cmd.Parameters.Add(new SqlParameter("@id", id));
-               SqlDataReader reader = cmd.ExecuteReader();
+    /// <summary>
+    ///  Returns a single room with the given id.
+    /// </summary>
+    public Room GetById(int id)
+    {
+        using (SqlConnection conn = Connection)
+        {
+            conn.Open();
+            using (SqlCommand cmd = conn.CreateCommand())
+            {
+                cmd.CommandText = "SELECT Name, MaxOccupancy FROM Room WHERE Id = @id";
+                cmd.Parameters.AddWithValue("@id", id);
+                SqlDataReader reader = cmd.ExecuteReader();
 
-               Department department = null;
+                Room room = null;
 
-               // If we only expect a single row back from the database, we don't need a while loop.
-               if (reader.Read())
-               {
-                   department = new Department
-                   {
-                       Id = id,
-                       DeptName = reader.GetString(reader.GetOrdinal("DeptName"))
-                   };
-               }
+                // If we only expect a single row back from the database, we don't need a while loop.
+                if (reader.Read())
+                {
+                    room = new Room
+                    {
+                        Id = id,
+                        Name = reader.GetString(reader.GetOrdinal("Name")),
+                        MaxOccupancy = reader.GetInt32(reader.GetOrdinal("MaxOccupancy")),
+                    };
+                }
 
-               reader.Close();
+                reader.Close();
 
-               return department;
-           }
-       }
-   }
+                return room;
+            }
+        }
+    }
    ```
 
 1. Update `Program.Main` to also call this new method
 
    ```csharp
-   Console.WriteLine("----------------------------");
-   Console.WriteLine("Getting Department with Id 1");
+    Console.WriteLine("----------------------------");
+    Console.WriteLine("Getting Room with Id 1");
 
-   Department singleDepartment = departmentRepo.GetDepartmentById(1);
+    Room singleRoom = roomRepo.GetById(1);
 
-   Console.WriteLine($"{singleDepartment.Id} {singleDepartment.DeptName}");
+    Console.WriteLine($"{singleRoom.Id} {singleRoom.Name} {singleRoom.MaxOccupancy}");
    ```
 
-1. Now that we've read data from our database, let's look at how we can add new records. Create a new method in the `DepartmentRepository` and name it `AddDepartment`. It should accept a single `Department dept` parameter and also return a Department object.
+1. Now that we've read data from our database, let's look at how we can add new records. Create a new method in the `RoomRepository` and name it `Insert`. It should accept a single `Room` parameter.
 
    ```csharp
     /// <summary>
-    ///  Add a new department to the database
+    ///  Add a new room to the database
     ///   NOTE: This method sends data to the database,
     ///   it does not get anything from the database, so there is nothing to return.
     /// </summary>
-    public void AddDepartment(Department department)
+    public void Insert(Room room)
     {
         using (SqlConnection conn = Connection)
         {
@@ -239,98 +318,111 @@ This will be an interactive lesson. Your instructor will lead you through follow
             {
                 // These SQL parameters are annoying. Why can't we use string interpolation?
                 // ... sql injection attacks!!!
-                cmd.CommandText = "INSERT INTO Department (DeptName) OUTPUT INSERTED.Id Values (@deptName)";
-                cmd.Parameters.Add(new SqlParameter("@deptName", department.DepartmentName));
+                cmd.CommandText = @"INSERT INTO Room (Name, MaxOccupancy) 
+                                            OUTPUT INSERTED.Id 
+                                            VALUES (@name, @maxOccupancy)";
+                cmd.Parameters.AddWithValue("@name", room.Name);
+                cmd.Parameters.AddWithValue("@maxOccupancy", room.MaxOccupancy);
                 int id = (int)cmd.ExecuteScalar();
 
-                department.Id = id;
+                room.Id = id;
             }
         }
 
-        // when this method is finished we can look in the database and see the new department.
+        // when this method is finished we can look in the database and see the new room.
     }
-   ```
+    ```
 
-   You may be wondering why we return the same object that gets passed in as a parameter. Remember that the database is where each department's Id gets created. The department parameter that gets passed into the method doesn't have an Id when the method begins, but once it gets returned the Id will be included. Notice this part of the SQL command: `OUTPUT INSERTED.Id`. Normally, when we issue an INSERT statement to our database, no records come back and nothing gets returned. The addition of this `OUTPUT` statement means that we'd also like to get back the ID of the department that we just inserted.
+   You may be wondering why we set the `room.Id` property after the records is inserting into the database. Remember that the database is where each room's Id gets created. The room parameter that gets passed into the method doesn't have an Id when the method begins, but once it gets returned the Id will be included. Notice this part of the SQL command: `OUTPUT INSERTED.Id`. Normally, when we issue an INSERT statement to our database, no records come back and nothing gets returned. The addition of this `OUTPUT` statement means that we'd also like to get back the ID of the room that we just inserted.
 
-   The `cmd.ExecuteScalar` method does two things: First, it executes the SQL command against the database. Then it looks at the first thing that the database sends back (in our case this is just the ID it created for the department) and returns it.
+   The `cmd.ExecuteScalar` method does two things: First, it executes the SQL command against the database. Then it looks at the first thing that the database sends back (in our case this is just the `Id` it created for the room) and returns it.
 
-1. Update `Program.Main` to create a new instance of Department and pass it into the `AddDepartment` method.
+1. Update `Program.Main` to create a new instance of Room and pass it into the `Insert` method.
 
-   ```csharp
-   Department legalDept = new Department
-   {
-       DeptName = "Legal"
-   };
+    ```csharp
+    Room bathroom = new Room
+    {
+        Name = "Bathroom",
+        MaxOccupancy = 1
+    };
 
-   departmentRepo.AddDepartment(legalDept);
+    roomRepo.Insert(bathroom);
 
-   Console.WriteLine("-------------------------------");
-   Console.WriteLine("Added the new Legal Department!");
-   ```
+    Console.WriteLine("-------------------------------");
+    Console.WriteLine($"Added the new Room with id {bathroom.Id}");
+    ```
 
-1. Now add the following method to the repository that allows us to update a department in the database. This method should be called `UpdateDepartment`. It should take two parameters--an `int id` and a `Department updatedDepartment`, and should not return anything
+1. Now add the following method to the repository that allows us to update a room in the database. This method should be called `Upate`. It should take  a `Room updatedRoom` parameter, and should not return anything
 
-   ```csharp
+    ```csharp
     /// <summary>
-    ///  Updates the department with the given id
+    ///  Updates the room
     /// </summary>
-    public void UpdateDepartment(int id, Department department)
+    public void Update(Room room)
     {
         using (SqlConnection conn = Connection)
         {
             conn.Open();
             using (SqlCommand cmd = conn.CreateCommand())
             {
-                cmd.CommandText = @"UPDATE Department
-                                        SET DeptName = @deptName
+                cmd.CommandText = @"UPDATE Room
+                                        SET Name = @name,
+                                            MaxOccupancy = @maxOccupancy
                                         WHERE Id = @id";
-                cmd.Parameters.Add(new SqlParameter("@deptName", department.DeptName));
-                cmd.Parameters.Add(new SqlParameter("@id", id));
+                cmd.Parameters.AddWithValue("@name", room.Name);
+                cmd.Parameters.AddWithValue("@maxOccupancy", room.MaxOccupancy);
+                cmd.Parameters.AddWithValue("@id", room.Id);
 
                 cmd.ExecuteNonQuery();
             }
         }
     }
-   ```
+    ```
 
-   The only difference here is we're calling a method called `cmd.ExecuteNonQuery`. We use this method when we want to execute a SQL command, but we don't expect anything back from the database.
+    The only difference here is we're calling a method called `cmd.ExecuteNonQuery`. We use this method when we want to execute a SQL command, but we don't expect anything back from the database.
 
-1. Lastly let's create a method that allows us to delete a department. Update `DepartmentRepository` to include a method called `DeleteDepartment`. It should take in an `int id` as a parameter and not return anything.
+1. Write some code in `Program.Main` to test the `Update` method.
 
-   ```csharp
-   /// <summary>
-   ///  Delete the department with the given id
-   /// </summary>
-   public void DeleteDepartment(int id)
-   {
-       using (SqlConnection conn = Connection)
-       {
-           conn.Open();
-           using (SqlCommand cmd = conn.CreateCommand())
-           {
-               cmd.CommandText = "DELETE FROM Department WHERE Id = @id";
-               cmd.Parameters.Add(new SqlParameter("@id", id));
-               cmd.ExecuteNonQuery();
-           }
-       }
-   }
-   ```
+1. Lastly let's create a method that allows us to delete a room. Update `RoomRepository` to include a method called `Delete`. It should take in an `int id` as a parameter and not return anything.
+
+    ```csharp
+    /// <summary>
+    ///  Delete the room with the given id
+    /// </summary>
+    public void Delete(int id)
+    {
+        using (SqlConnection conn = Connection)
+        {
+            conn.Open();
+            using (SqlCommand cmd = conn.CreateCommand())
+            {
+                cmd.CommandText = "DELETE FROM Room WHERE Id = @id";
+                cmd.Parameters.AddWithValue("@id", id);
+                cmd.ExecuteNonQuery();
+            }
+        }
+    }
+    ```
+1. Write some code in `Program.Main` to test the `Delete` method.
 
 ## Exercise
 
-1. Implement the `EmployeeRepository` class to include the following methods
-   - `public List<Employee> GetAllEmployees()` <---- Employee objects should have a null value for their Department property
-   - `public Employee GetEmployeeById(int id)`
-   - `public List<Employee> GetAllEmployeesWithDepartment()` <--- Employee objects _should_ have a Department property
-   - `public void AddEmployee(Employee employee)`
-   - `public void UpdateEmployee(int id, Employee employee)` <--- Use the SQL UPDATE statement
-   - `public void DeleteEmployee(int id)`
-1. Update the `Program.Main` method to print a report of all employees and their departments
+1. Implement the `RoommateRepository` class to include the following methods
+    - `public List<Roommate> GetAll()` 
+        - Roommate objects should have a null value for their Room property
+    - `public Roommate GetById(int id)`
+    - `public List<Roommate> GetAllWithRoom(int roomId)`
+        - Roommate objects _should_ have a Room property
+    - `public void Insert(Roommate roommate)`
+    - `public void Update(Roommate roommate)` 
+    - `public void Delete(int id)`
 
-## Challenge
+1. Update the `Program.Main` method to print a report of all roommates and their rooms
 
-1. Refactor the `Program.Main` method to accept user input before doing any operation
+## Challenges
+
+1. Change the program to provide the user with a menu to allow them to interact with the Roommates database
+1. Add Chores to the applications. Users should be able to perform full CRUD on Chores as well as assign and remove them from Roommates.
 
 ## Supplemental: Comparison of data access tools
 
