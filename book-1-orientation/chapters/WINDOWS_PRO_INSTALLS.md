@@ -1,11 +1,6 @@
 # Things to Install for Development on Windows
 
-1. Follow the instructions from [Client-Side-Master](https://github.com/nashville-software-school/client-side-mastery/blob/master/book-1-the-novice/chapters/GETTING_STARTED_WINDOWS.md)
-1. Once the installation is complete, open Git Bash and enter in the following command.
-    ```sh
-    git config --global core.longpaths true
-    ```
-1. [Create an SSH key](https://help.github.com/en/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent#platform-windows) on your Windows VM, and add it to your Github profile.
+1. Follow the instructions from [Client Side Master](https://github.com/nashville-software-school/client-side-mastery/blob/master/book-1-the-novice/chapters/GETTING_STARTED_WINDOWS.md)
 1. [Postman](https://www.getpostman.com/) for testing APIs.
 1. [SQL Server Express](https://www.microsoft.com/en-us/sql-server/sql-server-editions-express). This is the database tool where all your data will be stored for the server-side course.
 1. [Visual Studio Code](https://code.visualstudio.com/) for when you need to open files that have nothing to do with your code. The full Visual Studio IDE can be overkill for editing simple text files.
