@@ -1,7 +1,6 @@
 # Things to Install for Development on Windows
 
-1. Chrome
-1. [Git for Windows](https://gitforwindows.org/) - Accept all defaults during installation.
+1. Follow the instructions from [Client-Side-Master](https://github.com/nashville-software-school/client-side-mastery/blob/master/book-1-the-novice/chapters/GETTING_STARTED_WINDOWS.md)
 1. Once the installation is complete, open Git Bash and enter in the following command.
     ```sh
     git config --global core.longpaths true
