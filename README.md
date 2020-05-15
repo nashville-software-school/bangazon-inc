@@ -13,7 +13,6 @@ We'll spend the first few weeks orienting you to .NET Core, C#, SQL, and a new s
 1. Installation of required tools.
 1. Introduction to the C# language.
 1. Concepts of sustainable, scalable, object-oriented software development.
-1. Unit testing
 1. Overview of server-side development ecosystem
 1. How the Internet works
 1. Inheritance, composition, and aggregation
