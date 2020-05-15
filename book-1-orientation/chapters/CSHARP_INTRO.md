@@ -58,7 +58,7 @@ What else would you like app to say? Take a few minutes and play with this code.
 
 Learning your first programming language is hard. It's hard because you're learning more than syntax, you're learning _how to code_ at the same time.
 
-I have some good news. When it comes to learning your second language, you can transfer much of your understanding of your first language. It turns out that much of what you learned in JavaScript will apply to C# as well. There are notable differences and C# has some new concepts to learn, but a lot of the basic building blocs are the same.
+I have some good news. When it comes to learning your second language, you can transfer much of your understanding of your first language. It turns out that much of what you learned in JavaScript will apply to C# as well. There are notable differences and C# has some new concepts to learn, but a lot of the basic building blocks are the same.
 
 Let's get our hands on some more code. Head over to the repo linked below. You'll find a series of small applications. Some are written in C# while others are written in JavaScript. Your task is to rewrite the C# apps in JavaScript and the JavaScript apps in C#. Your instructor will live code each exercise after you've been given time to work on it.
 

@@ -8,6 +8,19 @@ It is often said that learning a second programming language is easier because y
 
 ## `if` statement
 
+#### JavaScript
+
+```js
+const numHats = 50;
+if (numHats > 10) {
+  console.log("Why do you have so many hats?");
+} else if (numHats <= 10 && numHats >= 2) {
+  console.log("You have a reasonable number of hats.");
+} else {
+  console.log("You need more hats!");
+}
+```
+
 #### C#
 
 ```cs
@@ -26,20 +39,16 @@ else
 }
 ```
 
+
+## `for` loop
+
 #### JavaScript
 
 ```js
-const numHats = 50;
-if (numHats > 10) {
-  console.log("Why do you have so many hats?");
-} else if (numHats <= 10 && numHats >= 2) {
-  console.log("You have a reasonable number of hats.");
-} else {
-  console.log("You need more hats!");
+for (let i = 0; i < 20; i++) {
+  console.log(`The number is ${i}`);
 }
 ```
-
-## `for` loop
 
 #### C#
 
@@ -50,15 +59,16 @@ for (int i=0; i<20; i++)
 }
 ```
 
+## `foreach` loop
+
 #### JavaScript
 
 ```js
-for (let i = 0; i < 20; i++) {
-  console.log(`The number is ${i}`);
+const foods = ["Brussels Sprout", "Toast", "Steak", "Tomato"];
+for (let food of foods) {
+  console.log(`You can eat ${food}.`);
 }
 ```
-
-## `foreach` loop
 
 #### C#
 
@@ -72,16 +82,16 @@ foreach (string food in foods)
 }
 ```
 
+
+## `while` loop
+
 #### JavaScript
 
 ```js
-const foods = ["Brussels Sprout", "Toast", "Steak", "Tomato"];
-for (let food of foods) {
-  console.log(`You can eat ${food}.`);
+while (true) {
+  console.log("Never stop looping");
 }
 ```
-
-## `while` loop
 
 #### C#
 
@@ -92,15 +102,46 @@ while (true)
 }
 ```
 
-#### JavaScript
-
-```js
-while (true) {
-  console.log("Never stop looping");
-}
-```
 
 ## Classes and Objects
+
+#### JavaScript
+
+##### Declare a `createPerson` factory function
+
+A _"factory function"_ is a function that creates a new object using the values passed into it as parameters.
+
+```js
+const createPerson = (name, birthday, hobbies) => {
+  return {
+    name: name,
+    birthday: birthday,
+    hobbies: hobbies,
+    addHobby: (hobby) => {
+      this.hobbies.push(hobby);
+    },
+  };
+};
+```
+
+##### Create a `person` object
+
+```cs
+const lulu = createPerson(
+    "Lulu",
+    new Date(1934, 1, 14),
+    ["Knitting", "Break dancing", "Lion taming"]
+};
+
+// Changing the name property
+lulu.name = "Lulu Rodriguez";
+
+// Calling the addHobby method
+lulu.addHobby("World domination");
+```
+
+> **NOTE:** A factory function is just one way of defining an
+> object in JavaScript. There are many other ways.
 
 #### C#
 
@@ -143,55 +184,7 @@ lulu.Name = "Lulu Rodriguez";
 lulu.AddHobby("World domination");
 ```
 
-#### JavaScript
-
-##### Declare a `createPerson` factory function
-
-```js
-const createPerson = (name, birthday, hobbies) => {
-  return {
-    name: name,
-    birthday: birthday,
-    hobbies: hobbies,
-    addHobby: (hobby) => {
-      this.hobbies.push(hobby);
-    },
-  };
-};
-```
-
-##### Create a `person` object
-
-```cs
-const lulu = createPerson(
-    "Lulu",
-    new Date(1934, 1, 14),
-    ["Knitting", "Break dancing", "Lion taming"]
-};
-
-// Changing the name property
-lulu.name = "Lulu Rodriguez";
-
-// Calling the addHobby method
-lulu.addHobby("World domination");
-```
-
-> **NOTE:** A factory function is just one way of defining an
-> object in JavaScript. There are many other ways.
-
 ## Lists and Arrays
-
-#### C#
-
-```cs
-Person ronny = new Person("Ronny", new DateTime(2000, 4, 1), new List<string> { "wrastlin'"} );
-Person june = new Person("June", new DateTime(1988, 10, 31), new List<string> { "carpentry", "animal husbandry"} );
-Person selam = new Person("Selam", new DateTime(1994, 5, 22), new List<string> { "opera", "juggling", "skeet shooting"} );
-
-List<Person> people = new List<Person>() { ronny, salam };
-people.Add(june);
-```
-
 #### JavaScript
 
 ```js
@@ -210,19 +203,18 @@ const people = [ronny, salam];
 people.push(june);
 ```
 
-## Dictionaries
-
 #### C#
 
 ```cs
-Dictionary<string, int> bowlingScores = new Dictionary<string, int>() {
-    { "Bubba", 40 },
-    { "Louis", 120 },
-    { "Mary Jane", 200 }
-};
+Person ronny = new Person("Ronny", new DateTime(2000, 4, 1), new List<string> { "wrastlin'"} );
+Person june = new Person("June", new DateTime(1988, 10, 31), new List<string> { "carpentry", "animal husbandry"} );
+Person selam = new Person("Selam", new DateTime(1994, 5, 22), new List<string> { "opera", "juggling", "skeet shooting"} );
 
-Console.WriteLine(bowlingScores["Bubba"]);
+List<Person> people = new List<Person>() { ronny, salam };
+people.Add(june);
 ```
+
+## Dictionaries
 
 #### JavaScript
 
@@ -236,26 +228,19 @@ const bowlingScores = {
 console.log(bowlingScores["Bubba"]);
 ```
 
-## Variables
-
 #### C#
 
 ```cs
-int theAnswer = 42;
-double olympicScore = 9.1;
-bool isFunny = true;
-string insult = "You are unpleasant";
-DateTime aDate = new DateTime(1989, 7, 2);
-List<string> activities = new List<string>() {
-    "bowling", "jumping on the bed", "sword swallowing"
+Dictionary<string, int> bowlingScores = new Dictionary<string, int>() {
+    { "Bubba", 40 },
+    { "Louis", 120 },
+    { "Mary Jane", 200 }
 };
-Person jacquelyn = new Person("Jacquelyn", aDate, activities);)
-Dictionary<string, string> nicknames = new Dictionary<string, string>() {
-    { "William", "Billy" },
-    { "Elizabeth", "Lizzie" },
-    { "Kevin", "Slim" }
-};
+
+Console.WriteLine(bowlingScores["Bubba"]);
 ```
+
+## Variables
 
 #### JavaScript
 
@@ -276,39 +261,33 @@ const nicknames = {
 };
 ```
 
-## `try` / `catch`
-
 #### C#
 
 ```cs
-try
-{
-    int age = GetAgeFromSomeplace();
-    if (age < 0)
-    {
-        throw new Exception("You can't be younger than zero, no matter how hard you try.");
-    }
-}
-catch (Exception ex)
-{
-    Console.WriteLine(ex.Message);
-}
+int theAnswer = 42;
+double olympicScore = 9.1;
+bool isFunny = true;
+string insult = "You are unpleasant";
+DateTime aDate = new DateTime(1989, 7, 2);
+List<string> activities = new List<string>() {
+    "bowling", "jumping on the bed", "sword swallowing"
+};
+Person jacquelyn = new Person("Jacquelyn", aDate, activities);)
+Dictionary<string, string> nicknames = new Dictionary<string, string>() {
+    { "William", "Billy" },
+    { "Elizabeth", "Lizzie" },
+    { "Kevin", "Slim" }
+};
 ```
+
+## `using` libraries
 
 #### JavaScript
 
 ```js
-try {
-  const age = getAgeFromSomeplace();
-  if (age < 0) {
-    throw new Error( "You can't be younger than zero, no matter how hard you try.");
-  }
-} catch (err) {
-  console.log(err.message);
-}
+import React, { useState } from 'react';
+import { Route } from 'react-router-dom';
 ```
-
-## `using` libraries
 
 #### C#
 
@@ -318,14 +297,25 @@ using System.Collections.Generic;
 using System.Linq;
 ```
 
+## List and Array Methods
+
 #### JavaScript
 
 ```js
-import React, { useState } from 'react';
-import { Route } from 'react-router-dom';
-```
+const numbers = [ 100, 32, 98, 4, 1, 22, 73, 8 ];
+const small = numbers.filter(n => n < 10);
+const even = numbers.filter(n => n % 2 === 0);
 
-## List and Array Methods
+const words = [ "do", "you", "understand", "the", "words", "coming", "out", "of", "my", "mouth?" ];
+const yelling = words.map(w => w.ToUpperCase());
+const sentence = yelling.join(" ");
+
+const people = getPeopleFromSomeplace();
+const names = people.map(p => p.Name);
+const person = people.find(p => p.Name == "Selam");
+const isAnyoneNamedPhil = people.some(p => p,Name == "Phil");
+const doesEveryoneHaveAHobby = people.every(p => p.Hobbies.length > 0);
+```
 
 #### C#
 
@@ -349,20 +339,34 @@ bool isAnyoneNamedPhil = people.Any(p => p,Name == "Phil");
 bool doesEveryoneHaveAHobby = people.All(p => p.Hobbies.Count > 0);
 ```
 
+## `try` / `catch`
+
 #### JavaScript
 
 ```js
-const numbers = [ 100, 32, 98, 4, 1, 22, 73, 8 ];
-const small = numbers.filter(n => n < 10);
-const even = numbers.filter(n => n % 2 === 0);
+try {
+  const age = getAgeFromSomeplace();
+  if (age < 0) {
+    throw new Error( "You can't be younger than zero, no matter how hard you try.");
+  }
+} catch (err) {
+  console.log(err.message);
+}
+```
 
-const words = [ "do", "you", "understand", "the", "words", "coming", "out", "of", "my", "mouth?" ];
-const yelling = words.map(w => w.ToUpperCase());
-const sentence = yelling.join(" ");
+#### C#
 
-const people = getPeopleFromSomeplace();
-const names = people.map(p => p.Name);
-const person = people.find(p => p.Name == "Selam");
-const isAnyoneNamedPhil = people.some(p => p,Name == "Phil");
-const doesEveryoneHaveAHobby = people.every(p => p.Hobbies.length > 0);
+```cs
+try
+{
+    int age = GetAgeFromSomeplace();
+    if (age < 0)
+    {
+        throw new Exception("You can't be younger than zero, no matter how hard you try.");
+    }
+}
+catch (Exception ex)
+{
+    Console.WriteLine(ex.Message);
+}
 ```

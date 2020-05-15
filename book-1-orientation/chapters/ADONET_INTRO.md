@@ -8,7 +8,7 @@ Your task is to build a command line application to manage a house full of roomm
 
 ## Instructions
 
-1. Use the [Roommates](./assets/roommates.sql) SQL script to create a `DepartmentsEmployees` database.
+1. Use the [Roommates](./assets/roommates.sql) SQL script to create a `Roommates` database.
 1. In Visual Studio, create a new console application called `Roommates`.
 1. In your terminal, navigate to the directory where you created your project. The directory will have a `Roommates.sln` file in it.
 1. `cd` into your project directory. When you list what's in the directory, you should see your `Roommates.csproj` and `Program.cs`.
