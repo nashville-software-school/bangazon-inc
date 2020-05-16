@@ -1,6 +1,6 @@
-# Book 2 - The Bangazon Platform API
+# Book 3 - Web APIs with <span>ASP.</span>NET Core
 
-This book prepares you for building the Bangazon Platform API
+This book prepares you for building the Tabloid API
 
 ## Topics
 

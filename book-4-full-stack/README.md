@@ -1,4 +1,4 @@
-# Book 4 - 
+# Book 4
 
 This book prepares you continue to build upon the Tabloid Web Application with real authentication, reporting and testing.
 
