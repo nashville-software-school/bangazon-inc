@@ -231,7 +231,7 @@ Your task is to build a command line application to manage a house full of roomm
             ///  This is the address of the database.
             ///  We define it here as a constant since it will never change.
             /// </summary>
-            private const string CONNECTION_STRING = @"server=localhost\\SQLExpress;database=Roommates;integrated security=true";
+            private const string CONNECTION_STRING = @"server=localhost\SQLExpress;database=Roommates;integrated security=true";
 
             static void Main(string[] args)
             {
