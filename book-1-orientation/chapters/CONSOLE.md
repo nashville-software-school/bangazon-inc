@@ -34,7 +34,7 @@ over thelazy dog
 
 ## Reading from the Console
 
-There are several methods for reading user input from the console, however the method we'll use is `ReadLine()`
+There are several methods for reading user input from the console, however the method we'll use is `ReadLine()`. It's important to note that the `ReadLine` method is always a string. If the value you actually want from your user is an integer or double, you'll have to take additional steps to parse it as such.
 
 ```cs
 string input = Console.ReadLine();
