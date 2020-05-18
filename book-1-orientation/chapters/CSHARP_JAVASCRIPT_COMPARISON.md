@@ -293,18 +293,7 @@ const numbers = [100, 32, 98, 4, 1, 22, 73, 8];
 const small = numbers.filter((n) => n < 10);
 const even = numbers.filter((n) => n % 2 === 0);
 
-const words = [
-  "do",
-  "you",
-  "understand",
-  "the",
-  "words",
-  "coming",
-  "out",
-  "of",
-  "my",
-  "mouth?",
-];
+const words = [ "do", "you", "understand", "the", "words", "coming", "out", "of", "my", "mouth?", ];
 const yelling = words.map((w) => w.ToUpperCase());
 const sentence = yelling.join(" ");
 
@@ -345,9 +334,7 @@ bool doesEveryoneHaveAHobby = people.All(p => p.Hobbies.Count > 0);
 try {
   const age = getAgeFromSomeplace();
   if (age < 0) {
-    throw new Error(
-      "You can't be younger than zero, no matter how hard you try."
-    );
+    throw new Error("You can't be younger than zero, no matter how hard you try.");
   }
 } catch (err) {
   console.log(err.message);
