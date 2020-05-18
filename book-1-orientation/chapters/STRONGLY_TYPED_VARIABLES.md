@@ -6,7 +6,7 @@ Consider the following JavaScript code:
 let num = 42;
 ```
 
-We say that `num` is a variable whose value is `42`. In Javascript the value, `42`, has a the type `number`, therefore we say that the variable `num` also has the type `number.
+We say that `num` is a variable whose value is `42`. In Javascript the value, `42`, has a the type `number`, therefore we say that the variable `num` also has the type `number`.
 
 However, in JavaScript, this is legal:
 
@@ -20,7 +20,7 @@ Because of the ability to change the types of variables, we call JavaScript a _"
 
 ## C# is Strongly Typed
 
-In C# we must specify the type of a variable when we create it. This means that once you create a variable in C#, you're committed to **only assign values of one type to the variable**. 
+In C# we must specify the type of a variable when we create it. This means that once you create a variable in C#, you're committed to **only assign values of one type to the variable**.
 
 ```cs
 string name = "Julio";
@@ -48,7 +48,7 @@ Note the `<string, int>` portion of the type. In this case `string` and `int` ar
 
 ## Custom Types
 
-C# provides us with the ability to create custom types. These are types beyond strings, integers, booleans, lits, etc... In C# we create custom types with classes. We'll talk about classes in great detail soon, but for now here's an example of creating and using a class.
+C# provides us with the ability to create custom types. These are types beyond strings, integers, booleans, lists, etc... In C# we create custom types with classes. We'll talk about classes in great detail soon, but for now here's an example of creating and using a class.
 
 `Dog.cs`
 
@@ -73,13 +73,14 @@ namespace MyApp
     {
         static void Main(string[] args)
         {
-            Dog rusty = new Dog() {
+            Dog rusty = new Dog()
+            {
                 Breed = "mut",
                 Name = "Rusty",
                 Age = 10,
                 hasShots = true
             };
-            
+
             Console.WriteLine(rusty.Name);
         }
     }
