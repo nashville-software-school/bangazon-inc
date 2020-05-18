@@ -28,20 +28,23 @@ string message = messageGenerator.GetMessageForUser(data.GetUserById(100));
 
 ## Conditionals
 
-Sometimes we need to ask questions within our code and do different thinks depending on the answer. In C# we use an `if` statement for this purpose.
+Sometimes we need to ask questions within our code and do different things depending on the answer. In C# we use an `if` statement for this purpose.
 
 ```cs
 int age = 12;
-if (age >= 18) {
+if (age >= 18)
+{
     Console.WriteLine("Can (and should) vote");
-} else {
+}
+else
+{
     Console.WriteLine("Cannot vote, sorry");
 }
 ```
 
 Conditional statements create "branches" in our control flow. Sometimes the code takes the `true` branch and other times it takes the `false` branch.
 
-> **NOTE:** Unlike JavaScript, in C# the `if` condition must be a boolean value.
+> **NOTE:** Unlike JavaScript, in C# the `if` condition must evaluate to a boolean value.
 
 ## Looping and Iteration
 
@@ -54,7 +57,7 @@ There are three types of loops in C#.
 Use a `for` loop to iterate some number of times.
 
 ```cs
-for (int i=0; i<10; i++)
+for (int i = 0; i < 10; i++)
 {
     Console.WriteLine($"i is {i}");
 }
