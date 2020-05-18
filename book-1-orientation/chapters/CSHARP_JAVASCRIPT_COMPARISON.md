@@ -19,7 +19,7 @@ const aDate = new Date(1989, 6, 2);
 const activities = ["bowling", "jumping on the bed", "sword swallowing"];
 ```
 
-#### C\
+#### C#
 
 ```cs
 int theAnswer = 42;
@@ -48,7 +48,7 @@ if (numHats > 10) {
 }
 ```
 
-#### C\
+#### C#
 
 ```cs
 int numHats = 50;
@@ -76,7 +76,7 @@ for (let i = 0; i < 20; i++) {
 }
 ```
 
-#### C\
+#### C###\
 
 ```cs
 for (int i = 0; i < 20; i++)
@@ -96,7 +96,7 @@ for (let food of foods) {
 }
 ```
 
-#### C\
+#### C###\
 
 ```cs
 List<string> foods = new List<string>()
@@ -119,7 +119,7 @@ while (true) {
 }
 ```
 
-#### C\
+#### C###\
 
 ```cs
 while (true)
@@ -149,7 +149,7 @@ const createPerson = (name, birthday, hobbies) => {
 };
 ```
 
-##### Create a `person` object
+##### C###reate a `person` object
 
 ```cs
 const lulu = createPerson(
@@ -168,7 +168,7 @@ lulu.addHobby("World domination");
 > **NOTE:** A factory function is just one way of defining an
 > object in JavaScript. There are many other ways.
 
-#### C\
+#### C###\
 
 ##### Declare a `Person` class
 
@@ -193,7 +193,7 @@ public class Person
 }
 ```
 
-##### Create a `Person` object
+##### C###reate a `Person` object
 
 ```cs
 Person lulu = new Person (
@@ -229,7 +229,7 @@ const people = [ronny, salam];
 people.push(june);
 ```
 
-#### C\
+#### C###\
 
 ```cs
 Person ronny = new Person("Ronny", new DateTime(2000, 4, 1), new List<string> { "wrastlin'"} );
@@ -254,7 +254,7 @@ const bowlingScores = {
 console.log(bowlingScores["Bubba"]);
 ```
 
-#### C\
+#### C###\
 
 ```cs
 Dictionary<string, int> bowlingScores = new Dictionary<string, int>()
@@ -276,7 +276,7 @@ import React, { useState } from "react";
 import { Route } from "react-router-dom";
 ```
 
-#### C\
+#### C###\
 
 ```cs
 using System;
@@ -315,7 +315,7 @@ const isAnyoneNamedPhil = people.some((p) => p, Name == "Phil");
 const doesEveryoneHaveAHobby = people.every((p) => p.Hobbies.length > 0);
 ```
 
-#### C\
+#### C###\
 
 ```cs
 using System.Linq;
@@ -354,7 +354,7 @@ try {
 }
 ```
 
-#### C\
+#### C###\
 
 ```cs
 try
