@@ -11,7 +11,8 @@ In C# the most common way to create a new type is with a `class`.
 ```cs
 public class Writer
 {
-    public Writer(string prefix) {
+    public Writer(string prefix)
+    {
         Prefix = prefix;
     }
 
@@ -49,7 +50,7 @@ The difference between a class and an object is not always easy to see at first.
 
 Let's imagine that you drive a [1994 Ford Taurus](https://www.google.com/search?tbm=isch&q=1994%20ford%20taurus&tbs=imgo:1). Of course, you love it. And, you know you're not alone. Plenty of other people _(dozens)_ also drive 1994 Ford Tauruses. But do they drive **your** 1994 Ford Taurus? No, of course not, You wouldn't let anyone drive your precious baby.
 
-In C# a class is like the _make and model_, 1994 Ford Taurus. An object, on the other hand, is like **your** 1994 Ford Taurus. The object is the real, specific car. The class is the _**type**_ of the car. We say that **your** car is an _"instance of"_ a 1994 Ford Taurus.
+In C# a class is like the _make and model_, 1994 Ford Taurus. An object, on the other hand, is like **your** 1994 Ford Taurus. The object is the real, specific car. The class is the _**type**_ of the car. We say that **your** car is an _"instance of"_ a 1994 Ford Taurus. If your buddy down the street also has a 1994 Ford Taurus, that would be considered another _instance of_ a 1994 Ford Taurus.
 
 In the C# example above. the class is `Writer` and we create a new `Writer` object to assign to the `author` variable.
 
@@ -126,7 +127,7 @@ namespace Classes
         */
         public void Deliver(Product product, Customer customer)
         {
-            Console.WriteLine($"Product delivered by {this.TransitType} to {customer.FullName}");
+            Console.WriteLine($"Product delivered by {TransitType} to {customer.FullName}");
         }
     }
 
@@ -204,6 +205,7 @@ public class Box {
     }
 }
 ```
+
 ```cs
 Box box = new Box();
 // The following line would cause an error. _secret is not accessible.
@@ -244,12 +246,11 @@ Store myStore = new Store("Stuff 'n' Things", inventory);
 
 A constructor is not required in a class. If a class does not have a constructor it will be given a hidden, "default" constructor that accepts no parameters and does nothing.
 
-
 ## Resources
 
-* [C# Classes Tutorial](https://youtu.be/ZqDtPFrUonQ?t=139)
-* [How to program in C# - CLASSES - Beginner Tutorial](https://youtu.be/s2hHjpZaSyI?t=117)
-* [Properties (C# Programming Guide)](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/properties)
+- [C# Classes Tutorial](https://youtu.be/ZqDtPFrUonQ?t=139)
+- [How to program in C# - CLASSES - Beginner Tutorial](https://youtu.be/s2hHjpZaSyI?t=117)
+- [Properties (C# Programming Guide)](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/properties)
 
 ---
 
@@ -276,37 +277,37 @@ namespace Planner
 
 ### Private Fields
 
-* `_designer` of type `string`. It will hold your name.
-* `_dateConstructed` of type `DateTime`. This will hold the exact time the building was created.
-* `_address` of type string.
-* `_owner` of type string. This will store the same of the person who owns the building.
+- `_designer` of type `string`. It will hold your name.
+- `_dateConstructed` of type `DateTime`. This will hold the exact time the building was created.
+- `_address` of type string.
+- `_owner` of type string. This will store the same of the person who owns the building.
 
 ### Public Properties
 
-* `Stories` typed as an integer.
-* `Width` typed as a double.
-* `Depth` typed as a double.
-* `Volume` should be read-only and should return _width * depth * (3 * # of stories)_. Each story is 3 meters high.
+- `Stories` typed as an integer.
+- `Width` typed as a double.
+- `Depth` typed as a double.
+- `Volume` should be read-only and should return _width * depth * (3 \* # of stories)_. Each story is 3 meters high.
 
 ### Constructor
 
 Define a constructor method that accepts a single string argument - `address` - so that you can send as a parameter when you create each instance with `new Building("800 8th Street");`.
 
-* The constructor's logic should set the `_address` field's value to the argument value
+- The constructor's logic should set the `_address` field's value to the argument value
 
 ### Public Methods
 
-* Define a `Construct()` method. The method's logic should set the `_dateConstructed` field's value to `DateTime.Now`.
-* Define a `Purchase()` method. The method should accept a single string argument of the name of the person purchasing a building. The method should take that string and assign it to the private `_owner` field.
+- Define a `Construct()` method. The method's logic should set the `_dateConstructed` field's value to `DateTime.Now`.
+- Define a `Purchase()` method. The method should accept a single string argument of the name of the person purchasing a building. The method should take that string and assign it to the private `_owner` field.
 
 Neither of these methods will return a value.
 
 ### Build Your City
 
 1. Create several buildings in the `Main()` method of `Program.cs`.
-    ```cs
-    Building FiveOneTwoEigth = new Building("512 8th Avenue");
-    ```
+   ```cs
+   Building FiveOneTwoEigth = new Building("512 8th Avenue");
+   ```
 1. Give each building a width, height, and number of stories.
 1. Construct each building.
 1. Have business people in your city purchase each of your buildings.
@@ -364,14 +365,14 @@ Using C# classes, you need to create custom types to represent an **`Employee`**
 ### Instructions
 
 1. Create a custom type for `Employee`. An employee has the following properties.
-    1. First name (_string_)
-    1. Last name (_string_)
-    1. Title (_string_)
-    1. Start date (_DateTime_)
+   1. First name (_string_)
+   1. Last name (_string_)
+   1. Title (_string_)
+   1. Start date (_DateTime_)
 1. Create a custom type for `Company`. A company has the following properties.
-    1. Date founded (_DateTime_)
-    1. Company name (_string_)
-    1. Employees (_List\<Employee\>_)
+   1. Date founded (_DateTime_)
+   1. Company name (_string_)
+   1. Employees (_List\<Employee\>_)
 1. The `Company` class should also have a `ListEmployees()` method which outputs the name of each employee to the console.
 1. In the `Main` method of your console application, create a new instance of Company, and three instances of Employee. Then assign the employees to the company.
 
@@ -415,6 +416,7 @@ class Program
     }
 }
 ```
+
 <br/>
 <br/>
 <br/>
