@@ -6,6 +6,34 @@ It is often said that learning a second programming language is easier because y
 
 ---
 
+## Variables
+
+#### JavaScript
+
+```js
+const theAnswer = 42;
+const olympicScore = 9.1;
+const isFunny = true;
+const insult = "You are unpleasant";
+const aDate = new Date(1989, 6, 2);
+const activities = [
+  "bowling", "jumping on the bed", "sword swallowing"
+];
+```
+
+#### C#
+
+```cs
+int theAnswer = 42;
+double olympicScore = 9.1;
+bool isFunny = true;
+string insult = "You are unpleasant";
+DateTime aDate = new DateTime(1989, 7, 2);
+List<string> activities = new List<string>() {
+    "bowling", "jumping on the bed", "sword swallowing"
+};
+```
+
 ## `if` statement
 
 #### JavaScript
@@ -239,47 +267,6 @@ Dictionary<string, int> bowlingScores = new Dictionary<string, int>() {
 
 Console.WriteLine(bowlingScores["Bubba"]);
 ```
-
-## Variables
-
-#### JavaScript
-
-```js
-const theAnswer = 42;
-const olympicScore = 9.1;
-const isFunny = true;
-const insult = "You are unpleasant";
-const aDate = new Date(1989, 6, 2);
-const activities = [
-  "bowling", "jumping on the bed", "sword swallowing"
-];
-const jacquelyn = createPerson("Jacquelyn", aDate, activities);)
-const nicknames = {
-  "William": "Billy",
-  "Elizabeth": "Lizzie",
-  "Kevin": "Slim"
-};
-```
-
-#### C#
-
-```cs
-int theAnswer = 42;
-double olympicScore = 9.1;
-bool isFunny = true;
-string insult = "You are unpleasant";
-DateTime aDate = new DateTime(1989, 7, 2);
-List<string> activities = new List<string>() {
-    "bowling", "jumping on the bed", "sword swallowing"
-};
-Person jacquelyn = new Person("Jacquelyn", aDate, activities);)
-Dictionary<string, string> nicknames = new Dictionary<string, string>() {
-    { "William", "Billy" },
-    { "Elizabeth", "Lizzie" },
-    { "Kevin", "Slim" }
-};
-```
-
 ## `using` libraries
 
 #### JavaScript
