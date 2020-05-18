@@ -16,9 +16,7 @@ const olympicScore = 9.1;
 const isFunny = true;
 const insult = "You are unpleasant";
 const aDate = new Date(1989, 6, 2);
-const activities = [
-  "bowling", "jumping on the bed", "sword swallowing"
-];
+const activities = ["bowling", "jumping on the bed", "sword swallowing"];
 ```
 
 #### C#
@@ -29,7 +27,8 @@ double olympicScore = 9.1;
 bool isFunny = true;
 string insult = "You are unpleasant";
 DateTime aDate = new DateTime(1989, 7, 2);
-List<string> activities = new List<string>() {
+List<string> activities = new List<string>()
+{
     "bowling", "jumping on the bed", "sword swallowing"
 };
 ```
@@ -67,7 +66,6 @@ else
 }
 ```
 
-
 ## `for` loop
 
 #### JavaScript
@@ -81,7 +79,7 @@ for (let i = 0; i < 20; i++) {
 #### C#
 
 ```cs
-for (int i=0; i<20; i++)
+for (int i = 0; i < 20; i++)
 {
     Console.WriteLine($"The number is {i}");
 }
@@ -101,7 +99,8 @@ for (let food of foods) {
 #### C#
 
 ```cs
-List<string> foods = new List<string>() {
+List<string> foods = new List<string>()
+{
     "Brussels Sprout", "Toast", "Steak", "Tomato"
 };
 foreach (string food in foods)
@@ -109,7 +108,6 @@ foreach (string food in foods)
     Console.WriteLine($"You can eat {food}.");
 }
 ```
-
 
 ## `while` loop
 
@@ -129,7 +127,6 @@ while (true)
     Console.WriteLine("Never stop looping");
 }
 ```
-
 
 ## Classes and Objects
 
@@ -182,7 +179,7 @@ public class Person
     public DateTime BirthDay { get; set; }
     public List<string> Hobbies { get; set; }
 
-    public Person(string name, DateTime birthday, Lis<string> hobbies)
+    public Person(string name, DateTime birthday, List<string> hobbies)
     {
         this.Name = name;
         this.Birthday = birthday;
@@ -203,7 +200,7 @@ Person lulu = new Person (
     "Lulu",
     new DateTime(1934, 2, 14),
     new List<string>() { "Knitting", "Break dancing", "Lion taming" }
-};
+);
 
 // Changing the Name property
 lulu.Name = "Lulu Rodriguez";
@@ -213,6 +210,7 @@ lulu.AddHobby("World domination");
 ```
 
 ## Lists and Arrays
+
 #### JavaScript
 
 ```js
@@ -259,7 +257,8 @@ console.log(bowlingScores["Bubba"]);
 #### C#
 
 ```cs
-Dictionary<string, int> bowlingScores = new Dictionary<string, int>() {
+Dictionary<string, int> bowlingScores = new Dictionary<string, int>()
+{
     { "Bubba", 40 },
     { "Louis", 120 },
     { "Mary Jane", 200 }
@@ -267,13 +266,14 @@ Dictionary<string, int> bowlingScores = new Dictionary<string, int>() {
 
 Console.WriteLine(bowlingScores["Bubba"]);
 ```
+
 ## `using` libraries
 
 #### JavaScript
 
 ```js
-import React, { useState } from 'react';
-import { Route } from 'react-router-dom';
+import React, { useState } from "react";
+import { Route } from "react-router-dom";
 ```
 
 #### C#
@@ -289,19 +289,30 @@ using System.Linq;
 #### JavaScript
 
 ```js
-const numbers = [ 100, 32, 98, 4, 1, 22, 73, 8 ];
-const small = numbers.filter(n => n < 10);
-const even = numbers.filter(n => n % 2 === 0);
+const numbers = [100, 32, 98, 4, 1, 22, 73, 8];
+const small = numbers.filter((n) => n < 10);
+const even = numbers.filter((n) => n % 2 === 0);
 
-const words = [ "do", "you", "understand", "the", "words", "coming", "out", "of", "my", "mouth?" ];
-const yelling = words.map(w => w.ToUpperCase());
+const words = [
+  "do",
+  "you",
+  "understand",
+  "the",
+  "words",
+  "coming",
+  "out",
+  "of",
+  "my",
+  "mouth?",
+];
+const yelling = words.map((w) => w.ToUpperCase());
 const sentence = yelling.join(" ");
 
 const people = getPeopleFromSomeplace();
-const names = people.map(p => p.Name);
-const person = people.find(p => p.Name == "Selam");
-const isAnyoneNamedPhil = people.some(p => p,Name == "Phil");
-const doesEveryoneHaveAHobby = people.every(p => p.Hobbies.length > 0);
+const names = people.map((p) => p.Name);
+const person = people.find((p) => p.Name == "Selam");
+const isAnyoneNamedPhil = people.some((p) => p, Name == "Phil");
+const doesEveryoneHaveAHobby = people.every((p) => p.Hobbies.length > 0);
 ```
 
 #### C#
@@ -334,7 +345,9 @@ bool doesEveryoneHaveAHobby = people.All(p => p.Hobbies.Count > 0);
 try {
   const age = getAgeFromSomeplace();
   if (age < 0) {
-    throw new Error( "You can't be younger than zero, no matter how hard you try.");
+    throw new Error(
+      "You can't be younger than zero, no matter how hard you try."
+    );
   }
 } catch (err) {
   console.log(err.message);
