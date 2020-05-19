@@ -9,7 +9,13 @@
 1. Visit the [.NET Tutorial](https://dotnet.microsoft.com/learn/dotnet/hello-world-tutorial/intro) site, click on your OS and follow the steps to install .NET Core.
 1. In your terminal go to your `workspace` directory and do steps 2 and 3 in the tutorial to verify everything works.
 
-> Note: We will install Windows inside VirtualBox at a later time.
+## Install a Linter
+C# FixFormat is a vscode extension that will--as its name implies--automatically format your C# code. To set it up:
+
+1. Install [C# FixFormat](https://marketplace.visualstudio.com/items?itemName=Leopotam.csharpfixformat)
+1. In VSCode go to File > Preferences > Settings
+1. In the search bar, look for the setting `Format On Save` and make sure it is checked
+1. In the same search bar, look for the setting `Auto Save` and make sure it's *NOT* set to `afterDelay`
 
 ## dbdiagram.io
 
