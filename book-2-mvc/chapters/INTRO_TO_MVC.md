@@ -65,26 +65,18 @@ namespace StudentExercises.Models
 {
     public class Student
     {
-        [Required]
         public int Id { get; set; }
-
-        [Required]
         public string Name { get; set; }
-
         public string Breed { get; set; }
-
-        [Required]
         public int OwnerId { get; set; }
-
         public Owner Owner { get; set; }
     }
 }
 ```
 
-A couple things to note here. 
+Something to note here.. 
 
-- The `[Required]` attribute is on some property because each of those columns in the database are marked as `NOT NULL` - meaning that blank values cannot be stored in them. You need to mimic that in your data model class.
-- In addition to properties that are foriegn keys like `OwnerId`, we may also want to include a property for the entire foriegn entity. That is why there is a property for the Owner object.
+In addition to properties that are foriegn keys like `OwnerId`, we may also want to include a property for the entire foriegn entity. That is why there is a property for the Owner object.
 
 ### Views
 

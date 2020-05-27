@@ -1,69 +1,80 @@
 # Introduction to ASP.NET MVC Web Application
 
-An MVC Web Application differs from your API in the fact that you are producing HTML instead of JSON. When a client requests `http://localhost:5000/students` in an API, they get a JSON representation of students in the response.
-
-```json
-[
-    {
-        "id": 1,
-        "firstName": "Amy",
-        "lastName": "Bennett",
-        "slackHandle": "@amybennett",
-        "cohortId": 2
-    }
-]
-```
-
-In a Web Application, you will be using the Razor templating system in .NET Core to produce an actual HTML page that will render a list of students in the browser.
-
-![list of students](./images/student-list-view.png)
+In this chapter you'll create a new MVC project to start the Nashville dog walking application, DogGo.
 
 ## Getting Started
 
 1. Create new project in Visual Studio
 1. Choose the _ASP.NET Core Web Application_
-1. Specify project name of _StudentExercisesMVC_
+1. Specify project name of _DogGo_
 1. Click _Ok_
 1. Choose _Web Application (Model-View-Controller)_
 1. Click _Ok_
+1. Add the Nuget package for `Microsoft.Data.SqlClient`
+
+Take a look around at the project files that come out of the box with a new ASP.NET MVC project. It already has folders for Models, Views, and Controllers. It has a `wwwroot` folder which contains some static assets like javascript and css files. It has a `Startup.cs` file where we can configure certain things about our web application if we choose.
+
+## Database
+
+Run the [dog walker sql script](./assets/DogWalker.sql) to create database. Take a moment and look through the tables that get created.
 
 ## Configuration
 
-Open your `appsettings.json` file and add your connection string. If you copy the text below, make sure you change it to contain your server name.
+Open the `appsettings.json` file and add your connection string. The file should look like this
 
 ```json
-"ConnectionStrings": {
-    "DefaultConnection": "Server=localhost\\SQLEXPRESS;Database=StudentExercises;Trusted_Connection=True;"
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft": "Warning",
+      "Microsoft.Hosting.Lifetime": "Information"
+    }
+  },
+  "AllowedHosts": "*",
+  "ConnectionStrings": {
+    "DefaultConnection": "Server=localhost\\SQLEXPRESS;Database=DogWalkerMVC;Trusted_Connection=True;"
+  }
 }
 ```
 
 ## Models
 
-You are going to be using the same models that you used in your API project. You can copy pasta those files into your new project.
+Create a `Neighborhood.cs` and `Walker.cs` file in the Models folder and add the following code
 
-![copying models from API project to MVC project](./images/DqeK4qXjRr.gif)
+> Neighborhood.cs
+```csharp
+public class Neighborhood
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+}
+```
 
+> Walker.cs
+```csharp
+public class Walker
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public int NeighborhoodId { get; set; }
+    public Neighborhood Neighborhood { get; set; }
+}
+```
 
 ## Controller
 
-Time to use Visual Studio scaffolding to create a base controller for our **`Student`** resource. Right click on the `Controllers` directory in Solution Explorer. Then choose `Add > New scaffolded item`.
+We can use Visual Studio to scaffold us the skeleton of a controller. Right click on the Controllers folder in Solution Explorer and click Add > Controller > MVC Controller with Read/Write actions. Give it the name `WalkersController`
 
-In the window that appears, choose _MVC Controller with read/write actions_. Then click the _Add_ button. You will then be asked to name your controller, so name it `StudentsController`.
+Visual Studio kindly just created a whole bunch of code for us.
 
- Your controller will be automatically created for you and `StudentsController.cs` will appear in your Solution Explorer.
+Add a private field for `IConfiguration _config`, a constructor, and a computed `SqlConnection` property to the `WalkersController`
 
-![scaffolding a new controller in Visual Studio](./images/lsq7qz3ZAE.gif)
-
-### Injecting Configuration for Connection String
-
-Next, you can copy the controller constructor and `Connection` property from a previous project and rename the constructor to `StudentsController`. You can also copy it from below and paste it into your controller.
-
-You'll have to use the helpful lightbulb several times to get all of the packages imported.
-
-```cs
+```csharp
 private readonly IConfiguration _config;
 
-public StudentsController(IConfiguration config)
+// The constructor accepts an IConfiguration object as a parameter. This class comes from the ASP.NET framework and is useful for retrieving things out of the appsettings.json file like connection strings.
+public WalkersController(IConfiguration config)
 {
     _config = config;
 }
@@ -77,63 +88,118 @@ public SqlConnection Connection
 }
 ```
 
-![](./images/pTuQO4sdAE.gif)
+### The power of ASP<span>.NET</span> Controllers
 
-## Student List Method
+In the context of ASP<span>.NET</span>, each of the public methods in the controllers is considered an Action. When our application receives incoming HTTP requests, The ASP<span>.NET</span> framework is smart enough to know which controller Action to invoke.  
 
-Your `Index` method in a web application should return a list of the corresponding resource. Modify your method to contain the following code.
+How does it do this? Take a look at the bottom of the `Startup.cs` class
 
-```cs
-using (SqlConnection conn = Connection)
+```csharp
+endpoints.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
+```
+
+ASPNET will inspect the parts of the url route. If a request comes in at `localhost:5001/Walkers/Index`, the framework will look for an `Index` action on the `Walker` controller and invoke it. If a request comes in at `localhost:5001/Walkers/Details/5`, The framework will look for a `Details` action in the `Walkers` controller and invoke it while passing in the parameter `5`. You'll also notice in the code above that some defaults have been set up in the routes. If the url of the request does not contain an action, the framework will invoke the Index action by default--meaning `localhost:5001/Walkers` would still trigger the `Index` action in the `Walkers` controller. Likewise, if the url doesn't contain a controller, i.e. `localhost:5001/`, the framework will assume the `Home` controller and the `Index` action. You are of course welcome to change these defaults.
+
+### Get All Walkers
+
+When a user is on `localhost:5001/Walkers`, we want to show them a view that contains a list of all the walkers in our system. Update the `Index` method to look like the following
+
+```csharp
+// GET: Walkers
+public ActionResult Index()
 {
-    conn.Open();
-    using (SqlCommand cmd = conn.CreateCommand())
+    using (SqlConnection conn = Connection)
     {
-        cmd.CommandText = @"
-            SELECT s.Id,
-                s.FirstName,
-                s.LastName,
-                s.SlackHandle,
-                s.CohortId
-            FROM Student s
-        ";
-        SqlDataReader reader = cmd.ExecuteReader();
-
-        List<Student> students = new List<Student>();
-        while (reader.Read())
+        conn.Open();
+        using (SqlCommand cmd = conn.CreateCommand())
         {
-            Student student = new Student
+            cmd.CommandText = @"
+                SELECT Id, [Name], NeighborhoodId
+                FROM Walker
+            ";
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            List<Walker> walkers = new List<Walker>();
+            while (reader.Read())
             {
-                Id = reader.GetInt32(reader.GetOrdinal("Id")),
-                FirstName = reader.GetString(reader.GetOrdinal("FirstName")),
-                LastName = reader.GetString(reader.GetOrdinal("LastName")),
-                SlackHandle = reader.GetString(reader.GetOrdinal("SlackHandle")),
-                CohortId = reader.GetInt32(reader.GetOrdinal("CohortId"))
-            };
+                Walker walker = new Walker
+                {
+                    Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                    Name = reader.GetString(reader.GetOrdinal("Name")),
+                    NeighborhoodId = reader.GetInt32(reader.GetOrdinal("NeighborhoodId"))
+                };
 
-            students.Add(student);
+                walkers.Add(walker);
+            }
+
+            reader.Close();
+
+            return View(walkers);
         }
-
-        reader.Close();
-
-        return View(students);
     }
 }
 ```
 
-## Student List Razor Template
-
-1. Right click on the `Index` method in your `StudentsController`
-1. Choose `Add View..`
-1. In the window that appears, provide a name of `Index`, template is `List`, and then choose the `Student` model
-1. Click `Add` and wait for the Razor template to be generated
-
-## Viewing the List of Students
-
-Now you start the project. Visit [http://localhost:5000/students](http://localhost:5000/students) in your browser to see the HTML representation of students you have in your database.
-
-## Adding the Other Views
-
-The next step is to create the `Details` view, the `Edit` view, and the `Delete` view. Use the scaffolding for _MVC View_ to create the Razor templates for each one. Don't attempt to build the create view until you get to the next chapter about View Models.
+This code will get all the walkers in the Walker table, convert it to a List and pass it off to the view. 
 
 
+
+### Viewing the list of walkers
+
+Currently, we're passing data into a view that doesn't exist. Let's fix that. Right click the method name `Index` in your controller and click "Add View". In the dialog box that appears, leave the view name "Index", for template select "List", and for Model class select "Walker". Then click the Add button. 
+
+The generated view creates an html table and iterates over each walker in the list and creates a new row for each one. 
+
+Run the application and go to `/walkers/index`. You should see your data driven page.
+
+
+### Getting A single walker
+
+When our users go to `/walkers/details/3` we want to take them to a page that has the details of the walker with the ID 3. To do this, we need to implement the `Details` action in the `Walkers` controller.
+
+```csharp
+public ActionResult Details(int id)
+{
+    using (SqlConnection conn = Connection)
+    {
+        conn.Open();
+        using (SqlCommand cmd = conn.CreateCommand())
+        {
+            cmd.CommandText = @"
+                SELECT Id, [Name], NeighborhoodId
+                FROM Walker
+                WHERE Id = @id
+            ";
+
+            cmd.Parameters.AddWithValue("@id", id);
+
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            if (reader.Read())
+            {
+                Walker walker = new Walker
+                {
+                    Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                    Name = reader.GetString(reader.GetOrdinal("Name")),
+                    NeighborhoodId = reader.GetInt32(reader.GetOrdinal("NeighborhoodId"))
+                };
+
+                reader.Close();
+                return View(walker);
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+    }
+}
+```
+
+Notice that this method accepts an `id` parameter. When the ASP<span>.NET</span> framework invokes this method for us, it will take whatever value is in the url and pass it to the `Details` method. For example, if the url is `walkers/details/2`, the framework will invoke the Details method and pass in the value `2`. The code looks in the database for a walker with the id of 2. If it finds one, it will return it to the view. If it doesn't the user will be given a 404 Not Found page.
+
+Right click the Details method and select Add View. Keep the name "Details", select "Details" for the Template dropdown, and select "Walker" for the model class.
+
+Run the application and go to `/walkers/details/1`. Then go to `/walkers/details/999` to see that we get a 404 response back.
