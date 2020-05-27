@@ -203,3 +203,8 @@ Notice that this method accepts an `id` parameter. When the ASP<span>.NET</span>
 Right click the Details method and select Add View. Keep the name "Details", select "Details" for the Template dropdown, and select "Walker" for the model class.
 
 Run the application and go to `/walkers/details/1`. Then go to `/walkers/details/999` to see that we get a 404 response back.
+
+
+## Exercise
+
+Create an Owners controller and implement the `Index` and `Details` methods. When viewing the details page of an owner, list all the dogs for that owner. If you finish, change the views and the styling to your liking. By default, Visual Studio installs bootstrap and jQuery to the project. You're welcome to embrace this if you like, or use something completely different--it's entirely up to you.
