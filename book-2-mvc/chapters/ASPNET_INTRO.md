@@ -57,6 +57,7 @@ public class Walker
 {
     public int Id { get; set; }
     public string Name { get; set; }
+    public string ImageUrl { get; set; }
     public int NeighborhoodId { get; set; }
     public Neighborhood Neighborhood { get; set; }
 }
@@ -116,7 +117,7 @@ public ActionResult Index()
         using (SqlCommand cmd = conn.CreateCommand())
         {
             cmd.CommandText = @"
-                SELECT Id, [Name], NeighborhoodId
+                SELECT Id, [Name], ImageUrl, NeighborhoodId
                 FROM Walker
             ";
             SqlDataReader reader = cmd.ExecuteReader();
@@ -128,6 +129,7 @@ public ActionResult Index()
                 {
                     Id = reader.GetInt32(reader.GetOrdinal("Id")),
                     Name = reader.GetString(reader.GetOrdinal("Name")),
+                    ImageUrl = reader.GetString(reader.GetOrdinal("ImageUrl")),
                     NeighborhoodId = reader.GetInt32(reader.GetOrdinal("NeighborhoodId"))
                 };
 
@@ -154,6 +156,13 @@ The generated view creates an html table and iterates over each walker in the li
 
 Run the application and go to `/walkers/index`. You should see your data driven page.
 
+The view that Visual Studio scaffolded for us is a decent start, but it has a number of flaws with it. For now, lets take care of the image urls. Instead of seeing the actual url, lets replace that with an actual image. Replace the code that say `@Html.DisplayFor(modelItem => item.ImageUrl)` with the following
+
+```html
+<img src="@item.ImageUrl" alt="avatar" />
+```
+
+Finally, uncomment the the code at the bottom of the view, and instead of using `item.PrimaryKey`, change the code to say `item.Id` on each of the action links.
 
 ### Getting A single walker
 
@@ -168,7 +177,7 @@ public ActionResult Details(int id)
         using (SqlCommand cmd = conn.CreateCommand())
         {
             cmd.CommandText = @"
-                SELECT Id, [Name], NeighborhoodId
+                SELECT Id, [Name], ImageUrl, NeighborhoodId
                 FROM Walker
                 WHERE Id = @id
             ";
@@ -183,6 +192,7 @@ public ActionResult Details(int id)
                 {
                     Id = reader.GetInt32(reader.GetOrdinal("Id")),
                     Name = reader.GetString(reader.GetOrdinal("Name")),
+                    ImageUrl = reader.GetString(reader.GetOrdinal("ImageUrl")),
                     NeighborhoodId = reader.GetInt32(reader.GetOrdinal("NeighborhoodId"))
                 };
 

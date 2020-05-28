@@ -61,9 +61,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace StudentExercises.Models
+namespace DogWalker.Models
 {
-    public class Student
+    public class Dog
     {
         public int Id { get; set; }
         public string Name { get; set; }
