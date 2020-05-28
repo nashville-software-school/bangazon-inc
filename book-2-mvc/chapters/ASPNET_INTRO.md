@@ -210,7 +210,11 @@ public ActionResult Details(int id)
 
 Notice that this method accepts an `id` parameter. When the ASP<span>.NET</span> framework invokes this method for us, it will take whatever value is in the url and pass it to the `Details` method. For example, if the url is `walkers/details/2`, the framework will invoke the Details method and pass in the value `2`. The code looks in the database for a walker with the id of 2. If it finds one, it will return it to the view. If it doesn't the user will be given a 404 Not Found page.
 
-Right click the Details method and select Add View. Keep the name "Details", select "Details" for the Template dropdown, and select "Walker" for the model class.
+Right click the Details method and select Add View. Keep the name "Details", select "Details" for the Template dropdown, and select "Walker" for the model class. Make the same changes in the view as before and replace the image url with the image tag
+
+```html
+<img class="bg-info" src="@Model.ImageUrl" alt="avatar" />
+```
 
 Run the application and go to `/walkers/details/1`. Then go to `/walkers/details/999` to see that we get a 404 response back.
 
