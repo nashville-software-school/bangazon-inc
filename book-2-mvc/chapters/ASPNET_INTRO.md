@@ -221,4 +221,4 @@ Run the application and go to `/walkers/details/1`. Then go to `/walkers/details
 
 ## Exercise
 
-Create an Owners controller and implement the `Index` and `Details` methods. When viewing the details page of an owner, list all the dogs for that owner. If you finish, change the views and the styling to your liking. By default, Visual Studio installs bootstrap and jQuery to the project. You're welcome to embrace this if you like, or use something completely different--it's entirely up to you.
+Create an Owners controller and implement the `Index` and `Details` methods. When viewing the details page of an owner, list all the dogs for that owner. Afterwards, go into the `Shared` folder in the `_Layout.cshtml` file. Add links for "Walkers" and "Owners" in the navbar. If you finish, try changing the views and the styling to your liking. By default, Visual Studio installs bootstrap and jQuery to the project. You're welcome to embrace this if you like, or use something completely different--it's entirely up to you.
