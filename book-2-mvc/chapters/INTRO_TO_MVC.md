@@ -28,6 +28,9 @@ Let's take an application that you built in the front end course, like Kennel, a
 
 1. The server sends the generated html page back to the browser along with whatever css and js is needed.
 
+![](./images/asp-net-workflow.png)
+
+
 ### Which is better?
 The big difference here is that in the Client/Server pattern, most of the rendering is being done client side while with MVC, the rendering is being server side.
 So which is better? By now you should know that the answer to this question is always "it depends." Both have their advantages and disadvantages, and in this course we'll explore both.
@@ -120,7 +123,3 @@ public class AnimalsController : Controller
 ```
 
 In this code, the controller is simply getting all the animals from the database and handing it to the View. 
-
-
-
-![](./images/asp-net-workflow.png)

@@ -2,15 +2,14 @@
 
 This book prepares you for building the web application that will be a prototype of the Tabloid blog platform.
 
-We'll be experimenting with technologies and conepts while building a simple app that matches dog owners in Nashville with dog walkers. 
+We'll be experimenting with technologies and concepts while building a simple app that matches dog owners in Nashville with dog walkers. 
 
 ## Topics
 
 * Request / Response Cycle
 * Anatomy of a HTTP request
 * Controllers
-* Routing
-* Route Parameters
+* Routing & Route Parameters
 * Models
 * ViewModels
 * DataAnnotations / Validation

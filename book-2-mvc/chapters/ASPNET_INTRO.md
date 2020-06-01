@@ -44,22 +44,28 @@ Create a `Neighborhood.cs` and `Walker.cs` file in the Models folder and add the
 
 > Neighborhood.cs
 ```csharp
-public class Neighborhood
+namespace DogGo.Models
 {
-    public int Id { get; set; }
-    public string Name { get; set; }
+    public class Neighborhood
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+    }
 }
 ```
 
 > Walker.cs
 ```csharp
-public class Walker
+namespace DogGo.Models
 {
-    public int Id { get; set; }
-    public string Name { get; set; }
-    public string ImageUrl { get; set; }
-    public int NeighborhoodId { get; set; }
-    public Neighborhood Neighborhood { get; set; }
+    public class Walker
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public int NeighborhoodId { get; set; }
+        public string ImageUrl { get; set; }
+        public Neighborhood Neighborhood { get; set; }
+    }
 }
 ```
 
@@ -69,7 +75,7 @@ We can use Visual Studio to scaffold us the skeleton of a controller. Right clic
 
 Visual Studio kindly just created a whole bunch of code for us.
 
-Add a private field for `IConfiguration _config`, a constructor, and a computed `SqlConnection` property to the `WalkersController`
+Add a private field for `IConfiguration _config`, a constructor, and a computed `SqlConnection` property to the `WalkersController`. Fix any compiler errors by adding a `using` statement for `Microsoft.Data.SqlClient`
 
 ```csharp
 private readonly IConfiguration _config;

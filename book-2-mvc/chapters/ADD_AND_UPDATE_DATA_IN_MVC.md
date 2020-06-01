@@ -267,3 +267,12 @@ The trick is to _hide_ the input field in the view, but keep it in the form. Put
     <input asp-for="Id" type="hidden" class="form-control" />
 </div>
 ```
+
+## Exercise
+
+Create a model for `Dog` and implement a `DogController` class that gives users the following functionality:
+
+- View a list of all Dogs
+- Create a new Dog (for now, capture the OwnerId as simple input field)
+- Edit a Dog
+- Delete a Dog
