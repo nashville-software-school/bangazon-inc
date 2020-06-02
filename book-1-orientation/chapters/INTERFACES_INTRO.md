@@ -15,9 +15,9 @@ You will also likely be asked about interfaces during the interview process. Aft
 1. They are contracts that you and your team decide upon to ensure consistency and quality in the classes that you author.
 1. Interfaces define what your class **should** do, but they can't specify **how** your class will do it.
 
-## Gary's Wholesale Garage
+## More Gary's Wholesale Garage
 
-You work for a company that sells all kinds of motorized vehicles - **Gary's Wholesale Garage**.
+Here are some types of vehicles from **Gary's Wholesale Garage**.
 
 1. Scooter
 1. Car
@@ -121,8 +121,10 @@ For example, this interface says that any class that implements it **must** have
 Those are implementation details that an `interface` doesn't care about.
 
 ```cs
-namespace Garage {
-    public interface IElectricPowered {
+namespace Garage 
+{
+    public interface IElectricPowered 
+    {
         double BatteryKWh { get; set; }
 
         void ChargeBattery ();
@@ -137,37 +139,51 @@ Likewise, the `ChargeBattery()` method can be implemented completely differently
 You tell the compiler that a class must implement an interface by putting a colon after the class name, followed by the interface.
 
 #### Example Pattern
+
 ```cs
-public class YourClassName : InterfaceToImplement {}
+public class YourClassName : InterfaceToImplement
+{
+    // class definition omitted
+}
 ```
 
 Now you need to refactor the `Zero` and the `Tesla` classes to implement your new interface.
 
 ```cs
-namespace Garage {
-    public class Zero : IElectricPowered {
+namespace Garage
+{
+    public class Zero : IElectricPowered
+    {
         public double BatteryKWh { get; set; }
         public string MainColor { get; set; }
         public string MaximumOccupancy { get; set; }
 
-        public void ChargeBattery () {  }
+        public void ChargeBattery()
+        {  
+            // method definition omitted
+        }
     }
 }
 ```
 
 ```cs
-namespace Garage {
-    public class Tesla : IElectricPowered {
+namespace Garage 
+{
+    public class Tesla : IElectricPowered
+    {
         public double BatteryKWh { get; set; }
         public string MainColor { get; set; }
         public string MaximumOccupancy { get; set; }
 
-        public void ChargeBattery () {  }
+        public void ChargeBattery()
+        {  
+            // method definition omitted
+        }
     }
 }
 ```
 
-The compiler will make sure that the developer implements everything in the interface, or the code won't compile. Watch what happens when I remove the `ChargeBattery()` method from my `Zero` class. I'm immediately informed by the compiler that my code has an exception because I didn't implement something in the interface.
+The compiler will make sure that the developer implements everything in the interface, or the code won't compile. Watch what happens when I remove the `ChargeBattery()` method from my `Zero` class. I'm immediately informed by the compiler that my code has an error because I didn't implement something in the interface.
 
 ![interface implementation exception example](./images/interface-implementation-exception.gif)
 
@@ -179,9 +195,12 @@ Check this out. This is valid code now.
 using System;
 using System.Collections.Generic;
 
-namespace Garage {
-    class Program {
-        static void Main (string[] args) {
+namespace Garage
+{
+    class Program
+    {
+        static void Main (string[] args)
+        {
             Zero fxs = new Zero ();
             Zero fx = new Zero ();
             Tesla modelS = new Tesla ();
@@ -199,9 +218,12 @@ namespace Garage {
 You are now able to add objects of completely different types, because they both now share another type of `IElectricPowered`!! That's pretty cool. Now you are able to group together electric vehicles in one list and gas vehicle in another.
 
 ```cs
-namespace Garage {
-    class Program {
-        static void Main (string[] args) {
+namespace Garage
+{
+    class Program
+    {
+        static void Main (string[] args)
+        {
             /*
                 Create some electric vehicles, add them to a List
                 and then iterate the List to charge all of their
@@ -243,7 +265,7 @@ For example, a platypus is both ground and water. Most birds are both air and gr
 
 🐯 🦅 🐎 🦈 🙎🏾‍♀️ 🦉
 
-To make our code base as flexible as possible, we define the properties and behaviors of each classification (or description) into an interface. You are going to start with intefaces for animals that can walk and those that can swim.
+To make our code base as flexible as possible, we define the properties and behaviors of each classification (or description) into an interface. You are going to start with interfaces for animals that can walk and those that can swim.
 
 ```cs
 public interface IWalking
@@ -259,7 +281,7 @@ public interface ISwimming
 }
 ```
 
-Now you can define a class as an implemention of the interface for a walking animal. You can start with an African Painted Dog.
+Now you can define a class as an implementation of the interface for a walking animal. You can start with an African Painted Dog.
 
 ```cs
 public class PaintedDog : IWalking
