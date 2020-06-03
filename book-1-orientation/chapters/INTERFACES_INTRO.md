@@ -30,61 +30,77 @@ Here are some types of vehicles from **Gary's Wholesale Garage**.
 
 Now, all of these types of things have some attributes and behaviors in common.
 
-* They all have an engine
-* They all carry one, or more, passenger
-* They all move
-* They all accelerate in any direction
+- They all have an engine
+- They all carry one, or more, passenger
+- They all move
+- They all accelerate in any direction
 
 There are other attributes and behaviors that **some** specific kinds of these vehicles share, but others don't.
 
-* Some use gas
-* Some are electric
-* Some use a propeller to move
-* Some have wheels
-* Some have doors
-* Some use a jet to move
+- Some use gas
+- Some are electric
+- Some use a propeller to move
+- Some have wheels
+- Some have doors
+- Some use a jet to move
 
 ## Gas Fueling Problem
 
 Consider the following four classes representing some of these vehicles.
 
 ```cs
-public class Zero {  // Electric motorcycle
+public class Zero  // Electric motorcycle
+{
     public double BatteryKWh { get; set; }
     public string MainColor { get; set; }
     public string MaximumOccupancy { get; set; }
 
-    public void ChargeBattery () { ... }
+    public void ChargeBattery()
+    {
+        // method definition omitted
+    }
 }
 ```
 
 ```cs
-public class Cessna {  // Propellor light aircraft
+public class Cessna  // Propellor light aircraft
+{
     public double FuelCapacity { get; set; }
     public string MainColor { get; set; }
     public string MaximumOccupancy { get; set; }
 
-    public void RefuelTank () { ... }
+    public void RefuelTank()
+    {
+        // method definition omitted
+    }
 }
 ```
 
 ```cs
-public class Tesla {  // Electric car
+public class Tesla  // Electric car
+{
     public double BatteryKWh { get; set; }
     public string MainColor { get; set; }
     public string MaximumOccupancy { get; set; }
 
-    public void ChargeBattery () { ... }
+    public void ChargeBattery()
+    {
+        // method definition omitted
+    }
 }
 ```
 
 ```cs
-public class Ram {  // Gas powered truck
+public class Ram  // Gas powered truck
+{
     public double FuelCapacity { get; set; }
     public string MainColor { get; set; }
     public string MaximumOccupancy { get; set; }
 
-    public void RefuelTank () { ... }
+    public void RefuelTank()
+    {
+        // method definition omitted
+    }
 }
 ```
 
@@ -115,19 +131,19 @@ You create an interface that every electric vehicle class must implement. It's i
 
 For example, this interface says that any class that implements it **must** have a `BatteryKHw` property. The developer can choose...
 
-* If it has a getter and setter
-* If the getter/setter have specific logic
+- If it has a getter and setter
+- If the getter/setter have specific logic
 
 Those are implementation details that an `interface` doesn't care about.
 
 ```cs
-namespace Garage 
+namespace Garage
 {
-    public interface IElectricPowered 
+    public interface IElectricPowered
     {
         double BatteryKWh { get; set; }
 
-        void ChargeBattery ();
+        void ChargeBattery();
     }
 }
 ```
@@ -159,7 +175,7 @@ namespace Garage
         public string MaximumOccupancy { get; set; }
 
         public void ChargeBattery()
-        {  
+        {
             // method definition omitted
         }
     }
@@ -167,7 +183,7 @@ namespace Garage
 ```
 
 ```cs
-namespace Garage 
+namespace Garage
 {
     public class Tesla : IElectricPowered
     {
@@ -176,7 +192,7 @@ namespace Garage
         public string MaximumOccupancy { get; set; }
 
         public void ChargeBattery()
-        {  
+        {
             // method definition omitted
         }
     }
@@ -306,7 +322,6 @@ public class PaintedDog : IWalking
 }
 ```
 
-
 The `PaintedDog` class has now followed the rules of the interface, and implemented the two required methods that are required.
 
 ### Multiple Interfaces
@@ -339,8 +354,8 @@ Because you specified two interfaces, you had to provide an implementation for t
 
 ## Resources
 
-* [Interface-based programming](https://en.wikipedia.org/wiki/Interface-based_programming)
-* [Understanding Interface-based Programming](https://msdn.microsoft.com/en-us/library/aa260635(v=vs.60).aspx)
+- [Interface-based programming](https://en.wikipedia.org/wiki/Interface-based_programming)
+- [Understanding Interface-based Programming](<https://msdn.microsoft.com/en-us/library/aa260635(v=vs.60).aspx>)
 
 ## Practice: Diggers and Fliers
 
@@ -361,10 +376,10 @@ This is the list of animals you want to own and care for.
 
 Each month, you clean out all of the habitats in a single day for efficiency. On that day, all animals need to be put into temporary containers. Each container will hold animals of similar similar, but different, types.
 
-* Animals that dig and live in the ground
-* Animals that move about on the ground
-* Animals that swim in water
-* Animals that fly above the ground
+- Animals that dig and live in the ground
+- Animals that move about on the ground
+- Animals that swim in water
+- Animals that fly above the ground
 
 1. Before you write any classes for the above animals, determine the common properties and behaviors that some of them share and define interfaces first.
 1. Once you believe you have a good set of interfaces, then start creating your specific animal classes and have them implement the appropriate interface.

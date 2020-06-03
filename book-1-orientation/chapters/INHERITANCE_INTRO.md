@@ -18,42 +18,100 @@ You work for a company that sells all kinds of motorized vehicles - Gary's Whole
 We will represent _types_ of vehicles using C# classes.
 
 ```cs
-public class Zero {  // Electric motorcycle
+public class Zero  // Electric motorcycle
+{
     public double BatteryKWh { get; set; }
     public string MainColor { get; set; }
     public string MaximumOccupancy { get; set; }
 
-    public void ChargeBattery () { ... }
+    public void ChargeBattery()
+    {
+        // method definition omitted
+    }
 }
 ```
 
 ```cs
-public class Cessna {  // Propellor light aircraft
+public class Cessna  // Propellor light aircraft
+{
     public double FuelCapacity { get; set; }
     public string MainColor { get; set; }
     public string MaximumOccupancy { get; set; }
 
-    public void RefuelTank () { ... }
+    public void RefuelTank()
+    {
+        // method definition omitted
+    }
 }
 ```
 
 ```cs
-public class Tesla {  // Electric car
+public class Cessna  // Propellor light aircraft
+{
+    public double FuelCapacity { get; set; }
+    public string MainColor { get; set; }
+    public string MaximumOccupancy { get; set; }
+
+    public void RefuelTank()
+    {
+        // method definition omitted
+    }
+}
+```
+
+```cs
+public class Tesla  // Electric car
+{
     public double BatteryKWh { get; set; }
     public string MainColor { get; set; }
     public string MaximumOccupancy { get; set; }
 
-    public void ChargeBattery () { ... }
+    public void ChargeBattery()
+    {
+        // method definition omitted
+    }
 }
 ```
 
 ```cs
-public class Ram {  // Gas powered truck
+public class Ram  // Gas powered truck
+{
     public double FuelCapacity { get; set; }
     public string MainColor { get; set; }
     public string MaximumOccupancy { get; set; }
 
-    public void RefuelTank () { ... }
+    public void RefuelTank()
+    {
+        // method definition omitted
+    }
+}
+```
+
+```cs
+public class Tesla  // Electric car
+{
+    public double BatteryKWh { get; set; }
+    public string MainColor { get; set; }
+    public string MaximumOccupancy { get; set; }
+
+    public void ChargeBattery()
+    {
+        // method definition omitted
+    }
+}
+```
+
+```cs
+public class Ram  // Gas powered truck
+{
+    public double FuelCapacity { get; set; }
+    public string MainColor { get; set; }
+    public string MaximumOccupancy { get; set; }
+
+    public void RefuelTank()
+    {
+        // method definition omitted
+    }
 }
 ```
 
@@ -109,7 +167,8 @@ public class Vehicle
     public string MainColor { get; set; }
     public string MaximumOccupancy { get; set; }
 
-    public void Drive () {
+    public void Drive()
+    {
         Console.WriteLine("Vrooom!");
     }
 }
@@ -139,7 +198,8 @@ To have each vehicle make its own sound, you need to do two things.
        public string MainColor { get; set; }
        public string MaximumOccupancy { get; set; }
 
-       public virtual void Drive () {
+       public virtual void Drive()
+       {
            Console.WriteLine("Vrooom!");
        }
    }
@@ -148,12 +208,14 @@ To have each vehicle make its own sound, you need to do two things.
 1. Override the method in the child class.
 
    ```cs
-   public class Cessna : Vehicle {
+   public class Cessna : Vehicle
+   {
        public double FuelCapacity { get; set; }
 
        public void RefuelTank () { ... }
 
-       public override void Drive () {
+       public override void Drive()
+       {
            Console.WriteLine("Zoooooom!");
        }
    }
