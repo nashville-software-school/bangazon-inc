@@ -146,7 +146,10 @@ public class Tesla : Vehicle
 {
     public double BatteryKWh { get; set; }
 
-    public void ChargeBattery () { ... }
+    public void ChargeBattery()
+    {
+        // method definition omitted
+    }
 }
 ```
 
@@ -212,7 +215,10 @@ To have each vehicle make its own sound, you need to do two things.
    {
        public double FuelCapacity { get; set; }
 
-       public void RefuelTank () { ... }
+       public void RefuelTank()
+       {
+           // method definition omitted
+       }
 
        public override void Drive()
        {
