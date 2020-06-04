@@ -54,7 +54,8 @@ public async Task<ActionResult> Login(LoginViewModel viewModel)
         new Claim(ClaimTypes.NameIdentifier, owner.Id.ToString()),
         new Claim(ClaimTypes.Email, owner.Email),
         new Claim(ClaimTypes.Name, owner.Name),
-        new Claim(ClaimTypes.Role, "DogOwner"),
+        new Claim("NeighborhoodId", owner.NeighborhoodId.ToString()),
+        new Claim(ClaimTypes.Role, "DogOwner")
     };
 
     var claimsIdentity = new ClaimsIdentity(
@@ -108,7 +109,7 @@ private Owner GetOwnerByEmail(string email)
 }
 ```
 
-The GET method for `Login` and the helper method `GetOwnerByEmail` should feel pretty familiar, but the POST method for `Login` has some new code in it we haven't seen before. We're looking up an owner by their email address and then it's saving some of the owner data into a cookie. The way this works is that when a user successfully logs in, the server is going to create something that's almost like a drivers license, and populate that license with whatever information it chooses--in this case our code is choosing to add the owner's Id, email address, name, and role. It then takes that license and puts it in the cookie. A cookie is a way that we can store data on a user's browser. After logging in, every time an owner makes a request to the server, the browser will send up the value of that cookie. The ASP<span>.NET</span> Core framework will look at the cookie every time and know who the user is that's making the request.
+The GET method for `Login` and the helper method `GetOwnerByEmail` should feel pretty familiar, but the POST method for `Login` has some new code in it we haven't seen before. We're looking up an owner by their email address and then it's saving some of the owner data into a cookie. The way this works is that when a user successfully logs in, the server is going to create something that's almost like a drivers license, and populate that license with whatever information it chooses--in this case our code is choosing to add the owner's Id, email address, name, neighborhoodId, and role. It then takes that license and puts it in the cookie. A cookie is a way that we can store data on a user's browser. After logging in, every time an owner makes a request to the server, the browser will send up the value of that cookie. The ASP<span>.NET</span> Core framework will look at the cookie every time and know who the user is that's making the request.
 
 We have to let ASP<span>.NET</span> Core know that we plan on using cookies for authentication. In the `Startup.cs` file, change the `ConfigureServices` and `Configure` methods to look like the following
 
@@ -280,3 +281,15 @@ public ActionResult Create(Dog dog)
     }
 }
 ```
+
+## Exercise
+
+Update the Index method in the walkers controller so that owners only see walkers in their own neighborhood. 
+
+**Hint**: you can get the logged in owner's neighborhood Id like this
+
+```csharp
+string neighborhoodIdString = User.FindFirstValue("NeighborhoodId");
+```
+
+If a user goes to `/walkers` and is not logged in, they should see the entire list of walkers.
