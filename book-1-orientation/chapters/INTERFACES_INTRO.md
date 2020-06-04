@@ -319,7 +319,9 @@ public class Ram : Vehicle // Gas powered truck
 }
 ```
 
-Your challenge is to replace your `Main` method with the following code and make the appropriate changes and additions to your porject in order to make this `Main` method work.
+Your challenge is to replace your `Main` method with the following code and make the appropriate changes and additions to your project in order to make this `Main` method work.
+
+> **HINT:** An example addition to your code might be an `IElectricVehicle` interface.
 
 ```cs
 namespace Garage
