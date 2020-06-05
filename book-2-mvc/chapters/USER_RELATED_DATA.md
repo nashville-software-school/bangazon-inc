@@ -122,7 +122,7 @@ public void ConfigureServices(IServiceCollection services)
 {
     services.AddControllersWithViews();
     services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-        .AddCookie();
+        .AddCookie(options => options.LoginPath = "/Owners/LogIn");
 }
 ```
 
@@ -281,6 +281,23 @@ public ActionResult Create(Dog dog)
     }
 }
 ```
+
+## Protecting Routes
+
+We have certain routes that we don't want unauthenticated users to go to. `/dogs` and `/dogs/create` for example should not be accessible unless a user is logged in. Protecting routes with ASP<span>.NET</span> is easy. In your Dog Controller, put an `[Authorize]` annotation above any action for which a user would need to be logged in (Note: We'll discuss annotations more in a later chapter).
+
+```csharp
+[Authorize]
+public ActionResult Index()
+```
+
+```csharp
+[Authorize]
+public ActionResult Create()
+```
+
+
+If an unauthenticated user now tries to go to either of these routes, they will be redirected to the login page.
 
 ## Exercise
 
