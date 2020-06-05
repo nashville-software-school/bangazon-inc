@@ -53,9 +53,7 @@ public async Task<ActionResult> Login(LoginViewModel viewModel)
     {
         new Claim(ClaimTypes.NameIdentifier, owner.Id.ToString()),
         new Claim(ClaimTypes.Email, owner.Email),
-        new Claim(ClaimTypes.Name, owner.Name),
         new Claim("NeighborhoodId", owner.NeighborhoodId.ToString()),
-        new Claim(ClaimTypes.Role, "DogOwner")
     };
 
     var claimsIdentity = new ClaimsIdentity(
