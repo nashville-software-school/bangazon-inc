@@ -122,7 +122,7 @@ Greeter g = new Greeter();
 Person sue = new Person { Name = "Susan" };
 g.Greet(sue);
 
-// Hey there Sue. Welcome back!
+// Hey there Susan. Welcome back!
 ```
 
 ## Access Modifiers
