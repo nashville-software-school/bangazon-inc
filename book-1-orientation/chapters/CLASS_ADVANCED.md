@@ -82,6 +82,49 @@ public class SuperPower
 }
 ```
 
+## Overloading Methods
+
+In C# we have the ability to create methods of the same name, just as long as they take different types, or different number of arguments. This feature is called _overloading_
+
+```csharp
+public class Greeter
+{
+    public void Greet(string name)
+    {
+        Console.WriteLine($"Hello, {name}! It's good to see you again");
+    }
+
+    public void Greet(Person person)
+    {
+        Console.WriteLine($"Hey there {person.Name}. Welcome back!");
+    }
+
+    public void Greet()
+    {
+        Console.WriteLine("Welcome Back");
+    }
+}
+```
+
+Even though these three methods are all named the same thing, this code is perfectly valid because they take separate types as arguments. If somewhere else in our program we call `Greet` and pass it a `string`, the `Greet` method with the `string` parameter will be invoked
+
+```csharp
+Greeter g = new Greeter();
+g.Greet("Bobby");
+
+// Hello, Bobby! It's good to see you again
+```
+
+Likewise, if we were to instead to call `Greet` and pass in an instance of `Person`, we would be invoking the third method
+
+```csharp
+Greeter g = new Greeter();
+Person sue = new Person { Name = "Susan" };
+g.Greet(sue);
+
+// Hey there Susan. Welcome back!
+```
+
 ## Access Modifiers
 
 We've already learned about the  `public` and `private` access modifiers. C# has a few more as well.
