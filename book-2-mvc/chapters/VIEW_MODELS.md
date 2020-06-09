@@ -391,7 +391,7 @@ public ActionResult Create()
 
 Now update the view to accept an instance of an `OwnerFormViewModel` and change the NeighborhoodId field from an `<input>` to a `<select>` 
 
-```csharp
+```html+razor
 @model DogWalker.Models.ViewModels.OwnerFormViewModel
 
 @{
