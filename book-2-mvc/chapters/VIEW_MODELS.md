@@ -2,45 +2,55 @@
 
 We've seen how controllers are able to pass objects into our views, and how views expect a certain type of object. For example:
 
-> DogsController.cs
+> OwnersController.cs
 
 ```csharp
-public ActionResult Index()
+public ActionResult Details(int id)
 {
     ...
 
-    return View(dogs);
+    return View(owner);
 }
 ```
 
-> Dogs/Index.cshtml
+> Owners/Details.cshtml
 
-```razor
-@model IEnumerable<DogWalker.Models.Dog>
+```html+razor
+@model DogWalker.Models.Owner
 
 ...
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Breed)
-        </td>
-    </tr>
-}
+<dl class="row">
+  <dt class = "col-sm-2">
+    @Html.DisplayNameFor(model => model.Name)
+  </dt>
+  <dd class = "col-sm-10">
+    @Html.DisplayFor(model => model.Name)
+  </dd>
+  <dt class = "col-sm-2">
+    @Html.DisplayNameFor(model => model.Email)
+  </dt>
+  <dd class = "col-sm-10">
+    @Html.DisplayFor(model => model.Email)
+  </dd>
+  <dt class = "col-sm-2">
+    @Html.DisplayNameFor(model => model.PhoneNumber)
+  </dt>
+  <dd class = "col-sm-10">
+    @Html.DisplayFor(model => model.PhoneNumber)
+  </dd>
+</dl>
 ```
 
-In this example we can see that the `Index` method of the Dog Controller is passing a list of dogs to the View. The view will then loop over each of the dogs in the list to dynamically create rows in a table.
+In this example we can see that the `Details` method of the Owners Controller is passing an owner instance to the View. The view will then dynamically create some html using the properties of that object.
 
-This works out fine if the page you're creating only requires dog information on it. Let's consider a more realistic scenario though. Say your designer asks that the Dog page of your application is a bit more complex. Here is the mockup you're given
+This works out fine if the page you're creating only requires owner information on it. Let's consider a more realistic scenario though. Say your designer asks that the Owner Details page of your application is a bit more complex. Here is the mockup you're given
 
 ![](./images/DogWalkerMockup.png)
 
-This View now seems to require more data than just a list of dogs. There's now information on the Owner and Walkers as well.
+This View now seems to require more data than just an Owner object. There's now information on the owner's dogs and walkers as well.
 
-The view, however, can only accept **one** type of thing, so how do we pass it multiple things?
+The problem is that in ASP<span>.NET</span>, we can only pass a View **one** type of thing. So how do we pass it multiple things?
 
 The answer is to wrap all the things up in a single class called a View Model. The difference between regular models and view models is that regular models are meant to mimic the shape of our database tables. View models are meant to mimic the shape of our html pages. It may be helpful to think of view models as similar to react state. Looking at the mockup again, what are the things on the page that would belong in state?
 
@@ -67,65 +77,22 @@ namespace DogWalker.Models.ViewModels
 }
 ```
 
-Now go to the `DogController` and add the following helper methods.
+We have a repository method already for getting a single owner, but we'll also need a method for getting a list of dogs by an owner Id, and method for getting a list of walkers in a given neighborhood.
 
-> Get an owner by Id
+Add this method to the `DogRepository`
 
+> DogRepository.cs
 ```csharp
-private Owner GetOwnerDetails(int id)
+public List<Dog> GetDogsByOwnerId(int ownerId)
 {
-    using(SqlConnection conn = Connection)
+    using (SqlConnection conn = Connection)
     {
         conn.Open();
 
-        using(SqlCommand cmd = conn.CreateCommand())
+        using (SqlCommand cmd = conn.CreateCommand())
         {
             cmd.CommandText = @"
-                SELECT Id, Email, Name, Address, NeighborhoodId, Phone
-                FROM Owner
-                WHERE Id = @id
-            ";
-
-            cmd.Parameters.AddWithValue("@id", id);
-
-            SqlDataReader reader = cmd.ExecuteReader();
-
-            Owner owner = null;
-
-            if (reader.Read())
-            {
-                owner = new Owner()
-                {
-                    Id = reader.GetInt32(reader.GetOrdinal("Id")),
-                        Name = reader.GetString(reader.GetOrdinal("Name")),
-                        Email = reader.GetString(reader.GetOrdinal("Email")),
-                        Address = reader.GetString(reader.GetOrdinal("Address")),
-                        PhoneNumber = reader.GetString(reader.GetOrdinal("Phone")),
-                        NeighborhoodId = reader.GetInt32(reader.GetOrdinal("NeighborhoodId"))
-                };
-            }
-
-            reader.Close();
-
-            return owner;
-        }
-    }
-}
-```
-
-> Get a list of owner's dogs
-
-```csharp
-private List<Dog> GetDogsByOwner(int ownerId)
-{
-    using(SqlConnection conn = Connection)
-    {
-        conn.Open();
-
-        using(SqlCommand cmd = conn.CreateCommand())
-        {
-            cmd.CommandText = @"
-                SELECT Id, Name, Breed, Notes, ImageUrl
+                SELECT Id, Name, Breed, Notes, ImageUrl, OwnerId 
                 FROM Dog
                 WHERE OwnerId = @ownerId
             ";
@@ -141,36 +108,42 @@ private List<Dog> GetDogsByOwner(int ownerId)
                 Dog dog = new Dog()
                 {
                     Id = reader.GetInt32(reader.GetOrdinal("Id")),
-                        Name = reader.GetString(reader.GetOrdinal("Name")),
-                        Breed = reader.GetString(reader.GetOrdinal("Breed")),
-                        Notes = reader.GetString(reader.GetOrdinal("Notes")),
-                        ImageUrl = reader.GetString(reader.GetOrdinal("ImageUrl")),
+                    Name = reader.GetString(reader.GetOrdinal("Name")),
+                    Breed = reader.GetString(reader.GetOrdinal("Breed")),
+                    OwnerId = reader.GetInt32(reader.GetOrdinal("OwnerId"))
                 };
+
+                // Check if optional columns are null
+                if (reader.IsDBNull(reader.GetOrdinal("Notes")) == false)
+                {
+                    dog.Notes = reader.GetString(reader.GetOrdinal("Notes"));
+                }
+                if (reader.IsDBNull(reader.GetOrdinal("ImageUrl")) == false)
+                {
+                    dog.ImageUrl = reader.GetString(reader.GetOrdinal("Notes"));
+                }
 
                 dogs.Add(dog);
             }
-
             reader.Close();
-
             return dogs;
         }
     }
 }
 ```
 
-> Get a list of walkers in a neighborhood
+Now update the Walkers Repository to add a method to get a list of walkers in a neighborhood
 
 ```csharp
-private List<Walker> GetWalkersByNeighborhood(int neighborhoodId)
+public List<Walker> GetWalkersInNeighborhood(int neighborhoodId)
 {
-    using(SqlConnection conn = Connection)
+    using (SqlConnection conn = Connection)
     {
         conn.Open();
-
-        using(SqlCommand cmd = conn.CreateCommand())
+        using (SqlCommand cmd = conn.CreateCommand())
         {
             cmd.CommandText = @"
-                SELECT Id, Name, ImageUrl
+                SELECT Id, [Name], ImageUrl, NeighborhoodId
                 FROM Walker
                 WHERE NeighborhoodId = @neighborhoodId
             ";
@@ -180,14 +153,14 @@ private List<Walker> GetWalkersByNeighborhood(int neighborhoodId)
             SqlDataReader reader = cmd.ExecuteReader();
 
             List<Walker> walkers = new List<Walker>();
-
             while (reader.Read())
             {
-                Walker walker = new Walker()
+                Walker walker = new Walker
                 {
                     Id = reader.GetInt32(reader.GetOrdinal("Id")),
-                        Name = reader.GetString(reader.GetOrdinal("Name")),
-                        ImageUrl = reader.GetString(reader.GetOrdinal("ImageUrl")),
+                    Name = reader.GetString(reader.GetOrdinal("Name")),
+                    ImageUrl = reader.GetString(reader.GetOrdinal("ImageUrl")),
+                    NeighborhoodId = reader.GetInt32(reader.GetOrdinal("NeighborhoodId"))
                 };
 
                 walkers.Add(walker);
@@ -201,17 +174,21 @@ private List<Walker> GetWalkersByNeighborhood(int neighborhoodId)
 }
 ```
 
-Now let's use these helper methods in the `Index` action to fill out our ProfileViewModel
+Now that we have all the repository methods implemented, we can refactor the Owner Details method to create a ProfileViewModel. Change the `Details` method to use the following code
+
+> OwnersController.cs 
 
 ```csharp
-// GET: Dogs
-public ActionResult Index()
+// GET: Owners/Details/5
+public ActionResult Details(int id)
 {
-    int ownerId = GetCurrentUserId();
+    OwnerRepository ownerRepo = new OwnerRepository(_config);
+    WalkerRepository walkerRepo = new WalkerRepository(_config);
+    DogRepository dogRepo = new DogRepository(_config);
 
-    Owner owner = GetOwnerDetails(ownerId);
-    List<Dog> dogs = GetDogsByOwner(ownerId);
-    List<Walker> walkers = GetWalkersByNeighborhood(owner.NeighborhoodId);
+    Owner owner = ownerRepo.GetOwnerById(id);
+    List<Dog> dogs = dogRepo.GetDogsByOwnerId(owner.Id);
+    List<Walker> walkers = walkerRepo.GetWalkersInNeighborhood(owner.NeighborhoodId);
 
     ProfileViewModel vm = new ProfileViewModel()
     {
@@ -224,13 +201,13 @@ public ActionResult Index()
 }
 ```
 
-Try running the application now and going to `/dogs` while logged in. You should see this error message
+Try running the application now and going to `/owners/1` while logged in. You should see this error message
 
 ```
-InvalidOperationException: The model item passed into the ViewDataDictionary is of type 'DogWalker.Models.ViewModels.ProfileViewModel', but this ViewDataDictionary instance requires a model item of type 'System.Collections.Generic.IEnumerable`1[DogWalker.Models.Dog]'
+InvalidOperationException: The model item passed into the ViewDataDictionary is of type 'DogWalker.Models.ViewModels.ProfileViewModel', but this ViewDataDictionary instance requires a model item of type 'DogWalker.Models.Owner'
 ```
 
-This is because the controller is now passing the view an instance of `ProfileViewModel` but the view is still expecting an `IEnumerable<Dog>`. Fix this by changing the first line of `Index.cshtml` to this
+This is because the controller is now passing the view an instance of `ProfileViewModel` but the view is still expecting an `Owner`. Fix this by changing the first line of `Details.cshtml` to this
 
 ```html+razor
 @model DogWalker.Models.ViewModels.ProfileViewModel
@@ -273,7 +250,7 @@ Now replace the rest of the view with the following code
       <div class="row">
         @foreach (Dog dog in Model.Dogs) {
         <div class="card m-4" style="width: 18rem;">
-          @if (dog.ImageUrl == null) {
+          @if (String.IsNullOrEmpty(dog.ImageUrl)) {
           <img
             src="https://cdn.pixabay.com/photo/2018/08/15/13/12/dog-3608037_960_720.jpg"
             class="card-img-top"
@@ -321,8 +298,8 @@ Now replace the rest of the view with the following code
 
 Currently the Create and Edit forms for Owners have a text input field to collect an owner's neighborhood Id. It was mentioned ealier that we'd ideally like to have that be a dropdown list instead. We can make this happen with view models. Once again, lets think about what we'd need to have in _state_ if this were a React application. 
 
-- properties for all the Owner form fields
-- a list of available options for the dropdown
+- Properties for all the Owner form fields
+- A list of available options for the dropdown
 
 Create a new class inside the ViewModels folder and name it `OwnerFormViewModel`. Add the following code
 
@@ -339,51 +316,85 @@ namespace DogWalker.Models.ViewModels
 }
 ```
 
-Now inside `OwnersController` add the following helper method that will get us a list of all the neighborhoods in the database.
+We don't yet have a repository for Neighborhoods, so lets add that now. Create a `NeighborhoodRepository.cs` file in the repositories folder and add the following code
+
+> NeighborhoodRepository.cs
 
 ```csharp
-private List<Neighborhood> GetNeighborhoods()
+using DogWalker.Models;
+using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
+using System.Collections.Generic;
+
+namespace DogWalker.Repositories
 {
-    using (SqlConnection conn = Connection)
+    public class NeighborhoodRepository
     {
-        conn.Open();
-        using (SqlCommand cmd = conn.CreateCommand())
+        private readonly IConfiguration _config;
+
+        public NeighborhoodRepository(IConfiguration config)
         {
-            cmd.CommandText = @"SELECT Id, Name FROM Neighborhood";
-
-            SqlDataReader reader = cmd.ExecuteReader();
-
-            List<Neighborhood> neighborhoods = new List<Neighborhood>();
-
-            while (reader.Read())
-            {
-                Neighborhood neighborhood = new Neighborhood()
-                {
-                    Id = reader.GetInt32(reader.GetOrdinal("Id")),
-                    Name = reader.GetString(reader.GetOrdinal("Name"))
-                };
-                neighborhoods.Add(neighborhood);
-            }
-
-            reader.Close();
-
-            return neighborhoods;
+            _config = config;
         }
 
+        public SqlConnection Connection
+        {
+            get
+            {
+                return new SqlConnection(_config.GetConnectionString("DefaultConnection"));
+            }
+        }
+
+        public List<Neighborhood> GetAll()
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"SELECT Id, Name FROM Neighborhood";
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    List<Neighborhood> neighborhoods = new List<Neighborhood>();
+
+                    while (reader.Read())
+                    {
+                        Neighborhood neighborhood = new Neighborhood()
+                        {
+                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                            Name = reader.GetString(reader.GetOrdinal("Name"))
+                        };
+                        neighborhoods.Add(neighborhood);
+                    }
+
+                    reader.Close();
+
+                    return neighborhoods;
+                }
+            }
+        }
     }
 }
+
 ```
 
-Update the GET `Create` method to now create a view model and pass it to the view
+Now update the GET `Create` method to now create a view model and pass it to the view
+
+> OwnersController.cs
 
 ```csharp
 // GET: Owners/Create
 public ActionResult Create()
 {
-    OwnerFormViewModel vm = new OwnerFormViewModel();
+    NeighborhoodRepository neighborhoodRepo = new NeighborhoodRepository(_config);
+    List<Neighborhood> neighborhoods = neighborhoodRepo.GetAll();
 
-    vm.Neighborhoods = GetNeighborhoods();
-    vm.Owner = new Owner();
+    OwnerFormViewModel vm = new OwnerFormViewModel()
+    {
+        Owner = new Owner(),
+        Neighborhoods = neighborhoods
+    };
 
     return View(vm);
 }
