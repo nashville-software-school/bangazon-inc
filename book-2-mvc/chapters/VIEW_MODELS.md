@@ -316,3 +316,143 @@ Now replace the rest of the view with the following code
   </div>
 </div>
 ```
+
+## Using View Models with Forms
+
+Currently the Create and Edit forms for Owners have a text input field to collect an owner's neighborhood Id. It was mentioned ealier that we'd ideally like to have that be a dropdown list instead. We can make this happen with view models. Once again, lets think about what we'd need to have in _state_ if this were a React application. 
+
+- properties for all the Owner form fields
+- a list of available options for the dropdown
+
+Create a new class inside the ViewModels folder and name it `OwnerFormViewModel`. Add the following code
+
+```csharp
+using System.Collections.Generic;
+
+namespace DogWalker.Models.ViewModels
+{
+    public class OwnerFormViewModel
+    {
+        public Owner Owner { get; set; }
+        public List<Neighborhood> Neighborhoods { get; set; }
+    }
+}
+```
+
+Now inside `OwnersController` add the following helper method that will get us a list of all the neighborhoods in the database.
+
+```csharp
+private List<Neighborhood> GetNeighborhoods()
+{
+    using (SqlConnection conn = Connection)
+    {
+        conn.Open();
+        using (SqlCommand cmd = conn.CreateCommand())
+        {
+            cmd.CommandText = @"SELECT Id, Name FROM Neighborhood";
+
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            List<Neighborhood> neighborhoods = new List<Neighborhood>();
+
+            while (reader.Read())
+            {
+                Neighborhood neighborhood = new Neighborhood()
+                {
+                    Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                    Name = reader.GetString(reader.GetOrdinal("Name"))
+                };
+                neighborhoods.Add(neighborhood);
+            }
+
+            reader.Close();
+
+            return neighborhoods;
+        }
+
+    }
+}
+```
+
+Update the GET `Create` method to now create a view model and pass it to the view
+
+```csharp
+// GET: Owners/Create
+public ActionResult Create()
+{
+    OwnerFormViewModel vm = new OwnerFormViewModel();
+
+    vm.Neighborhoods = GetNeighborhoods();
+    vm.Owner = new Owner();
+
+    return View(vm);
+}
+```
+
+Now update the view to accept an instance of an `OwnerFormViewModel` and change the NeighborhoodId field from an `<input>` to a `<select>` 
+
+```csharp
+@model DogWalker.Models.ViewModels.OwnerFormViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Owner</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Owner.Email" class="control-label"></label>
+                <input asp-for="Owner.Email" class="form-control" />
+                <span asp-validation-for="Owner.Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Owner.Name" class="control-label"></label>
+                <input asp-for="Owner.Name" class="form-control" />
+                <span asp-validation-for="Owner.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Owner.PhoneNumber" class="control-label"></label>
+                <input asp-for="Owner.PhoneNumber" class="form-control" />
+                <span asp-validation-for="Owner.PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Owner.Address" class="control-label"></label>
+                <input asp-for="Owner.Address" class="form-control" />
+                <span asp-validation-for="Owner.Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Owner.NeighborhoodId" class="control-label"></label>
+                <select asp-for="Owner.NeighborhoodId" class="form-control">
+                    <option value="">Select Neighborhood</option>
+                    @foreach (Neighborhood neighborhood in Model.Neighborhoods)
+                    {
+                        <option value="@neighborhood.Id">@neighborhood.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="Owner.NeighborhoodId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+```
+
+## Exercise
+
+1. Update the `/owner/edit/{id}` route to use the `OwnerFormViewModel` so that the Neighborhood Id uses a dropdown instead of an input. field. 
+
+1. Try to implement the following design for the walker details page at `/walkers/details/{id}`. Hint: Use the `DateTime` class to help format the date strings.
+
+![](./images/DW_Walker_Snapshot.png)
