@@ -1,6 +1,6 @@
 ## User Related Data
 
-As part of the last exercise, you made views for creating, editing, and viewing dogs. Currently anyone can create a dog, assign it to any Owner, and view a list of all dogs. For the sake of privacy though, it would be nice if owners could only view or edit their own dogs. It would also be nice if in the dog Create form, we didn't make users enter an owner ID into an input field; instead the server would look for the current logged in owner, and default the dog's OwnerId property to that.
+As part of a previous exercise, you made views for creating, editing, and listing dogs. Currently anyone can create a dog, assign it to any Owner, and view a list of all dogs. For the sake of privacy though, it would be nice if owners could only view or edit their own dogs. It would also be nice if in the dog Create form, we didn't make users enter an owner ID into an input field; instead the server would look for the current logged in owner, and default the dog's OwnerId property to that.
 
 To be able to do this, we need to create a system for authentication and autorization. 
 
@@ -18,7 +18,7 @@ Creating a secure system for authentication and authorization is both incredibly
 
 We want owners to be able to authenticate, so let's create them a Login page. We'd like the url for this login form to be `/owners/login` which means that we'll need to eventually create two methods in our `OwnerController` called `Login` (again, we need two because the first is to GET the form and the second is to POST the form).
 
-First create a new file in your models folder and name it `Login.cs`. This is a simple class that will only capture a user's email address when logging in. Add the following code
+First create a new file in your ViewModels folder and name it `LoginViewModel.cs`. This is a simple class that will only capture a user's email address when logging in. Add the following code
 
 ```csharp
 namespace DogWalker.Models
@@ -41,8 +41,8 @@ public ActionResult Login()
 [HttpPost]
 public async Task<ActionResult> Login(LoginViewModel viewModel)
 {
-
-    Owner owner = GetOwnerByEmail(viewModel.Email);
+    OwnerRepository repo = new OwnerRepository(_config);
+    Owner owner = repo.GetOwnerByEmail(viewModel.Email);
 
     if (owner == null)
     {
@@ -53,7 +53,7 @@ public async Task<ActionResult> Login(LoginViewModel viewModel)
     {
         new Claim(ClaimTypes.NameIdentifier, owner.Id.ToString()),
         new Claim(ClaimTypes.Email, owner.Email),
-        new Claim("NeighborhoodId", owner.NeighborhoodId.ToString()),
+        new Claim(ClaimTypes.Role, "DogOwner"),
     };
 
     var claimsIdentity = new ClaimsIdentity(
@@ -63,51 +63,11 @@ public async Task<ActionResult> Login(LoginViewModel viewModel)
         CookieAuthenticationDefaults.AuthenticationScheme,
         new ClaimsPrincipal(claimsIdentity));
 
-    return RedirectToAction("Index", "Home");
-}
-
-// helper method for getting a user by their email address from the DB
-private Owner GetOwnerByEmail(string email)
-{
-    using (SqlConnection conn = Connection)
-    {
-        conn.Open();
-
-        using (SqlCommand cmd = conn.CreateCommand())
-        {
-            cmd.CommandText = @"
-                SELECT Id, [Name], Email, Address, Phone, NeighborhoodId
-                FROM Owner
-                WHERE Email = @email";
-
-            cmd.Parameters.AddWithValue("@email", email);
-
-            SqlDataReader reader = cmd.ExecuteReader();
-
-            if (reader.Read())
-            {
-                Owner owner = new Owner()
-                {
-                    Id = reader.GetInt32(reader.GetOrdinal("Id")),
-                    Name = reader.GetString(reader.GetOrdinal("Name")),
-                    Email = reader.GetString(reader.GetOrdinal("Email")),
-                    Address = reader.GetString(reader.GetOrdinal("Address")),
-                    PhoneNumber = reader.GetString(reader.GetOrdinal("Phone")),
-                    NeighborhoodId = reader.GetInt32(reader.GetOrdinal("NeighborhoodId"))
-                };
-
-                reader.Close();
-                return owner;
-            }
-
-            reader.Close();
-            return null;
-        }
-    }
+    return RedirectToAction("Index", "Dogs");
 }
 ```
 
-The GET method for `Login` and the helper method `GetOwnerByEmail` should feel pretty familiar, but the POST method for `Login` has some new code in it we haven't seen before. We're looking up an owner by their email address and then it's saving some of the owner data into a cookie. The way this works is that when a user successfully logs in, the server is going to create something that's almost like a drivers license, and populate that license with whatever information it chooses--in this case our code is choosing to add the owner's Id, email address, name, neighborhoodId, and role. It then takes that license and puts it in the cookie. A cookie is a way that we can store data on a user's browser. After logging in, every time an owner makes a request to the server, the browser will send up the value of that cookie. The ASP<span>.NET</span> Core framework will look at the cookie every time and know who the user is that's making the request.
+The GET method for `Login` should feel pretty familiar, but the POST method has some new code in it we haven't seen before. We're looking up an owner by their email address and then it's saving some of the owner's data into a cookie. The way this works is that when a user successfully logs in, the server is going to create something that's almost like a drivers license. The server populates that license with whatever information it chooses--in this case our code is choosing to add the owner's Id, email address, and role. It then takes that license/cookie and gives it back to whoever made the request. A cookie is a way that we can store data on a user's browser. After logging in, every time an owner makes a request to the server, the browser will automatically send up the value of that cookie. The ASP<span>.NET</span> Core framework will look at the cookie every time and know who the user is that's making the request.
 
 We have to let ASP<span>.NET</span> Core know that we plan on using cookies for authentication. In the `Startup.cs` file, change the `ConfigureServices` and `Configure` methods to look like the following
 
@@ -183,52 +143,11 @@ public ActionResult Index()
 {
     int ownerId = GetCurrentUserId();
 
-    using (SqlConnection conn = Connection)
-    {
-        conn.Open();
+    DogRepository repo = new DogRepository(_config);
 
-        using (SqlCommand cmd = conn.CreateCommand())
-        {
-            cmd.CommandText = @"
-                SELECT Id, Name, Breed, Notes, ImageUrl, OwnerId 
-                FROM Dog
-                WHERE OwnerId = @ownerId
-            ";
+    List<Dog> dogs = repo.GetDogsByOwnerId(ownerId);
 
-            cmd.Parameters.AddWithValue("@ownerId", ownerId);
-
-            SqlDataReader reader = cmd.ExecuteReader();
-
-            List<Dog> dogs = new List<Dog>();
-
-            while (reader.Read())
-            {
-                Dog dog = new Dog()
-                {
-                    Id = reader.GetInt32(reader.GetOrdinal("Id")),
-                    Name = reader.GetString(reader.GetOrdinal("Name")),
-                    Breed = reader.GetString(reader.GetOrdinal("Breed")),
-                    OwnerId = reader.GetInt32(reader.GetOrdinal("OwnerId"))
-                };
-
-                // Check if optional columns are null
-                if (reader.IsDBNull(reader.GetOrdinal("Notes")) == false)
-                {
-                    dog.Notes = reader.GetString(reader.GetOrdinal("Notes"));
-                }
-                if (reader.IsDBNull(reader.GetOrdinal("ImageUrl")) == false)
-                {
-                    dog.ImageUrl = reader.GetString(reader.GetOrdinal("Notes"));
-                }
-
-                dogs.Add(dog);
-            }
-
-            reader.Close();
-
-            return View(dogs);
-        }
-    }
+    return View(dogs);
 }
 ```
 
@@ -238,7 +157,39 @@ Now try going to the `/dogs` route. You should only see the dogs of the owner yo
 
 Currently the form the user fills out when creating a dog asks the user to fill out a field for OwnerId. We can now remove that field and have the server set that value for us. First, go into the `Create.cshtml` file for Dogs and remove the form field for `OwnerId`
 
-Now change the controller method for `Create` to set the `OwnerId` to the current user's Id
+**Note:** _If you don't already have a method in your Dog Repository to add a new Dog, be sure to update that class with the following method_
+
+```csharp
+ public void AddDog(Dog dog)
+{
+    using (SqlConnection conn = Connection)
+    {
+        conn.Open();
+        using (SqlCommand cmd = conn.CreateCommand())
+        {
+            cmd.CommandText = @"
+            INSERT INTO Dog (Name, Breed, OwnerId, Notes, ImageUrl)
+            VALUES (@name, @breed, @ownerId, @notes, @imageUrl)
+            ";
+
+            cmd.Parameters.AddWithValue("@name", dog.Name);
+            cmd.Parameters.AddWithValue("@breed", dog.Breed);
+            cmd.Parameters.AddWithValue("@ownerId", dog.OwnerId);
+
+            // nullable columns
+            cmd.Parameters.AddWithValue("@notes", dog.Notes ?? "");
+            cmd.Parameters.AddWithValue("@imageUrl", dog.ImageUrl ?? "");
+
+            int newlyCreatedId = (int)cmd.ExecuteScalar();
+
+            dog.Id = newlyCreatedId;
+
+        }
+    }
+}
+```
+
+Now change the Dog Controller method for `Create` to set the `OwnerId` to the current user's Id
 
 ```csharp
 [HttpPost]
@@ -247,31 +198,13 @@ public ActionResult Create(Dog dog)
 {
     try
     {
-        using (SqlConnection conn = Connection)
-        {
-            conn.Open();
-            using(SqlCommand cmd = conn.CreateCommand())
-            {
-                cmd.CommandText = @"
-                    INSERT INTO Dog (Name, Breed, OwnerId, Notes, ImageUrl)
-                    VALUES (@name, @breed, @ownerId, @notes, @imageUrl)
-                ";
+        // update the dogs OwnerId to the current user's Id 
+        dog.OwnerId = GetCurrentUserId();
 
-                cmd.Parameters.AddWithValue("@name", dog.Name);
-                cmd.Parameters.AddWithValue("@breed", dog.Breed);
-                cmd.Parameters.AddWithValue("@ownerId", GetCurrentUserId());
+        DogRepository repo = new DogRepository(_config);
+        repo.AddDog(dog);
 
-                // nullable columns
-                cmd.Parameters.AddWithValue("@notes", dog.Notes ?? "");
-                cmd.Parameters.AddWithValue("@imageUrl", dog.ImageUrl ?? "");
-
-                cmd.ExecuteNonQuery();
-
-                return RedirectToAction(nameof(Index));
-
-            }
-        }
-
+        return RedirectToAction("Index");
     }
     catch (Exception ex)
     {
@@ -299,12 +232,7 @@ If an unauthenticated user now tries to go to either of these routes, they will 
 
 ## Exercise
 
-Update the Index method in the walkers controller so that owners only see walkers in their own neighborhood. 
+1. Update the Index method in the walkers controller so that owners only see walkers in their own neighborhood. 
+**Hint**: Use the UserRepository to look up the user by Id before getting the walkers.
 
-**Hint**: you can get the logged in owner's neighborhood Id like this
-
-```csharp
-string neighborhoodIdString = User.FindFirstValue("NeighborhoodId");
-```
-
-If a user goes to `/walkers` and is not logged in, they should see the entire list of walkers.
+1. If a user goes to `/walkers` and is not logged in, they should see the entire list of walkers.
