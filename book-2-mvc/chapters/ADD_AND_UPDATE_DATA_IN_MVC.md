@@ -2,6 +2,189 @@
 
 In this chapter you'll continue to implement CRUD for the DogGo application by adding Create, Edit, and Delete routes for our dog owners.
 
+As part of the exercises in the previous chapter, you should have already created an OwnerRepository that has a method for getting all owners and getting a single owner by Id. We'll need additional CRUD functionality in the repository for this chapter, so update OwnerRepository to have the following code
+
+```csharp
+using DogWalker.Models;
+using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
+
+namespace DogWalker.Repositories
+{
+    public class OwnerRepository
+    {
+        private readonly IConfiguration _config;
+
+        // The constructor accepts an IConfiguration object as a parameter. This class comes from the ASP.NET framework and is useful for retrieving things out of the appsettings.json file like connection strings.
+        public OwnerRepository(IConfiguration config)
+        {
+            _config = config;
+        }
+
+        public SqlConnection Connection
+        {
+            get
+            {
+                return new SqlConnection(_config.GetConnectionString("DefaultConnection"));
+            }
+        }
+
+        public Owner GetOwnerById(int id)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        SELECT Id, [Name], Email, Address, Phone, NeighborhoodId
+                        FROM Owner
+                        WHERE Id = @id";
+
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    if (reader.Read())
+                    {
+                        Owner owner = new Owner()
+                        {
+                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                            Name = reader.GetString(reader.GetOrdinal("Name")),
+                            Email = reader.GetString(reader.GetOrdinal("Email")),
+                            Address = reader.GetString(reader.GetOrdinal("Address")),
+                            PhoneNumber = reader.GetString(reader.GetOrdinal("Phone")),
+                            NeighborhoodId = reader.GetInt32(reader.GetOrdinal("NeighborhoodId"))
+                        };
+
+                        reader.Close();
+                        return owner;
+                    }
+
+                    reader.Close();
+                    return null;
+                }
+            }
+        }
+
+        public Owner GetOwnerByEmail(string email)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        SELECT Id, [Name], Email, Address, Phone, NeighborhoodId
+                        FROM Owner
+                        WHERE Email = @email";
+
+                    cmd.Parameters.AddWithValue("@email", email);
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    if (reader.Read())
+                    {
+                        Owner owner = new Owner()
+                        {
+                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                            Name = reader.GetString(reader.GetOrdinal("Name")),
+                            Email = reader.GetString(reader.GetOrdinal("Email")),
+                            Address = reader.GetString(reader.GetOrdinal("Address")),
+                            PhoneNumber = reader.GetString(reader.GetOrdinal("Phone")),
+                            NeighborhoodId = reader.GetInt32(reader.GetOrdinal("NeighborhoodId"))
+                        };
+
+                        reader.Close();
+                        return owner;
+                    }
+
+                    reader.Close();
+                    return null;
+                }
+            }
+        }
+
+        public void AddOwner(Owner owner)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                    INSERT INTO Owner ([Name], Email, Phone, Address, NeighborhoodId)
+                    VALUES (@name, @email, @phoneNumber, @address, @neighborhoodId);
+                ";
+
+                    cmd.Parameters.AddWithValue("@name", owner.Name);
+                    cmd.Parameters.AddWithValue("@email", owner.Email);
+                    cmd.Parameters.AddWithValue("@phoneNumber", owner.PhoneNumber);
+                    cmd.Parameters.AddWithValue("@address", owner.Address);
+                    cmd.Parameters.AddWithValue("@neighborhoodId", owner.NeighborhoodId);
+
+                    int id = (int)cmd.ExecuteScalar();
+
+                    owner.Id = id;
+                }
+            }
+        }
+
+        public void UpdateOwner(Owner owner)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                            UPDATE Owner
+                            SET 
+                                [Name] = @name, 
+                                Email = @email, 
+                                Address = @address, 
+                                Phone = @phone, 
+                                NeighborhoodId = @neighborhoodId
+                            WHERE Id = @id";
+
+                    cmd.Parameters.AddWithValue("@name", owner.Name);
+                    cmd.Parameters.AddWithValue("@email", owner.Email);
+                    cmd.Parameters.AddWithValue("@address", owner.Address);
+                    cmd.Parameters.AddWithValue("@phone", owner.PhoneNumber);
+                    cmd.Parameters.AddWithValue("@neighborhoodId", owner.NeighborhoodId);
+                    cmd.Parameters.AddWithValue("@id", owner.Id);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public void DeleteOwner(int ownerId)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                            DELETE FROM Owner
+                            WHERE Id = @id
+                        ";
+
+                    cmd.Parameters.AddWithValue("@id", ownerId);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+    }
+}
+```
+
 ## Creating an Owner
 
 Let's build out a form for us to be able to add a new Owner. Open the DogGo application you created in the previous chapter, go to the Owner controller, and find the `Create` action. You might notice...there are two Create methods! How can this be? Think about interactions we have in real life involving filling out forms. Doctors' visits comes to mind... When you go to the doctor, you're likely to have 2 interactions with a person behind the counter. The first interaction is when you go to the receptionist and ask for a blank form. The receptionist gives you the form so you can go back to your chair and fill it out. Once you're done, you can go back up to the counter and give that form back so they can process it. This is the same sort of interaction end users have with a server. Notice the comments above the two `Create` methods--one says GET and the other says POST. When a user navigates to the url `/walkers/create`, they are making a GET request to that url. This is the request that will give the user the html of the empty form. When the user clicks a "submit" button, that is going to make a POST request to the same url. 
@@ -24,38 +207,23 @@ When the user hits the "Create" button, the browser is going to make a POST requ
 public ActionResult Create(Owner owner)
 ```
 
-We're seeing here another piece of magic we get from the ASP<span>.NET<span> framework. The framework knows how to _bind_ values it gets from html forms fields to C# objects. 
+We're seeing here another piece of magic we get from the ASP<span>.NET<span> framework. The framework knows how to _bind_ values it gets from html forms fields to C# objects.
 
-Update the `Create` method so that it inserts the new owner.
+Update the `Create` method in the OwnersController so that it inserts the new owner.
 
 ```csharp
+// POST: Owners/Create
 [HttpPost]
 [ValidateAntiForgeryToken]
 public ActionResult Create(Owner owner)
 {
     try
     {
-        using (SqlConnection conn = Connection)
-        {
-            conn.Open();
-            using (SqlCommand cmd = conn.CreateCommand())
-            {
-                cmd.CommandText = @"
-                    INSERT INTO Owner ([Name], Email, Phone, Address, NeighborhoodId)
-                    VALUES (@name, @email, @phoneNumber, @address, @neighborhoodId);
-                ";
+        OwnerRepository repo = new OwnerRepository(_config);
 
-                cmd.Parameters.AddWithValue("@name", owner.Name);
-                cmd.Parameters.AddWithValue("@email", owner.Email);
-                cmd.Parameters.AddWithValue("@phoneNumber", owner.PhoneNumber);
-                cmd.Parameters.AddWithValue("@address", owner.Address);
-                cmd.Parameters.AddWithValue("@neighborhoodId", owner.NeighborhoodId);
+        repo.AddOwner(owner);
 
-                cmd.ExecuteNonQuery();
-
-                return RedirectToAction("Index", "Walkers");
-            }
-        }
+        return RedirectToAction("Owners");
     }
     catch(Exception ex)
     {
@@ -64,54 +232,26 @@ public ActionResult Create(Owner owner)
 }
 ```
 
-A couple things to note here. First, if everthing goes as expected an the new user gets entered into the database, we redirect the user back to `/walkers/index`. Second, if some exception gets thrown, we want to return the same view the user on so they can try again.
+A couple things to note here. First, if everthing goes as expected and the new user gets entered into the database, we redirect the user back to `/owners/index`. Second, if some exception gets thrown, we want to return the same view the user on so they can try again.
 
 Run the application and submit the form. The new owner should be added to the database.
 
 
 ## Deleting an owner
 
-In your owner controller, find the delete methods. Again, you'll notice that there are two methods--one for GET and another for POST. The GET method assumes you'd like to create a view that asks the user to confirm the deletion. Notice that the GET method for `Delete` accepts an `int id` parameter. ASP.<span>NET<span> will get this value from the route. i.e. `owners/delete/5` suggests that the user is attempting to delete the owner with Id of 5. Let's assume that owner with the Id of 5 is Mo Silvera. We want the view to have some text on it that says "Are you sure you want to delete the owner Mo Silvera?". To be able to generate this text, we'll have to get Mo's name from the database. Update your Delete method to the following:
+In your owner controller, find the delete methods. Again, you'll notice that there are two methods--one for GET and another for POST. The GET method assumes you'd like to create a view that asks the user to confirm the deletion. Notice that the GET method for `Delete` accepts an `int id` parameter. ASP.<span>NET<span> will get this value from the route. i.e. `owners/delete/5` suggests that the user is attempting to delete the owner with Id of 5. Let's assume that owner with the Id of 5 is Mo Silvera. We want the view to have some text on it that says "Are you sure you want to delete the owner Mo Silvera?". To be able to generate this text, we'll have to get Mo's name from the database.
 
+Update your `Delete` method in the OwnerController to the following:
+
+> OwnersController.cs
 ```csharp
 // GET: Owners/Delete/5
 public ActionResult Delete(int id)
 {
-    using (SqlConnection conn = Connection)
-    {
-        conn.Open();
+    OwnerRepository repo = new OwnerRepository(_config);
+    Owner owner = repo.GetOwnerById(id);
 
-        using (SqlCommand cmd = conn.CreateCommand())
-        {
-            cmd.CommandText = @"
-                SELECT Id, [Name], Email, NeighborhoodId, Address, Phone
-                FROM Owner
-                WHERE Id = @id
-            ";
-
-            cmd.Parameters.AddWithValue("@id", id);
-
-            SqlDataReader reader = cmd.ExecuteReader();
-
-            if (reader.Read())
-            {
-                Owner owner = new Owner
-                {
-                    Id = reader.GetInt32(reader.GetOrdinal("Id")),
-                    Name = reader.GetString(reader.GetOrdinal("Name")),
-                    Email = reader.GetString(reader.GetOrdinal("Email")),
-                    Address = reader.GetString(reader.GetOrdinal("Address")),
-                    PhoneNumber = reader.GetString(reader.GetOrdinal("Phone")),
-                };
-
-                reader.Close();
-                return View(owner);
-            }
-
-            reader.Close();
-            return NotFound();
-        }
-    }
+    return View(owner);
 }
 ```
 
@@ -125,8 +265,11 @@ Instead of having the text say "Are you sure you want to delete this?", change i
 
 Run the application and go to `owners/delete/3` to view the delete confirmation page. 
 
-If the user clicks the delete button, a POST request will be made to `/owners/delete/3`. Let's create the action behind that route. Update the POST `Delete` method to the following
+If the user clicks the delete button, a POST request will be made to `/owners/delete/3`.
 
+Update the POST `Delete` method in the controller to the following
+
+> OwnerController.cs
 ```csharp
 // POST: Owners/Delete/5
 [HttpPost]
@@ -135,28 +278,14 @@ public ActionResult Delete(int id, Owner owner)
 {
     try
     {
-        using(SqlConnection conn = Connection)
-        {
-            conn.Open();
+        OwnerRepository repo = new OwnerRepository(_config);
+        repo.DeleteOwner(id);
 
-            using (SqlCommand cmd = conn.CreateCommand())
-            {
-                cmd.CommandText = @"
-                    DELETE FROM Owner
-                    WHERE Id = @id
-                ";
-
-                cmd.Parameters.AddWithValue("@id", id);
-
-                cmd.ExecuteNonQuery();
-
-                return RedirectToAction("Index", "Walkers");
-            }
-        }
+        return RedirectToAction("Index");
     }
     catch(Exception ex)
     {
-        return View();
+        return View(owner);
     }
 }
 ```
@@ -170,82 +299,32 @@ Editing an owner is similar to creating an owner except when the user gets the f
 // GET: Owners/Edit/5
 public ActionResult Edit(int id)
 {
-    using (SqlConnection conn = Connection)
+    OwnerRepository repo = new OwnerRepository(_config);
+    Owner owner = repo.GetOwnerById(id);
+
+    if (owner == null)
     {
-        conn.Open();
-
-        using (SqlCommand cmd = conn.CreateCommand())
-        {
-            cmd.CommandText = @"
-                SELECT Id, [Name], Email, Address, Phone, NeighborhoodId
-                FROM Owner
-                WHERE Id = @id";
-
-            cmd.Parameters.AddWithValue("@id", id);
-
-            SqlDataReader reader = cmd.ExecuteReader();
-
-            if (reader.Read())
-            {
-                Owner owner = new Owner()
-                {
-                    Id = reader.GetInt32(reader.GetOrdinal("Id")),
-                    Name = reader.GetString(reader.GetOrdinal("Name")),
-                    Email = reader.GetString(reader.GetOrdinal("Email")),
-                    Address = reader.GetString(reader.GetOrdinal("Address")),
-                    PhoneNumber = reader.GetString(reader.GetOrdinal("Phone")),
-                    NeighborhoodId = reader.GetInt32(reader.GetOrdinal("NeighborhoodId"))
-                };
-
-                reader.Close();
-                return View(owner);
-            }
-
-            reader.Close();
-            return NotFound();
-        }
+        return NotFound();
     }
+
+    return View(owner);
 }
 ```
 
 Now update the POST method for `Edit`. This is similar to `Create` except we are updating the database instead of inserting into.
 
 ```csharp
- // POST: Owners/Edit/5
+// POST: Owners/Edit/5
 [HttpPost]
 [ValidateAntiForgeryToken]
 public ActionResult Edit(int id, Owner owner)
 {
     try
     {
-        using (SqlConnection conn = Connection)
-        {
-            conn.Open();
+        OwnerRepository repo = new OwnerRepository(_config);
+        repo.UpdateOwner(owner);
 
-            using (SqlCommand cmd = conn.CreateCommand())
-            {
-                cmd.CommandText = @"
-                    UPDATE Owner
-                    SET 
-                        [Name] = @name, 
-                        Email = @email, 
-                        Address = @address, 
-                        Phone = @phone, 
-                        NeighborhoodId = @neighborhoodId
-                    WHERE Id = @id";
-
-                cmd.Parameters.AddWithValue("@name", owner.Name);
-                cmd.Parameters.AddWithValue("@email", owner.Email);
-                cmd.Parameters.AddWithValue("@address", owner.Address);
-                cmd.Parameters.AddWithValue("@phone", owner.PhoneNumber);
-                cmd.Parameters.AddWithValue("@neighborhoodId", owner.NeighborhoodId);
-                cmd.Parameters.AddWithValue("@id", owner.Id);
-
-                cmd.ExecuteNonQuery();
-
-                return RedirectToAction("Index", "Walkers");
-            }
-        }
+        return RedirectToAction("Index");
     }
     catch(Exception ex)
     {
@@ -270,7 +349,7 @@ The trick is to _hide_ the input field in the view, but keep it in the form. Put
 
 ## Exercise
 
-Create a model for `Dog` and implement a `DogController` class that gives users the following functionality:
+Create a model for `Dog` and implement a `DogRepository` and `DogController` that gives users the following functionality:
 
 - View a list of all Dogs
 - Create a new Dog (for now, capture the OwnerId as simple input field)

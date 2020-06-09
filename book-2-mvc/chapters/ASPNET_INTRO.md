@@ -69,13 +69,120 @@ namespace DogGo.Models
 }
 ```
 
+Let's also create a repository for walkers. For now we'll just give it methods for getting all walkers and getting a single walker by their Id.
+
+Create a new folder at root of the project called Repositories and create a `WalkerRepository.cs` file inside it. Add the following code
+
+```csharp
+using DogWalker.Models;
+using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
+using System.Collections.Generic;
+
+namespace DogWalker.Repositories
+{
+    public class WalkerRepository
+    {
+        private readonly IConfiguration _config;
+
+        // The constructor accepts an IConfiguration object as a parameter. This class comes from the ASP.NET framework and is useful for retrieving things out of the appsettings.json file like connection strings.
+        public WalkerRepository(IConfiguration config)
+        {
+            _config = config;
+        }
+
+        public SqlConnection Connection
+        {
+            get
+            {
+                return new SqlConnection(_config.GetConnectionString("DefaultConnection"));
+            }
+        }
+
+        public List<Walker> GetAllWalkers()
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        SELECT Id, [Name], ImageUrl, NeighborhoodId
+                        FROM Walker
+                    ";
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    List<Walker> walkers = new List<Walker>();
+                    while (reader.Read())
+                    {
+                        Walker walker = new Walker
+                        {
+                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                            Name = reader.GetString(reader.GetOrdinal("Name")),
+                            ImageUrl = reader.GetString(reader.GetOrdinal("ImageUrl")),
+                            NeighborhoodId = reader.GetInt32(reader.GetOrdinal("NeighborhoodId"))
+                        };
+
+                        walkers.Add(walker);
+                    }
+
+                    reader.Close();
+
+                    return walkers;
+                }
+            }
+        }
+
+        public Walker GetWalkerById(int id)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        SELECT Id, [Name], ImageUrl, NeighborhoodId
+                        FROM Walker
+                        WHERE Id = @id
+                    ";
+
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    if (reader.Read())
+                    {
+                        Walker walker = new Walker
+                        {
+                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                            Name = reader.GetString(reader.GetOrdinal("Name")),
+                            ImageUrl = reader.GetString(reader.GetOrdinal("ImageUrl")),
+                            NeighborhoodId = reader.GetInt32(reader.GetOrdinal("NeighborhoodId"))
+                        };
+
+                        reader.Close();
+                        return walker;
+                    }
+                    else
+                    {
+                        reader.Close();
+                        return null;
+                    }
+                }
+            }
+        }
+    }
+}
+```
+
 ## Controller
 
 We can use Visual Studio to scaffold us the skeleton of a controller. Right click on the Controllers folder in Solution Explorer and click Add > Controller > MVC Controller with Read/Write actions. Give it the name `WalkersController`
 
 Visual Studio kindly just created a whole bunch of code for us.
 
-Add a private field for `IConfiguration _config`, a constructor, and a computed `SqlConnection` property to the `WalkersController`. Fix any compiler errors by adding a `using` statement for `Microsoft.Data.SqlClient`
+Add a private field for `IConfiguration _config` and a constructor
 
 ```csharp
 private readonly IConfiguration _config;
@@ -85,19 +192,11 @@ public WalkersController(IConfiguration config)
 {
     _config = config;
 }
-
-public SqlConnection Connection
-{
-    get
-    {
-        return new SqlConnection(_config.GetConnectionString("DefaultConnection"));
-    }
-}
 ```
 
 ### The power of ASP<span>.NET</span> Controllers
 
-In the context of ASP<span>.NET</span>, each of the public methods in the controllers is considered an Action. When our application receives incoming HTTP requests, The ASP<span>.NET</span> framework is smart enough to know which controller Action to invoke.  
+In the context of ASP<span>.NET</span>, each of the public methods in the controllers is considered an **Action**. When our application receives incoming HTTP requests, The ASP<span>.NET</span> framework is smart enough to know which controller Action to invoke.  
 
 How does it do this? Take a look at the bottom of the `Startup.cs` class
 
@@ -117,36 +216,10 @@ When a user is on `localhost:5001/Walkers`, we want to show them a view that con
 // GET: Walkers
 public ActionResult Index()
 {
-    using (SqlConnection conn = Connection)
-    {
-        conn.Open();
-        using (SqlCommand cmd = conn.CreateCommand())
-        {
-            cmd.CommandText = @"
-                SELECT Id, [Name], ImageUrl, NeighborhoodId
-                FROM Walker
-            ";
-            SqlDataReader reader = cmd.ExecuteReader();
+    WalkerRepository repo = new WalkerRepository(_config);
+    List<Walker> walkers = repo.GetAllWalkers();
 
-            List<Walker> walkers = new List<Walker>();
-            while (reader.Read())
-            {
-                Walker walker = new Walker
-                {
-                    Id = reader.GetInt32(reader.GetOrdinal("Id")),
-                    Name = reader.GetString(reader.GetOrdinal("Name")),
-                    ImageUrl = reader.GetString(reader.GetOrdinal("ImageUrl")),
-                    NeighborhoodId = reader.GetInt32(reader.GetOrdinal("NeighborhoodId"))
-                };
-
-                walkers.Add(walker);
-            }
-
-            reader.Close();
-
-            return View(walkers);
-        }
-    }
+    return View(walkers);
 }
 ```
 
@@ -175,42 +248,18 @@ Finally, uncomment the the code at the bottom of the view, and instead of using 
 When our users go to `/walkers/details/3` we want to take them to a page that has the details of the walker with the ID 3. To do this, we need to implement the `Details` action in the `Walkers` controller.
 
 ```csharp
+// GET: Walkers/Details/5
 public ActionResult Details(int id)
 {
-    using (SqlConnection conn = Connection)
+    WalkerRepository repo = new WalkerRepository(_config);
+    Walker walker = repo.GetWalkerById(id);
+
+    if (walker == null)
     {
-        conn.Open();
-        using (SqlCommand cmd = conn.CreateCommand())
-        {
-            cmd.CommandText = @"
-                SELECT Id, [Name], ImageUrl, NeighborhoodId
-                FROM Walker
-                WHERE Id = @id
-            ";
-
-            cmd.Parameters.AddWithValue("@id", id);
-
-            SqlDataReader reader = cmd.ExecuteReader();
-
-            if (reader.Read())
-            {
-                Walker walker = new Walker
-                {
-                    Id = reader.GetInt32(reader.GetOrdinal("Id")),
-                    Name = reader.GetString(reader.GetOrdinal("Name")),
-                    ImageUrl = reader.GetString(reader.GetOrdinal("ImageUrl")),
-                    NeighborhoodId = reader.GetInt32(reader.GetOrdinal("NeighborhoodId"))
-                };
-
-                reader.Close();
-                return View(walker);
-            }
-            else
-            {
-                return NotFound();
-            }
-        }
+        return NotFound();
     }
+
+    return View(walker);
 }
 ```
 
@@ -227,4 +276,6 @@ Run the application and go to `/walkers/details/1`. Then go to `/walkers/details
 
 ## Exercise
 
-Create an Owners controller and implement the `Index` and `Details` methods. When viewing the details page of an owner, list all the dogs for that owner. Afterwards, go into the `Shared` folder in the `_Layout.cshtml` file. Add links for "Walkers" and "Owners" in the navbar. If you finish, try changing the views and the styling to your liking.
+1. Create an `OwnerRepository` and an `OwnersController` file and implement the `Index` and `Details` methods.
+1. Go into the `Shared` folder in the `_Layout.cshtml` file. Add links for "Walkers" and "Owners" in the navbar. If you finish, try changing the views and the styling to your liking.
+1. **Challenge**: When viewing the details page of an owner, list all the dogs for that owner as well.
