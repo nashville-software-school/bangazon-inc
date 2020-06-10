@@ -231,7 +231,32 @@ This code will get all the walkers in the Walker table, convert it to a List and
 
 Currently, we're passing data into a view that doesn't exist. Let's fix that. Right click the method name `Index` in your controller and click "Add View". In the dialog box that appears, leave the view name "Index", for template select "List", and for Model class select "Walker". Then click the Add button. 
 
-The generated view creates an html table and iterates over each walker in the list and creates a new row for each one. 
+The generated view creates an html table and iterates over each walker in the list and creates a new row for each one.
+
+##### Razor Templates
+
+You'll notice a couple things about the code in the view. For one, it's not in an html file--it's in a cshtml file. This is called a _razor template_. With razor we can write a mix of C# and html code. It's similar to JSX in that it can dynamically create html. Once data gets passed into the view, the razor engine will convert it to an html page that can be returned to the browser. Here's an example of what razor code might look like
+
+```html+razor
+<h1>@Model.Name</h1>
+```
+
+And here is what the dynamically outputted html might look like
+
+```html
+<h1>Mo Silvera<h1>
+```
+
+We can also do things in our razor templates like make `if` statements or `foreach` loops to dynamically create html. Notice that any C# code that we want evaluated in the views starts with the `@` symbol. Also notice that the `Model` keyword is a reference to whatever object that the view receives from the controller. Assume in the example below that a controller has just passed the view a `List<Walker>`
+
+```html+razor
+<ul>
+    @foreach (Walker walker in Model)
+    {
+        <li>@walker.Name</li>
+    }
+</ul>
+```
 
 Run the application and go to `/walkers/index`. You should see your data driven page.
 
