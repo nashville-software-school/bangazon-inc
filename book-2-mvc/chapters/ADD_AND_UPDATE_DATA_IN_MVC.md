@@ -219,9 +219,7 @@ public ActionResult Create(Owner owner)
 {
     try
     {
-        OwnerRepository repo = new OwnerRepository(_config);
-
-        repo.AddOwner(owner);
+        _ownerRepo.AddOwner(owner);
 
         return RedirectToAction("Owners");
     }
@@ -248,8 +246,7 @@ Update your `Delete` method in the OwnerController to the following:
 // GET: Owners/Delete/5
 public ActionResult Delete(int id)
 {
-    OwnerRepository repo = new OwnerRepository(_config);
-    Owner owner = repo.GetOwnerById(id);
+    Owner owner = _ownerRepo.GetOwnerById(id);
 
     return View(owner);
 }
@@ -278,8 +275,7 @@ public ActionResult Delete(int id, Owner owner)
 {
     try
     {
-        OwnerRepository repo = new OwnerRepository(_config);
-        repo.DeleteOwner(id);
+        _ownerRepo.DeleteOwner(id);
 
         return RedirectToAction("Index");
     }
@@ -299,8 +295,7 @@ Editing an owner is similar to creating an owner except when the user gets the f
 // GET: Owners/Edit/5
 public ActionResult Edit(int id)
 {
-    OwnerRepository repo = new OwnerRepository(_config);
-    Owner owner = repo.GetOwnerById(id);
+    Owner owner = _ownerRepo.GetOwnerById(id);
 
     if (owner == null)
     {
@@ -321,8 +316,7 @@ public ActionResult Edit(int id, Owner owner)
 {
     try
     {
-        OwnerRepository repo = new OwnerRepository(_config);
-        repo.UpdateOwner(owner);
+        _ownerRepo.UpdateOwner(owner);
 
         return RedirectToAction("Index");
     }

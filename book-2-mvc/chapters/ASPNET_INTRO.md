@@ -182,15 +182,15 @@ We can use Visual Studio to scaffold us the skeleton of a controller. Right clic
 
 Visual Studio kindly just created a whole bunch of code for us.
 
-Add a private field for `IConfiguration _config` and a constructor
+Add a private field for `WalkerRepository` and a constructor
 
 ```csharp
-private readonly IConfiguration _config;
+private readonly WalkerRepository _walkerRepo;
 
 // The constructor accepts an IConfiguration object as a parameter. This class comes from the ASP.NET framework and is useful for retrieving things out of the appsettings.json file like connection strings.
 public WalkersController(IConfiguration config)
 {
-    _config = config;
+    _walkerRepo = new WalkerRepository(config);
 }
 ```
 
@@ -216,8 +216,7 @@ When a user is on `localhost:5001/Walkers`, we want to show them a view that con
 // GET: Walkers
 public ActionResult Index()
 {
-    WalkerRepository repo = new WalkerRepository(_config);
-    List<Walker> walkers = repo.GetAllWalkers();
+    List<Walker> walkers = _walkerRepo.GetAllWalkers();
 
     return View(walkers);
 }
@@ -276,8 +275,7 @@ When our users go to `/walkers/details/3` we want to take them to a page that ha
 // GET: Walkers/Details/5
 public ActionResult Details(int id)
 {
-    WalkerRepository repo = new WalkerRepository(_config);
-    Walker walker = repo.GetWalkerById(id);
+    Walker walker = _walkerRepo.GetWalkerById(id);
 
     if (walker == null)
     {

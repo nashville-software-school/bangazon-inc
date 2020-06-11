@@ -82,6 +82,7 @@ We have a repository method already for getting a single owner, but we'll also n
 Add this method to the `DogRepository`
 
 > DogRepository.cs
+
 ```csharp
 public List<Dog> GetDogsByOwnerId(int ownerId)
 {
@@ -176,7 +177,26 @@ public List<Walker> GetWalkersInNeighborhood(int neighborhoodId)
 }
 ```
 
-Now that we have all the repository methods implemented, we can refactor the Owner Details method to create a ProfileViewModel. Change the `Details` method to use the following code
+Now that the Owner Details view will need to know about more than just the owner, we'll need access to other repositories. Update the private fields and constructor in your OwnerController class to add them
+
+> OwnerController.cs
+
+```csharp
+private readonly OwnerRepository _ownerRepo;
+private readonly DogRepository _dogRepo;
+private readonly WalkerRepository _walkerRepo;
+
+
+// The constructor accepts an IConfiguration object as a parameter. This class comes from the ASP.NET framework and is useful for retrieving things out of the appsettings.json file like connection strings.
+public OwnersController(IConfiguration config)
+{
+    _ownerRepo = new OwnerRepository(config);
+    _dogRepo = new DogRepository(config);
+    _walkerRepo = new WalkerRepository(config);
+}
+```
+
+Now that we have all the repositories we need, we can refactor the Owner Details method to create a ProfileViewModel. Change the `Details` method to use the following code
 
 > OwnersController.cs 
 
@@ -184,13 +204,9 @@ Now that we have all the repository methods implemented, we can refactor the Own
 // GET: Owners/Details/5
 public ActionResult Details(int id)
 {
-    OwnerRepository ownerRepo = new OwnerRepository(_config);
-    WalkerRepository walkerRepo = new WalkerRepository(_config);
-    DogRepository dogRepo = new DogRepository(_config);
-
-    Owner owner = ownerRepo.GetOwnerById(id);
-    List<Dog> dogs = dogRepo.GetDogsByOwnerId(owner.Id);
-    List<Walker> walkers = walkerRepo.GetWalkersInNeighborhood(owner.NeighborhoodId);
+    Owner owner = _ownerRepo.GetOwnerById(id);
+    List<Dog> dogs = _dogRepo.GetDogsByOwnerId(owner.Id);
+    List<Walker> walkers = _walkerRepo.GetWalkersInNeighborhood(owner.NeighborhoodId);
 
     ProfileViewModel vm = new ProfileViewModel()
     {
@@ -381,7 +397,29 @@ namespace DogWalker.Repositories
 
 ```
 
-Now update the GET `Create` method to now create a view model and pass it to the view
+Now add a `NeighborhoodRepository`  to the fields and the constructor inside `OwnersController` like before
+
+> OwnersController.cs
+
+```csharp
+private readonly OwnerRepository _ownerRepo;
+private readonly DogRepository _dogRepo;
+private readonly WalkerRepository _walkerRepo;
+private readonly NeighborhoodRepository _neighborhoodRepo;
+
+
+// The constructor accepts an IConfiguration object as a parameter. This class comes from the ASP.NET framework and is useful for retrieving things out of the appsettings.json file like connection strings.
+public OwnersController(IConfiguration config)
+{
+    _ownerRepo = new OwnerRepository(config);
+    _dogRepo = new DogRepository(config);
+    _walkerRepo = new WalkerRepository(config);
+    _neighborhoodRepo = new NeighborhoodRepository(config);
+
+}
+```
+
+Update the GET `Create` method to now create a view model and pass it to the view
 
 > OwnersController.cs
 
@@ -389,8 +427,7 @@ Now update the GET `Create` method to now create a view model and pass it to the
 // GET: Owners/Create
 public ActionResult Create()
 {
-    NeighborhoodRepository neighborhoodRepo = new NeighborhoodRepository(_config);
-    List<Neighborhood> neighborhoods = neighborhoodRepo.GetAll();
+    List<Neighborhood> neighborhoods = _neighborhoodRepo.GetAll();
 
     OwnerFormViewModel vm = new OwnerFormViewModel()
     {
