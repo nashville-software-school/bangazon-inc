@@ -1,6 +1,6 @@
 # Routing and HTTP Requests
 
-The ASP.<span>NET</span> framework is great at taking in http requests and knowing what controller methods to call. To get a better understanding of how it makes these decisions, lets look at some relevant parts of an HTTP request
+The ASP.<span>NET</span> framework is great at taking in HTTP requests and knowing what controller methods to call. To get a better understanding of how it makes these decisions, lets look at some relevant parts of an HTTP request
 
 ### Verb
 
