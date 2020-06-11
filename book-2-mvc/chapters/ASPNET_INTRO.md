@@ -267,6 +267,20 @@ The view that Visual Studio scaffolded for us is a decent start, but it has a nu
 
 Finally, uncomment the the code at the bottom of the view, and instead of using `item.PrimaryKey`, change the code to say `item.Id` on each of the action links.
 
+```html+razor
+<td>
+    @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+    @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+    @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+</td>
+```
+
+These action links will generate `<a>` tags at runtime. The first one, for example, is saying that we want an `<a>` tag whose text content says the work "Edit", and we also want it to link to the `Edit` action in the controller. Lastly, it's saying that we want to include whatever `item.Id` is as a route parameter. The genereated anchor tag would look something like this
+
+```html
+<a href="/Walkers/Edit/5">Edit</a>
+```
+
 ### Getting A single walker
 
 When our users go to `/walkers/details/3` we want to take them to a page that has the details of the walker with the ID 3. To do this, we need to implement the `Details` action in the `Walkers` controller.

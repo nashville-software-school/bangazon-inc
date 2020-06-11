@@ -193,6 +193,25 @@ Go to the `Create` action for the GET request. Currently all it does is return a
 
 ### Building the form
 
+Let's first look at a couple things about this form. 
+
+##### asp-for
+
+```html
+<label asp-for="Owner.Email" class="control-label"></label>
+<input asp-for="Owner.Email" class="form-control" />
+```
+
+The `asp-for` attribute is something we get from ASP.<span>NET</span> and razor. When the attribute is on a `<label>` element, the generated html will be whatever the property name is. In the example here, the label will literally have the word "Email" in it. The resulting html will look like this
+
+```html
+<label for="Email" class="control-label">Email</label>
+```
+
+When the `asp-for` attribute is on an `<input>` element, it will generate html attributes that will allow us to know later on that the value for this input field should be set as an owner's email address.
+
+##### Update the form
+
 The view that visual studio creates for us is a good start, but we have to modify it at least a little bit. For starters, it added an input field for the user to enter in an ID. Users don't chose their own Ids--the database does--so we can remove the form goup div that has the Id input in it. 
 
 There is currently an input field for the user to enter a Neighborhood Id into. It's doubtful the user knows the actual Id of the neighborhood they are in--ideally this would be replaced by a dropdown of possible neighborhood options. We'll do that in a later chapter.

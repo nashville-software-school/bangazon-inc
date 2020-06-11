@@ -19,7 +19,7 @@ We'll be experimenting with technologies and concepts while building a simple ap
 
 * Chapter 1 - [Intro to MVC](./chapters/INTRO_TO_MVC.md)
 * Chapter 2 - [Introduction to ASP.NET Web Applications](./chapters/ASPNET_INTRO.md)
-* Chapter 3 - [ASP.NET Web Applications Part 2](./chapters/ASPNET_INTRO.md)
+* Chapter 3 - [ASP.NET Web Applications Part 2](./chapters/ADD_AND_UPDATE_DATA_IN_MVC.md)
 * Chapter 4 - [Creating a Profile page with View Models](./chapters/VIEW_MODELS.md)
 * Chapter 5 - [Auth & User related data](./chapters/USER_RELATED_DATA.md)
 * Chapter 6 - [Annotations and model validation](./chapters/MODEL_ANNOTATIONS.md)

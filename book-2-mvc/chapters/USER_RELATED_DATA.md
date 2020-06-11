@@ -232,6 +232,8 @@ If an unauthenticated user now tries to go to either of these routes, they will 
 
 ## Exercise
 
+1. In the DogController update the GET and POST methods for the Edit and Delete actions to make sure that a user can only edit or delete a dog that they own. Example: if a user goes to `/dogs/edit/5` or `/dogs/delete/5` and they don't own that dog, they should get a 404 NotFound result.
+
 1. Update the Index method in the walkers controller so that owners only see walkers in their own neighborhood. 
 **Hint**: Use the UserRepository to look up the user by Id before getting the walkers.
 

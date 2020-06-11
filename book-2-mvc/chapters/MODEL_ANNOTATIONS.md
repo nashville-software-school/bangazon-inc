@@ -50,6 +50,7 @@ Now go to create an owner and try to put in invalid data in some of the input fi
 
 Have you been finding it annoying that a lot of the input labels in our application aren't very user friendly? They say things like "PhoneNumber" or "NeighborhoodId". We can also use annotations to change the way their labels are displayed when rendered to an html page
 
+
 ```csharp
 [Phone]
 [DisplayName("Phone Number")]
@@ -60,10 +61,18 @@ public string PhoneNumber { get; set; }
 public int NeighborhoodId { get; set; }
 ```
 
+In our view, these annotations will affect the way code like gets evaluated
+
+```html+razor
+<th>
+    @Html.DisplayNameFor(model => model.NeighborhoodId)
+</th>
+```
+
 Annotations can also come in handy when deciding how your DateTime properties should be formatted
 
 ```csharp
-[DisplayFormat(DataFormatString = "{0:MMM dd}")]
+[DisplayFormat(DataFormatString = "{0:MMM dd, yyyy}")]
 public DateTime Birthday { get; set; }
 ```
 
