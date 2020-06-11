@@ -12,7 +12,7 @@ An HTTP request will have a verb like GET, POST, PUT, or DELETE. We can use diff
 
 HTTP requests all get made to a url. The ASP.<span>NET</span> framework can make a lot of assumptions about how to handle those requests from the url's path. The url `https://doggo.com/owners/create` tips the framework off to look for an Owners controller and specifically a `Create` method.
 
-Urls can also carry route parameters. These are parts of the url that typically hold things like IDs. If a request comes in at `https://doggo.com/owners/details/81`, the 81 part of that url is considered a route parameter. The framework will look for an `Details` method in an Owner controller and invoke it by passing in the value of 81 as the parameter
+Urls can also carry **route parameters**. These are parts of the url that typically hold things like IDs. If a request comes in at `https://doggo.com/owners/details/81`, the 81 part of that url is considered a route parameter. The framework will look for an `Details` method in an Owner controller and invoke it by passing in the value of 81 as the parameter
 
 ### Body
 
