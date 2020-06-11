@@ -210,6 +210,15 @@ The `asp-for` attribute is something we get from ASP.<span>NET</span> and razor.
 
 When the `asp-for` attribute is on an `<input>` element, it will generate html attributes that will allow us to know later on that the value for this input field should be set as an owner's email address.
 
+
+##### asp-action
+
+```html
+<form asp-action="Create">
+```
+
+All of our input elements should be inside a form. The `asp-for` attribute is added to the form element to specify which controller action should be called when the form gets submitted. The the contents of the form we're building here should be submitted to the `Create` method in our controller.
+
 ##### Update the form
 
 The view that visual studio creates for us is a good start, but we have to modify it at least a little bit. For starters, it added an input field for the user to enter in an ID. Users don't chose their own Ids--the database does--so we can remove the form goup div that has the Id input in it. 
