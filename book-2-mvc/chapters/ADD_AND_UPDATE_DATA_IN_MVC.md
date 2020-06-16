@@ -54,7 +54,7 @@ namespace DogGo.Repositories
                             Name = reader.GetString(reader.GetOrdinal("Name")),
                             Email = reader.GetString(reader.GetOrdinal("Email")),
                             Address = reader.GetString(reader.GetOrdinal("Address")),
-                            PhoneNumber = reader.GetString(reader.GetOrdinal("Phone")),
+                            Phone = reader.GetString(reader.GetOrdinal("Phone")),
                             NeighborhoodId = reader.GetInt32(reader.GetOrdinal("NeighborhoodId"))
                         };
 
@@ -93,7 +93,7 @@ namespace DogGo.Repositories
                             Name = reader.GetString(reader.GetOrdinal("Name")),
                             Email = reader.GetString(reader.GetOrdinal("Email")),
                             Address = reader.GetString(reader.GetOrdinal("Address")),
-                            PhoneNumber = reader.GetString(reader.GetOrdinal("Phone")),
+                            Phone = reader.GetString(reader.GetOrdinal("Phone")),
                             NeighborhoodId = reader.GetInt32(reader.GetOrdinal("NeighborhoodId"))
                         };
 
@@ -121,7 +121,7 @@ namespace DogGo.Repositories
 
                     cmd.Parameters.AddWithValue("@name", owner.Name);
                     cmd.Parameters.AddWithValue("@email", owner.Email);
-                    cmd.Parameters.AddWithValue("@phoneNumber", owner.PhoneNumber);
+                    cmd.Parameters.AddWithValue("@phoneNumber", owner.Phone);
                     cmd.Parameters.AddWithValue("@address", owner.Address);
                     cmd.Parameters.AddWithValue("@neighborhoodId", owner.NeighborhoodId);
 
@@ -153,7 +153,7 @@ namespace DogGo.Repositories
                     cmd.Parameters.AddWithValue("@name", owner.Name);
                     cmd.Parameters.AddWithValue("@email", owner.Email);
                     cmd.Parameters.AddWithValue("@address", owner.Address);
-                    cmd.Parameters.AddWithValue("@phone", owner.PhoneNumber);
+                    cmd.Parameters.AddWithValue("@phone", owner.Phone);
                     cmd.Parameters.AddWithValue("@neighborhoodId", owner.NeighborhoodId);
                     cmd.Parameters.AddWithValue("@id", owner.Id);
 
