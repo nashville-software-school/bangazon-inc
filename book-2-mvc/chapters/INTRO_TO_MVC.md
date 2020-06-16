@@ -64,9 +64,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace DogWalker.Models
+namespace Kennel.Models
 {
-    public class Dog
+    public class Animal
     {
         public int Id { get; set; }
         public string Name { get; set; }
