@@ -74,12 +74,12 @@ Let's also create a repository for walkers. For now we'll just give it methods f
 Create a new folder at root of the project called Repositories and create a `WalkerRepository.cs` file inside it. Add the following code
 
 ```csharp
-using DogWalker.Models;
+using DogGo.Models;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
 
-namespace DogWalker.Repositories
+namespace DogGo.Repositories
 {
     public class WalkerRepository
     {
