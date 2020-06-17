@@ -116,6 +116,7 @@ namespace DogGo.Repositories
                 {
                     cmd.CommandText = @"
                     INSERT INTO Owner ([Name], Email, Phone, Address, NeighborhoodId)
+                    OUTPUT INSERTED.ID
                     VALUES (@name, @email, @phoneNumber, @address, @neighborhoodId);
                 ";
 
@@ -249,7 +250,7 @@ public ActionResult Create(Owner owner)
     {
         _ownerRepo.AddOwner(owner);
 
-        return RedirectToAction("Owners");
+        return RedirectToAction("Index");
     }
     catch(Exception ex)
     {
