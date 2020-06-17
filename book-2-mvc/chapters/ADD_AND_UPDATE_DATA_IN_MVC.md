@@ -218,8 +218,8 @@ Let's first look at a couple things about this form.
 ##### asp-for
 
 ```html
-<label asp-for="Owner.Email" class="control-label"></label>
-<input asp-for="Owner.Email" class="form-control" />
+<label asp-for="Email" class="control-label"></label>
+<input asp-for="Email" class="form-control" />
 ```
 
 The `asp-for` attribute is something we get from ASP.<span>NET</span> and razor. When the attribute is on a `<label>` element, the generated html will be whatever the property name is. In the example here, the label will literally have the word "Email" in it. The resulting html will look like this
