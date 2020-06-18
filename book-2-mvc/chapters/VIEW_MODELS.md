@@ -16,7 +16,7 @@ public ActionResult Details(int id)
 > Owners/Details.cshtml
 
 ```html+razor
-@model DogWalker.Models.Owner
+@model DogGo.Models.Owner
 
 ...
 
@@ -66,7 +66,7 @@ Let's create a View Model that contains all of these things. Create a directory 
 using System;
 using System.Collections.Generic;
 
-namespace DogWalker.Models.ViewModels
+namespace DogGo.Models.ViewModels
 {
     public class ProfileViewModel
     {
@@ -228,14 +228,15 @@ InvalidOperationException: The model item passed into the ViewDataDictionary is 
 This is because the controller is now passing the view an instance of `ProfileViewModel` but the view is still expecting an `Owner`. Fix this by changing the first line of `Details.cshtml` to this
 
 ```html+razor
-@model DogWalker.Models.ViewModels.ProfileViewModel
+@model DogGo.Models.ViewModels.ProfileViewModel
 ```
 
 Now replace the rest of the view with the following code
 
 ```html+razor
-@model DogWalker.Models.ViewModels.ProfileViewModel @{ ViewData["Title"] =
-"Profile"; }
+@model DogGo.Models.ViewModels.ProfileViewModel 
+
+@{ ViewData["Title"] ="Profile"; }
 <div>
   <h1 class="mb-4">@Model.Owner.Name</h1>
 
@@ -339,12 +340,12 @@ We don't yet have a repository for Neighborhoods, so lets add that now. Create a
 > NeighborhoodRepository.cs
 
 ```csharp
-using DogWalker.Models;
+using DogGo.Models;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
 
-namespace DogWalker.Repositories
+namespace DogGo.Repositories
 {
     public class NeighborhoodRepository
     {
@@ -442,7 +443,7 @@ public ActionResult Create()
 Now update the view to accept an instance of an `OwnerFormViewModel` and change the NeighborhoodId field from an `<input>` to a `<select>` 
 
 ```html+razor
-@model DogWalker.Models.ViewModels.OwnerFormViewModel
+@model DogGo.Models.ViewModels.OwnerFormViewModel
 
 @{
     ViewData["Title"] = "Create";
