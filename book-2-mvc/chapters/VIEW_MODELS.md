@@ -34,10 +34,10 @@ public ActionResult Details(int id)
     @Html.DisplayFor(model => model.Email)
   </dd>
   <dt class = "col-sm-2">
-    @Html.DisplayNameFor(model => model.PhoneNumber)
+    @Html.DisplayNameFor(model => model.Phone)
   </dt>
   <dd class = "col-sm-10">
-    @Html.DisplayFor(model => model.PhoneNumber)
+    @Html.DisplayFor(model => model.Phone)
   </dd>
 </dl>
 ```
@@ -251,7 +251,7 @@ Now replace the rest of the view with the following code
     </div>
     <div>
       <label class="font-weight-bold">Phone:</label>
-      <span>@Model.Owner.PhoneNumber</span>
+      <span>@Model.Owner.Phone</span>
     </div>
     <div>
       <label class="font-weight-bold">Email:</label>
@@ -468,9 +468,9 @@ Now update the view to accept an instance of an `OwnerFormViewModel` and change 
                 <span asp-validation-for="Owner.Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Owner.PhoneNumber" class="control-label"></label>
-                <input asp-for="Owner.PhoneNumber" class="form-control" />
-                <span asp-validation-for="Owner.PhoneNumber" class="text-danger"></span>
+                <label asp-for="Owner.Phone" class="control-label"></label>
+                <input asp-for="Owner.Phone" class="form-control" />
+                <span asp-validation-for="Owner.Phone" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Owner.Address" class="control-label"></label>
