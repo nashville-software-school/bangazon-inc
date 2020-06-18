@@ -325,7 +325,7 @@ Create a new class inside the ViewModels folder and name it `OwnerFormViewModel`
 ```csharp
 using System.Collections.Generic;
 
-namespace DogWalker.Models.ViewModels
+namespace DogGo.Models.ViewModels
 {
     public class OwnerFormViewModel
     {
