@@ -2,7 +2,7 @@
 
 As part of a previous exercise, you made views for creating, editing, and listing dogs. Currently anyone can create a dog, assign it to any Owner, and view a list of all dogs. For the sake of privacy though, it would be nice if owners could only view or edit their own dogs. It would also be nice if in the dog Create form, we didn't make users enter an owner ID into an input field; instead the server would look for the current logged in owner, and default the dog's OwnerId property to that.
 
-To be able to do this, we need to create a system for authentication and autorization. 
+To be able to do this, we need to create a system for authentication and authorization. 
 
 ### Authentication vs Authorization
 
@@ -21,9 +21,9 @@ We want owners to be able to authenticate, so let's create them a Login page. We
 First create a new file in your ViewModels folder and name it `LoginViewModel.cs`. This is a simple class that will only capture a user's email address when logging in. Add the following code
 
 ```csharp
-namespace DogWalker.Models
+namespace DogGo.Models.ViewModels
 {
-    public class Login
+    public class LoginViewModel
     {
         public string Email { get; set; }
     }
@@ -41,8 +41,7 @@ public ActionResult Login()
 [HttpPost]
 public async Task<ActionResult> Login(LoginViewModel viewModel)
 {
-    OwnerRepository repo = new OwnerRepository(_config);
-    Owner owner = repo.GetOwnerByEmail(viewModel.Email);
+    Owner owner = _ownerRepo.GetOwnerByEmail(viewModel.Email);
 
     if (owner == null)
     {
@@ -118,7 +117,7 @@ public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 }
 ```
 
-The last thing we need to do is create a Login form. Right click the `Login` method in `OwnersController` and select add view, give it the template of Create, and the model class of `Login`
+The last thing we need to do is create a Login form. Right click the `Login` method in `OwnersController` and select add view, give it the template of Create, and the model class of `LoginViewModel`
 
 You should now be able to log in at `/owners/login` and enter an existing email address. You can confirm it worked by checking for the cookie in your dev tools.
 
@@ -143,9 +142,7 @@ public ActionResult Index()
 {
     int ownerId = GetCurrentUserId();
 
-    DogRepository repo = new DogRepository(_config);
-
-    List<Dog> dogs = repo.GetDogsByOwnerId(ownerId);
+    List<Dog> dogs = _dogRepo.GetDogsByOwnerId(ownerId);
 
     return View(dogs);
 }
@@ -201,8 +198,7 @@ public ActionResult Create(Dog dog)
         // update the dogs OwnerId to the current user's Id 
         dog.OwnerId = GetCurrentUserId();
 
-        DogRepository repo = new DogRepository(_config);
-        repo.AddDog(dog);
+        _dogRepo.AddDog(dog);
 
         return RedirectToAction("Index");
     }
