@@ -219,7 +219,7 @@ public ActionResult Details(int id)
 }
 ```
 
-Try running the application now and going to `/owners/1` while logged in. You should see this error message
+Try running the application now and going to `/owners/details/1` while logged in. You should see this error message
 
 ```
 InvalidOperationException: The model item passed into the ViewDataDictionary is of type 'DogWalker.Models.ViewModels.ProfileViewModel', but this ViewDataDictionary instance requires a model item of type 'DogWalker.Models.Owner'
