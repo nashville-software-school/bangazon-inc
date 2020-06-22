@@ -61,7 +61,7 @@ public string PhoneNumber { get; set; }
 public int NeighborhoodId { get; set; }
 ```
 
-In our view, these annotations will affect the way code like gets evaluated
+In our view, these annotations will affect the way code like this gets evaluated
 
 ```html+razor
 <th>
