@@ -165,8 +165,9 @@ Currently the form the user fills out when creating a dog asks the user to fill 
         using (SqlCommand cmd = conn.CreateCommand())
         {
             cmd.CommandText = @"
-            INSERT INTO Dog (Name, Breed, OwnerId, Notes, ImageUrl)
-            VALUES (@name, @breed, @ownerId, @notes, @imageUrl)
+                INSERT INTO Dog ([Name], OwnerId, Breed, Notes, ImageUrl)
+                OUTPUT INSERTED.ID
+                VALUES (@name, @ownerId, @breed, @notes, @imageUrl);
             ";
 
             cmd.Parameters.AddWithValue("@name", dog.Name);
