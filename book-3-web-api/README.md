@@ -26,9 +26,8 @@ This book prepares you for building the Tabloid API
 **Part 1: Web API**
 
 * Chapter 1 - [Web API Intro](./chapters/API_OVERVIEW.md)
-* Chapter 2 - [API Controllers](./chapters/API_MODELS_CONTROLLERS.md)
+* Chapter 2 - [ASP.NET Core Web API Intro](./chapters/ASP_NET_WEB_API_INTRO.md)
 * Chapter 3 - [Route and Query String Parameters](./chapters/CONTROLLER_PARAMETERS.md)
-* Chapter 4 - [Validating Data with Annotations](./chapters/MODEL_VALIDATION.md)
 
 **Part 2: Entity Framework**
 
