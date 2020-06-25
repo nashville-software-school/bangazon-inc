@@ -78,7 +78,7 @@ The query string parameters are `q`, `sort` and `t`. They are used by the Reddit
 
 The Reddit example demonstrates a common use case for query string parameters. They are often used for searching, sorting and configuring how data is returned from a web API.
 
-> **NOTE:** It is important to note that query string parameters can be whatever you, the developer, want them to be. There is nothing special about the query string parameters in the example. They are just what the Reddit developers chose.
+> **NOTE:** It is important to note that query string parameters can be whatever you, the developer, want them to be. There is nothing special about the query string parameters in the example. They are just what the Reddit developers chose. In the same way, there is nothing special about the _embed or _expand parameters you used with json-server. These are parameter names that the developer of json-server picked out, and are not necessarily relevant keywords outside of json-server
 
 ### Query String Example
 
