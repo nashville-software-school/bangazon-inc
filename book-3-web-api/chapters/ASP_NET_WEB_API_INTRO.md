@@ -257,7 +257,7 @@ namespace CoffeeShop.Repositories
 
 ## Controllers
 
-Controllers in Web API are similar to controllers in MVC with a few small differences. The perform the same function in MVC. As in MVC a Web API controller contains methods to respond to HTTP requests.
+Controllers in Web API are similar to controllers in MVC with a few small differences. They perform the same function in MVC. As in MVC a Web API controller contains methods to respond to HTTP requests.
 
 Create a `BeanVarietyController` class in the `Controllers` directory.
 
@@ -442,7 +442,7 @@ That's right...a "CORS" error.
 Access to fetch at 'https://localhost:5001/api/beanvariety/' from origin 'http://localhost:3000' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. If an opaque response serves your needs, set the request's mode to 'no-cors' to fetch the resource with CORS disabled.
 ```
 
-[CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS/Errors) is a browser security feature that prevents JavaScript from talking to APIs without the web server's concent. CORS is extremely important for production applications, but in development we can afford to be a bit more lax. Update the `Configure` method in the `Startup` class to call `app.UseCors()` to configure CORS behavior.
+[CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS/Errors) is a browser security feature that prevents JavaScript from talking to APIs without the web server's consent. CORS is extremely important for production applications, but in development we can afford to be a bit more lax. Update the `Configure` method in the `Startup` class to call `app.UseCors()` to configure CORS behavior.
 
 ```cs
 public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
