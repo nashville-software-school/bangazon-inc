@@ -27,12 +27,13 @@ This book prepares you for building the Tabloid API
 
 * Chapter 1 - [Web API Intro](./chapters/API_OVERVIEW.md)
 * Chapter 2 - [ASP.NET Core Web API Intro](./chapters/ASP_NET_WEB_API_INTRO.md)
-* Chapter 3 - [Route and Query String Parameters](./chapters/CONTROLLER_PARAMETERS.md)
 
 **Part 2: Entity Framework**
 
-* Chapter 5 - [Entity Framework](./chapters/EF_INTRO.md)
+* Chapter 3 - [Entity Framework](./chapters/EF_INTRO.md)
 * Chapter 6 - [Seeding Database](./chapters/EF_SEEDING.md)
+
+* Chapter 3 - [Route and Query String Parameters](./chapters/CONTROLLER_PARAMETERS.md)
 
 * Chapter 7 - [Starting your Sprint](./chapters/HOW_TO_START.md)
 

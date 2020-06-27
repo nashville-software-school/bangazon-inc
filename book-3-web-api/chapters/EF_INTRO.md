@@ -1,272 +1,480 @@
 # Object/Relational Mapping and Entity Framework
 
-An Object/Relational Mapper (ORM) is a software tool for automatically connecting C# objects to relational database tables. You've likely noticed that when working with ADO<span>.NET</span> you have to write a lot of SQL and C# code that is largely repetitive. An ORM is a tool that does the repetitive SQL and boilerplate C# for you. An ORM greatly reduces - often eliminates - the need to write SQL in your application.
+An _Object/Relational Mapper_ (ORM) is a data access technology for automatically connecting C# objects to relational database tables. You've likely noticed that when working with ADO<span>.NET</span> you have to write a lot of SQL and C# code that is largely repetitive. An ORM is a tool that does the repetitive SQL and boilerplate C# for you. An ORM greatly reduces - often eliminates - the need to write SQL in your application.
 
-## Entity Framework
+## Entity Framework Core
 
-Entity Framework (EF) is a popular ORM created by Microsoft. It allows you to use LINQ methods in conjunction with your data models to interact with your database (e.g. SELECT. INSERT, UPDATE, DELETE data). EF then determines the SQL syntax needed to perform the appropriate action(s).
+_Entity Framework Core_ (EF) is a popular ORM created by Microsoft. It allows you to use LINQ methods in conjunction with your data models to interact with your database (e.g. SELECT. INSERT, UPDATE, DELETE data). EF then determines the SQL syntax needed to perform the appropriate action(s).
+
+## Entity Framework Core Compared to ADO<span>.NET</span>
+
+Before we get into the details of Entity Framework Core, let's take a quick look at how we might use it in comparison to the data access technology we've been using, ADO<span>.NET</span>. The following example uses the `CoffeeShop` database from the previous chapter.
+
+Here's a method that will get all the bean varieties using ADO<span>.NET</span>.
+
+```cs
+public List<BeanVariety> GetAll()
+{
+    using (var conn = Connection)
+    {
+        conn.Open();
+        using (var cmd = conn.CreateCommand())
+        {
+            cmd.CommandText = "SELECT Id, [Name], Region, Notes FROM BeanVariety;";
+            var reader = cmd.ExecuteReader();
+            var varieties = new List<BeanVariety>();
+            while (reader.Read())
+            {
+                var variety = new BeanVariety()
+                {
+                    Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                    Name = reader.GetString(reader.GetOrdinal("Name")),
+                    Region = reader.GetString(reader.GetOrdinal("Region")),
+                };
+                if (!reader.IsDBNull(reader.GetOrdinal("Notes")))
+                {
+                    variety.Notes = reader.GetString(reader.GetOrdinal("Notes"));
+                }
+                varieties.Add(variety);
+            }
+
+            reader.Close();
+
+            return varieties;
+        }
+    }
+}
+```
+
+And here it is with Entity Framework Core.
+
+```cs
+public List<BeanVariety> GetAll()
+{
+    return _context.BeanVariety.ToList();
+}
+```
+
+Bit of a difference, isn't there?
+
+Interacting with a database isn't all about querying though. Here's some code to add a bean variety to the database.
+
+> ADO<span>.NET</span>
+
+```cs
+public void Add(BeanVariety variety)
+{
+    using (var conn = Connection)
+    {
+        conn.Open();
+        using (var cmd = conn.CreateCommand())
+        {
+            cmd.CommandText = @"
+                INSERT INTO BeanVariety ([Name], Region, Notes)
+                OUTPUT INSERTED.ID
+                VALUES (@name, @region, @notes)";
+            cmd.Parameters.AddWithValue("@name", variety.Name);
+            cmd.Parameters.AddWithValue("@region", variety.Region);
+            if (variety.Notes == null)
+            {
+                cmd.Parameters.AddWithValue("@notes", DBNull.Value);
+            }
+            else
+            {
+                cmd.Parameters.AddWithValue("@notes", variety.Name);
+            }
+
+            variety.Id = (int)cmd.ExecuteScalar();
+        }
+    }
+}
+```
+
+> Entity Framework Core
+
+```cs
+public void Add(BeanVariety variety)
+{
+    _context.Add(variety);
+    _context.SaveChanges();
+}
+```
+
+## Exploring Entity Framework Core with Gifter
+
+### Gifter
+
+To explore EF Core, we'll build a new app, Gifter. Gifter is a social app for sharing animated GIFs with others. For the time being we'll focus on using building a Web API using Entity Framework Core. In future chapters we'll be creating a React application that will interact with the API.
+
+Here's the initial Gifter ERD.
+
+![Gifter ERD](./images/Gifter_ERD.png)
 
 Here's an example showing the different between EF and ADO<span>.NET</span>. This example selects all of the departments from the Bangazon database.
 
-## Select all Departments
+And the [SQL Script](./sql/Gifter.sql)
 
-### ADO<span>.NET</span> Example
+### Installing Entity Framework Core Nuget Packages
 
-```cs
-public ActionResult Index()
-{
-    using (SqlConnection conn = Connection)
-    {
-        conn.Open();
-        using (SqlCommand cmd = conn.CreateCommand())
-        {
-            cmd.CommandText = "SELECT Id, Name, Budget FROM Department";
-            SqlDataReader reader = cmd.ExecuteReader();
+In order to use EF Core, we have to install a few packages. During the course, we've seen a few ways of installing packages. One way is no better than any other. One way that works well for copy/pasting our way to success, is to add package references to our `*.csproj` file.
 
-            List<Department> departments = new List<Department>();
-            while (reader.Read())
-            {
-                departments.Add(new Department
-                {
-                    Id = reader.GetInt32(reader.GetOrdinal("Id")),
-                    Name = reader.GetString(reader.GetOrdinal("name")),
-                    Budget = reader.GetInt32(reader.GetOrdinal("budget"))
-                });
-            }
-            reader.Close();
-            return View(departments);
-        }
-    }
-}
+> Gifter.csproj
 
+```xml
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.5">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.3" />
+  </ItemGroup>
+
+</Project>
 ```
 
-### EF Example
+When you save the `Gifter.csproj` file, Visual Studio will download the packages from the Nuget package repository.
+
+### Models
+
+One thing EF Core has in common with ADO<span>.NET</span> is the use of models that correspond to tables in the database. For now we'll get started by building models for `Post` and `UserProfile`.
+
+> Models/Post.cs
 
 ```cs
-public async Task<IActionResult> Index()
+using System.ComponentModel.DataAnnotations;
+
+namespace Gifter.Models
 {
-    List<Department> departments = await _context.Department.ToListAsync();
-    return View(departments);
-}
-```
-
-## Create New Department
-
-You also create new database entries with other methods that abstract the SQL away from you - the `Add()` and `SaveChangesAsync()` methods.
-
-### ADO<span>.NET</span> Example
-
-```cs
-[HttpPost]
-[ValidateAntiForgeryToken]
-public ActionResult Create(Department department)
-{
-    using (SqlConnection conn = Connection)
+    public class Post
     {
-        conn.Open();
-        using (SqlCommand cmd = conn.CreateCommand())
-        {
-            cmd.CommandText = @"INSERT INTO Department ([name], budget)
-                                     VALUES (@name, @budget)";
-            cmd.Parameters.Add(new SqlParameter("@name", department.Name));
-            cmd.Parameters.Add(new SqlParameter("@budget", department.Budget));
+        public int Id { get; set; }
 
-            cmd.ExecuteReader();
+        [Required]
+        public string Title { get; set; }
 
-            return RedirectToAction(nameof(Index));
-        }
+        [Required]
+        public string ImageUrl { get; set; }
+
+        public string Caption { get; set; }
+
+        [Required]
+        public int UserProfileId { get; set; }
+
+        public UserProfile UserProfile { get; set; }
     }
 }
 ```
 
-### EF Example
+> Models/UserProfile.cs
 
 ```cs
-[HttpPost]
-[ValidateAntiForgeryToken]
-public async Task<IActionResult> Create(Department department)
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
+namespace Gifter.Models
 {
-    if (ModelState.IsValid)
+    public class UserProfile
     {
-        _context.Add(department);
-        await _context.SaveChangesAsync();
-        return RedirectToAction(nameof(Index));
+        public int Id { get; set; }
+
+        [Required]
+        public string Name { get; set; }
+
+        [Required]
+        public string  Email { get; set; }
+
+        public string ImageUrl { get; set; }
     }
-    return View(department);
 }
 ```
 
 ### DbContext
+
 In Entity Framework we don't directly use a `SqlConnection` object like we did in ADO.<span>NET</span>. Instead we use an instance of ` Microsoft.EntityFrameworkCore.DbContext`.
 
-In the examples above you'll notice the `_context` variable. This private field is the instance of our `DbContext` that we use in our controller to interact with the database.
+In the examples above you'll notice the `_context` variable. This private field is the instance of our `DbContext` that we use in our repository to interact with the database.
 
-The first step in creating a `DbContext` is to make a new class that inherits from it. This class is commonly called `ApplicationDbContext`. Because every database is different, Microsoft could not make a generic `DbContext` to cover everything. The `DbContext` EF provides is a base class that we extend with the specifics of our database.
+The first step in creating a `DbContext` is to make a new class that inherits from it. This class is commonly called `ApplicationDbContext`. Because every database is different, Microsoft could not make a generic `DbContext` to cover everything. The `DbContext` class EF Core provides is a base class that we extend with the specifics of our database.
 
-Here is a partial implementation of an `ApplicationDbContext` for Bangazon's Workforce Application.
+Here is a partial implementation of an `ApplicationDbContext` for Gifter.
+
+> Data/ApplicationDbContext.cs
 
 ```cs
-using Bangazon.Models;
+using Gifter.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Bangazon.Data {
-    public class ApplicationDbContext : DbContext {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
-
-        public DbSet<Employee> Employee { get; set; }
-        public DbSet<Department> Department { get; set; }
-    }
-}
-```
-In order to get an instance of our `ApplicationDbContext` class in our controller, we use dependency injection. By creating a parameter in the controller's constructor, we're telling ASP.<span>NET</span> to give us an instance.
-
-```cs
-namespace Bangazon.Controllers {
-    public class DepartmentsController : Controller {
-        private readonly ApplicationDbContext _context;
-
-        public DepartmentsController(ApplicationDbContext context) {
-            _context = context;
-        }
-
-        // ...controller actions that use the _context field...
-    }
-}
-```
-
-### DbSet&lt;T&gt;
-
-Notice the `DbSet<T>` properties in `ApplicationDbContext`. `DbSet<T>`s are the link between models and database tables. The `ApplicationDbContext` above implies that we have `Employee` and `Department` model classes AND `Employee` and `Department` database tables.
-
-Take another look at this line from the department query example above:
-
-```cs
-List<Department> departments = await _context.Department.ToListAsync();
-```
-We are accessing the `Department` property on the instance of our `ApplicationDbContext` in order to query the `Department` database table.
-
-### CRUD with Entity Framework
-
-#### Create
-
-To insert a record into a database table use the context's `Add()` method followed by `SaveChangesAsync()`
-
-```cs
-Department dept = new Department() {
-    Name = "Public Relations",
-    Budget = 500_000
-};
-_context.Add(dept);
-await _context.SaveChangesAsync();
-```
-
-> **NOTE:** the `Add` method only "stages" the insert action. The database is not updated until `SaveChangesAsync()` is called.
-
-> **NOTE:** We do NOT set the department's `Id` property. The database will provide the new department id.
-
-#### Read
-
-To query a database table use LINQ queries on the appropriate `DbSet<T>`. In EF we have the full power of LINQ along with some additional capabilities that LINQ does not provide.
-
-```cs
-// Get all Employees
-await _context.Employee.ToListAsync();
-
-// Get an individual Employee by id
-await _context.Employee.FindAsync(id);
-// or
-await _context.Employee.FirstOrDefaultAsync(e => e.id == id);
-
-// Get all Employees with the last name of Garcia
-// ordered by their first name
-await _context.Employee
-              .Where(e => e.LastName == 'Garcia')
-              .OrderBy(e => e.FirstName)
-              .ToListAsync();
-
-// Get All supervisors and their departments
-// "Include()" is the way to do simple SQL JOINS
-await _context.Employee
-              .Include(e => e.Department)
-              .Where(e => e.IsSupervisor)
-              .ToListAsync();
-```
-
-> **NOTE:** The query is not executed in the database until one of the "Async" methods is called. (e.g. `ToListAsync(), FindAsync(), FirstOrDefaultAsync()`)
-
-#### Update
-
-Update a record with the `Update()` method.
-
-```cs
-Employee emp = await _context.Employee.FirstOrDefaultAsync(e => e.FirstName == "Betty");
-
-emp.FirstName = "Liz";
-
-_context.Update(emp);
-await _context.SaveChangesAsync();
-```
-
-#### Delete
-
-Delete a record with the `Remove()` method.
-
-```cs
-Department dept = _context.Department.FindAsync(id);
-_context.Remove(dept);
-await _context.SaveChangesAsync();
-```
-
-## Project Setup
-
-Before you can use any of the Entity Framework goodness, you have to do a little bit of setup in your project.
-
-### Nuget Package References
-
-By default an ASP<span>.Net</span> project does not include the classes needed to use EF with SQL Server. You'll need to add these nuget packages.
-
-* **Microsoft.EntityFrameworkCore**
-    * The foundational EF library
-* **Microsoft.EntityFrameworkCore.SqlServer**
-    * Specific bits for connecting EF with SQL Server
-* **Microsoft.EntityFrameworkCore.Tool**
-    * Used for working with database "migrations"
- 
-
-### Startup.cs
-
-To configure EF, you must call `services.AddDbContext()` in the `ConfigureServices` method of the `Startup` class.
-
-For example, if you would like to use EF in an MVC project, your `ConfigureServices` method would look something like this.
-
-```cs
-public void ConfigureServices(IServiceCollection services)
-{
-    services.AddDbContext<ApplicationDbContext>(options =>
-        options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-
-    services.AddControllersWithViews();
-}
-```
-
-### ApplicationDbContext
-
-You will need to create a DbContext as described above.
-
-```cs
-using DepartmentsEmployeesEF.Models;
-using Microsoft.EntityFrameworkCore;
-
-namespace MyProjectName.Data
+namespace Gifter.Data
 {
     public class ApplicationDbContext : DbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
-        // TODO: Add "DbSet<T>"s here...
+        public DbSet<UserProfile> UserProfile { get; set; }
+        public DbSet<Post> Post { get; set; }
     }
 }
+```
+
+### Configuration
+
+Since our app is communicating with a database, we'll need a connection string. As usual, we'll store it in the `appsettings.json` file.
+
+> appsettings.json
+
+```json
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Warning",
+      "Microsoft": "Information",
+      "Microsoft.Hosting.Lifetime": "Information"
+    }
+  },
+  "AllowedHosts": "*",
+  "ConnectionStrings": {
+    "DefaultConnection":  "server=localhost\\SQLExpress;database=Gifter;integrated security=true;"
+  }
+}
+```
+
+We must also tell ASP<span>.NET</span> that we'd like to use the `ApplicationDbContext` class, and that we'll be connecting to a SQL Server database. We do this in the `ConfigureServices()` method in the `Startup` class.
+
+> Startup.cs
+
+```cs
+// ...other code omitted for brevity...
+
+public void ConfigureServices(IServiceCollection services)
+{
+    services.AddDbContext<ApplicationDbContext>(options =>
+        options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+    services.AddControllers();
+}
+
+// ...other code omitted for brevity...
+```
+
+### Getting Gifter Posts
+
+We're finally ready to query the database. Create a new repository called `PostRepository`.
+
+> Repositories/PostRepository.cs
+
+```cs
+using System.Linq;
+using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
+using Gifter.Data;
+using Gifter.Models;
+
+namespace Gifter.Repositories
+{
+    public class PostRepository
+    {
+        private readonly ApplicationDbContext _context;
+
+        public PostRepository(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+
+        public List<Post> GetAll()
+        {
+            return _context.Post.ToList();
+        }
+
+        public Post GetById(int id)
+        {
+            return _context.Post.FirstOrDefault(p => p.Id == id);
+        }
+    }
+}
+```
+
+Next create a Web API controller with "Get" methods.
+
+> controllers/PostController.cs
+
+```cs
+using Microsoft.AspNetCore.Mvc;
+using Gifter.Data;
+using Gifter.Repositories;
+
+namespace Gifter.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class PostController : ControllerBase
+    {
+        private readonly PostRepository _postRepository;
+        public PostController(ApplicationDbContext context)
+        {
+            _postRepository = new PostRepository(context);
+        }
+
+        [HttpGet]
+        public IActionResult Get()
+        {
+            return Ok(_postRepository.GetAll());
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult Get(int id)
+        {
+            var post = _postRepository.GetById(id);
+            if (post == null)
+            {
+                return NotFound();
+            }
+            return Ok(post);
+        }
+    }
+}
+```
+
+Now use Postman to view the Post data.
+
+You'll notice the `UserProfile` property is `null` for each Post. Let's fix that.
+
+### "Joining" tables with Include()
+
+To bring in data from related tables, we use the `Include()` method. Update the methods in the `PostRepository` to get User Profile` data with each Post.
+
+> Repositories/PostRepository.cs
+
+```cs
+// ...other code omitted for brevity...
+
+public List<Post> GetAll()
+{
+    return _context.Post.Include(p => p.UserProfile).ToList();
+}
+
+public Post GetById(int id)
+{
+    return _context.Post.Include(p => p.UserProfile).FirstOrDefault(p => p.Id == id);
+}
+
+// ...other code omitted for brevity...
+```
+
+The API responses should now include the `UserProfile` property for each Post object.
+
+### Filtering Data with LINQ
+
+EF Core let's us use LINQ when querying data in our database.
+
+For example, if we wanted to get all Posts from a particular user we could use LINQ's `Where()` method. We could also order the Posts with `OrderBy()`.
+
+Add the following method to the `PostRepository`...
+
+```cs
+// ...other code omitted for brevity...
+
+public List<Post> GetByUserProfileId(int id)
+{
+    return _context.Post.Include(p => p.UserProfile)
+                    .Where(p => p.UserProfileId == id)
+                    .OrderBy(p => p.Title)
+                    .ToList();
+}
+
+// ...other code omitted for brevity...
+```
+
+...And add a method to the `PostController`...
+
+```cs
+// ...other code omitted for brevity...
+
+[HttpGet("getbyuser/{id}")]
+public IActionResult GetByUser(int id)
+{
+    return Ok(_postRepository.GetByUserProfileId(id));
+}
+
+// ...other code omitted for brevity...
+```
+
+Now go to https://localhost:5001/post/getbyuser/1 to get Posts from the user with id 1.
+
+### Create, Update and Delete
+
+Add the appropriate methods to the `PostRepository`...
+
+> Repositories/PostRepository.cs
+
+```cs
+// ...other code omitted for brevity...
+
+public void Add(Post post)
+{
+    _context.Add(post);
+    _context.SaveChanges();
+}
+
+public void Update(Post post)
+{
+    _context.Entry(post).State = EntityState.Modified;
+    _context.SaveChanges();
+}
+
+public void Delete(int id)
+{
+    var post = GetById(id);
+    _context.Post.Remove(post);
+    _context.SaveChanges();
+}
+
+// ...other code omitted for brevity...
+```
+
+...and to the controller...
+
+> Controllers/PostController.cs
+
+```cs
+// ...other code omitted for brevity...
+
+[HttpPost]
+public IActionResult Post(Post post)
+{
+    _postRepository.Add(post);
+    return CreatedAtAction("Get", new { id = post.Id }, post);
+}
+
+[HttpPut("{id}")]
+public IActionResult Put(int id, Post post)
+{
+    if (id != post.Id)
+    {
+        return BadRequest();
+    }
+
+    _postRepository.Update(post);
+    return NoContent();
+}
+
+[HttpDelete("{id}")]
+public IActionResult Delete(int id)
+{
+    _postRepository.Delete(id);
+    return NoContent();
+}
+
+// ...other code omitted for brevity...
 ```
 
 ## The Cost of Convenience
@@ -277,6 +485,14 @@ While the simpler syntax may seem like a breath of fresh air, and much easier to
 * [Performance: Entity Framework 7 vs. Dapper.net vs. raw ADO.NET](https://ppanyukov.github.io/2015/05/20/entity-framework-7-performance.html)
 
 > **NOTE:** [Dapper](https://github.com/StackExchange/Dapper) is a popular "light-weight" ORM. It's an alternative to EF and ADO<span>.NET</span>. We won't be discussing Dapper in this course.
+
+## Exercises
+
+1. Create the necessary classes to make a `UserProfile` API endpoint at https://locahost:5001/api/userprofile. The endpoint should allow perform full CRUD functionality for the `UserProfile` entity.
+1. Add the `Comment` entity to the system. Perform full CRUD on the `Comment` entity and also allow listing of comments by `PostId`.
+1. Update the `Post` model to contain a list of comments. What impact does this have on the Post  and Comment APIs? Why?
+
+---
 
 ## Supplemental Tutorial
 
