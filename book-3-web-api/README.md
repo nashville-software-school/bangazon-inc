@@ -31,6 +31,7 @@ This book prepares you for building the Tabloid API
 **Part 2: Entity Framework**
 
 * Chapter 3 - [Entity Framework](./chapters/EF_INTRO.md)
+* Chapter 4 - [React & Web API](./chapters/REACT_WITH_API.md)
 * Chapter 6 - [Seeding Database](./chapters/EF_SEEDING.md)
 
 * Chapter 3 - [Route and Query String Parameters](./chapters/CONTROLLER_PARAMETERS.md)
