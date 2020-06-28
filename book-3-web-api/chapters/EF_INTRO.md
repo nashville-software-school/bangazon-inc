@@ -408,7 +408,7 @@ public IActionResult GetByUser(int id)
 // ...other code omitted for brevity...
 ```
 
-Now go to https://localhost:5001/post/getbyuser/1 to get Posts from the user with id 1.
+Now go to https://localhost:5001/api/post/getbyuser/1 to get Posts from the user with id 1.
 
 ### Create, Update and Delete
 
