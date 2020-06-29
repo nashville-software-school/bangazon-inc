@@ -27,6 +27,7 @@ CREATE TABLE BeanVariety (
 1. In the "Create a new project" dialog, choose the C# "ASP<span>.NET</span> Core web application" option
 1. Name the project "CoffeeShop"
 1. In the "Create a new ASP<span>.NET</span> Core web application" dialog choose "API"
+1. In Solution Explorer, right click the name of the project and select "Manage Nuget Packages". Install the `Microsoft.Data.SqlClient` pacakge
 
 You now have an ASP<span>.NET</span> Core Web API project. Spend some time looking around the code that Visual Studio generated. You'll find several familiar items.
 
