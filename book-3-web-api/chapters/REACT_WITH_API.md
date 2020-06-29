@@ -60,7 +60,7 @@ This providers the state value of the posts array, as well as methods to fetch a
 
 ## Adding a Posts List Component
 
-Inside the components director, create a file called `PostList.js` and add the following code
+Inside the components directory, create a file called `PostList.js` and add the following code
 
 ```js
 import React, { useContext, useEffect } from "react";

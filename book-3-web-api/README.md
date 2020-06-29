@@ -8,14 +8,11 @@ This book prepares you for building the Tabloid API
 * Routing
 * Route Parameters
 * Query string parameters
-* Entity Framework
 * Models
 * Model Validation
+* Entity Framework
 * EF Queries
-* EF Migrations
-* Async / Await / Tasks
 * Web API + React
-
 * Ado.net + EF
 * Integration testing
 * JWT tokens
@@ -23,40 +20,31 @@ This book prepares you for building the Tabloid API
 
 ## Chapters
 
-**Part 1: Web API**
+**Part 1: Web API + Entity Framework**
 
 * Chapter 1 - [Web API Intro](./chapters/API_OVERVIEW.md)
 * Chapter 2 - [ASP.NET Core Web API Intro](./chapters/ASP_NET_WEB_API_INTRO.md)
-
-**Part 2: Entity Framework**
-
 * Chapter 3 - [Entity Framework](./chapters/EF_INTRO.md)
-* Chapter 4 - [React & Web API](./chapters/REACT_WITH_API.md)
-* Chapter 6 - [Seeding Database](./chapters/EF_SEEDING.md)
-
-* Chapter 3 - [Route and Query String Parameters](./chapters/CONTROLLER_PARAMETERS.md)
-
-* Chapter 7 - [Starting your Sprint](./chapters/HOW_TO_START.md)
+* Chapter 4 - [Route and Query String Parameters](./chapters/CONTROLLER_PARAMETERS.md)
+* Chapter 5 - [React & Web API](./chapters/REACT_WITH_API.md)
+* Chapter 6 - [JSON Web Tokens](./chapters/JWT.md)
+* Chapter 7 - Firebase Auth
+* Chapter 8 - [Starting your Sprint](./chapters/HOW_TO_START.md)
 
 > __Sprint 1__ - Full-stack Tabloid
 
-**Part 3: SQL Practice**
+**Part 2: SQL Practice**
 
-* Chapter 8 - [Chinook SQL Practice](./chapters/CHINOOK.md)
-* Chapter 9 - [Bangazon SQL Practice](./chapters/BANGAZON_SQL_EXERCISE.md)
+* Chapter 9 - [Chinook SQL Practice](./chapters/CHINOOK.md)
+* Chapter 10 - [Bangazon SQL Practice](./chapters/BANGAZON_SQL_EXERCISE.md)
 
-**Part 4: Testing**
+**Part 3: Testing**
 
-* Chapter X - [Integration Tests](./chapters/INTEGRATION_TESTS.md)
+* Chapter 11 - [Integration Tests](./chapters/INTEGRATION_TESTS.md)
 
-**Part 5: ADO<span>.NET</span> and EF**
+**Part 4: ADO<span>.NET</span> and EF**
 
-* Chapter X - Mixing SQL and Entity Framework
-
-**Part 6: Authentication**
-
-* Chapter X - [JSON Web Tokens](./chapters/JWT.md)
-* Chapter X - Firebase Auth
+* Chapter 12 - Reporting - Mixing SQL and Entity Framework
 
 > __Sprint 2__ - Full-stack Tabloid
 
