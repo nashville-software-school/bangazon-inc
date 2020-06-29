@@ -1,10 +1,10 @@
 # Adding a React Client
 
-The cool thing about exposing a Web API is that any client capable of making HTTP requests can communicate with it. You can create web apps in React, Angular, or Vue and they could all talk to the same API. It even extends past browser based clients. You could make a mobile or desktop app and they could talk to the API. Maybe even IOT devices like microwaves or refrigerators want to make requests to your API.
+The cool thing about exposing a Web API is that any client capable of making HTTP requests can communicate with it. You can create web apps in React, Angular, or Vue and they could all talk to the same API. It even extends past browser based clients. You could make a mobile or desktop app and they could talk to the API. Maybe even IOT devices ([Internet of Things](https://en.wikipedia.org/wiki/Internet_of_things)) like microwaves or refrigerators want to make requests to your API.
 
 ## Create React App
  
-Programming refrigerators may come in a later chapter. For now, lets build a react client that will make requests to our API. Open your Gifter project and make a directory called `wwwroot`. This is where we'll put our React code. In your terminal, `cd` into the wwwroot directory and run `npx create-react-app client`
+Programming refrigerators may come in a later chapter. For now, lets build a react client that will make requests to our API. Open your Gifter project and make a directory called `client`. This is where we'll put our React code. In your terminal, `cd` into the client directory and run `npx create-react-app .`
 
 **NOTE** VS Code has a much better developer experience when writing javascript. For our projects, it's recommended that you continue writing your C# code in Visual Studio, but use VS Code for javascript. `cd` into the newly created `client` folder and open VS Code from there using the `code .` command.
 
@@ -205,6 +205,8 @@ function App() {
     </div>
   );
 }
-```
+``` 
 
 2. Put a button somewhere in the Post component that allows a user to delete a post.
+
+3. Update the Post component so that it includes the comments on each post
