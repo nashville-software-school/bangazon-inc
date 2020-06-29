@@ -445,16 +445,32 @@ Access to fetch at 'https://localhost:5001/api/beanvariety/' from origin 'http:/
 [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS/Errors) is a browser security feature that prevents JavaScript from talking to APIs without the web server's consent. CORS is extremely important for production applications, but in development we can afford to be a bit more lax. Update the `Configure` method in the `Startup` class to call `app.UseCors()` to configure CORS behavior.
 
 ```cs
-if (env.IsDevelopment())
+ public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 {
-    app.UseDeveloperExceptionPage();
-
-    // Do not block requests while in development
-    app.UseCors(options =>
+    if (env.IsDevelopment())
     {
-        options.AllowAnyOrigin();
-        options.AllowAnyMethod();
-        options.AllowAnyHeader();
+        app.UseDeveloperExceptionPage();
+
+        app.UseDeveloperExceptionPage();
+
+        // Do not block requests while in development
+        app.UseCors(options =>
+        {
+            options.AllowAnyOrigin();
+            options.AllowAnyMethod();
+            options.AllowAnyHeader();
+        });
+    }
+
+    app.UseHttpsRedirection();
+
+    app.UseRouting();
+
+    app.UseAuthorization();
+
+    app.UseEndpoints(endpoints =>
+    {
+        endpoints.MapControllers();
     });
 }
 ```
