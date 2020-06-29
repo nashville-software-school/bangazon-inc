@@ -500,11 +500,11 @@ In exercise 3 above, you should have gotten an error that looked something like 
 JsonException: A possible object cycle was detected which is not supported. This can either be due to a cycle or if the object depth is larger than the maximum allowed depth of 32.
 ```
 
-This error results from trying to _serialize_ an object that contains a circular reference (a.k.a. a _cycle_). In this case a `Post` contains `Comment`s and each `Comment` contains a `Post`.
+This error results from trying to convert a C# object to JSON (a.k.a _serialize the object_) when that object contains a circular reference (a.k.a. a _cycle_). In this case a `Post` contains `Comment`s and each `Comment` contains a `Post`.
 
 Inside C# code such a cycle isn't a problem. However, it is a problem when we try to serialize the C# object to JSON. JSON simply _cannot_ represent object cycles. It's not possible.
 
-To fix this, we must configure ASP.NET Core's serialization settings. Update the `ConfigureServices` method in the `Startup` class to configure `ReferenceLoopHandling` to ignore cycles.
+To fix this, we can configure ASP.NET Core's serialization settings. Update the `ConfigureServices` method in the `Startup` class to configure `ReferenceLoopHandling` to ignore cycles.
 
 ```cs
 public void ConfigureServices(IServiceCollection services)
@@ -518,6 +518,8 @@ public void ConfigureServices(IServiceCollection services)
             );
 }
 ```
+
+> **NOTE:** There are many options for fixing this cycle problem. The solution above was chosen due to it's relative simplicity. Another option would be to create a custom API Model to return from the Web API instead of using the data model. This "custom API model" is analogous to a viewmodel im MVC.
 
 ---
 
