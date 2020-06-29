@@ -27,6 +27,7 @@ CREATE TABLE BeanVariety (
 1. In the "Create a new project" dialog, choose the C# "ASP<span>.NET</span> Core web application" option
 1. Name the project "CoffeeShop"
 1. In the "Create a new ASP<span>.NET</span> Core web application" dialog choose "API"
+1. In Solution Explorer, right click the name of the project and select "Manage Nuget Packages". Install the `Microsoft.Data.SqlClient` pacakge
 
 You now have an ASP<span>.NET</span> Core Web API project. Spend some time looking around the code that Visual Studio generated. You'll find several familiar items.
 
@@ -444,10 +445,12 @@ Access to fetch at 'https://localhost:5001/api/beanvariety/' from origin 'http:/
 [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS/Errors) is a browser security feature that prevents JavaScript from talking to APIs without the web server's consent. CORS is extremely important for production applications, but in development we can afford to be a bit more lax. Update the `Configure` method in the `Startup` class to call `app.UseCors()` to configure CORS behavior.
 
 ```cs
-public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+ public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 {
     if (env.IsDevelopment())
     {
+        app.UseDeveloperExceptionPage();
+
         app.UseDeveloperExceptionPage();
 
         // Do not block requests while in development
@@ -458,7 +461,17 @@ public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
             options.AllowAnyHeader();
         });
     }
-    // ...omitted for brevity...
+
+    app.UseHttpsRedirection();
+
+    app.UseRouting();
+
+    app.UseAuthorization();
+
+    app.UseEndpoints(endpoints =>
+    {
+        endpoints.MapControllers();
+    });
 }
 ```
 
