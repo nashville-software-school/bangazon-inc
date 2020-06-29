@@ -492,6 +492,33 @@ While the simpler syntax may seem like a breath of fresh air, and much easier to
 1. Add the `Comment` entity to the system. Perform full CRUD on the `Comment` entity and also allow listing of comments by `PostId`.
 1. Update the `Post` model to contain a list of comments. What impact does this have on the Post  and Comment APIs? Why?
 
+### Object Cycles
+
+In exercise 3 above, you should have gotten an error that looked something like this:
+
+```txt
+JsonException: A possible object cycle was detected which is not supported. This can either be due to a cycle or if the object depth is larger than the maximum allowed depth of 32.
+```
+
+This error results from trying to _serialize_ an object that contains a circular reference (a.k.a. a _cycle_). In this case a `Post` contains `Comment`s and each `Comment` contains a `Post`.
+
+Inside C# code such a cycle isn't a problem. However, it is a problem when we try to serialize the C# object to JSON. JSON simply _cannot_ represent object cycles. It's not possible.
+
+To fix this, we must configure ASP.NET Core's serialization settings. Update the `ConfigureServices` method in the `Startup` class to configure `ReferenceLoopHandling` to ignore cycles.
+
+```cs
+public void ConfigureServices(IServiceCollection services)
+{
+    services.AddDbContext<ApplicationDbContext>(options =>
+        options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+    services.AddControllers()
+            .AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            );
+}
+```
+
 ---
 
 ## Supplemental Tutorial
@@ -501,4 +528,3 @@ You may find the first four parts of this tutorial helpful. [ASP.NET Core MVC wi
 > **NOTE:** This tutorial is challenging and will include new concepts beyond those specifically related to Entity Framework, but stick with it. It's an important part of your education to practice learning from online documentation. This will not be the last time you find yourself needing to learn something from docs.
 
 > **NOTE:** It is easy race through the tutorial without reading and understanding what is being discussed. Do NOT make this mistake. Read the text don't just copy and paste the code.
-
