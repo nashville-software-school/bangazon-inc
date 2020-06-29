@@ -1,67 +1,91 @@
-# Query String and Route Parameters
+# Web API Parameters
 
-You can send data to the server in your request in three main ways.
-
-1. In the body of the request.
-1. As a route parameter.
-1. As a query string parameter.
-
-## Request Body
-
-You learned how to do this in JavaScript using `fetch`. Here's a JavaScript request to your `cohorts` resource in your API.
+We've encountered the term _parameter_ a few times throughout the course. We've seen that a parameter is a special variable that is _passed into_ a function or method.
 
 ```js
-fetch("http://localhost:5000/cohorts", {
-    "method": "POST",
-    "headers": {
-        "Content-Type": "application/json"
-    },
-    "body": JSON.stringify({
-        "name": "Day 26"
-    })
-})
-.then(res => res.json())
-.then(console.table)
+function sum(num1, num2) {
+    return num1 + num2;
+}
 ```
 
-You can view the body request by looking in your Network tab of Chrome Developer Tools, clicking on the request, and scrolling to the bottom.
+`num1` and `num2` are _parameters_ of the `sum` function.
 
-![a sample fetch request and showing the request payload](./images/jc9cpBmvW9.gif)
+We've also seen _SQL parameters_ as a way to get data into a SQL statement.
+
+```cs
+cmd.CommandText = @"
+    INSERT INTO Villain ([Name], Power, Weakness)
+    VALUES (@name, @power, @weakness)";
+cmd.Parameters.AddWithValue("@name", "MovieTalker");
+cmd.Parameters.AddWithValue("@power", "irritating an entire audience");
+cmd.Parameters.AddWithValue("@weakness", "inability to understand a film");
+```
+
+`@name`, `@power` and `@weakness` are SQL parameters.
+
+Clearly the syntax of these two types of parameters is vastly different, but we still call them both _parameters_. Why? Because of they have common purpose. They are both ways of getting data from one part of the code into another part of the code.
 
 ## Route Parameters
 
-A route parameter is part of the route itself. For example, if you want to get a single student, you would GET the following URL.
+In addition to the two kinds of parameters mentioned above, we've also seen a third: _Route parameters_.
 
-```sh
-http://localhost:5000/students/1
-```
-
-The `1` at the end of the URL is a route parameter.
-
-This kind of parameter is handled in a controller method by specifying the `[FromRoute]` attribute in the argument list. The following method will create a variable `id` and store the value of `1` in it.
+Recall that route parameters are a feature of MVC and Web API that give us the ability to pass in data on the URL.
 
 ```cs
-public async Task<IActionResult> Get([FromRoute]int id)
+[HttpGet("{id}")]
+public IActionResult Get(int id)
+{
+    var variety = _beanVarietyRepository.Get(id);
+    if (variety == null)
+    {
+        return NotFound();
+    }
+    return Ok(variety);
+}
 ```
+
+When we make a `GET` request to `https://localhost:5001/api/beanvariety/5`, the value `5` is passed in as the `id` parameter to the `Get(int id)` method. In this case, that `5` represents the id of the bean variety we wish to get from the database.
+
+> **NOTE:** ASP<span>.NET</span> Core turns _route parameters_ into _method parameters_ for us. Isn't that nice of it?
+
+In Web API we specify the route parameter in two places. In the HTTP verb attribute (ex. `[HttpGet("{id}")]`) and in the method parameters (ex. `public IActionResult Get(int id)`)
+
+> **NOTE:** Route parameters are not limited to `id`s and can get significantly more complex if the need arises.
 
 ## Query String Parameters
 
-Anything after the route and preceded by a question mark is a query string parameter.
+When working with `json-server` you used `_expand` and `_embed` to optionally include related data.
 
-```sh
-http://localhost:5000/students?cohort=13
+```txt
+http://localhost:3000/animal?_embed=employee
 ```
 
-The `cohort` in the URL above is a query string parameter. It's value is `13`. You can provide as many query string parameters as you want.
+`_expand` and `_embed` are examples of _query string parameters_.
 
-```sh
-http://localhost:5000/students?cohort=13&orderBy=lastname&limit=5
+A _query string_ is the part of a URL after the `?`. It consists of a list of `key=value` pairs separated by `&`.
+
+Consider this URL:
+
+```txt
+https://www.reddit.com/search/?q=csharp&sort=top&t=month
 ```
 
-To get the value of each of those query string parameters, you specify each in the argument list. Any arguments with no attribute in front of them will instruct ASP.NET to look in the query string parameters for the values.
+The query string parameters are `q`, `sort` and `t`. They are used by the Reddit search feature to dictate how the search should be conducted and the search results should be displayed.
 
-> **Note:** The variable names you define in the argument list must match the name in the URL. If you changed `string orderBy` to `string orderColumn`, then it would not capture `lastname` from the URL above.
+* `q` is the search term
+* `sort` defines the order in which the search results should be returned. In this example we want "top" results to be first...whatever that means.
+* `t` specifies the time limit to search. In this example we only want results from the past month
 
-```cs
-public async Task<IActionResult> Get(int? cohort, string orderBy, int limit)
-```
+The Reddit example demonstrates a common use case for query string parameters. They are often used for searching, sorting and configuring how data is returned from a web API.
+
+> **NOTE:** It is important to note that query string parameters can be whatever you, the developer, want them to be. There is nothing special about the query string parameters in the example. They are just what the Reddit developers chose. In the same way, there is nothing special about the _embed or _expand parameters you used with json-server. These are parameter names that the developer of json-server picked out, and are not necessarily relevant keywords outside of json-server
+
+### Query String Example
+
+**TODO**
+
+---
+
+## Exercises
+
+**TODO**
