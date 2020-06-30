@@ -165,6 +165,7 @@ namespace Gifter.Models
 
         public string Caption { get; set; }
 
+        [Required]
         public DateTime DateCreated { get; set; }
 
         [Required]
@@ -195,6 +196,7 @@ namespace Gifter.Models
 
         public string ImageUrl { get; set; }
 
+        [Required]
         public DateTime DateCreated { get; set; }
 
     }
