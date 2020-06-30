@@ -502,7 +502,7 @@ While the simpler syntax may seem like a breath of fresh air, and much easier to
 
 ## Exercises
 
-1. Create the necessary classes to make a `UserProfile` API endpoint at https://locahost:5001/api/userprofile. The endpoint should allow perform full CRUD functionality for the `UserProfile` entity.
+1. Create the necessary classes to make a `UserProfile` API endpoint at https://localhost:5001/api/userprofile. The endpoint should allow perform full CRUD functionality for the `UserProfile` entity.
 1. Add the `Comment` entity to the system. Perform full CRUD on the `Comment` entity and also allow listing of comments by `PostId`.
 1. Update the `Post` model to contain a list of comments. What impact does this have on the Post  and Comment APIs? Why?
 
