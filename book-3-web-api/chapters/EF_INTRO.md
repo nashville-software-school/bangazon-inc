@@ -180,6 +180,7 @@ namespace Gifter.Models
 > Models/UserProfile.cs
 
 ```cs
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
