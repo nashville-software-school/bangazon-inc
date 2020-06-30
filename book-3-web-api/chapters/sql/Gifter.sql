@@ -27,7 +27,7 @@ CREATE TABLE [Post] (
 )
 GO
 
-CREATE TABLE [UserProilfe] (
+CREATE TABLE [UserProfile] (
   [Id] integer PRIMARY KEY NOT NULL,
   [Name] nvarchar(255) NOT NULL,
   [Email] nvarchar(255) NOT NULL,
