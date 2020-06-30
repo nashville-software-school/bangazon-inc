@@ -1,24 +1,18 @@
 USE [master]
 GO
-
 IF db_id('Gifter') IS NULL
   CREATE DATABASE [Gifter]
 GO
-
 USE [Gifter]
 GO
-
-
 
 DROP TABLE IF EXISTS [Subscription];
 DROP TABLE IF EXISTS [Comment];
 DROP TABLE IF EXISTS [Post];
 DROP TABLE IF EXISTS [UserProfile];
 
-
-
 CREATE TABLE [Post] (
-  [Id] integer PRIMARY KEY NOT NULL,
+  [Id] integer PRIMARY KEY identity NOT NULL,
   [Title] nvarchar(255) NOT NULL,
   [ImageUrl] nvarchar(255) NOT NULL,
   [Caption] nvarchar(255),
@@ -28,7 +22,7 @@ CREATE TABLE [Post] (
 GO
 
 CREATE TABLE [UserProfile] (
-  [Id] integer PRIMARY KEY NOT NULL,
+  [Id] integer PRIMARY KEY identity NOT NULL,
   [Name] nvarchar(255) NOT NULL,
   [Email] nvarchar(255) NOT NULL,
   [ImageUrl] nvarchar(255),
@@ -38,7 +32,7 @@ CREATE TABLE [UserProfile] (
 GO
 
 CREATE TABLE [Comment] (
-  [Id] integer PRIMARY KEY NOT NULL,
+  [Id] integer PRIMARY KEY identity NOT NULL,
   [UserProfileId] integer NOT NULL,
   [PostId] integer NOT NULL,
   [Message] nvarchar(255) NOT NULL
@@ -46,41 +40,32 @@ CREATE TABLE [Comment] (
 GO
 
 CREATE TABLE [Subscription] (
-  [Id] integer PRIMARY KEY NOT NULL,
+  [Id] integer PRIMARY KEY identity NOT NULL,
   [SubscriberId] integer NOT NULL,
   [ProviderId] integer NOT NULL
 )
 GO
 
-ALTER TABLE [Post] ADD FOREIGN KEY ([UserProfileId]) REFERENCES [UserProilfe] ([Id])
+ALTER TABLE [Post] ADD FOREIGN KEY ([UserProfileId]) REFERENCES [UserProfile] ([Id])
 GO
-
 ALTER TABLE [Comment] ADD FOREIGN KEY ([PostId]) REFERENCES [Post] ([Id])
 GO
-
-ALTER TABLE [Comment] ADD FOREIGN KEY ([UserProfileId]) REFERENCES [UserProilfe] ([Id])
+ALTER TABLE [Comment] ADD FOREIGN KEY ([UserProfileId]) REFERENCES [UserProfile] ([Id])
 GO
-
-ALTER TABLE [Subscription] ADD FOREIGN KEY ([SubscriberId]) REFERENCES [UserProilfe] ([Id])
+ALTER TABLE [Subscription] ADD FOREIGN KEY ([SubscriberId]) REFERENCES [UserProfile] ([Id])
 GO
-
-ALTER TABLE [Subscription] ADD FOREIGN KEY ([ProviderId]) REFERENCES [UserProilfe] ([Id])
+ALTER TABLE [Subscription] ADD FOREIGN KEY ([ProviderId]) REFERENCES [UserProfile] ([Id])
 GO
-
-
-
-
 SET IDENTITY_INSERT [UserProfile] ON
 INSERT INTO [UserProfile]
   ([Id], [Name], [Email], [ImageUrl], [Bio], [DateCreated])
 VALUES 
   (1, 'Oliver Hardy', 'olie@email.com', null, null, '06-21-2020');
 INSERT INTO [UserProfile]
-  ([Id], [Name], [Email], [ImageUrl], [Bio])
+  ([Id], [Name], [Email], [ImageUrl], [Bio], [DateCreated])
 VALUES 
   (2, 'Stan Laurel', 'stan@email.com', null, null, '04-20-2020');
 SET IDENTITY_INSERT [UserProfile] OFF
-
 SET IDENTITY_INSERT [Post] ON
 INSERT INTO [Post]
   ([Id], [Title], [ImageUrl], [Caption], [UserProfileId], [DateCreated])
@@ -91,8 +76,6 @@ VALUES
   (4, 'People!', 'https://media.giphy.com/media/u8mNsDNfHCTUQ/giphy.gif', 'animals are better', 1, '06-29-2020'),
   (5, 'Laughter', 'https://media.giphy.com/media/5vGkcQV9AfDPy/giphy.gif', null, 2, '04-20-2020');
 SET IDENTITY_INSERT [Post] OFF
-
-
 SET IDENTITY_INSERT [Comment] ON
 INSERT INTO [Comment]
   ([Id], [UserProfileId], [PostId], [Message])
