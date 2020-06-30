@@ -33,13 +33,13 @@ export const PostProvider = (props) => {
   const [posts, setPosts] = useState([]);
 
   const getAllPosts = () => {
-    return fetch("api/post")
+    return fetch("/api/post")
       .then((res) => res.json())
       .then(setPosts);
   };
 
   const addPost = (post) => {
-    return fetch("api/post", {
+    return fetch("/api/post", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -177,7 +177,7 @@ const PostList = () => {
   return (
     <div className="container">
       <div className="row justify-content-center">
-        <div class="cards-column">
+        <div className="cards-column">
           {posts.map((post) => (
             <Post key={post.id} post={post} />
           ))}
