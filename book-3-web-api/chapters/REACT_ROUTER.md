@@ -1,6 +1,6 @@
 # React Router
 
-Lets add different routes to our Gifter application so that we can have certain components on different views and at different URLs. In this chapter we'll set up the following routes:
+Let's add different routes to our Gifter application so that we can have certain components on different views and at different URLs. In this chapter we'll set up the following routes:
 
 - `/` Main feed for all posts
 - `/posts/add` Form for adding a new post
@@ -12,7 +12,7 @@ Start by installing the React router package from npm. `cd` into your client dir
 npm i react-router-dom
 ```
 
-We can use the React router to only render certain views when a user is on a specific URL. Lets create a component that will specify this. Make a new file in your components directory and name it `ApplicationViews.js`
+We can use the React router to only render certain views when a user is on a specific URL. Let's create a component that will specify this. Make a new file in your components directory and name it `ApplicationViews.js`
 
 ```js
 import React from "react";
@@ -82,7 +82,7 @@ Run the app and go to `localhost/3000` and `localhost/3000/posts/add`
 
 ## Adding a Header Component
 
-We don't expect our users to manually type into their url bar every time they want to navigate through the app so lets create a navbar component. Add a `Header.js` file to your components directory.
+We don't expect our users to manually type into their url bar every time they want to navigate through the app so let's create a navbar component. Add a `Header.js` file to your components directory.
 
 > Header.js
 
@@ -115,7 +115,7 @@ const Header = () => {
 export default Header;
 ```
 
-Notice that instead of `<a>` tags to navigate we're using the `<Link>` component that we import from the react router. We can use the `to` attribute to specify where we want the link to take the user to. Lets add our new header component to our application. Before we do, lets think about where we should put it. We _could_ put it in our ApplicationViews component, but remember that we want the header present on _all_ routes. For now lets put it in App.js above the ApplicationViews component.
+Notice that instead of `<a>` tags to navigate we're using the `<Link>` component that we import from the react router. We can use the `to` attribute to specify where we want the link to take the user to. Let's add our new header component to our application. Before we do, let's think about where we should put it. We _could_ put it in our ApplicationViews component, but remember that we want the header present on _all_ routes. For now let's put it in App.js above the ApplicationViews component.
 
 > App.js
 
@@ -131,8 +131,8 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <Header />
         <PostProvider>
+          <Header />
           <ApplicationViews />
         </PostProvider>
       </Router>
@@ -251,7 +251,7 @@ Add these two lines of code to your own `PostForm` component and try adding a ne
 
 The last thing we want to do with our new routing abilities, is create a `PostDetails` component and use the route parameter to decide which post's details we should be showing. For example, if a user navigates to `/posts/2`, the component code will have to read the route param of `2` and use that value to make a fetch call to get that post's details.
 
-Before we make a Post Details component, lets add a function to our provider that makes that fetch call
+Before we make a Post Details component, let's add a function to our provider that makes that fetch call
 
 > PostProvider.js
 
@@ -299,10 +299,9 @@ const PostDetails = () => {
         <div className="col-sm-12 col-lg-6">
           <Post post={post} />
           <ListGroup>
-            {post.comments &&
-              post.comments.map((c) => (
-                <ListGroupItem>{c.message}</ListGroupItem>
-              ))}
+            {post.comments.map((c) => (
+              <ListGroupItem>{c.message}</ListGroupItem>
+            ))}
           </ListGroup>
         </div>
       </div>
