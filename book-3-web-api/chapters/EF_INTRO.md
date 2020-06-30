@@ -106,13 +106,11 @@ public void Add(BeanVariety variety)
 
 To explore EF Core, we'll build a new app, Gifter. Gifter is a social app for sharing animated GIFs with others. For the time being we'll focus on using building a Web API using Entity Framework Core. In future chapters we'll be creating a React application that will interact with the API.
 
-Here's the initial Gifter ERD.
+Here's the initial Gifter ERD...
 
 ![Gifter ERD](./images/Gifter_ERD.png)
 
-Here's an example showing the different between EF and ADO<span>.NET</span>. This example selects all of the departments from the Bangazon database.
-
-And the [SQL Script](./sql/Gifter.sql)
+...and the [SQL Script](./sql/Gifter.sql).
 
 ### Installing Entity Framework Core Nuget Packages
 
@@ -230,6 +228,13 @@ namespace Gifter.Data
     }
 }
 ```
+
+### DbSet&lt;T&gt;
+
+Notice the public properties in the `DbContext`. There is one `DbSet` for each table we will be interacting with. We'll see how they are used a little later.
+
+Just as we create model classes to represent the each table in our database, with Entity Framework Core we create a `DbContext` along with the appropriate `DbSet`s to represent an entire database.
+
 
 ### Configuration
 
