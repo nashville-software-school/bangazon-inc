@@ -207,6 +207,6 @@ function App() {
 }
 ``` 
 
-2. Put a button somewhere in the Post component that allows a user to delete a post.
+1. Add a "Search Posts" feature to your app that uses the `/api/post/search` API endpoint.
 
-3. Update the Post component so that it includes the comments on each post
+1. Update the Post component so that it includes the comments on each post.
