@@ -82,10 +82,47 @@ The Reddit example demonstrates a common use case for query string parameters. T
 
 ### Query String Example
 
-**TODO**
+Let's add the ability to search Posts in Gifter. We'll search by `Title` and allow the results to be sorted by date in either an ascending or descending direction.
 
----
+We'll start by adding a new method to our `PostRepository`.
+
+```cs
+public List<Post> Search(string criterion, bool sortDescending)
+{
+    var query = _context.Post
+                        .Include(p => p.UserProfile)
+                        .Where(p => p.Title.Contains(criterion));
+
+    return sortDescending 
+        ? query.OrderByDescending(p => p.DateCreated).ToList()
+        : query.OrderBy(p => p.DateCreated).ToList();
+}
+```
+
+The `Search()` method uses EF Core and Linq to create a query that includes the search criterion and order the results appropriated.
+
+Note how Entity Framework Core lets us define the query across multiple lines. In this case, we separate the majority of the query from the ordering clause. Remember the SQL isn't executed until the `ToList()` method is called, so until then we are free to append Linq method calls to our query. This is a powerful feature of EF Core that allows us to dynamically construct queries.
+
+Once we have a repository method, we'll create the new Action in the `PostController`.
+
+```cs 
+[HttpGet("search")]
+public IActionResult Search(string q, bool sortDesc)
+{
+    return Ok(_postRepository.Search(q, sortDesc));
+}
+```
+
+The above method will respond to a request that looks like this:
+
+> https://localhost:5001/api/post/search?q=p&sortDesc=false
+
+Notice the URL's route contains `search` and the URL's query string has values for `q` and `sortDesc` keys. `search` corresponds to the the argument passed to the `[HttpGet("search")]` attribute, and `q` and `sortDesc` correspond to the method's parameters.
 
 ## Exercises
 
-**TODO**
+1. Update your Gifter API to allow searching of Posts by title as illustrated in this chapter.
+1. Update the search endpoint to search by title and the caption.
+1. Add a new endpoint, `/api/post/hottest?since=<SOME_DATE>` that will return posts created on or after the provided date.
+
+> **NOTE:** as always make sure to use Postman to test your API.
