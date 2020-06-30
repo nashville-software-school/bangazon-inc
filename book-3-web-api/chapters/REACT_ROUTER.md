@@ -246,3 +246,89 @@ const history = useHistory();
 ```
 
 Add these two lines of code to your own `PostForm` component and try adding a new post. You should be taken back to the feed after submitting the form.
+
+## Using URL params in Components
+
+The last thing we want to do with our new routing abilities, is create a `PostDetails` component and use the route parameter to decide which post's details we should be showing. For example, if a user navigates to `/posts/2`, the component code will have to read the route param of `2` and use that value to make a fetch call to get that post's details.
+
+Before we make a Post Details component, lets add a function to our provider that makes that fetch call
+
+> PostProvider.js
+
+```js
+const getPost = (id) => {
+    return fetch(`/api/post/${id}`).then((res) => res.json());
+};
+```
+
+Now make sure to provide that new function
+
+```js
+<PostContext.Provider value={{ posts, getAllPosts, addPost, getPost }}>
+```
+
+**NOTE** This assumes your API is set up to return a post object which includes an array of comments. If you need to make an additional fetch call to get the comments for a post, update the `getPost` function as needed.
+
+Now we can add a `PostDetails.js` file in your components directory. Notice the use of the `useParams` hook to access the route param.
+
+> PostDetails.js
+
+```js
+import React, { useEffect, useContext, useState } from "react";
+import { ListGroup, ListGroupItem } from "reactstrap";
+import { PostContext } from "../providers/PostProvider";
+import { useParams } from "react-router-dom";
+import Post from "./Post";
+
+const PostDetails = () => {
+  const [post, setPost] = useState();
+  const { getPost } = useContext(PostContext);
+  const { id } = useParams();
+
+  useEffect(() => {
+    getPost(id).then(setPost);
+  }, []);
+
+  if (!post) {
+    return null;
+  }
+
+  return (
+    <div className="container">
+      <div className="row justify-content-center">
+        <div className="col-sm-12 col-lg-6">
+          <Post post={post} />
+          <ListGroup>
+            {post.comments &&
+              post.comments.map((c) => (
+                <ListGroupItem>{c.message}</ListGroupItem>
+              ))}
+          </ListGroup>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default PostDetails;
+```
+
+Finally, we want to update each post in the feed to have a link to the details. Update the `Post` component to import the Link component from the react router and wrap the Title of each post in a `Link`.
+
+> Post.js
+```js
+import { Link } from "react-router-dom";
+...
+```
+
+
+```js
+<Link to={`/posts/${post.id}`}>
+    <strong>{post.title}</strong>
+</Link>
+```
+
+## Exercise
+
+1. Add a new route in ApplicationViews whose path is `users/:id` and make a new component called `UserPosts` to go inside that route. If the url is `/users/1`, the app should only show the posts made by the user with the Id of 1
+1. Update the `Post` component so the username at the top is a link to your new route
