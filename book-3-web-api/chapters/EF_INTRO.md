@@ -149,6 +149,7 @@ One thing EF Core has in common with ADO<span>.NET</span> is the use of models t
 > Models/Post.cs
 
 ```cs
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace Gifter.Models
