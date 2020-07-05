@@ -67,7 +67,7 @@ Because Web API, EF Core and React are all familiar to us, we won't go into them
 1. When the react application needs to make an authenticated request to the Web API server, it passes token along with the request.
 1. When the Web API sever receives the request from the react application, it verifies the token and uses it to determine who the user is.
 
-## Digging into the Demo
+## Running the Demo
 
 As mentioned above the application we'll be building is for managing quotes from the brilliant Grace Hopper. Because there are a lot of steps required to build this application, we will not be doing it together in class. Instead you should **fork** the Github repo linked to below, then clone your copy to your computer and follow along.
 
@@ -92,3 +92,18 @@ Before we can run the app we need to make a few changes.
 1. Update the `.env` file. Change the value of the `REACT_APP_API_KEY` key to the API Key from your Firebase project.
 
 Now we're finally ready to run this thing. Build your database, then run both server and client apps.
+
+## Examining the Demo
+
+Your instructor will take you through the parts of the demo application and describe how it is setup to use Firebase authentication.
+
+### Some Key Areas to Explore
+
+* JWT Authentication in `Startup.cs`.
+* `app.UseAuthentication()` in `Startup.cs`.
+* `FirebaseUserId` property in `UserPofile.cs`.
+* `GetCurrentUser()` method in `QuoteController`.
+* Firebase JavaScript Library
+* `Login`, `Register` and `Logout` functions in `UserProfileProvider.js`.
+* Using the token (JWT) in the `fetch()` calls in both `UserProfileProvider.js` and `QuoteProvider.js`.
+* Simple `UserType` verification in `QuoteController.cs` and in `QuoteProvider.js`.
