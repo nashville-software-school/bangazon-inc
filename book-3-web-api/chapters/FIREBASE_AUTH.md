@@ -107,3 +107,7 @@ Your instructor will take you through the parts of the demo application and desc
 * `Login`, `Register` and `Logout` functions in `UserProfileProvider.js`.
 * Using the token (JWT) in the `fetch()` calls in both `UserProfileProvider.js` and `QuoteProvider.js`.
 * Simple `UserType` verification in `QuoteController.cs` and in `QuoteProvider.js`.
+
+## Exercise
+
+Add Firebase authentication to the Gifter application.
