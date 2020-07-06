@@ -103,11 +103,95 @@ Your instructor will take you through the parts of the demo application and desc
 * `app.UseAuthentication()` in `Startup.cs`.
 * `FirebaseUserId` property in `UserPofile.cs`.
 * `GetCurrentUser()` method in `QuoteController`.
-* Firebase JavaScript Library
+* Use of the `[Authorize]` attribute to secure the `UserProfileController` and `QuoteController` controllers.
+* Firebase JavaScript Library installed from npm.
 * `Login`, `Register` and `Logout` functions in `UserProfileProvider.js`.
 * Using the token (JWT) in the `fetch()` calls in both `UserProfileProvider.js` and `QuoteProvider.js`.
 * Simple `UserType` verification in `QuoteController.cs` and in `QuoteProvider.js`.
 
 ## Exercise
 
-Add Firebase authentication to the Gifter application.
+1. Go through the chapter and follow the steps to make the `WisdomAndGrace` app work on your computer.
+1. Add Firebase authentication to the Gifter application.
+
+### Firebase Authentication Checklist
+
+#### In Firebase
+
+1. Create a new Firebase project.
+1. Enable the `Email/Password` `Sign-in method`.
+1. Add at least two new users to Firebase. Each user **must** have the same email address as one of the users in your Gifter application.
+
+#### In the Gifter Database
+
+> **NOTE:** The following will delete and recreate the database.
+
+1. Update the Gifter SQL script to add a `FirebaseUserId` column to the `UserProfile` table.
+
+    ```sql
+    CREATE TABLE [UserProfile] (
+    [Id] INTEGER PRIMARY KEY IDENTITY NOT NULL,
+    [FirebaseUserId] NVARCHAR(28) NOT NULL,
+    [Name] NVARCHAR(255) NOT NULL,
+    [Email] NVARCHAR(255) NOT NULL,
+    [ImageUrl] NVARCHAR(255),
+    [Bio] NVARCHAR(255),
+    [DateCreated] DATETiME NOT NULL
+    )
+    ```
+
+1. Change the `UserProfile` `INSERT` statements to insert users with the `FirebaseUserId`s and `Email`s that match the users you created in Firebase.
+1. Run the script to recreate the Gifter database.
+
+#### In the Visual Studio Web API Project
+
+As you work through the following checklist, make sure to use the `WisdomAndGrace` application as an example.
+
+1. Update the `appsettings.json` file to add a `"FirebaseProjectId"` key. Make the value of this key your Firebase project id.
+1. Add the `Microsoft.AspNetCore.Authentication.JwtBearer` Nuget package to your project.
+1. Update the `ConfigureServices()` method in `Startup.cs` to configure your web API to understand and validate Firebase JWT authentication.
+
+    ```cs
+    var firebaseProjectId = Configuration.GetValue<string>("FirebaseProjectId");
+    var googleTokenUrl = $"https://securetoken.google.com/{firebaseProjectId}";
+    services
+        .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+        .AddJwtBearer(options =>
+        {
+            options.Authority = googleTokenUrl;
+            options.TokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuer = true,
+                ValidIssuer = googleTokenUrl,
+                ValidateAudience = true,
+                ValidAudience = firebaseProjectId,
+                ValidateLifetime = true
+            };
+        });
+    ```
+
+1. Update the `Configure()` method in `Startup.cs` to call `app.UseAuthentication();`.
+
+    ```cs
+    // ...
+    app.UseRouting();
+    app.UseAuthentication();
+    app.UseAuthorization();
+    // ...
+    ```
+
+1. Update the `UserProfile` model to include a `FirebaseUserId` property. This property should be a `string`.
+1. Create a new web API action in the `UserProfileController` that will return a user by `firebaseUserId`. This new endpoint will be used for login.
+
+    > **NOTE:** You should already have an API action for adding a new UserProfile that will be used in the registration process.
+
+1. Add [Authorize] attributes to all of your controllers. We will not allow anonymous users in the Gifter app.
+
+#### In the React Client App
+
+As you work through the following checklist, make sure to use the `WisdomAndGrace` application as an example.
+
+1. Create a `UserProfileProvider` component and a `UserProfileContext` context in a `UserProfileProvider.js` file.
+1. Add `login`, `logout` and `register` functions to the `UserProfileProvider`.
+1. Add an `isLoggedIn` boolean to the `UserProfileProvider`'s state.
+1. Update `fetch()` calls throughout the app to include an `Authorization` header that uses the Firebase token.
