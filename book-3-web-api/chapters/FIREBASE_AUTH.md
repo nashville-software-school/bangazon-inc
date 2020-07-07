@@ -193,6 +193,7 @@ As you work through the following checklist, make sure to use the `WisdomAndGrac
 
 As you work through the following checklist, make sure to use the `WisdomAndGrace` application as an example.
 
+1. Use npm to install the firebase library: `npm install firebase`.
 1. Create a `UserProfileProvider` component and a `UserProfileContext` context in a `UserProfileProvider.js` file.
 1. Add `login`, `logout` and `register` functions to the `UserProfileProvider`.
 1. Add an `isLoggedIn` boolean to the `UserProfileProvider`'s state.
