@@ -28,9 +28,8 @@ This book prepares you for building the Tabloid API
 * Chapter 4 - [Route and Query String Parameters](./chapters/CONTROLLER_PARAMETERS.md)
 * Chapter 5 - [React & Web API](./chapters/REACT_WITH_API.md)
 * Chapter 6 - [React Routing](./chapters/REACT_ROUTER.md)
-* Chapter 7 - [JSON Web Tokens](./chapters/JWT.md)
-* Chapter 8 - Firebase Auth
-* Chapter 9 - [Starting your Sprint](./chapters/HOW_TO_START.md)
+* Chapter 7 - [Firebase Authentication](./chapters/FIREBASE_AUTH.md)
+* Chapter 8 - [Starting your Sprint](./chapters/HOW_TO_START.md)
 
 > __Sprint 1__ - Full-stack Tabloid
 
