@@ -69,9 +69,9 @@ Because Web API, EF Core and React are all familiar to us, we won't go into them
 
 ## Running the Demo
 
-As mentioned above the application we'll be building is for managing quotes from the brilliant Grace Hopper. Because there are a lot of steps required to build this application, we will not be doing it together in class. Instead you should **fork** the Github repo linked to below, then clone your copy to your computer and follow along.
+As mentioned above the application we'll be building is for managing quotes from the brilliant Grace Hopper. Because there are a lot of steps required to build this application, we will not be doing it together in class. Instead you should **fork** the Github repo linked to below, then clone your copy to your computer.
 
-https://github.com/askingalot/WisdomAndGrace
+https://github.com/nashville-software-school/WisdomAndGrace
 
 ### Look around the repo
 
