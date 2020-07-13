@@ -2,7 +2,7 @@
 
 ## 1. Install .NET Core
 
-1. Visit the [.NET Tutorial](https://www.microsoft.com/net/learn/get-started-with-dotnet-tutorial) site, click on your OS and follow the steps to install .NET Core.
+1. Visit the [.NET Tutorial](https://dotnet.microsoft.com/learn/dotnet/hello-world-tutorial/intro) site, click on your OS and follow the steps to install .NET Core.
 1. In your terminal go to your `workspace` directory and do steps 2 and 3 in the tutorial to verify everything works.
 
 ## 2. Install [SQL Server Express](https://www.microsoft.com/en-us/sql-server/sql-server-editions-express)
