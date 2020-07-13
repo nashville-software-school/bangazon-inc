@@ -25,15 +25,14 @@ This book builds a strong foundation in the syntax, data structures, and valuabl
 
 > #### Let's Talk About C#
 
-* Chapter 17 - [Windows Installations](./chapters/WINDOWS_PRO_INSTALLS.md)
-* Chapter 18 - [Intro to Visual Studio](./chapters/VISUAL_STUDIO.md)
-* Chapter 19 - [Debugging in Visual Studio](./chapters/DEBUGGING_VS.md)
-* Chapter 20 - [SQL Server using Visual Studio](./chapters/SQL_SERVER_AND_VISUAL_STUDIO.md)
-* Chapter 21 - [Introduction to SQL](./chapters/SQL_INTRO.md)
-* Chapter 22 - [Student Exercises - Part 4](./chapters/STUDENT_EXERCISES_SQL.md)
-* Chapter 23 - [Using ADO.NET and SQL](./chapters/ADONET_INTRO.md)
-* Chapter 24 - [Student Exercises - Part 5](./chapters/STUDENT_EXERCISES_ADONET.md)
-* Chapter 25 - [Bangazon ERD](./chapters/BANGAZON_ERD.md)
+* Chapter 17 - [Intro to Visual Studio](./chapters/VISUAL_STUDIO.md)
+* Chapter 18 - [Debugging in Visual Studio](./chapters/DEBUGGING_VS.md)
+* Chapter 19 - [SQL Server using Visual Studio](./chapters/SQL_SERVER_AND_VISUAL_STUDIO.md)
+* Chapter 20 - [Introduction to SQL](./chapters/SQL_INTRO.md)
+* Chapter 21 - [Student Exercises - Part 4](./chapters/STUDENT_EXERCISES_SQL.md)
+* Chapter 22 - [Using ADO.NET and SQL](./chapters/ADONET_INTRO.md)
+* Chapter 23 - [Student Exercises - Part 5](./chapters/STUDENT_EXERCISES_ADONET.md)
+* Chapter 24 - [Bangazon ERD](./chapters/BANGAZON_ERD.md)
 
 ## Supplementary Content
 * Supplement - [SQL Challenge: Chinook](./chapters/CHINOOK.md)
