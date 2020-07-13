@@ -220,25 +220,39 @@ await _context.SaveChangesAsync();
 
 ## Project Setup
 
-### Create a new project:
-1. Select ASP.NET Core Web Application
-1. Name your project and hit "Create"
-1. Select "Web Application Model-View-Controller"
-    - On the right, under "Authentication", select "Change" and then select "Individual User Accounts"
-1. Go into `appsettings.json` and change the connection of your database to point toward the SQL Server database you want to use in this project.
+Before you can use any of the Entity Framework goodness, you have to do a little bit of setup in your project.
 
 ### Nuget Package References
 
-When you add authentication, ASP<span>.Net</span> installs the packages you need to use Identity Framework and SQL Server. You need to install the following package manually:
+By default an ASP<span>.Net</span> project does not include the classes needed to use EF with SQL Server. You'll need to add these nuget packages.
 
 * **Microsoft.EntityFrameworkCore**
     * The foundational EF library
+* **Microsoft.EntityFrameworkCore.SqlServer**
+    * Specific bits for connecting EF with SQL Server
+* **Microsoft.EntityFrameworkCore.Tool**
+    * Used for working with database "migrations"
 
 
+Notice the `DbSet<T>` properties in `ApplicationDbContext`. `DbSet<T>`s are the link between models and database tables. The `ApplicationDbContext` above implies that we have `Employee` and `Department` model classes AND `Employee` and `Department` database tables.
+
+To configure EF, you must call `services.AddDbContext()` in the `ConfigureServices` method of the `Startup` class.
+
+For example, if you would like to use EF in an MVC project, your `ConfigureServices` method would look something like this.
+
+```cs
+public void ConfigureServices(IServiceCollection services)
+{
+    services.AddDbContext<ApplicationDbContext>(options =>
+        options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+    services.AddControllersWithViews();
+}
+```
 
 ### ApplicationDbContext
 
-Once you create your models, you will need to add them to your `ApplicationDBContext`.
+You will need to create a DbContext as described above.
 
 ```cs
 using DepartmentsEmployeesEF.Models;

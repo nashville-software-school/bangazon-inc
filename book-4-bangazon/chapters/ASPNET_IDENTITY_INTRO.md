@@ -14,6 +14,8 @@ Identity Framework contains features for both authentication and authorization, 
 
 When you create a new project in Visual Studio, you need to make sure that during the setup that you click the button labeled `Change Authentication` and select _Individual User Accounts_.
 
+![mvc with identity](./assets/mvc_with_identity.gif)
+
 The new application will contain quite a bit of initial structure, including a lot of Entity Framework related code. While we will use a lot of the code in the initial project, we will need to make some changes and add some things.
 
 ## ApplicationUser
@@ -61,7 +63,7 @@ namespace YourApplicationNamespaceHere.Models
 
 Identity Framework works hand-in-hand with Entity framework. When we create a new Identity Framework project, VS even gives us an initial `ApplicationDbContext`, a migration and a connection string in `appSettings.json`. These scaffolded items are a good starting point, but we need to make a few changes.
 
-1. If you're starting a new project, you can delete the `Data/Migrations` folder. It was nice of VS to give us an initial migration, but that migration wasn't built with our custom `ApplicationUser` class. If you're overriding the `ApplicationUser` in a project that already exists, you don't need to delete the `Migrations` folder. 
+1. Delete the `Data/Migrations` folder. It was nice of VS to give us an initial migration, but that migration wasn't built with our custom `ApplicationUser` class.
     > **NOTE:** Do NOT delete the `Data` folder, only the `Migration` folder inside of it.
 1. Update the connection string in your appsettings file to point to a new database in your local SQLExpress database server.
 1. Tell Identity and Entity about your custom `ApplicationUser` class by updating the `ApplicationDbContext` to inherit from `IdentityDbContext<ApplicationUser>`
@@ -107,6 +109,7 @@ As of .NET Core 2.1, the Razor pages that are used by Identity Framework for use
 1. Choose your `ApplicationDbContext` file in the drop-down below the list of files
 1. Click 'Add'
 
+![mvc_identity_scaffold_register.gif](./assets/mvc_identity_scaffold_register.gif)
 
 Once that's complete, look in your Solution Explorer. You will see a new directory structure of `Areas -> Identity -> Pages -> Account`. In that directory, you will find the `Register.cshtml` file.
 

@@ -473,16 +473,18 @@ List<double> prices = new List<double>()
 ### Partitioning Operations
 
 ```cs
-/*
-    Store each number in the following List until a perfect square
-    is detected.
-
-    Ref: https://msdn.microsoft.com/en-us/library/system.math.sqrt(v=vs.110).aspx
-*/
 List<int> wheresSquaredo = new List<int>()
 {
     66, 12, 8, 27, 82, 34, 7, 50, 19, 46, 81, 23, 30, 4, 68, 14
 };
+/*
+    Store each number in the following List until a perfect square
+    is detected.
+
+    Expected output is { 66, 12, 8, 27, 82, 34, 7, 50, 19, 46 } 
+
+    Ref: https://msdn.microsoft.com/en-us/library/system.math.sqrt(v=vs.110).aspx
+*/
 ```
 
 ### Using Custom Types
@@ -528,15 +530,17 @@ public class Program
 */
 ```
 
+## Challenge
+
 ### Introduction to Joining Two Related Collections
 
 As a light introduction to working with relational databases, this example works with two collections of data - `banks` and `customers` - that are related through the `Bank` attribute on the customer. In that attribute, we store the abbreviation for a bank. However, we want to get the full name of the bank when we produce our output.
 
 This is called joining the collections together.
 
-This exercise is also an introduction to producing anonymous objects as the result of the LINQ statement.
-
-Read the [Group Join](https://code.msdn.microsoft.com/LINQ-Join-Operators-dabef4e9#groupjoin) example to get started.
+Read the [Cross Join](https://code.msdn.microsoft.com/LINQ-Join-Operators-dabef4e9#crossjoin) example to get started.
+> **NOTE**: You might also find this page on the Microsoft Docs site helpful.
+> * [Enumerable.Join Method ](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.join?view=netframework-4.8#System_Linq_Enumerable_Join__4_System_Collections_Generic_IEnumerable___0__System_Collections_Generic_IEnumerable___1__System_Func___0___2__System_Func___1___2__System_Func___0___1___3__)
 
 ```cs
 /*
@@ -613,4 +617,3 @@ public class Program
     }
 }
 ```
-

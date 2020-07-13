@@ -13,15 +13,15 @@ What is a **relational database**? A relational database is one that stores data
 
 ## Setup
 
-1. Open **Azue Data Studio**.
-1. Connect to the master database.
-1. Run [this SQL script](./assets/musichistory_create.sql) inside ADS to create a new database named `MusicHistory`.
-1. Delete the SQL from the previous step, and run [this SQL script](./assets/musichistory.sqlserver.sql) inside ADS to create tables in your database and insert some seed data.
-1. Type `ctrl+G` to view your connections.
-1. Right click your connection and choose _New Query_
-    ![open a new query window](./images/ads_newquery.gif)
-
-You will be writing your SQL statements in this new, blank query window.
+1. Open **Visual Studio**.
+1. At the start screen select `Continue without code`.
+1. Open the `View` menu and select `SQL Server Object Explorer`.
+1. Expand the node for your SQL Server instance.
+1. Right-click on "Databases" and select `Add new database`.
+1. Name the new database `MusicHistory`.
+1. Right click the `MusicHistory` database and choose `New Query`.
+1. Run [this SQL script](./assets/musichistory.sqlserver.sql) to create tables in your database and insert some seed data.
+1. Create a new query window You will be writing your SQL statements in this new, blank query window.
 
 ## Querying Data
 
@@ -102,14 +102,17 @@ INSERT INTO Genre (Label) VALUES ('Techno');
 Change the length (in seconds) for one of the songs.
 
 ```sql
-select * from Song where Id = 18;
-> 664
+select SongLength from Song where Id = 18;
+
+-- The following is the output you get when you run the query above.
+> 237
 
 update Song
 set SongLength = 515
 where Id = 18;
 
-select * from Song where Id = 18;
+-- Once you run the update statement, in order to make sure the value has changed, we run the select query again.
+select SongLength from Song where Id = 18;
 > 515
 ```
 
@@ -138,7 +141,7 @@ delete from Song;
 
 ## Instructions
 
-1. Using the **Object Explorer** in SSMS, examine the tables, columns, and foreign keys of the database.
+1. Using the **SQL Server Object Explorer** in Visual Studio, examine the tables, columns, and foreign keys of the database.
 1. Using the `dbdiagram.io` site, create an ERD for the database.
 
 For each of the following exercises, provide the appropriate query. Yes, even the ones that are expressed in the form of questions. Everything from class and the references listed above is fair game.
@@ -151,8 +154,8 @@ For each of the following exercises, provide the appropriate query. Yes, even th
     > **Reminder:** Direction of join matters. Try the following statements and see the difference in results.
 
     ```
-    SELECT a.Title, s.Title FROM Album a LEFT JOIN Song s ON s.AlbumId = a.AlbumId;
-    SELECT a.Title, s.Title FROM Song s LEFT JOIN Album a ON s.AlbumId = a.AlbumId;
+    SELECT a.Title, s.Title FROM Album a LEFT JOIN Song s ON s.AlbumId = a.Id;
+    SELECT a.Title, s.Title FROM Song s LEFT JOIN Album a ON s.AlbumId = a.Id;
     ```
 1. Write a `SELECT` statement to display how many songs exist for each album. You'll need to use the `COUNT()` function and the `GROUP BY` keyword sequence.
 1. Write a `SELECT` statement to display how many songs exist for each artist. You'll need to use the `COUNT()` function and the `GROUP BY` keyword sequence.

@@ -10,7 +10,7 @@ In order to become a profitable, and sustainable organization, we need you to bu
 
 ## Orientation
 
-Your first two weeks on the job will be you orientation to the technical languages that you'll be using, and to the processes and procedures that you will need to follow to ensure high communication and high productivity for your team.
+Your first four weeks on the job will be you orientation to the technical languages that you'll be using, and to the processes and procedures that you will need to follow to ensure high communication and high productivity for your team.
 
 1. Installation of required tools.
 1. Introduction to the language.

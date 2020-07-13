@@ -13,13 +13,14 @@ This book prepares you for building the Bangazon Platform API
 * Chapter 7 - [Student Exercises - Part 8](./chapters/STUDENT_EXERCISES_MODELSTATE.md)
 * Chapter 8 - [Integration Tests](./chapters/INTEGRATION_TESTS.md)
 * Chapter 9 - [Student Exercises - Part 9](./chapters/STUDENT_EXERCISES_TESTING.md)
-* Chapter 10 - [Bangazon ERD](./chapters/BANGAZON_ERD.md)
-* Chapter 11- [Starting your Sprint](./chapters/HOW_TO_START.md)
+* Chapter 10 - [Starting your Sprint](./chapters/HOW_TO_START.md)
 
 > ### __Sprint 1__ - Bangazon Platform API
 
-* Chapter 11 - [Student Exercises React Client](./chapters/STUDENT_EXERCISES_REACT_CLIENT.md)
+* Chapter 11 - [Chinook SQL Practice](./chapters/CHINOOK.md)
+* Chapter 12 - [Bangazon SQL Practice](./chapters/BANGAZON_SQL_EXERCISE.md)
+* Chapter 13 - [Student Exercises React Client](./chapters/STUDENT_EXERCISES_REACT_CLIENT.md)
 
 ## Supplementary Content
 
-* Supplement - [Web API Tutorial](https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-web-api?view=aspnetcore-2.1)
+* Supplement - [Web API Tutorial](https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-web-api?view=aspnetcore-3.0)
