@@ -20,7 +20,7 @@ In a Web Application, you will be using the Razor templating system in .NET Core
 
 ## Getting Started
 
-1. Create new project in Visual Studio.
+1. Create new project in Visual Studio
 1. Choose the _ASP.NET Core Web Application_
 1. Specify project name of _StudentExercisesMVC_
 1. Click _Ok_
@@ -46,17 +46,17 @@ You are going to be using the same models that you used in your API project. You
 
 ## Controller
 
-Time to use Visual Studio scaffolding to create a base controller for our **`Student`** resource. Right click on the `Controllers` director in Solution Explorer. Then choose `Add > New scaffolded item`.
+Time to use Visual Studio scaffolding to create a base controller for our **`Student`** resource. Right click on the `Controllers` directory in Solution Explorer. Then choose `Add > New scaffolded item`.
 
 In the window that appears, choose _MVC Controller with read/write actions_. Then click the _Add_ button. You will then be asked to name your controller, so name it `StudentsController`.
 
- Your controller will be automatically created for you, and `StudentsController.cs` will appear in your Solution Explorer.
+ Your controller will be automatically created for you and `StudentsController.cs` will appear in your Solution Explorer.
 
 ![scaffolding a new controller in Visual Studio](./images/lsq7qz3ZAE.gif)
 
 ### Injecting Configuration for Connection String
 
-Next, you can copy the controller constructor, and `Connection` property from a previous project, and rename the constructor to `StudentsController`. You can also copy it from below and paste it into your controller.
+Next, you can copy the controller constructor and `Connection` property from a previous project and rename the constructor to `StudentsController`. You can also copy it from below and paste it into your controller.
 
 You'll have to use the helpful lightbulb several times to get all of the packages imported.
 
@@ -123,14 +123,14 @@ using (SqlConnection conn = Connection)
 
 ## Student List Razor Template
 
-1. Right click on the `Index` method in your `StudentsController`.
-1. Choose `Add View..`.
-1. In the window that appears, provide a name of `Index`, template is `List`, and then choose the `Student` model.
-1. Click `Add` and wait for the Razor template to be generated.
+1. Right click on the `Index` method in your `StudentsController`
+1. Choose `Add View..`
+1. In the window that appears, provide a name of `Index`, template is `List`, and then choose the `Student` model
+1. Click `Add` and wait for the Razor template to be generated
 
 ## Viewing the List of Students
 
-Now you start the project, and visit [http://localhost:5000/students](http://localhost:5000/students) in your browser to see the HTML representation of student you have in your database.
+Now you start the project. Visit [http://localhost:5000/students](http://localhost:5000/students) in your browser to see the HTML representation of students you have in your database.
 
 ## Adding the Other Views
 

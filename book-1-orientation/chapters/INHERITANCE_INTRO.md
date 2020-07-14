@@ -15,7 +15,7 @@ You will likely be asked about inheritance during the interview process and shou
 
 You are going to use the vehicle classes from Gary's Wholesale Garage from the last chapter to learn about the basics of inheritance. Here's the code from the last chapter.
 
-When considering interfaces, you examine your code to look for properties and methods that **some** of the classes have in common. When considering inheritance, you examine your code to look for properties and meethods that **all** of the classes have in common.
+When considering interfaces, you examine your code to look for properties and methods that **some** of the classes have in common. When considering inheritance, you examine your code to look for properties and methods that **all** of the classes have in common.
 
 Are there any in the classes below?
 

@@ -50,7 +50,7 @@ namespace StudentExercises.Models
 
 ## Additional Properties not Mapped to Columns
 
-When a `Student` instance gets created, you can access the `FirstName` and `LastName` properties and concatendate them together. However, if this happens many times in your application, you can save time, and code, by creating a computed property called `FullName`.
+When a `Student` instance gets created, you can access the `FirstName` and `LastName` properties and concatenate them together. However, if this happens many times in your application, you can save time, and code, by creating a computed property called `FullName`.
 
 This property is not saved in the database, but is used by your application logic.
 
@@ -69,9 +69,9 @@ First, controllers are just classes.
 
 Second, these classes have methods to handle HTTP requests to your application.
 
-The controller has all of the logic needed to generate the  response requested by the client. It can validate the user, validate request data, query the database, logic for manipulating the data, and generating an HTML response.
+The controller has all of the logic needed to generate the  response requested by the client. It can validate the user, validate request data, query the database, contain logic for manipulating the data, and generate an HTML response.
 
-Here is the overall workflow.
+Here is the overall workflow:
 
 1. Client generates a request
 1. Request is heard by a web server and passed along to your application

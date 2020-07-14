@@ -35,7 +35,7 @@ We will be covering integration tests in this chapter.
 
 ## Integration Testing in ASP.NET Core Web API
 
-It's true that a human _could_ open a web browser and manually perform all the steps necessary to test all parts of a web application, but - like with many things - a computer can do it faster, with fewer mistakes, and without complaining about how boring it is to test and retest the same app all the time.
+It's true that a human _could_ open a web browser or Postman and manually perform all the steps necessary to test all parts of a web application, but - like with many things - a computer can do it faster, with fewer mistakes, and without complaining about how boring it is to test and retest the same app all the time.
 
 
 ## Example
@@ -152,7 +152,7 @@ using KennelAPI;
 using System.Net.Http;
 using Xunit;
 
-namespace TestAnimalAPI
+namespace TestKennelAPI
 {
     class APIClientProvider : IClassFixture<WebApplicationFactory<Startup>>
     {
@@ -173,16 +173,20 @@ namespace TestAnimalAPI
 }
 ```
 
-## Required Packages
+## Setup the test project
 
-The following packages are needed to run integration tests with this code. You can use the command line (e.g. `dotnet add package Microsoft.AspNetCore.HttpsPolicy`) or use the Visual Studio window for managing packages.
+1. Clone the [KennelAPI](https://github.com/nss-day-cohort-34/IntegrationTesting-KennelAPI) repo.
+1. Create a `KennelDB` database using the script provided in the `KennelAPI` repo.
+1. Open `KennelAPI` in Visual Studio.
+1. Right click the **solution** _(.sln file)_ and select `Add` / `New Project...`.
+1. Use the `xUnit Test Project (.NET Core)` template to create a test project.
+1. Name the project "TestKennelAPI"
+1. Add the `Microsoft.AspNetCore.Mvc.Testing` nuget package to the test project.
+1. Right click the `Dependencies` node beneath the test project, click `Add Reference`.
+1. Select the `KennelAPI` project and click `Ok`.
+1. Create a `APIClientProvider` class and copy in the above code.
+1. Start testing....
 
-```sh
-Microsoft.AspNetCore
-Microsoft.AspNetCore.HttpsPolicy
-Microsoft.AspNetCore.Mvc
-Microsoft.AspNetCore.Mvc.Testing
-```
 
 ## Get All Animals
 

@@ -27,7 +27,7 @@ List<int> yearsBorn = new List<int>() {
 
 ## A More Powerful Array
 
-You can use [arrays](https://docs.microsoft.com/en-us/dotnet/api/system.array?view=netcore-2.1) in C#, as well.
+You can use [arrays](https://docs.microsoft.com/en-us/dotnet/api/system.array?view=netcore-3.0) in C#, as well.
 
 ```cs
 int[] itemsSold = new int[] {9, 12, 8, 8, 7, 14, 13, 9};
@@ -37,16 +37,17 @@ The downside to using arrays in C#, in particular for web application developmen
 
 The `List` collection in C# has the following methods that an array does not.
 
-* [Add()](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1.add?view=netcore-2.1)
-* [AddRange()](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1.addrange?view=netcore-2.1)
-* [Insert()](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1.insert?view=netcore-2.1)
-* [Find()](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1.find?view=netcore-2.1)
-* [Remove()](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1.remove?view=netcore-2.1)
-* [Contains()](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1.contains?view=netcore-2.1)
-* [ForEach()](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1.foreach?view=netcore-2.1)
-* [Count](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1.count?view=netcore-2.1)
+* [Add()](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1.add?view=netcore-3.0)
+* [AddRange()](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1.addrange?view=netcore-3.0)
+* [Insert()](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1.insert?view=netcore-3.0)
+* [Find()](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1.find?view=netcore-3.0)
+* [Remove()](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1.remove?view=netcore-3.0)
+* [Contains()](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1.contains?view=netcore-3.0)
+* [ForEach()](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1.foreach?view=netcore-3.0)
+* [Count](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1.count?view=netcore-3.0)
 
 ```cs
+using System;
 using System.Collections.Generic;
 
 namespace NSSOrientation
@@ -59,7 +60,7 @@ namespace NSSOrientation
                 "Megan", "Damon", "Chase", "Tekisha",
                 "Castle", "Mark", "Keith", "Adam",
                 "Patrick", "Hannah", "Mike"
-            }
+            };
 
             // Can't do this easily with a base array
             students.Add("Melanie");

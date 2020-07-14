@@ -4,10 +4,10 @@ GO
 IF NOT EXISTS (
     SELECT [name]
     FROM sys.databases
-    WHERE [name] = N'Music History'
+    WHERE [name] = N'MusicHistory'
 )
-CREATE DATABASE Music History
+CREATE DATABASE MusicHistory
 GO
 
-USE Music History
+USE MusicHistory
 GO

@@ -1,6 +1,6 @@
 # ASP.NET Web API
 
-In the client side course, you learned how to create a JSON based API using `json-server`. You also, likely, consumed a third-party API for your client side capstone project. Organizations provide APIs so that software developers can build interesting products based on their data.
+In the client side course, you learned how to create a JSON based API using `json-server`. You also may have consumed a third-party API for your client side capstone project. Organizations provide APIs so that software developers can build interesting products based on their data.
 
 With ASP.NET, you can use the Web API project type to actually build business logic into your API. `json-server` was severely limited in that it could only create, update, and read JavaScript objects in arrays in your JSON file. In the upcoming sprint, you can perform multiple actions in response to a request from a client.
 
@@ -16,4 +16,4 @@ That's some complex logic that your API will handle instead of forcing the clien
 
 ## Resources
 
-1. [Create a Web API with ASP.NET Core and Visual Studio](https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-web-api?view=aspnetcore-2.1) - This tutorial uses Entity Framework, not Dapper, but still is a good tutorial to see how everything works.
+1. [Create a Web API with ASP.NET Core and Visual Studio](https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-web-api?view=aspnetcore-3.0) - This tutorial uses Entity Framework (which we will cover later), but still is a good tutorial to see how everything works.

@@ -6,7 +6,7 @@ Now that you have learned that basics of being able to designate various types f
 
 Since interfaces specify the rules for classes to follow, you very often specify methods in the interface to ensure that all implementing classes have the same behavior. Methods often define arguments. Arguments have types.
 
-However, since the implementing classes can often take define different types for their arguments, learning generic typing will make your interfaces more powerful and flexible.
+However, since the implementing classes can often take different types for their arguments, learning generic typing will make your interfaces more powerful and flexible.
 
 ## Generics
 
