@@ -43,34 +43,6 @@ In this chapter we'll look at how to write **unit** tests for the methods in Gif
 
 The tests we write are not part of our application, so we don't put them in the same project, however they _can_ go in the same Visual Studio solution. Open up the Gifter application in Visual Studio and right click the top item in Solution Explorer marked `Solution 'Gifter'` and select Add > New Project. Search the templates for "xUnit Test Project (.NET Core)" and select the one for C#. Give it the name "Gifter.Tests". This will create a new project for you as well as a file to start writing some tests in that looks like this:
 
-### Entity Framework Core
-
-Our new test project will need access to Entity Framework Core, so we will need to add the EF nuget packages.
-
-Add these Nuget package references to your test project's `*.csproj` file.
-
-```xml
-<PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.5" />
-<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.5" />
-<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.5" />
-```
-
-### Reference the Project to Test
-
-Our tests will be written to verify that the Gifter app behaves as we expect. This means we'll have to tell our test project about the Gifter project.
-
-Add this project reference to your test project's `*.csproj` file.
-
-```xml
-<ItemGroup>
-  <ProjectReference Include="..\Gifter\Gifter.csproj" />
-</ItemGroup>
-```
-
-> **NOTE:** Tthe Gifter app is referred to as the [_System Under Test_](https://en.wikipedia.org/wiki/System_under_test) (SUT).
-
-## Our First Tests
-
 ```csharp
 using System;
 using Xunit;
@@ -112,9 +84,42 @@ namespace Gifter.Tests
 
 Now let's see how we can execute this test to see the results. In Visual Studio, go to the top menu bar and select Test > Test Explorer. This opens the Test Explorer window where we can see and run all of our tests. Right click the name of the test project and select "Run". This will run our lone test called "Two Numbers Should Equal". The test will fail--but this is a good thing! We always want to start off by writing _failing_ tests. This ensures that we're not getting an false positives by accident. After the test fails, change the code in the test to make it pass and run it again. Your red X is now a green checkmark. Welcome to the joys of software development.
 
+Now let's start setting up some more meaningful tests that will test the behavior of some of our PostRepository methods.
+
+
+### Entity Framework Core
+
+Our new test project will need access to Entity Framework Core, so we will need to add the EF nuget packages.
+
+Add these Nuget package references to your test project's `*.csproj` file.
+
+```xml
+<PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.5" />
+<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.5" />
+<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.5" />
+```
+
+### Reference the Project to Test
+
+Our tests will be written to verify that the Gifter app behaves as we expect. This means we'll have to tell our test project about the Gifter project.
+
+Add this project reference to your test project's `*.csproj` file.
+
+```xml
+<ItemGroup>
+  <ProjectReference Include="..\Gifter\Gifter.csproj" />
+</ItemGroup>
+```
+
+> **NOTE:** The Gifter app is referred to as the [_System Under Test_](https://en.wikipedia.org/wiki/System_under_test) (SUT).
+
+
+
+
+
 ## Writing Repository Tests
 
-Consider the example test earlier in this chapter that tested whether or not our `Add` method actually added something to the database. There is a problem that we have to consider: I want to be able to run that test as many times as I'd like, but I _don't_ want that ugly test data to actually be added to my database every time I run it. 
+Ponder for a moment the example test earlier in this chapter that tested whether or not our `Add` method actually added something to the database. There is a problem that we have to consider: I want to be able to run that test as many times as I'd like, but I _don't_ want that ugly test data to actually be added to my database every time I run it. 
 
 We can tell Entity Framework to actually use a _different_ database/connection string that's just for our tests. In fact, we're going to use an "in memory" database so that when we run a test, the following things will happen:
 
@@ -204,21 +209,24 @@ namespace Gifter.Tests
             {
                 Name = "Walter",
                 Email = "walter@gmail.com",
-                DateCreated = DateTime.Now - TimeSpan.FromDays(365)
+                DateCreated = DateTime.Now - TimeSpan.FromDays(365),
+                FirebaseUserId = "TEST_FIREBASE_UID_1"
             };
 
             var user2 = new UserProfile()
             {
                 Name = "Donny",
                 Email = "donny@gmail.com",
-                DateCreated = DateTime.Now - TimeSpan.FromDays(400)
+                DateCreated = DateTime.Now - TimeSpan.FromDays(400),
+                FirebaseUserId = "TEST_FIREBASE_UID_2"
             };
 
             var user3 = new UserProfile()
             {
                 Name = "The Dude",
                 Email = "thedude@gmail.com",
-                DateCreated = DateTime.Now - TimeSpan.FromDays(400)
+                DateCreated = DateTime.Now - TimeSpan.FromDays(400),
+                FirebaseUserId = "TEST_FIREBASE_UID_3"
             };
 
             _context.Add(user1);
