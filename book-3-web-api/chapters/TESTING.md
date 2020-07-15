@@ -43,6 +43,34 @@ In this chapter we'll look at how to write **unit** tests for the methods in Gif
 
 The tests we write are not part of our application, so we don't put them in the same project, however they _can_ go in the same Visual Studio solution. Open up the Gifter application in Visual Studio and right click the top item in Solution Explorer marked `Solution 'Gifter'` and select Add > New Project. Search the templates for "xUnit Test Project (.NET Core)" and select the one for C#. Give it the name "Gifter.Tests". This will create a new project for you as well as a file to start writing some tests in that looks like this:
 
+### Entity Framework Core
+
+Our new test project will need access to Entity Framework Core, so we will need to add the EF nuget packages.
+
+Add these Nuget package references to your test project's `*.csproj` file.
+
+```xml
+<PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.5" />
+<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.5" />
+<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.5" />
+```
+
+### Reference the Project to Test
+
+Our tests will be written to verify that the Gifter app behaves as we expect. This means we'll have to tell our test project about the Gifter project.
+
+Add this project reference to your test project's `*.csproj` file.
+
+```xml
+<ItemGroup>
+  <ProjectReference Include="..\Gifter\Gifter.csproj" />
+</ItemGroup>
+```
+
+> **NOTE:** Tthe Gifter app is referred to as the [_System Under Test_](https://en.wikipedia.org/wiki/System_under_test) (SUT).
+
+## Our First Tests
+
 ```csharp
 using System;
 using Xunit;
