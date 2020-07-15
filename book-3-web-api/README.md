@@ -30,6 +30,7 @@ This book prepares you for building the Tabloid API
 * Chapter 6 - [React Routing](./chapters/REACT_ROUTER.md)
 * Chapter 7 - [Firebase Authentication](./chapters/FIREBASE_AUTH.md)
 * Chapter 8 - [Starting your Sprint](./chapters/HOW_TO_START.md)
+* Chapter 9 - [Testing](./chapters/TESTING.md)
 
 > __Sprint 1__ - Full-stack Tabloid
 
