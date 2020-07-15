@@ -29,23 +29,12 @@ This book prepares you for building the Tabloid API
 * Chapter 5 - [React & Web API](./chapters/REACT_WITH_API.md)
 * Chapter 6 - [React Routing](./chapters/REACT_ROUTER.md)
 * Chapter 7 - [Firebase Authentication](./chapters/FIREBASE_AUTH.md)
-* Chapter 8 - [Starting your Sprint](./chapters/HOW_TO_START.md)
-* Chapter 9 - [Testing](./chapters/TESTING.md)
 
 > __Sprint 1__ - Full-stack Tabloid
 
-**Part 2: SQL Practice**
+**Part 2: Testing**
 
-* Chapter 9 - [Chinook SQL Practice](./chapters/CHINOOK.md)
-* Chapter 10 - [Bangazon SQL Practice](./chapters/BANGAZON_SQL_EXERCISE.md)
-
-**Part 3: Testing**
-
-* Chapter 11 - [Integration Tests](./chapters/INTEGRATION_TESTS.md)
-
-**Part 4: ADO<span>.NET</span> and EF**
-
-* Chapter 12 - Reporting - Mixing SQL and Entity Framework
+* Chapter 8 - [Testing](./chapters/TESTING.md)
 
 > __Sprint 2__ - Full-stack Tabloid
 
