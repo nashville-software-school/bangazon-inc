@@ -2,7 +2,7 @@
 
 ## Set up project
 
-1. Create Web API VS project
+1. Create Web API project in Visual Studio
 1. Create SQL script (either copy from Gifter and modify or generate from DBDiagram): Save SQL file in the project
 1. Create .gitignore
 
