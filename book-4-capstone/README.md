@@ -1,4 +1,4 @@
-# Book 5 - Plan and Execute your Capstone
+# Book 4 - Plan and Execute your Capstone
 
 ## Resources
 
