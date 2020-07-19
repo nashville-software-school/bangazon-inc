@@ -6,3 +6,4 @@
 
 * [Design Thinking & Capstones](https://docs.google.com/presentation/d/1yND0ZBCrKyz5PnDujtE1IL74MQ5D_xNNzwtzpOAmOLo/present?token=AC4w5VgWjVNQqf0p7jx44HqzhRWIaQtEeA%3A1555681121160&includes_info_params=1&eisi=CMTR8eSj3OECFU8KyAod170KoA#slide=id.p)
 
+* [Getting Started Guide](CAPSTONE_CHECKLIST.md)
