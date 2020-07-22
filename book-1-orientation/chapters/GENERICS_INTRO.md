@@ -16,71 +16,129 @@ Generics are much the same, but for the type!
 
 The truly weird thing that you will need to get used to is the syntax for it. The type is passed into an object via the class, or interface, name itself rather than the typical parenthesis after a method name.
 
-##### Method Argument
+## Back to Gary's Garage
+
+Gary's Garage is expanding. He now needs one garage for his electric vehicles, so he can recharge them appropriately, and another one for gas-powered vehicles. Finally, Gary needs a third showroom garage that can hold electric _and_ gas powered vehicles.
+
+All three of his garages must have the following things:
+
+1. A list of cars
+2. A method to add cars to the garage
+3. A method to list all of the cars in that garage to the console
+
+The class for our electric garage might look something like this:
 
 ```cs
-public class CarFactory
-{
-    public List<Autoworker> employees { get; set; } = new List<Autoworker>();
-
-    /*
-        Standard argument defined for a method, with a
-        pre-defined, concrete type and a variable name.
-    */
-    public void HireEmployee (Autoworker employee)
+public class ElectricGarage
     {
-        employees.add(employee);
+        public List<IElectric> cars { get; set; }
+
+        public void AddCarToGarage(IElectric car)
+        {
+            cars.Add(car);
+        }
+
+        public void listCars()
+        {
+            cars.ForEach(singleCar=> Console.WriteLine(singleCar));
+        }
     }
-}
 ```
 
-##### Generic Type Argument
+Since all of our garage classes need to have similar properties and methods, we might start thinking about using inheritance or interfaces to structure our code. But we'll run into a problem very quickly where an instance of an `ElectricGarage` needs to manage electric vehicles, but an instance of our gas powered garage class will need to manage gas powered vehicles.
+
+For example, in our `GasPoweredGarage.cs` class, we might end up with a list that looks like this:
 
 ```cs
-// The `T` here is the variable name. It's value will be a type.
-public interface IFactory<T>
-{
-    /*
-        The type is used in the method signature to specify
-        that the `employee` variable will be of *some* type,
-        but I don't know ahead of time what that will be.
-    */
-    void HireEmployee (T employee);
-}
+public List<IGasPowered> cars { get; set; }
 ```
 
-## Titan of Industry
+And in our show room garage, that can contain all types of vehicles, our list might look like this:
+
+```cs
+public List<IVehicle> cars { get; set; }
+```
+
+They all have a list called cars, but the lists contain different types of cars. We're totally screwed! We might as well microwave our computer and call it a day.
+
+**Da daaa! Generics to save the day!**
+
+> > Generic Interface for garages
+
+```cs
+  public interface IGarage<T> // The <T> stands for type. This means that we don't know or care what _type_ of car the garage is going to deal with-- we can decide that when we implement the interface
+    {
+
+        // This could be a list of IVehicles, or IElectric, or IGasPowered. The <T> is like a placeholder.
+        public List<T> cars {get; set;}
+
+        public void AddCarToGarage(T car);
+
+        public void listCars();
+    }
+```
+
+Here's what it looks like when we implment our interface to build our `GasPoweredGarage` class.
+
+```cs
+    public class GasPoweredGarage : IGarage<IGasPowered>
+    {
+        public List<IGasPowered> cars { get; set; }
+
+        public void AddCarToGarage(IGasPowered car)
+        {
+            cars.Add(car);
+        }
+
+        public void listCars()
+        {
+            cars.ForEach(singleCar => Console.WriteLine(singleCar));
+        }
+    }
+
+```
+
+## Practice: Titan of Industry
+
+> Note: Please read all of the instructions before starting.
 
 You work for H.E. Pennypacker, an industry titan that has ammassed a business empire consisting of 5 different factories that produce the following goods. H.E. has diversified the empire to make the company as recession proof as possible.
 
 1. Steel
 1. Automobiles
 1. Chicken nuggets
-1. Insulin
-1. Taffy
 
-In each of these factories, potential employees must have a very specialized skillset before they are hired. Here are the coresponding skillsets, represented as types.
+
+In each of these factories, potential employees must have a very specialized skillset before they are hired. Here are the coresponding skillsets, represented as classes.
 
 1. `SteelWorker`
 1. `AutoWorker`
 1. `FoodProcessor`
-1. `LabTechnician`
-1. `Confectioner`
 
+### Step One: Workers
+Create custom types for each type of worker. Each worker has the following properties:
+1. A full name
+1. A date hired
+1. A pay rate
+
+Steel workers should additionally have a method called `MakeSteel()`. Auto workers should have a method called `MakeCar()`. Food processors should have a method called `MakeChicken()`. The methods don't have to do anything right now-- a `Console.WriteLine()` is fine.
+
+> Do you notice that all of your workers have some properties in common? This would be a good time to use inheritance. If you want extra practice, create a `Worker` base class and have each individual worker inherit from `Worker`.
+
+
+### Step Two: Factories
 Now, since you are in charge of building a command line application to help the Global HR department manage the hiring of employees for all factories, you want to ensure that each factory has the same properties and the same behaviors _(i.e. methods)_. This means you need an interface.
 
-* Each factory should have a minimum employee count.
-* Each factory should have a maximum employee count.
-* Each factory should have a method for hiring an employee. Name it `HireEmployee()` per above code.
-* Each factory should have a method for hiring multiple employees. Name it `HireEmployees()`.
+- Each factory should have a minimum employee count.
+- Each factory should have a maximum employee count.
+- Each factory should have a method for hiring an employee. Name it `HireEmployee()` per above code.
+- Each factory should have a method for hiring multiple employees. Name it `HireEmployees()`.
 
 Since the `HireEmployee()` of each factory must limit the type of employee being hired, it requires that the interface be defined as more dynamic.
 
 1. Steel - `HireEmployee(SteelWorker employee)`
 1. Automobiles - `HireEmployee(AutoWorker employee)`
 1. Chicken nuggets - `HireEmployee(FoodProcessor employee)`
-1. Insulin - `HireEmployee(LabTechnician employee)`
-1. Taffy - `HireEmployee(Confectioner employee)`
 
 Since interfaces must also define the arity of a method (if it has one), we run into a roadbloack. If you tightly bind the argument type to a single custom type, then the other factories cannot hire the right employees.
 
@@ -91,62 +149,25 @@ public interface IFactory
 }
 ```
 
-The Taffy factory can't implement this interface. It needs to hire **`Confectioner`** type people.
+The Chicken Nugget factory can't implement this interface. It needs to hire **`FoodProcessor`** type people. _You're going to need a Generic._
 
-```cs
-public class TaffyFactory : IFactory
-{
-    public List<Confectioner> employees { get; set; } = new List<Confectioner>();
+- Create a Generic Interface to reprsent a factory
+- Create three custom types to represent each type of factory, and make sure you implement your interface
 
-    /*
-        Compiler error. Can't convert type Confectioner to type SteelWorker.
-    */
-    public void HireEmployee (Confectioner employee)
-    {
-        employees.Add(employee);
-    }
-}
+### Step Three: Hiring Some People
+1. In `Program.cs`, create at least one instance of each type of employee and each type of factory.
+1. Call the `HireEmployee()` method for each factory and make sure that they can hire the correct type of employee.
+
+### Challenge: Command Line Interface
+> Please do not attempt this challenge unless you have completed all of the exercises so far, and are feeling confident and not burnt out.
+Build a CLI for H.E. Pennypacker Industries. When the user runs the CLI, they should be presented with a menu that lists the following options:
+
 ```
-
-Therefore, the interface must generically define the type of employee being hired. This is where Generics come into play. Look at this new syntax.
-
-```cs
-public interface IFactory<T>
-{
-    void HireEmployee (T employee);
-}
+Welcome to H.E. Pennypacker Industries!
+1. View employees at a factory
+2. Hire a new employee
 ```
+If the user selects option 1, they should be presented with a list of factories. When they select a factory from the list, they should see all of the workers at that factory printed to the console.
 
-By using generics, the variable of `T` gets replaced by whatever the implemeting class passes in as the type argument. Look at the first line of code below. You will notice that `<Confectioner>` has been added as a type argument to send to the interface. That type will get stored in the variable `T`, which then means that the `employee` argument for `HireEmployee` will be typed appropriately.
+If the user selects option 2, they should see a list of possible factories where they could hire an employee. Once they select a factory, they should be prompted for first name, last name, and pay rate. The hire date of the employee should be added automatically. Once they enter the new worker's information, that worker should be added to the appropriate factory, and they should be shown a confirmation message.
 
-```cs
-public class TaffyFactory : IFactory<Confectioner>
-{
-    public List<Confectioner> employees { get; set; } = new List<Confectioner>();
-
-    /*
-        No compiler error.
-    */
-    public void HireEmployee (Confectioner employee)
-    {
-        employees.add(employee);
-    }
-}
-```
-
-## Practice: Refueling Stations for Gary's Wholesale Garage
-
-1. Create a **`GasStation`** type for gas-powered vehicles.
-1. Create a **`BatteryStation`** type for electric-powered vehicles.
-1. Create an inteface that both types of stations must implement that ensures that they both have the following properties and methods.
-    * `int Capacity`: The number of vehicles that they can refuel at any one time.
-    * `void Refuel(List<T> vehicles)`: A method to print a message to the terminal that the vehicle has been refueled. _(e.g. "The Cessna has been refueled with 200 gallons of gas")_ Each refueling station's `Refuel()` method should accept a list of vehicles that only it can process. **`GasStation.Refuel()`** should only accept a list of gas-powered vehicles. **`BatteryStation.Refuel()`** should only accept a list of electric-powered vehicles.
-1. In your main method, make sure you have a list of electric vehicles, and a list of gas vehicles.
-1. Create an instance of **`BatteryStation`** and **`GasStation`**.
-1. Refuel all the vehicles by sending them to the correct refueling station.
-
-## Advanced Challenge: Station Inheritance
-
-> **Note:** Advanced challenges should only be attempted once you complete the practice exercise and feel comfortable with the concept.
-
-Can you create a **`Station`** class from which both **`BatteryStation`** and **`GasStation`** inherit the `Refuel()` method?
