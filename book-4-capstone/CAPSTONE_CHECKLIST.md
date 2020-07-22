@@ -8,6 +8,8 @@ _**If you would like to use an alternative technology (ex. ADO<span>.</span>NET,
 
 Most of these steps will require copying code from either WisdomAndGrace and Gifter, so you may want to have those repositories handy before you start
 
+You can view a video walkthrough of these steps [here](https://www.loom.com/share/bbd6f552dcfc4851a70185160e4330e9)
+
 ## Set up project
 
 1. Create Web API project in Visual Studio
