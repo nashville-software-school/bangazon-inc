@@ -14,6 +14,7 @@ You can view a video walkthrough of these steps [here](https://www.loom.com/shar
 
 1. Create Web API project in Visual Studio
 1. Create .gitignore
+1. Run `git init` from the root of your project
 
 ## Setup SQL Server
 1. Create a `SQL` folder in the root of your project
