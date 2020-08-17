@@ -12,8 +12,8 @@ Work on the **C# to JavaScript** exercises in the repo linked above.
 
 ## Part 2
 
-Work on the first three JavaScript to C# exercises in the repo linked above.
+Work on the first three **JavaScript to C#** exercises in the repo linked above.
 
 ## Part 3
 
-Work on the remaining JavaScript to C# exercises in the repo linked above.
+Work on the remaining J**avaScript to C#** exercises in the repo linked above.
