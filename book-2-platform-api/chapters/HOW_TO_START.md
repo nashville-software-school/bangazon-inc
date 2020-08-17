@@ -3,7 +3,7 @@
 > **Alert:** One teammate should complete this entire setup process before anyone else does anything.
 
 
-## Via Visual Studio
+## Option 1: Via Visual Studio
 
 ### Create API Project and Solution
 
@@ -41,12 +41,24 @@ Replace what's in your `appsettings.json` file with this. Make sure that the act
 1. Make sure **.NET Core** is selected on the left menu.
 1. Choose _xUnit Test Project_ from the list of options.
 1. In the name field, type `TestBangazonAPI`, then click Ok.
+1. You will need to create a single `APIClientProvider` class and a single `DatabaseFixture` class for your test project. Then you will create a test class for each controller you create.
+1. Because you need to share your `DatabaseFixture` class among many test classes, you should also add the following `DatabaseCollection` class to your test project: 
+```
+[CollectionDefinition("Database collection")]
+public class DatabaseCollection : ICollectionFixture<DatabaseFixture>
+{
+    // This class has no code, and is never created. Its purpose is simply
+    // to be the place to apply [CollectionDefinition] and all the
+    // ICollectionFixture<> interfaces.
+}
+```
+Then, above each of your test classes, add the annotation `[Collection("Database collection")]`. [See the docs for an example.](https://xunit.net/docs/shared-context)
 
 ### Push the Changes
 
 Add. Commit. Push.
 
-## Via the Command Line
+## Option 2: Via the Command Line
 
 If you are comfortable on the command line and would like to set up your project using the `dotnet` commands, then follow these steps.
 
