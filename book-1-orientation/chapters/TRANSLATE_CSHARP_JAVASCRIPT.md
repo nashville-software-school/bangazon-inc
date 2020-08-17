@@ -8,12 +8,12 @@ https://github.com/nashville-software-school/translate-csharp-js
 
 ## Part 1
 
-Work on the **JavaScript to C#** exercises in the repo linked above.
+Work on the **C# to JavaScript** exercises in the repo linked above.
 
 ## Part 2
 
-Work on the first three C# to JavaScript exercises in the repo linked above.
+Work on the first three JavaScript to C# exercises in the repo linked above.
 
 ## Part 3
 
-Work on the remaining C# to JavaScript exercises in the repo linked above.
+Work on the remaining JavaScript to C# exercises in the repo linked above.
