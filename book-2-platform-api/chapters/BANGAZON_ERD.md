@@ -61,11 +61,3 @@ Build an ERD to define the properties of the following resources and the relatio
 * If a customer does not interact with the system for over 240 days, they will be marked as inactive
 
 
-## Populating the Database
-
-Once you have have built the ERD and had it approved by one of the instruction team, you must write a SQL script for populating a couple rows in each table.
-
-1. Start with DELETE statements to wipe out the data in the tables.
-1. Then DROP TABLE statements to remove the tables.
-1. Next should be your CREATE TABLE statements with the CONSTRAINT keywords for the foreign keys.
-1. Last should be the INSERT statements for seeding the database with data.
