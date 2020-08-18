@@ -1,5 +1,9 @@
 # Installing Required Software in Windows
 
+## Zoom
+
+1. https://zoom.us/
+
 ## Web Browsers
 
 1. The main browser we will use is [Google Chrome]( https://www.google.com/chrome/browser/desktop/index.html)
