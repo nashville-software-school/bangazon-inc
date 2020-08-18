@@ -89,6 +89,19 @@ C# FixFormat is a vscode extension that will--as its name implies--automatically
 1. In VSCode go to File > Preferences > Settings
 1. In the search bar, look for the setting `Format On Save` and make sure it is checked
 1. In the same search bar, look for the setting `Auto Save` and make sure it's *NOT* set to `afterDelay`
+1. Configure C# FixFormat
+    1. Inside Visual Studio code type `ctrl+.` to open the vscode settings.
+    1. Click the `Open Settings (JSON)` button near the upper-right corner of the window.
+    1. Add the following to `settings.json` file:
+
+    ```json
+    "[csharp]": {
+        "editor.defaultFormatter": "Leopotam.csharpfixformat"
+    },
+    "csharpfixformat.style.braces.onSameLine": false,
+    "csharpfixformat.style.spaces.beforeIndexerBracket": false,
+    "csharpfixformat.style.spaces.beforeParenthesis": false
+    ```
 
 ## Visual Studio IDE
 
