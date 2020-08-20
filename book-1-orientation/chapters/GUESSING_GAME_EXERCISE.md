@@ -4,7 +4,7 @@
 
 Write a console program in C# that invites the user to guess a number.
 
-The program should be written in increments. Each "phase" will add a little more complexity.
+The program should be written in increments. Each phase will add a little more complexity.
 
 ### Phase 1
 
@@ -35,7 +35,7 @@ The program should be updated to...
 The program should be updated to...
 
 1. Display the number of the user's current guess in the prompt.
-    For example, if the user has already guessed one time, the prommpt should say something like `Your guess (2)>`.
+   For example, if the user has already guessed one time, the prommpt should say something like `Your guess (2)>`.
 1. End the loop early if the user guesses the correct number.
 
 ### Phase 5
@@ -57,10 +57,10 @@ The program should be updated to...
 
 1. Prompt the user for a difficulty level before they are prompted to guess the number.
 1. The difficulty level should determine how many guesses the user gets.
-    The difficulty levels should be:
-      * Easy - this gives the user eight guesses.
-      * Medium - this gives the user six guesses.
-      * Hard - this gives the user four guesses.
+   The difficulty levels should be:
+   - Easy - this gives the user eight guesses.
+   - Medium - this gives the user six guesses.
+   - Hard - this gives the user four guesses.
 
 ### Phase 8
 
