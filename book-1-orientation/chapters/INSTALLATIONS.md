@@ -24,22 +24,20 @@
     1. Add the following object to the `profiles.list` array
         ```json
         {
-          "guid": "{00000000-0000-0000-ba54-000000000002}",
-          "acrylicOpacity": 0.75,
-          "closeOnExit": true,
-          "colorScheme": "Campbell",
-          "commandline": "\"%PROGRAMFILES%\\git\\usr\\bin\\bash.exe\" -i -l",
-          "cursorColor": "#FFFFFF",
-          "cursorShape": "bar",
-          "fontFace": "Consolas",
-          "historySize": 9001,
-          "icon": "ms-appx:///ProfileIcons/{0caa0dad-35be-5f56-a8ff-afceeeaa6101}.png",
-          "name": "Bash",
-          "padding": "0, 0, 0, 0",
-          "snapOnInput": true,
-          "startingDirectory": "%USERPROFILE%",
-          "useAcrylic": true
-        },
+            "guid": "{00000000-0000-0000-ba54-000000000002}",
+            "closeOnExit": true,
+            "colorScheme": "Campbell",
+            "commandline": "\"%PROGRAMFILES%\\git\\usr\\bin\\bash.exe\" -i -l",
+            "cursorColor": "#FFFFFF",
+            "cursorShape": "bar",
+            "fontFace": "Consolas",
+            "historySize": 9001,
+            "icon": "ms-appx:///ProfileIcons/{0caa0dad-35be-5f56-a8ff-afceeeaa6101}.png",
+            "name": "Bash",
+            "padding": "10, 0, 0, 0",
+            "snapOnInput": true,
+            "startingDirectory": "%USERPROFILE%"
+        }
         ```
     1. Find the `defaultProfile` key near the top of the file. Updates it's value to be `"{00000000-0000-0000-ba54-000000000002}"`
     1. Save teh `settings.json` file and close Visual Studio Code.
