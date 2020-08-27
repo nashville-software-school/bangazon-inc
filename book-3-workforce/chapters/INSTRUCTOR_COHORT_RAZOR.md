@@ -3,79 +3,47 @@
 
 ## Editing an Instructor
 
-> **Note:** You will need a custom view model for this task _(e.g. `InstructorEditViewModel`)_
 
 Modify your Instructor edit form to display all cohorts in a select element. The user should be able to select one of the cohorts in the dropdown. When the user submits the form, then the corresponding row in the `Instructor` table in your database should have its `CohortId` column value updated.
 
-## Details
-
-When you view the details of an instructor, it should display the name of the cohort she is currently teaching.
-
 ## Starter Code
 
-### ViewModel Starter Code
-
-```cs
-namespace StudentExerciseMVC.Models.ViewModels
-{
-    public class InstructorEditViewModel
-    {
-        private readonly IConfiguration _config;
-
-        public List<SelectListItem> Cohorts { get; set; }
-        public Instructor Instructor { get; set; }
-
-        public InstructorEditViewModel() { }
-
-        public InstructorEditViewModel(IConfiguration config)
-        {
-
-            /*
-                Query the database to get all cohorts
-            */
-
-
-            /*
-                Use the LINQ .Select() method to convert
-                the list of Cohort into a list of SelectListItem
-                objects
-            */
-        }
-    }
-}
-```
+> Note: we can use the same view model for editing an instructor as we did for creating an instructor. The info that we need is the same-- all of the cohorts, and info about a single instructor. 
 
 ### Controller Starter Code
 
 ```cs
 // GET: Instructors/Edit/5
+// This method loads the edit form
 [HttpGet]
 public async Task<ActionResult> Edit(int id)
 {
-    string sql = $@"
-    SELECT
-        i.Id,
-        i.FirstName,
-        i.LastName,
-        i.SlackHandle,
-        i.CohortId
-    FROM Instructor i
-    WHERE i.Id = {id}
-    ";
-
+   
     /*
-        Run the query above and create an instance of Instructor
-        populated with the data it returns
+        STEP ONE
+        A user needs to see form fields pre-populated with the info from the instructor they wanted to edit
+        That means we need to run a SQL query to SELECT an instructor by its id
+        (The id comes from the route! For example, if the route is Students/Edit/5 we'll use the id of 5 to go get the correct student from the database
      */
-
+     
      /*
-        Create an instance of your InstructorEditViewModel
-      */
-
-    /*
-        Assign the instructor you created to the .Instructor
-        property of your view model
+       STEP TWO
+        Once we have our instructor from the database, we need to map it to our Instructor model
+        Then we need to assign our new instance of an instructor (which we got from our db) to the Instructor property on our view model
      */
+     
+     /*
+      STEP THREE
+        A user also needs to see a dropdown of all the cohorts
+        That means we need to run a SECOND SQL query to get all the cohorts from the database
+     */
+     
+      /*
+      STEP FOUR
+        Map the cohorts from the database into a list of SelectListItems and attach them to your view model (we did the same thing in our Create method)
+     */
+
+   
 
     return View(viewModel);
 }
@@ -97,3 +65,7 @@ Use the follow tag helper in your Razor template for instructor edit.
 1. You will need to create a `StudentEditViewModel`.
 1. When you edit a student, you should see a dropdown of all cohorts. The student's current cohort should be auto-selected.
 1. You should be able to select any cohort from the dropdown to reassign a student to a different cohort.
+
+
+## Challenge
+1. Modify the Details view for instructors and cohorts so that it shows the name of the cohort they're assigned to instead of the id.
