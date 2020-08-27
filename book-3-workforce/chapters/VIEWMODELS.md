@@ -33,7 +33,7 @@ In scenario A, we can just use our normal `Cohort` type to represent this data. 
 
 But what about scenario B? Do we have a model that can hold a list of _all_ the instructors, regardless of their cohort and _all_ of the students, also regardless of their cohort? We do not! There's no relataionship in our database between _all_ of the instructors and _all_ of the students-- just the ones who share a cohort. In this case, we need to build a view model. 
 
-#### What belongson a view model?
+#### What belongs on a view model?
 Whatever the user needs to see! In scenario B from above, the user needs to see a list of all the instructors and all the students. Our view model might look something like this: 
 
 ```c#
