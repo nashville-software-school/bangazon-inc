@@ -244,3 +244,7 @@ Now you can run the program again and the Cessna will make a different noise.
 1. Make your vehicle instances perform all three behaviors.
 
 ![](./images/inheritance-vehicles-drive.gif)
+
+## Practice: Shooting Dice
+
+Follow the instructions in this repo: https://github.com/nashville-software-school/ShootingDice
