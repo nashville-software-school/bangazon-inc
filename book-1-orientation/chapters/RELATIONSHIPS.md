@@ -1,9 +1,5 @@
 # Object Inheritance and Object Associations
 
-## References
-
-
-
 ## Inheritance
 
 Inheritance is for defining straightforward `is-a` relationships. When you have many types in your system, and you discover that several of them share the same properties and/or behaviors, you may want to consider designing an inheritance system.
