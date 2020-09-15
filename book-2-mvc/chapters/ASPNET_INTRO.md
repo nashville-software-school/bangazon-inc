@@ -179,11 +179,11 @@ namespace DogGo.Repositories
 Create an `IWalkerRepository.cs` file inside it. Add the following code
 
 ```cs
-using Doggo.Models;
+using DogGo.Models;
 using Microsoft.Data.SqlClient;
 using System.Collections.Generic;
 
-namespace Doggo.Repositories
+namespace DogGo.Repositories
 {
     public interface IWalkerRepository
     {
