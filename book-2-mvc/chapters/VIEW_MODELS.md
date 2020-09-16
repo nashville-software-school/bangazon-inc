@@ -182,17 +182,19 @@ Now that the Owner Details view will need to know about more than just the owner
 > OwnerController.cs
 
 ```csharp
-private readonly OwnerRepository _ownerRepo;
-private readonly DogRepository _dogRepo;
-private readonly WalkerRepository _walkerRepo;
+private readonly IOwnerRepository _ownerRepo;
+private readonly IDogRepository _dogRepo;
+private readonly IWalkerRepository _walkerRepo;
 
 
-// The constructor accepts an IConfiguration object as a parameter. This class comes from the ASP.NET framework and is useful for retrieving things out of the appsettings.json file like connection strings.
-public OwnersController(IConfiguration config)
+public OwnersController(
+    IOwnerRepository ownerRepository, 
+    IDogRepository dogRepository, 
+    IWalkerRepository walkerRepository)
 {
-    _ownerRepo = new OwnerRepository(config);
-    _dogRepo = new DogRepository(config);
-    _walkerRepo = new WalkerRepository(config);
+    _ownerRepo = ownerRepository;
+    _dogRepo = dogRepository;
+    _walkerRepo = walkerRepository;
 }
 ```
 
@@ -347,7 +349,7 @@ using System.Collections.Generic;
 
 namespace DogGo.Repositories
 {
-    public class NeighborhoodRepository
+    public class NeighborhoodRepository : INeighborhoodRepository
     {
         private readonly IConfiguration _config;
 
@@ -395,28 +397,30 @@ namespace DogGo.Repositories
         }
     }
 }
-
 ```
 
-Now add a `NeighborhoodRepository`  to the fields and the constructor inside `OwnersController` like before
+Remember to create the `INeighborhoodRepository` interface and tell ASP<span>.</span>NET about it in the `Startup.ConfigureServices` method.
+
+Now add an `INeighborhoodRepository`  to the fields and the constructor inside `OwnersController` like before
 
 > OwnersController.cs
 
 ```csharp
-private readonly OwnerRepository _ownerRepo;
-private readonly DogRepository _dogRepo;
-private readonly WalkerRepository _walkerRepo;
-private readonly NeighborhoodRepository _neighborhoodRepo;
+private readonly IOwnerRepository _ownerRepo;
+private readonly IDogRepository _dogRepo;
+private readonly IWalkerRepository _walkerRepo;
+private readonly INeighborhoodRepository _neighborhoodRepo;
 
-
-// The constructor accepts an IConfiguration object as a parameter. This class comes from the ASP.NET framework and is useful for retrieving things out of the appsettings.json file like connection strings.
-public OwnersController(IConfiguration config)
+public OwnersController(
+    IOwnerRepository ownerRepository, 
+    IDogRepository dogRepository, 
+    IWalkerRepository walkerRepository, 
+    INeighborhoodRepository neighborhoodRepository)
 {
-    _ownerRepo = new OwnerRepository(config);
-    _dogRepo = new DogRepository(config);
-    _walkerRepo = new WalkerRepository(config);
-    _neighborhoodRepo = new NeighborhoodRepository(config);
-
+    _ownerRepo = ownerRepository;
+    _dogRepo = dogRepository;
+    _walkerRepo = walkerRepository;
+    _neighborhoodRepo = neighborhoodRepository;
 }
 ```
 
