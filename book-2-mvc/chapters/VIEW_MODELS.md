@@ -121,7 +121,7 @@ public List<Dog> GetDogsByOwnerId(int ownerId)
                 }
                 if (reader.IsDBNull(reader.GetOrdinal("ImageUrl")) == false)
                 {
-                    dog.ImageUrl = reader.GetString(reader.GetOrdinal("Notes"));
+                    dog.ImageUrl = reader.GetString(reader.GetOrdinal("ImageUrl"));
                 }
 
                 dogs.Add(dog);
