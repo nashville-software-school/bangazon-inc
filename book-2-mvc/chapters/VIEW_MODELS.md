@@ -510,4 +510,12 @@ Now update the view to accept an instance of an `OwnerFormViewModel` and change 
 
 1. Try to implement the following design for the walker details page at `/walkers/details/{id}`. Hint: Use the `DateTime` class to help format the date strings.
 
-![](./images/DW_Walker_Snapshot.png)
+    ![](./images/DW_Walker_Snapshot.png)
+
+**Challenge:** Create a form that allows the user to create several new `Walks` records. It should allow the user to select a single Walker and _multiple_ Dogs, as well as, allowing them to enter a Date and Duration for the walk.
+
+> **NOTE:** You should use a "multi-select" to select more than one Dog.
+
+**Advanced Challenge:** Create a page that allows a user to select multiple `Walks` and delete them all. 
+
+> **NOTE:** You could use a "multi-select" to select more than one Walk ...OR you _could_ use checkboxes
