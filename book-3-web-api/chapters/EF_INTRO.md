@@ -9,8 +9,8 @@ _Entity Framework Core_ (EF) is a popular ORM created by Microsoft. It allows yo
 ## Entity Framework Core Compared to ADO<span>.NET</span>
 
 Before we get into the details of Entity Framework Core, let's take a quick look at how we might use it in comparison to the data access technology we've been using, ADO<span>.NET</span>. The following example uses the `CoffeeShop` database from the previous chapter.
-nclud
-Here's a method that will get all the bean varieties using ADO<span>.NET</span>.
+
+ Here's a method that will get all the bean varieties using ADO<span>.NET</span>.
 
 ```cs
 public List<BeanVariety> GetAll()
