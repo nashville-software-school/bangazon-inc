@@ -9,7 +9,7 @@ _Entity Framework Core_ (EF) is a popular ORM created by Microsoft. It allows yo
 ## Entity Framework Core Compared to ADO<span>.NET</span>
 
 Before we get into the details of Entity Framework Core, let's take a quick look at how we might use it in comparison to the data access technology we've been using, ADO<span>.NET</span>. The following example uses the `CoffeeShop` database from the previous chapter.
-
+nclud
 Here's a method that will get all the bean varieties using ADO<span>.NET</span>.
 
 ```cs
@@ -275,6 +275,9 @@ public void ConfigureServices(IServiceCollection services)
         options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
     services.AddControllers();
+
+    // Register repositories...
+    // services.AddTransient<ISomeRepository, SomeRepository>();
 }
 
 // ...other code omitted for brevity...
@@ -295,7 +298,7 @@ using Gifter.Models;
 
 namespace Gifter.Repositories
 {
-    public class PostRepository
+    public class PostRepository : IPostRepository
     {
         private readonly ApplicationDbContext _context;
 
@@ -317,6 +320,8 @@ namespace Gifter.Repositories
 }
 ```
 
+> **NOTE:** Remember to create and register an `IPostRepository` interface.
+
 Next create a Web API controller with "Get" methods.
 
 > controllers/PostController.cs
@@ -332,10 +337,10 @@ namespace Gifter.Controllers
     [ApiController]
     public class PostController : ControllerBase
     {
-        private readonly PostRepository _postRepository;
-        public PostController(ApplicationDbContext context)
+        private readonly IPostRepository _postRepository;
+        public PostController(IPostRepository postRepository)
         {
-            _postRepository = new PostRepository(context);
+            _postRepository = postRepository;
         }
 
         [HttpGet]
@@ -530,6 +535,9 @@ public void ConfigureServices(IServiceCollection services)
             .AddNewtonsoftJson(options =>
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore
             );
+
+    // Register repositories...
+    // services.AddTransient<ISomeRepository, SomeRepository>();
 }
 ```
 
