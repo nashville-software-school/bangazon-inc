@@ -275,6 +275,9 @@ public void ConfigureServices(IServiceCollection services)
         options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
     services.AddControllers();
+
+    // Register repositories...
+    // services.AddTransient<ISomeRepository, SomeRepository>();
 }
 
 // ...other code omitted for brevity...
@@ -295,7 +298,7 @@ using Gifter.Models;
 
 namespace Gifter.Repositories
 {
-    public class PostRepository
+    public class PostRepository : IPostRepository
     {
         private readonly ApplicationDbContext _context;
 
@@ -317,6 +320,8 @@ namespace Gifter.Repositories
 }
 ```
 
+> **NOTE:** Remember to create and register an `IPostRepository` interface.
+
 Next create a Web API controller with "Get" methods.
 
 > controllers/PostController.cs
@@ -332,10 +337,10 @@ namespace Gifter.Controllers
     [ApiController]
     public class PostController : ControllerBase
     {
-        private readonly PostRepository _postRepository;
-        public PostController(ApplicationDbContext context)
+        private readonly IPostRepository _postRepository;
+        public PostController(IPostRepository postRepository)
         {
-            _postRepository = new PostRepository(context);
+            _postRepository = postRepository;
         }
 
         [HttpGet]
@@ -530,6 +535,9 @@ public void ConfigureServices(IServiceCollection services)
             .AddNewtonsoftJson(options =>
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore
             );
+
+    // Register repositories...
+    // services.AddTransient<ISomeRepository, SomeRepository>();
 }
 ```
 

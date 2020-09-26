@@ -2,14 +2,14 @@
 
 In this chapter we'll walk through creating a "Coffee Shop" Web API in ASP<span>.NET</span> Core. When it's complete our API will expose resources for `Coffee` and `BeanVariety`.
 
-* Coffee - https://localhost/api/coffee
-* BeanVariety - https://localhost/api/beanvariety
+* Coffee - https://localhost:5001/api/coffee
+* BeanVariety - https://localhost:5001/api/beanvariety
 
 ## Setting up the database
 
-Run [this SQL script](./sql/CoffeeShop.sql) to create the `CoffeeShop` database.
+Review and run [this SQL script](./sql/CoffeeShop.sql) to create the `CoffeeShop` database.
 
-In this chapter we'll be focused on the `BeanVariety` entity and you'll work with the `Coffee`.
+In this chapter we'll be focused on the `BeanVariety` entity and you'll work with the `Coffee` entity in the exercise.
 
 ```sql
 CREATE TABLE BeanVariety (
@@ -106,7 +106,7 @@ namespace CoffeeShop.Repositories
             _connectionString = configuration.GetConnectionString("DefaultConnection");
         }
 
-        public SqlConnection Connection
+        private SqlConnection Connection
         {
             get { return new SqlConnection(_connectionString); }
         }
@@ -255,6 +255,15 @@ namespace CoffeeShop.Repositories
 }
 ```
 
+### `IBeanVarietyRepository`
+
+1. Use the `Extract Interface...` feature of Visual Studio to create the `IBeanVarietyRepository` interface.
+2. Update the `ConfigureServices` method in the `Startup` class to register your new repository with ASP<span>.</span>NET.
+
+    ```cs
+    services.AddTransient<IBeanVarietyRepository, BeanVarietyRepository>();
+    ```
+
 ## Controllers
 
 Controllers in Web API are similar to controllers in MVC with a few small differences. They perform the same function in MVC. As in MVC a Web API controller contains methods to respond to HTTP requests.
@@ -265,7 +274,6 @@ Create a `BeanVarietyController` class in the `Controllers` directory.
 
 ```cs
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 using CoffeeShop.Models;
 using CoffeeShop.Repositories;
 
@@ -275,10 +283,10 @@ namespace CoffeeShop.Controllers
     [ApiController]
     public class BeanVarietyController : ControllerBase
     {
-        private readonly BeanVarietyRepository _beanVarietyRepository;
-        public BeanVarietyController(IConfiguration configuration)
+        private readonly IBeanVarietyRepository _beanVarietyRepository;
+        public BeanVarietyController(IBeanVarietyRepository beanVarietyRepository)
         {
-            _beanVarietyRepository = new BeanVarietyRepository(configuration);
+            _beanVarietyRepository = beanVarietyRepository;
         }
 
         // https://localhost:5001/api/beanvariety/
@@ -445,7 +453,7 @@ Access to fetch at 'https://localhost:5001/api/beanvariety/' from origin 'http:/
 [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS/Errors) is a browser security feature that prevents JavaScript from talking to APIs without the web server's consent. CORS is extremely important for production applications, but in development we can afford to be a bit more lax. Update the `Configure` method in the `Startup` class to call `app.UseCors()` to configure CORS behavior.
 
 ```cs
- public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 {
     if (env.IsDevelopment())
     {
