@@ -10,10 +10,8 @@ This book prepares you for building the Tabloid API
 * Query string parameters
 * Models
 * Model Validation
-* Entity Framework
 * EF Queries
 * Web API + React
-* Ado.net + EF
 * Integration testing
 * JWT tokens
 * Firebase auth

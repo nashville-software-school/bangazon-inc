@@ -255,6 +255,8 @@ namespace CoffeeShop.Repositories
 }
 ```
 
+> **NOTE:** Look closely at the code above. Do you notice anything different? Yes, we're using the ["var" keyword](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/implicitly-typed-local-variables). Happy day!
+
 ### `IBeanVarietyRepository`
 
 1. Use the `Extract Interface...` feature of Visual Studio to create the `IBeanVarietyRepository` interface.
