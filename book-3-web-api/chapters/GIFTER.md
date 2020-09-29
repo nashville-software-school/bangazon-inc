@@ -25,7 +25,7 @@ Let's explore this idea some more with an example application, Gifter. Along the
 
 Gifter is a social app for sharing animated GIFs with others. For the time being we'll focus on using building a Web API. In future chapters we'll be creating a React application that will interact with the API. Along the way we'll dig into some more complex queries.
 
-> **NOTE:** There is quite a lot of debate over the pronunciation of the word "gif". Of course, this debate is a waste of time since surely we all know the correct way to pronounce it...
+> **NOTE:** There is quite a lot of debate over the pronunciation of the word "gif". Of course, this debate is a waste of time since surely we all know the correct way to pronounce it is "gif".
 
 ### Project Setup
 
