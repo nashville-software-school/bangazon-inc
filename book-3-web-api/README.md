@@ -17,7 +17,7 @@ This book prepares you for building the Tabloid API
 
 ## Chapters
 
-**Part 1: Web API + Entity Framework**
+**Part 1: Web API**
 
 * Chapter 1 - [Web API Intro](./chapters/API_OVERVIEW.md)
 * Chapter 2 - [ASP.NET Core Web API Intro](./chapters/ASP_NET_WEB_API_INTRO.md)
