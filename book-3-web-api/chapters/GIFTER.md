@@ -1,6 +1,6 @@
-# Special-Purpose Repository Methods and More Complex SQL
+# Utility Classes, Special-Purpose Repository Methods and More Complex SQL
 
-So far much of what we've done with SQL has has been simple CRUD operations on a single table. Sure we've done a few `JOIN`s here and there, but we've mostly kept it fairly simple.
+So far much of what we've done in this course has been basic CRUD operations on a single entity. Sure we've done a few `JOIN`s here and there, but we've mostly kept it fairly simple.
 
 This focus on basic CRUD has also been reflected in our repositories. Our repositories usually look something like this
 
@@ -19,7 +19,7 @@ public interface ISomeModelRepository
 
 Often basic CRUD is sufficient, but there times when it isn't - times when we need something more complex. This is particularly true when it comes to querying complex data with the goal of populating multiple types of Model objects from a single query.
 
-Let's explore this idea some more with an example application, Gifter.
+Let's explore this idea some more with an example application, Gifter. Along the way we'll also build some tools to help reduce some of the complexity of our repositories.
 
 ## Gifter
 
@@ -121,11 +121,11 @@ namespace Gifter.Models
 
 ### Basic CRUD
 
-Before we can get fancy, let's get the cover the basics. In this section we'll build and test an initial `PostRepository` and `PostController`.
+Before we can get fancy, let's cover the basics. In this section we'll build and test an initial `PostRepository` and `PostController`.
 
 #### PostRepository
 
-Given our database hse more than one entity, it's a good bet that we'll need more than one repository. And since each repository will need to access `SqlConnection`s, this is a good opportunity to share a bit of code with using inheritance. So before we create the `PostRepository` let's create a repository parent class called `BaseRepository`.
+Before we dive into the `PostRepository`, let's pause a minute to reflect on our system design. Given our database hse more than one entity, it's a good bet that we'll need more than one repository. And since each repository will need to access `SqlConnection`s, this is a good opportunity to share a bit of code with using inheritance. So before we create the `PostRepository` let's create a repository parent class called `BaseRepository`.
 
 > Repositories/BAseRepository.cs
 
@@ -561,7 +561,7 @@ That would work, but it would _NOT_ be a approach.
 
 _Why not?_
 
-There are a couple of reasons related to code readability to software design principles, but we're going to focus on another reason: Performance.
+There are a couple reasons related to code readability to software design principles, but we're going to focus on another reason: Performance.
 
 #### Limiting "Round Trips" to the Database
 
@@ -635,3 +635,117 @@ The code above gets all the data we need with a single round trip to the databas
 
 #### Handling a Post's Comments
 
+Before we dive into the code to get a Post's Comments, let's take another moment to think. Do we _always_ need a Post's Comments? Another way to ask this is, will we ever need a Post object but NOT need it's Comments?
+
+The answer to this question depends on the _business rules_ of the application your building. For Gifter, let's say we don't always need the Comments.
+
+So, given that we don't always want Comments, it doesn't make sense to add code to get them in the `GetAll()` method. Fortunately, though, we have the full power of C# at our disposal. We're not limited in what methods we can add to our repository.
+
+##### GetAllWithComments()
+
+Let's create a special purpose method that gets all the Posts along with their Comments. Add this method to the `PostRepository` class and to the `IPostRepository` interface.
+
+```cs
+public List<Post> GetAllWithComments()
+{
+    using (var conn = Connection)
+    {
+        conn.Open();
+        using (var cmd = conn.CreateCommand())
+        {
+            cmd.CommandText = @"
+                SELECT p.Id AS PostId, p.Title, p.Caption, p.DateCreated AS PostDateCreated,
+                       p.ImageUrl AS PostImageUrl, p.UserProfileId AS PostUserProfileId,
+
+                       up.Name, up.Bio, up.Email, p.DateCreated AS UserProfileDateCreated,
+                       up.ImageUrl AS UserProfileImageUrl,
+
+                       c.Id AS CommentId, c.Message, c.UserProfileId AS CommentUserProfileId
+                  FROM Post p
+                       LEFT JOIN UserProfile up ON p.UserProfileId = up.id
+                       LEFT JOIN Comment c on c.PostId = p.id
+              ORDER BY p.DateCreated";
+
+            var reader = cmd.ExecuteReader();
+
+            var posts = new List<Post>();
+            while (reader.Read())
+            {
+                var postId = DbUtils.GetInt(reader, "PostId");
+
+                var existingPost = posts.FirstOrDefault(p => p.Id == postId);
+                if (existingPost == null)
+                {
+                    existingPost = new Post()
+                    {
+                        Id = postId,
+                        Title = DbUtils.GetString(reader, "Title"),
+                        Caption = DbUtils.GetString(reader, "Caption"),
+                        DateCreated = DbUtils.GetDateTime(reader, "PostDateCreated"),
+                        ImageUrl = DbUtils.GetString(reader, "PostImageUrl"),
+                        UserProfileId = DbUtils.GetInt(reader, "PostUserProfileId"),
+                        UserProfile = new UserProfile()
+                        {
+                            Id = DbUtils.GetInt(reader, "PostUserProfileId"),
+                            Name = DbUtils.GetString(reader, "Name"),
+                            Email = DbUtils.GetString(reader, "Email"),
+                            DateCreated = DbUtils.GetDateTime(reader, "UserProfileDateCreated"),
+                            ImageUrl = DbUtils.GetString(reader, "UserProfileImageUrl"),
+                        },
+                        Comments = new List<Comment>()
+                    };
+
+                    posts.Add(existingPost);
+                }
+
+                if (DbUtils.IsNotDbNull(reader, "CommentId"))
+                {
+                    existingPost.Comments.Add(new Comment()
+                    {
+                        Id = DbUtils.GetInt(reader, "CommentId"),
+                        Message = DbUtils.GetString(reader, "Message"),
+                        PostId = postId,
+                        UserProfileId = DbUtils.GetInt(reader, "CommentUserProfileId")
+                    });
+                }
+            }
+
+            reader.Close();
+
+            return posts;
+        }
+    }
+}
+```
+
+This method is quite a bit more complex than the `GetAll()` method. How's should we go about understanding it?
+
+Here are some things you should try:
+
+1. Read the code...then read it again.
+1. Copy out the SQL and run it in a query window. Note the results. Take particular note of the duplicate Post data. What makes each record in the resultset unique?
+1. Use the Visual Studio debugger to step line-by-line through the code. Pay particular attention to how the `existingPost` variable is used.
+1. Talk to classmates. Can you describe this code to others?
+1. Check your understanding with an instructor.
+
+##### Using the GetAllWithComments method
+
+Add this method to your `PostController`
+
+```cs
+[HttpGet("GetWithComments")]
+public IActionResult GetWithComments()
+{
+    var posts = _postRepository.GetAllWithComments();
+    return Ok(posts);
+}
+```
+
+And test it by using Postman to send a GET request to the `/api/post/getwithcomments` route.
+
+## Exercises
+
+1. Update the `PostRepository.GetById()` method to include the `UserProfile` object in the returned `Post` object.
+1. Add a `GetPostByIdWithComments()` method to your `PostRepository` that gets a single `Post` and includes that Post's comments.
+1. Create a `UserProfileController` and `UserProfileRepository` with all the basic CRUD operations.
+1. Add methods to the `UserProfileController` and `UserProfileRepository` to return a single `UserProfile` along with the list of posts authored by that user.

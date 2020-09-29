@@ -10,7 +10,6 @@ This book prepares you for building the Tabloid API
 * Query string parameters
 * Models
 * Model Validation
-* EF Queries
 * Web API + React
 * Integration testing
 * JWT tokens
@@ -22,7 +21,7 @@ This book prepares you for building the Tabloid API
 
 * Chapter 1 - [Web API Intro](./chapters/API_OVERVIEW.md)
 * Chapter 2 - [ASP.NET Core Web API Intro](./chapters/ASP_NET_WEB_API_INTRO.md)
-* Chapter 3 - [Entity Framework](./chapters/EF_INTRO.md)
+* Chapter 3 - [Gifter](./chapters/GIFTER.md)
 * Chapter 4 - [Route and Query String Parameters](./chapters/CONTROLLER_PARAMETERS.md)
 * Chapter 5 - [React & Web API](./chapters/REACT_WITH_API.md)
 * Chapter 6 - [React Routing](./chapters/REACT_ROUTER.md)
