@@ -38,7 +38,7 @@ Gifter is a social app for sharing animated GIFs with others. For the time being
 
 ### Model Classes
 
-Create the `Post`, `UserProfiel` and `Comment` models. We're going to ignore the `Subscription` entity for now.
+Create the `Post`, `UserProfile` and `Comment` models. We're going to ignore the `Subscription` entity for now.
 
 > Models/Post.cs
 
@@ -125,7 +125,7 @@ Before we can get fancy, let's cover the basics. In this section we'll build and
 
 #### PostRepository
 
-Before we dive into the `PostRepository`, let's pause a minute to reflect on our system design. Given our database hse more than one entity, it's a good bet that we'll need more than one repository. And since each repository will need to access `SqlConnection`s, this is a good opportunity to share a bit of code with using inheritance. So before we create the `PostRepository` let's create a repository parent class called `BaseRepository`.
+Before we dive into the `PostRepository`, let's pause a minute to reflect on our system design. Given our database has more than one entity, it's a good bet that we'll need more than one repository. And since each repository will need to access `SqlConnection`s, this is a good opportunity to share a bit of code with using inheritance. So before we create the `PostRepository` let's create a repository parent class called `BaseRepository`.
 
 > Repositories/BAseRepository.cs
 
@@ -414,7 +414,7 @@ namespace Gifter.Utils
         }
 
         /// <summary>
-        ///  Decimeter if the value a given column is NULL
+        ///  Determine if the value a given column is NULL
         /// </summary>
         /// <param name="reader">A SqlDataReader that has not exhausted it's result set.</param>
         /// <param name="column">The name of the column from the result set refereed to by the reader.</param>
@@ -425,7 +425,7 @@ namespace Gifter.Utils
         }
 
         /// <summary>
-        ///  Decimeter if the value a given column is not NULL
+        ///  Determine if the value a given column is not NULL
         /// </summary>
         /// <param name="reader">A SqlDataReader that has not exhausted it's result set.</param>
         /// <param name="column">The name of the column from the result set refereed to by the reader.</param>
@@ -538,7 +538,7 @@ I know you don't want to, but do it anyway. It's always best to test _as soon as
 
 ### Beyond Basic CRUD
 
-In your thorough testing of the API, you surly noticed that the JSON representation of a `Post` was missing some pieces. Each `Post` has a property for a `UserProfile` object (to represent the author of the Post) and a property for `Comments` made about that Post. However, although we have the properties, we don't have the data. Let's remedy that starting with the `UserProfile`.
+In your thorough testing of the API, you surely noticed that the JSON representation of a `Post` was missing some pieces. Each `Post` has a property for a `UserProfile` object (to represent the author of the Post) and a property for `Comments` made about that Post. However, although we have the properties, we don't have the data. Let's remedy that starting with the `UserProfile`.
 
 There are a couple of ways we might imagine getting a `UserProfile` object for a particular `Post`. Assuming we have a `UserProfileRepository`, we could do something like this in the `PostController`.
 
@@ -557,7 +557,7 @@ public IActionResult Get()
 }
 ```
 
-That would work, but it would _NOT_ be a approach.
+That would work, but it would _NOT_ be an approach.
 
 _Why not?_
 
@@ -637,7 +637,9 @@ The code above gets all the data we need with a single round trip to the databas
 
 Before we dive into the code to get a Post's Comments, let's take another moment to think. Do we _always_ need a Post's Comments? Another way to ask this is, will we ever need a Post object but NOT need it's Comments?
 
-The answer to this question depends on the _business rules_ of the application your building. For Gifter, let's say we don't always need the Comments.
+The answer to this question depends on the _business rules_ of the application your building (i.e. the features/requirements a Product Owner outlines for an app)
+
+For Gifter, let's say we don't always need the Comments. We may want a view that displays all the Posts without the comments.
 
 So, given that we don't always want Comments, it doesn't make sense to add code to get them in the `GetAll()` method. Fortunately, though, we have the full power of C# at our disposal. We're not limited in what methods we can add to our repository.
 
@@ -749,3 +751,7 @@ And test it by using Postman to send a GET request to the `/api/post/getwithcomm
 1. Add a `GetPostByIdWithComments()` method to your `PostRepository` that gets a single `Post` and includes that Post's comments.
 1. Create a `UserProfileController` and `UserProfileRepository` with all the basic CRUD operations.
 1. Add methods to the `UserProfileController` and `UserProfileRepository` to return a single `UserProfile` along with the list of posts authored by that user.
+
+### Challenge
+
+1. Update the method you added in Exercise 4 to include all the comments for each post.
