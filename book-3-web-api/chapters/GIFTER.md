@@ -45,6 +45,7 @@ Create the `Post`, `UserProfile` and `Comment` models. We're going to ignore the
 ```cs
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
 
 namespace Gifter.Models
 {
