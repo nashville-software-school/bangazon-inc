@@ -593,7 +593,7 @@ public List<Post> GetAll()
                 SELECT p.Id AS PostId, p.Title, p.Caption, p.DateCreated AS PostDateCreated, 
                        p.ImageUrl AS PostImageUrl, p.UserProfileId,
 
-                       up.Name, up.Bio, up.Email, p.DateCreated AS UserProfileDateCreated, 
+                       up.Name, up.Bio, up.Email, up.DateCreated AS UserProfileDateCreated, 
                        up.ImageUrl AS UserProfileImageUrl
                   FROM Post p 
                        LEFT JOIN UserProfile up ON p.UserProfileId = up.id
@@ -659,7 +659,7 @@ public List<Post> GetAllWithComments()
                 SELECT p.Id AS PostId, p.Title, p.Caption, p.DateCreated AS PostDateCreated,
                        p.ImageUrl AS PostImageUrl, p.UserProfileId AS PostUserProfileId,
 
-                       up.Name, up.Bio, up.Email, p.DateCreated AS UserProfileDateCreated,
+                       up.Name, up.Bio, up.Email, up.DateCreated AS UserProfileDateCreated,
                        up.ImageUrl AS UserProfileImageUrl,
 
                        c.Id AS CommentId, c.Message, c.UserProfileId AS CommentUserProfileId
