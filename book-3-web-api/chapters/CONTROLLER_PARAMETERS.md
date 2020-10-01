@@ -101,7 +101,7 @@ public List<Post> Search(string criterion, bool sortDescending)
                         up.Name, up.Bio, up.Email, p.DateCreated AS UserProfileDateCreated, 
                         up.ImageUrl AS UserProfileImageUrl
                     FROM Post p 
-                        LEFT JOIN UserProfile up ON p.UserProfileId = up.id
+                        LEFT JOIN UserProfile up ON up.UserProfileId = up.id
                     WHERE p.Title LIKE @Criterion OR p.Caption LIKE @Criterion";
 
             if (sortDescending)
