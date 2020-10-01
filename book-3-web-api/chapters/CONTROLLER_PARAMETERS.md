@@ -98,10 +98,10 @@ public List<Post> Search(string criterion, bool sortDescending)
                 @"SELECT p.Id AS PostId, p.Title, p.Caption, p.DateCreated AS PostDateCreated, 
                         p.ImageUrl AS PostImageUrl, p.UserProfileId,
 
-                        up.Name, up.Bio, up.Email, p.DateCreated AS UserProfileDateCreated, 
+                        up.Name, up.Bio, up.Email, up.DateCreated AS UserProfileDateCreated, 
                         up.ImageUrl AS UserProfileImageUrl
                     FROM Post p 
-                        LEFT JOIN UserProfile up ON up.UserProfileId = up.id
+                        LEFT JOIN UserProfile up ON p.UserProfileId = up.id
                     WHERE p.Title LIKE @Criterion OR p.Caption LIKE @Criterion";
 
             if (sortDescending)
