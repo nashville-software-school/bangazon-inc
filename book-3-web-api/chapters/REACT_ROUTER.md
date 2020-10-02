@@ -78,7 +78,7 @@ function App() {
 export default App;
 ```
 
-Run the app and go to `localhost/3000` and `localhost/3000/posts/add`
+Run the app and go to `localhost:3000` and `localhost:3000/posts/add`
 
 ## Adding a Header Component
 
