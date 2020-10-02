@@ -207,6 +207,6 @@ function App() {
 }
 ``` 
 
-1. Add a "Search Posts" feature to your app that uses the `/api/post/search` API endpoint.
+2. Add a "Search Posts" feature to your app that uses the `/api/post/search` API endpoint.
 
-1. Update the Post component so that it includes the comments on each post.
+3. Update the Post component so that it includes the comments on each post.
