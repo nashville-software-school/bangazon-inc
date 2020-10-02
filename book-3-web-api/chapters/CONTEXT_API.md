@@ -7,11 +7,12 @@ In the front-end course you learned a couple of approaches to getting data into 
     ```jsx
 
     const MyComponent = (props) => {
-        return
+        return(
            <>
             <h1>props.data</h1>
            </>
-    };
+           );
+    }
     ```
 
 1. Call a method on an imported module to get data from an API
