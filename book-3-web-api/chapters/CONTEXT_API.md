@@ -7,7 +7,10 @@ In the front-end course you learned a couple of approaches to getting data into 
     ```jsx
 
     const MyComponent = (props) => {
-        return <h1>props.data</h1>;
+        return
+           <>
+            <h1>props.data</h1>
+           </>
     };
     ```
 
@@ -18,7 +21,7 @@ In the front-end course you learned a couple of approaches to getting data into 
 
     // ... Code omitted for brevity ...
 
-    const [data, setDate] = useState();
+    const [data, setData] = useState();
 
     useEffect(() => {
         ApiManager
