@@ -128,7 +128,7 @@ Before we can get fancy, let's cover the basics. In this section we'll build and
 
 Before we dive into the `PostRepository`, let's pause a minute to reflect on our system design. Given our database has more than one entity, it's a good bet that we'll need more than one repository. And since each repository will need to access `SqlConnection`s, this is a good opportunity to share a bit of code with using inheritance. So before we create the `PostRepository` let's create a repository parent class called `BaseRepository`.
 
-> Repositories/BAseRepository.cs
+> Repositories/BaseRepository.cs
 
 ```cs
 using Microsoft.Data.SqlClient;
