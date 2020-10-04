@@ -38,7 +38,12 @@ public IActionResult Post(Comment comment)
 1. Allow users to edit _their own_ posts.
 1. Allow users to delete _their own_ posts
 1. Allow users to comment on any post.
-1. Allow users to delete _their own_ comments.
+1. Add a "like" button to a Post's details.       
+    * Clicking this button should increment the number of "likes" associated with a Post.
+    * A user should be able to "like" a post as many times as possible.
+    * Do not record the user who "liked" ths Post.
+    * A like cannot be removed.
+1. When displaying Posts sort the Post by number of likes. The most liked Posts should be on top.
 1. Allow users to "subscribe" to other users' posts.
     1. Create a view that lists all users in the system.
     1. Add a button beside each user in the list to allow the "current" user to subscribe to that user's posts.
