@@ -1,27 +1,49 @@
-# Testing
+# Automated Testing
 
-Say you're working on a brand new application. You pull your first ticket and start implementing the user story. You write some code and think that everything you just wrote should work--but how do you know? You probably run the application, walk through the appropriate steps, observe the app's behavior and see if matches your expectations. This process is considered **manual** testing. If the outcome you observe with your own eyes matches your expectations, you can probably start moving that ticket closer to your "DONE" column and move on to the next, and rinse and repeat. But when you pick up that 2nd ticket and complete it, what assurances do you have that you didn't break the 1st ticket in the process? You might be saying "well, I'll go back and test that the 1st ticket is still working." Imagine though that you're a few months into this application, and you've implemented hundreds of user stories. How can you be sure that your new code is not breaking your old code? The manual testing strategy is not sustainable. We should automate this process. Here's a peek at a simple example of an automated test we might write to confirm that the `Add` method in our Gifter `PostRepository` methods is working as expected:
+Say you're working on a brand new application. You pull your first ticket and start implementing the user story. You write some code and think that everything you just wrote should work--but how do you know? You probably run the application, walk through the appropriate steps, observe the app's behavior and see if matches your expectations. This process is considered **manual** testing. If the outcome you observe with your own eyes matches your expectations, you can probably start moving that ticket closer to your "DONE" column and move on to the next, and rinse and repeat. But when you pick up that 2nd ticket and complete it, what assurances do you have that you didn't break the 1st ticket in the process? You might be saying "well, I'll go back and test that the 1st ticket is still working." Imagine though that you're a few months into this application, and you've implemented hundreds of user stories. How can you be sure that your new code is not breaking your old code? The manual testing strategy is not sustainable. We should automate this process. 
 
-```csharp
-[Fact]
-public void PostRepository_Can_Add_New_Post()
+## Our First Test
+
+In order to demonstrate a test, we must first have some code that needs to be tested.
+
+Here's a utility class that has a single method, `MakeExciting`, that makes a string more exciting.
+
+> StringUtils.cs
+
+```cs
+public class StringUtils
 {
-    // Get all posts and count them
-    var repo = new PostRepository(_context);
-    var startingPosts = repo.GetAll();
-    var startingCount = startingPosts.Count;
+    public static string MakeExciting(string source)
+    {
+        return $"{source.ToUpper()}!!!";
+    }
+}
+```
 
-    // Add new Post -- THIS IS THE PART WE'RE TESTING
-    var newPost = new Post() { Title = "Test Title", ImageUrl = "Test Url", UserProfileId = 1 };
-    repo.Add(newPost);
+And here's a test we can use to verify that the `MakeExciting` method works correctly.
 
-    // Get all posts again and count them
-    var resultingPosts = repo.GetAll();
-    var resultingCount = resultingPosts.Count;
+> StringUtilsTests.cs
 
-    // Check that one has been added
-    Assert.NotEqual(0, newPost.Id);
-    Assert.Equal(startingCount + 1, resultingCount);
+```cs
+using Xunit;
+
+namespace Tests
+{
+    public class StringUtilsTests
+    {
+        [Fact]
+        public void MakeExciting_Method_Makes_A_String_Exciting()
+        {
+            // Arrange - Create any variables, objects or resources needed to run the test
+            var testString = "There's a spider on me";
+
+            // Act - Run the code you want to test (a.k.a "System Under Test")
+            var result = StringUtils.MakeExciting(testString);
+
+            // Assert - Verify that the code from the "Act" step did what we expected
+            Assert.Equal("THERE'S A SPIDER ON ME!!!", result);
+        }
+    }
 }
 ```
 
@@ -31,13 +53,13 @@ It might seem weird to think about writing code to test our code, but this is an
 
 There are a few common types of automated tests you'll write during the development process
 
-- **Unit Testing** - Testing a single method. The example above, for instance, tests _only_ the `Add` method in the `PostRepository` class
+- **Unit Testing** - Testing a single method. The example above, for instance, tests _only_ the `MakeExciting` method.
 
 - **Integration Testing** - Testing pieces of our system that are connected to one another. We might, for example, write an integration test that tests one of the routes in our API. To do this, we are interacting with more than just a single unit--we're interacting with a controller, repository, and database.
 
 - **End to End (E2E) Testing** - These tests simulate the actual flow of an end user. In web development, E2E tests may involve automating the process of launching a browser, typing in form values, clicking buttons, etc.
 
-In this chapter we'll look at how to write **unit** tests for the methods in Gifter's `PostRepository`. To do this, we're going to use a testing tool called XUnit
+In this chapter we'll look at how to write **unit** tests for the methods in Gifter's `PostController`. To do this, we're going to use a testing tool called XUnit
 
 ## Setup
 
@@ -86,19 +108,6 @@ Now let's see how we can execute this test to see the results. In Visual Studio,
 
 Now let's start setting up some more meaningful tests that will test the behavior of some of our PostRepository methods.
 
-
-### Entity Framework Core
-
-Our new test project will need access to Entity Framework Core, so we will need to add the EF nuget packages.
-
-Add these Nuget package references to your test project's `*.csproj` file.
-
-```xml
-<PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.5" />
-<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.5" />
-<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.5" />
-```
-
 ### Reference the Project to Test
 
 Our tests will be written to verify that the Gifter app behaves as we expect. This means we'll have to tell our test project about the Gifter project.
@@ -113,336 +122,442 @@ Add this project reference to your test project's `*.csproj` file.
 
 > **NOTE:** The Gifter app is referred to as the [_System Under Test_](https://en.wikipedia.org/wiki/System_under_test) (SUT).
 
+## Writing Controller Tests
 
+As we know ASP<span>.</span>NET controllers are special classes that handle HTTP requests. However when it comes to unit testing a controller, we don't have to worry about what makes controllers "special". Instead we rely on the fact that they are really _just C# classes_.
 
+Here's a snippet of Gifter's `PostController` class
 
+```cs
+[ApiController]
+public class PostController : ControllerBase
+{
+    private readonly IPostRepository _postRepository;
+    public PostController(IPostRepository postRepository)
+    {
+        _postRepository = postRepository;
+    }
 
-## Writing Repository Tests
+    [HttpGet]
+    public IActionResult Get()
+    {
+        return Ok(_postRepository.GetAll());
+    }
 
-Ponder for a moment the example test earlier in this chapter that tested whether or not our `Add` method actually added something to the database. There is a problem that we have to consider: I want to be able to run that test as many times as I'd like, but I _don't_ want that ugly test data to actually be added to my database every time I run it. 
+// ...
+```
 
-We can tell Entity Framework to actually use a _different_ database/connection string that's just for our tests. In fact, we're going to use an "in memory" database so that when we run a test, the following things will happen:
+Let's focus on the `Get()` method. What does it do? It returns an object - some kind of `IActionResult` - that contains a list of all the posts in our database.
 
-1. A brand new database will get created on the fly and live only in memory
-2. (Optional) We'll pre-populate the database with some starter data
-3. Our tests will run
-4. The test database will get destroyed
-5. Rinse and repeat
+What do you think we'd need to do in order to test the `Get()` method? Well, to see if the `Get()` method does what we think it should do, we could _run it and see if it does what we think it should do_.
 
-In Visual Studio Solution Explorer right click the Gifter.Test project and select Add > Class and name it `EFTestFixture.cs`. This will be where we set up the in-memory database. Add the following code
+How do we do that?
 
-```csharp
-using Gifter.Data;
-using Microsoft.Data.Sqlite;
-using Microsoft.EntityFrameworkCore;
+1. Create an instance of the `PostController`.
+1. Call the `Get()` method.
+1. Check the object returned by the `Get()` method to see if it contains the list of posts.
+
+### Unit Testing the PostController
+
+#### Creating an Instance of the `PostController`
+
+The process outlined above sounds simple enough until we look a little closer. The first step is to create instance of the `PostController` class, but an examination of the `PostController` constructor shows us that we need to pass in instance of `IPostRepository` when we instantiate a `PostController`.
+
+#### "Mocking" the IPostRepository
+
+Let's revisit the definition of a _uint test_. A unit test is a test that verifies a single method works properly.
+
+But how can we test a single controller method given that each controller method calls into the repository and the repository sends SQL commands to the database. If you think about it you'll see that's a LOT more than one method.
+
+We solve this problem by creating a _mock_ repository. This is a fake version of repository that we will use for tests. Instead of connecting to SQL Server, this mock repository will mimic the behavior using a simple list of posts.
+
+In your test project create a folder called 'Mocks` and add the following class.
+
+> Mocks/InMemoryPostRepository.cs
+
+```cs
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using Gifter.Models;
+using Gifter.Repositories;
 
-namespace Gifter.Tests
+namespace Gifter.Tests.Mocks
 {
-
-    public class TestDbContext : ApplicationDbContext
+    class InMemoryPostRepository : IPostRepository
     {
-        public TestDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
-        protected override void OnModelCreating(ModelBuilder builder)
+        private readonly List<Post> _data;
+
+        public List<Post> InternalData
         {
-            builder.Model.GetEntityTypes()
-                .Where(e => !e.IsOwned())
-                .SelectMany(e => e.GetForeignKeys())
-                .ToList()
-                .ForEach(relationship => relationship.DeleteBehavior = DeleteBehavior.Restrict);
-        }
-    }
-
-    public abstract class EFTestFixture : IDisposable
-    {
-        private const string _connectionString = "DataSource=:memory:";
-        private readonly SqliteConnection _connection;
-
-        protected readonly TestDbContext _context;
-
-        protected EFTestFixture()
-        {
-            _connection = new SqliteConnection(_connectionString);
-            _connection.Open();
-            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-                    .UseSqlite(_connection)
-                    .Options;
-            _context = new TestDbContext(options);
-            _context.Database.EnsureCreated();
-
+            get
+            {
+                return _data;
+            }
         }
 
-        public void Dispose()
+        public InMemoryPostRepository(List<Post> startingData)
         {
-            _connection.Close();
+            _data = startingData;
         }
 
-        
+        public void Add(Post post)
+        {
+            var lastPost = _data.Last();
+            post.Id = lastPost.Id + 1;
+            _data.Add(post);
+        }
+
+        public void Delete(int id)
+        {
+            var postTodelete = _data.FirstOrDefault(p => p.Id == id);
+            if (postTodelete == null)
+            {
+                return;
+            }
+
+            _data.Remove(postTodelete);
+        }
+
+        public List<Post> GetAll()
+        {
+            return _data;
+        }
+
+        public Post GetById(int id)
+        {
+            return _data.FirstOrDefault(p => p.Id == id);
+        }
+
+        public void Update(Post post)
+        {
+            var currentPost = _data.FirstOrDefault(p => p.Id == post.Id);
+            if (currentPost == null)
+            {
+                return;
+            }
+
+            currentPost.Caption = post.Caption;
+            currentPost.Title = post.Title;
+            currentPost.DateCreated = post.DateCreated;
+            currentPost.ImageUrl = post.ImageUrl;
+            currentPost.UserProfileId = post.UserProfileId;
+        }
+
+        public List<Post> Search(string criterion, bool sortDescending)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Post> GetAllWithComments()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Post GetPostByIdWithComments(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 ```
 
-Add another new class to the Gift.Tests project and call it `PostRepositoryTests.cs`. This class will inherit from the `EFTestFixture` class and actually hold our tests, but before we write any of our tests, let's add some sample data to our in-memory database. Add the following code
+Take a spin through the code. What do you see?
 
-```csharp
+The first thing to note is that the `InMemoryPostRepository` implements the `IPostRepository` interface. This means it has the same methods as the "real" `PostRepository` class in our Gifter application.
+
+Have you been wondering why we have to go to all the trouble of creating both an interface and a class for each repository? Well this is the reason. Be creating the `IPostRepository` interface and using that interface within the `PostController` class, our code is flexible enough to allow us to use a mock repository in unit tests.
+
+Another important thing ot notice is how we use the `_data` list. Instead of a SQL Server database, our mock repository stores data inside this list. Since the list is resides within our C# program, we say we're storing the data _in memory_.
+
+#### The `PostControllerTests` Test Class
+
+Rename the `UnitTes1.cs` file to `PostControllerTests.cs` and copy the following code into it.
+
+> `PostControllerTests.cs`
+
+```cs
+using Gifter.Controllers;
 using Gifter.Models;
-using Gifter.Repositories;
+using Gifter.Tests.Mocks;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 using Xunit;
 
 namespace Gifter.Tests
 {
-    public class PostRepositoryTests : EFTestFixture
+    public class PostControllerTests
     {
-        public PostRepositoryTests()
+        [Fact]
+        public void Get_Returns_All_Posts()
         {
-            AddSampleData();
+            // Arrange 
+            var postCount = 20;
+            var posts = CreateTestPosts(postCount);
+
+            var repo = new InMemoryPostRepository(posts);
+            var controller = new PostController(repo);
+
+            // Act 
+            var result = controller.Get();
+
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var actualPosts = Assert.IsType<List<Post>>(okResult.Value);
+
+            Assert.Equal(postCount, actualPosts.Count);
+            Assert.Equal(posts, actualPosts);
         }
 
-        // Add sample data
-        private void AddSampleData()
+        [Fact]
+        public void Get_By_Id_Returns_NotFound_When_Given_Unknown_id()
         {
-            var user1 = new UserProfile()
+            // Arrange 
+            var posts = new List<Post>(); // no posts
+
+            var repo = new InMemoryPostRepository(posts);
+            var controller = new PostController(repo);
+
+            // Act
+            var result = controller.Get(1);
+
+            // Assert
+            Assert.IsType<NotFoundResult>(result);
+        }
+
+        [Fact]
+        public void Get_By_Id_Returns_Post_With_Given_Id()
+        {
+            // Arrange
+            var testPostId = 99;
+            var posts = CreateTestPosts(5);
+            posts[0].Id = testPostId; // Make sure we know the Id of one of the posts
+
+            var repo = new InMemoryPostRepository(posts);
+            var controller = new PostController(repo);
+
+            // Act
+            var result = controller.Get(testPostId);
+
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var actualPost = Assert.IsType<Post>(okResult.Value);
+
+            Assert.Equal(testPostId, actualPost.Id);
+        }
+
+        [Fact]
+        public void Post_Method_Adds_A_New_Post()
+        {
+            // Arrange 
+            var postCount = 20;
+            var posts = CreateTestPosts(postCount);
+
+            var repo = new InMemoryPostRepository(posts);
+            var controller = new PostController(repo);
+
+            // Act
+            var newPost = new Post()
             {
-                Name = "Walter",
-                Email = "walter@gmail.com",
-                DateCreated = DateTime.Now - TimeSpan.FromDays(365),
-                FirebaseUserId = "TEST_FIREBASE_UID_1"
+                Caption = "Caption",
+                Title = "Title",
+                ImageUrl = "http://post.image.url/",
+                DateCreated = DateTime.Today,
+                UserProfileId = 999,
+                UserProfile = CreateTestUserProfile(999),
             };
 
-            var user2 = new UserProfile()
+            controller.Post(newPost);
+
+            // Assert
+            Assert.Equal(postCount + 1, repo.InternalData.Count);
+        }
+
+        [Fact]
+        public void Put_Method_Returns_BadRequest_When_Ids_Do_Not_Match()
+        {
+            // Arrange
+            var testPostId = 99;
+            var posts = CreateTestPosts(5);
+            posts[0].Id = testPostId; // Make sure we know the Id of one of the posts
+
+            var repo = new InMemoryPostRepository(posts);
+            var controller = new PostController(repo);
+
+            var postToUpdate = new Post()
             {
-                Name = "Donny",
-                Email = "donny@gmail.com",
-                DateCreated = DateTime.Now - TimeSpan.FromDays(400),
-                FirebaseUserId = "TEST_FIREBASE_UID_2"
+                Id = testPostId,
+                Caption = "Updated!",
+                Title = "Updated!",
+                UserProfileId = 99,
+                DateCreated = DateTime.Today,
+                ImageUrl = "http://some.image.url",
+            };
+            var someOtherPostId = testPostId + 1; // make sure they aren't the same
+
+            // Act
+            var result = controller.Put(someOtherPostId, postToUpdate);
+
+            // Assert
+            Assert.IsType<BadRequestResult>(result);
+        }
+
+        [Fact]
+        public void Put_Method_Updates_A_Post()
+        {
+            // Arrange
+            var testPostId = 99;
+            var posts = CreateTestPosts(5);
+            posts[0].Id = testPostId; // Make sure we know the Id of one of the posts
+
+            var repo = new InMemoryPostRepository(posts);
+            var controller = new PostController(repo);
+
+            var postToUpdate = new Post()
+            {
+                Id = testPostId,
+                Caption = "Updated!",
+                Title = "Updated!",
+                UserProfileId = 99,
+                DateCreated = DateTime.Today,
+                ImageUrl = "http://some.image.url",
             };
 
-            var user3 = new UserProfile()
+            // Act
+            controller.Put(testPostId, postToUpdate);
+
+            // Assert
+            var postFromDb = repo.InternalData.FirstOrDefault(p => p.Id == testPostId);
+            Assert.NotNull(postFromDb);
+
+            Assert.Equal(postToUpdate.Caption, postFromDb.Caption);
+            Assert.Equal(postToUpdate.Title, postFromDb.Title);
+            Assert.Equal(postToUpdate.UserProfileId, postFromDb.UserProfileId);
+            Assert.Equal(postToUpdate.DateCreated, postFromDb.DateCreated);
+            Assert.Equal(postToUpdate.ImageUrl, postFromDb.ImageUrl);
+        }
+
+        [Fact]
+        public void Delete_Method_Removes_A_Post()
+        {
+            // Arrange
+            var testPostId = 99;
+            var posts = CreateTestPosts(5);
+            posts[0].Id = testPostId; // Make sure we know the Id of one of the posts
+
+            var repo = new InMemoryPostRepository(posts);
+            var controller = new PostController(repo);
+
+            // Act
+            controller.Delete(testPostId);
+
+            // Assert
+            var postFromDb = repo.InternalData.FirstOrDefault(p => p.Id == testPostId);
+            Assert.Null(postFromDb);
+        }
+
+        private List<Post> CreateTestPosts(int count)
+        {
+            var posts = new List<Post>();
+            for (var i = 1; i <= count; i++)
             {
-                Name = "The Dude",
-                Email = "thedude@gmail.com",
-                DateCreated = DateTime.Now - TimeSpan.FromDays(400),
-                FirebaseUserId = "TEST_FIREBASE_UID_3"
-            };
+                posts.Add(new Post()
+                {
+                    Id = i,
+                    Caption = $"Caption {i}",
+                    Title = $"Title {i}",
+                    ImageUrl = $"http://post.image.url/{i}",
+                    DateCreated = DateTime.Today.AddDays(-i),
+                    UserProfileId = i,
+                    UserProfile = CreateTestUserProfile(i),
+                });
+            }
+            return posts;
+        }
 
-            _context.Add(user1);
-            _context.Add(user2);
-            _context.Add(user3);
-
-            var post1 = new Post()
+        private UserProfile CreateTestUserProfile(int id)
+        {
+            return new UserProfile()
             {
-                Caption = "If you will it, Dude, it is no dream",
-                Title = "The Dude",
-                ImageUrl = "http://foo.gif",
-                UserProfile = user1,
-                DateCreated = DateTime.Now - TimeSpan.FromDays(10)
+                Id = id,
+                Name = $"User {id}",
+                Email = $"user{id}@example.com",
+                Bio = $"Bio {id}",
+                DateCreated = DateTime.Today.AddDays(-id),
+                ImageUrl = $"http://user.image.url/{id}",
             };
-
-            var post2 = new Post()
-            {
-                Caption = "If you're not into the whole brevity thing",
-                Title = "El Duderino",
-                ImageUrl = "http://foo.gif",
-                UserProfile = user2,
-                DateCreated = DateTime.Now - TimeSpan.FromDays(11),
-            };
-
-            var post3 = new Post()
-            {
-                Caption = "It really ties the room together",
-                Title = "My Rug",
-                ImageUrl = "http://foo.gif",
-                UserProfile = user3,
-                DateCreated = DateTime.Now - TimeSpan.FromDays(12),
-            };
-
-            var comment1 = new Comment()
-            {
-                Post = post2,
-                Message = "This is great",
-                UserProfile = user3
-            };
-
-            var comment2 = new Comment()
-            {
-                Post = post2,
-                Message = "The post really tied the room together",
-                UserProfile = user2
-            };
-
-            _context.Add(post1);
-            _context.Add(post2);
-            _context.Add(post3);
-            _context.Add(comment1);
-            _context.Add(comment2);
-            _context.SaveChanges();
         }
     }
 }
 ```
 
-The code above just adds a few users, posts, and comments in as dummy data. Now we're ready to test one of our methods. Let's test the behavior of our `Search` method. Some things we could/should test are:
+Take a look at the code. Focus on the `Get_Returns_All_Posts()` method for now.
 
-- If the search criterion exists anywhere in a post's Title it should be in the result set
-- If the search criterion exists anywhere in a post's Caption it should be in the result set
-- If the search criterion doesn't match any posts, an empty list should be returned (and not throw an exception)
-- If sortDescending is true, then the most recent post should be first in the list
-- If sortDescending is false, then the most recent post should be last in the list.
-
-We can turn each of these expectations into automated tests. Update the code to include the following tests:
-
-```csharp
-using Gifter.Models;
-using Gifter.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using Xunit;
-
-namespace Gifter.Tests
-{
-    public class PostRepositoryTests : EFTestFixture
-    {
-        public PostRepositoryTests()
-        {
-            AddSampleData();
-        }
-
-        [Fact]
-        public void Search_Should_Match_A_Posts_Title()
-        {
-            var repo = new PostRepository(_context);
-            var results = repo.Search("Dude", false);
-
-            Assert.Equal(2, results.Count);
-            Assert.Equal("El Duderino", results[0].Title);
-            Assert.Equal("The Dude", results[1].Title);
-        }
-
-        [Fact]
-        public void Search_Should_Match_A_Posts_Caption()
-        {
-            var repo = new PostRepository(_context);
-            var results = repo.Search("it is no dream", false);
-
-            Assert.Equal(1, results.Count);
-            Assert.Equal("If you will it, Dude, it is no dream", results[0].Caption);
-        }
-
-        [Fact]
-        public void Search_Should_Return_Empty_List_If_No_Matches()
-        {
-            var repo = new PostRepository(_context);
-            var results = repo.Search("foobarbazcatgrill", false);
-
-            Assert.NotNull(results);
-            Assert.Empty(results);
-        }
-
-        [Fact]
-        public void Search_Can_Return_Most_Recent_First()
-        {
-            var mostRecentTitle = "The Dude";
-            var repo = new PostRepository(_context);
-            var results = repo.Search("", true);
-
-            Assert.Equal(3, results.Count);
-            Assert.Equal(mostRecentTitle, results[0].Title);
-        }
-
-        [Fact]
-        public void Search_Can_Return_Most_Recent_Last()
-        {
-            var mostRecentTitle = "The Dude";
-            var repo = new PostRepository(_context);
-            var results = repo.Search("", false);
-
-            Assert.Equal(3, results.Count);
-            Assert.Equal(mostRecentTitle, results[2].Title);
-        }
-
-        // Add sample data
-        private void AddSampleData()
-        {
-            // Omitted for brevity
-        }
-    }
-}
-
-```
-
-## Has this ever happened to you???
-
-In any of your Tabloid sprints, did you ever have a moment where you thought your DELETE for Post was working, but then later you found out if that post had a Comment or Tag on it, it would throw an exception?  
-
-Is that code working in your project right now? Are you sure? How could you prove it?
-
-Let's write a test for the `Delete` method in Gifter to see if it's working
-
-```csharp
+```cs
 [Fact]
-public void User_Can_Delete_Post_With_Comment()
+public void Get_Returns_All_Posts()
 {
-    var postIdWithComment = 2;
-    var repo = new PostRepository(_context);
+    // Arrange
+    var postCount = 20;
+    var posts = CreateTestPosts(postCount);
 
-    // Attempt to delete it
-    repo.Delete(postIdWithComment);
+    var repo = new InMemoryPostRepository(posts);
+    var controller = new PostController(repo);
 
-    // Now attempt to get it
-    var result = repo.GetById(postIdWithComment);
+    // Act
+    var result = controller.Get();
 
-    Assert.Null(result);
+    // Assert
+    var okResult = Assert.IsType<OkObjectResult>(result);
+    var actualPosts = Assert.IsType<List<Post>>(okResult.Value);
+
+    Assert.Equal(postCount, actualPosts.Count);
+    Assert.Equal(posts, actualPosts);
 }
 ```
 
-If you run this test, it should alert us that our `Delete` method actually _doesn't_ work. And we didn't even have to create a full API and UI just to be able to test it. Having the test here allows us to now safely refactor our `Delete` method. Here's an updated version of the `Delete` method that _might_ work. We say "might" because we're really not sure, but try replacing the code in your PostRepository with this
+The `Get_Returns_All_Posts()` method is a single test. Tests are public methods marked with the `[Fact]` attribute. The `[Fact]` attribute is provided by the xUnit testing library.
 
-> PostRepository.cs
-```csharp
-public void Delete(int id)
-{
-    // Remove related comments first
-    var relatedComments = _context.Comment.Where(c => c.PostId == id);
-    _context.Comment.RemoveRange(relatedComments);
+It's also very common to write out very long names for tests. The name should describe what the test is doing.
 
-    var post = GetById(id);
-    _context.Post.Remove(post);
-    _context.SaveChanges();
-}
-```
+> **NOTE:** This is the _ONLY TIME_ we use underscores in method names in C#...and some people would argue we shouldn't use them even in tests.
 
-Run the test again and see if it passes now.
+#### Arrange, Act, Assert
 
-## Exercise
+Unit tests often follow the "Arrange, Act, Assert" pattern. The `Get_Returns_All_Posts` test is no exception. Notice the comments above each section of the test that call out the pattern.
 
-Add more tests to confirm the following assumptions about the `GetByUserProfileId` method in your PostRepository
+##### Arrange
 
-- The Posts in the result set should be ordered alphabetically by title
-- The Posts in the result set should only belong to the user whose ID was passed in
-- If the ID that gets passed in doesn't belong to a user, the method should return an empty list
+In the _arrange_ section we create any objects that are needed for the test. In our example we create some test Posts, a mock repository and an instance of the `PostController` class.
 
-## Challenge: Test Driven Development
+> **NOTE:** It's important to understand what's happening in the arrange section of the `Get_Get_Returns_All_Posts` test. Pay particular attention to our use of the `InMemoryPostRepository` as a mock repository.
 
-A popular strategy developers choose is Test Driven Development or TDD. Let's say we know exactly what type of method we need, but aren't really sure how to implement it yet. In TDD we would write a test _first_ and then write the code to make it pass. Example: Our Gifter product owner wants a feature where users can see the most recent 1, 2, or 3 posts, so we know we want to make a method that does something like this
+##### Act
 
-> PostRepository.cs
-```csharp
-public List<Post> GetMostRecent(int numResults)
-{
-    // TODO: Implement this!
-    throw new NotImplementedException();
-}
-```
+In the _act_ section we execute the method that is being testing. In our example we call the `PostController.Get()` method.
 
-Copy this code into your repository but **don't implement it yet**. Instead, add more tests to your test project that confirm the following assumptions
+##### Assert
 
-- If numResults is 1, then the result set should only have 1 Post in it
-- If numResults is 3, then the result set should have 3 Posts in it
-- If numResults is 100 and there are only 3 Posts in the database, the result set should have 3 Posts in it
-- If numResults is anything less than 1, the result should be an empty list
-- The first Post in the result set should always be the most recent
+In the _assert_ section we verify that the method we're testing did what we expected it to do. We usually use the `Assert` utility class (provided by xUnit) to help.
+
+In the example we verify the result of `Get()` method is an instance of the `OkObjectResult` class - this is the type returned by the `Ok()` method - and then we verify that it contains the expected list of posts.
+
+### Run the Tests
+
+Use the Visual Studio Test Explorer to run all the tests in the `PostControllerTests` class, then take some time to explore each test.
+
+## Exercises
+
+1. Create tests for all the basic CRUD functionality in the `UserProfileController`. You should create _at least one_ test for each of these controller methods.
+
+    * `Get()`
+    * `Get(int id)`
+    * `Post(UserProfile userProfile)`
+    * `Put(int id, UserProfile userProfile)`
+    * `Delete(int id)`
+
+    > **NOTE:** You'll need to create a mock repository as part of this exercise.
+ 
+1. Create a test for the `PostController.Search()` method.
