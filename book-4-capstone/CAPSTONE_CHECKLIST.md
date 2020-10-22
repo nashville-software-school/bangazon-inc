@@ -4,11 +4,9 @@ This checklist covers creating a project with ASP<span>.</span>NET Core Web API,
 
 The technologies outlines in this chapter are _NOT_ the only technologies you are allowed to use for your capstone, but they are the standard, "happy-path" technologies that we generally recommend.
 
-_**If you would like to use an alternative technology (ex. ADO<span>.</span>NET, MVC, etc...) you must get approval from your capstone mentor.**_
+_**If you would like to use an alternative technology (ex. MVC, etc...) you must get approval from your capstone mentor.**_
 
 Most of these steps will require copying code from either WisdomAndGrace and Gifter, so you may want to have those repositories handy before you start
-
-You can view a video walkthrough of these steps [here](https://www.loom.com/share/bbd6f552dcfc4851a70185160e4330e9)
 
 ## Set up project
 
