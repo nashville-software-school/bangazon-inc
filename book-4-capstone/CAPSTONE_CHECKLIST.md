@@ -37,9 +37,7 @@ You can view a video walkthrough of these steps [here](https://www.loom.com/shar
 1. Install Nuget Packages (Copy from WisdomAndGrace.csproj & Gifter.csproj)
 1. Add connection string to `appsettings.json`
 1. Create Models
-1. Create `Data` folder and `ApplicationDbContext.cs` file
 1. Update `appsettings.json` to include your `FirebaseProjectId`
-1. Update `Startup.cs` to use Entity Framework and ApplicationDbContext
 1. Update `Startup.cs` to ignore reference loops when serializing JSON
 1. Update `Startup.cs` to handle JWTs
 1. Copy in the `UserProfileRepository` and `UserProfileController` from WisdomAndGrace and modify as needed
