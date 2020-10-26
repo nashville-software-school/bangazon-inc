@@ -362,3 +362,11 @@ Let's add multiple questions. We could do that in the `Main()` method, but `Main
 Our moose is finally both enthusiastic and inquisitive, but the code for asking each question is a little redundant.
 
 1. Refactor the app to reduce the redundancy in the code.
+
+## Advanced Challenge
+
+[Magic Moose](./MAGIC_MOOSE.md)
+
+## Advanced Challenge 2
+
+[Rock Paper Scissors](./ROCK_PAPER_SCISSORS.md)
