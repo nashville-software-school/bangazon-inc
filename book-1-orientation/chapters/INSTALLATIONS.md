@@ -48,11 +48,11 @@
 
 Watch a short video for [creating an SSH key in the terminal](https://youtu.be/znRMcNG9_qQ) so that you an work with Github.
 
-### Add SSH Key to Github Account
+### Add SSH Key to Github Account \*
 
 Now watch the video for [adding your SSH key to your Github account](https://youtu.be/8hlmIObpMd4).
 
-## Node
+## Node \*
 
 1. Install [Node](https://nodejs.org/en/) for working with JavaScript tools
 1. Install `serve` and `json-server`
@@ -81,28 +81,9 @@ echo "dnignore() {
 
 You now have access in your terminal to a command called `dnignore` which will add a gitignore file to your project.
 
-## Install a C# Linter
+## VS Code Settings
 
-C# FixFormat is a vscode extension that will--as its name implies--automatically format your C# code. To set it up:
-
-1. Install [C# FixFormat](https://marketplace.visualstudio.com/items?itemName=Leopotam.csharpfixformat)
-1. In VSCode go to File > Preferences > Settings
-1. In the search bar, look for the setting `Format On Save` and make sure it is checked
-1. In the same search bar, look for the setting `Auto Save` and make sure it's _NOT_ set to `afterDelay`
-1. Configure C# FixFormat
-
-   1. Inside Visual Studio code type `ctrl + ,` to open the vscode settings.
-   1. Click the `Open Settings (JSON)` button near the upper-right corner of the window.
-   1. Add the following to `settings.json` file:
-
-   ```json
-   "[csharp]": {
-       "editor.defaultFormatter": "Leopotam.csharpfixformat"
-   },
-   "csharpfixformat.style.braces.onSameLine": false,
-   "csharpfixformat.style.spaces.beforeIndexerBracket": false,
-   "csharpfixformat.style.spaces.beforeParenthesis": false
-   ```
+If you haven't already set up Visual Studio Code to format your code and autosave your files, now is a good time to set that up. Inside VS Code go to the settings by using the shortcut `ctrl` + `,` and using the search bar find the `Format On Save` setting and make sure it is checked. Next find the setting for `Auto Save` and make sure that it's set to either "onFocusChange" or "onWindowChange" (whatever you prefer)
 
 ## Visual Studio IDE
 
