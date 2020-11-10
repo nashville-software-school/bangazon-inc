@@ -74,7 +74,7 @@ Now watch the video for [adding your SSH key to your Github account](https://you
 You'll be making a lot of new projects and we want to easily be able to create a gitignore file before pushing to Github. Run the following code from a git bash window
 
 ```sh
-echo "\ndnignore() {
+echo "dnignore() {
     curl -L -s 'https://raw.githubusercontent.com/github/gitignore/master/VisualStudio.gitignore' > .gitignore
 }" >> ~/.bashrc
 ```
