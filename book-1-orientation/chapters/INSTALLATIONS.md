@@ -52,6 +52,17 @@ Watch a short video for [creating an SSH key in the terminal](https://youtu.be/z
 
 Now watch the video for [adding your SSH key to your Github account](https://youtu.be/8hlmIObpMd4).
 
+### Add Username and Email For Git
+In order for Git to know who made a commit, we have to set the username and email properties in the git config. 
+In the terminal, paste the following and add your email:
+```sh
+git config --global user.email "you@example.com"
+```
+In the terminal, paste the following and add your name:
+```sh
+git config --global user.name "Your Name"
+```
+
 ## Node \*
 
 1. Install [Node](https://nodejs.org/en/) for working with JavaScript tools
