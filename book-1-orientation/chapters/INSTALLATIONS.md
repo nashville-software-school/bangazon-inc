@@ -95,7 +95,7 @@ If you haven't already set up Visual Studio Code to format your code and autosav
 
 ## SQL Server Express Database
 
-1. [SQL Server Express](https://www.microsoft.com/en-us/sql-server/sql-server-editions-express). This is the database tool where all your data will be stored for the server-side course.
+1. [SQL Server Express](https://www.microsoft.com/en-us/sql-server/sql-server-downloads). This is the database tool where all your data will be stored for the server-side course. Click the Download button under the Express option. During the setup, take the basic installation option
 
 ## Bookmark the Following Sites
 
