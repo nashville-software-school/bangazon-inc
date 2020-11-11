@@ -42,7 +42,7 @@
       }
       ```
    1. Find the `defaultProfile` key near the top of the file. Updates it's value to be `"{00000000-0000-0000-ba54-000000000002}"`
-   1. Save teh `settings.json` file and close Visual Studio Code.
+   1. Save the `settings.json` file and close Visual Studio Code.
 
 ### Creating Your SSH Key For Github \*
 
