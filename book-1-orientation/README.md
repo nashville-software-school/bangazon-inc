@@ -9,8 +9,8 @@ This book builds a strong foundation in the syntax, data structures, and valuabl
 **Part 1: C#**
 
 * Chapter 2 - [Introduction to C#](./chapters/CSHARP_INTRO.md)
-* Chapter 3 - [Enthusiastic Moose](./chapters/ENTHUSIASTIC_MOOSE.md)
-* Chapter 4 - [C# for the JavaScript Developer](./chapters/CSHARP_JAVASCRIPT_COMPARISON.md)
+* Chapter 3 - [C# for the JavaScript Developer](./chapters/CSHARP_JAVASCRIPT_COMPARISON.md)
+* Chapter 4 - [Enthusiastic Moose](./chapters/ENTHUSIASTIC_MOOSE.md)
 * Chapter 5 - [Debugging C# in Visual Studio Code](./chapters/DEBUGGING_VSCODE.md)
 * Chapter 6 - [Exercise - Translate Part 1](./chapters/TRANSLATE_CSHARP_JAVASCRIPT.md)
 * Chapter 7 - [Anatomy of a C# Program](./chapters/ANATOMY_OF_CSHARP_APP.md)
