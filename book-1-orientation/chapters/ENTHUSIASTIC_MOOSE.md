@@ -36,8 +36,6 @@ Make the new project and git repo
 
    > **NOTE:** Make sure you run this command from the `EnthusiasticMoose` directory.
 
-   > **NOTE:** You might want to make an alias for downloading this `.gitignore`.
-
 1. initialize a git repository and commit
 
 ### Phase 2
