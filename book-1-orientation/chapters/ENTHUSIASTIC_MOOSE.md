@@ -13,7 +13,7 @@ As you go through the phases make sure you...
 
 ### Phase 1
 
-1. Use the `dotnet` command to create a new .NET console application, and then change to the project directory
+1. From your workspace directory, use the `dotnet` command to create a new .NET console application, and then change to the project directory
 
    ```sh
    dotnet new console -o EnthusiasticMoose
