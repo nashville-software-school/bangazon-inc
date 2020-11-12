@@ -13,8 +13,6 @@ As you go through the phases make sure you...
 
 ### Phase 1
 
-Make the new project and git repo
-
 1. Use the `dotnet` command to create a new .NET console application, and then change to the project directory
 
    ```sh
