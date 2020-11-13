@@ -252,7 +252,7 @@ Our moose can ask a question now, but it doesn't respond. Let's change that.
        MooseSays("H I, I'M  E N T H U S I A S T I C !");
        MooseSays("I really am enthusiastic");
 
-       // As a question
+       // Ask a question
        bool isTrue = MooseAsks("Is Canada real?");
        if (isTrue)
        {
