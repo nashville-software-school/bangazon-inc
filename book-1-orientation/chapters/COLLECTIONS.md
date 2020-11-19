@@ -78,18 +78,18 @@ namespace NSSOrientation
         {
             List<string> students = new List<string>() 
             {
-                "Megan", "Damon", "Chase", "Tekisha",
-                "Castle", "Mark", "Keith", "Adam",
-                "Patrick", "Hannah", "Mike"
+                "Mori", "Travis", "Braxton", "Parker",
+                "Ember", "Matt", "CJ", "Sam",
+                "Jerry", "Terra", "Brady"
             };
 
             // Can't do this easily with a base array
-            students.Add("Melanie");
-            students.Insert(3, "Simon");
+            students.Add("Adam");
+            students.Insert(3, "Rose");
 
-            if (students.Contains("Chase")) 
+            if (students.Contains("Rose")) 
             {
-                Console.WriteLine("Must be cohort 13");
+                Console.WriteLine("Must be cohort 43");
             }
 
             // This looks a lot like JavaScript!
