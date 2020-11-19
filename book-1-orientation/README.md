@@ -20,10 +20,10 @@ This book builds a strong foundation in the syntax, data structures, and valuabl
 * Chapter 11 - [Guessing Game](./chapters/GUESSING_GAME_EXERCISE.md)
 * Chapter 12 - [User Defined Types with Classes](./chapters/CLASS_BASICS.md)
 * Chapter 13 - [Exercise - Translate Part 2](./chapters/TRANSLATE_CSHARP_JAVASCRIPT.md)
-* Chapter 14 - [Exceptions and Try/Catch](./chapters/TRY_CATCH_INTRO.md)
-* Chapter 15 - [Collections](./chapters/COLLECTIONS.md)
-* Chapter 16 - [Wrangling Data with LINQ](./chapters/LINQ_INTRO.md)
-* Chapter 17 - [Exercise - Translate Part 3](./chapters/TRANSLATE_CSHARP_JAVASCRIPT.md)
+* Chapter 14 - [Collections](./chapters/COLLECTIONS.md)
+* Chapter 15 - [Wrangling Data with LINQ](./chapters/LINQ_INTRO.md)
+* Chapter 16 - [Exercise - Translate Part 3](./chapters/TRANSLATE_CSHARP_JAVASCRIPT.md)
+* Chapter 17 - [Exceptions and Try/Catch](./chapters/TRY_CATCH_INTRO.md)
 * Chapter 18 - [Exercise - Plan Your Heist](./chapters/PLAN_YOUR_HEIST.md)
 
 **Part 2: SQL**
