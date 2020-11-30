@@ -55,4 +55,4 @@ Query the `PoKi` database using SQL `SELECT` statements to answer the following 
 
 
 
-(key)[https://gist.github.com/AdamSheaffer/8dda90933e63c35bb7dbf585fc7dee71]
+[key](https://gist.github.com/AdamSheaffer/8dda90933e63c35bb7dbf585fc7dee71)
