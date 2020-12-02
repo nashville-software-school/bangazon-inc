@@ -19,8 +19,9 @@ Our .NET application will need to communicate with a SQL Server database. To be 
 Before you get started, let's introduce some terms that will be used during this project.
 
 - **Models** - Models are C# classes that represent our database tables. For example, we have a `Chore` table in our database with a `Id` and `Name` column. To model this, we'd make a C# class named `Chore` with an `Id` and `Name` property.
-- **Repositorty** - Repositories are classes that we create whose purpose is data access. We'll define lots of our CRUD functionality there. They often have methods like `Get`, `GetById`, `Add`, `Delete`, etc
-- **Connection String** - A connection string is an address of a database--similar to a URL. It specifies the source of the data as well as the means of connecting to it. For example, the connection string for the `Roommates` database you just created is ` 
+- **Repository** - Repositories are classes that we create whose purpose is data access. We'll define lots of our CRUD functionality there. They often have methods like `Get`, `GetById`, `Add`, `Delete`, etc
+- **Connection String** - A connection string is an address of a database--similar to a URL. It specifies the source of the data as well as the means of connecting to it. For example, the connection string for the `Roommates` database you just created is `server=localhost\SQLExpress;database=Roommates;integrated security=true`
+- **ADO.NET** - ADO.NET is an umbrella term for all of the C# classes we'll be using (listed above) for accessing our SQL database from our C# console app. 
 
 
 ## Instructions
@@ -38,7 +39,7 @@ Before you get started, let's introduce some terms that will be used during this
    dotnet restore
    ```
 
->> NOTE: The following steps will have you creating folders inside Visual Studio. If you've never done this before, the way to add folders is to right click the directory level in Solution Explorer where you want to add the folder, and select `Add > New Folder`. If your menu says "Add Solution Folder", you've clicked the wrong spot.
+> NOTE: The following steps will have you creating folders inside Visual Studio. If you've never done this before, the way to add folders is to right click the directory level in Solution Explorer where you want to add the folder, and select `Add > New Folder`. If your menu says "Add Solution Folder", you've clicked the wrong spot.
 
 1. Make a folder in your project called `Models`. This folder will contain classes that represent tables in our database.
 1. In the `Models` folder, create `Room.cs`, `Roommate.cs` and `Chore.cs` file. Copy in the following code
