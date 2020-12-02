@@ -39,7 +39,7 @@ Before you get started, let's introduce some terms that will be used during this
    dotnet restore
    ```
 
-> NOTE: The following steps will have you creating folders inside Visual Studio. If you've never done this before, the way to add folders is to right click the directory level in Solution Explorer where you want to add the folder, and select `Add > New Folder`. If your menu says "Add Solution Folder", you've clicked the wrong spot.
+    > NOTE: The following steps will have you creating folders inside Visual Studio. If you've never done this before, the way to add folders is to right click the directory level in Solution Explorer where you want to add the folder, and select `Add > New Folder`. If your menu says "Add Solution Folder", you've clicked the wrong spot.
 
 1. Make a folder in your project called `Models`. This folder will contain classes that represent tables in our database.
 1. In the `Models` folder, create `Room.cs`, `Roommate.cs` and `Chore.cs` file. Copy in the following code
@@ -96,6 +96,79 @@ Before you get started, let's introduce some terms that will be used during this
     }
     ```
 
+    Before we get into access data from our database, let's stub out a quick menu for our user that has options for seeing all rooms, seeing a single room, or adding a new room. Update your `Main` method in `Program.cs` to the following
+
+    **Program.cs**
+
+    ```csharp
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            bool runProgram = true;
+            while (runProgram)
+            {
+                string selection = GetMenuSelection();
+
+                switch (selection)
+                {
+                    case ("Show all rooms"):
+                        // Do stuff
+                        break;
+                    case ("Search for room"):
+                        // Do stuff
+                        break;
+                    case ("Add a room"):
+                        // Do stuff
+                        break;
+                    case ("Exit"):
+                        runProgram = false;
+                        break;
+                }
+            }
+
+        }
+
+        static string GetMenuSelection()
+        {
+            Console.Clear();
+
+            List<string> options = new List<string>()
+            {
+                "Show all rooms",
+                "Search for room",
+                "Add a room",
+                "Exit"
+            };
+
+            for (int i = 0; i < options.Count; i++)
+            {
+                Console.WriteLine($"{i + 1}. {options[i]}");
+            }
+
+            while (true)
+            {
+                try
+                {
+                    Console.WriteLine();
+                    Console.Write("Select an option > ");
+
+                    string input = Console.ReadLine();
+                    int index = int.Parse(input) - 1;
+                    return options[index];
+                }
+                catch (Exception)
+                {
+
+                    continue;
+                }
+            }
+
+        }
+    }
+    ```
+
+    You can run this if you like, but it doesn't do much yet. Let's start creating some Repository classes next so we can actually access data from our database.
 
 1. Create a new folder called `Repositories`. This folder will contain classes that will be responsible for getting data out of our database and creating C# objects from that data. We typically call classes with this responsibility a Repository. Add two new files to it called `BaseRepository.cs` and `RoomRepository.cs`.
 1. Copy the following code into `BaseRepository.cs`
@@ -235,46 +308,47 @@ Before you get started, let's introduce some terms that will be used during this
     }
    ```
 
-   To test this, let's call this method from the `Program.Main` method. Create a new instance of a `RoomRepository` and call `GetAll()`. Run the application.
+   To test this, let's get this method hooked up to the menu. First, we'll need to create a new instace of a `RoomRepository` in our `Main` method back in the `Program.cs` file. Add this variable declaration as the first line in `Main`
 
-    **Program.cs**
+   ```csharp
+   RoomRepository roomRepo = new RoomRepository(CONNECTION_STRING);
+   ```
 
-    ```csharp
-    using System;
-    using System.Collections.Generic;
-    using Roommates.Models;
-    using Roommates.Repositories;
+   Now update the code inside the `while` loop so it'll call our new `GetAll` method if the user asks to see all rooms.
 
-    namespace Roommates
+   ```csharp
+    while (runProgram)
     {
-        class Program
+        string selection = GetMenuSelection();
+
+        switch (selection)
         {
-            /// <summary>
-            ///  This is the address of the database.
-            ///  We define it here as a constant since it will never change.
-            /// </summary>
-            private const string CONNECTION_STRING = @"server=localhost\SQLExpress;database=Roommates;integrated security=true";
-
-            static void Main(string[] args)
-            {
-                RoomRepository roomRepo = new RoomRepository(CONNECTION_STRING);
-
-                Console.WriteLine("Getting All Rooms:");
-                Console.WriteLine();
-
-                List<Room> allRooms = roomRepo.GetAll();
-
-                foreach (Room room in allRooms)
+            case ("Show all rooms"):
+                List<Room> rooms = roomRepo.GetAll();
+                foreach (Room r in rooms)
                 {
-                    Console.WriteLine($"{room.Id} {room.Name} {room.MaxOccupancy}");
+                    Console.WriteLine($"{r.Id} - {r.Name} Max Occupancy({r.MaxOccupancy})");
                 }
-
-            }
+                Console.Write("Press any key to continue");
+                Console.ReadKey();
+                break;
+            case ("Search for room"):
+                // Do stuff
+                break;
+            case ("Add a room"):
+                // Do stuff
+                break;
+            case ("Exit"):
+                runProgram = false;
+                break;
         }
     }
-    ```
+   ```
 
-1. Now create another method in `RoomRepository` that will get a single room by its Id. The method should accept an `int id` as a parameter and return a single `Room` object.
+   Running the program and selecting "Show all rooms" should now print all the rooms from the database out to the console. Try playing with some of the data in the database and see the changes in the program
+
+
+1. Now create another method in `RoomRepository` that will get a single room by its Id. The method should accept an `int id` as a parameter and return a single `Room` object. Notice in the code below that the SQL statement now uses a parameter. We can tell we're using params in our SQL queries when we see the `@` symbol. Whatever integer value gets passed into the `GetById` method will get inserted into the SQL query.
 
    ```csharp
     /// <summary>
@@ -312,18 +386,23 @@ Before you get started, let's introduce some terms that will be used during this
     }
    ```
 
-1. Update `Program.Main` to also call this new method
+1. Update the `switch` statement back in `Program.Main` so it calls the new `GetById` method. 
+    > NOTE: this implementation doesn't have any error handling. If you're feeling ambitious, you can add code to this to account for the possibility of the user entering a non-numeric value, or entering an Id that doesn't exist in the database.
 
    ```csharp
-    Console.WriteLine("----------------------------");
-    Console.WriteLine("Getting Room with Id 1");
+    case ("Search for room"):
+        Console.Write("Room Id: ");
+        int id = int.Parse(Console.ReadLine());
 
-    Room singleRoom = roomRepo.GetById(1);
+        Room room = roomRepo.GetById(id);
 
-    Console.WriteLine($"{singleRoom.Id} {singleRoom.Name} {singleRoom.MaxOccupancy}");
+        Console.WriteLine($"{room.Id} - {room.Name} Max Occupancy({room.MaxOccupancy})");
+        Console.Write("Press any key to continue");
+        Console.ReadKey();
+        break;
    ```
 
-1. Now that we've read data from our database, let's look at how we can add new records. Create a new method in the `RoomRepository` and name it `Insert`. It should accept a single `Room` parameter.
+1. Now that we've read data from our database, let's look at how we can add new records. Create a new method in the `RoomRepository` and name it `Insert`. It should accept a single `Room` object as a parameter. Notice once again we are using parameters in our SQL statement.
 
    ```csharp
     /// <summary>
@@ -338,8 +417,6 @@ Before you get started, let's introduce some terms that will be used during this
             conn.Open();
             using (SqlCommand cmd = conn.CreateCommand())
             {
-                // These SQL parameters are annoying. Why can't we use string interpolation?
-                // ... sql injection attacks!!!
                 cmd.CommandText = @"INSERT INTO Room (Name, MaxOccupancy) 
                                             OUTPUT INSERTED.Id 
                                             VALUES (@name, @maxOccupancy)";
@@ -359,100 +436,26 @@ Before you get started, let's introduce some terms that will be used during this
 
    The `cmd.ExecuteScalar` method does two things: First, it executes the SQL command against the database. Then it looks at the first thing that the database sends back (in our case this is just the `Id` it created for the room) and returns it.
 
-1. Update `Program.Main` to create a new instance of Room and pass it into the `Insert` method.
+1. Update the switch statement in `Program.Main` to use our `Insert` method.
 
     ```csharp
-    Room bathroom = new Room
-    {
-        Name = "Bathroom",
-        MaxOccupancy = 1
-    };
+    case ("Add a room"):
+        Console.Write("Room name: ");
+        string name = Console.ReadLine();
 
-    roomRepo.Insert(bathroom);
+        Console.Write("Max occupancy: ");
+        int max = int.Parse(Console.ReadLine());
 
-    Console.WriteLine("-------------------------------");
-    Console.WriteLine($"Added the new Room with id {bathroom.Id}");
-    ```
-
-1. Now add the following method to the repository that allows us to update a room in the database. This method should be called `Upate`. It should take  a `Room updatedRoom` parameter, and should not return anything
-
-    ```csharp
-    /// <summary>
-    ///  Updates the room
-    /// </summary>
-    public void Update(Room room)
-    {
-        using (SqlConnection conn = Connection)
+        Room roomToAdd = new Room()
         {
-            conn.Open();
-            using (SqlCommand cmd = conn.CreateCommand())
-            {
-                cmd.CommandText = @"UPDATE Room
-                                        SET Name = @name,
-                                            MaxOccupancy = @maxOccupancy
-                                        WHERE Id = @id";
-                cmd.Parameters.AddWithValue("@name", room.Name);
-                cmd.Parameters.AddWithValue("@maxOccupancy", room.MaxOccupancy);
-                cmd.Parameters.AddWithValue("@id", room.Id);
+            Name = name,
+            MaxOccupancy = max
+        };
 
-                cmd.ExecuteNonQuery();
-            }
-        }
-    }
+        roomRepo.Insert(roomToAdd);
+
+        Console.WriteLine($"{roomToAdd.Name} has been added and assigned an Id of {roomToAdd.Id}");
+        Console.Write("Press any key to continue");
+        Console.ReadKey();
+        break;
     ```
-
-    The only difference here is we're calling a method called `cmd.ExecuteNonQuery`. We use this method when we want to execute a SQL command, but we don't expect anything back from the database.
-
-1. Write some code in `Program.Main` to test the `Update` method.
-
-1. Lastly let's create a method that allows us to delete a room. Update `RoomRepository` to include a method called `Delete`. It should take in an `int id` as a parameter and not return anything.
-
-    ```csharp
-    /// <summary>
-    ///  Delete the room with the given id
-    /// </summary>
-    public void Delete(int id)
-    {
-        using (SqlConnection conn = Connection)
-        {
-            conn.Open();
-            using (SqlCommand cmd = conn.CreateCommand())
-            {
-                cmd.CommandText = "DELETE FROM Room WHERE Id = @id";
-                cmd.Parameters.AddWithValue("@id", id);
-                cmd.ExecuteNonQuery();
-            }
-        }
-    }
-    ```
-1. Write some code in `Program.Main` to test the `Delete` method.
-
-## Exercise
-
-1. Implement the `RoommateRepository` class to include the following methods
-    - `public List<Roommate> GetAll()` 
-        - Roommate objects should have a null value for their Room property
-    - `public Roommate GetById(int id)`
-    - `public List<Roommate> GetAllWithRoom(int roomId)`
-        - Roommate objects _should_ have a Room property
-    - `public void Insert(Roommate roommate)`
-    - `public void Update(Roommate roommate)` 
-    - `public void Delete(int id)`
-
-1. Update the `Program.Main` method to print a report of all roommates and their rooms
-
-## Challenges
-
-1. Change the program to provide the user with a menu to allow them to interact with the Roommates database
-1. Add Chores to the applications. Users should be able to perform full CRUD on Chores as well as assign and remove them from Roommates.
-
-## Supplemental: Comparison of data access tools
-
-| \_                          | <span>ADO.NET</span>           | Micro-ORM (Dapper)                           | Full ORM (Entity Framework)            |
-| --------------------------- | ------------------------------ | -------------------------------------------- | -------------------------------------- |
-| **Dev Writes SQL**          | yes                            | yes                                          | no                                     |
-| **Boilerplate Code**        | yes                            | minimal                                      | no                                     |
-| **Automatic Model Binding** | no                             | yes                                          | yes                                    |
-| **Degree of "Magic"**       | none                           | a little                                     | a lot                                  |
-| **Pros**                    | Full control, best performance | Balance between control and ease of use      | Ease of use, Rapid development         |
-| **Cons**                    | Lots of code to write          | Can lead to writing more code than is needed | Too much magic, Performance can suffer |
