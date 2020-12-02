@@ -1,10 +1,18 @@
-# Using SQL in a .NET Application
+# Writing SQL in a .NET Application with ADO.NET
 
 Sometimes money is tight. Sometimes when money is tight, it becomes an unavoidable truth that we must live with other people. We call these people _Roommates_.
 
 Your task is to build a command line application to manage a house full of roommates. You should persist data in a SQL Server database.
 
 > **NOTE:** This will begin as an interactive lesson. Your instructor will lead you through following the instructions.
+
+## Data Persistance
+
+Our .NET application will need to communicate with a SQL Server database. To be able to do this, we'll be installing a library called ADO.NET. With ADO.NET installed, we'll have access to a few C# classes that are helpful for communicating with databases. The ADO.NET classes we'll be using heavily are:
+
+- **SqlConnection** - This class represents the connection between our console application and our SQL Server database
+- **SqlCommand** - This class will help us write sql queries in our C# code and execute them against the database
+- 
 
 ## Instructions
 
