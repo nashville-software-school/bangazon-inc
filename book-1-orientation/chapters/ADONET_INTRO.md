@@ -6,7 +6,7 @@ Your task is to build a command line application to manage a house full of roomm
 
 > **NOTE:** This will begin as an interactive lesson. Your instructor will lead you through following the instructions.
 
-## Data Persistance
+## Data Persistence
 
 Our .NET application will need to communicate with a SQL Server database. To be able to do this, we'll be installing a library called ADO.NET. With ADO.NET installed, we'll have access to a few C# classes that are helpful for communicating with databases. The ADO.NET classes we'll be using heavily are:
 
