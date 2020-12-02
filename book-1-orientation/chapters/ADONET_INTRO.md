@@ -12,22 +12,33 @@ Our .NET application will need to communicate with a SQL Server database. To be 
 
 - **SqlConnection** - This class represents the connection between our console application and our SQL Server database
 - **SqlCommand** - This class will help us write sql queries in our C# code and execute them against the database
-- 
+- **SqlDataReader** - This class will help us parse out the data that comes back from our database so that we can convert it to C# objects
+
+## Vocabulary
+
+Before you get started, let's introduce some terms that will be used during this project.
+
+- **Models** - Models are C# classes that represent our database tables. For example, we have a `Chore` table in our database with a `Id` and `Name` column. To model this, we'd make a C# class named `Chore` with an `Id` and `Name` property.
+- **Repositorty** - Repositories are classes that we create whose purpose is data access. We'll define lots of our CRUD functionality there. They often have methods like `Get`, `GetById`, `Add`, `Delete`, etc
+- **Connection String** - A connection string is an address of a database--similar to a URL. It specifies the source of the data as well as the means of connecting to it. For example, the connection string for the `Roommates` database you just created is ` 
+
 
 ## Instructions
 
 1. Use the [Roommates](./assets/roommates.sql) SQL script to create a `Roommates` database.
 1. Take a look at the ERD to familiarize yourself with the database.
 ![Roommates ERD](./assets/Roommates.png)
-1. In Visual Studio, create a new console application called `Roommates`.
+1. In Visual Studio, create a new project. Make it a console application (.NET Core) and call it `Roommates`. The following screen will ask you where you want to put this project. Select your `workspace` directory.
 1. In your terminal, navigate to the directory where you created your project. The directory will have a `Roommates.sln` file in it.
 1. `cd` into your project directory. When you list what's in the directory, you should see your `Roommates.csproj` and `Program.cs`.
-1. Run the following commands. This imports the required package needed to have your C# code connect to a SQL Server database.
+1. Run the following commands. This imports the required package needed for using the ADO.NET classes.
 
    ```sh
    dotnet add package Microsoft.Data.SqlClient
    dotnet restore
    ```
+
+>> NOTE: The following steps will have you creating folders inside Visual Studio. If you've never done this before, the way to add folders is to right click the directory level in Solution Explorer where you want to add the folder, and select `Add > New Folder`. If your menu says "Add Solution Folder", you've clicked the wrong spot.
 
 1. Make a folder in your project called `Models`. This folder will contain classes that represent tables in our database.
 1. In the `Models` folder, create `Room.cs`, `Roommate.cs` and `Chore.cs` file. Copy in the following code
