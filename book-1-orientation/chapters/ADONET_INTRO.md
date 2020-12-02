@@ -246,7 +246,7 @@ Your task is to build a command line application to manage a house full of roomm
 
                 foreach (Room room in allRooms)
                 {
-                    Console.WriteLine($"{room.Id} {room.Name} {room.MaxOccupancy}");
+                    Console.WriteLine($"{room.Name} has an Id of {room.Id} and a max occupancy of {room.MaxOccupancy}");
                 }
 
             }
