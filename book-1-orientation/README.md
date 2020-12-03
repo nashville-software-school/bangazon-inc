@@ -45,6 +45,7 @@ This book builds a strong foundation in the syntax, data structures, and valuabl
 * Chapter 27 - [Intro to Visual Studio](./chapters/VISUAL_STUDIO.md)
 * Chapter 28 - [Debugging in Visual Studio](./chapters/DEBUGGING_VS.md)
 * Chapter 29 - [Using ADO.NET and SQL](./chapters/ADONET_INTRO.md)
+* Chapter 30 - [Using ADO.NET and SQL Part II](./chapters/ADONET_CONTINUED.md)
 
 **Part 5: Tabloid CLI Group Project**
 
