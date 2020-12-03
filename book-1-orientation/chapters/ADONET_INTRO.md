@@ -96,7 +96,7 @@ Before you get started, let's introduce some terms that will be used during this
     }
     ```
 
-    Before we get into access data from our database, let's stub out a quick menu for our user that has options for seeing all rooms, seeing a single room, or adding a new room. Update your `Main` method in `Program.cs` to the following
+    Before we get into accessing the data from our database, let's stub out a quick menu for our user that has options for seeing all rooms, seeing a single room, or adding a new room. Update your `Main` method in `Program.cs` to the following
 
     **Program.cs**
 
