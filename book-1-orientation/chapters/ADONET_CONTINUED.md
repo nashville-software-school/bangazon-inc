@@ -96,4 +96,4 @@ public void Delete(int id)
 
 **Advanced Challenge**
 
-Give the user a menu option called "Reassign Chore". It should first list the chores that are already assigned to a roommate and prompt the user to select a Chore Id from the list. Upon selecting the chore, the user should get a message saying "This chore is currently assigned to {name}. Who would you like to assign it to?" followed by a list of all roommates. Finally the user should be prompted to enter the Id of one of the other roommates and the chore should be reassigned. Note: You'll likely need to create multiple methods to make this happen.
+Give the user a menu option called "Reassign Chore". It should first list the chores that are already assigned to a roommate and prompt the user to select a Chore Id from the list. Upon selecting the chore, the user should get a message saying "This chore is currently assigned to {name}. Who would you like to assign it to?" followed by a list of all roommates. Finally the user should be prompted to enter the Id of one of the other roommates and the chore should be reassigned. NOTE: You'll likely need to create multiple methods to make this happen.
