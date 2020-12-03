@@ -1,6 +1,6 @@
 # Finishing CRUD Using ADO.NET
 
-In this chapter we'll implement some functionality to our Roommates application that allow users to update and delete records in the database. 
+In this chapter we'll implement some functionality to our Roommates application to allow users to update and delete records in the database. 
 
 ## Updating a Room
 
