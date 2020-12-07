@@ -99,7 +99,7 @@ In MVC, the View is sometimes refered to as part of the Presentation Layer. It i
 }
 ```
 
-The First line of this code `@model List<Kennel.Models.Animal>` is telling the view what _type_ of object is going to be passed to it. In this case, the view is going to be passed a List of Animal objects. When the server has to respond a request for the homepage, the view will iterate over of the list of animals and create a div element for each one. The html that gets generated will be what the server sends back to a user's browser.
+The First line of this code `@model List<Kennel.Models.Animal>` is telling the view what _type_ of object is going to be passed to it. In this case, the view is going to be passed a List of Animal objects. When the server has to respond a request for the homepage, the view will iterate over the list of animals and create a div element for each one. The html that gets generated will be what the server sends back to a user's browser.
 
 ### Controllers
 
