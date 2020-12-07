@@ -11,7 +11,7 @@ Let's take an application that you built in the front end course, like Kennel, a
 
 1. The request gets handled by an nss server, and the server responds by sending all the react code back. Because it's a react application, almost all the code is javascript.
 
-1. The browser immediately starts executing the react js code. Part of that code tells the browser to make `fetch` a fetch call to `https://kennel.nss.com/api/animals` so the react app can get animal data in the form of JSON. If we were to pause this whole process right here, the user would see _some_ of the animal page, but would not see any animals listed since that data has not been returned yet.
+1. The browser immediately starts executing the react js code. Part of that code tells the browser to make a `fetch` call to `https://kennel.nss.com/api/animals` so the react app can get animal data in the form of JSON. If we were to pause this whole process right here, the user would see _some_ of the animal page, but would not see any animals listed since that data has not been returned yet.
 
 1. The nss server receives the request made by the react app for animal data. It makes a call to the database to ask for all the saved information on the animals. The nss server then sends a response to the react app with all the animal information as JSON.
 
