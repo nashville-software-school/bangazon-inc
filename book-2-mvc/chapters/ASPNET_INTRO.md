@@ -71,7 +71,7 @@ namespace DogGo.Models
 
 Let's also create a repository for walkers. For now we'll just give it methods for getting all walkers and getting a single walker by their Id.
 
-Create a new folder at root of the project called Repositories and create a `WalkerRepository.cs` file inside it. Add the following code
+Create a new folder at root of the project called Repositories and create a `WalkerRepository.cs` file inside it. Add the following code (This won't immediately compile--we'll create the interface in the next step)
 
 ```csharp
 using DogGo.Models;
@@ -81,7 +81,7 @@ using System.Collections.Generic;
 
 namespace DogGo.Repositories
 {
-    public class WalkerRepository
+    public class WalkerRepository : IWalkerRepository
     {
         private readonly IConfiguration _config;
 
@@ -176,21 +176,44 @@ namespace DogGo.Repositories
 }
 ```
 
+Now create an interface for this repository in a new file called `IWalkerRepository.cs` and add the following code
+
+```csharp
+using DogGo.Models;
+using Microsoft.Data.SqlClient;
+using System.Collections.Generic;
+
+namespace DogGo.Repositories
+{
+    public interface IWalkerRepository
+    {
+        List<Walker> GetAllWalkers();
+        Walker GetWalkerById(int id);
+    }
+}
+```
+
+Update the `Startup.cs` file to let ASP.NET Core know about our new repository. Add the following line to the `ConfigureServices` method. And don't worry! We'll discuss why we do these steps soon enough
+
+```csharp
+services.AddTransient<IWalkerRepository, WalkerRepository>();
+```
+
 ## Controller
 
 We can use Visual Studio to scaffold us the skeleton of a controller. Right click on the Controllers folder in Solution Explorer and click Add > Controller > MVC Controller with Read/Write actions. Give it the name `WalkersController`
 
 Visual Studio kindly just created a whole bunch of code for us.
 
-Add a private field for `WalkerRepository` and a constructor
+Add a private field for `IWalkerRepository` and a constructor
 
 ```csharp
-private readonly WalkerRepository _walkerRepo;
+private readonly IWalkerRepository _walkerRepo;
 
-// The constructor accepts an IConfiguration object as a parameter. This class comes from the ASP.NET framework and is useful for retrieving things out of the appsettings.json file like connection strings.
-public WalkersController(IConfiguration config)
+// ASP.NET will give us an instance of our Walker Repository. This is called "Dependency Injection"
+public WalkersController(IWalkerRepository walkerRepository)
 {
-    _walkerRepo = new WalkerRepository(config);
+    _walkerRepo = walkerRepository;
 }
 ```
 
@@ -313,6 +336,7 @@ Run the application and go to `/walkers/details/1`. Then go to `/walkers/details
 
 ## Exercise
 
-1. Create an `OwnerRepository` and an `OwnersController` file and implement the `Index` and `Details` methods.
+1. Create an `OwnerRepository`, an `IOwnerRepository` interface, and an `OwnersController` file and implement the `Index` and `Details` methods.
+1. Update the `Startup.cs` to tell ASP.NET about the `OwnerRepository`.
 1. Go into the `Shared` folder in the `_Layout.cshtml` file. Add links for "Walkers" and "Owners" in the navbar. If you finish, try changing the views and the styling to your liking.
 1. **Challenge**: When viewing the details page of an owner, list all the dogs for that owner as well.
