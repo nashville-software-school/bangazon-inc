@@ -22,8 +22,8 @@ These are properties that **all of them** have in common. You can design your sy
 */
 class Ball
 {
-    public double radius { get; set; }
-    public double weight { get; set; }
+    public double Radius { get; set; }
+    public double Weight { get; set; }
 }
 
 /*
@@ -35,14 +35,14 @@ class Ball
 class Baseball : Ball
 {
     // Stitches is not common to every kind of ball
-    public int stitches { get; set; }
+    public int Stitches { get; set; }
 }
 
 // All soccer balls will also have radius and weight
 class SoccerBall : Ball
 {
     // Panels is not common to every kind of ball
-    public int panels { get; set; }
+    public int Panels { get; set; }
 }
 ```
 
@@ -59,12 +59,12 @@ Consider the human body. It is composed of many individual parts that can be def
 ```cs
 class Pancreas
 {
-    public bool filtering { get; set; }
+    public bool Filtering { get; set; }
 }
 
 class Liver
 {
-    public bool poisoned { get; set; }
+    public bool Poisoned { get; set; }
 }
 
 class Body
@@ -80,12 +80,12 @@ class Body
     {
         // Create a brand new pancreas and assign it to this body
         _pancreas = new Pancreas(){
-            filtering = true
+            Filtering = true
         };
 
         // Create a brand new liver and assign it to this body
         _liver = new Liver(){
-            poisoned = false
+            Poisoned = false
         };
     }
 }

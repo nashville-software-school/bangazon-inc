@@ -42,17 +42,28 @@
       }
       ```
    1. Find the `defaultProfile` key near the top of the file. Updates it's value to be `"{00000000-0000-0000-ba54-000000000002}"`
-   1. Save teh `settings.json` file and close Visual Studio Code.
+   1. Save the `settings.json` file and close Visual Studio Code.
 
 ### Creating Your SSH Key For Github \*
 
 Watch a short video for [creating an SSH key in the terminal](https://youtu.be/znRMcNG9_qQ) so that you an work with Github.
 
-### Add SSH Key to Github Account
+### Add SSH Key to Github Account \*
 
 Now watch the video for [adding your SSH key to your Github account](https://youtu.be/8hlmIObpMd4).
 
-## Node
+### Add Username and Email For Git
+In order for Git to know who made a commit, we have to set the username and email properties in the git config. 
+In the terminal, paste the following and add your email:
+```sh
+git config --global user.email "you@example.com"
+```
+In the terminal, paste the following and add your name:
+```sh
+git config --global user.name "Your Name"
+```
+
+## Node \*
 
 1. Install [Node](https://nodejs.org/en/) for working with JavaScript tools
 1. Install `serve` and `json-server`
@@ -63,6 +74,7 @@ Now watch the video for [adding your SSH key to your Github account](https://you
 ## .NET Core
 
 1. Visit the [.NET Tutorial](https://dotnet.microsoft.com/learn/dotnet/hello-world-tutorial/intro) site, click on your OS and follow the steps to install .NET Core.
+1. If you're new to Windows or Git Bash, create a new workspace directory `mkdir ~/workspace`
 1. In your terminal go to your `workspace` directory and do steps 2 and 3 in the tutorial to verify everything works.
 
 ## Visual Studio Code
@@ -74,35 +86,16 @@ Now watch the video for [adding your SSH key to your Github account](https://you
 You'll be making a lot of new projects and we want to easily be able to create a gitignore file before pushing to Github. Run the following code from a git bash window
 
 ```sh
-echo “\ndnignore() {
-    curl -L -s ‘https://raw.githubusercontent.com/github/gitignore/master/VisualStudio.gitignore' > .gitignore
-}” >> ~/.bashrc
+echo "dnignore() {
+    curl -L -s 'https://raw.githubusercontent.com/github/gitignore/master/VisualStudio.gitignore' > .gitignore
+}" >> ~/.bashrc
 ```
 
 You now have access in your terminal to a command called `dnignore` which will add a gitignore file to your project.
 
-## Install a C# Linter
+## VS Code Settings
 
-C# FixFormat is a vscode extension that will--as its name implies--automatically format your C# code. To set it up:
-
-1. Install [C# FixFormat](https://marketplace.visualstudio.com/items?itemName=Leopotam.csharpfixformat)
-1. In VSCode go to File > Preferences > Settings
-1. In the search bar, look for the setting `Format On Save` and make sure it is checked
-1. In the same search bar, look for the setting `Auto Save` and make sure it's _NOT_ set to `afterDelay`
-1. Configure C# FixFormat
-
-   1. Inside Visual Studio code type `ctrl + ,` to open the vscode settings.
-   1. Click the `Open Settings (JSON)` button near the upper-right corner of the window.
-   1. Add the following to `settings.json` file:
-
-   ```json
-   "[csharp]": {
-       "editor.defaultFormatter": "Leopotam.csharpfixformat"
-   },
-   "csharpfixformat.style.braces.onSameLine": false,
-   "csharpfixformat.style.spaces.beforeIndexerBracket": false,
-   "csharpfixformat.style.spaces.beforeParenthesis": false
-   ```
+If you haven't already set up Visual Studio Code to format your code and autosave your files, now is a good time to set that up. Inside VS Code go to the settings by using the shortcut `ctrl` + `,` and using the search bar find the `Format On Save` setting and make sure it is checked. Next find the setting for `Auto Save` and make sure that it's set to either "onFocusChange" or "onWindowChange" (whatever you prefer)
 
 ## Visual Studio IDE
 
@@ -114,7 +107,7 @@ C# FixFormat is a vscode extension that will--as its name implies--automatically
 
 ## SQL Server Express Database
 
-1. [SQL Server Express](https://www.microsoft.com/en-us/sql-server/sql-server-editions-express). This is the database tool where all your data will be stored for the server-side course.
+1. [SQL Server Express](https://www.microsoft.com/en-us/sql-server/sql-server-downloads). This is the database tool where all your data will be stored for the server-side course. Click the Download button under the Express option. During the setup, take the basic installation option
 
 ## Bookmark the Following Sites
 

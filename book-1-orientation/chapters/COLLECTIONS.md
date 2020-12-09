@@ -21,7 +21,8 @@ However, unlike JavaScript, lists can **only contain** one type. A list cannot b
 
 ```cs
 // Totally fine code
-List<int> yearsBorn = new List<int>() {
+List<int> yearsBorn = new List<int>() 
+{
     1967, 1969, 1972
 };
 ```
@@ -30,7 +31,8 @@ This code will produce red squiggles under 1967 and 1972. C# has no default way 
 
 ```cs
 // Bogus code
-List<int> yearsBorn = new List<int>() {
+List<int> yearsBorn = new List<int>() 
+{
     "1967", 1969, "1972"
 };
 ```
@@ -74,18 +76,20 @@ namespace NSSOrientation
     {
         public static void Main()
         {
-            List<string> students = new List<string>() {
-                "Megan", "Damon", "Chase", "Tekisha",
-                "Castle", "Mark", "Keith", "Adam",
-                "Patrick", "Hannah", "Mike"
+            List<string> students = new List<string>() 
+            {
+                "Mori", "Travis", "Braxton", "Parker",
+                "Ember", "Matt", "CJ", "Sam",
+                "Jerry", "Terra", "Brady"
             };
 
             // Can't do this easily with a base array
-            students.Add("Melanie");
-            students.Insert(3, "Simon");
+            students.Add("Adam");
+            students.Insert(3, "Rose");
 
-            if (students.Contains("Chase")) {
-                Console.WriteLine("Must be cohort 13");
+            if (students.Contains("Rose")) 
+            {
+                Console.WriteLine("Must be cohort 43");
             }
 
             // This looks a lot like JavaScript!
@@ -118,7 +122,8 @@ const toysSold = {
 Here's how that would look in C# as a **`Dictionary`**.
 
 ```cs
-Dictionary<string, int> toysSold = new Dictionary<string, int>() {
+Dictionary<string, int> toysSold = new Dictionary<string, int>() 
+{
     {"Hot Wheels", 344},
     {"Legos", 763},
     {"Gaming Consoles", 551},

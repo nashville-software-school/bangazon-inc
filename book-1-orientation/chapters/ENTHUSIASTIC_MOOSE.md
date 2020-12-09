@@ -13,9 +13,7 @@ As you go through the phases make sure you...
 
 ### Phase 1
 
-Make the new project and git repo
-
-1. Use the `dotnet` command to create a new .NET console application, and then change to the project directory
+1. From your workspace directory, use the `dotnet` command to create a new .NET console application, and then change to the project directory
 
    ```sh
    dotnet new console -o EnthusiasticMoose
@@ -35,8 +33,6 @@ Make the new project and git repo
    ```
 
    > **NOTE:** Make sure you run this command from the `EnthusiasticMoose` directory.
-
-   > **NOTE:** You might want to make an alias for downloading this `.gitignore`.
 
 1. initialize a git repository and commit
 
@@ -256,7 +252,7 @@ Our moose can ask a question now, but it doesn't respond. Let's change that.
        MooseSays("H I, I'M  E N T H U S I A S T I C !");
        MooseSays("I really am enthusiastic");
 
-       // As a question
+       // Ask a question
        bool isTrue = MooseAsks("Is Canada real?");
        if (isTrue)
        {
