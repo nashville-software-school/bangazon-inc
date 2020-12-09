@@ -275,7 +275,7 @@ Finally, uncomment the the code at the bottom of the view, and instead of using 
 </td>
 ```
 
-These action links will generate `<a>` tags at runtime. The first one, for example, is saying that we want an `<a>` tag whose text content says the work "Edit", and we also want it to link to the `Edit` action in the controller. Lastly, it's saying that we want to include whatever `item.Id` is as a route parameter. The genereated anchor tag would look something like this
+These action links will generate `<a>` tags at runtime. The first one, for example, is saying that we want an `<a>` tag whose text content says the word "Edit", and we also want it to link to the `Edit` action in the controller. Lastly, it's saying that we want to include whatever `item.Id` is as a route parameter. The genereated anchor tag would look something like this
 
 ```html
 <a href="/Walkers/Edit/5">Edit</a>
