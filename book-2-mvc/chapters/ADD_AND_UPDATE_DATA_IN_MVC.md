@@ -30,7 +30,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace DogGo.Repositories
 {
-    public class OwnerRepository
+    public class OwnerRepository : IOwnerRepository
     {
         private readonly IConfiguration _config;
 
@@ -205,6 +205,8 @@ namespace DogGo.Repositories
 }
 ```
 
+After you update the `OwnerRepository` make sure you update the `IOwnerRepository` interface to include the `AddOwner`, `UpdateOwner` and `DeleteOwner` methods.
+
 ## Creating an Owner
 
 Let's build out a form for us to be able to add a new Owner. Open the DogGo application you created in the previous chapter, go to the Owner controller, and find the `Create` action. You might notice...there are two Create methods! How can this be? Think about interactions we have in real life involving filling out forms. Doctors' visits comes to mind... When you go to the doctor, you're likely to have 2 interactions with a person behind the counter. The first interaction is when you go to the receptionist and ask for a blank form. The receptionist gives you the form so you can go back to your chair and fill it out. Once you're done, you can go back up to the counter and give that form back so they can process it. This is the same sort of interaction end users have with a server. Notice the comments above the two `Create` methods--one says GET and the other says POST. When a user navigates to the url `/owners/create`, they are making a GET request to that url. This is the request that will give the user the html of the empty form. When the user clicks a "submit" button, that is going to make a POST request to the same url. 
@@ -237,7 +239,7 @@ When the `asp-for` attribute is on an `<input>` element, it will generate html a
 <form asp-action="Create">
 ```
 
-All of our input elements should be inside a form. The `asp-for` attribute is added to the form element to specify which controller action should be called when the form gets submitted. The the contents of the form we're building here should be submitted to the `Create` method in our controller.
+All of our input elements should be inside a form. The `asp-action` attribute is added to the form element to specify which controller action should be called when the form gets submitted. The the contents of the form we're building here should be submitted to the `Create` method in our controller.
 
 ##### Update the form
 
