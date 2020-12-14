@@ -133,6 +133,10 @@ public List<Dog> GetDogsByOwnerId(int ownerId)
 }
 ```
 
+Because we are updating the DogRepository, we also need to add a corresponding method to the IDogRepository
+```csharp
+List<Dog> GetDogsByOwnerId(int ownerId);
+```
 Now update the Walkers Repository to add a method to get a list of walkers in a neighborhood
 
 > WalkersRepository.cs
@@ -176,7 +180,10 @@ public List<Walker> GetWalkersInNeighborhood(int neighborhoodId)
     }
 }
 ```
-
+Similar to how we updated the IDogRepository, we also need to change the IOwnerRepository by adding the following method:
+```csharp
+List<Walker> GetWalkersInNeighborhood(int neighborhoodId);
+```
 Now that the Owner Details view will need to know about more than just the owner, we'll need access to other repositories. Update the private fields and constructor in your OwnerController class to add them
 
 > OwnerController.cs
