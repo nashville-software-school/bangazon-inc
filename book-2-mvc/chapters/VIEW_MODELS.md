@@ -182,17 +182,17 @@ Now that the Owner Details view will need to know about more than just the owner
 > OwnerController.cs
 
 ```csharp
-private readonly OwnerRepository _ownerRepo;
-private readonly DogRepository _dogRepo;
-private readonly WalkerRepository _walkerRepo;
+private IOwnerRepository _ownerRepo;
+private IDogRepository _dogRepo;
+private IWalkerRepository _walkerRepo;
 
 
 // The constructor accepts an IConfiguration object as a parameter. This class comes from the ASP.NET framework and is useful for retrieving things out of the appsettings.json file like connection strings.
-public OwnersController(IConfiguration config)
+public OwnersController(IOwnerRepository ownerRepo, IDogRepository dogRepo, IWalkerRepository walkerRepo)
 {
-    _ownerRepo = new OwnerRepository(config);
-    _dogRepo = new DogRepository(config);
-    _walkerRepo = new WalkerRepository(config);
+    _ownerRepo = ownerRepo;
+    _dogRepo = dogRepo;
+    _walkerRepo = walkerRepo;
 }
 ```
 
