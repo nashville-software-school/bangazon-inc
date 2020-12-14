@@ -352,7 +352,7 @@ using System.Collections.Generic;
 
 namespace DogGo.Repositories
 {
-    public class NeighborhoodRepository
+    public class NeighborhoodRepository : INeighborhoodRepository
     {
         private readonly IConfiguration _config;
 
@@ -401,6 +401,29 @@ namespace DogGo.Repositories
     }
 }
 
+```
+
+Just like before we have to create the `INeighborhoodRepository` and register it with the `Startup.cs` class
+
+> INeighborhoodRepository
+
+```csharp
+using DogGo.Models;
+using System.Collections.Generic;
+
+namespace DogGo.Repositories
+{
+    public interface INeighborhoodRepository
+    {
+        List<Neighborhood> GetAll();
+    }
+}
+```
+
+> Startup.cs
+
+```csharp
+services.AddTransient<INeighborhoodRepository, NeighborhoodRepository>();
 ```
 
 Now add a `NeighborhoodRepository`  to the fields and the constructor inside `OwnersController` like before
