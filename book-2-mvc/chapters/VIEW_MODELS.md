@@ -180,7 +180,7 @@ public List<Walker> GetWalkersInNeighborhood(int neighborhoodId)
     }
 }
 ```
-Similar to how we updated the IDogRepository, we also need to change the IOwnerRepository by adding the following method:
+Similar to how we updated the IDogRepository, we also need to change the IWalkerRepository by adding the following method:
 ```csharp
 List<Walker> GetWalkersInNeighborhood(int neighborhoodId);
 ```
