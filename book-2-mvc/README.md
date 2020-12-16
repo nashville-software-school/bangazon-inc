@@ -34,3 +34,4 @@ We'll be experimenting with technologies and concepts while building a simple ap
 * [Building HTML Views with Razor](./chapters/RAZOR_FEATURES.md)
 * Supplement - [Additional Student Exercises MVC Features](./chapters/STUDENT_EXERCISES_CHALLENGES.md)
 * Supplement - [Writing Web Application Integration Tests](./chapters/XUNIT_INTRO.md)
+* Supplement - [Simple Profile Images Using Gravatar](./chapters/GRAVATAR.md)
