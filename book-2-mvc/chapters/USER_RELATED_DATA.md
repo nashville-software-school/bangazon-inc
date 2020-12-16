@@ -226,6 +226,47 @@ public ActionResult Create()
 
 If an unauthenticated user now tries to go to either of these routes, they will be redirected to the login page.
 
+## Customize the Navbar
+
+It'd be nice if our navbar was dynamic to account for a few things
+
+- If someone comes to the app and they are not logged in, they should only see a nav link for `Login`
+- If an authenticated owner is on the app, the navbar should show links for `Walkers` and `My Dogs` as well as a welcome message
+
+Update your navbar inside `_Layout.cshtml` to look like the following
+
+```html
+<div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+    <ul class="navbar-nav flex-grow-1">
+        @if (User.Identity.IsAuthenticated)
+        {
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="" asp-controller="Walkers" asp-action="Index">Walkers</a>
+            </li>
+            @if (User.IsInRole("DogOwner"))
+            {
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Dog" asp-action="Index">My Dogs</a>
+                </li>
+            }
+            <li class="nav-item ml-auto">Welcome @User.FindFirst(ClaimTypes.Email).Value</li>
+        }
+        else
+        {
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="" asp-controller="Owners" asp-action="Login">Login</a>
+            </li>
+        }
+    </ul>
+</div>
+```
+
+You'll need to add a `using` statement at the top of the view for it to know about the `ClaimTypes` class
+
+```
+@using System.Security.Claims;
+```
+
 ## Exercise
 
 1. In the DogController update the GET and POST methods for the Edit and Delete actions to make sure that a user can only edit or delete a dog that they own. Example: if a user goes to `/dogs/edit/5` or `/dogs/delete/5` and they don't own that dog, they should get a 404 NotFound result.
