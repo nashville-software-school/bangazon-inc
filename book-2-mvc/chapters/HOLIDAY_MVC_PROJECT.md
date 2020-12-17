@@ -30,12 +30,12 @@
 
 ### WireFrames
 
-![Owner's Details Page] (OwnerDetailsPage.PNG)
+![Owner's Details Page](images\OwnerDetailsPage.PNG)
 
-![Schedule Appointment Page] (ScheduleAppointment.PNG)
+![Schedule Appointment Page](images\ScheduleAppointment.PNG)
 
-![Appointment] (AppointmentView.PNG)
+![Appointment](images\AppointmentView.PNG)
 
-![Complete Appointment] (CompleteAppointment.PNG)
+![Complete Appointment](images\CompleteAppointment.PNG)
 
-![Dog Details] (DogDetails.PNG)
+![Dog Details](images\DogDetails.PNG)
