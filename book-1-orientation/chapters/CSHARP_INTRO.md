@@ -54,6 +54,10 @@ Enter a name and marvel at the warm greeting you receive.
 
 What else would you like app to say? Take a few minutes and play with this code. What deep, philosophical truths can you make this app reveal?
 
+## Pushing To Github
+
+Before you push to Github, make sure that you add a gitignore file to your project. In your terminal, from the root of the application run `dnignore`. If you get an error saying the command is not found, be sure to go back to the installation chapter and get that added to your bashrc file.
+
 ## Learning a Second Language
 
 Learning your first programming language is hard. It's hard because you're learning more than syntax, you're learning _how to code_ at the same time.

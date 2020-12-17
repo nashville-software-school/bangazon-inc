@@ -8,14 +8,12 @@ The program should be written in increments. Each phase will add a little more c
 
 As you go through the phases make sure you...
 
-* Run the program after each change to confirm it works
-* Commit your code after each phase
+- Run the program after each change to confirm it works
+- Commit your code after each phase
 
 ### Phase 1
 
-Make the new project and git repo
-
-1. Use the `dotnet` command to create a new .NET console application, and then change to the project directory
+1. From your workspace directory, use the `dotnet` command to create a new .NET console application, and then change to the project directory
 
    ```sh
    dotnet new console -o EnthusiasticMoose
@@ -28,15 +26,13 @@ Make the new project and git repo
    dotnet run
    ```
 
-1. Download a `.gitignore` file that's suitable for .NET projects.
+1. Add a gitignore to the project
 
    ```sh
-   curl https://raw.githubusercontent.com/github/gitignore/master/VisualStudio.gitignore > .gitignore
+   dnignore
    ```
 
    > **NOTE:** Make sure you run this command from the `EnthusiasticMoose` directory.
-
-   > **NOTE:** You might want to make an alias for downloading this `.gitignore`.
 
 1. initialize a git repository and commit
 
@@ -256,7 +252,7 @@ Our moose can ask a question now, but it doesn't respond. Let's change that.
        MooseSays("H I, I'M  E N T H U S I A S T I C !");
        MooseSays("I really am enthusiastic");
 
-       // As a question
+       // Ask a question
        bool isTrue = MooseAsks("Is Canada real?");
        if (isTrue)
        {
@@ -306,59 +302,67 @@ Let's add multiple questions. We could do that in the `Main()` method, but `Main
 
 1. Add a few more questions. Feel free to copy and paste the code below and/or make up your own questions.
 
-    ```cs
-    static void EnthusiasticQuestion()
-    {
-        bool isEnthusiastic = MooseAsks("Are you enthusiastic?");
-        if (isEnthusiastic)
-        {
-            MooseSays("Yay!");
-        }
-        else
-        {
-            MooseSays("You should try it!");
-        }
-    }
+   ```cs
+   static void EnthusiasticQuestion()
+   {
+       bool isEnthusiastic = MooseAsks("Are you enthusiastic?");
+       if (isEnthusiastic)
+       {
+           MooseSays("Yay!");
+       }
+       else
+       {
+           MooseSays("You should try it!");
+       }
+   }
 
-    static void LoveCSharpQuestion()
-    {
-        bool doesLoveCSharp = MooseAsks("Do you love C# yet?");
-        if (doesLoveCSharp)
-        {
-            MooseSays("Good job sucking up to your instructor!");
-        }
-        else
-        {
-            MooseSays("You will...oh, yes, you will...");
-        }
-    }
+   static void LoveCSharpQuestion()
+   {
+       bool doesLoveCSharp = MooseAsks("Do you love C# yet?");
+       if (doesLoveCSharp)
+       {
+           MooseSays("Good job sucking up to your instructor!");
+       }
+       else
+       {
+           MooseSays("You will...oh, yes, you will...");
+       }
+   }
 
-    static void SecretQuestion()
-    {
-        bool isEverythingFine = MooseAsks("Do you want to know a secret?");
-        if (isEverythingFine)
-        {
-            MooseSays("ME TOO!!!! I love secrets...tell me one!");
-        }
-        else
-        {
-            MooseSays("Oh, no...secrets are the best, I love to share them!");
-        }
-    }
-    ```
+   static void SecretQuestion()
+   {
+       bool isEverythingFine = MooseAsks("Do you want to know a secret?");
+       if (isEverythingFine)
+       {
+           MooseSays("ME TOO!!!! I love secrets...tell me one!");
+       }
+       else
+       {
+           MooseSays("Oh, no...secrets are the best, I love to share them!");
+       }
+   }
+   ```
 
 1. Call your new methods from the `Main()` method
 
-    ```cs
-    // Ask some questions
-    CanadaQuestion();
-    EnthusiasticQuestion();
-    LoveCSharpQuestion();
-    SecretQuestion();
-    ```
+   ```cs
+   // Ask some questions
+   CanadaQuestion();
+   EnthusiasticQuestion();
+   LoveCSharpQuestion();
+   SecretQuestion();
+   ```
 
 ## Phase 8 - A Challenge
 
 Our moose is finally both enthusiastic and inquisitive, but the code for asking each question is a little redundant.
 
-1. Refactor the app to reduce the redundantly in the code.
+1. Refactor the app to reduce the redundancy in the code.
+
+## Advanced Challenge
+
+[Magic Moose](./MAGIC_MOOSE.md)
+
+## Advanced Challenge 2
+
+[Rock Paper Scissors](./ROCK_PAPER_SCISSORS.md)

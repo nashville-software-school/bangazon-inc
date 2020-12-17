@@ -133,6 +133,10 @@ public List<Dog> GetDogsByOwnerId(int ownerId)
 }
 ```
 
+Because we are updating the DogRepository, we also need to add a corresponding method to the IDogRepository
+```csharp
+List<Dog> GetDogsByOwnerId(int ownerId);
+```
 Now update the Walkers Repository to add a method to get a list of walkers in a neighborhood
 
 > WalkersRepository.cs
@@ -176,23 +180,24 @@ public List<Walker> GetWalkersInNeighborhood(int neighborhoodId)
     }
 }
 ```
-
+Similar to how we updated the IDogRepository, we also need to change the IWalkerRepository by adding the following method:
+```csharp
+List<Walker> GetWalkersInNeighborhood(int neighborhoodId);
+```
 Now that the Owner Details view will need to know about more than just the owner, we'll need access to other repositories. Update the private fields and constructor in your OwnerController class to add them
 
 > OwnerController.cs
 
 ```csharp
-private readonly OwnerRepository _ownerRepo;
-private readonly DogRepository _dogRepo;
-private readonly WalkerRepository _walkerRepo;
+private IOwnerRepository _ownerRepo;
+private IDogRepository _dogRepo;
+private IWalkerRepository _walkerRepo;
 
-
-// The constructor accepts an IConfiguration object as a parameter. This class comes from the ASP.NET framework and is useful for retrieving things out of the appsettings.json file like connection strings.
-public OwnersController(IConfiguration config)
+public OwnersController(IOwnerRepository ownerRepo, IDogRepository dogRepo, IWalkerRepository walkerRepo)
 {
-    _ownerRepo = new OwnerRepository(config);
-    _dogRepo = new DogRepository(config);
-    _walkerRepo = new WalkerRepository(config);
+    _ownerRepo = ownerRepo;
+    _dogRepo = dogRepo;
+    _walkerRepo = walkerRepo;
 }
 ```
 
@@ -347,7 +352,7 @@ using System.Collections.Generic;
 
 namespace DogGo.Repositories
 {
-    public class NeighborhoodRepository
+    public class NeighborhoodRepository : INeighborhoodRepository
     {
         private readonly IConfiguration _config;
 
@@ -396,6 +401,29 @@ namespace DogGo.Repositories
     }
 }
 
+```
+
+Just like before we have to create the `INeighborhoodRepository` and register it with the `Startup.cs` class
+
+> INeighborhoodRepository
+
+```csharp
+using DogGo.Models;
+using System.Collections.Generic;
+
+namespace DogGo.Repositories
+{
+    public interface INeighborhoodRepository
+    {
+        List<Neighborhood> GetAll();
+    }
+}
+```
+
+> Startup.cs
+
+```csharp
+services.AddTransient<INeighborhoodRepository, NeighborhoodRepository>();
 ```
 
 Now add a `NeighborhoodRepository`  to the fields and the constructor inside `OwnersController` like before
