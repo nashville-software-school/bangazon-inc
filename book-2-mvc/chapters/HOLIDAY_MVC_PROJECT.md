@@ -22,7 +22,7 @@
 
 ## Tips 
 
-1. You will need to run this new SQL script to update existing tables and Add an AppointmentsRequest table.
+1. You will need to run this new SQL script to update existing tables.
 [Holiday Break Project SQL](assets/DogWalkerHolidayProject.sql)
 
 2. No need for a create page for Walker.
