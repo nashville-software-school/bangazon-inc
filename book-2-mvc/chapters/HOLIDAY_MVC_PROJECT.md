@@ -22,10 +22,11 @@
 
 ## Tips 
 
-1. You will need to run this new SQL script to update existing tables.
-[Holiday Break Project SQL](assets/DogWalkerHolidayProject.sql)
+1. You will need to delete your current DogWalkerMVC database and run this new SQL script to update existing tables. (It adds an `Email` column to Walkers and a Status to a Walk)
+[Holiday Break Project SQL](assets/DogWalkerHolidayProject.sql).
+Here is the [updated ERD](https://dbdiagram.io/d/5fdb90a99a6c525a03bb7b45) with the additional columns and table
 
-2. No need for a create page for Walker.
+1. No need for a create page for Walker.
 
 ## WireFrames
 
