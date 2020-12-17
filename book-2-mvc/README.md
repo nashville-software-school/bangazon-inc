@@ -25,6 +25,8 @@ We'll be experimenting with technologies and concepts while building a simple ap
 * Chapter 6 - [HTTP Requests and Routing](./chapters/ROUTING.md)
 * Chapter 7 - [Annotations and model validation](./chapters/MODEL_ANNOTATIONS.md)
 
+* Holiday Break Project (Optional) - [Refining DogGo](./chapters/HOLIDAY_MVC_PROJECT.md)
+
 > [__Sprint_ - Tabloid Web App Prototype](./chapters/GROUP_PROJECT.md)
 
 * Chapter 8 - [SQL Exercises](./chapters/SQL_EXERCISES.md)
