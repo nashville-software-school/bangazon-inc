@@ -331,11 +331,7 @@ Before you get started, let's introduce some terms that will be used during this
                 List<Room> rooms = roomRepo.GetAll();
                 foreach (Room r in rooms)
                 {
-<<<<<<< HEAD
                     Console.WriteLine($"{room.Name} has an Id of {room.Id} and a max occupancy of {room.MaxOccupancy}");
-=======
-                    Console.WriteLine($"{r.Id} - {r.Name} Max Occupancy({r.MaxOccupancy})");
->>>>>>> origin/cohort-43
                 }
                 Console.Write("Press any key to continue");
                 Console.ReadKey();
