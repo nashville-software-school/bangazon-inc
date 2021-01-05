@@ -317,6 +317,15 @@ namespace Gifter.Repositories
 }
 ```
 
+### `IPostRepository`
+
+1. Use the `Extract Interface...` feature of Visual Studio to create the `IPostRepository` interface.
+2. Update the `ConfigureServices` method in the `Startup` class to register your new repository with ASP<span>.</span>NET.
+
+```cs
+services.AddTransient<IPostRepository, PostRepository>();
+```
+
 Next create a Web API controller with "Get" methods.
 
 > controllers/PostController.cs
@@ -332,10 +341,10 @@ namespace Gifter.Controllers
     [ApiController]
     public class PostController : ControllerBase
     {
-        private readonly PostRepository _postRepository;
-        public PostController(ApplicationDbContext context)
+        private readonly IPostRepository _postRepository;
+        public PostController(IPostRepository postRepository)
         {
-            _postRepository = new PostRepository(context);
+            _postRepository = postRepository;
         }
 
         [HttpGet]
