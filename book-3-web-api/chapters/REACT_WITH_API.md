@@ -20,57 +20,20 @@ In development, our React app will be running on port 3000 and our API will be r
   // ...other code omitted for brevity...
 ```
 
-## Adding Post Provider
+## Showing Posts
 
-Make two directories under the `src` folder: `components` and `providers`. In the prodivers directory create a file called `PostProvider.js` and give it the following code
-
-```js
-import React, { useState } from "react";
-
-export const PostContext = React.createContext();
-
-export const PostProvider = (props) => {
-  const [posts, setPosts] = useState([]);
-
-  const getAllPosts = () => {
-    return fetch("/api/post")
-      .then((res) => res.json())
-      .then(setPosts);
-  };
-
-  const addPost = (post) => {
-    return fetch("/api/post", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(post),
-    });
-  };
-
-  return (
-    <PostContext.Provider value={{ posts, getAllPosts, addPost }}>
-      {props.children}
-    </PostContext.Provider>
-  );
-};
-```
-
-This providers the state value of the posts array, as well as methods to fetch all posts and add a new post. Note that the urls we are making requests to are relative urls--they don't have anything like `https://localhost:5001/api/posts`. This is a benefit of adding the `proxy` attribute in our package.json file.
-
-## Adding a Posts List Component
-
-Inside the components directory, create a file called `PostList.js` and add the following code
+Create a `components` folder inside `src` and create a `PostList.js` file with the following code
 
 ```js
-import React, { useContext, useEffect } from "react";
-import { PostContext } from "../providers/PostProvider";
+import React, { useEffect, useState } from 'react';
 
 const PostList = () => {
-  const { posts, getAllPosts } = useContext(PostContext);
+  const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    getAllPosts();
+    fetch('/api/posts')
+      .then(res => res.json())
+      .then(data => setPosts(data));
   }, []);
 
   return (
@@ -91,7 +54,9 @@ const PostList = () => {
 export default PostList;
 ```
 
-Nothing too fancy here. When the component loads, it will call the `getAllPosts` method it recieves from the provider and render a list of posts.
+This component will make a fetch call to get all the posts from the API as soon as it load and store it in state. Note that the urls we are making requests to are relative urls--they don't have anything like `https://localhost:5001/api/posts`. This is a benefit of adding the `proxy` attribute in our package.json file.
+
+Now use the `PostList` component in `App.js`
 
 ## Wiring It Up
 
@@ -100,15 +65,12 @@ We have our nice provider and component so lets use them. Replace App.js with th
 ```js
 import React from "react";
 import "./App.css";
-import { PostProvider } from "./providers/PostProvider";
 import PostList from "./components/PostList";
 
 function App() {
   return (
     <div className="App">
-      <PostProvider>
-        <PostList />
-      </PostProvider>
+      <PostList />
     </div>
   );
 }
@@ -163,15 +125,16 @@ Again, nothing fancy here; we're just using the Card component that comes with r
 Now lets update the `PostList` component to use the new `Post` component
 
 ```js
-import React, { useContext, useEffect } from "react";
-import { PostContext } from "../providers/PostProvider";
-import Post from "./Post";
+import React, { useEffect, useState } from 'react';
+import Post from './Post';
 
 const PostList = () => {
-  const { posts, getAllPosts } = useContext(PostContext);
+  const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    getAllPosts();
+    fetch('/api/posts')
+      .then(res => res.json())
+      .then(data => setPosts(data));
   }, []);
 
   return (
@@ -198,10 +161,8 @@ export default PostList;
 function App() {
   return (
     <div className="App">
-      <PostProvider>
-        {/* <AwesomeNewPostComponent/> */}
-        <PostList />
-      </PostProvider>
+      {/* <AwesomeNewPostComponent/> */}
+      <PostList />
     </div>
   );
 }
