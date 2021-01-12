@@ -99,6 +99,8 @@ public List<Post> Search(string criterion, bool sortDescending)
 }
 ```
 
+> Note: Don't forget to also add this method to the IPostRepository
+
 The `Search()` method uses EF Core and Linq to create a query that includes the search criterion and order the results appropriated.
 
 Note how Entity Framework Core lets us define the query across multiple lines. In this case, we separate the majority of the query from the ordering clause. Remember the SQL isn't executed until the `ToList()` method is called, so until then we are free to append Linq method calls to our query. This is a powerful feature of EF Core that allows us to dynamically construct queries.
