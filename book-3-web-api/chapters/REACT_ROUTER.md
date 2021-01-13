@@ -61,15 +61,12 @@ import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import "./App.css";
 import ApplicationViews from "./components/ApplicationViews";
-import { PostProvider } from "./providers/PostProvider";
 
 function App() {
   return (
     <div className="App">
       <Router>
-        <PostProvider>
-          <ApplicationViews />
-        </PostProvider>
+        <ApplicationViews />
       </Router>
     </div>
   );
@@ -124,17 +121,14 @@ import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import "./App.css";
 import ApplicationViews from "./components/ApplicationViews";
-import { PostProvider } from "./providers/PostProvider";
 import Header from "./components/Header";
 
 function App() {
   return (
     <div className="App">
       <Router>
-        <PostProvider>
-          <Header />
-          <ApplicationViews />
-        </PostProvider>
+        <Header />
+        <ApplicationViews />
       </Router>
     </div>
   );
@@ -148,7 +142,7 @@ The `<Link>` component is great for rendering links in our UI, but what about if
 In the last chapter you added a `PostForm` component that saves new posts. Your component may look a little different than this, but there's only a couple lines of code that need to be added to make this work.
 
 ```js
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import {
   Form,
   FormGroup,
@@ -158,11 +152,9 @@ import {
   Input,
   Button,
 } from "reactstrap";
-import { PostContext } from "../providers/PostProvider";
 import { useHistory } from "react-router-dom";
 
 const PostForm = () => {
-  const { addPost } = useContext(PostContext);
   const [userProfileId, setUserProfileId] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [title, setTitle] = useState("");
@@ -170,6 +162,15 @@ const PostForm = () => {
 
   // Use this hook to allow us to programatically redirect users
   const history = useHistory();
+
+  const addPost = (post) => {
+    return fetch('/api/posts', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(post)
+    })
+    .then(res => res.json());
+  }
 
   const submit = (e) => {
     const post = {
@@ -234,8 +235,8 @@ Again, your Add form will likely look different than this, but there's only two 
 
 ```js
 addPost(post).then((p) => {
-    // Navigate the user back to the home route
-    history.push("/");
+  // Navigate the user back to the home route
+  history.push("/");
 });
 ```
 
@@ -251,42 +252,26 @@ Add these two lines of code to your own `PostForm` component and try adding a ne
 
 The last thing we want to do with our new routing abilities, is create a `PostDetails` component and use the route parameter to decide which post's details we should be showing. For example, if a user navigates to `/posts/2`, the component code will have to read the route param of `2` and use that value to make a fetch call to get that post's details.
 
-Before we make a Post Details component, let's add a function to our provider that makes that fetch call
-
-> PostProvider.js
-
-```js
-const getPost = (id) => {
-    return fetch(`/api/post/${id}`).then((res) => res.json());
-};
-```
-
-Now make sure to provide that new function
-
-```js
-<PostContext.Provider value={{ posts, getAllPosts, addPost, getPost }}>
-```
+Now we can add a `PostDetails.js` file in your components directory. Notice the use of the `useParams` hook to access the route param.
 
 **NOTE** This assumes your API is set up to return a post object which includes an array of comments. If you need to make an additional fetch call to get the comments for a post, update the `getPost` function as needed.
-
-Now we can add a `PostDetails.js` file in your components directory. Notice the use of the `useParams` hook to access the route param.
 
 > PostDetails.js
 
 ```js
-import React, { useEffect, useContext, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ListGroup, ListGroupItem } from "reactstrap";
-import { PostContext } from "../providers/PostProvider";
 import { useParams } from "react-router-dom";
 import Post from "./Post";
 
 const PostDetails = () => {
   const [post, setPost] = useState();
-  const { getPost } = useContext(PostContext);
   const { id } = useParams();
 
   useEffect(() => {
-    getPost(id).then(setPost);
+    fetch(`/api/posts/${id}`)
+      .then(res => res.json())
+      .then(post => setPost(post));
   }, []);
 
   if (!post) {
@@ -323,7 +308,7 @@ import { Link } from "react-router-dom";
 
 ```js
 <Link to={`/posts/${post.id}`}>
-    <strong>{post.title}</strong>
+  <strong>{post.title}</strong>
 </Link>
 ```
 
