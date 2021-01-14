@@ -2,6 +2,14 @@
 
 [Firebase](https://firebase.google.com/) is a development platform provided by Google. It offers a wide array of tools for app development, data/file storage and even machine learning. We will be using firebase for user authentication.
 
+## Firebase Authentication Setup
+
+Firebase provides an _identity store_ for user emails and passwords. Using Firebase relieves our application of the burden (and risk) of storing user credentials. Firebase also offers a set of tools for setting password strength requirements, for letting users change passwords and many other common credential management tools that we would otherwise have to build. In this course we will only touch the surface of the tools that Firebase offers.
+
+> **NOTE:** In addition to email/password authentication, Firebase provides tools to allow authentication via Google, Github and several other third-party auth providers. We will not cover these alternatives in this course, but there is extensive documentation on the Firebase website.
+
+## Disclaimer
+
 The subject of authentication, particularly authentication using a _third-party provider_ such as Firebase, is both broad and deep. There are several approaches to authentication and each approach is non-trivial to implement. While the approach we cover in this course is a perfectly feasible way to implement authentication, it is by no means an exhaustive look at the topic.
 
 ## Authentication vs Authorization
@@ -10,46 +18,12 @@ _Authentication_ is the process of verifying a user is who they say they are. Th
 
 _Authorization_ is the process of determining if a user should be _allowed to perform_ an action. Authorization requires that a user be authenticated since the application cannot check a user permissions until it knows who the user is.
 
-## Firebase Authentication Setup
 
-Firebase provides an _identity store_ for user emails and passwords. Using Firebase relieves our application of the burden (and risk) of storing user credentials. Firebase also offers a set of tools for setting password strength requirements, for letting users change passwords and many other common credential management tools that we would otherwise have to build. In this course we will only touch the surface of the tools that Firebase offers.
+## High Level Overview
 
-> **NOTE:** In addition to email/password authentication, Firebase provides tools to allow authentication via Google, Github and several other third-party auth providers. We will not cover these alternatives in this course, but there is extensive documentation on the Firebase website.
+[Here is a slide deck of our basic auth flow](https://sketchboard.me/PCmJSxesIXN#/presentation). It will show how register, login, and making authenticated requests works
 
-### Firebase Account
-
-Before you get started using Firebase, you must create an account. Go to https://firebase.google.com/ and click the large `Getting started` button to create an account. You will need to login with a Google username/password. If you do not have a Google account, there is an option to create on on the Google sign in form.
-
-### Firebase Project
-
-A Firebase identity store is contained within a _Project_. Once you have logged into Firebase, click the `Add project` button to create new project.
-
-The example we'll be using for this chapter is an application for managing [Grace Hopper](https://en.wikipedia.org/wiki/Grace_Hopper) quotes called `WisdomAndGrace`. Create a Firebase project with that name.
-
-### Project Id and Web API Key
-
-Once you've created the project, you should see a menu on the left side of the screen. Select the gear image near the top of this menu and choose the `Project settings` options.
-
-On the Project settings page take note of the `Project ID` and the `Web API Key`. Remember how you got here because you will need these values later.
-
-### Setting up Authentication
-
-1. From the Project Overview page, select `Authentication` in the menu on the left.
-1. From the Authentication page, select the `Sign-in method` tab.
-1. Hover your mouse over the `Email/password` sign-in provider and click the pencil icon.
-1. In the window that appears, turn on the `Enable` switch, but make sure the `Email link (passwordless sign-in)` switch is turned off.
-1. Click the `Save` button.
-1. Select the `Users` tab and click the `Add user` button. Enter an email and a password _that you must remember_. The email does not have to be real.
-1. After you create the user notice the value in the `User UID` column in the table. We'll be using his id later.
-1. Finally, create a second user in the same manner as before. It's recommended that you use the same password for both users.
-
-## Demo Project Overview
-
-Now that we have some initial setup out of the way, let's take some time to think about what we are going to be building.
-
-Our goal is to build a full-stack application using ASP<span>.NET</span> Core Web API on the server, Entity Framework Core to interact with a SQL Server database, React on the client and Firebase for authentication.
-
-Because Web API, EF Core and React are all familiar to us, we won't go into them here. But we do need to get a high-level idea of how authentication will fit into the project. The image below describes the process.
+Once you go through it, you might also ponder this slightly more technical diagram of the auth flow.
 
 ![Firebase auth flow](./images/firebase-auth-architecture-small-1.png)
 
@@ -63,97 +37,313 @@ Because Web API, EF Core and React are all familiar to us, we won't go into them
 1. The react application (running on a user's browser) sends a request to the Firebase server containing the user's email and password.
 1. Firebase communicates with the Google  API server to confirm that the user's credentials are valid.
 1. Once confirmed, Firebase sends a token (called a [JWT](https://jwt.io/introduction/)) to the React application. This token contains encoded information about the user.
-1. The react application stores the token in the browser's `sessionStorage`. **The user is now _logged in_** to the app.
+1. The react application stores the token in the browser's `localStorage`. **The user is now _logged in_** to the app.
 1. When the react application needs to make an authenticated request to the Web API server, it passes token along with the request.
 1. When the Web API sever receives the request from the react application, it verifies the token and uses it to determine who the user is.
 
-## Running the Demo
+## Example Project
 
-As mentioned above the application we'll be building is for managing quotes from the brilliant Grace Hopper. Because there are a lot of steps required to build this application, we will not be doing it together in class. Instead you should **fork** the Github repo linked to below, then clone your copy to your computer.
+The process of implementing this auth flow will be long. If you need a reference to a simple working example, you will probably want to bookmark [this repo](https://github.com/nashville-software-school/WisdomAndGrace/tree/entity-framework)
 
-https://github.com/nashville-software-school/WisdomAndGrace
+Let's get into it.....
 
-### Look around the repo
+## Setting up Firebase
 
-In the repo you will find...
+### Firebase Account
 
-* A Visual Studio solution and project both called `WisdomAndGrace`.
-* A `client` folder inside the project folder than contains a react application. This application's `package.json` file has already been configured to use the react proxy server.
-* A sql script for building the application database.
-* An `appsettings.json` file containing configuration information for the Web API.
-* A `.env` file containing configuration settings for the React application.
+Before you get started using Firebase, you must create an account. Go to https://firebase.google.com/ and click the large `Getting started` button to create an account. You will need to login with a Google username/password. If you do not have a Google account, there is an option to create on on the Google sign in form.
 
-### Update the Repo
+### Firebase Project
 
-Before we can run the app we need to make a few changes.
+A Firebase identity store is contained within a _Project_. Once you have logged into Firebase, click the `Add project` button to create new project. When it prompts you for a name you can call it "Gifter"
 
-1. Open the SQL script in an editor and find the `INSERT` statements that insert records into the `UserProfile` table. Modify these statements to add the users you added to Firebase earlier in this chapter.
-1. Update the `appsettings.json` file. Change the value of the `FirebaseProjectId` key to me the Project Id of your Firebase project.
-1. Update the `.env` file. Change the value of the `REACT_APP_API_KEY` key to the API Key from your Firebase project.
+### Project Id and Web API Key
 
-Now we're finally ready to run this thing. Build your database, then run both server and client apps.
+Once you've created the project, you should see a menu on the left side of the screen. Select the gear image near the top of this menu and choose the `Project settings` options.
 
-## Examining the Demo
+On the Project settings page take note of the `Project ID` and the `Web API Key`. Remember how you got here because you will need these values later.
 
-Your instructor will take you through the parts of the demo application and describe how it is setup to use Firebase authentication.
+### Setting up Authentication in the Firebase console
 
-### Some Key Areas to Explore
+1. From the Project Overview page, select `Authentication` in the menu on the left.
+1. From the Authentication page, select the `Sign-in method` tab.
+1. Hover your mouse over the `Email/password` sign-in provider and click the pencil icon.
+1. In the window that appears, turn on the `Enable` switch, but make sure the `Email link (passwordless sign-in)` switch is turned off.
+1. Click the `Save` button.
+1. Select the `Users` tab and click the `Add user` button. Enter an email and a password _that you must remember_. The email does not have to be real.
+1. After you create the user notice the value in the `User UID` column in the table. We'll be using this id later.
+1. Finally, create a second user in the same manner as before. It's recommended that you use the same password for both users.
 
-* JWT Authentication in `Startup.cs`.
-* `app.UseAuthentication()` in `Startup.cs`.
-* `FirebaseUserId` property in `UserPofile.cs`.
-* `GetCurrentUser()` method in `QuoteController`.
-* Use of the `[Authorize]` attribute to secure the `UserProfileController` and `QuoteController` controllers.
-* Firebase JavaScript Library installed from npm.
-* `Login`, `Register` and `Logout` functions in `UserProfileProvider.js`.
-* Using the token (JWT) in the `fetch()` calls in both `UserProfileProvider.js` and `QuoteProvider.js`.
-* Simple `UserType` verification in `QuoteController.cs` and in `QuoteProvider.js`.
+## Adding the Firebase JS library to our Gifter client
 
-## Exercise
+We're going to install a firebase npm package in our React app which will do a lot of the heavy lifting in communicating with Firebase.
 
-1. Go through the chapter and follow the steps to make the `WisdomAndGrace` app work on your computer.
-1. Add Firebase authentication to the Gifter application.
+1. Install the firebase library by running `npm install firebase` in your `/client` directory.
+1. Create a file named `.env.local` (don't forget the leading `.`) inside the `client` directory and add the following
+    ```
+    REACT_APP_FIREBASE_API_KEY=xxxxxxxxxxxx
+    ```
+    Replace the `xxx`'s with your firebase API key. You can find this in your project settings on the Firebase website.
+1. Update the `index.js` file to include the following code right below your `import` statements
+    ```js
+    // other imports omitted
+    import firebase from "firebase/app";
 
-### Firebase Authentication Checklist
+    const firebaseConfig = {
+        apiKey: process.env.REACT_APP_API_KEY,
+    };
+    firebase.initializeApp(firebaseConfig);
 
-#### In Firebase
+    // other code omitted
+    ```
+    You'll need to restart the React dev server, but your app should now be hooked up to your firebase project and ready to implement our auth flow.
+## Implementing the auth flow in Gifter
 
-1. Create a new Firebase project.
-1. Enable the `Email/Password` `Sign-in method`.
-1. Add at least two new users to Firebase. Each user **must** have the same email address as one of the users in your Gifter application.
+### Adding a UserProfileProvider in the React app
 
-#### In the Gifter Database
+Our UserProfileProvider is going to hold on to the user state as well as define the methods which will make the login/register calls to firebase and handle the responses. Create a `providers` folder inside the `src` directory and add a `UserProfileProvider.js` file with the following code
+    ```js
+    import React, { useState, useEffect, createContext } from "react";
+    import { Spinner } from "reactstrap";
+    import firebase from "firebase/app";
+    import "firebase/auth";
 
-> **NOTE:** The following will delete and recreate the database.
+    export const UserProfileContext = createContext();
 
-1. Update the Gifter SQL script to add a `FirebaseUserId` column to the `UserProfile` table.
+    export function UserProfileProvider(props) {
+    const apiUrl = "/api/userprofile";
 
-    ```sql
-    CREATE TABLE [UserProfile] (
-      [Id] INTEGER PRIMARY KEY IDENTITY NOT NULL,
-      [FirebaseUserId] NVARCHAR(28) NOT NULL,
-      [Name] NVARCHAR(255) NOT NULL,
-      [Email] NVARCHAR(255) NOT NULL,
-      [ImageUrl] NVARCHAR(255),
-      [Bio] NVARCHAR(255),
-      [DateCreated] DATETiME NOT NULL,
+    const userProfile = localStorage.getItem("userProfile");
+    const [isLoggedIn, setIsLoggedIn] = useState(userProfile != null);
 
-      CONSTRAINT UQ_FirebaseUserId UNIQUE(FirebaseUserId)
-    )
+    const [isFirebaseReady, setIsFirebaseReady] = useState(false);
+    useEffect(() => {
+        firebase.auth().onAuthStateChanged((u) => {
+            setIsFirebaseReady(true);
+        });
+    }, []);
+
+    const login = (email, pw) => {
+        return firebase.auth().signInWithEmailAndPassword(email, pw)
+        .then((signInResponse) => getUserProfile(signInResponse.user.uid))
+        .then((userProfile) => {
+            localStorage.setItem("userProfile", JSON.stringify(userProfile));
+            setIsLoggedIn(true);
+        });
+    };
+
+    const logout = () => {
+        return firebase.auth().signOut()
+        .then(() => {
+            localStorage.clear()
+            setIsLoggedIn(false);
+        });
+    };
+
+    const register = (userProfile, password) => {
+        return firebase.auth().createUserWithEmailAndPassword(userProfile.email, password)
+            .then((createResponse) => saveUser({ ...userProfile, firebaseUserId: createResponse.user.uid }))
+            .then((savedUserProfile) => {
+                localStorage.setItem("userProfile", JSON.stringify(savedUserProfile));
+                setIsLoggedIn(true);
+            });
+    };
+
+    const getToken = () => firebase.auth().currentUser.getIdToken();
+
+    const getUserProfile = (firebaseUserId) => {
+        return getToken().then((token) =>
+        fetch(`${apiUrl}/${firebaseUserId}`, {
+            method: "GET",
+            headers: {
+            Authorization: `Bearer ${token}`
+            }
+        }).then(resp => resp.json()));
+    };
+
+    const saveUser = (userProfile) => {
+        return getToken().then((token) =>
+        fetch(apiUrl, {
+            method: "POST",
+            headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json"
+            },
+            body: JSON.stringify(userProfile)
+        }).then(resp => resp.json()));
+    };
+
+    return (
+        <UserProfileContext.Provider value={{ isLoggedIn, login, logout, register, getToken }}>
+        {isFirebaseReady
+            ? props.children
+            : <Spinner className="app-spinner dark"/>}
+        </UserProfileContext.Provider>
+    );
+    }
     ```
 
-1. Change the `UserProfile` `INSERT` statements to insert users with the `FirebaseUserId`s and `Email`s that match the users you created in Firebase.
-1. Run the script to recreate the Gifter database.
+While you might go through this code to try to match up each method with how it fits into our auth diagram above, it's not necessary that you understand everything in it. What _is_ important is that you recognize that this provider can provide other components with a  boolean property of `isLoggedIn`, along with methods for
 
-#### In the Visual Studio Web API Project
+- login
+- logout
+- register
+- getToken
 
-As you work through the following checklist, make sure to use the `WisdomAndGrace` application as an example.
+### Adding a Login & Register component to the React app
 
-1. Update the `appsettings.json` file to add a `"FirebaseProjectId"` key. Make the value of this key your Firebase project id.
-1. Add the `Microsoft.AspNetCore.Authentication.JwtBearer` Nuget package to your project.
-1. Update the `ConfigureServices()` method in `Startup.cs` to configure your web API to understand and validate Firebase JWT authentication.
+Create a `Login.js` file in the `components` directory. The following code simply creates a login form and calls into the `login` method which it gets from the `UserProfileProvider` we defined above
 
-    ```cs
+```js
+import React, { useState, useContext } from "react";
+import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { useHistory, Link } from "react-router-dom";
+import { UserProfileContext } from "../providers/UserProfileProvider";
+
+export default function Login() {
+    const history = useHistory();
+    const { login } = useContext(UserProfileContext);
+
+    const [email, setEmail] = useState();
+    const [password, setPassword] = useState();
+
+    const loginSubmit = (e) => {
+        e.preventDefault();
+        login(email, password)
+            .then(() => history.push("/"))
+            .catch(() => alert("Invalid email or password"));
+    };
+
+    return (
+        <Form onSubmit={loginSubmit}>
+            <fieldset>
+                <FormGroup>
+                    <Label for="email">Email</Label>
+                    <Input id="email" type="text" onChange={e => setEmail(e.target.value)} />
+                </FormGroup>
+                <FormGroup>
+                    <Label for="password">Password</Label>
+                    <Input id="password" type="password" onChange={e => setPassword(e.target.value)} />
+                </FormGroup>
+                <FormGroup>
+                    <Button>Login</Button>
+                </FormGroup>
+                <em>
+                    Not registered? <Link to="register">Register</Link>
+                </em>
+            </fieldset>
+        </Form>
+    );
+}
+```
+
+Now do the same for register by creating a `Register.js` file with the following code
+
+```js
+import React, { useState, useContext } from "react";
+import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { useHistory } from "react-router-dom";
+import { UserProfileContext } from "../providers/UserProfileProvider";
+
+export default function Register() {
+  const history = useHistory();
+  const { register } = useContext(UserProfileContext);
+
+  const [name, setName] = useState();
+  const [bio, setBio] = useState();
+  const [email, setEmail] = useState();
+  const [imageUrl, setImageUrl] = useState();
+  const [password, setPassword] = useState();
+  const [confirmPassword, setConfirmPassword] = useState();
+
+  const registerClick = (e) => {
+    e.preventDefault();
+    if (password && password !== confirmPassword) {
+      alert("Passwords don't match. Do better.");
+    } else {
+      const userProfile = { name, bio, imageUrl, email };
+      register(userProfile, password)
+        .then(() => history.push("/"));
+    }
+ };
+
+  return (
+    <Form onSubmit={registerClick}>
+      <fieldset>
+        <FormGroup>
+          <Label htmlFor="name">First Name</Label>
+          <Input id="name" type="text" onChange={e => setName(e.target.value)} />
+        </FormGroup>
+        <FormGroup>
+          <Label htmlFor="bio">Bio</Label>
+          <Input id="bio" type="text" onChange={e => setBio(e.target.value)} />
+        </FormGroup>
+        <FormGroup>
+          <Label for="email">Email</Label>
+          <Input id="email" type="text" onChange={e => setEmail(e.target.value)} />
+        </FormGroup>
+        <FormGroup>
+          <Label htmlFor="imageUrl">Profile Image URL</Label>
+          <Input id="imageUrl" type="text" onChange={e => setImageUrl(e.target.value)} />
+        </FormGroup>
+        <FormGroup>
+          <Label for="password">Password</Label>
+          <Input id="password" type="password" onChange={e => setPassword(e.target.value)} />
+        </FormGroup>
+        <FormGroup>
+          <Label for="confirmPassword">Confirm Password</Label>
+          <Input id="confirmPassword" type="password" onChange={e => setConfirmPassword(e.target.value)} />
+        </FormGroup>
+        <FormGroup>
+          <Button>Register</Button>
+        </FormGroup>
+      </fieldset>
+    </Form>
+  );
+}
+```
+
+Now give both of these components routes in your `ApplicationViews`
+
+```html
+// code omitted
+
+<Route path="/login">
+    <Login />
+</Route>
+
+<Route path="/register">
+    <Register />
+</Route>
+
+// code omitted
+```
+
+### Adding a FirebaseId column to our UserProfile table & model
+
+1. Run this SQL script to add the additional column
+    ```sql
+    ALTER TABLE UserProfile
+    ADD FirebaseId VARCHAR(50);
+    ```
+1. Now that our database table has been updated, we also need to update the `UserProfile` model. Update `UserProfile.cs` to include this property
+    ```csharp
+    public string FirebaseId { get; set; }
+    ```
+
+### Setting the server up to talk to Firebase
+
+1. Update your `appsettings.json` file to include your firebase Project ID (you can find this back on the firebase website). Add it right below the connection string
+
+    ```json
+    "ConnectionStrings": {
+        "DefaultConnection": "server=localhost\\SQLExpress;database=Gifter;integrated security=true"
+    },
+    "FirebaseProjectId": "YOUR_FIREBASE_PROJECT_ID"
+    ```
+1. Update the `ConfigureServices` method inside `Startup.cs` to include the following code. This is what allows our server to verify incoming tokens with Firebase.
+
+    ```csharp
     var firebaseProjectId = Configuration.GetValue<string>("FirebaseProjectId");
     var googleTokenUrl = $"https://securetoken.google.com/{firebaseProjectId}";
     services
@@ -171,30 +361,181 @@ As you work through the following checklist, make sure to use the `WisdomAndGrac
             };
         });
     ```
+1. Still inside `Startup.cs`, in the `Configure` method find the line that calls `app.UseAuthorization()` and add `app.UseAuthentication()` right above it. This is what will tell our API server to check the token on each request
 
-1. Update the `Configure()` method in `Startup.cs` to call `app.UseAuthentication();`.
+    ```csharp
+    // code omitted...
 
-    ```cs
-    // ...
-    app.UseRouting();
     app.UseAuthentication();
     app.UseAuthorization();
-    // ...
+
+    // code omitted...
     ```
 
-1. Update the `UserProfile` model to include a `FirebaseUserId` property. This property should be a `string`.
-1. Create a new web API action in the `UserProfileController` that will return a user by `firebaseUserId`. This new endpoint will be used for login.
+### Creating User Repository and Controller
 
-    > **NOTE:** You should already have an API action for adding a new UserProfile that will be used in the registration process.
+Lastly we need to create the methods for getting and saving user profiles. Start by adding a `UserProfileRepository.cs` to your `Repositories` directory with the following code
 
-1. Add [Authorize] attributes to all of your controllers. We will not allow anonymous users in the Gifter app.
+```csharp
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
+using Gifter.Data;
+using Gifter.Models;
 
-#### In the React Client App
+namespace Gifter.Repositories
+{
+    public class UserProfileRepository
+    {
+        private readonly ApplicationDbContext _context;
 
-As you work through the following checklist, make sure to use the `WisdomAndGrace` application as an example.
+        public UserProfileRepository(ApplicationDbContext context)
+        {
+            _context = context;
+        }
 
-1. Use npm to install the firebase library: `npm install firebase`.
-1. Create a `UserProfileProvider` component and a `UserProfileContext` context in a `UserProfileProvider.js` file.
-1. Add `login`, `logout` and `register` functions to the `UserProfileProvider`.
-1. Add an `isLoggedIn` boolean to the `UserProfileProvider`'s state.
-1. Update `fetch()` calls throughout the app to include an `Authorization` header that uses the Firebase token.
+        public UserProfile GetByFirebaseUserId(string firebaseUserId)
+        {
+            return _context.UserProfile
+                    .Include(up => up.UserType) 
+                    .FirstOrDefault(up => up.FirebaseUserId == firebaseUserId);
+        }
+
+        public void Add(UserProfile userProfile)
+        {
+            _context.Add(userProfile);
+            _context.SaveChanges();
+        }
+    }
+}
+```
+
+Afterwards, extract an `IUserProfileRepository` interface and have the `UserProfileRepository` implement it. Don't forget to register it inside `Startup.cs`
+
+```csharp
+services.AddTransient<IUserProfileRepository, UserProfileRepository>();
+```
+
+Finally, add a `UserProfileController` which will expose our API endpoints
+
+```csharp
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
+using System;
+using Gifter.Data;
+using Gifter.Models;
+using Gifter.Repositories;
+
+namespace Gifter.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class UserProfileController : ControllerBase
+    {
+        private readonly UserProfileRepository _userProfileRepository;
+        public UserProfileController(ApplicationDbContext context)
+        {
+            _userProfileRepository = new UserProfileRepository(context);
+        }
+
+        [HttpGet("{firebaseUserId}")]
+        public IActionResult GetUserProfile(string firebaseUserId)
+        {
+            return Ok(_userProfileRepository.GetByFirebaseUserId(firebaseUserId));
+        }
+
+        [HttpPost]
+        public IActionResult Post(UserProfile userProfile)
+        {
+            userProfile.CreateDateTime = DateTime.Now;
+            userProfile.UserTypeId = UserType.AUTHOR_ID;
+            _userProfileRepository.Add(userProfile);
+            return CreatedAtAction(
+                nameof(GetUserProfile),
+                new { firebaseUserId = userProfile.FirebaseUserId },
+                userProfile);
+        }
+    }
+}
+```
+
+### Checking if it's working
+
+To verify that everything is working, you should confirm that you can register a new user and then subsequently log in as that user. You should be able to check both firebase and your database and see that the user has been created in both.
+
+### What are we left with?
+
+Now that everything is set up, what can we do?
+
+#### Get the current user in our controllers
+
+We can add a private method to our controllers which will get us the current user.
+
+```csharp
+private UserProfile GetCurrentUserProfile()
+{
+    var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+    return _userProfileRepository.GetByFirebaseUserId(firebaseUserId);
+}
+```
+
+Similar to how we did this in our MVC controllers, we're getting the firebase ID out of the token (although, we used cookies before in MVC) and we're looking up in the database the user object with that firebase ID.
+
+#### Ensure only authenticated users access certain API endpoints
+
+We can do this exactly how we did in our MVC controllers. Simply put the `[Authorize]` annotation above any controller class or controller method and it will block anyone from accessing that API enpoint unless they send a valid token up with the request.
+
+```csharp
+[Authorize]
+[Route("api/[controller]")]
+[ApiController]
+public class PostController : ControllerBase
+{
+    // controller code here can only be accessed by authenticated users...
+}
+```
+
+#### Get the logged in user in your React application
+
+When users login/register we're saving their profile information inside localStorage. Any component or js file can access the user object by retrieving it from there
+
+```js
+const user = JSON.parse(localStorage.getItem('userProfile'));
+```
+
+#### Authenticate our `fetch` calls
+
+Our `UserProfileProvider` exposes a `getToken` method. We can add that token to our fetch requests so that the server will know who is making the call. To inlcude a token in a `fetch` call, set the `Authorization` header like this
+
+```js
+import React, { useContext, useEffect } from 'react';
+import { UserProfileContext } from "../providers/UserProfileProvider";
+
+const SomeComponent = () => {
+    const { getToken } = useContext(UserProfileContext);
+
+    useEffect(() => {
+         getToken().then((token) =>
+            fetch(apiUrl, {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${token}` // The token gets added to the Authorization header
+                }
+            })
+            .then(resp => resp.json())
+            .then(setQuotes));
+    }, []);
+}
+
+
+```
+
+## Exercises
+
+1. In the AddPost form, remove the input field for User Id. Instead, set that property on the server in the controller code.
+1. Update the Header so that if a user is not logged in, they see links for Login and Register. If they are logged in, they should see a link for Logout and the header should display their username somewhere.
+1. Update ApplicationViews so that only authenticated users can access routes other than Login and Register. If a user tries to go to those URLs directly, they should be redirected to the Login page. You should also protect all the `api/posts` endpoints from being hit directly without a token.
+1. Add a delete feature in the React client. Make sure that only the owner of a post can delete it (this check needs to be done client side _and_ server side. It's not enough to just hide a button. Make sure someone else couldn't delete it using POSTMAN)
+
+## Advanced
+
+Congrats. You've conquered the regular auth challenges. Implement the comment and subscription features that Gifter is missing. Allow users to subscribe to one another and comment on each others posts.
