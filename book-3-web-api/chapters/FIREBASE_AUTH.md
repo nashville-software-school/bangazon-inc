@@ -18,7 +18,7 @@ Firebase provides an _identity store_ for user emails and passwords. Using Fireb
 
 ### Firebase Account
 
-Before you get started using Firebase, you must create an account. Go to https://firebase.google.com/ and click the large `Getting started` button to create an account. You will need to login with a Google username/password. If you do not have a Google account, there is an option to create on on the Google sign in form.
+Before you get started using Firebase, you must create an account. Go to https://firebase.google.com/ and click the large `Getting started` button to create an account. You will need to login with a Google username/password. If you do not have a Google account, there is an option to create one on the Google sign in form.
 
 ### Firebase Project
 
