@@ -324,11 +324,11 @@ Now give both of these components routes in your `ApplicationViews`
 1. Run this SQL script to add the additional column
     ```sql
     ALTER TABLE UserProfile
-    ADD FirebaseId VARCHAR(50);
+    ADD FirebaseUserId VARCHAR(50);
     ```
 1. Now that our database table has been updated, we also need to update the `UserProfile` model. Update `UserProfile.cs` to include this property
     ```csharp
-    public string FirebaseId { get; set; }
+    public string FirebaseUserId { get; set; }
     ```
 
 ### Setting the server up to talk to Firebase
