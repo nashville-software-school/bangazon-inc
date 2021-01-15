@@ -190,6 +190,19 @@ While you might go through this code to try to match up each method with how it 
 - register
 - getToken
 
+Now add the `UserProfileProvider` to `App.js` by wrapping the Header and ApplicationViews
+
+```html
+<div className="App">
+      <Router>
+        <UserProfileProvider>
+            <Header />
+            <ApplicationViews />
+        </UserProfileProvider>    
+      </Router>
+    </div>
+```
+
 ### Adding a Login & Register component to the React app
 
 Create a `Login.js` file in the `components` directory. The following code simply creates a login form and calls into the `login` method which it gets from the `UserProfileProvider` we defined above
