@@ -20,7 +20,7 @@ _Authorization_ is the process of determining if a user should be _allowed to pe
 
 ## High Level Overview
 
-[Here is a slide deck of our basic auth flow](https://sketchboard.me/PCmJSxesIXN#/presentation). It will show how register, login, and making authenticated requests works
+[Here is a slide deck of our basic auth flow](https://docs.google.com/presentation/d/15ZgUUcqIk0qIeywjj10klQT4IX2C1K5gJXJY8OpjEGg/edit?usp=sharing). It will show how register, login, and making authenticated requests works
 
 Once you go through it, you might also ponder this slightly more technical diagram of the auth flow.
 
