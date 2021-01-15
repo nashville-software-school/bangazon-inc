@@ -9,7 +9,6 @@ Firebase provides an _identity store_ for user emails and passwords. Using Fireb
 > **NOTE:** In addition to email/password authentication, Firebase provides tools to allow authentication via Google, Github and several other third-party auth providers. We will not cover these alternatives in this course, but there is extensive documentation on the Firebase website.
 
 ## Disclaimer
-
 The subject of authentication, particularly authentication using a _third-party provider_ such as Firebase, is both broad and deep. There are several approaches to authentication and each approach is non-trivial to implement. While the approach we cover in this course is a perfectly feasible way to implement authentication, it is by no means an exhaustive look at the topic.
 
 ## Authentication vs Authorization
@@ -102,15 +101,16 @@ We're going to install a firebase npm package in our React app which will do a l
 ### Adding a UserProfileProvider in the React app
 
 Our UserProfileProvider is going to hold on to the user state as well as define the methods which will make the login/register calls to firebase and handle the responses. Create a `providers` folder inside the `src` directory and add a `UserProfileProvider.js` file with the following code
-    ```js
-    import React, { useState, useEffect, createContext } from "react";
-    import { Spinner } from "reactstrap";
-    import firebase from "firebase/app";
-    import "firebase/auth";
 
-    export const UserProfileContext = createContext();
+```js
+import React, { useState, useEffect, createContext } from "react";
+import { Spinner } from "reactstrap";
+import firebase from "firebase/app";
+import "firebase/auth";
 
-    export function UserProfileProvider(props) {
+export const UserProfileContext = createContext();
+
+export function UserProfileProvider(props) {
     const apiUrl = "/api/userprofile";
 
     const userProfile = localStorage.getItem("userProfile");
@@ -156,7 +156,7 @@ Our UserProfileProvider is going to hold on to the user state as well as define 
         fetch(`${apiUrl}/${firebaseUserId}`, {
             method: "GET",
             headers: {
-            Authorization: `Bearer ${token}`
+                Authorization: `Bearer ${token}`
             }
         }).then(resp => resp.json()));
     };
@@ -166,8 +166,8 @@ Our UserProfileProvider is going to hold on to the user state as well as define 
         fetch(apiUrl, {
             method: "POST",
             headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json"
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json"
             },
             body: JSON.stringify(userProfile)
         }).then(resp => resp.json()));
@@ -180,8 +180,8 @@ Our UserProfileProvider is going to hold on to the user state as well as define 
             : <Spinner className="app-spinner dark"/>}
         </UserProfileContext.Provider>
     );
-    }
-    ```
+}
+```
 
 While you might go through this code to try to match up each method with how it fits into our auth diagram above, it's not necessary that you understand everything in it. What _is_ important is that you recognize that this provider can provide other components with a  boolean property of `isLoggedIn`, along with methods for
 
