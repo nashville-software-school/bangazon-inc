@@ -396,7 +396,6 @@ namespace Gifter.Repositories
         public UserProfile GetByFirebaseUserId(string firebaseUserId)
         {
             return _context.UserProfile
-                    .Include(up => up.UserType) 
                     .FirstOrDefault(up => up.FirebaseUserId == firebaseUserId);
         }
 
@@ -447,7 +446,6 @@ namespace Gifter.Controllers
         public IActionResult Post(UserProfile userProfile)
         {
             userProfile.CreateDateTime = DateTime.Now;
-            userProfile.UserTypeId = UserType.AUTHOR_ID;
             _userProfileRepository.Add(userProfile);
             return Ok(userProfile);
         }
