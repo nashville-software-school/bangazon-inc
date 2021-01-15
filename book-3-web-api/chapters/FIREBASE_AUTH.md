@@ -89,7 +89,7 @@ We're going to install a firebase npm package in our React app which will do a l
     import firebase from "firebase/app";
 
     const firebaseConfig = {
-        apiKey: process.env.REACT_APP_API_KEY,
+        apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
     };
     firebase.initializeApp(firebaseConfig);
 
