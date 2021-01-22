@@ -94,9 +94,9 @@ Our new test project will need access to Entity Framework Core, so we will need 
 Add these Nuget package references to your test project's `*.csproj` file.
 
 ```xml
-<PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.5" />
-<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.5" />
-<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.5" />
+<PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.1" />
+<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.1" />
+<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.1" />
 ```
 
 ### Reference the Project to Test
