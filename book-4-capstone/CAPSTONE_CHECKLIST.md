@@ -6,7 +6,7 @@ The technologies outlines in this chapter are _NOT_ the only technologies you ar
 
 _**If you would like to use an alternative technology (ex. ADO<span>.</span>NET, MVC, etc...) you must get approval from your capstone mentor.**_
 
-Most of these steps will require copying code from either WisdomAndGrace and Gifter, so you may want to have those repositories handy before you start
+Most of these steps will require copying code from Tabloid and Gifter, so you may want to have those repositories handy before you start
 
 You can view a video walkthrough of these steps [here](https://www.loom.com/share/bbd6f552dcfc4851a70185160e4330e9)
 
@@ -34,7 +34,7 @@ You can view a video walkthrough of these steps [here](https://www.loom.com/shar
 
 ## Server Side
 
-1. Install Nuget Packages (Copy from WisdomAndGrace.csproj & Gifter.csproj)
+1. Install Nuget Packages (Copy from Tabloid.csproj and/or Gifter.csproj)
 1. Add connection string to `appsettings.json`
 1. Create Models
 1. Create `Data` folder and `ApplicationDbContext.cs` file
@@ -42,7 +42,9 @@ You can view a video walkthrough of these steps [here](https://www.loom.com/shar
 1. Update `Startup.cs` to use Entity Framework and ApplicationDbContext
 1. Update `Startup.cs` to ignore reference loops when serializing JSON
 1. Update `Startup.cs` to handle JWTs
-1. Copy in the `UserProfileRepository` and `UserProfileController` from WisdomAndGrace and modify as needed
+1. Update `Startup.cs` to call `UseAuthentication` before `UseAuthorization`
+1. Copy in the `UserProfileRepository`, `IUserProfileRepository` and `UserProfileController` from Tabloid/Gifter and modify as needed
+1. Register the `UserProfileRepository` with ASP.NET by calling `services.AddTransient` inside `Startup.cs`
 
 > **NOTE:** Make sure to update the `namespace` of any classes you copy/paste from another project.
 
@@ -54,6 +56,6 @@ You can view a video walkthrough of these steps [here](https://www.loom.com/shar
 1. Install whatever component library you want
 1. Create a `.env.local` file in your `client` folder (DON'T forget the leading `.`) and add the firebase API Key
 1. Update the `index.js` file to add the call to `firebase.initializeApp`
-1. Copy in `UserProfileProvider.js`, `Login.js`, `Register.js` from WisdomAndGrace
-1. Copy in `ApplicationViews.js` from WisdomAndGrace and remove code that's not needed
+1. Copy in `UserProfileProvider.js`, `Login.js`, `Register.js` from Tabloid
+1. Copy in `ApplicationViews.js` from Tabloid/Gifter and remove code that's not needed
 1. Modify `App.js` to use the `Router`, `UserProfileProvider`, and `ApplicationViews` components
