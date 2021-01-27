@@ -8,7 +8,7 @@ _**If you would like to use an alternative technology (ex. ADO<span>.</span>NET,
 
 Most of these steps will require copying code from Tabloid and Gifter, so you may want to have those repositories handy before you start
 
-You can view a video walkthrough of these steps [here](https://www.loom.com/share/bbd6f552dcfc4851a70185160e4330e9)
+You can view a video walkthrough of these steps [here](https://us02web.zoom.us/rec/share/Bgnm4gt_tnzLDqYjurEu6fNlNFKR1JvUIv6MJPzV3pUn5O7SorCKThA7oZSOENH5.CPfq3-FjcpbbHSvt) Passcode is %wmVL*5@
 
 ## Set up project
 
