@@ -30,7 +30,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace DogGo.Repositories
 {
-    public class OwnerRepository
+    public class OwnerRepository : IOwnerRepository
     {
         private readonly IConfiguration _config;
 
@@ -204,6 +204,8 @@ namespace DogGo.Repositories
     }
 }
 ```
+
+After you update the `OwnerRepository` make sure you update the `IOwnerRepository` interface to include the `AddOwner`, `UpdateOwner` and `DeleteOwner` methods.
 
 ## Creating an Owner
 

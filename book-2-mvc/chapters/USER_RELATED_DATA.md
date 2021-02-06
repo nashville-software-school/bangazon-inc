@@ -78,6 +78,12 @@ We have to let ASP<span>.NET</span> Core know that we plan on using cookies for 
 public void ConfigureServices(IServiceCollection services)
 {
     services.AddControllersWithViews();
+
+    services.AddTransient<IWalkerRepository, WalkerRepository>();
+    services.AddTransient<IOwnerRepository, OwnerRepository>();
+    services.AddTransient<IDogRepository, DogRepository>();
+    services.AddTransient<INeighborhoodRepository, NeighborhoodRepository>();
+
     services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
         .AddCookie(options => options.LoginPath = "/Owners/LogIn");
 }

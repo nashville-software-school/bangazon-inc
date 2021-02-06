@@ -89,19 +89,67 @@ We'll start by adding a new method to our `PostRepository`.
 ```cs
 public List<Post> Search(string criterion, bool sortDescending)
 {
-    var query = _context.Post
-                        .Include(p => p.UserProfile)
-                        .Where(p => p.Title.Contains(criterion));
+    using (var conn = Connection)
+    {
+        conn.Open();
+        using (var cmd = conn.CreateCommand())
+        {
+            var sql =
+                @"SELECT p.Id AS PostId, p.Title, p.Caption, p.DateCreated AS PostDateCreated, 
+                        p.ImageUrl AS PostImageUrl, p.UserProfileId,
 
-    return sortDescending 
-        ? query.OrderByDescending(p => p.DateCreated).ToList()
-        : query.OrderBy(p => p.DateCreated).ToList();
+                        up.Name, up.Bio, up.Email, up.DateCreated AS UserProfileDateCreated, 
+                        up.ImageUrl AS UserProfileImageUrl
+                    FROM Post p 
+                        LEFT JOIN UserProfile up ON p.UserProfileId = up.id
+                    WHERE p.Title LIKE @Criterion OR p.Caption LIKE @Criterion";
+
+            if (sortDescending)
+            {
+                sql += " ORDER BY p.DateCreated DESC";
+            }
+            else
+            {
+                sql += " ORDER BY p.DateCreated";
+            }
+
+            cmd.CommandText = sql;
+            DbUtils.AddParameter(cmd, "@Criterion", $"%{criterion}%");
+            var reader = cmd.ExecuteReader();
+
+            var posts = new List<Post>();
+            while (reader.Read())
+            {
+                posts.Add(new Post()
+                {
+                    Id = DbUtils.GetInt(reader, "PostId"),
+                    Title = DbUtils.GetString(reader, "Title"),
+                    Caption = DbUtils.GetString(reader, "Caption"),
+                    DateCreated = DbUtils.GetDateTime(reader, "PostDateCreated"),
+                    ImageUrl = DbUtils.GetString(reader, "PostImageUrl"),
+                    UserProfileId = DbUtils.GetInt(reader, "UserProfileId"),
+                    UserProfile = new UserProfile()
+                    {
+                        Id = DbUtils.GetInt(reader, "UserProfileId"),
+                        Name = DbUtils.GetString(reader, "Name"),
+                        Email = DbUtils.GetString(reader, "Email"),
+                        DateCreated = DbUtils.GetDateTime(reader, "UserProfileDateCreated"),
+                        ImageUrl = DbUtils.GetString(reader, "UserProfileImageUrl"),
+                    },
+                });
+            }
+
+            reader.Close();
+
+            return posts;
+        }
+    }
 }
 ```
 
-The `Search()` method uses EF Core and Linq to create a query that includes the search criterion and order the results appropriated.
+The `Search()` method builds a SQL query that uses the `LIKE` operator to find records matching the search criterion and uses the `sortDesc` parameter to determine the `ORDER BY` direction.
 
-Note how Entity Framework Core lets us define the query across multiple lines. In this case, we separate the majority of the query from the ordering clause. Remember the SQL isn't executed until the `ToList()` method is called, so until then we are free to append Linq method calls to our query. This is a powerful feature of EF Core that allows us to dynamically construct queries.
+> **NOTE:** The `cmd.CommandText` property is just a string, so we can append to it as we would any other string.
 
 Once we have a repository method, we'll create the new Action in the `PostController`.
 
@@ -126,3 +174,7 @@ Notice the URL's route contains `search` and the URL's query string has values f
 1. Add a new endpoint, `/api/post/hottest?since=<SOME_DATE>` that will return posts created on or after the provided date.
 
 > **NOTE:** as always make sure to use Postman to test your API.
+
+## Challenge
+
+1. Take a look at the methods in your `PostRepository`. Pay special attention to the "query" methods - those that `SELECT` data. What do you notice? There's a LOT of redundant code. Your challenge is to create one or more `private` helper methods to reduce the complexity and call those new methods from the query methods.
