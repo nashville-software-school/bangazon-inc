@@ -2,11 +2,11 @@
 
 As part of a previous exercise, you made views for creating, editing, and listing dogs. Currently anyone can create a dog, assign it to any Owner, and view a list of all dogs. For the sake of privacy though, it would be nice if owners could only view or edit their own dogs. It would also be nice if in the dog Create form, we didn't make users enter an owner ID into an input field; instead the server would look for the current logged in owner, and default the dog's OwnerId property to that.
 
-To be able to do this, we need to create a system for authentication and authorization. 
+To be able to do this, we need to create a system for authentication and authorization.
 
 ### Authentication vs Authorization
 
-Authentication is the process of determining _who_ a user is. One way this could be determined is when a user logs in using an email/password combination. With that combination, the server can assume who the user is. 
+Authentication is the process of determining _who_ a user is. One way this could be determined is when a user logs in using an email/password combination. With that combination, the server can assume who the user is.
 
 Authorization is the process of determining _what a user has access to_. In our case, we're saying that owners should only be able to view and edit their own dogs. If Bob tries to navigate to `/dogs/edit/3` but the dog with the ID 3 belongs to Patty, Bob should not be authorized to view that page.
 
@@ -48,14 +48,14 @@ public async Task<ActionResult> Login(LoginViewModel viewModel)
         return Unauthorized();
     }
 
-    var claims = new List<Claim>
+    List<Claim> claims = new List<Claim>
     {
         new Claim(ClaimTypes.NameIdentifier, owner.Id.ToString()),
         new Claim(ClaimTypes.Email, owner.Email),
         new Claim(ClaimTypes.Role, "DogOwner"),
     };
 
-    var claimsIdentity = new ClaimsIdentity(
+    ClaimsIdentity claimsIdentity = new ClaimsIdentity(
         claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
     await HttpContext.SignInAsync(
@@ -129,7 +129,7 @@ You should now be able to log in at `/owners/login` and enter an existing email 
 
 ### Getting the current user in controllers
 
-Go to the `DogController`. Let's make it so that if a logged in owner goes to the `/dogs` route, they only see their dogs. We'll do this by getting the current logged in owner's id and then adding a `WHERE` clause to our sql statement. 
+Go to the `DogController`. Let's make it so that if a logged in owner goes to the `/dogs` route, they only see their dogs. We'll do this by getting the current logged in owner's id and then adding a `WHERE` clause to our sql statement.
 
 Getting the id of the current logged in user will be something that we'll need to do many times in our controller, so let's separate this out into its own helper method. Add this private method to the bottom of the Dogs controller
 
@@ -202,7 +202,7 @@ public ActionResult Create(Dog dog)
 {
     try
     {
-        // update the dogs OwnerId to the current user's Id 
+        // update the dogs OwnerId to the current user's Id
         dog.OwnerId = GetCurrentUserId();
 
         _dogRepo.AddDog(dog);
@@ -230,14 +230,54 @@ public ActionResult Index()
 public ActionResult Create()
 ```
 
-
 If an unauthenticated user now tries to go to either of these routes, they will be redirected to the login page.
+
+## Customize the Navbar
+
+It'd be nice if our navbar was dynamic to account for a few things
+
+- If someone comes to the app and they are not logged in, they should only see a nav link for `Login`
+- If an authenticated owner is on the app, the navbar should show links for `Walkers` and `My Dogs` as well as a welcome message
+
+Update your navbar inside `_Layout.cshtml` to look like the following
+
+```html
+<div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+    <ul class="navbar-nav flex-grow-1">
+        @if (User.Identity.IsAuthenticated)
+        {
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="" asp-controller="Walkers" asp-action="Index">Walkers</a>
+            </li>
+            @if (User.IsInRole("DogOwner"))
+            {
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Dog" asp-action="Index">My Dogs</a>
+                </li>
+            }
+            <li class="nav-item ml-auto">Welcome @User.FindFirst(ClaimTypes.Email).Value</li>
+        }
+        else
+        {
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="" asp-controller="Owners" asp-action="Login">Login</a>
+            </li>
+        }
+    </ul>
+</div>
+```
+
+You'll need to add a `using` statement at the top of the view for it to know about the `ClaimTypes` class
+
+```
+@using System.Security.Claims;
+```
 
 ## Exercise
 
 1. In the DogController update the GET and POST methods for the Edit and Delete actions to make sure that a user can only edit or delete a dog that they own. Example: if a user goes to `/dogs/edit/5` or `/dogs/delete/5` and they don't own that dog, they should get a 404 NotFound result.
 
-1. Update the Index method in the walkers controller so that owners only see walkers in their own neighborhood. 
-**Hint**: Use the OwnerRepository to look up the owner by Id before getting the walkers.
+1. Update the Index method in the walkers controller so that owners only see walkers in their own neighborhood.
+   **Hint**: Use the OwnerRepository to look up the owner by Id before getting the walkers.
 
 1. If a user goes to `/walkers` and is not logged in, they should see the entire list of walkers.

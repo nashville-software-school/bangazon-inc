@@ -239,7 +239,7 @@ When the `asp-for` attribute is on an `<input>` element, it will generate html a
 <form asp-action="Create">
 ```
 
-All of our input elements should be inside a form. The `asp-for` attribute is added to the form element to specify which controller action should be called when the form gets submitted. The the contents of the form we're building here should be submitted to the `Create` method in our controller.
+All of our input elements should be inside a form. The `asp-action` attribute is added to the form element to specify which controller action should be called when the form gets submitted. The the contents of the form we're building here should be submitted to the `Create` method in our controller.
 
 ##### Update the form
 
