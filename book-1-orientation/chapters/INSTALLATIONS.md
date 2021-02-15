@@ -1,10 +1,14 @@
 # Installing Required Software in Windows
 
-> NOTE: Items marked with `*` need to re-installed if you have been using WSL
+> **NOTE:** If you used Windows in the front-end course, you have most of this installed and configured already, but there are a few new tools to install so please carefully read through this document.
 
 ## Zoom
 
-1. https://zoom.us/
+https://zoom.us/
+
+## Slack
+
+https://slack.com/
 
 ## Web Browsers
 
@@ -15,15 +19,16 @@
 
 1. Install [Postman](https://www.getpostman.com/) for testing APIs.
 
-## Terminal \*
+## Terminal
 
 1. Install [Git For Windows](https://gitforwindows.org/). This comes with the `git-bash` bash prompt we will be using throughout the backend.
-1. Install [Windows Terminal](https://www.microsoft.com/en-us/p/windows-terminal-preview/9n0dx20hk701?activetab=pivot:overviewtab)
+1. Install [Windows Terminal](https://www.microsoft.com/en-us/p/windows-terminal/9n0dx20hk701?activetab=pivot:overviewtab)
 1. Configure Windows Terminal to use git-bash
    1. Open Windows Terminal (You'll find it in the Start menu)
    1. Select the arrow drop-down in the Windows Terminal title bar. It will be next to the `+` button.
    1. Select `Settings`. This will open the `settings.json` file in Visual Studio Code
    1. Add the following object to the `profiles.list` array
+
       ```json
       {
         "guid": "{00000000-0000-0000-ba54-000000000002}",
@@ -41,19 +46,20 @@
         "startingDirectory": "%USERPROFILE%"
       }
       ```
+
    1. Find the `defaultProfile` key near the top of the file. Updates it's value to be `"{00000000-0000-0000-ba54-000000000002}"`
    1. Save the `settings.json` file and close Visual Studio Code.
+1. Open your terminal and create a workspace directory `mkdir ~/workspace`
 
-### Creating Your SSH Key For Github \*
+### Creating Your SSH Key For Github
 
 Watch a short video for [creating an SSH key in the terminal](https://youtu.be/znRMcNG9_qQ) so that you an work with Github.
 
-### Add SSH Key to Github Account \*
+### Add SSH Key to Github Account
 
 Now watch the video for [adding your SSH key to your Github account](https://youtu.be/8hlmIObpMd4).
 
 ### Configuring Git
-
 
 First we'll configure git to use `main` as the default branch instead of `master`.
 
@@ -64,10 +70,13 @@ git config --global init.defaultBranch main
 Next, in order for Git to know who made a commit, we have to set the username and email properties in the git config. 
 
 In the terminal, paste the following and add your email:
+
 ```sh
 git config --global user.email "you@example.com"
 ```
+
 In the terminal, paste the following and add your name:
+
 ```sh
 git config --global user.name "Your Name"
 ```
@@ -78,20 +87,19 @@ Finally, we will tell git which _merge strategy_ to use when we do a `git pull`.
 git config --global pull.rebase false
 ```
 
-
-## Node \*
+## Node
 
 1. Install [Node](https://nodejs.org/en/) for working with JavaScript tools
 1. Install `serve` and `json-server`
-   ```sh
-   npm i -g serve json-server
-   ```
+
+```sh
+npm i -g serve json-server
+```
 
 ## .NET
 
-1. Install .NET https://dotnet.microsoft.com/
-1. If you're new to Windows or Git Bash, create a new workspace directory `mkdir ~/workspace`
-1. In your terminal go to your `workspace` directory and do steps 2 and 3 in the tutorial to verify everything works.
+1. Install .NET from https://dotnet.microsoft.com/
+1. Open a terminal and run `dotnet --version`. You should see a version greater than or equal to `5.0.103`
 
 ## Visual Studio Code
 
@@ -115,7 +123,7 @@ If you haven't already set up Visual Studio Code to format your code and autosav
 
 ## Visual Studio IDE
 
-1. [Visual Studio Community Edition](https://visualstudio.microsoft.com/vs/community/). This will be your main code authoring tool for the server-side course.
+ [Visual Studio Community Edition](https://visualstudio.microsoft.com/vs/community/). This will be your main code authoring tool for the server-side course.
    > **INFO:** When installing Visual Studio, you will be presented with a variety of workloads. Select the following workloads.
    >
    > - ASP.NET and web development
@@ -123,7 +131,7 @@ If you haven't already set up Visual Studio Code to format your code and autosav
 
 ## SQL Server Express Database
 
-1. [SQL Server Express](https://www.microsoft.com/en-us/sql-server/sql-server-downloads). This is the database tool where all your data will be stored for the server-side course. Click the Download button under the Express option. During the setup, take the basic installation option
+[SQL Server Express](https://www.microsoft.com/en-us/sql-server/sql-server-downloads). This is the database tool where all your data will be stored for the server-side course. Click the Download button under the Express option. During the setup, take the basic installation option
 
 ## Bookmark the Following Sites
 
@@ -133,7 +141,7 @@ https://docs.asp.net/en/latest/getting-started.html
 
 https://docs.microsoft.com/en-us/dotnet/
 
-#### .NET on YouTube
+### .NET on YouTube
 
 - **Main page**: https://www.youtube.com/channel/UCvtT19MZW8dq5Wwfu6B0oxw
 - **C# 101**: https://www.youtube.com/watch?v=BM4CHBmAPh4&list=PLdo4fOZ0oVxKLQCHpiUWun7vlJJvUiN
