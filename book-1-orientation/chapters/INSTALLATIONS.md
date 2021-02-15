@@ -52,8 +52,17 @@ Watch a short video for [creating an SSH key in the terminal](https://youtu.be/z
 
 Now watch the video for [adding your SSH key to your Github account](https://youtu.be/8hlmIObpMd4).
 
-### Add Username and Email For Git
-In order for Git to know who made a commit, we have to set the username and email properties in the git config. 
+### Configuring Git
+
+
+First we'll configure git to use `main` as the default branch instead of `master`.
+
+```sh
+git config --global init.defaultBranch main
+```
+
+Next, in order for Git to know who made a commit, we have to set the username and email properties in the git config. 
+
 In the terminal, paste the following and add your email:
 ```sh
 git config --global user.email "you@example.com"
@@ -63,6 +72,13 @@ In the terminal, paste the following and add your name:
 git config --global user.name "Your Name"
 ```
 
+Finally, we will tell git which _merge strategy_ to use when we do a `git pull`.
+
+```sh
+git config --global pull.rebase false
+```
+
+
 ## Node \*
 
 1. Install [Node](https://nodejs.org/en/) for working with JavaScript tools
@@ -71,9 +87,9 @@ git config --global user.name "Your Name"
    npm i -g serve json-server
    ```
 
-## .NET Core
+## .NET
 
-1. Visit the [.NET Tutorial](https://dotnet.microsoft.com/learn/dotnet/hello-world-tutorial/intro) site, click on your OS and follow the steps to install .NET Core.
+1. Install .NET https://dotnet.microsoft.com/
 1. If you're new to Windows or Git Bash, create a new workspace directory `mkdir ~/workspace`
 1. In your terminal go to your `workspace` directory and do steps 2 and 3 in the tutorial to verify everything works.
 
@@ -121,4 +137,4 @@ https://docs.microsoft.com/en-us/dotnet/
 
 - **Main page**: https://www.youtube.com/channel/UCvtT19MZW8dq5Wwfu6B0oxw
 - **C# 101**: https://www.youtube.com/watch?v=BM4CHBmAPh4&list=PLdo4fOZ0oVxKLQCHpiUWun7vlJJvUiN
-- **.NET Core 101**: https://www.youtube.com/watch?v=eIHKZfgddLM&list=PLdo4fOcmZ0oWoazjhXQzBKMrFuArxpW80
+- **.NET 101**: https://www.youtube.com/watch?v=eIHKZfgddLM&list=PLdo4fOcmZ0oWoazjhXQzBKMrFuArxpW80

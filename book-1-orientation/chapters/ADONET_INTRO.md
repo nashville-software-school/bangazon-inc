@@ -29,7 +29,7 @@ Before you get started, let's introduce some terms that will be used during this
 1. Use the [Roommates](./assets/roommates.sql) SQL script to create a `Roommates` database.
 1. Take a look at the ERD to familiarize yourself with the database.
 ![Roommates ERD](./assets/Roommates.png)
-1. In Visual Studio, create a new project. Make it a console application (.NET Core) and call it `Roommates`. The following screen will ask you where you want to put this project. Select your `workspace` directory.
+1. In Visual Studio, create a new project. Make it a console application (using .NET 5 as the target framework) and call it `Roommates`. The following screen will ask you where you want to put this project. Select your `workspace` directory.
 1. In your terminal, navigate to the directory where you created your project. The directory will have a `Roommates.sln` file in it.
 1. `cd` into your project directory. When you list what's in the directory, you should see your `Roommates.csproj` and `Program.cs`.
 1. Run the following commands. This imports the required package needed for using the ADO.NET classes.
