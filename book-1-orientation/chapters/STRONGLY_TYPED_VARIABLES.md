@@ -50,39 +50,26 @@ Note the `<string, int>` portion of the type. In this case `string` and `int` ar
 
 C# provides us with the ability to create custom types. These are types beyond strings, integers, booleans, lists, etc... In C# we create custom types with classes. We'll talk about classes in great detail soon, but for now here's an example of creating and using a class.
 
-`Dog.cs`
+`Program.cs`
 
 ```cs
+// The class, "Dog", is declared below...
+Dog rusty = new Dog()
+{
+    Breed = "mut",
+    Name = "Rusty",
+    Age = 10,
+    hasShots = true
+};
+
+System.Console.WriteLine(rusty.Name);
+
+
 public class Dog
 {
     public string Breed { get; set; }
     public string Name { get; set; }
     public int Age { get; set; }
     public bool HasShots { get; set; }
-}
-```
-
-`Program.cs`
-
-```cs
-using System;
-
-namespace MyApp
-{
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            Dog rusty = new Dog()
-            {
-                Breed = "mut",
-                Name = "Rusty",
-                Age = 10,
-                hasShots = true
-            };
-
-            Console.WriteLine(rusty.Name);
-        }
-    }
 }
 ```
