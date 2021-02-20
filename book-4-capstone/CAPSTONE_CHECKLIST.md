@@ -1,6 +1,6 @@
 # Checklist for setting up a Fullstack Capstone
 
-This checklist covers creating a project with ASP<span>.</span>NET Core Web API, Entity Framework Core, SQL Server, React and Firebase Auth.
+This checklist covers creating a project with ASP<span>.</span>NET Core Web API, SQL Server, React and Firebase Auth.
 
 The technologies outlines in this chapter are _NOT_ the only technologies you are allowed to use for your capstone, but they are the standard, "happy-path" technologies that we generally recommend.
 

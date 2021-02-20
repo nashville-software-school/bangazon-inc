@@ -10,9 +10,9 @@ When the application starts, the Magic Moose should prompt the user to ask a que
 
 After the user asks the question, the Magic Moose should randomly reply with one of these responses.
 
-> HINT: Here's how you can [generate a random integer](https://www.tutorialspoint.com/generating-random-numbers-in-chash)
+> **HINT:** Here's how you can [generate a random integer](https://www.tutorialspoint.com/generating-random-numbers-in-chash)
 
-1. As I see it, yes.
+0. As I see it, yes.
 1. Ask again later.
 1. Better not tell you now.
 1. Cannot predict now.
@@ -32,6 +32,8 @@ After the user asks the question, the Magic Moose should randomly reply with one
 1. Yes.
 1. Yes – definitely.
 1. You may rely on it.
+
+> **Question:** How many ways are there to accomplish this task? You should think of at least two alternative approaches before you begin coding.
 
 ## Phase 3
 

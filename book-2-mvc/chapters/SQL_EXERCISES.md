@@ -10,7 +10,7 @@ Below the links to each exercise question (on the left side of the page) you'll 
 
 > **NOTE:** Don't just race through these exercises. Make sure you understand the answer before moving on.
 
-## Even More Practice:w
+## Even More Practice
 
 You may also find these tutorials helpful
 

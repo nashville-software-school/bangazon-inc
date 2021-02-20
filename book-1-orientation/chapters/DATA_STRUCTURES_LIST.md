@@ -27,7 +27,7 @@ List<int> yearsBorn = new List<int>() {
 
 ## A More Powerful Array
 
-You can use [arrays](https://docs.microsoft.com/en-us/dotnet/api/system.array?view=netcore-3.0) in C#, as well.
+You can use [arrays](https://docs.microsoft.com/en-us/dotnet/api/system.array)
 
 ```cs
 int[] itemsSold = new int[] {9, 12, 8, 8, 7, 14, 13, 9};
@@ -37,14 +37,14 @@ The downside to using arrays in C#, in particular for web application developmen
 
 The `List` collection in C# has the following methods that an array does not.
 
-* [Add()](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1.add?view=netcore-3.0)
-* [AddRange()](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1.addrange?view=netcore-3.0)
-* [Insert()](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1.insert?view=netcore-3.0)
-* [Find()](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1.find?view=netcore-3.0)
-* [Remove()](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1.remove?view=netcore-3.0)
-* [Contains()](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1.contains?view=netcore-3.0)
-* [ForEach()](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1.foreach?view=netcore-3.0)
-* [Count](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1.count?view=netcore-3.0)
+* [Add()](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1.add)
+* [AddRange()](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1.addrange)
+* [Insert()](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1.insert)
+* [Find()](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1.find)
+* [Remove()](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1.remove)
+* [Contains()](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1.contains)
+* [ForEach()](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1.foreach)
+* [Count](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1.count)
 
 ```cs
 using System;

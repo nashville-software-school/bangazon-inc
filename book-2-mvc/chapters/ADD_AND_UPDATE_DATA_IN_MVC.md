@@ -19,7 +19,7 @@ services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
 And you're good to go. To see changes made in your view, just save your cshtml file are refresh your browser. It'd be nice if we could also automatically refresh when we make changes to our controllers and repositories.... but for now this will have to do....
 
-<hr/>
+---
 
 As part of the exercises in the previous chapter, you should have already created an OwnerRepository that has a method for getting all owners and getting a single owner by Id. We'll need additional CRUD functionality in the repository for this chapter, so update OwnerRepository to have the following code
 

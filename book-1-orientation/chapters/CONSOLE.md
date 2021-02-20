@@ -40,4 +40,4 @@ There are several methods for reading user input from the console, however the m
 string input = Console.ReadLine();
 ```
 
-> **NOTE:** For more information about `Console` methods, check out the [documentation](https://docs.microsoft.com/en-us/dotnet/api/system.console?view=netcore-3.1#methods)
+> **NOTE:** For more information about `Console` methods, check out the [documentation](https://docs.microsoft.com/en-us/dotnet/api/system.console)

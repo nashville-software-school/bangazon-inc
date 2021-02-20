@@ -39,7 +39,7 @@ This book prepares you for building the Tabloid API
 
 ## Supplementary Content
 
-* Supplement - [Web API Tutorial](https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-web-api?view=aspnetcore-3.0)
+* Supplement - [Web API Tutorial](https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-web-api)
 * Supplement - [HttpClient & 3rd Party APIs](./chapters/HTTPCLIENT.md)
 * Supplement - [Introduction to SSMS](./chapters/SSMS_INTRO.md)
 * Supplement - [How to Start a New Project](./chapters/PROJECT_INIT.md)
