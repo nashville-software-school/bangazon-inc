@@ -1,9 +1,5 @@
 # Hello, C#
 
-## Getting Started Guide
-
-Please read and complete the steps in the official [Get Started with C# and Visual Studio Code](https://docs.microsoft.com/en-us/dotnet/core/tutorials/with-visual-studio-code) guide.
-
 ## Your first console application
 
 Let's begin with your first C# console application _(also known as a "command line interface" application or "cli" app)_.
@@ -20,7 +16,7 @@ Create a new console application with the `dotnet` command line utility.
 dotnet new console
 ```
 
-This will create _(a.k.a. "scaffold")_ two files in the directory.
+This will create _(a.k.a. "scaffold")_ two files in the directory as well as an `obj` directory. Go ahead and open the `Intro` directory in Visual Studio Code.
 
 1. `intro.csproj` - This is the _C# project file_ that contains certain configuration settings for your application. It's kinda like the `package.json` for C#.
 
@@ -74,7 +70,7 @@ That's a lot shorter.
 
 Yes, it's still a little more code than you'd write in JavaScript, but there are benefits to the verbosity of C#. Trust me.
 
-> **NOTE:** There is a good reason the `dotnet new console` command created all that extra code. We just don't it for this simple program.
+> **NOTE:** There is a good reason the `dotnet new console` command created all that extra code. We just don't need it for this simple program.
 
 ### Making things a little more interesting
 

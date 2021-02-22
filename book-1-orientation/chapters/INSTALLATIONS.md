@@ -102,7 +102,8 @@ npm i -g serve json-server
 
 ## .NET
 
-1. Install .NET from https://dotnet.microsoft.com/
+1. Install .NET from https://dotnet.microsoft.com/download
+   * Click the `Download .NET SDK x64` button under the large `.NET` header on the left side. This will download the _.NET 5 Software Development Kit_
 1. Open a terminal and run `dotnet --version`. You should see a version greater than or equal to `5.0.103`
 
 ## Gitignore Shortcut
