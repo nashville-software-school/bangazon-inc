@@ -57,7 +57,7 @@ https://slack.com/
 
 ### Creating Your SSH Key For Github
 
-Watch a short video for [creating an SSH key in the terminal](https://youtu.be/znRMcNG9_qQ) so that you an work with Github.
+Watch a short video for [creating an SSH key in the terminal](https://youtu.be/znRMcNG9_qQ) so that you can work with Github.
 
 ### Add SSH Key to Github Account
 
