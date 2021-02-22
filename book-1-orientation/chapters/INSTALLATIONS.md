@@ -15,6 +15,10 @@ https://slack.com/
 1. The main browser we will use is [Google Chrome](https://www.google.com/chrome/browser/desktop/index.html)
 1. You might also like to give [Mozilla Firefox](https://www.mozilla.org/en-US/firefox/new/) a try too.
 
+## Visual Studio Code
+
+[Visual Studio Code](https://code.visualstudio.com/download) is Microsoft's cross-platform editor that we'll be using during orientation for writing C# and building .NET applications. Make sure you add the [C# extension](https://code.visualstudio.com/Docs/languages/csharp) immediately after installation completes.
+
 ## Postman
 
 1. Install [Postman](https://www.getpostman.com/) for testing APIs.
@@ -100,10 +104,6 @@ npm i -g serve json-server
 
 1. Install .NET from https://dotnet.microsoft.com/
 1. Open a terminal and run `dotnet --version`. You should see a version greater than or equal to `5.0.103`
-
-## Visual Studio Code
-
-[Visual Studio Code](https://code.visualstudio.com/download) is Microsoft's cross-platform editor that we'll be using during orientation for writing C# and building .NET applications. Make sure you add the [C# extension](https://code.visualstudio.com/Docs/languages/csharp) immediately after installation completes.
 
 ## Gitignore Shortcut
 
