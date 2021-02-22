@@ -21,7 +21,7 @@ https://slack.com/
 
 ## Postman
 
-1. Install [Postman](https://www.getpostman.com/) for testing APIs.
+1. Install [Postman](https://www.postman.com/downloads/) for testing APIs.
 
 ## Terminal
 
@@ -51,7 +51,7 @@ https://slack.com/
       }
       ```
 
-   1. Find the `defaultProfile` key near the top of the file. Updates it's value to be `"{00000000-0000-0000-ba54-000000000002}"`
+   1. Find the `defaultProfile` key near the top of the file. Updates its value to be `"{00000000-0000-0000-ba54-000000000002}"`
    1. Save the `settings.json` file and close Visual Studio Code.
 1. Open your terminal and create a workspace directory `mkdir ~/workspace`
 
