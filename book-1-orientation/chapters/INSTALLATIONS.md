@@ -96,7 +96,7 @@ git config --global pull.rebase false
 1. Install [Node](https://nodejs.org/en/) for working with JavaScript tools
 
 > **NOTE:** You will be prompted with a checkbox in the window 'Tools for Native Modules' that asks, 'Automatically install the necessary tools. Note that this will also install Chocolatey. The script will pop-up in a new window after the installation completes'. You must leave this checkbox *unchecked*, which is the default setting.
-
+>
 > After installing node, you should close and reopen your terminal window before continuing.
 
 2. Install `serve` and `json-server`
