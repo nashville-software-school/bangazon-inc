@@ -156,7 +156,7 @@ const lulu = createPerson(
     "Lulu",
     new Date(1934, 1, 14),
     ["Knitting", "Break dancing", "Lion taming"]
-};
+);
 
 // Changing the name property
 lulu.name = "Lulu Rodriguez";
@@ -303,8 +303,8 @@ const sentence = yelling.join(" ");
 
 const people = getPeopleFromSomeplace();
 const names = people.map((p) => p.Name);
-const person = people.find((p) => p.Name == "Selam");
-const isAnyoneNamedPhil = people.some((p) => p, Name == "Phil");
+const person = people.find((p) => p.Name === "Selam");
+const isAnyoneNamedPhil = people.some((p) => p.Name === "Phil");
 const doesEveryoneHaveAHobby = people.every((p) => p.Hobbies.length > 0);
 ```
 
@@ -326,7 +326,7 @@ string sentence = string.Join(" ", yelling);
 List<Person> people = GetPeopleFromSomeplace();
 List<string> names = people.Select(p => p.Name).ToList();
 Person person = people.First(p => p.Name == "Selam");
-bool isAnyoneNamedPhil = people.Any(p => p,Name == "Phil");
+bool isAnyoneNamedPhil = people.Any(p => p.Name == "Phil");
 bool doesEveryoneHaveAHobby = people.All(p => p.Hobbies.Count > 0);
 ```
 
