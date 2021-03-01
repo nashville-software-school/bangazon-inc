@@ -176,77 +176,71 @@ SQL Server 2019 Configuration Manager
 ```
 
 ### Installation Check: Terminal Commands
-Finally, run the following commands without quotes in Windows Terminal to check that the following are installed or set correctly:
+Finally, run the following commands in Windows Terminal to check that the following are installed or set correctly:
 
 ```ssh
-"git --version"
+$ git --version
+git version 2.28.0.windows.1
 ```
-> **Example Output:** git version 2.28.0.windows.1
 
 ```ssh
-"node -v"
+$ node -v
+v12.16.3
 ```
-> **Example Output:** v12.16.3
 
 ```ssh
-"serve -v"
+$ serve -v
+11.3.2
 ```
-> **Example Output:** 11.3.2
 
 ```ssh
-"json-server -v"
+$ json-server -v
+0.16.3
 ```
-> **Example Output:** 0.16.3
 
 ```ssh
-"dotnet --version"
+$ dotnet --version
+5.0.103
 ```
-> **Example Output:** 5.0.103
 
 ```ssh
-"ls -al ~/.ssh"
+$ ls -al ~/.ssh
+drwxr-xr-x 1 mecar 197609    0 May 22  2020 ./  
+drwxr-xr-x 1 mecar 197609    0 Feb 26 13:41 ../  
+-rw-r--r-- 1 mecar 197609 3434 May 20  2020 id_rsa  
+-rw-r--r-- 1 mecar 197609  751 May 20  2020 id_rsa.pub  
+-rw-r--r-- 1 mecar 197609  751 May 20  2020 id_rsa.pub  
+-rw-r--r-- 1 mecar 197609 2375 Jun  1  2020 known_hosts  
 ```
-> **Example Output:**  
-> drwxr-xr-x 1 mecar 197609    0 May 22  2020 ./  
-> drwxr-xr-x 1 mecar 197609    0 Feb 26 13:41 ../  
-> -rw-r--r-- 1 mecar 197609 3434 May 20  2020 id_rsa  
-> -rw-r--r-- 1 mecar 197609  751 May 20  2020 id_rsa.pub  
-> -rw-r--r-- 1 mecar 197609  751 May 20  2020 id_rsa.pub  
-> -rw-r--r-- 1 mecar 197609 2375 Jun  1  2020 known_hosts  
 
 ```ssh
-"git config --list"
+$ git config --list
+user.email=youremail@example.com  
+user.name=yourGitHubUsername  
+pull.rebase=false  
+init.defaultbranch=main  
 ```
-> **Example Output:**  
-> user.email=youremail@example.<span></span>com  
-> user.name=yourGitHubUsername  
-> pull.rebase=false  
-> init.defaultbranch=main  
->  
-> **Note:** There are many options listed, you only need to check `user.email`, `user.name`, `pull.rebase`, & `init.defaultBranch`
+> **Note:** There are many settings listed. You only need to check `user.email`, `user.name`, `pull.rebase`, & `init.defaultBranch`.
 
 ```ssh
-"type dnignore"
+$ type dnignore
+dnignore is a function  
+dnignore ()  
+{  
+   curl -L -s "https://<span></span>raw.githu<span></span>busercontent.<span></span>com/dotnet/core/master/.gitignore" > .gitignore  
+}
 ```
-> **Example Output:**  
-> dnignore is a function  
-> dnignore ()  
-> {  
->    curl -L -s "https://<span></span>raw.githu<span></span>busercontent.<span></span>com/dotnet/core/master/.gitignore" > .gitignore  
-> }
 
 ```ssh
-"type cd"
+$ type cd
+cd is a function  
+cd ()  
+{  
+   builtin cd "$@";  
+   pwd > ~/.last_dir  
+}
 ```
-> **Example Output:**  
-> cd is a function  
-> cd ()  
-> {  
->    builtin cd "$@";  
->    pwd > ~/.last_dir  
-> }
->  
-> **Note:** Only if you chose to run the command to always open a terminal window in last directory
+> **Note:** Only if you chose to run the command to always open a terminal window in the last directory.
 
 ## Bookmark the Following Sites
 
