@@ -206,52 +206,46 @@ Finally, run the following commands without quotes in Windows Terminal to check 
 ```ssh
 "ls -al ~/.ssh"
 ```
-> **Example Output:**
-```ssh
-drwxr-xr-x 1 mecar 197609    0 May 22  2020 ./
-drwxr-xr-x 1 mecar 197609    0 Feb 26 13:41 ../
--rw-r--r-- 1 mecar 197609 3434 May 20  2020 id_rsa
--rw-r--r-- 1 mecar 197609  751 May 20  2020 id_rsa.pub
--rw-r--r-- 1 mecar 197609  751 May 20  2020 id_rsa.pub
--rw-r--r-- 1 mecar 197609 2375 Jun  1  2020 known_hosts
-```
+> **Example Output:**  
+> drwxr-xr-x 1 mecar 197609    0 May 22  2020 ./  
+> drwxr-xr-x 1 mecar 197609    0 Feb 26 13:41 ../  
+> -rw-r--r-- 1 mecar 197609 3434 May 20  2020 id_rsa  
+> -rw-r--r-- 1 mecar 197609  751 May 20  2020 id_rsa.pub  
+> -rw-r--r-- 1 mecar 197609  751 May 20  2020 id_rsa.pub  
+> -rw-r--r-- 1 mecar 197609 2375 Jun  1  2020 known_hosts  
 
 ```ssh
 "git config --list"
 ```
-> **Example Output:** 
-```ssh
-user.email=youremail@example.com
-user.name=yourGitHubUsername
-pull.rebase=false
-init.defaultbranch=main
-```
+> **Example Output:**  
+> user.email=youremail@example.<span></span>com  
+> user.name=yourGitHubUsername  
+> pull.rebase=false  
+> init.defaultbranch=main  
+>  
 > **Note:** There are many options listed, you only need to check `user.email`, `user.name`, `pull.rebase`, & `init.defaultBranch`
 
 ```ssh
 "type dnignore"
 ```
-**Example Output:** 
-```ssh
-dnignore is a function
-dnignore ()
-{
-   curl -L -s "https://raw.githubusercontent.com/dotnet/core/master/.gitignore" > .gitignore
-}
-```
+> **Example Output:**  
+> dnignore is a function  
+> dnignore ()  
+> {  
+>    curl -L -s "https://<span></span>raw.githu<span></span>busercontent.<span></span>com/dotnet/core/master/.gitignore" > .gitignore  
+> }
 
 ```ssh
 "type cd"
 ```
-> **Example Output:** 
-```ssh
-cd is a function
-cd ()
-{
-   builtin cd "$@";
-   pwd > ~/.last_dir
-}
-```
+> **Example Output:**  
+> cd is a function  
+> cd ()  
+> {  
+>    builtin cd "$@";  
+>    pwd > ~/.last_dir  
+> }
+>  
 > **Note:** Only if you chose to run the command to always open a terminal window in last directory
 
 ## Bookmark the Following Sites
