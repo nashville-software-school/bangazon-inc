@@ -19,6 +19,12 @@ https://slack.com/
 
 [Visual Studio Code](https://code.visualstudio.com/download) is Microsoft's cross-platform editor that we'll be using during orientation for writing C# and building .NET applications. Make sure you add the [C# extension](https://code.visualstudio.com/Docs/languages/csharp) immediately after installation completes.
 
+> **NOTE:** On the second window, Select Additional Tasks, you will be prompted with checkbox options. Select all options under 'Other'. 
+
+## VS Code Settings
+
+If you haven't already set up Visual Studio Code to format your code and autosave your files, now is a good time to set that up. Inside VS Code go to the settings by using the shortcut `ctrl` + `,` and using the search bar find the `Format On Save` setting and make sure it is checked. Next find the setting for `Auto Save` and make sure that it's set to either "onFocusChange" or "onWindowChange" (whatever you prefer)
+
 ## Postman
 
 1. Install [Postman](https://www.postman.com/downloads/) for testing APIs.
@@ -123,9 +129,20 @@ echo "dnignore() {
 
 You now have access in your terminal to a command called `dnignore` which will add a gitignore file to your project.
 
-## VS Code Settings
+## Always Open a Terminal Window in Last Directory
+If you would like your terminal window to always open in the last directory you were in, then you can run the following code in your terminal.
 
-If you haven't already set up Visual Studio Code to format your code and autosave your files, now is a good time to set that up. Inside VS Code go to the settings by using the shortcut `ctrl` + `,` and using the search bar find the `Format On Save` setting and make sure it is checked. Next find the setting for `Auto Save` and make sure that it's set to either "onFocusChange" or "onWindowChange" (whatever you prefer)
+```sh
+echo $'\n \n
+# always remember last directory
+cd() {
+  builtin cd "$@"
+  pwd > ~/.last_dir
+}
+if [ -f ~/.last_dir ]; then
+  cd "`cat ~/.last_dir`"
+fi' >> ~/.bashrc
+```
 
 ## Visual Studio IDE
 
@@ -138,6 +155,92 @@ If you haven't already set up Visual Studio Code to format your code and autosav
 ## SQL Server Express Database
 
 [SQL Server Express](https://www.microsoft.com/en-us/sql-server/sql-server-downloads). This is the database tool where all your data will be stored for the server-side course. Click the Download button under the Express option. During the setup, take the basic installation option
+
+
+## Installation Check
+Now that you have finished the installation process, please double check that you have not missed something.
+
+### Installation Check: Start Menu
+Check that you have the following programs by pressing your Windows key (Windows keyboard) or Command key (Apple keyboard) to open the Start menu, and begin typing in the name of the following progams to see that they are installed:
+
+```ssh
+Zoom
+Slack
+Postman
+Google Chrome
+Visual Studio
+Visual Studio Code
+Windows Terminal
+Mozilla Firefox (if you installed it)
+SQL Server 2019 Configuration Manager
+```
+
+### Installation Check: Terminal Commands
+Finally, run the following commands in Windows Terminal to check that the following are installed or set correctly. Example outputs are listed under each command:
+
+```ssh
+$ git --version
+git version 2.28.0.windows.1
+```
+
+```ssh
+$ node -v
+v12.16.3
+```
+
+```ssh
+$ serve -v
+11.3.2
+```
+
+```ssh
+$ json-server -v
+0.16.3
+```
+
+```ssh
+$ dotnet --version
+5.0.103
+```
+
+```ssh
+$ ls -al ~/.ssh
+drwxr-xr-x 1 mecar 197609    0 May 22  2020 ./  
+drwxr-xr-x 1 mecar 197609    0 Feb 26 13:41 ../  
+-rw-r--r-- 1 mecar 197609 3434 May 20  2020 id_rsa  
+-rw-r--r-- 1 mecar 197609  751 May 20  2020 id_rsa.pub  
+-rw-r--r-- 1 mecar 197609  751 May 20  2020 id_rsa.pub  
+-rw-r--r-- 1 mecar 197609 2375 Jun  1  2020 known_hosts  
+```
+
+```ssh
+$ git config --list
+user.email=youremail@example.com  
+user.name=yourGitHubUsername  
+pull.rebase=false  
+init.defaultbranch=main  
+```
+> **Note:** There are many settings listed. You only need to check `user.email`, `user.name`, `pull.rebase`, & `init.defaultBranch`.
+
+```ssh
+$ type dnignore
+dnignore is a function  
+dnignore ()  
+{  
+   curl -L -s "https://<span></span>raw.githu<span></span>busercontent.<span></span>com/dotnet/core/master/.gitignore" > .gitignore  
+}
+```
+
+```ssh
+$ type cd
+cd is a function  
+cd ()  
+{  
+   builtin cd "$@";  
+   pwd > ~/.last_dir  
+}
+```
+> **Note:** Only if you chose to run the command to always open a terminal window in the last directory.
 
 ## Bookmark the Following Sites
 
