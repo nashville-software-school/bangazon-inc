@@ -132,7 +132,7 @@ You now have access in your terminal to a command called `dnignore` which will a
 ## Always Open a Terminal Window in Last Directory
 If you would like your terminal window to always open in the last directory you were in, then you can run the following code in your terminal.
 
-```ssh
+```sh
 echo $'\n \n
 # always remember last directory
 cd() {
@@ -158,33 +158,101 @@ fi' >> ~/.bashrc
 
 
 ## Installation Check
-Now that you have finished the installation process, please double check that you have not missed something. Check that you have the following programs by pressing your Windows key (Windows keyboard) or Command key (Apple keyboard) to open the Start menue, and begin typing in the name of the following progams to see that they are installed:
+Now that you have finished the installation process, please double check that you have not missed something.
+
+### Installation Check: Start Menu
+Check that you have the following programs by pressing your Windows key (Windows keyboard) or Command key (Apple keyboard) to open the Start menu, and begin typing in the name of the following progams to see that they are installed:
 
 ```ssh
 Zoom
 Slack
-Google Chrome
-Mozilla Firefox (if you installed it)
-Visual Studio
-- check for both Visual Studio & Visual Studio Code
 Postman
+Google Chrome
+Visual Studio
+Visual Studio Code
 Windows Terminal
+Mozilla Firefox (if you installed it)
+SQL Server 2019 Configuration Manager
 ```
 
-Finally, run the following commands in Windows Terminal to check that the following are installed or set correctly:
+### Installation Check: Terminal Commands
+Finally, run the following commands without quotes in Windows Terminal to check that the following are installed or set correctly:
 
 ```ssh
-git --version
-node -v
-serve -v
-json-server -v
-dotnet --version
-ls -al ~/.ssh
-git config --list
-- check user.email, user.name, pull.rebase, & init.defaultBranch
-type dnignore
-type cd
+"git --version"
 ```
+> **Example Output:** git version 2.28.0.windows.1
+
+```ssh
+"node -v"
+```
+> **Example Output:** v12.16.3
+
+```ssh
+"serve -v"
+```
+> **Example Output:** 11.3.2
+
+```ssh
+"json-server -v"
+```
+> **Example Output:** 0.16.3
+
+```ssh
+"dotnet --version"
+```
+> **Example Output:** 5.0.103
+
+```ssh
+"ls -al ~/.ssh"
+```
+> **Example Output:**
+```ssh
+drwxr-xr-x 1 mecar 197609    0 May 22  2020 ./
+drwxr-xr-x 1 mecar 197609    0 Feb 26 13:41 ../
+-rw-r--r-- 1 mecar 197609 3434 May 20  2020 id_rsa
+-rw-r--r-- 1 mecar 197609  751 May 20  2020 id_rsa.pub
+-rw-r--r-- 1 mecar 197609  751 May 20  2020 id_rsa.pub
+-rw-r--r-- 1 mecar 197609 2375 Jun  1  2020 known_hosts
+```
+
+```ssh
+"git config --list"
+```
+> **Example Output:** 
+```ssh
+user.email=youremail@example.com
+user.name=yourGitHubUsername
+pull.rebase=false
+init.defaultbranch=main
+```
+> **Note:** There are many options listed, you only need to check `user.email`, `user.name`, `pull.rebase`, & `init.defaultBranch`
+
+```ssh
+"type dnignore"
+```
+**Example Output:** 
+```ssh
+dnignore is a function
+dnignore ()
+{
+   curl -L -s "https://raw.githubusercontent.com/dotnet/core/master/.gitignore" > .gitignore
+}
+```
+
+```ssh
+"type cd"
+```
+> **Example Output:** 
+```ssh
+cd is a function
+cd ()
+{
+   builtin cd "$@";
+   pwd > ~/.last_dir
+}
+```
+> **Note:** Only if you chose to run the command to always open a terminal window in last directory
 
 ## Bookmark the Following Sites
 
