@@ -176,7 +176,7 @@ SQL Server 2019 Configuration Manager
 ```
 
 ### Installation Check: Terminal Commands
-Finally, run the following commands in Windows Terminal to check that the following are installed or set correctly:
+Finally, run the following commands in Windows Terminal to check that the following are installed or set correctly. Example outputs are listed under each command:
 
 ```ssh
 $ git --version
