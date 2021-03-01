@@ -59,7 +59,7 @@ Dog rusty = new Dog()
     Breed = "mut",
     Name = "Rusty",
     Age = 10,
-    hasShots = true
+    HasShots = true
 };
 
 System.Console.WriteLine(rusty.Name);
