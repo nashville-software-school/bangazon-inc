@@ -37,7 +37,15 @@ over thelazy dog
 There are several methods for reading user input from the console, however the method we'll use is `ReadLine()`. It's important to note that the `ReadLine` method is always a string. If the value you actually want from your user is an integer or double, you'll have to take additional steps to parse it as such.
 
 ```cs
+// either
 string input = Console.ReadLine();
+
+int parsedInput = Int32.Parse(input);
+
+//or
+string input = Console.ReadLine();
+
+double parsedInput = Double.Parse(input);
 ```
 
 > **NOTE:** For more information about `Console` methods, check out the [documentation](https://docs.microsoft.com/en-us/dotnet/api/system.console)
