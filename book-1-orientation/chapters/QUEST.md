@@ -23,7 +23,7 @@ In this phase we'll get going with some starter code. We'll add to this initial 
     using System.Collections.Generic;
 
     // Every class in the program is defined within the "Quest" namespace
-    // Classes within the same namespace and refer to one another without a "using" statement
+    // Classes within the same namespace refer to one another without a "using" statement
     namespace Quest
     {
         class Program
@@ -35,7 +35,7 @@ In this phase we'll get going with some starter code. We'll add to this initial 
                 //   the text of the challenge
                 //   a correct answer
                 //   a number of awesome points to gain or lose depending on the success of the challenge
-                Challenge twoPlustwo = new Challenge("2 + 2?", 4, 10);
+                Challenge twoPlusTwo = new Challenge("2 + 2?", 4, 10);
                 Challenge theAnswer = new Challenge(
                     "What's the answer to life, the universe and everything?", 42, 25);
                 Challenge whatSecond = new Challenge(
@@ -54,12 +54,12 @@ In this phase we'll get going with some starter code. We'll add to this initial 
                     4, 20
                 );
 
-                // "Awesomness" is like our Adventurer's current "score"
+                // "Awesomeness" is like our Adventurer's current "score"
                 // A higher Awesomeness is better
 
                 // Here we set some reasonable min and max values.
-                //  If a Adventurer has an Awesomeness greater than the max, they are truly awesome
-                //  If a Adventurer has an Awesomeness less than the min, they are terrible
+                //  If an Adventurer has an Awesomeness greater than the max, they are truly awesome
+                //  If an Adventurer has an Awesomeness less than the min, they are terrible
                 int minAwesomeness = 0;
                 int maxAwesomeness = 100;
 
@@ -67,9 +67,10 @@ In this phase we'll get going with some starter code. We'll add to this initial 
                 Adventurer theAdventurer = new Adventurer("Jack");
 
                 // A list of challenges for the Adventurer to complete
+                // Note we can use the List class here because have the line "using System.Collections.Generic;" at the top of the file.
                 List<Challenge> challenges = new List<Challenge>()
                 {
-                    twoPlustwo,
+                    twoPlusTwo,
                     theAnswer,
                     whatSecond,
                     guessRandom,
@@ -83,12 +84,12 @@ In this phase we'll get going with some starter code. We'll add to this initial 
                 }
 
                 // This code examines how Awesome the Adventurer is after completing the challenges
-                // And praises or humiliates them accordinly
-                if (theAdventurer.Awesomness >= maxAwesomeness)
+                // And praises or humiliates them accordingly
+                if (theAdventurer.Awesomeness >= maxAwesomeness)
                 {
                     Console.WriteLine("YOU DID IT! You are truly awesome!");
                 }
-                else if (theAdventurer.Awesomness <= minAwesomeness)
+                else if (theAdventurer.Awesomeness <= minAwesomeness)
                 {
                     Console.WriteLine("Get out of my sight. Your lack of awesomeness offends me!");
                 }
@@ -101,59 +102,6 @@ In this phase we'll get going with some starter code. We'll add to this initial 
     }
     ```
 
-    > `Adventurer.cs`
-
-    ```cs
-    namespace Quest
-    {
-        // An instance of the Adventurer class is an object that will undergo some challenges
-        public class Adventurer
-        {
-            // The is an "immutable" property. It only has a "get".
-            // The only place the Name can be set is in the Adventurer constructor
-            public string Name { get; }
-
-            // This is a mutable property it has a "get" and a "set"
-            //  So it can be read and changed by any code in the application
-            public int Awesomness { get; set; }
-
-            // A constructor to make a new Adventurer object with a given name
-            public Adventurer(string name)
-            {
-                Name = name;
-                Awesomness = 50;
-            }
-
-
-            // This method returns a string that describes the Adventurer's status
-            // Note one way to describe what this method does is:
-            //   it transforms the Awesomeness integer into a status string
-            public string GetAdventurerStatus()
-            {
-                string status = "okay";
-                if (Awesomness >= 75)
-                {
-                    status = "great";
-                }
-                else if (Awesomness < 25 && Awesomness >= 10)
-                {
-                    status = "not so good";
-                }
-                else if (Awesomness < 10 && Awesomness > 0)
-                {
-                    status = "barely hanging on";
-                }
-                else if (Awesomness <= 0)
-                {
-                    status = "not gonna make it";
-                }
-
-                return $"Adventurer, {Name}, is {status}";
-            }
-        }
-    }
-    ```
-
     > `Challenge.cs`
 
     ```cs
@@ -161,7 +109,7 @@ In this phase we'll get going with some starter code. We'll add to this initial 
 
     namespace Quest
     {
-        // An instance of the Challenge class is occurrence of a single challenge
+        // An instance of the Challenge class is an occurrence of a single challenge
         public class Challenge
         {
             // These private fields hold the "state" of an individual challenge object.
@@ -183,8 +131,8 @@ In this phase we'll get going with some starter code. We'll add to this initial 
                 _awesomenessChange = awesomenessChange;
             }
 
-            // This method will take a Adventurer object and make that Adventurer perform the challenge
-            public void RunChallenge(Adventurer Adventurer)
+            // This method will take an Adventurer object and make that Adventurer perform the challenge
+            public void RunChallenge(Adventurer adventurer)
             {
                 Console.Write($"{_text}: ");
                 string answer = Console.ReadLine();
@@ -197,18 +145,72 @@ In this phase we'll get going with some starter code. We'll add to this initial 
                 {
                     Console.WriteLine("Well Done!");
 
-                    // Note how we access a Adventurer object's property
-                    Adventurer.Awesomness += _awesomenessChange;
+                    // Note how we access an Adventurer object's property
+                    adventurer.Awesomeness += _awesomenessChange;
                 }
                 else
                 {
                     Console.WriteLine("You have failed the challenge, there will be consequences.");
-                    Adventurer.Awesomness -= _awesomenessChange;
+                    adventurer.Awesomeness -= _awesomenessChange;
                 }
 
-                // Note how we call a Adventurer object's method
-                Console.WriteLine(Adventurer.GetAdventurerStatus());
+                // Note how we call an Adventurer object's method
+                Console.WriteLine(adventurer.GetAdventurerStatus());
                 Console.WriteLine();
+            }
+        }
+    }
+    ```
+
+    > `Adventurer.cs`
+
+    ```cs
+    namespace Quest
+    {
+        // An instance of the Adventurer class is an object that will undergo some challenges
+        public class Adventurer
+        {
+            // The is an "immutable" property. It only has a "get".
+            // The only place the Name can be set is in the Adventurer constructor
+            // Note: the constructor is defined below.
+            public string Name { get; }
+
+            // This is a mutable property it has a "get" and a "set"
+            //  So it can be read and changed by any code in the application
+            public int Awesomeness { get; set; }
+
+            // A constructor to make a new Adventurer object with a given name
+            public Adventurer(string name)
+            {
+                Name = name;
+                Awesomeness = 50;
+            }
+
+
+            // This method returns a string that describes the Adventurer's status
+            // Note one way to describe what this method does is:
+            //   it transforms the Awesomeness integer into a status string
+            public string GetAdventurerStatus()
+            {
+                string status = "okay";
+                if (Awesomeness >= 75)
+                {
+                    status = "great";
+                }
+                else if (Awesomeness < 25 && Awesomeness >= 10)
+                {
+                    status = "not so good";
+                }
+                else if (Awesomeness < 10 && Awesomeness > 0)
+                {
+                    status = "barely hanging on";
+                }
+                else if (Awesomeness <= 0)
+                {
+                    status = "not gonna make it";
+                }
+
+                return $"Adventurer, {Name}, is {status}";
             }
         }
     }
@@ -242,7 +244,7 @@ In this phase we'll add the robe.
 1. Add a new immutable property to the `Adventurer` class called `ColorfulRobe`. The type of this property should be `Robe`.
 1. Add a new constructor parameter to the `Adventurer` class to accept a `Robe` and to set the `ColorfulRobe` property.
 1. Add a new method to the `Adventurer` class called `GetDescription`. This method should return a string that contains the adventurer's name and a description of their robe.
-1. In `Program.cs` create a new instance of the `Robe` class and set it's properties.
+1. In `Program.cs` create a new instance of the `Robe` class and set its properties.
 1. Pass the new `Robe` into the constructor of the `Adventurer`.
 1. Before the adventurer starts their challenge, call the `GetDescription` method and print the results to the console.
 
@@ -250,9 +252,9 @@ In this phase we'll add the robe.
 
 Let's cover that hatless head.
 
-1. Create a new class called `Hat` in it's own file.
+1. Create a new class called `Hat` in its own file.
 1. Add a mutable integer property called `ShininessLevel` to indicate how shiny the hat is.
-1. Add a computer string property called `ShininessDescription` to return a text description of the hat's shininess according to the following rules.
+1. Add a computed string property called `ShininessDescription` to return a text description of the hat's shininess according to the following rules.
     * A `ShininessLevel` less than `2` should be "dull"
     * A `ShininessLevel` between `2` and `5` should be "noticeable"
     * A `ShininessLevel` between `6` and `9` should be "bright"
@@ -273,7 +275,7 @@ Let's create a prize to give our adventurer at the end of the quest. Of course t
 1. Create a method in the class called `ShowPrize`.
     * The method should accept an `Adventurer` as a parameter.
     * If the adventurer's `Awesomeness` is greater than zero, write the `_text` field to the console the same number of times as the value of the `Awesomeness` property.
-    * If the adventurer'a `Awesomeness` is zero or less than zero, write a message of pity to the console.
+    * If the adventurer's `Awesomeness` is zero or less than zero, write a message of pity to the console.
 1. In `Program.cs` create an instance of the `Prize`.
 1. At the end of the quest (before you ask if the user wants to repeat the quest) call the `ShowPrize` method.
 
