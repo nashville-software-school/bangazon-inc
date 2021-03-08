@@ -71,8 +71,7 @@ SELECT
     ArtistId,
     AlbumId
 FROM Song
-WHERE SongLength > 100
-;
+WHERE SongLength > 100;
 ```
 
 ## Joining Tables
