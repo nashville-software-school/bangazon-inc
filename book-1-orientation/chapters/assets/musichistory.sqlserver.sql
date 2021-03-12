@@ -1,6 +1,6 @@
 CREATE TABLE Genre (
     Id INTEGER NOT NULL PRIMARY KEY IDENTITY,
-    Label VARCHAR(55) NOT NULL
+    Name VARCHAR(55) NOT NULL
 );
 
 CREATE TABLE Artist (
@@ -37,20 +37,20 @@ CREATE TABLE Song (
 
 -- Add some data to the tables
 
-INSERT INTO Genre (Label) VALUES ('Soul');
-INSERT INTO Genre (Label) VALUES ('Rock');
-INSERT INTO Genre (Label) VALUES ('Blues');
-INSERT INTO Genre (Label) VALUES ('Jazz');
-INSERT INTO Genre (Label) VALUES ('Heavy Metal');
-INSERT INTO Genre (Label) VALUES ('R&B');
-INSERT INTO Genre (Label) VALUES ('Pop');
-INSERT INTO Genre (Label) VALUES ('Bluegrass');
-INSERT INTO Genre (Label) VALUES ('Punk');
-INSERT INTO Genre (Label) VALUES ('Classical');
-INSERT INTO Genre (Label) VALUES ('Country');
-INSERT INTO Genre (Label) VALUES ('Latin');
-INSERT INTO Genre (Label) VALUES ('Rap');
-INSERT INTO Genre (Label) VALUES ('Electronic');
+INSERT INTO Genre (Name) VALUES ('Soul');
+INSERT INTO Genre (Name) VALUES ('Rock');
+INSERT INTO Genre (Name) VALUES ('Blues');
+INSERT INTO Genre (Name) VALUES ('Jazz');
+INSERT INTO Genre (Name) VALUES ('Heavy Metal');
+INSERT INTO Genre (Name) VALUES ('R&B');
+INSERT INTO Genre (Name) VALUES ('Pop');
+INSERT INTO Genre (Name) VALUES ('Bluegrass');
+INSERT INTO Genre (Name) VALUES ('Punk');
+INSERT INTO Genre (Name) VALUES ('Classical');
+INSERT INTO Genre (Name) VALUES ('Country');
+INSERT INTO Genre (Name) VALUES ('Latin');
+INSERT INTO Genre (Name) VALUES ('Rap');
+INSERT INTO Genre (Name) VALUES ('Electronic');
 
 INSERT INTO Artist (ArtistName, YearEstablished) VALUES ('Judas Priest', 1969);
 INSERT INTO Artist (ArtistName, YearEstablished) VALUES ('Def Leppard', 1977);
@@ -124,5 +124,3 @@ INSERT INTO Song (Title, SongLength, ReleaseDate, GenreId, ArtistId, AlbumId) VA
 INSERT INTO Song (Title, SongLength, ReleaseDate, GenreId, ArtistId, AlbumId) VALUES ('What More Can I Say', 150, '12/03/1982', 13, 27, 1);
 INSERT INTO Song (Title, SongLength, ReleaseDate, GenreId, ArtistId, AlbumId) VALUES ('Encore', 260, '12/03/1982', 13, 27, 1);
 INSERT INTO Song (Title, SongLength, ReleaseDate, GenreId, ArtistId, AlbumId) VALUES ('Dirt Off Your Shoulder', 851, '12/03/1982', 13, 27, 1);
-
--- BLOCK: CREATE TABLES AND DATA
