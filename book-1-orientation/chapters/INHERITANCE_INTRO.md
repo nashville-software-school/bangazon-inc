@@ -17,6 +17,8 @@ You work for a company that sells all kinds of motorized vehicles - Gary's Whole
 
 We will represent _types_ of vehicles using C# classes.
 
+> `Zero.cs`
+
 ```cs
 public class Zero  // Electric motorcycle
 {
@@ -30,6 +32,8 @@ public class Zero  // Electric motorcycle
     }
 }
 ```
+
+> `Cessna.cs`
 
 ```cs
 public class Cessna  // Propellor light aircraft
@@ -45,6 +49,8 @@ public class Cessna  // Propellor light aircraft
 }
 ```
 
+> `Tesla.cs`
+
 ```cs
 public class Tesla  // Electric car
 {
@@ -58,6 +64,8 @@ public class Tesla  // Electric car
     }
 }
 ```
+
+> `Ram.cs`
 
 ```cs
 public class Ram  // Gas powered truck
@@ -87,6 +95,8 @@ To avoid these kinds of problems, you are going to create a more general type in
 
 Since all of the types are vehicles, a good name for this new type would be `Vehicle`.
 
+> `Vehicle.cs`
+
 ```cs
 public class Vehicle
 {
@@ -98,6 +108,8 @@ public class Vehicle
 Then each of the other, more specific, types would inherit from it. We use a colon between the class name and the _**base class**_ name when inheriting.
 
 When two classes are involved in an inheritance relationship, we call the more general type (e.g. `Vehicle`) the _**base class**_ or _**parent class**_ and we call the more specific (e.g. `Tesla`) the _**subclass**_ or _**child class**_.
+
+> `Tesla.cs`
 
 ```cs
 public class Tesla : Vehicle
@@ -115,12 +127,13 @@ Now any instance of `Tesla` will have both of those properties on it automatical
 
 ![example of inherited properties](./images/inheritance-example.gif)
 
-
 ## Overriding Parent Behavior
 
 To this point, you've seen how to inherit common properties from a parent class, and now you're going to implement a behavior on a parent class. Each child class will automatically inherit it, but then an **_override_** the default logic.
 
 You can safely assume that each vehicle can be driven. What you would then do is implement a `Drive()` method on the **`Vehicle`** class.
+
+> `Vehicle.cs`
 
 ```cs
 public class Vehicle
@@ -137,14 +150,22 @@ public class Vehicle
 
 Once you do this, all of the specific vehicles can be driven. For now, however, they will all make the same sound, which is ridicuous because a plane doesn't sound like a truck which doesn't sound like a motorcycle.
 
-```cs
-Zero fxs = new Zero ();
-Tesla modelS = new Tesla ();
-Cessna mx410 = new Cessna ();
+> `Program.cs`
 
-fxs.Drive();
-modelS.Drive();
-mx410.Drive();
+```cs
+class Program
+{
+    static void Main(string[] args) 
+    {
+        Zero fxs = new Zero();
+        Tesla modelS = new Tesla();
+        Cessna mx410 = new Cessna();
+
+        fxs.Drive();
+        modelS.Drive();
+        mx410.Drive();
+    }
+}
 ```
 
 ![all vehicles make the same sound](./images/non-overridden-method.gif)
@@ -153,18 +174,18 @@ To have each vehicle make its own sound, you need to do two things.
 
 1. Define the `Drive()` method as virtual.
 
-   ```cs
-   public class Vehicle
-   {
-       public string MainColor { get; set; }
-       public string MaximumOccupancy { get; set; }
+    ```cs
+    public class Vehicle
+    {
+        public string MainColor { get; set; }
+        public string MaximumOccupancy { get; set; }
 
-       public virtual void Drive()
-       {
-           Console.WriteLine("Vrooom!");
-       }
-   }
-   ```
+        public virtual void Drive()
+        {
+            Console.WriteLine("Vrooom!");
+        }
+    }
+    ```
 
 1. Override the method in the child class.
 
