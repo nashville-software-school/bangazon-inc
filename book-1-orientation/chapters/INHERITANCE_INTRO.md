@@ -20,15 +20,18 @@ We will represent _types_ of vehicles using C# classes.
 > `Zero.cs`
 
 ```cs
-public class Zero  // Electric motorcycle
+namespace Garage
 {
-    public double BatteryKWh { get; set; }
-    public string MainColor { get; set; }
-    public string MaximumOccupancy { get; set; }
-
-    public void ChargeBattery()
+    public class Zero  // Electric motorcycle
     {
-        // method definition omitted
+        public double BatteryKWh { get; set; }
+        public string MainColor { get; set; }
+        public int MaximumOccupancy { get; set; }
+
+        public void ChargeBattery()
+        {
+            // method definition omitted
+        }
     }
 }
 ```
@@ -36,15 +39,18 @@ public class Zero  // Electric motorcycle
 > `Cessna.cs`
 
 ```cs
-public class Cessna  // Propellor light aircraft
+namespace Garage
 {
-    public double FuelCapacity { get; set; }
-    public string MainColor { get; set; }
-    public string MaximumOccupancy { get; set; }
-
-    public void RefuelTank()
+    public class Cessna  // Propellor light aircraft
     {
-        // method definition omitted
+        public double FuelCapacity { get; set; }
+        public string MainColor { get; set; }
+        public int MaximumOccupancy { get; set; }
+
+        public void RefuelTank()
+        {
+            // method definition omitted
+        }
     }
 }
 ```
@@ -52,15 +58,18 @@ public class Cessna  // Propellor light aircraft
 > `Tesla.cs`
 
 ```cs
-public class Tesla  // Electric car
+namespace Garage
 {
-    public double BatteryKWh { get; set; }
-    public string MainColor { get; set; }
-    public string MaximumOccupancy { get; set; }
-
-    public void ChargeBattery()
+    public class Tesla  // Electric car
     {
-        // method definition omitted
+        public double BatteryKWh { get; set; }
+        public string MainColor { get; set; }
+        public int MaximumOccupancy { get; set; }
+
+        public void ChargeBattery()
+        {
+            // method definition omitted
+        }
     }
 }
 ```
@@ -68,15 +77,18 @@ public class Tesla  // Electric car
 > `Ram.cs`
 
 ```cs
-public class Ram  // Gas powered truck
+namespace Garage
 {
-    public double FuelCapacity { get; set; }
-    public string MainColor { get; set; }
-    public string MaximumOccupancy { get; set; }
-
-    public void RefuelTank()
+    public class Ram  // Gas powered truck
     {
-        // method definition omitted
+        public double FuelCapacity { get; set; }
+        public string MainColor { get; set; }
+        public int MaximumOccupancy { get; set; }
+
+        public void RefuelTank()
+        {
+            // method definition omitted
+        }
     }
 }
 ```
@@ -98,10 +110,13 @@ Since all of the types are vehicles, a good name for this new type would be `Veh
 > `Vehicle.cs`
 
 ```cs
-public class Vehicle
+namespace Garage
 {
-    public string MainColor { get; set; }
-    public string MaximumOccupancy { get; set; }
+    public class Vehicle
+    {
+        public string MainColor { get; set; }
+        public int MaximumOccupancy { get; set; }
+    }
 }
 ```
 
@@ -112,13 +127,16 @@ When two classes are involved in an inheritance relationship, we call the more g
 > `Tesla.cs`
 
 ```cs
-public class Tesla : Vehicle
+namespace Garage
 {
-    public double BatteryKWh { get; set; }
-
-    public void ChargeBattery()
+    public class Tesla : Vehicle
     {
-        // method definition omitted
+        public double BatteryKWh { get; set; }
+
+        public void ChargeBattery()
+        {
+            // method definition omitted
+        }
     }
 }
 ```
@@ -136,14 +154,17 @@ You can safely assume that each vehicle can be driven. What you would then do is
 > `Vehicle.cs`
 
 ```cs
-public class Vehicle
+namespace Garage
 {
-    public string MainColor { get; set; }
-    public string MaximumOccupancy { get; set; }
-
-    public void Drive()
+    public class Vehicle
     {
-        Console.WriteLine("Vrooom!");
+        public string MainColor { get; set; }
+        public int MaximumOccupancy { get; set; }
+
+        public void Drive()
+        {
+            Console.WriteLine("Vrooom!");
+        }
     }
 }
 ```
@@ -153,17 +174,20 @@ Once you do this, all of the specific vehicles can be driven. For now, however, 
 > `Program.cs`
 
 ```cs
-class Program
+namespace Garage
 {
-    static void Main(string[] args) 
+    class Program
     {
-        Zero fxs = new Zero();
-        Tesla modelS = new Tesla();
-        Cessna mx410 = new Cessna();
+        static void Main(string[] args) 
+        {
+            Zero fxs = new Zero();
+            Tesla modelS = new Tesla();
+            Cessna mx410 = new Cessna();
 
-        fxs.Drive();
-        modelS.Drive();
-        mx410.Drive();
+            fxs.Drive();
+            modelS.Drive();
+            mx410.Drive();
+        }
     }
 }
 ```
@@ -175,36 +199,42 @@ To have each vehicle make its own sound, you need to do two things.
 1. Define the `Drive()` method as virtual.
 
     ```cs
-    public class Vehicle
+    namespace Garage
     {
-        public string MainColor { get; set; }
-        public string MaximumOccupancy { get; set; }
-
-        public virtual void Drive()
+        public class Vehicle
         {
-            Console.WriteLine("Vrooom!");
+            public string MainColor { get; set; }
+            public int MaximumOccupancy { get; set; }
+
+            public virtual void Drive()
+            {
+                Console.WriteLine("Vrooom!");
+            }
         }
     }
     ```
 
 1. Override the method in the child class.
 
-   ```cs
-   public class Cessna : Vehicle
-   {
-       public double FuelCapacity { get; set; }
+    ```cs
+    namespace Garage
+    {
+        public class Cessna : Vehicle
+        {
+            public double FuelCapacity { get; set; }
 
-       public void RefuelTank()
-       {
-           // method definition omitted
-       }
+            public void RefuelTank()
+            {
+                // method definition omitted
+            }
 
-       public override void Drive()
-       {
-           Console.WriteLine("Zoooooom!");
-       }
-   }
-   ```
+            public override void Drive()
+            {
+                Console.WriteLine("Zoooooom!");
+            }
+        }
+    }
+    ```
 
 Now you can run the program again and the Cessna will make a different noise.
 
