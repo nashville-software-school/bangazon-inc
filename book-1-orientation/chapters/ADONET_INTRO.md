@@ -101,73 +101,77 @@ Before you get started, let's introduce some terms that will be used during this
     **Program.cs**
 
     ```csharp
-    class Program
+    using System;
+
+    namespace Roommates
     {
-        //  This is the address of the database.
-        //  We define it here as a constant since it will never change.
-        private const string CONNECTION_STRING = @"server=localhost\SQLExpress;database=Roommates;integrated security=true";
-
-        static void Main(string[] args)
+        class Program
         {
-            bool runProgram = true;
-            while (runProgram)
-            {
-                string selection = GetMenuSelection();
+            //  This is the address of the database.
+            //  We define it here as a constant since it will never change.
+            private const string CONNECTION_STRING = @"server=localhost\SQLExpress;database=Roommates;integrated security=true";
 
-                switch (selection)
+            static void Main(string[] args)
+            {
+                bool runProgram = true;
+                while (runProgram)
                 {
-                    case ("Show all rooms"):
-                        // Do stuff
-                        break;
-                    case ("Search for room"):
-                        // Do stuff
-                        break;
-                    case ("Add a room"):
-                        // Do stuff
-                        break;
-                    case ("Exit"):
-                        runProgram = false;
-                        break;
+                    string selection = GetMenuSelection();
+
+                    switch (selection)
+                    {
+                        case ("Show all rooms"):
+                            // Do stuff
+                            break;
+                        case ("Search for room"):
+                            // Do stuff
+                            break;
+                        case ("Add a room"):
+                            // Do stuff
+                            break;
+                        case ("Exit"):
+                            runProgram = false;
+                            break;
+                    }
                 }
+
             }
 
-        }
-
-        static string GetMenuSelection()
-        {
-            Console.Clear();
-
-            List<string> options = new List<string>()
+            static string GetMenuSelection()
             {
-                "Show all rooms",
-                "Search for room",
-                "Add a room",
-                "Exit"
-            };
+                Console.Clear();
 
-            for (int i = 0; i < options.Count; i++)
-            {
-                Console.WriteLine($"{i + 1}. {options[i]}");
-            }
-
-            while (true)
-            {
-                try
+                List<string> options = new List<string>()
                 {
-                    Console.WriteLine();
-                    Console.Write("Select an option > ");
+                    "Show all rooms",
+                    "Search for room",
+                    "Add a room",
+                    "Exit"
+                };
 
-                    string input = Console.ReadLine();
-                    int index = int.Parse(input) - 1;
-                    return options[index];
-                }
-                catch (Exception)
+                for (int i = 0; i < options.Count; i++)
                 {
+                    Console.WriteLine($"{i + 1}. {options[i]}");
+                }
 
-                    continue;
+                while (true)
+                {
+                    try
+                    {
+                        Console.WriteLine();
+                        Console.Write("Select an option > ");
+
+                        string input = Console.ReadLine();
+                        int index = int.Parse(input) - 1;
+                        return options[index];
+                    }
+                    catch (Exception)
+                    {
+
+                        continue;
+                    }
                 }
             }
-
         }
     }
     ```
