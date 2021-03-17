@@ -102,6 +102,7 @@ Before you get started, let's introduce some terms that will be used during this
 
     ```csharp
     using System;
+    using System.Collections.Generic;
 
     namespace Roommates
     {
