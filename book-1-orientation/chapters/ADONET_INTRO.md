@@ -334,7 +334,7 @@ Before you get started, let's introduce some terms that will be used during this
         {
             case ("Show all rooms"):
                 List<Room> rooms = roomRepo.GetAll();
-                foreach (Room r in rooms)
+                foreach (Room room in rooms)
                 {
                     Console.WriteLine($"{room.Name} has an Id of {room.Id} and a max occupancy of {room.MaxOccupancy}");
                 }
