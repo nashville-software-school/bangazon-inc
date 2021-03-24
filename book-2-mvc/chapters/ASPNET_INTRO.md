@@ -5,11 +5,13 @@ In this chapter you'll create a new MVC project to start the Nashville dog walki
 ## Getting Started
 
 1. Create new project in Visual Studio
-1. Choose the _ASP.NET Core Web Application_
+1. Choose the _ASP.NET Core Web App (Model-View-Controller)_
+1. Click _Next_
 1. Specify project name of _DogGo_
-1. Click _Ok_
-1. Choose _Web Application (Model-View-Controller)_
-1. Click _Ok_
+1. Click _Next_
+1. Select _.NET 5.0 (Current)_ as the Target Framework
+1. Check the box that says _Enable Razor runtime compilation_
+1. Click _Create_
 1. Add the Nuget package for `Microsoft.Data.SqlClient`
 
 Take a look around at the project files that come out of the box with a new ASP.NET MVC project. It already has folders for Models, Views, and Controllers. It has a `wwwroot` folder which contains some static assets like javascript and css files. It has a `Startup.cs` file where we can configure certain things about our web application if we choose.
@@ -217,7 +219,7 @@ public WalkersController(IWalkerRepository walkerRepository)
 }
 ```
 
-### The power of ASP<span>.NET</span> Controllers
+### A Route Invokes a Controller Method
 
 In the context of ASP<span>.NET</span>, each of the public methods in the controllers is considered an **Action**. When our application receives incoming HTTP requests, The ASP<span>.NET</span> framework is smart enough to know which controller Action to invoke.  
 
@@ -255,7 +257,7 @@ Currently, we're passing data into a view that doesn't exist. Let's fix that. Ri
 
 The generated view creates an html table and iterates over each walker in the list and creates a new row for each one.
 
-##### Razor Templates
+#### Razor Templates
 
 You'll notice a couple things about the code in the view. For one, it's not in an html file--it's in a cshtml file. This is called a _razor template_. With razor we can write a mix of C# and html code. It's similar to JSX in that it can dynamically create html. Once data gets passed into the view, the razor engine will convert it to an html page that can be returned to the browser. Here's an example of what razor code might look like
 
@@ -284,7 +286,7 @@ Run the application and go to `/walkers/index`. You should see your data driven 
 
 The view that Visual Studio scaffolded for us is a decent start, but it has a number of flaws with it. For now, lets take care of the image urls. Instead of seeing the actual url, lets replace that with an actual image. Replace the code that say `@Html.DisplayFor(modelItem => item.ImageUrl)` with the following
 
-```html
+```html+razor
 <img src="@item.ImageUrl" alt="avatar" />
 ```
 
