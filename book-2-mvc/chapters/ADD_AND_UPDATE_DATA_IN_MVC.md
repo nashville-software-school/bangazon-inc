@@ -2,25 +2,6 @@
 
 In this chapter you'll continue to implement CRUD for the DogGo application by adding Create, Edit, and Delete routes for our dog owners.
 
-<hr/>
-
-**QUICK NOTE**
-
-Did you get tired of stopping and restarting your server every time you make a change? There's a helpful package for you so that when you're only making changes to your view, you don't have to manually stop and restart your server.
-
-To install it right click on the project name and select Manage Nuget Packages. Search for and install
-```Microsoft.AspNetCore.MVC.Razor.RuntimeCompilation```
-
-Then go to `Startup.cs` and change this line `services.AddControllersWithViews();` to this
-
-```csharp
-services.AddControllersWithViews().AddRazorRuntimeCompilation();
-```
-
-And you're good to go. To see changes made in your view, just save your cshtml file are refresh your browser. It'd be nice if we could also automatically refresh when we make changes to our controllers and repositories.... but for now this will have to do....
-
----
-
 As part of the exercises in the previous chapter, you should have already created an OwnerRepository that has a method for getting all owners and getting a single owner by Id. We'll need additional CRUD functionality in the repository for this chapter, so update OwnerRepository to have the following code
 
 ```csharp

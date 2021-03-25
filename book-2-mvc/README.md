@@ -33,6 +33,7 @@ We'll be experimenting with technologies and concepts while building a simple ap
 
 ## Supplementary Content
 
+* [Visual Studio Tips](./chapters/VISUAL_STUDIO_TIPS.md)
 * [Building HTML Views with Razor](./chapters/RAZOR_FEATURES.md)
 * Supplement - [Writing Web Application Integration Tests](./chapters/XUNIT_INTRO.md)
 * Supplement - [Simple Profile Images Using Gravatar](./chapters/GRAVATAR.md)
