@@ -1,5 +1,19 @@
 # View Models
 
+---
+
+## Objectives
+
+After completing this lesson and working on related exercises you should be able to:
+
+1. Define the term "view model" and distinguish it from a "model".
+1. Describe at least two scenarios where using a view model is appropriate.
+1. Write the code for the appropriate SQL queries, classes, methods, properties and razor templates needed to display data taken from multiple database tables.
+1. Write the code to let the user create and edit a database record that requires using an HTML `select` to allow the user to choose a value.
+1. Properly handle retrieving a `NULL` value from a `SqlDataReader` object.
+
+---
+
 We've seen how controllers are able to pass objects into our views, and how views expect a certain type of object. For example:
 
 > OwnersController.cs
@@ -18,7 +32,7 @@ public ActionResult Details(int id)
 ```html+razor
 @model DogGo.Models.Owner
 
-...
+// ...
 
 <dl class="row">
   <dt class = "col-sm-2">
@@ -134,9 +148,11 @@ public List<Dog> GetDogsByOwnerId(int ownerId)
 ```
 
 Because we are updating the DogRepository, we also need to add a corresponding method to the IDogRepository
+
 ```csharp
 List<Dog> GetDogsByOwnerId(int ownerId);
 ```
+
 Now update the Walkers Repository to add a method to get a list of walkers in a neighborhood
 
 > WalkersRepository.cs
@@ -180,10 +196,13 @@ public List<Walker> GetWalkersInNeighborhood(int neighborhoodId)
     }
 }
 ```
+
 Similar to how we updated the IDogRepository, we also need to change the IWalkerRepository by adding the following method:
+
 ```csharp
 List<Walker> GetWalkersInNeighborhood(int neighborhoodId);
 ```
+
 Now that the Owner Details view will need to know about more than just the owner, we'll need access to other repositories. Update the private fields and constructor in your OwnerController class to add them
 
 > OwnerController.cs
@@ -230,7 +249,7 @@ public ActionResult Details(int id)
 
 Try running the application now and going to `/owners/details/1` while logged in. You should see this error message
 
-```
+```sh
 InvalidOperationException: The model item passed into the ViewDataDictionary is of type 'DogWalker.Models.ViewModels.ProfileViewModel', but this ViewDataDictionary instance requires a model item of type 'DogWalker.Models.Owner'
 ```
 
