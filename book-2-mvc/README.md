@@ -23,7 +23,7 @@ We'll be experimenting with technologies and concepts while building a simple ap
 * Chapter 4 - [Creating a Profile page with View Models](./chapters/VIEW_MODELS.md)
 * Chapter 5 - [Auth & User related data](./chapters/USER_RELATED_DATA.md)
 * Chapter 6 - [HTTP Requests and Routing](./chapters/ROUTING.md)
-* Chapter 7 - [Validating Input and Customizing the Display Using C# Attributes](./chapters/MODEL_ANNOTATIONS.md)
+* Chapter 7 - [Validating Input and Customizing the Display Using C# Attributes](./chapters/MODEL_ATTRIBUTES.md)
 
 > [_Sprint_ - Tabloid Web App Prototype](./chapters/GROUP_PROJECT.md)
 
