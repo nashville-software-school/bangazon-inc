@@ -10,6 +10,7 @@ After completing this lesson and working on related exercises you should be able
 1. Describe at least two scenarios where using a view model is appropriate.
 1. Write the code for the appropriate SQL queries, classes, methods, properties and razor templates needed to display data taken from multiple database tables.
 1. Write the code to let the user create and edit a database record that requires using an HTML `select` to allow the user to choose a value.
+1. Recognize and resolve the error that occurs when the controller passes an incompatible type of object to the view.
 1. Properly handle retrieving a `NULL` value from a `SqlDataReader` object.
 
 ---
