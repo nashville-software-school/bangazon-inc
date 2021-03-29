@@ -18,7 +18,7 @@ After completing this lesson and working on related exercises you should be able
 
 ## Validation
 
-Validation is the process of confirming a user has entered correct data. For example, imagine we create a form that requires the user input an email address. Such a form might have two types of validation. The first to confirm that the user has not left the field blank and the second to confirm that the user has entered some text that "looks like" an email address.
+Validation is the process of confirming a user has entered properly formatted data. For example, imagine we create a form that requires the user input an email address. Such a form might have two types of validation. The first to confirm that the user has not left the field blank and the second to confirm that the user has entered some text that "looks like" an email address.
 
 Writing validation code can be tedious and error prone, so, fortunately, ASP<span>.</span>NET Core gives us a set of special C# attributes we can use to get validation for "free".
 
