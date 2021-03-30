@@ -283,7 +283,7 @@ Update your navbar inside `_Layout.cshtml` to look like the following
             @if (User.IsInRole("DogOwner"))
             {
                 <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Dog" asp-action="Index">My Dogs</a>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Dogs" asp-action="Index">My Dogs</a>
                 </li>
             }
             <li class="nav-item ml-auto">Welcome @User.FindFirst(ClaimTypes.Email).Value</li>
