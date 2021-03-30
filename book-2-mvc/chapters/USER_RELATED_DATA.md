@@ -196,8 +196,24 @@ public void AddDog(Dog dog)
             cmd.Parameters.AddWithValue("@ownerId", dog.OwnerId);
 
             // nullable columns
-            cmd.Parameters.AddWithValue("@notes", dog.Notes ?? "");
-            cmd.Parameters.AddWithValue("@imageUrl", dog.ImageUrl ?? "");
+            if (dog.Notes == null)
+            {
+                cmd.Parameters.AddWithValue("@notes", DBNull.Value);
+            } 
+            else
+            {
+                cmd.Parameters.AddWithValue("@notes", dog.Notes);
+            }
+
+            if (dog.ImageUrl == null)
+            {
+                cmd.Parameters.AddWithValue("@imageUrl", DBNull.Value);
+            }
+            else
+            {
+                cmd.Parameters.AddWithValue("@imageUrl", dog.ImageUrl;
+            }
+
 
             int newlyCreatedId = (int)cmd.ExecuteScalar();
 
