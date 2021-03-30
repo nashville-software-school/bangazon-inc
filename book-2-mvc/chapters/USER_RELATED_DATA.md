@@ -1,16 +1,33 @@
-## User Related Data
+# User Related Data
+
+---
+
+## Objectives
+
+After completing this lesson and working on related exercises you should be able to:
+
+1. Define the terms "authentication" and "authorization", and distinguish between them.
+1. Describe the purpose of setting a browser "cookie" with regards to authentication and authorization.
+1. Describe the concept of the "current user" who initiated an HTTP request and give some examples of how the current user could be used.
+1. Write code to add a simple login process to an MVC application.
+1. Write code to get the data for the current user from the database.
+1. Write code to use the current user's id when creating or editing a database record.
+1. Write code to prevent anonymous users from accessing protected controller actions.
+1. Write code to conditionally render HTML based on whether or not the user is authenticated.
+
+---
 
 As part of a previous exercise, you made views for creating, editing, and listing dogs. Currently anyone can create a dog, assign it to any Owner, and view a list of all dogs. For the sake of privacy though, it would be nice if owners could only view or edit their own dogs. It would also be nice if in the dog Create form, we didn't make users enter an owner ID into an input field; instead the server would look for the current logged in owner, and default the dog's OwnerId property to that.
 
 To be able to do this, we need to create a system for authentication and authorization.
 
-### Authentication vs Authorization
+## Authentication vs Authorization
 
 Authentication is the process of determining _who_ a user is. One way this could be determined is when a user logs in using an email/password combination. With that combination, the server can assume who the user is.
 
 Authorization is the process of determining _what a user has access to_. In our case, we're saying that owners should only be able to view and edit their own dogs. If Bob tries to navigate to `/dogs/edit/3` but the dog with the ID 3 belongs to Patty, Bob should not be authorized to view that page.
 
-**IMPORTANT NOTE**
+### IMPORTANT NOTE
 
 Creating a secure system for authentication and authorization is both incredibly important and very complex. We'll talk a bit more about safely storing sensitive information later in the course, but for now we're going to skip the password step and instead we're going to implement a lite version of auth where users only enter their email addresses to log in.
 
@@ -70,9 +87,9 @@ The GET method for `Login` should feel pretty familiar, but the POST method has 
 
 We have to let ASP<span>.NET</span> Core know that we plan on using cookies for authentication. In the `Startup.cs` file, change the `ConfigureServices` and `Configure` methods to look like the following
 
-> ConfigureServices
+> Startup.cs
 
-\* _This adds the call to_ `AddAuthentication`
+* _This adds the call to_ `AddAuthentication`
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -89,9 +106,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-> Configure
-
-\* _This adds a call to_ `UseAuthentication()`
+* _This adds a call to_ `UseAuthentication()`
 
 ```csharp
 public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -163,7 +178,7 @@ Currently the form the user fills out when creating a dog asks the user to fill 
 **Note:** _If you don't already have a method in your Dog Repository to add a new Dog, be sure to update that class with the following method_
 
 ```csharp
- public void AddDog(Dog dog)
+public void AddDog(Dog dog)
 {
     using (SqlConnection conn = Connection)
     {
