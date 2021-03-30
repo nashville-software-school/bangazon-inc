@@ -211,7 +211,7 @@ public void AddDog(Dog dog)
             }
             else
             {
-                cmd.Parameters.AddWithValue("@imageUrl", dog.ImageUrl;
+                cmd.Parameters.AddWithValue("@imageUrl", dog.ImageUrl);
             }
 
 
