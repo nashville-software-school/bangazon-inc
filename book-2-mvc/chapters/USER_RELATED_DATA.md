@@ -81,6 +81,12 @@ public async Task<ActionResult> Login(LoginViewModel viewModel)
 
     return RedirectToAction("Index", "Dogs");
 }
+
+public async Task<ActionResult> Logout()
+{
+    await HttpContext.SignOutAsync();
+    return RedirectToAction("Index", "Home");
+}
 ```
 
 The GET method for `Login` should feel pretty familiar, but the POST method has some new code in it we haven't seen before. We're looking up an owner by their email address and then it's saving some of the owner's data into a cookie. The way this works is that when a user successfully logs in, the server is going to create something that's almost like a drivers license. The server populates that license with whatever information it chooses--in this case our code is choosing to add the owner's Id, email address, and role. It then takes that license/cookie and gives it back to whoever made the request. A cookie is a way that we can store data on a user's browser. After logging in, every time an owner makes a request to the server, the browser will automatically send up the value of that cookie. The ASP<span>.NET</span> Core framework will look at the cookie every time and know who the user is that's making the request.
@@ -286,7 +292,11 @@ Update your navbar inside `_Layout.cshtml` to look like the following
                     <a class="nav-link text-dark" asp-area="" asp-controller="Dogs" asp-action="Index">My Dogs</a>
                 </li>
             }
-            <li class="nav-item ml-auto">Welcome @User.FindFirst(ClaimTypes.Email).Value</li>
+            <li class="nav-item ml-auto">
+                <a class="nav-link text-dark" asp-area="" asp-controller="Owners" asp-action="Logout">
+                    Logout @User.FindFirst(ClaimTypes.Email).Value
+                </a>
+            </li>
         }
         else
         {
