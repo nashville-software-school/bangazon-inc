@@ -1,5 +1,13 @@
 # Utility Classes, Special-Purpose Repository Methods and More Complex SQL
 
+---
+
+## Objectives
+
+After completing this lesson and working on related exercises you should be able to:
+
+---
+
 So far much of what we've done in this course has been basic CRUD operations on a single entity. Sure we've done a few `JOIN`s here and there, but we've mostly kept it fairly simple.
 
 This focus on basic CRUD has also been reflected in our repositories. Our repositories usually look something like this
