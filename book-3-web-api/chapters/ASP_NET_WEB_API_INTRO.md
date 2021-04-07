@@ -464,8 +464,8 @@ public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     if (env.IsDevelopment())
     {
         app.UseDeveloperExceptionPage();
-
-        app.UseDeveloperExceptionPage();
+        app.UseSwagger();
+        app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "CoffeeShop v1"));
 
         // Do not block requests while in development
         app.UseCors(options =>
