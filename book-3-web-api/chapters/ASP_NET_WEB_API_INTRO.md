@@ -405,6 +405,8 @@ The whole point of building an API is to provide an _interface_ for other code t
 
 Create a directory called `js-app` in the root directory of your solution (the directory that contains the `CoffeeShop.sln` file). Add the following HTML and JavaScript files to the `js-app` directory.
 
+> **NOTE:** While it's technically true that Visual Studio will let you edit JavaScript, HTML and CSS, it's not really the best tool for front-end development. For front-end work you should switch back to Visual Studio Code.
+
 > js-app/index.html
 
 ```html
