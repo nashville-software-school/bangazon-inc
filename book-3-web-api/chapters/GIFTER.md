@@ -6,6 +6,14 @@
 
 After completing this lesson and working on related exercises you should be able to:
 
+1. Describe how inheriting from a base class can reduce the amount oof code in a repository.
+1. Define the term "utility class".
+1. Define the terms "nullable int" and "nullable DateTime".
+1. Describe what is meant by a "round trip" to the database.
+1. Write a simple utility class that has methods for retrieving a value from a SqlDataReader by column name.
+1. Rewrite given SQL code containing multiple queries into a single query using a LEFT JOIN.
+1. Write a C# repository method that executes a complex SQL query (using one or more JOINs) and converts the resulting data into C# objects.
+
 ---
 
 So far much of what we've done in this course has been basic CRUD operations on a single entity. Sure we've done a few `JOIN`s here and there, but we've mostly kept it fairly simple.
