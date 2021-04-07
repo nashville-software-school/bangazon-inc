@@ -1,5 +1,23 @@
 # ASP<span>.NET</span> Core Web API
 
+---
+
+## Objectives
+
+After completing this lesson and working on related exercises you should be able to:
+
+1. Compare and contrast ASP<span>.</span>NET Core Web API with ASP<span>.</span>NET Core MVC.
+1. Describe the HTTP method and the URL associated with each method in a Web API Controller.
+1. Describe the C# `var` keyword.
+1. Give a high-level definition of CORS.
+1. Write an ASP<span>.</span>NET Core Web API that will perform all CRUD operations on a simple entity.
+1. Write a simple HTML/JavaScript client application that will communicate with a Web API.
+1. Test a Web API using Postman.
+1. Translate (rewrite) code that uses the `var` keyword into code that does not use it.
+1. Disable CORS for an ASP<span>.</span>NET running in a Development environment.
+
+---
+
 In this chapter we'll walk through creating a "Coffee Shop" Web API in ASP<span>.NET</span> Core. When it's complete our API will expose resources for `Coffee` and `BeanVariety`.
 
 * Coffee - https://localhost:5001/api/coffee

@@ -1,5 +1,18 @@
 # Web API Parameters
 
+---
+
+## Objectives
+
+After completing this lesson and working on related exercises you should be able to:
+
+1. List and describe three different types of parameters.
+1. Give two examples of websites that use query string parameters.
+1. Discuss a benefit of using query string parameters for a search feature of an application.
+1. Write code in an ASP<span>.</span>NET Core Web API that uses query strings to perform a search of a database entity.
+
+---
+
 We've encountered the term _parameter_ a few times throughout the course. We've seen that a parameter is a special variable that is _passed into_ a function or method.
 
 ```js
