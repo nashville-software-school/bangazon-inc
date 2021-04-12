@@ -1,5 +1,25 @@
 # Adding a React Client
 
+> **NOTE:** Even though there isn't _technically_ a lot of new material in the next couple of chapters, at first all this is going to seem pretty foreign. You may find yourself looking over it and saying "Hmmm.... This looks vaguely familiar. Did we cover this? Did I used to know this? Did I dream it? Did I see it in a vision? Are these memories even mine?". You may find yourself scouring the dusty attic of your mind, looking under sheets, opening boxes...pausing now and again to reflect on your past and the array of choices that have led you to this time and place...trying to pinpoint exactly where things went wrong.  
+> 
+> Don't worry. This is all perfectly natural.  
+> 
+> You're gonna be fine.
+
+---
+
+## Objectives
+
+After completing this lesson and working on related exercises you should be able to:
+
+1. Define the term "client" as it relates to Web APIs.
+1. List at least three types of applications that could be a client for a Web API.
+1. Use configuration in a react app's `package.json` file to avoid CORS errors.
+1. Write code in a react application to get a collection of data from an ASP<span>.</span>NET Core Web API.
+1. Write code in a react application to add a new record using an ASP<span>.</span>NET Core Web API.
+
+---
+
 The cool thing about exposing a Web API is that any client capable of making HTTP requests can communicate with it. You can create web apps in React, Angular, or Vue and they could all talk to the same API. It even extends past browser based clients. You could make a mobile or desktop app and they could talk to the API. Maybe even IOT devices ([Internet of Things](https://en.wikipedia.org/wiki/Internet_of_things)) like microwaves or refrigerators want to make requests to your API.
 
 ## Create React App
