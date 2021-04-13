@@ -4,14 +4,14 @@
 
 Please read and complete the steps in the official [Get Started with C# and Visual Studio Code](https://docs.microsoft.com/en-us/dotnet/core/tutorials/with-visual-studio-code) guide.
 
-## Setup
+## Your first console application
 
-We're going to get your first C# console application setup and running so that we can review some basics of the language.
+Let's begin with your first C# console application _(also known as a "command line interface" application or "cli" app)_.
 
 Create a directory to hold the application.
 
 ```sh
-mkdir -p ~/workspace/csharp/intro && cd $_
+mkdir -p ~/workspace/csharp/Intro && cd $_
 ```
 
 Create a new console application with the `dotnet` command line utility.
@@ -30,141 +30,32 @@ Copy this code into your Program.cs, replacing everything there.
 ```cs
 using System;
 
-namespace bangazoncli
+namespace Intro
 {
     public class Program
     {
         public static void Main(string[] args)
         {
-            Console.WriteLine("Welcome to Bangazon!");
+            Console.Write("What is your name? ");
+            string name = Console.ReadLine();
+            Console.WriteLine($"Hello, {name}! I'm glad to meet you.");
         }
     }
 }
-
 ```
 
-> ☞ Unike JavaScript, C# is a compiled language, meaning that you need a compiler to read the source code, parse all the logic, and then construct a new executable file.
-
-Next, you compile the program.
-
-```sh
-dotnet build
-```
-
-Now that you have verified that the program will compile without errors, you can execute it.
+Run the program.
 
 ```sh
 dotnet run
 ```
 
-You should see `Welcome to Bangazon!` print out in your terminal.
+Enter a name and marvel at the warm greeting you receive.
 
-## Strongly Typed Variable in C#
+What else would you like app to say? Take a few minutes and play with this code. What deep, philosophical truths can you make this app reveal?
 
-Now replace your source code with the following.
+## Learning a Second Language
 
-```cs
-using System;
-using System.Collections.Generic;
+Learning your first programming language is hard. It's hard because you're learning more than syntax, you're learning _how to code_ at the same time.
 
-namespace bangazon
-{
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            // DateTime is the type of the purchaseData variable.
-            DateTime purchaseDate=DateTime.Now;
-
-            /*
-                string is the type of the lastName variable. It
-                tells the compiler that the lastName variable can
-                ONLY hold a string value.
-            */
-            string lastName="Smith";
-
-            /*
-                C# now supports implicitly typing of a variable. The
-                type of the variable will be determined, by the
-                compiler, at compile time.
-            */
-            var firstName="Bill";
-
-            /*
-                String interpolation in C# is similar to string interpolation in JavaScript,
-                but there is a different syntax.
-
-                An equivalent statement in JavaScript would be:
-                console.log(`${firstName} ${lastName} purchased on ${purchaseDate}`);
-            */
-            Console.WriteLine($"{firstName} {lastName} purchased on {purchaseDate}");
-        }
-    }
-}
-```
-
-# C# Collections and Loops
-
-The C# language has many ways to store a collection of items. You'll quickly see that C# is much more verbose when you write your source code, because the developer needs to provide all of the instructions to the compiler, unlike JavaScript or other dynamically typed languages.
-
-We'll look at a simple type of collection first - list of strings. Add the following code to your `Main` method.
-
-```cs
-/*
-    Not only do you have to say what type the variable is, you also
-    have to instantiate that exact same type of object on assignment.
-    This may seem redundant, but it's part of the C# language compiler's
-    type checking constraints.
-*/
-List<string> products = new List<string>() {
-    "Motorcycle",
-    "Sofa",
-    "Sandals",
-    "Omega Watch",
-    "iPhone"
-};
-
-/*
-    A foreach loop is used to iterate over a collection.
-
-    The code below is roughly equivalent to the following JavaScript:
-    products.forEach(product => {
-        console.log(product);
-    });
-*/
-foreach (string product in products) {
-    Console.WriteLine(product);
-}
-
-/*
-    Like JavaScript, C# has a for() loop
-
-    This code is equivalent to the foreach loop above.
-*/
-for (int i=0; i<products.Count; i++) {
-    Console.WriteLine(products[i]);
-}
-```
-
-# C# Conditions
-
-Luckily, the `if-then` syntax works exactly like it did in JavaScript.
-Let's display a different message based on on the length of a product.
-
-```cs
-foreach (string product in products) {
-    if (product.Length < 5) {
-        Console.WriteLine($"{product} has a short name");
-    } else if (product.Length < 10) {
-        Console.WriteLine($"{product} has a medium-sized name");
-    } else {
-        Console.WriteLine($"{product} has a long name");
-    }
-}
-```
-
-# Resources
-
-I strongly recommend that you bookmark the following web page.
-
-[C# Programming Guide](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/index)
+I have some good news. When it comes to learning your second language, you can transfer much of your understanding of your first language. It turns out that much of what you learned in JavaScript will apply to C# as well. There are notable differences and C# has some new concepts to learn, but a lot of the basic building blocks are the same.
