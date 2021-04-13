@@ -183,7 +183,6 @@ Notice the URL's route contains `search` and the URL's query string has values f
 ## Exercises
 
 1. Update your Gifter API to allow searching of Posts by title as illustrated in this chapter.
-1. Update the search endpoint to search by title and the caption.
 1. Add a new endpoint, `/api/post/hottest?since=<SOME_DATE>` that will return posts created on or after the provided date.
 
 > **NOTE:** as always make sure to use Postman to test your API.
