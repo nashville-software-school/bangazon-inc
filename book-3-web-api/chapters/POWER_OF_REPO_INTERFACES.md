@@ -8,7 +8,7 @@ As you know a database is used for "permanent" storage for our data. However, as
 
 It's more accurate to say the database holds the  _state_ of our system, and that state may change over time.
 
-As you might imagine, it's often useful to see the _previous_ states of a system. What did the database look like yesterday? Last week? Two years ago? This knowledge could be useful for debugging, for tracking trends, for investigating security breeches, and lots of other things.
+As you might imagine, it's often useful to see the _previous_ states of a system. What did the database look like yesterday? Last week? Two years ago? This knowledge could be useful for debugging, for tracking trends, for investigating security breaches, and lots of other things.
 
 There are many approaches to tracking changes to a database. In this exercise we're going to touch on an over-simplified implementation of one of the simpler techniques - writing to an _audit table_.
 
