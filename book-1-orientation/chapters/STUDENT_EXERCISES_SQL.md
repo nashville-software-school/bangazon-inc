@@ -27,8 +27,8 @@ Then use `INSERT` statements to create data in your tables.
 
 1. Create tables for each entity. These should match the dbdiagram ERD you created in [Student Exercises Part 1](./STUDENT_EXERCISES_TYPES.md).
 1. Populate each table with data. You should have 2-3 cohorts, 5-10 students, 4-8 instructors,  2-5 exercises and each student should be assigned 1-2 exercises.
-1. Write SQL queries to display the following data:
-- Write a query to return student first and last names with their cohort's name only for a single cohort.
+1. Write a query to return all student first and last names with their cohort's name.
+1. Write a query to return student first and last names with their cohort's name only for a single cohort.
 1. Write a query to return all instructors ordered by their last name.
     > **NOTE:** SQL offers the ability to [order by](https://www.w3schools.com/SQL/sql_orderby.asp) columns in a table.
 1. Write a query to return a list of unique instructor specialties.
