@@ -26,15 +26,10 @@ A Firebase identity store is contained within a _Project_. Once you have logged 
 
 The example we'll be using for this chapter is an application for managing [Grace Hopper](https://en.wikipedia.org/wiki/Grace_Hopper) quotes called `WisdomAndGrace`. Create a Firebase project with that name.
 
-### Project Id and Web API Key
-
-Once you've created the project, you should see a menu on the left side of the screen. Select the gear image near the top of this menu and choose the `Project settings` options.
-
-On the Project settings page take note of the `Project ID` and the `Web API Key`. Remember how you got here because you will need these values later.
-
 ### Setting up Authentication
 
 1. From the Project Overview page, select `Authentication` in the menu on the left.
+1. Click the `Get Started` button to begin the authentication set up process.
 1. From the Authentication page, select the `Sign-in method` tab.
 1. Hover your mouse over the `Email/password` sign-in provider and click the pencil icon.
 1. In the window that appears, turn on the `Enable` switch, but make sure the `Email link (passwordless sign-in)` switch is turned off.
@@ -42,6 +37,12 @@ On the Project settings page take note of the `Project ID` and the `Web API Key`
 1. Select the `Users` tab and click the `Add user` button. Enter an email and a password _that you must remember_. The email does not have to be real.
 1. After you create the user notice the value in the `User UID` column in the table. We'll be using his id later.
 1. Finally, create a second user in the same manner as before. It's recommended that you use the same password for both users.
+
+### Project Id and Web API Key
+
+Once you've created the project, you should see a menu on the left side of the screen. Select the gear image near the top of this menu and choose the `Project settings` options.
+
+On the Project settings page take note of the `Project ID` and the `Web API Key`. Remember how you got here because you will need these values later.
 
 ## Demo Project Overview
 
@@ -88,7 +89,7 @@ In the repo you will find...
 Before we can run the app we need to make a few changes.
 
 1. Open the SQL script in an editor and find the `INSERT` statements that insert records into the `UserProfile` table. Modify these statements to add the users you added to Firebase earlier in this chapter.
-1. Update the `appsettings.json` file. Change the value of the `FirebaseProjectId` key to me the Project Id of your Firebase project.
+1. Update the `appsettings.json` file. Change the value of the `FirebaseProjectId` key to be the Project Id of your Firebase project.
 1. Update the `.env` file. Change the value of the `REACT_APP_API_KEY` key to the API Key from your Firebase project.
 
 Now we're finally ready to run this thing. Build your database, then run both server and client apps.
