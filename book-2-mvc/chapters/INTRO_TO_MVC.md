@@ -97,7 +97,7 @@ namespace Kennel.Models
 
 ### Views
 
-In MVC, the View is sometimes refereed to as part of the Presentation Layer. It is an HTML template written in a language called "razor", and is similar to the JSX code you are used to writing in react except it has the power of C# instead of JS. If it is given the context of a C# object, it knows how to dynamically create HTML.
+In MVC, the View is sometimes referred to as part of the Presentation Layer. It is an HTML template written in a language called "razor", and is similar to the JSX code you are used to writing in react except it has the power of C# instead of JS. If it is given the context of a C# object, it knows how to dynamically create HTML.
 
 ```html+razor
 @model List<Kennel.Models.Animal>
