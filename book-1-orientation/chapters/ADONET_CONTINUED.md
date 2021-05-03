@@ -31,7 +31,7 @@ public void Update(Room room)
 }
 ```
 
-Notice in this method that we use a new method called `ExecuteNonQuery` where in previous methods we used to call `ExecuteReader`. That's because when we were making `SELECT` statements in our SQL we were expecting the database to send data back and we had to read through it. Now that we're using a `UPDATE` statement in our SQL command, what we're really telling the database is simply that "We'd like you to execute this SQL code to update a row. We I don't expect you to give us anything back, please and thank you".
+Notice in this method that we use a new method called `ExecuteNonQuery` where in previous methods we used to call `ExecuteReader`. That's because when we were making `SELECT` statements in our SQL we were expecting the database to send data back and we had to read through it. Now that we're using a `UPDATE` statement in our SQL command, what we're really telling the database is simply that "We'd like you to execute this SQL code to update a row. We don't expect you to give us anything back, please and thank you".
 
 Now update the menu in `Program.cs` to allow users to update a room of their choosing.
 
