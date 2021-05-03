@@ -337,7 +337,7 @@ namespace Classes
     1. Last name (_string_)
     1. Title (_string_)
     1. Start date (_DateTime_)
-1. The `Company` class should also have a `ListEmployees()` method which outputs a string about each employee, such as _"Jane Doe works for Acme, Inc. as Lion Tamer since 3/23/15."_
+1. The `Company` class should also have a `ListEmployees()` method which writes a string to the console about each employee, such as _"Jane Doe works for Acme, Inc. as Lion Tamer since 3/23/15."_
 1. In the `Main` method of your console application, create a new instance of Company, and three instances of Employee. Then assign the employees to the company.
 
 
