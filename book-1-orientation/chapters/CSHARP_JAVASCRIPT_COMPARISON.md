@@ -302,7 +302,7 @@ const yelling = words.map((w) => w.ToUpperCase());
 const sentence = yelling.join(" ");
 
 const people = getPeopleFromSomeplace();
-const names = people.map((p) => p.Name);
+const names = people.map((p) => p.name);
 const person = people.find((p) => p.Name === "Selam");
 const isAnyoneNamedPhil = people.some((p) => p.Name === "Phil");
 const doesEveryoneHaveAHobby = people.every((p) => p.Hobbies.length > 0);
