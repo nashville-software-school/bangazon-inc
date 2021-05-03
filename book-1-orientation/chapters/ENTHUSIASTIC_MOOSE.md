@@ -332,7 +332,7 @@ Notice the code at the top of our file - the `Console.WriteLine()`s and the call
 
 You might be surprised to learn that this is a feature of C# that was only recently added. It's called "Top-level Statements". The feature allows us to write code at the "top-level" of our file. It's an excellent feature that allows us to get started quickly without any ceremony, but after a while it starts to become rather ungainly, and it's definitely not _idiomatic_ C# code.
 
-Latter in the course, we'll see the more traditional place to put startup code, but for now, let's just put the code in a function. 
+Later in the course, we'll see the more traditional place to put startup code, but for now, let's just put the code in a function. 
 
 > **NOTE:** We call this _wrapping_ the code in a function.
 
