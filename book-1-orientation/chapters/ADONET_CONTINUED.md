@@ -55,7 +55,7 @@ case ("Update a room"):
 
     roomRepo.Update(selectedRoom);
 
-    Console.WriteLine($"Room has been successfully updated");
+    Console.WriteLine("Room has been successfully updated");
     Console.Write("Press any key to continue");
     Console.ReadKey();
     break;
