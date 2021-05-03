@@ -1,12 +1,13 @@
 # Checklist for setting up a Fullstack Capstone
 
-This checklist covers creating a project with ASP<span>.</span>NET Core Web API, Entity Framework Core, SQL Server, React and Firebase Auth.
+This checklist covers creating a project with ASP<span>.</span>NET Core Web API, SQL Server, React and Firebase Auth.
 
 The technologies outlines in this chapter are _NOT_ the only technologies you are allowed to use for your capstone, but they are the standard, "happy-path" technologies that we generally recommend.
 
 _**If you would like to use an alternative technology (ex. MVC, etc...) you must get approval from your capstone mentor.**_
 
-Most of these steps will require copying code from either WisdomAndGrace and Gifter, so you may want to have those repositories handy before you start
+Most of these steps will require copying code from Tabloid and Gifter, so you may want to have those repositories handy before you start
+
 
 ## Set up project
 
@@ -32,12 +33,14 @@ Most of these steps will require copying code from either WisdomAndGrace and Gif
 
 ## Server Side
 
-1. Install Nuget Packages (Copy from WisdomAndGrace.csproj & Gifter.csproj)
+1. Install Nuget Packages (Copy from Tabloid.csproj and/or Gifter.csproj)
 1. Add connection string to `appsettings.json`
 1. Create Models
 1. Update `appsettings.json` to include your `FirebaseProjectId`
 1. Update `Startup.cs` to handle JWTs
-1. Copy in the `UserProfileRepository` and `UserProfileController` from WisdomAndGrace and modify as needed
+1. Update `Startup.cs` to call `UseAuthentication` before `UseAuthorization`
+1. Copy in the `UserProfileRepository`, `IUserProfileRepository` and `UserProfileController` from Tabloid/Gifter and modify as needed
+1. Register the `UserProfileRepository` with ASP.NET by calling `services.AddTransient` inside `Startup.cs`
 
 > **NOTE:** Make sure to update the `namespace` of any classes you copy/paste from another project.
 
@@ -49,6 +52,6 @@ Most of these steps will require copying code from either WisdomAndGrace and Gif
 1. Install whatever component library you want
 1. Create a `.env.local` file in your `client` folder (DON'T forget the leading `.`) and add the firebase API Key
 1. Update the `index.js` file to add the call to `firebase.initializeApp`
-1. Copy in `UserProfileProvider.js`, `Login.js`, `Register.js` from WisdomAndGrace
-1. Copy in `ApplicationViews.js` from WisdomAndGrace and remove code that's not needed
+1. Copy in `UserProfileProvider.js`, `Login.js`, `Register.js` from Tabloid (and optionally copy in the `Login.css` file if you want that bootstrap styling)
+1. Copy in `ApplicationViews.js` from Tabloid/Gifter and remove code that's not needed
 1. Modify `App.js` to use the `Router`, `UserProfileProvider`, and `ApplicationViews` components

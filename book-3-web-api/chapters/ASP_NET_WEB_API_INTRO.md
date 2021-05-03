@@ -1,33 +1,37 @@
 # ASP<span>.NET</span> Core Web API
 
+---
+
+## Objectives
+
+After completing this lesson and working on related exercises you should be able to:
+
+1. Compare and contrast ASP<span>.</span>NET Core Web API with ASP<span>.</span>NET Core MVC.
+1. Describe the HTTP method and the URL associated with each method in a Web API Controller.
+1. Describe the C# `var` keyword.
+1. Give a high-level definition of CORS.
+1. Write an ASP<span>.</span>NET Core Web API that will perform all CRUD operations on a simple entity.
+1. Write a simple HTML/JavaScript client application that will communicate with a Web API.
+1. Test a Web API using Postman.
+1. Translate (rewrite) code that uses the `var` keyword into code that does not use it.
+1. Disable CORS for an ASP<span>.</span>NET running in a Development environment.
+
+---
+
 In this chapter we'll walk through creating a "Coffee Shop" Web API in ASP<span>.NET</span> Core. When it's complete our API will expose resources for `Coffee` and `BeanVariety`.
 
 * Coffee - https://localhost:5001/api/coffee
 * BeanVariety - https://localhost:5001/api/beanvariety
 
-## Setting up the database
-
-Review and run [this SQL script](./sql/CoffeeShop.sql) to create the `CoffeeShop` database.
-
-In this chapter we'll be focused on the `BeanVariety` entity and you'll work with the `Coffee` entity in the exercise.
-
-```sql
-CREATE TABLE BeanVariety (
-    Id INTEGER NOT NULL PRIMARY KEY IDENTITY,
-    [Name] VARCHAR(50) NOT NULL,
-    Region VARCHAR(255) NOT NULL,
-    Notes TEXT
-);
-```
-
 ## Project Setup
 
 1. Open Visual Studio
 1. Select "Create a new project"
-1. In the "Create a new project" dialog, choose the C# "ASP<span>.NET</span> Core web application" option
-1. Name the project "CoffeeShop"
-1. In the "Create a new ASP<span>.NET</span> Core web application" dialog choose "API"
+1. In the "Create a new project" dialog, choose the C# "ASP<span>.NET</span> Core Web API" option
+1. Name the project "CoffeeShop" and click "Next"
+1. Select ".NET 5.0 (Current)" for the "Target Framework" and click "Create"
 1. In Solution Explorer, right click the name of the project and select "Manage Nuget Packages". Install the `Microsoft.Data.SqlClient` pacakge
+1. Review and run [this SQL script](./sql/CoffeeShop.sql) to create the `CoffeeShop` database.
 
 You now have an ASP<span>.NET</span> Core Web API project. Spend some time looking around the code that Visual Studio generated. You'll find several familiar items.
 
@@ -52,6 +56,17 @@ As in an MVC project, a Web API project has an `appsettings.json` file to store 
 ```
 
 ## Models
+
+In this chapter we'll be focused on the `BeanVariety` entity and you'll work with the `Coffee` entity in the exercise.
+
+```sql
+CREATE TABLE BeanVariety (
+    Id INTEGER NOT NULL PRIMARY KEY IDENTITY,
+    [Name] VARCHAR(50) NOT NULL,
+    Region VARCHAR(255) NOT NULL,
+    Notes TEXT
+);
+```
 
 Models (a,k.a _data models_) in Web API are exactly the same as in MVC. They are simple classes containing properties that correspond to columns in a database table. We can even use the same `DataAnnotations` as we used in MVC.
 
@@ -272,6 +287,11 @@ Controllers in Web API are similar to controllers in MVC with a few small differ
 
 Create a `BeanVarietyController` class in the `Controllers` directory.
 
+1. Right-click on the `Controllers` folder in the Solution Explorer and select `Add` -> `Controller...`.
+1. In the dialog box that appears, select `API` on the left panel.
+1. Next select `API Controller - Empty` in the center panel.
+1. Finally click the `Add` button
+
 > Controllers/BeanVarietyController.cs
 
 ```cs
@@ -403,6 +423,8 @@ The whole point of building an API is to provide an _interface_ for other code t
 
 Create a directory called `js-app` in the root directory of your solution (the directory that contains the `CoffeeShop.sln` file). Add the following HTML and JavaScript files to the `js-app` directory.
 
+> **NOTE:** While it's technically true that Visual Studio will let you edit JavaScript, HTML and CSS, it's not really the best tool for front-end development. For front-end work you should switch back to Visual Studio Code.
+
 > js-app/index.html
 
 ```html
@@ -460,8 +482,8 @@ public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     if (env.IsDevelopment())
     {
         app.UseDeveloperExceptionPage();
-
-        app.UseDeveloperExceptionPage();
+        app.UseSwagger();
+        app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "CoffeeShop v1"));
 
         // Do not block requests while in development
         app.UseCors(options =>

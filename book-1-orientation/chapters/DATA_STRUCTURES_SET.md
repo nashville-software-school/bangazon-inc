@@ -59,7 +59,7 @@ dotnet new console
 
 ## References
 
-* [C# HashSet](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.hashset-1?redirectedfrom=MSDN&view=netcore-2.1)
+* [C# HashSet](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.hashset-1)
 
 
 ## Instructions

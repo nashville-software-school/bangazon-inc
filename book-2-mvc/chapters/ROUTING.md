@@ -1,6 +1,16 @@
 # Routing and HTTP Requests
 
-The ASP.<span>NET</span> framework is great at taking in HTTP requests and knowing what controller methods to call. To get a better understanding of how it makes these decisions, lets look at some relevant parts of an HTTP request
+---
+
+## Objectives
+
+After completing this lesson and working on related exercises you should be able to:
+
+1. Describe the relationship between a URL route and an MVC controller method.
+
+---
+
+The ASP.<span>NET</span> Core framework is great at taking in HTTP requests and knowing what controller methods to call. To get a better understanding of how it makes these decisions, lets look at some relevant parts of an HTTP request
 
 ### Verb
 
@@ -8,7 +18,7 @@ The ASP.<span>NET</span> framework is great at taking in HTTP requests and knowi
 
 An HTTP request will have a verb like GET, POST, PUT, or DELETE. We can use different verbs at the same url. For instance, I can make a GET request to `https://doggo.com/owners/create` and I can also make a `POST` request to that same url.
 
-### URL 
+### URL
 
 HTTP requests all get made to a url. The ASP.<span>NET</span> framework can make a lot of assumptions about how to handle those requests from the url's path. The url `https://doggo.com/owners/create` tips the framework off to look for an Owners controller and specifically a `Create` method.
 

@@ -1,4 +1,4 @@
-# Using SQL in a .NET Application
+# Writing SQL in a .NET Application with ADO.NET
 
 Sometimes money is tight. Sometimes when money is tight, it becomes an unavoidable truth that we must live with other people. We call these people _Roommates_.
 
@@ -6,20 +6,40 @@ Your task is to build a command line application to manage a house full of roomm
 
 > **NOTE:** This will begin as an interactive lesson. Your instructor will lead you through following the instructions.
 
+## Data Persistence
+
+Our .NET application will need to communicate with a SQL Server database. To be able to do this, we'll be installing a library called ADO.NET. With ADO.NET installed, we'll have access to a few C# classes that are helpful for communicating with databases. The ADO.NET classes we'll be using heavily are:
+
+- **SqlConnection** - This class represents the connection between our console application and our SQL Server database
+- **SqlCommand** - This class will help us write sql queries in our C# code and execute them against the database
+- **SqlDataReader** - This class will help us parse out the data that comes back from our database so that we can convert it to C# objects
+
+## Vocabulary
+
+Before you get started, let's introduce some terms that will be used during this project.
+
+- **Models** - Models are C# classes that represent our database tables. For example, we have a `Chore` table in our database with a `Id` and `Name` column. To model this, we'd make a C# class named `Chore` with an `Id` and `Name` property.
+- **Repository** - Repositories are classes that we create whose purpose is data access. We'll define lots of our CRUD functionality there. They often have methods like `Get`, `GetById`, `Add`, `Delete`, etc
+- **Connection String** - A connection string is an address of a database--similar to a URL. It specifies the source of the data as well as the means of connecting to it. For example, you're about to create a database inside of SQL Server called `Roommates`; the connection string for the `Roommates` database will be `server=localhost\SQLExpress;database=Roommates;integrated security=true`
+- **ADO.NET** - ADO.NET is an umbrella term for all of the C# classes we'll be using (listed above) for accessing our SQL database from our C# console app. 
+
+
 ## Instructions
 
 1. Use the [Roommates](./assets/roommates.sql) SQL script to create a `Roommates` database.
 1. Take a look at the ERD to familiarize yourself with the database.
 ![Roommates ERD](./assets/Roommates.png)
-1. In Visual Studio, create a new console application called `Roommates`.
+1. In Visual Studio, create a new project. Make it a console application (using .NET 5 as the target framework) and call it `Roommates`. The following screen will ask you where you want to put this project. Select your `workspace` directory.
 1. In your terminal, navigate to the directory where you created your project. The directory will have a `Roommates.sln` file in it.
 1. `cd` into your project directory. When you list what's in the directory, you should see your `Roommates.csproj` and `Program.cs`.
-1. Run the following commands. This imports the required package needed to have your C# code connect to a SQL Server database.
+1. Run the following commands. This imports the required package needed for using the ADO.NET classes.
 
    ```sh
    dotnet add package Microsoft.Data.SqlClient
    dotnet restore
    ```
+
+    > NOTE: The following steps will have you creating folders inside Visual Studio. If you've never done this before, the way to add folders is to right click the directory level in Solution Explorer where you want to add the folder, and select `Add > New Folder`. If your menu says "Add Solution Folder", you've clicked the wrong spot.
 
 1. Make a folder in your project called `Models`. This folder will contain classes that represent tables in our database.
 1. In the `Models` folder, create `Room.cs`, `Roommate.cs` and `Chore.cs` file. Copy in the following code
@@ -53,8 +73,8 @@ Your task is to build a command line application to manage a house full of roomm
         public class Roommate
         {
             public int Id { get; set; }
-            public string Firstname { get; set; }
-            public string Lastname { get; set; }
+            public string FirstName { get; set; }
+            public string LastName { get; set; }
             public int RentPortion { get; set; }
             public DateTime MovedInDate { get; set; }
             public Room Room { get; set; }
@@ -76,6 +96,88 @@ Your task is to build a command line application to manage a house full of roomm
     }
     ```
 
+    Before we get into accessing the data from our database, let's stub out a quick menu for our user that has options for seeing all rooms, seeing a single room, or adding a new room. Update your `Main` method in `Program.cs` to the following
+
+    **Program.cs**
+
+    ```csharp
+    using System;
+    using System.Collections.Generic;
+
+    namespace Roommates
+    {
+        class Program
+        {
+            //  This is the address of the database.
+            //  We define it here as a constant since it will never change.
+            private const string CONNECTION_STRING = @"server=localhost\SQLExpress;database=Roommates;integrated security=true";
+
+            static void Main(string[] args)
+            {
+                bool runProgram = true;
+                while (runProgram)
+                {
+                    string selection = GetMenuSelection();
+
+                    switch (selection)
+                    {
+                        case ("Show all rooms"):
+                            // Do stuff
+                            break;
+                        case ("Search for room"):
+                            // Do stuff
+                            break;
+                        case ("Add a room"):
+                            // Do stuff
+                            break;
+                        case ("Exit"):
+                            runProgram = false;
+                            break;
+                    }
+                }
+
+            }
+
+            static string GetMenuSelection()
+            {
+                Console.Clear();
+
+                List<string> options = new List<string>()
+                {
+                    "Show all rooms",
+                    "Search for room",
+                    "Add a room",
+                    "Exit"
+                };
+
+                for (int i = 0; i < options.Count; i++)
+                {
+                    Console.WriteLine($"{i + 1}. {options[i]}");
+                }
+
+                while (true)
+                {
+                    try
+                    {
+                        Console.WriteLine();
+                        Console.Write("Select an option > ");
+
+                        string input = Console.ReadLine();
+                        int index = int.Parse(input) - 1;
+                        return options[index];
+                    }
+                    catch (Exception)
+                    {
+
+                        continue;
+                    }
+                }
+            }
+        }
+    }
+    ```
+
+    You can run this if you like, but it doesn't do much yet. Let's start creating some Repository classes next so we can actually access data from our database.
 
 1. Create a new folder called `Repositories`. This folder will contain classes that will be responsible for getting data out of our database and creating C# objects from that data. We typically call classes with this responsibility a Repository. Add two new files to it called `BaseRepository.cs` and `RoomRepository.cs`.
 1. Copy the following code into `BaseRepository.cs`
@@ -136,7 +238,7 @@ Your task is to build a command line application to manage a house full of roomm
         public class RoomRepository : BaseRepository
         {
             /// <summary>
-            ///  When new RoomRespository is instantiated, pass the connection string along to the BaseRepository
+            ///  When new RoomRepository is instantiated, pass the connection string along to the BaseRepository
             /// </summary>
             public RoomRepository(string connectionString) : base(connectionString) { }
 
@@ -190,8 +292,8 @@ Your task is to build a command line application to manage a house full of roomm
                     int nameColumnPosition = reader.GetOrdinal("Name");
                     string nameValue = reader.GetString(nameColumnPosition);
 
-                    int maxOccupancyColunPosition = reader.GetOrdinal("MaxOccupancy");
-                    int maxOccupancy = reader.GetInt32(maxOccupancyColunPosition);
+                    int maxOccupancyColumPosition = reader.GetOrdinal("MaxOccupancy");
+                    int maxOccupancy = reader.GetInt32(maxOccupancyColumPosition);
 
                     // Now let's create a new room object using the data from the database.
                     Room room = new Room
@@ -215,46 +317,47 @@ Your task is to build a command line application to manage a house full of roomm
     }
    ```
 
-   To test this, let's call this method from the `Program.Main` method. Create a new instance of a `RoomRepository` and call `GetAll()`. Run the application.
+   To test this, let's get this method hooked up to the menu. First, we'll need to create a new instance of a `RoomRepository` in our `Main` method back in the `Program.cs` file. Add this variable declaration as the first line in `Main`
 
-    **Program.cs**
+   ```csharp
+   RoomRepository roomRepo = new RoomRepository(CONNECTION_STRING);
+   ```
 
-    ```csharp
-    using System;
-    using System.Collections.Generic;
-    using Roommates.Models;
-    using Roommates.Repositories;
+   Now update the code inside the `while` loop so it'll call our new `GetAll` method if the user asks to see all rooms.
 
-    namespace Roommates
+   ```csharp
+    while (runProgram)
     {
-        class Program
+        string selection = GetMenuSelection();
+
+        switch (selection)
         {
-            /// <summary>
-            ///  This is the address of the database.
-            ///  We define it here as a constant since it will never change.
-            /// </summary>
-            private const string CONNECTION_STRING = @"server=localhost\SQLExpress;database=Roommates;integrated security=true";
-
-            static void Main(string[] args)
-            {
-                RoomRepository roomRepo = new RoomRepository(CONNECTION_STRING);
-
-                Console.WriteLine("Getting All Rooms:");
-                Console.WriteLine();
-
-                List<Room> allRooms = roomRepo.GetAll();
-
-                foreach (Room room in allRooms)
+            case ("Show all rooms"):
+                List<Room> rooms = roomRepo.GetAll();
+                foreach (Room r in rooms)
                 {
-                    Console.WriteLine($"{room.Name} has an Id of {room.Id} and a max occupancy of {room.MaxOccupancy}");
+                    Console.WriteLine($"{r.Name} has an Id of {r.Id} and a max occupancy of {r.MaxOccupancy}");
                 }
-
-            }
+                Console.Write("Press any key to continue");
+                Console.ReadKey();
+                break;
+            case ("Search for room"):
+                // Do stuff
+                break;
+            case ("Add a room"):
+                // Do stuff
+                break;
+            case ("Exit"):
+                runProgram = false;
+                break;
         }
     }
-    ```
+   ```
 
-1. Now create another method in `RoomRepository` that will get a single room by its Id. The method should accept an `int id` as a parameter and return a single `Room` object.
+   Running the program and selecting "Show all rooms" should now print all the rooms from the database out to the console. Try playing with some of the data in the database and see the changes in the program
+
+
+1. Now create another method in `RoomRepository` that will get a single room by its Id. The method should accept an `int id` as a parameter and return a single `Room` object. Notice in the code below that the SQL statement now uses a parameter. We can tell we're using params in our SQL queries when we see the `@` symbol. Whatever integer value gets passed into the `GetById` method will get inserted into the SQL query.
 
    ```csharp
     /// <summary>
@@ -292,18 +395,23 @@ Your task is to build a command line application to manage a house full of roomm
     }
    ```
 
-1. Update `Program.Main` to also call this new method
+1. Update the `switch` statement back in `Program.Main` so it calls the new `GetById` method. 
+    > NOTE: this implementation doesn't have any error handling. If you're feeling ambitious, you can add code to this to account for the possibility of the user entering a non-numeric value, or entering an Id that doesn't exist in the database.
 
    ```csharp
-    Console.WriteLine("----------------------------");
-    Console.WriteLine("Getting Room with Id 1");
+    case ("Search for room"):
+        Console.Write("Room Id: ");
+        int id = int.Parse(Console.ReadLine());
 
-    Room singleRoom = roomRepo.GetById(1);
+        Room room = roomRepo.GetById(id);
 
-    Console.WriteLine($"{singleRoom.Id} {singleRoom.Name} {singleRoom.MaxOccupancy}");
+        Console.WriteLine($"{room.Id} - {room.Name} Max Occupancy({room.MaxOccupancy})");
+        Console.Write("Press any key to continue");
+        Console.ReadKey();
+        break;
    ```
 
-1. Now that we've read data from our database, let's look at how we can add new records. Create a new method in the `RoomRepository` and name it `Insert`. It should accept a single `Room` parameter.
+1. Now that we've read data from our database, let's look at how we can add new records. Create a new method in the `RoomRepository` and name it `Insert`. It should accept a single `Room` object as a parameter. Notice once again we are using parameters in our SQL statement.
 
    ```csharp
     /// <summary>
@@ -318,8 +426,6 @@ Your task is to build a command line application to manage a house full of roomm
             conn.Open();
             using (SqlCommand cmd = conn.CreateCommand())
             {
-                // These SQL parameters are annoying. Why can't we use string interpolation?
-                // ... sql injection attacks!!!
                 cmd.CommandText = @"INSERT INTO Room (Name, MaxOccupancy) 
                                             OUTPUT INSERTED.Id 
                                             VALUES (@name, @maxOccupancy)";
@@ -339,100 +445,58 @@ Your task is to build a command line application to manage a house full of roomm
 
    The `cmd.ExecuteScalar` method does two things: First, it executes the SQL command against the database. Then it looks at the first thing that the database sends back (in our case this is just the `Id` it created for the room) and returns it.
 
-1. Update `Program.Main` to create a new instance of Room and pass it into the `Insert` method.
+1. Update the switch statement in `Program.Main` to use our `Insert` method.
 
     ```csharp
-    Room bathroom = new Room
-    {
-        Name = "Bathroom",
-        MaxOccupancy = 1
-    };
+    case ("Add a room"):
+        Console.Write("Room name: ");
+        string name = Console.ReadLine();
 
-    roomRepo.Insert(bathroom);
+        Console.Write("Max occupancy: ");
+        int max = int.Parse(Console.ReadLine());
 
-    Console.WriteLine("-------------------------------");
-    Console.WriteLine($"Added the new Room with id {bathroom.Id}");
-    ```
-
-1. Now add the following method to the repository that allows us to update a room in the database. This method should be called `Upate`. It should take  a `Room updatedRoom` parameter, and should not return anything
-
-    ```csharp
-    /// <summary>
-    ///  Updates the room
-    /// </summary>
-    public void Update(Room room)
-    {
-        using (SqlConnection conn = Connection)
+        Room roomToAdd = new Room()
         {
-            conn.Open();
-            using (SqlCommand cmd = conn.CreateCommand())
-            {
-                cmd.CommandText = @"UPDATE Room
-                                        SET Name = @name,
-                                            MaxOccupancy = @maxOccupancy
-                                        WHERE Id = @id";
-                cmd.Parameters.AddWithValue("@name", room.Name);
-                cmd.Parameters.AddWithValue("@maxOccupancy", room.MaxOccupancy);
-                cmd.Parameters.AddWithValue("@id", room.Id);
+            Name = name,
+            MaxOccupancy = max
+        };
 
-                cmd.ExecuteNonQuery();
-            }
-        }
-    }
+        roomRepo.Insert(roomToAdd);
+
+        Console.WriteLine($"{roomToAdd.Name} has been added and assigned an Id of {roomToAdd.Id}");
+        Console.Write("Press any key to continue");
+        Console.ReadKey();
+        break;
     ```
 
-    The only difference here is we're calling a method called `cmd.ExecuteNonQuery`. We use this method when we want to execute a SQL command, but we don't expect anything back from the database.
+# Practice
 
-1. Write some code in `Program.Main` to test the `Update` method.
+**IMPORTANT NOTE BEFORE YOU START!!!** 
+    
+The process of using ADO.NET is lengthy and verbose. You will undoubtedly be tempted to copy and paste code from one repository to another. We _highly_ _HIGHLY_ **HIGHLY** suggest that you do not do this. Doing this will not only lead to bugs in your code, it will hinder you from building muscle memory and impact your understanding of the code we're writing. Instead, reference code from other repositories, but type out your code by hand and leave comments if it helps you. It will pay off.
 
-1. Lastly let's create a method that allows us to delete a room. Update `RoomRepository` to include a method called `Delete`. It should take in an `int id` as a parameter and not return anything.
+## Create a Chore Repository
 
-    ```csharp
-    /// <summary>
-    ///  Delete the room with the given id
-    /// </summary>
-    public void Delete(int id)
-    {
-        using (SqlConnection conn = Connection)
-        {
-            conn.Open();
-            using (SqlCommand cmd = conn.CreateCommand())
-            {
-                cmd.CommandText = "DELETE FROM Room WHERE Id = @id";
-                cmd.Parameters.AddWithValue("@id", id);
-                cmd.ExecuteNonQuery();
-            }
-        }
-    }
-    ```
-1. Write some code in `Program.Main` to test the `Delete` method.
+1. Create a new file in the Repositories folder called `ChoreRepository` and implement the same methods as we did with the `RoomRepository`. After implementing each method, update the `Main` method to add an option in the menu.
 
-## Exercise
+1. Create a `RoommateRepository` and implement only the `GetById` method. It should take in a `int id` as a parameter and return a `Roommate` object. The trick: When you add a menu option for searching for a roommate by their Id, the output to the screen should output their first name, their rent portion, and _the name of the room they occupy_. Hint: You'll want to use a JOIN statement in your SQL query
 
-1. Implement the `RoommateRepository` class to include the following methods
-    - `public List<Roommate> GetAll()` 
-        - Roommate objects should have a null value for their Room property
-    - `public Roommate GetById(int id)`
-    - `public List<Roommate> GetRoommatesByRoomId(int roomId)`
-        - Roommate objects _should_ have a Room property
-    - `public void Insert(Roommate roommate)`
-    - `public void Update(Roommate roommate)` 
-    - `public void Delete(int id)`
+1. Add a method to `ChoreRepository` called `GetUnassignedChores`. It should not accept any parameters and should return a list of chores that don't have any roommates already assigned to them. After implementing this method, add an option to the menu so the user can see the list of unassigned chores.
 
-1. Update the `Program.Main` method to print a report of all roommates and their rooms
+1. Add a `RoommateRepository` and define a `GetAll` method on it, but don't add a menu option to view all roommates yet. Next create a method in the `ChoreRepository` named `AssignChore`. It should accept 2 parameters--a roommateId and a choreId. Finally, add an option to the menu for "Assign chore to roommate". When the user selects that option, the program should first show a list of all chores and prompt the user to select the Id of the chore they want. Next the program should show a list of all roommates and prompt the user to select the Id of the roommate they want assigned to that chore. After the roommate has been assigned to the chore the program should print a message to the user to let them know the operation was successful.
 
-## Challenges
+### Advanced Challenge
 
-1. Change the program to provide the user with a menu to allow them to interact with the Roommates database
-1. Add Chores to the applications. Users should be able to perform full CRUD on Chores as well as assign and remove them from Roommates.
+Before you begin, add a few more records to the Chore and RoommateChore tables.
 
-## Supplemental: Comparison of data access tools
+Inside the `ChoreRepository` create a method called `GetChoreCounts`. It's purpose will be to eventually help print out a report to the user that shows how many chores have been assigned to each roommate. i.e.
 
-| \_                          | <span>ADO.NET</span>           | Micro-ORM (Dapper)                           | Full ORM (Entity Framework)            |
-| --------------------------- | ------------------------------ | -------------------------------------------- | -------------------------------------- |
-| **Dev Writes SQL**          | yes                            | yes                                          | no                                     |
-| **Boilerplate Code**        | yes                            | minimal                                      | no                                     |
-| **Automatic Model Binding** | no                             | yes                                          | yes                                    |
-| **Degree of "Magic"**       | none                           | a little                                     | a lot                                  |
-| **Pros**                    | Full control, best performance | Balance between control and ease of use      | Ease of use, Rapid development         |
-| **Cons**                    | Lots of code to write          | Can lead to writing more code than is needed | Too much magic, Performance can suffer |
+```
+Wilma: 3
+Juan: 4
+Karen: 1
+```
+
+Helpful tips: 
+- It may be tempting to make a SQL query to fetch all the chores and programmatically count them in your C# code; but that would be inefficient, and if you've made it this far you're better than that! The better way to do this is using a GROUP BY clause in your SQL query
+- The shape of the data that will be returned by your GROUP BY won't match the shape of any of your model classes. You'll need to make another class whose properties better represent this data.

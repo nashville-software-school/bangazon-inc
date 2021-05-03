@@ -1,4 +1,14 @@
-# React Router
+# React Router Revisited
+
+---
+
+## Objectives
+
+After completing this lesson and working on related exercises you should be able to:
+
+1. Add multiple routes ("pages") to a react application that uses a Web API.
+
+---
 
 Let's add different routes to our Gifter application so that we can have certain components on different views and at different URLs. In this chapter we'll set up the following routes:
 

@@ -1,5 +1,18 @@
 # Web API Parameters
 
+---
+
+## Objectives
+
+After completing this lesson and working on related exercises you should be able to:
+
+1. List and describe three different types of parameters.
+1. Give two examples of websites that use query string parameters.
+1. Discuss a benefit of using query string parameters for a search feature of an application.
+1. Write code in an ASP<span>.</span>NET Core Web API that uses query strings to perform a search of a database entity.
+
+---
+
 We've encountered the term _parameter_ a few times throughout the course. We've seen that a parameter is a special variable that is _passed into_ a function or method.
 
 ```js
@@ -170,7 +183,6 @@ Notice the URL's route contains `search` and the URL's query string has values f
 ## Exercises
 
 1. Update your Gifter API to allow searching of Posts by title as illustrated in this chapter.
-1. Update the search endpoint to search by title and the caption.
 1. Add a new endpoint, `/api/post/hottest?since=<SOME_DATE>` that will return posts created on or after the provided date.
 
 > **NOTE:** as always make sure to use Postman to test your API.

@@ -2,7 +2,7 @@
 
 ## Instructions
 
-1. Create a new "**Console App (.NET Core)**" project.
+1. Create a new "**Console Application**" project.
 1. Add the `System.Data.SqlClient` nuget package to your project.
 1. Create a `Repository` class to interact with the `StudentExercises` database you created in Student Exercises Part 4.
 1. Write the necessary C# code in `Repository.cs` and `Program.cs` to perform the following actions. Make sure to print results of each action to the console.

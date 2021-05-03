@@ -63,7 +63,7 @@ In this chapter we'll look at how to write **unit** tests for the methods in Gif
 
 ## Setup
 
-The tests we write are not part of our application, so we don't put them in the same project, however they _can_ go in the same Visual Studio solution. Open up the Gifter application in Visual Studio and right click the top item in Solution Explorer marked `Solution 'Gifter'` and select Add > New Project. Search the templates for "xUnit Test Project (.NET Core)" and select the one for C#. Give it the name "Gifter.Tests". This will create a new project for you as well as a file to start writing some tests in that looks like this:
+The tests we write are not part of our application, so we don't put them in the same project, however they _can_ go in the same Visual Studio solution. Open up the Gifter application in Visual Studio and right click the top item in Solution Explorer marked `Solution 'Gifter'` and select Add > New Project. Search the templates for "xUnit Test Project (using .NET 5)" and select the one for C#. Give it the name "Gifter.Tests". This will create a new project for you as well as a file to start writing some tests in that looks like this:
 
 ```csharp
 using System;
