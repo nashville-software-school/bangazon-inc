@@ -178,32 +178,34 @@ SQL Server 2019 Configuration Manager
 ### Installation Check: Terminal Commands
 Finally, run the following commands in Windows Terminal to check that the following are installed or set correctly. Example outputs are listed under each command:
 
-```ssh
+> **NOTE:** The version numbers you see may be higher than those listed below. It's completely fine to have a higher version of any of these tools, but if you have a lower version, please ask an instructor to take a look.
+
+```sh
 $ git --version
 git version 2.28.0.windows.1
 ```
 
-```ssh
+```sh
 $ node -v
 v12.16.3
 ```
 
-```ssh
+```sh
 $ serve -v
 11.3.2
 ```
 
-```ssh
+```sh
 $ json-server -v
 0.16.3
 ```
 
-```ssh
+```sh
 $ dotnet --version
 5.0.103
 ```
 
-```ssh
+```sh
 $ ls -al ~/.ssh
 drwxr-xr-x 1 mecar 197609    0 May 22  2020 ./  
 drwxr-xr-x 1 mecar 197609    0 Feb 26 13:41 ../  
@@ -213,7 +215,7 @@ drwxr-xr-x 1 mecar 197609    0 Feb 26 13:41 ../
 -rw-r--r-- 1 mecar 197609 2375 Jun  1  2020 known_hosts  
 ```
 
-```ssh
+```sh
 $ git config --list
 user.email=youremail@example.com  
 user.name=yourGitHubUsername  
@@ -222,7 +224,7 @@ init.defaultbranch=main
 ```
 > **Note:** There are many settings listed. You only need to check `user.email`, `user.name`, `pull.rebase`, & `init.defaultBranch`.
 
-```ssh
+```sh
 $ type dnignore
 dnignore is a function  
 dnignore ()  
@@ -231,7 +233,7 @@ dnignore ()
 }
 ```
 
-```ssh
+```sh
 $ type cd
 cd is a function  
 cd ()  
@@ -240,6 +242,7 @@ cd ()
    pwd > ~/.last_dir  
 }
 ```
+
 > **Note:** Only if you chose to run the command to always open a terminal window in the last directory.
 
 ## Bookmark the Following Sites
