@@ -303,7 +303,7 @@ const sentence = yelling.join(" ");
 
 const people = getPeopleFromSomeplace();
 const names = people.map((p) => p.name);
-const person = people.find((p) => p.Name === "Selam");
+const person = people.find((p) => p.name === "Selam");
 const isAnyoneNamedPhil = people.some((p) => p.Name === "Phil");
 const doesEveryoneHaveAHobby = people.every((p) => p.Hobbies.length > 0);
 ```
