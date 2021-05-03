@@ -170,7 +170,7 @@ In this phase we'll get going with some starter code. We'll add to this initial 
         // An instance of the Adventurer class is an object that will undergo some challenges
         public class Adventurer
         {
-            // The is an "immutable" property. It only has a "get".
+            // This is an "immutable" property. It only has a "get".
             // The only place the Name can be set is in the Adventurer constructor
             // Note: the constructor is defined below.
             public string Name { get; }
@@ -286,4 +286,3 @@ Let's make the challenges a little more interesting. Add 2 to 5 more challenges 
 ### Phase 8
 
 Add code to record the number of successful challenges the adventurer completes during a quest. If the user chooses to repeat the quest, multiply this number by 10 and add it do the initial `Awesomeness` of the adventurer on their next quest.
-
