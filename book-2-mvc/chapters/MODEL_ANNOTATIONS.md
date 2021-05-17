@@ -76,6 +76,4 @@ Annotations can also come in handy when deciding how your DateTime properties sh
 public DateTime Birthday { get; set; }
 ```
 
-## Exercise
 
-Add proper annotations on the `Dog` and `Walker` models so that validation rules are enforced and input labels are user friendly
