@@ -1,5 +1,16 @@
 # Installing Required Software in Windows
 
+---
+
+## Objectives
+
+After completing this chapter you should be able to:
+
+1. Informally describe what it means to install software
+1. Install and configure the tools mentioned in this chapter on a new Windows computer
+
+---
+
 > **NOTE:** If you used Windows in the front-end course, you have most of this installed and configured already, but there are a few new tools to install so please carefully read through this document.
 
 ## Zoom
@@ -156,11 +167,12 @@ fi' >> ~/.bashrc
 
 [SQL Server Express](https://www.microsoft.com/en-us/sql-server/sql-server-downloads). This is the database tool where all your data will be stored for the server-side course. Click the Download button under the Express option. During the setup, take the basic installation option
 
-
 ## Installation Check
+
 Now that you have finished the installation process, please double check that you have not missed something.
 
 ### Installation Check: Start Menu
+
 Check that you have the following programs by pressing your Windows key (Windows keyboard) or Command key (Apple keyboard) to open the Start menu, and begin typing in the name of the following progams to see that they are installed:
 
 ```ssh
@@ -176,6 +188,7 @@ SQL Server 2019 Configuration Manager
 ```
 
 ### Installation Check: Terminal Commands
+
 Finally, run the following commands in Windows Terminal to check that the following are installed or set correctly. Example outputs are listed under each command:
 
 > **NOTE:** The version numbers you see may be higher than those listed below. It's completely fine to have a higher version of any of these tools, but if you have a lower version, please ask an instructor to take a look.
@@ -222,6 +235,7 @@ user.name=yourGitHubUsername
 pull.rebase=false  
 init.defaultbranch=main  
 ```
+
 > **Note:** There are many settings listed. You only need to check `user.email`, `user.name`, `pull.rebase`, & `init.defaultBranch`.
 
 ```sh
@@ -255,6 +269,6 @@ https://docs.microsoft.com/en-us/dotnet/
 
 ### .NET on YouTube
 
-- **Main page**: https://www.youtube.com/channel/UCvtT19MZW8dq5Wwfu6B0oxw
-- **C# 101**: https://www.youtube.com/watch?v=BM4CHBmAPh4&list=PLdo4fOZ0oVxKLQCHpiUWun7vlJJvUiN
-- **.NET 101**: https://www.youtube.com/watch?v=eIHKZfgddLM&list=PLdo4fOcmZ0oWoazjhXQzBKMrFuArxpW80
+* **Main page**: https://www.youtube.com/channel/UCvtT19MZW8dq5Wwfu6B0oxw
+* **C# 101**: https://www.youtube.com/watch?v=BM4CHBmAPh4&list=PLdo4fOZ0oVxKLQCHpiUWun7vlJJvUiN
+* **.NET 101**: https://www.youtube.com/watch?v=eIHKZfgddLM&list=PLdo4fOcmZ0oWoazjhXQzBKMrFuArxpW80

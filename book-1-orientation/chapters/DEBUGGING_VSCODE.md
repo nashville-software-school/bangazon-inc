@@ -1,5 +1,21 @@
 # Debugging
 
+---
+
+## Objectives
+
+After completing this lesson you should be able to:
+
+1. Run a C# program in the VS Code debugger
+1. Set a breakpoint in C# code
+1. Step through code after the debugger stops on a breakpoint
+1. Continue running the program after it was stopped at a breakpoint
+1. Stop the debugger
+1. Use the Variables panel to examine the values of variables
+1. Configure VS Code to run the application using the "integrated terminal"
+
+---
+
 _To follow along with the example code below, clone this repo_
 
 [VS Code Debugging Example](https://github.com/nashville-software-school/vscode-csharp-debug-demo)
@@ -16,7 +32,7 @@ If you aren't presented with that window, you can select the Debugger icon on th
 
 This will create a `.vscode` folder in your project that contains a `launch.json` and a `tasks.json` file. 
 
-Open the `launch.json` file and find the "console" property. This propety can have 1 of 3 values
+Open the `launch.json` file and find the "console" property. This property can have 1 of 3 values
 
 - **"integratedConsole"**: The output from statements such as `Console.WriteLine` will show up in a VS Code window called the Debug Console
 
@@ -24,7 +40,7 @@ Open the `launch.json` file and find the "console" property. This propety can ha
 
 - **"externalTerminal"**: The output will show up in your normal terminal window outside of VS Code.
 
-For debugging most applications, you'll find the _intergratedTerminal_ option to be the most helpful. Set the console propety to that
+For debugging most applications, you'll find the _integratedTerminal_ option to be the most helpful. Set the console property to that
 
 ```json
 "console": "integratedTerminal",

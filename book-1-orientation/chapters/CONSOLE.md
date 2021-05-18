@@ -1,5 +1,18 @@
 # Writing to and Reading from the Console
 
+---
+
+## Objectives
+
+After completing this lesson you should be able to:
+
+1. Define `Console`
+1. Write a string to the console
+1. Read a string value from the console
+1. Read a numeric value from the console
+
+---
+
 The `Console` object in C# is the way we interact with the terminal. We can write to it - meaning we can print out text, and we can read from it - meaning we can capture user input.
 
 > **NOTE:** The "terminal", "console" and "command line" all refer to the same thing.

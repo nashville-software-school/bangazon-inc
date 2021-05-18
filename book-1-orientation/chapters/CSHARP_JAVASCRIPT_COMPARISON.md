@@ -1,8 +1,12 @@
 # C# for the JavaScript Developer
 
+## A Cheat Sheet
+
 Learning your first programming language is hard. It's hard because you're not only learning a language, but you're also learning _how to program_.
 
 It is often said that learning a second programming language is easier because you now have the mental model of programming and how programming languages work. Now you can transfer the knowledge from the language you know to the language you're learning.
+
+> **NOTE:** You should keep this chapter handy throughout the orientation portion of the course.
 
 ---
 

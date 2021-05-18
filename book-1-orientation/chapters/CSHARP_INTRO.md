@@ -1,5 +1,21 @@
 # Hello, C#
 
+---
+
+## Objectives
+
+After completing this lesson and working on related exercises you should be able to:
+
+1. Define the acronym "CLI"
+1. State the purpose of a `*.csproj` file
+1. State the purpose of a `*.cs` file
+1. Informally distinguish between the terms ".NET 5", ".NET Core" and ".NET Framework".
+1. Create a new, empty C# console program
+1. Write a simple "Hello World" C# console program
+1. Run a C# program using the `dotnet run` command
+
+---
+
 ## Your first console application
 
 Let's begin with your first C# console application _(also known as a "command line interface" application or "cli" app)_.
