@@ -436,13 +436,7 @@ function getAllBeanVarieties() {
 }
 ```
 
-Run the app with `serve`
-
-```sh
-npx serve -l 3000 .
-```
-
-> **NOTE:** The default port for `serve` is `5000`, but our an ASP<span>.NET</span> app is already running on ports `5000` and `5001`, so we use the `-l` (a.k.a. _listen_) flag to tell `serve` to use port `3000`.
+Start live server. 
 
 Open the console and then click the `Run It!` button. What do you see?
 
