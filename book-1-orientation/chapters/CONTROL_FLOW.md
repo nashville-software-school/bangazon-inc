@@ -1,5 +1,20 @@
 # Control Flow
 
+---
+
+## Objectives
+
+After completing this lesson you should be able to:
+
+1. Informally define "control flow"
+1. List three types of loops in C#
+1. Recognize an `if` statement
+1. Recognize a `while` loop
+1. Recognize a `for` loop
+1. Recognize a `foreach` loop
+
+---
+
 Control flow _(also known as "signal flow")_ refers to the order in which statements and expressions execute in our code. It's basically the order of "stuff that happens" in our program.
 
 ## Top-Down
