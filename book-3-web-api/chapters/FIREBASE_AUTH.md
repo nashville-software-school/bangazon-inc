@@ -47,9 +47,9 @@ On the Project settings page take note of the `Project ID` and the `Web API Key`
 
 Now that we have some initial setup out of the way, let's take some time to think about what we are going to be building.
 
-Our goal is to build a full-stack application using ASP<span>.NET</span> Core Web API on the server, Entity Framework Core to interact with a SQL Server database, React on the client and Firebase for authentication.
+Our goal is to build a full-stack application using ASP<span>.NET</span> Core Web API on the server, ADO.NET to interact with a SQL Server database, React on the client and Firebase for authentication.
 
-Because Web API, EF Core and React are all familiar to us, we won't go into them here. But we do need to get a high-level idea of how authentication will fit into the project. The image below describes the process.
+Because Web API, ADO.NET and React are all familiar to us, we won't go into them here. But we do need to get a high-level idea of how authentication will fit into the project. The image below describes the process.
 
 ![Firebase auth flow](./images/firebase-auth-architecture-small-1.png)
 
