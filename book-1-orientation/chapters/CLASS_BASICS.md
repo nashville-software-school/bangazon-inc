@@ -74,7 +74,8 @@ public class Customer
     public bool IsLocal { get; set; }
 
     // Calculated property that has no setter. It is readonly.
-    public string FullName {
+    public string FullName 
+    {
         get
         {
             return $"{FirstName} {LastName}";
@@ -193,13 +194,18 @@ namespace Classes
 Much like **properties**, **Fields** are use to store values in an object. Unlike properties fields are usually marked as **`private`** meaning they cannot be accessed outside the object. The concept of storing private data that is only accessible inside the object is referred to as **encapsulation**.
 
 ```cs
-public class Box {
+public class Box 
+{
     private string _secret = "Sometimes I sing Aretha Franklin songs in the shower.";
 
-    public string GetSecret(string magicWord) {
-        if (magicWord == "please") {
+    public string GetSecret(string magicWord) 
+    {
+        if (magicWord == "please") 
+        {
             return _secret;
-        } else {
+        } 
+        else
+        {
             return "I'm not telling you!";
         }
     }
@@ -220,8 +226,10 @@ Console.WriteLine(box.GetSecret("please"));
 A constructor is special method in a class that is called when a new instance of the class is created. The role of a constructor is to make sure the new object is setup and ready for use immediately after it is created.
 
 ```cs
-public class Store {
-    public Store(string name, List<string> initialInventory) {
+public class Store
+{
+    public Store(string name, List<string> initialInventory)
+    {
         Name = name;
         Inventory = initialInventory;
     }
