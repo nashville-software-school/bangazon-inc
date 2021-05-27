@@ -349,10 +349,6 @@ namespace Classes
 1. In the `Main` method of your console application, create a new instance of Company, and three instances of Employee. Then assign the employees to the company.
 
 
-## Practice: An Adventurer's Quest
-
-Follow [this link](./QUEST.md) to begin your quest.
-
 <br/>
 <br/>
 <br/>
