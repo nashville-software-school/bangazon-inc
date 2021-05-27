@@ -92,8 +92,12 @@ namespace NSSOrientation
                 Console.WriteLine("Must be cohort 43");
             }
 
-            // This looks a lot like JavaScript!
-            students.ForEach(stu => Console.WriteLine(stu));
+            // This looks a lot like a for...of loop in JavaScript!
+            
+            foreach(string student in students)
+            {
+            Console.WriteLine(student);
+            }
         }
     }
 }
