@@ -2,10 +2,6 @@
 
 .NET Language-Integrated Query defines a set of general purpose standard query operators that allow traversal, filter, and projection operations to be expressed in a direct yet declarative way in any .NET-based programming language. The standard query operators allow queries to be applied to any `IEnumerable<T>`-based information source.
 
-### Visualization of LINQ methods
-
-![linq methods chart](./assets/linq.jpg)
-
 
 ## LINQ Methods
 
@@ -504,13 +500,10 @@ Read the [Cross Join](https://code.msdn.microsoft.com/LINQ-Join-Operators-dabef4
 > **NOTE**: You might also find this page on the Microsoft Docs site helpful.
 > * [Enumerable.Join Method ](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.join?view=netframework-4.8#System_Linq_Enumerable_Join__4_System_Collections_Generic_IEnumerable___0__System_Collections_Generic_IEnumerable___1__System_Func___0___2__System_Func___1___2__System_Func___0___1___3__)
 
+TASK: As in the previous exercise, you're going to output the millionaires, but you will also display the full name of the bank. You also need to sort the millionaires' names, ascending by their LAST name.
+    
 ```cs
 /*
-    TASK:
-    As in the previous exercise, you're going to output the millionaires,
-    but you will also display the full name of the bank. You also need
-    to sort the millionaires' names, ascending by their LAST name.
-
     Example output:
         Tina Fey at Citibank
         Joe Landy at Wells Fargo
@@ -611,3 +604,6 @@ namespace Challenge
     }   
 }
 ```
+### Visualization of LINQ methods
+
+![linq methods chart](./assets/linq.jpg)
