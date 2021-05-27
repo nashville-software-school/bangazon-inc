@@ -2,10 +2,6 @@
 
 .NET Language-Integrated Query defines a set of general purpose standard query operators that allow traversal, filter, and projection operations to be expressed in a direct yet declarative way in any .NET-based programming language. The standard query operators allow queries to be applied to any `IEnumerable<T>`-based information source.
 
-### Visualization of LINQ methods
-
-![linq methods chart](./assets/linq.jpg)
-
 
 ## LINQ Methods
 
@@ -113,11 +109,10 @@ int small = sampleNumbers.FirstOrDefault(n => n < 5);
 
 ## Select Using a Custom Type
 
+### Person.cs
 ```cs
-
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace linqExample
 {
@@ -128,12 +123,30 @@ namespace linqExample
         public DateTime DOB {get; set;}
         public List<string> NickNames {get; set;}
     }
-    internal class ReportEntry
+ }
+ ```
+ ### ReportEntry.cs
+ ```cs
+ using System;
+ 
+ namespace linqExample
+{
+    public class ReportEntry
     {
         public string FullName { get; set; }
         public DateTime DOB { get; set; }
         public int NickNameCount { get; set; }
     }
+}
+ ```
+ ### Program.cs
+ ```cs
+using System;
+using System.Collections.Generic;
+using System.Linq;
+ 
+ namespace linqExample
+{
     class Program
     {
         static void Main(string[] args)
@@ -225,11 +238,9 @@ public class Program
 
 
 ## Using a `group by`
-
+### SalesReportEntry.cs
 ```cs
 using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace linqGroupBy
 {
@@ -238,11 +249,30 @@ namespace linqGroupBy
         public string ReportNeighborhood { get; set; }
         public double ReportTotalSales { get; set; }
     }
-    public class Kid {
+}
+```
+### Kid.cs
+```cs
+using System;
+
+namespace linqGroupBy
+{
+    public class Kid 
+    {
         public string FullName {get; set;}
         public string Neighborhood {get; set;}
         public double Sales {get; set;}
     }
+}
+```
+### Program.cs
+```cs
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace linqGroupBy
+{
     class Program
     {
         static void Main(string[] args)
@@ -396,31 +426,51 @@ List<int> wheresSquaredo = new List<int>()
 ```
 
 ### Using Custom Types
-
+#### Customer.cs
 ```cs
 // Build a collection of customers who are millionaires
-public class Customer
-{
-    public string Name { get; set; }
-    public double Balance { get; set; }
-    public string Bank { get; set; }
-}
 
-public class Program
+using System;
+
+namespace CustomTypeExample 
 {
-    public static void Main() {
-        List<Customer> customers = new List<Customer>() {
-            new Customer(){ Name="Bob Lesman", Balance=80345.66, Bank="FTB"},
-            new Customer(){ Name="Joe Landy", Balance=9284756.21, Bank="WF"},
-            new Customer(){ Name="Meg Ford", Balance=487233.01, Bank="BOA"},
-            new Customer(){ Name="Peg Vale", Balance=7001449.92, Bank="BOA"},
-            new Customer(){ Name="Mike Johnson", Balance=790872.12, Bank="WF"},
-            new Customer(){ Name="Les Paul", Balance=8374892.54, Bank="WF"},
-            new Customer(){ Name="Sid Crosby", Balance=957436.39, Bank="FTB"},
-            new Customer(){ Name="Sarah Ng", Balance=56562389.85, Bank="FTB"},
-            new Customer(){ Name="Tina Fey", Balance=1000000.00, Bank="CITI"},
-            new Customer(){ Name="Sid Brown", Balance=49582.68, Bank="CITI"}
-        };
+
+    public class Customer
+    {
+        public string Name { get; set; }
+        public double Balance { get; set; }
+        public string Bank { get; set; }
+    }
+    
+}
+```
+#### Program.cs
+```cs
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace CustomTypeExample 
+{
+    public class Program
+    {
+        public static void Main() 
+        {
+            List<Customer> customers = new List<Customer>() 
+            {
+                new Customer(){ Name="Bob Lesman", Balance=80345.66, Bank="FTB"},
+                new Customer(){ Name="Joe Landy", Balance=9284756.21, Bank="WF"},
+                new Customer(){ Name="Meg Ford", Balance=487233.01, Bank="BOA"},
+                new Customer(){ Name="Peg Vale", Balance=7001449.92, Bank="BOA"},
+                new Customer(){ Name="Mike Johnson", Balance=790872.12, Bank="WF"},
+                new Customer(){ Name="Les Paul", Balance=8374892.54, Bank="WF"},
+                new Customer(){ Name="Sid Crosby", Balance=957436.39, Bank="FTB"},
+                new Customer(){ Name="Sarah Ng", Balance=56562389.85, Bank="FTB"},
+                new Customer(){ Name="Tina Fey", Balance=1000000.00, Bank="CITI"},
+                new Customer(){ Name="Sid Brown", Balance=49582.68, Bank="CITI"}
+            };
+        }
     }
 }
 ```
@@ -450,13 +500,10 @@ Read the [Cross Join](https://code.msdn.microsoft.com/LINQ-Join-Operators-dabef4
 > **NOTE**: You might also find this page on the Microsoft Docs site helpful.
 > * [Enumerable.Join Method ](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.join?view=netframework-4.8#System_Linq_Enumerable_Join__4_System_Collections_Generic_IEnumerable___0__System_Collections_Generic_IEnumerable___1__System_Func___0___2__System_Func___1___2__System_Func___0___1___3__)
 
+TASK: As in the previous exercise, you're going to output the millionaires, but you will also display the full name of the bank. You also need to sort the millionaires' names, ascending by their LAST name.
+    
 ```cs
 /*
-    TASK:
-    As in the previous exercise, you're going to output the millionaires,
-    but you will also display the full name of the bank. You also need
-    to sort the millionaires' names, ascending by their LAST name.
-
     Example output:
         Tina Fey at Citibank
         Joe Landy at Wells Fargo
@@ -464,64 +511,99 @@ Read the [Cross Join](https://code.msdn.microsoft.com/LINQ-Join-Operators-dabef4
         Les Paul at Wells Fargo
         Peg Vale at Bank of America
 */
+```
+#### Bank.cs
+```cs
+using System;
 
 // Define a bank
-public class Bank
+namespace Challenge 
 {
-    public string Symbol { get; set; }
-    public string Name { get; set; }
+    public class Bank
+    {
+        public string Symbol { get; set; }
+        public string Name { get; set; }
+    }
 }
+```
+#### Customer.cs
+```cs
+using System;
 
 // Define a customer
-public class Customer
+namespace Challenge 
 {
-    public string Name { get; set; }
-    public double Balance { get; set; }
-    public string Bank { get; set; }
+    public class Customer
+    {
+        public string Name { get; set; }
+        public double Balance { get; set; }
+        public string Bank { get; set; }
+    }
 }
+```
+#### Program.cs
+```cs
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
-public class Program
+namespace Challenge 
 {
-    public static void Main() {
-        // Create some banks and store in a List
-        List<Bank> banks = new List<Bank>() {
-            new Bank(){ Name="First Tennessee", Symbol="FTB"},
-            new Bank(){ Name="Wells Fargo", Symbol="WF"},
-            new Bank(){ Name="Bank of America", Symbol="BOA"},
-            new Bank(){ Name="Citibank", Symbol="CITI"},
-        };
+    public class Program
+    {
+        public static void Main() 
+        {
+            // Create some banks and store in a List
+            List<Bank> banks = new List<Bank>() {
+                new Bank(){ Name="First Tennessee", Symbol="FTB"},
+                new Bank(){ Name="Wells Fargo", Symbol="WF"},
+                new Bank(){ Name="Bank of America", Symbol="BOA"},
+                new Bank(){ Name="Citibank", Symbol="CITI"},
+            };
 
-        // Create some customers and store in a List
-        List<Customer> customers = new List<Customer>() {
-            new Customer(){ Name="Bob Lesman", Balance=80345.66, Bank="FTB"},
-            new Customer(){ Name="Joe Landy", Balance=9284756.21, Bank="WF"},
-            new Customer(){ Name="Meg Ford", Balance=487233.01, Bank="BOA"},
-            new Customer(){ Name="Peg Vale", Balance=7001449.92, Bank="BOA"},
-            new Customer(){ Name="Mike Johnson", Balance=790872.12, Bank="WF"},
-            new Customer(){ Name="Les Paul", Balance=8374892.54, Bank="WF"},
-            new Customer(){ Name="Sid Crosby", Balance=957436.39, Bank="FTB"},
-            new Customer(){ Name="Sarah Ng", Balance=56562389.85, Bank="FTB"},
-            new Customer(){ Name="Tina Fey", Balance=1000000.00, Bank="CITI"},
-            new Customer(){ Name="Sid Brown", Balance=49582.68, Bank="CITI"}
-        };
+            // Create some customers and store in a List
+            List<Customer> customers = new List<Customer>() {
+                new Customer(){ Name="Bob Lesman", Balance=80345.66, Bank="FTB"},
+                new Customer(){ Name="Joe Landy", Balance=9284756.21, Bank="WF"},
+                new Customer(){ Name="Meg Ford", Balance=487233.01, Bank="BOA"},
+                new Customer(){ Name="Peg Vale", Balance=7001449.92, Bank="BOA"},
+                new Customer(){ Name="Mike Johnson", Balance=790872.12, Bank="WF"},
+                new Customer(){ Name="Les Paul", Balance=8374892.54, Bank="WF"},
+                new Customer(){ Name="Sid Crosby", Balance=957436.39, Bank="FTB"},
+                new Customer(){ Name="Sarah Ng", Balance=56562389.85, Bank="FTB"},
+                new Customer(){ Name="Tina Fey", Balance=1000000.00, Bank="CITI"},
+                new Customer(){ Name="Sid Brown", Balance=49582.68, Bank="CITI"}
+            };
+            List<ReportItem> millionaireReport = ...
+
+            foreach (var item in millionaireReport)
+            {
+                Console.WriteLine($"{item.CustomerName} at {item.BankName}");
+            }
+        }
+    }
+}
+```
+#### ReportItem.cs
+```cs
+using System;
 
         /*
             You will need to use the `Where()`
             and `Select()` methods to generate
             instances of the following class.
-
-            public class ReportItem
-            {
-                public string CustomerName { get; set; }
-                public string BankName { get; set; }
-            }
+            
         */
-        List<ReportItem> millionaireReport = ...
-
-        foreach (var item in millionaireReport)
-        {
-            Console.WriteLine($"{item.CustomerName} at {item.BankName}");
-        }
-    }
+        
+namespace Challenge 
+{
+    public class ReportItem
+    {
+        public string CustomerName { get; set; }
+        public string BankName { get; set; }
+    }   
 }
 ```
+### Visualization of LINQ methods
+
+![linq methods chart](./assets/linq.jpg)
