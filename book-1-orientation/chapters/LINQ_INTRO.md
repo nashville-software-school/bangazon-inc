@@ -588,6 +588,7 @@ namespace Challenge
                 Console.WriteLine($"{item.CustomerName} at {item.BankName}");
             }
         }
+    }
 }
 ```
 #### ReportItem.cs
