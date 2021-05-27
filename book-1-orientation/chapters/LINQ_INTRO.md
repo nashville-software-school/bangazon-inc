@@ -113,11 +113,10 @@ int small = sampleNumbers.FirstOrDefault(n => n < 5);
 
 ## Select Using a Custom Type
 
+### Person.cs
 ```cs
-
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace linqExample
 {
@@ -128,12 +127,30 @@ namespace linqExample
         public DateTime DOB {get; set;}
         public List<string> NickNames {get; set;}
     }
-    internal class ReportEntry
+ }
+ ```
+ ### ReportEntry.cs
+ ```cs
+ using System;
+ 
+ namespace linqExample
+{
+    public class ReportEntry
     {
         public string FullName { get; set; }
         public DateTime DOB { get; set; }
         public int NickNameCount { get; set; }
     }
+}
+ ```
+ ### Program.cs
+ ```cs
+using System;
+using System.Collections.Generic;
+using System.Linq;
+ 
+ namespace linqExample
+{
     class Program
     {
         static void Main(string[] args)
@@ -225,11 +242,9 @@ public class Program
 
 
 ## Using a `group by`
-
+### SalesReportEntry.cs
 ```cs
 using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace linqGroupBy
 {
@@ -238,11 +253,30 @@ namespace linqGroupBy
         public string ReportNeighborhood { get; set; }
         public double ReportTotalSales { get; set; }
     }
-    public class Kid {
+}
+```
+### Kid.cs
+```cs
+using System;
+
+namespace linqGroupBy
+{
+    public class Kid 
+    {
         public string FullName {get; set;}
         public string Neighborhood {get; set;}
         public double Sales {get; set;}
     }
+}
+```
+### Program.cs
+```cs
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace linqGroupBy
+{
     class Program
     {
         static void Main(string[] args)
