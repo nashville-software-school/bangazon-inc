@@ -430,31 +430,51 @@ List<int> wheresSquaredo = new List<int>()
 ```
 
 ### Using Custom Types
-
+#### Customer.cs
 ```cs
 // Build a collection of customers who are millionaires
-public class Customer
-{
-    public string Name { get; set; }
-    public double Balance { get; set; }
-    public string Bank { get; set; }
-}
 
-public class Program
+using System;
+
+namespace CustomTypeExample 
 {
-    public static void Main() {
-        List<Customer> customers = new List<Customer>() {
-            new Customer(){ Name="Bob Lesman", Balance=80345.66, Bank="FTB"},
-            new Customer(){ Name="Joe Landy", Balance=9284756.21, Bank="WF"},
-            new Customer(){ Name="Meg Ford", Balance=487233.01, Bank="BOA"},
-            new Customer(){ Name="Peg Vale", Balance=7001449.92, Bank="BOA"},
-            new Customer(){ Name="Mike Johnson", Balance=790872.12, Bank="WF"},
-            new Customer(){ Name="Les Paul", Balance=8374892.54, Bank="WF"},
-            new Customer(){ Name="Sid Crosby", Balance=957436.39, Bank="FTB"},
-            new Customer(){ Name="Sarah Ng", Balance=56562389.85, Bank="FTB"},
-            new Customer(){ Name="Tina Fey", Balance=1000000.00, Bank="CITI"},
-            new Customer(){ Name="Sid Brown", Balance=49582.68, Bank="CITI"}
-        };
+
+    public class Customer
+    {
+        public string Name { get; set; }
+        public double Balance { get; set; }
+        public string Bank { get; set; }
+    }
+    
+}
+```
+#### Program.cs
+```cs
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace CustomTypeExample 
+{
+    public class Program
+    {
+        public static void Main() 
+        {
+            List<Customer> customers = new List<Customer>() 
+            {
+                new Customer(){ Name="Bob Lesman", Balance=80345.66, Bank="FTB"},
+                new Customer(){ Name="Joe Landy", Balance=9284756.21, Bank="WF"},
+                new Customer(){ Name="Meg Ford", Balance=487233.01, Bank="BOA"},
+                new Customer(){ Name="Peg Vale", Balance=7001449.92, Bank="BOA"},
+                new Customer(){ Name="Mike Johnson", Balance=790872.12, Bank="WF"},
+                new Customer(){ Name="Les Paul", Balance=8374892.54, Bank="WF"},
+                new Customer(){ Name="Sid Crosby", Balance=957436.39, Bank="FTB"},
+                new Customer(){ Name="Sarah Ng", Balance=56562389.85, Bank="FTB"},
+                new Customer(){ Name="Tina Fey", Balance=1000000.00, Bank="CITI"},
+                new Customer(){ Name="Sid Brown", Balance=49582.68, Bank="CITI"}
+            };
+        }
     }
 }
 ```
@@ -498,64 +518,95 @@ Read the [Cross Join](https://code.msdn.microsoft.com/LINQ-Join-Operators-dabef4
         Les Paul at Wells Fargo
         Peg Vale at Bank of America
 */
+```
+#### Bank.cs
+```cs
+using System;
 
 // Define a bank
-public class Bank
+namespace Challenge 
 {
-    public string Symbol { get; set; }
-    public string Name { get; set; }
+    public class Bank
+    {
+        public string Symbol { get; set; }
+        public string Name { get; set; }
+    }
 }
+```
+#### Customer.cs
+```cs
+using System;
 
 // Define a customer
-public class Customer
+namespace Challenge 
 {
-    public string Name { get; set; }
-    public double Balance { get; set; }
-    public string Bank { get; set; }
+    public class Customer
+    {
+        public string Name { get; set; }
+        public double Balance { get; set; }
+        public string Bank { get; set; }
+    }
 }
+```
+#### Program.cs
+```cs
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
-public class Program
+namespace Challenge 
 {
-    public static void Main() {
-        // Create some banks and store in a List
-        List<Bank> banks = new List<Bank>() {
-            new Bank(){ Name="First Tennessee", Symbol="FTB"},
-            new Bank(){ Name="Wells Fargo", Symbol="WF"},
-            new Bank(){ Name="Bank of America", Symbol="BOA"},
-            new Bank(){ Name="Citibank", Symbol="CITI"},
-        };
+    public class Program
+    {
+        public static void Main() 
+        {
+            // Create some banks and store in a List
+            List<Bank> banks = new List<Bank>() {
+                new Bank(){ Name="First Tennessee", Symbol="FTB"},
+                new Bank(){ Name="Wells Fargo", Symbol="WF"},
+                new Bank(){ Name="Bank of America", Symbol="BOA"},
+                new Bank(){ Name="Citibank", Symbol="CITI"},
+            };
 
-        // Create some customers and store in a List
-        List<Customer> customers = new List<Customer>() {
-            new Customer(){ Name="Bob Lesman", Balance=80345.66, Bank="FTB"},
-            new Customer(){ Name="Joe Landy", Balance=9284756.21, Bank="WF"},
-            new Customer(){ Name="Meg Ford", Balance=487233.01, Bank="BOA"},
-            new Customer(){ Name="Peg Vale", Balance=7001449.92, Bank="BOA"},
-            new Customer(){ Name="Mike Johnson", Balance=790872.12, Bank="WF"},
-            new Customer(){ Name="Les Paul", Balance=8374892.54, Bank="WF"},
-            new Customer(){ Name="Sid Crosby", Balance=957436.39, Bank="FTB"},
-            new Customer(){ Name="Sarah Ng", Balance=56562389.85, Bank="FTB"},
-            new Customer(){ Name="Tina Fey", Balance=1000000.00, Bank="CITI"},
-            new Customer(){ Name="Sid Brown", Balance=49582.68, Bank="CITI"}
-        };
+            // Create some customers and store in a List
+            List<Customer> customers = new List<Customer>() {
+                new Customer(){ Name="Bob Lesman", Balance=80345.66, Bank="FTB"},
+                new Customer(){ Name="Joe Landy", Balance=9284756.21, Bank="WF"},
+                new Customer(){ Name="Meg Ford", Balance=487233.01, Bank="BOA"},
+                new Customer(){ Name="Peg Vale", Balance=7001449.92, Bank="BOA"},
+                new Customer(){ Name="Mike Johnson", Balance=790872.12, Bank="WF"},
+                new Customer(){ Name="Les Paul", Balance=8374892.54, Bank="WF"},
+                new Customer(){ Name="Sid Crosby", Balance=957436.39, Bank="FTB"},
+                new Customer(){ Name="Sarah Ng", Balance=56562389.85, Bank="FTB"},
+                new Customer(){ Name="Tina Fey", Balance=1000000.00, Bank="CITI"},
+                new Customer(){ Name="Sid Brown", Balance=49582.68, Bank="CITI"}
+            };
+            List<ReportItem> millionaireReport = ...
+
+            foreach (var item in millionaireReport)
+            {
+                Console.WriteLine($"{item.CustomerName} at {item.BankName}");
+            }
+        }
+}
+```
+#### ReportItem.cs
+```cs
+using System;
 
         /*
             You will need to use the `Where()`
             and `Select()` methods to generate
             instances of the following class.
-
-            public class ReportItem
-            {
-                public string CustomerName { get; set; }
-                public string BankName { get; set; }
-            }
+            
         */
-        List<ReportItem> millionaireReport = ...
-
-        foreach (var item in millionaireReport)
-        {
-            Console.WriteLine($"{item.CustomerName} at {item.BankName}");
-        }
-    }
+        
+namespace Challenge 
+{
+    public class ReportItem
+    {
+        public string CustomerName { get; set; }
+        public string BankName { get; set; }
+    }   
 }
 ```
