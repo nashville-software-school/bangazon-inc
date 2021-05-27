@@ -96,7 +96,7 @@ namespace NSSOrientation
             
             foreach(string student in students)
             {
-            Console.WriteLine(student);
+                Console.WriteLine(student);
             }
         }
     }
