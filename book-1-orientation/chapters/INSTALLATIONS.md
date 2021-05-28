@@ -136,7 +136,8 @@ You'll be making a lot of new projects and we want to easily be able to create a
 echo "
 dnignore() {
     curl -L -s 'https://raw.githubusercontent.com/github/gitignore/master/VisualStudio.gitignore' > .gitignore
-}" >> ~/.bashrc
+}
+" >> ~/.bashrc
 ```
 
 You now have access in your terminal to a command called `dnignore` which will add a gitignore file to your project.
