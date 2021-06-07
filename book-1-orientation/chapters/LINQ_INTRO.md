@@ -168,7 +168,7 @@ This method returns a new collection of objects sorted by the given expression.
 
 ##### Example
 
-```c
+```cs
 List<People> sortedByLastName = people.OrderBy(p => p.LastName).ToList();
 ```
 
