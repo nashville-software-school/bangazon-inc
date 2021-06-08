@@ -164,7 +164,7 @@ Notice that interfaces look a bit like classes with a few distinguishing element
 1. Use the `interface` keyword instead of `class`
 1. The name starts with the letter `I` to indicate that it is an interface.
 1. Do not use the `public` keyword on methods and properties. Methods and properties on an interface are _always_ public.
-1. Methods and properties _contain **no** definition. We only see the **_signature_** of the method or property. The 
+1. Methods and properties _contain **no** definition. We only see the **_signature_** of the method or property.
 
 Now you can define a class as an implementation of the interface for a walking animal. You can start with an African Painted Dog.
 
