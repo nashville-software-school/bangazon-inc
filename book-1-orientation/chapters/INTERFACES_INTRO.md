@@ -278,7 +278,7 @@ public class Zero : Vehicle // Electric motorcycle
 
     public void ChargeBattery()
     {
-        // method definition omitted
+        // method body omitted
     }
 }
 ```
@@ -290,7 +290,7 @@ public class Cessna : Vehicle // Propellor light aircraft
 
     public void RefuelTank()
     {
-        // method definition omitted
+        // method body omitted
     }
 }
 ```
@@ -302,7 +302,7 @@ public class Tesla : Vehicle // Electric car
 
     public void ChargeBattery()
     {
-        // method definition omitted
+        // method body omitted
     }
 }
 ```
@@ -314,7 +314,7 @@ public class Ram : Vehicle // Gas powered truck
 
     public void RefuelTank()
     {
-        // method definition omitted
+        // method body omitted
     }
 }
 ```
