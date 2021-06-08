@@ -36,19 +36,22 @@ This book builds a strong foundation in the syntax, data structures, and valuabl
 
 * Chapter 22 - [Inheritance](./chapters/INHERITANCE_INTRO.md)
 * Chapter 23 - [Interfaces](./chapters/INTERFACES_INTRO.md)
-* Chapter 24 - [Object Relationship Vocabulary Terms](./chapters/RELATIONSHIPS.md)
-* Chapter 25 - [More about Classes](./chapters/CLASS_ADVANCED.md)
-* Chapter 26 - [Wrangling Data with LINQ](./chapters/LINQ_INTRO.md)
-* Chapter 27 - [Exercise - Heist Part II](./chapters/CLASSIC_HEIST.md)
+* Chapter 24 - [Exercise - Heist Part II](./chapters/CLASSIC_HEIST.md)
+* Chapter 25 - [Object Relationship Vocabulary Terms](./chapters/RELATIONSHIPS.md)
+* Chapter 26 - [More about Classes](./chapters/CLASS_ADVANCED.md)
 
-**Part 4: C# and SQL with ADO<span>.NET</span>**
+**Part 4: Handling Data in C#**
+
+* Chapter 27 - [Wrangling Data with LINQ](./chapters/LINQ_INTRO.md)
+
+**Part 5: C# and SQL with ADO<span>.NET</span>**
 
 * Chapter 28 - [Intro to Visual Studio](./chapters/VISUAL_STUDIO.md)
 * Chapter 29 - [Debugging in Visual Studio](./chapters/DEBUGGING_VS.md)
 * Chapter 30 - [Using ADO.NET and SQL](./chapters/ADONET_INTRO.md)
 * Chapter 31 - [Using ADO.NET and SQL Part II](./chapters/ADONET_CONTINUED.md)
 
-**Part 5: Tabloid CLI Group Project**
+**Part 6: Tabloid CLI Group Project**
 
 ## Supplementary Content
 
