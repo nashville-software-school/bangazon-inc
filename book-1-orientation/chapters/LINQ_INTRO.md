@@ -160,7 +160,7 @@ map()
 
 ---
 
-### Sorting and Reversing
+### Sorting
 
 #### OrderBy
 
