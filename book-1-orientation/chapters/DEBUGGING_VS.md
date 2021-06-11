@@ -87,6 +87,7 @@ class Program
         IEnumerable<Book> books = _books.Where(b => b.AuthorId == authorId);
         return books;
     }
+}
 ```
 
 Put a breakpoint at the start of the `Main` method and step through. If we Step Into the `GetAuthorByName` method, we can see that it unexpectedly returns `null`. We can inspect both the parameter that was passed in along with the items in `_authors` by hovering over each of them. We can now see that we mispelled the name Stephen.
