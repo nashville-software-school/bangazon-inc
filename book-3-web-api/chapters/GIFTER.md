@@ -35,37 +35,35 @@ public interface ISomeModelRepository
 
 Often basic CRUD is sufficient, but there times when it isn't - times when we need something more complex. This is particularly true when it comes to querying complex data with the goal of populating multiple types of Model objects from a single query.
 
-Let's explore this idea some more with an example application, Gifter. Along the way we'll also build some tools to help reduce some of the complexity of our repositories.
+Let's explore this idea some more with an example application, Streamish. Along the way we'll also build some tools to help reduce some of the complexity of our repositories.
 
-## Gifter
+## Streamish
 
-Gifter is a social app for sharing animated GIFs with others. For the time being we'll focus on using building a Web API. In future chapters we'll be creating a React application that will interact with the API. Along the way we'll dig into some more complex queries.
-
-> **NOTE:** There is quite a lot of debate over the pronunciation of the word "gif". Of course, this debate is a waste of time since surely we all know the correct way to pronounce it is "gif".
+Streamish is a social app for sharing videos with others. For the time being we'll focus on using building a Web API. In future chapters we'll be creating a React application that will interact with the API. Along the way we'll dig into some more complex queries.
 
 ### Project Setup
 
-1. Create the `Gifter` database using the [SQL script](./sql/Gifter.sql).
-1. Use Visual Studio to create a new ASP<span>.</span>NET Core Web Application project called "Gifter". Make suse to choose the "API" template when prompted.
+1. Create the `Streamish` database using the [SQL script](./sql/Streamish.sql).
+1. Use Visual Studio to create a new ASP<span>.</span>NET Core Web Application project called "Streamish". Make suse to choose the "API" template when prompted.
 1. Use Visual Studio's Nuget Package Manager to install the `Microsoft.Data.SqlClient` nuget package.
 1. Add the database connection string to the `appsettings.json` file.
-1. Spend a little while familiarizing yourself with the Gifter ERD
-    ![Gifter ERD](./images/Gifter_ERD.png)
+1. Spend a little while familiarizing yourself with the Streamish ERD
+    ![Streamish ERD](./images/Streamish_ERD.png)
 
 ### Model Classes
 
-Create the `Post`, `UserProfile` and `Comment` models. We're going to ignore the `Subscription` entity for now.
+Create the `Video`, `UserProfile` and `Comment` models. We're going to ignore the `Favorite` entity for now.
 
-> Models/Post.cs
+> Models/Video.cs
 
 ```cs
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 
-namespace Gifter.Models
+namespace Streamish.Models
 {
-    public class Post
+    public class Video
     {
         public int Id { get; set; }
 
@@ -77,10 +75,8 @@ namespace Gifter.Models
 
         public string Caption { get; set; }
 
-        [Required]
         public DateTime DateCreated { get; set; }
 
-        [Required]
         public int UserProfileId { get; set; }
 
         public UserProfile UserProfile { get; set; }
@@ -98,7 +94,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Gifter.Models
+namespace Streamish.Models
 {
     public class UserProfile
     {
@@ -112,7 +108,6 @@ namespace Gifter.Models
 
         public string ImageUrl { get; set; }
 
-        [Required]
         public DateTime DateCreated { get; set; }
 
     }
@@ -122,7 +117,7 @@ namespace Gifter.Models
 > Models/Comment.cs
 
 ```cs
-namespace Gifter.Models
+namespace Streamish.Models
 {
     public class Comment
     {
@@ -130,19 +125,19 @@ namespace Gifter.Models
         public string Message { get; set; }
         public int UserProfileId { get; set; }
         public UserProfile UserProfile { get; set; }
-        public int PostId { get; set; }
-        public Post Post { get; set; }
+        public int VideoId { get; set; }
+        public Video Video { get; set; }
     }
 }
 ```
 
 ### Basic CRUD
 
-Before we can get fancy, let's cover the basics. In this section we'll build and test an initial `PostRepository` and `PostController`.
+Before we can get fancy, let's cover the basics. In this section we'll build and test an initial `VideoRepository` and `VideoController`.
 
-#### PostRepository
+#### VideoRepository
 
-Before we dive into the `PostRepository`, let's pause a minute to reflect on our system design. Given our database has more than one entity, it's a good bet that we'll need more than one repository. And since each repository will need to access `SqlConnection`s, this is a good opportunity to share a bit of code with using inheritance. So before we create the `PostRepository` let's create a repository parent class called `BaseRepository`.
+And before we dive into the `VideoRepository`, let's pause a minute to reflect on our system design. Given our database has more than one entity, it's a good bet that we'll need more than one repository. And since each repository will need to access `SqlConnection`s, this is a good opportunity to share a bit of code with using inheritance. So before we create the `VideoRepository` let's create a repository parent class called `BaseRepository`.
 
 > Repositories/BaseRepository.cs
 
@@ -150,7 +145,7 @@ Before we dive into the `PostRepository`, let's pause a minute to reflect on our
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 
-namespace Gifter.Repositories
+namespace Streamish.Repositories
 {
     public abstract class BaseRepository
     {
@@ -176,25 +171,25 @@ namespace Gifter.Repositories
 
 > **NOTE:** The use of the keyword `abstract` in the class definition is something we haven't seen before. It indicates that our `BaseRepository` class cannot be directly instantiated, but can ONLY be used by inheritance.
 
-Now we're ready to create the `PostRepository`. This is the first version of the class. We'll be embellishing it later.
+Now we're ready to create the `VideoRepository`. This is the first version of the class. We'll be embellishing it later.
 
-> Repositories/PostRepository.cs
+> Repositories/VideoRepository.cs
 
 ```cs
 using System;
 using System.Linq;
 using System.Collections.Generic;
 using Microsoft.Extensions.Configuration;
-using Gifter.Models;
-using Gifter.Utils;
+using Streamish.Models;
+using Streamish.Utils;
 
-namespace Gifter.Repositories
+namespace Streamish.Repositories
 {
-    public class PostRepository : BaseRepository, IPostRepository
+    public class VideoRepository : BaseRepository, IVideoRepository
     {
-        public PostRepository(IConfiguration configuration) : base(configuration) { }
+        public VideoRepository(IConfiguration configuration) : base(configuration) { }
 
-        public List<Post> GetAll()
+        public List<Video> GetAll()
         {
             using (var conn = Connection)
             {
@@ -203,15 +198,15 @@ namespace Gifter.Repositories
                 {
                     cmd.CommandText = @"
                           SELECT Id, Title, Caption, DateCreated, ImageUrl, UserProfileId
-                            FROM Post
+                            FROM Video
                         ORDER BY DateCreated";
 
                     var reader = cmd.ExecuteReader();
 
-                    var posts = new List<Post>();
+                    var videos = new List<Video>();
                     while (reader.Read())
                     {
-                        posts.Add(new Post()
+                        videos.Add(new Video()
                         {
                             Id = DbUtils.GetInt(reader, "Id"),
                             Title = DbUtils.GetString(reader, "Title"),
@@ -224,12 +219,12 @@ namespace Gifter.Repositories
 
                     reader.Close();
 
-                    return posts;
+                    return videos;
                 }
             }
         }
 
-        public Post GetById(int id)
+        public Video GetById(int id)
         {
             using (var conn = Connection)
             {
@@ -238,17 +233,17 @@ namespace Gifter.Repositories
                 {
                     cmd.CommandText = @"
                           SELECT Title, Caption, DateCreated, ImageUrl, UserProfileId
-                            FROM Post
+                            FROM Video
                            WHERE Id = @Id";
 
                     DbUtils.AddParameter(cmd, "@Id", id);
 
                     var reader = cmd.ExecuteReader();
 
-                    Post post = null;
+                    Video video = null;
                     if (reader.Read())
                     {
-                        post = new Post()
+                        video = new Video()
                         {
                             Id = id,
                             Title = DbUtils.GetString(reader, "Title"),
@@ -261,12 +256,12 @@ namespace Gifter.Repositories
 
                     reader.Close();
 
-                    return post;
+                    return video;
                 }
             }
         }
 
-        public void Add(Post post)
+        public void Add(Video video)
         {
             using (var conn = Connection)
             {
@@ -274,22 +269,22 @@ namespace Gifter.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        INSERT INTO Post (Title, Caption, DateCreated, ImageUrl, UserProfileId)
+                        INSERT INTO Video (Title, Caption, DateCreated, ImageUrl, UserProfileId)
                         OUTPUT INSERTED.ID
                         VALUES (@Title, @Caption, @DateCreated, @ImageUrl, @UserProfileId)";
 
-                    DbUtils.AddParameter(cmd, "@Title", post.Title);
-                    DbUtils.AddParameter(cmd, "@Caption", post.Caption);
-                    DbUtils.AddParameter(cmd, "@DateCreated", post.DateCreated);
-                    DbUtils.AddParameter(cmd, "@ImageUrl", post.ImageUrl);
-                    DbUtils.AddParameter(cmd, "@UserProfileId", post.UserProfileId);
+                    DbUtils.AddParameter(cmd, "@Title", video.Title);
+                    DbUtils.AddParameter(cmd, "@Caption", video.Caption);
+                    DbUtils.AddParameter(cmd, "@DateCreated", video.DateCreated);
+                    DbUtils.AddParameter(cmd, "@ImageUrl", video.ImageUrl);
+                    DbUtils.AddParameter(cmd, "@UserProfileId", video.UserProfileId);
 
-                    post.Id = (int)cmd.ExecuteScalar();
+                    video.Id = (int)cmd.ExecuteScalar();
                 }
             }
         }
 
-        public void Update(Post post)
+        public void Update(Video video)
         {
             using (var conn = Connection)
             {
@@ -297,7 +292,7 @@ namespace Gifter.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        UPDATE Post
+                        UPDATE Video
                            SET Title = @Title,
                                Caption = @Caption,
                                DateCreated = @DateCreated,
@@ -305,12 +300,12 @@ namespace Gifter.Repositories
                                UserProfileId = @UserProfileId
                          WHERE Id = @Id";
 
-                    DbUtils.AddParameter(cmd, "@Title", post.Title);
-                    DbUtils.AddParameter(cmd, "@Caption", post.Caption);
-                    DbUtils.AddParameter(cmd, "@DateCreated", post.DateCreated);
-                    DbUtils.AddParameter(cmd, "@ImageUrl", post.ImageUrl);
-                    DbUtils.AddParameter(cmd, "@UserProfileId", post.UserProfileId);
-                    DbUtils.AddParameter(cmd, "@Id", post.Id);
+                    DbUtils.AddParameter(cmd, "@Title", video.Title);
+                    DbUtils.AddParameter(cmd, "@Caption", video.Caption);
+                    DbUtils.AddParameter(cmd, "@DateCreated", video.DateCreated);
+                    DbUtils.AddParameter(cmd, "@ImageUrl", video.ImageUrl);
+                    DbUtils.AddParameter(cmd, "@UserProfileId", video.UserProfileId);
+                    DbUtils.AddParameter(cmd, "@Id", video.Id);
 
                     cmd.ExecuteNonQuery();
                 }
@@ -324,7 +319,7 @@ namespace Gifter.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = "DELETE FROM Post WHERE Id = @Id";
+                    cmd.CommandText = "DELETE FROM Video WHERE Id = @Id";
                     DbUtils.AddParameter(cmd, "@id", id);
                     cmd.ExecuteNonQuery();
                 }
@@ -334,11 +329,11 @@ namespace Gifter.Repositories
 }
 ```
 
-> **NOTE:** Remember to create and register the `IPostRepository` interface.
+> **NOTE:** Remember to create and register the `IVideoRepository` interface.
 
 At first glance the code above may seem like all the other ADO<span>.</span>NET code we've written, but look closer. Notice the references to `DbUtils`.
 
-What is `DbUtils`? It's not a part of .NET. It's a class we created in order help simplify some of our database interaction code, particularly with regards to dealing with `null` values. You might have noticed that the `Caption` column in the `Post` table is nullable, so we could use the help.
+What is `DbUtils`? It's not a part of .NET. It's a class we created in order help simplify some of our database interaction code, particularly with regards to dealing with `null` values. You might have noticed that the `Description` column in the `Video` table is nullable, so we could use the help.
 
 Create a `Utils` folder and add the `DbUtils.cs` file inside it.
 
@@ -348,7 +343,7 @@ Create a `Utils` folder and add the `DbUtils.cs` file inside it.
 using System;
 using Microsoft.Data.SqlClient;
 
-namespace Gifter.Utils
+namespace Streamish.Utils
 {
     /// <summary>
     ///  A set of useful function for interacting with ADO.NET
@@ -477,77 +472,77 @@ Read through the code above. Does it make sense? Are there other helper methods 
 
 You'll find it's fairly common practice to create such _utility classes_ (sometimes called _helper classes_). They are the "junk drawer" of our software projects. Beware, though, just like everything in software development there are positives and negatives to utility classes. Resist the temptation to over-generalize. When a particular method is only needed in one place, it's better to just make it a `private` method of whatever class it's used in.
 
-#### PostController
+#### VideoController
 
-Let's round out basic CRUD by creating a simple API that allows us to Create, Read, Update and Delete `Post`s.
+Let's round out basic CRUD by creating a simple API that allows us to Create, Read, Update and Delete `Video`s.
 
-> Controllers/PostController.cs
+> Controllers/VideoController.cs
 
 ```cs
 using System;
 using Microsoft.AspNetCore.Mvc;
-using Gifter.Repositories;
-using Gifter.Models;
+using Streamish.Repositories;
+using Streamish.Models;
 
-namespace Gifter.Controllers
+namespace Streamish.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PostController : ControllerBase
+    public class VideoController : ControllerBase
     {
-        private readonly IPostRepository _postRepository;
-        public PostController(IPostRepository postRepository)
+        private readonly IVideoRepository _videoRepository;
+        public VideoController(IVideoRepository videoRepository)
         {
-            _postRepository = postRepository;
+            _videoRepository = videoRepository;
         }
 
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(_postRepository.GetAll());
+            return Ok(_videoRepository.GetAll());
         }
 
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            var post = _postRepository.GetById(id);
-            if (post == null)
+            var video = _videoRepository.GetById(id);
+            if (video == null)
             {
                 return NotFound();
             }
-            return Ok(post);
+            return Ok(video);
         }
 
         [HttpPost]
-        public IActionResult Post(Post post)
+        public IActionResult Post(Video video)
         {
-            _postRepository.Add(post);
-            return CreatedAtAction("Get", new { id = post.Id }, post);
+            _videoRepository.Add(video);
+            return CreatedAtAction("Get", new { id = video.Id }, video);
         }
 
         [HttpPut("{id}")]
-        public IActionResult Put(int id, Post post)
+        public IActionResult Put(int id, Video video)
         {
-            if (id != post.Id)
+            if (id != video.Id)
             {
                 return BadRequest();
             }
 
-            _postRepository.Update(post);
+            _videoRepository.Update(video);
             return NoContent();
         }
 
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            _postRepository.Delete(id);
+            _videoRepository.Delete(id);
             return NoContent();
         }
     }
 }
 ```
 
-There's nothing new in the `PostController`. It's just a standard Web API controller.
+There's nothing new in the `VideoController`. It's just a standard Web API controller.
 
 #### Test the API Using Postman
 
@@ -555,22 +550,22 @@ I know you don't want to, but do it anyway. It's always best to test _as soon as
 
 ### Beyond Basic CRUD
 
-In your thorough testing of the API, you surely noticed that the JSON representation of a `Post` was missing some pieces. Each `Post` has a property for a `UserProfile` object (to represent the author of the Post) and a property for `Comments` made about that Post. However, although we have the properties, we don't have the data. Let's remedy that starting with the `UserProfile`.
+In your thorough testing of the API, you surely noticed that the JSON representation of a `Video` was missing some pieces. Each `Video` has a property for a `UserProfile` object (to represent the author of the Video) and a property for `Comments` made about that Video. However, although we have the properties, we don't have the data. Let's remedy that starting with the `UserProfile`.
 
-There are a couple of ways we might imagine getting a `UserProfile` object for a particular `Post`. Assuming we have a `UserProfileRepository`, we could do something like this in the `PostController`.
+There are a couple of ways we might imagine getting a `UserProfile` object for a particular `Video`. Assuming we have a `UserProfileRepository`, we could do something like this in the `VideoController`.
 
 ```cs
 [HttpGet]
 public IActionResult Get()
 {
-    var posts = _postRepository.GetAll();
+    var videos = _videoRepository.GetAll();
 
-    foreach (var post in posts)
+    foreach (var video in videos)
     {
-        post.UserProfile = _userProfileRepository.GetById(post.UserProfileId);
+        video.UserProfile = _userProfileRepository.GetById(video.UserProfileId);
     }
 
-    return Ok(posts);
+    return Ok(videos);
 }
 ```
 
@@ -578,7 +573,7 @@ That would work, but it would _NOT_ be an approach.
 
 _Why not?_
 
-There are a couple reasons related to code readability to software design principles, but we're going to focus on another reason: Performance.
+There are a couple reasons related to code readability and software design principles, but we're going to focus on another reason: Performance.
 
 #### Limiting "Round Trips" to the Database
 
@@ -592,14 +587,14 @@ This process takes time. A lot of time. In fact many apps spend most of their ti
 
 There's no avoiding going to the database for data. Sometimes we make one trip, sometimes we make several. This is just the nature of web development. But we should _think_ about the trips we make to the database. We should be able to justify each one. And we should limit them when we can.
 
-#### Back to Posts and UserProfiles
+#### Back to Videos and UserProfiles
 
-A better way to set the `UserProfile` property on a `Post` would be to get the `UserProfile` data at the same time we get the `Post` data.
+A better way to set the `UserProfile` property on a `Video` would be to get the `UserProfile` data at the same time we get the `Video` data.
 
-Replace the `GetAll()` method in `PostRepository` with this code.
+Replace the `GetAll()` method in `VideoRepository` with this code.
 
 ```cs
-public List<Post> GetAll()
+public List<Video> GetAll()
 {
     using (var conn = Connection)
     {
@@ -607,27 +602,27 @@ public List<Post> GetAll()
         using (var cmd = conn.CreateCommand())
         {
             cmd.CommandText = @"
-                SELECT p.Id AS PostId, p.Title, p.Caption, p.DateCreated AS PostDateCreated, 
-                       p.ImageUrl AS PostImageUrl, p.UserProfileId,
+                SELECT p.Id AS VideoId, p.Title, p.Caption, p.DateCreated AS VideoDateCreated, 
+                       p.ImageUrl AS VideoImageUrl, p.UserProfileId,
 
                        up.Name, up.Bio, up.Email, up.DateCreated AS UserProfileDateCreated, 
                        up.ImageUrl AS UserProfileImageUrl
-                  FROM Post p 
+                  FROM Video p 
                        LEFT JOIN UserProfile up ON p.UserProfileId = up.id
               ORDER BY p.DateCreated";
 
             var reader = cmd.ExecuteReader();
 
-            var posts = new List<Post>();
+            var videos = new List<Video>();
             while (reader.Read())
             {
-                posts.Add(new Post()
+                videos.Add(new Video()
                 {
-                    Id = DbUtils.GetInt(reader, "PostId"),
+                    Id = DbUtils.GetInt(reader, "VideoId"),
                     Title = DbUtils.GetString(reader, "Title"),
                     Caption = DbUtils.GetString(reader, "Caption"),
-                    DateCreated = DbUtils.GetDateTime(reader, "PostDateCreated"),
-                    ImageUrl = DbUtils.GetString(reader, "PostImageUrl"),
+                    DateCreated = DbUtils.GetDateTime(reader, "VideoDateCreated"),
+                    ImageUrl = DbUtils.GetString(reader, "VideoImageUrl"),
                     UserProfileId = DbUtils.GetInt(reader, "UserProfileId"),
                     UserProfile = new UserProfile()
                     {
@@ -642,7 +637,7 @@ public List<Post> GetAll()
 
             reader.Close();
 
-            return posts;
+            return videos;
         }
     }
 }
@@ -650,22 +645,22 @@ public List<Post> GetAll()
 
 The code above gets all the data we need with a single round trip to the database.
 
-#### Handling a Post's Comments
+#### Handling a Video's Comments
 
-Before we dive into the code to get a Post's Comments, let's take another moment to think. Do we _always_ need a Post's Comments? Another way to ask this is, will we ever need a Post object but NOT need it's Comments?
+Before we dive into the code to get a Video's Comments, let's take another moment to think. Do we _always_ need a Video's Comments? Another way to ask this is, will we ever need a Video object but NOT need it's Comments?
 
 The answer to this question depends on the _business rules_ of the application your building (i.e. the features/requirements a Product Owner outlines for an app)
 
-For Gifter, let's say we don't always need the Comments. We may want a view that displays all the Posts without the comments.
+For Streamish, let's say we don't always need the Comments. We may want a view that displays all the Videos without the comments.
 
 So, given that we don't always want Comments, it doesn't make sense to add code to get them in the `GetAll()` method. Fortunately, though, we have the full power of C# at our disposal. We're not limited in what methods we can add to our repository.
 
 ##### GetAllWithComments()
 
-Let's create a special purpose method that gets all the Posts along with their Comments. Add this method to the `PostRepository` class and to the `IPostRepository` interface.
+Let's create a special purpose method that gets all the Videos along with their Comments. Add this method to the `VideoRepository` class and to the `IVideoRepository` interface.
 
 ```cs
-public List<Post> GetAllWithComments()
+public List<Video> GetAllWithComments()
 {
     using (var conn = Connection)
     {
@@ -673,39 +668,39 @@ public List<Post> GetAllWithComments()
         using (var cmd = conn.CreateCommand())
         {
             cmd.CommandText = @"
-                SELECT p.Id AS PostId, p.Title, p.Caption, p.DateCreated AS PostDateCreated,
-                       p.ImageUrl AS PostImageUrl, p.UserProfileId AS PostUserProfileId,
+                SELECT p.Id AS VideoId, p.Title, p.Caption, p.DateCreated AS VideoDateCreated,
+                       p.ImageUrl AS VideoImageUrl, p.UserProfileId AS VideoUserProfileId,
 
                        up.Name, up.Bio, up.Email, up.DateCreated AS UserProfileDateCreated,
                        up.ImageUrl AS UserProfileImageUrl,
 
                        c.Id AS CommentId, c.Message, c.UserProfileId AS CommentUserProfileId
-                  FROM Post p
+                  FROM Video p
                        LEFT JOIN UserProfile up ON p.UserProfileId = up.id
-                       LEFT JOIN Comment c on c.PostId = p.id
+                       LEFT JOIN Comment c on c.VideoId = p.id
               ORDER BY p.DateCreated";
 
             var reader = cmd.ExecuteReader();
 
-            var posts = new List<Post>();
+            var videos = new List<Video>();
             while (reader.Read())
             {
-                var postId = DbUtils.GetInt(reader, "PostId");
+                var videoId = DbUtils.GetInt(reader, "VideoId");
 
-                var existingPost = posts.FirstOrDefault(p => p.Id == postId);
-                if (existingPost == null)
+                var existingVideo = videos.FirstOrDefault(p => p.Id == videoId);
+                if (existingVideo == null)
                 {
-                    existingPost = new Post()
+                    existingVideo = new Video()
                     {
-                        Id = postId,
+                        Id = videoId,
                         Title = DbUtils.GetString(reader, "Title"),
                         Caption = DbUtils.GetString(reader, "Caption"),
-                        DateCreated = DbUtils.GetDateTime(reader, "PostDateCreated"),
-                        ImageUrl = DbUtils.GetString(reader, "PostImageUrl"),
-                        UserProfileId = DbUtils.GetInt(reader, "PostUserProfileId"),
+                        DateCreated = DbUtils.GetDateTime(reader, "VideoDateCreated"),
+                        ImageUrl = DbUtils.GetString(reader, "VideoImageUrl"),
+                        UserProfileId = DbUtils.GetInt(reader, "VideoUserProfileId"),
                         UserProfile = new UserProfile()
                         {
-                            Id = DbUtils.GetInt(reader, "PostUserProfileId"),
+                            Id = DbUtils.GetInt(reader, "VideoUserProfileId"),
                             Name = DbUtils.GetString(reader, "Name"),
                             Email = DbUtils.GetString(reader, "Email"),
                             DateCreated = DbUtils.GetDateTime(reader, "UserProfileDateCreated"),
@@ -714,16 +709,16 @@ public List<Post> GetAllWithComments()
                         Comments = new List<Comment>()
                     };
 
-                    posts.Add(existingPost);
+                    videos.Add(existingVideo);
                 }
 
                 if (DbUtils.IsNotDbNull(reader, "CommentId"))
                 {
-                    existingPost.Comments.Add(new Comment()
+                    existingVideo.Comments.Add(new Comment()
                     {
                         Id = DbUtils.GetInt(reader, "CommentId"),
                         Message = DbUtils.GetString(reader, "Message"),
-                        PostId = postId,
+                        VideoId = videoId,
                         UserProfileId = DbUtils.GetInt(reader, "CommentUserProfileId")
                     });
                 }
@@ -731,7 +726,7 @@ public List<Post> GetAllWithComments()
 
             reader.Close();
 
-            return posts;
+            return videos;
         }
     }
 }
@@ -742,33 +737,33 @@ This method is quite a bit more complex than the `GetAll()` method. How's should
 Here are some things you should try:
 
 1. Read the code...then read it again.
-1. Copy out the SQL and run it in a query window. Note the results. Take particular note of the duplicate Post data. What makes each record in the resultset unique?
-1. Use the Visual Studio debugger to step line-by-line through the code. Pay particular attention to how the `existingPost` variable is used.
+1. Copy out the SQL and run it in a query window. Note the results. Take particular note of the duplicate Video data. What makes each record in the resultset unique?
+1. Use the Visual Studio debugger to step line-by-line through the code. Pay particular attention to how the `existingVideo` variable is used.
 1. Talk to classmates. Can you describe this code to others?
 1. Check your understanding with an instructor.
 
 ##### Using the GetAllWithComments method
 
-Add this method to your `PostController`
+Add this method to your `VideoController`
 
 ```cs
 [HttpGet("GetWithComments")]
 public IActionResult GetWithComments()
 {
-    var posts = _postRepository.GetAllWithComments();
-    return Ok(posts);
+    var videos = _videoRepository.GetAllWithComments();
+    return Ok(videos);
 }
 ```
 
-And test it by using Postman to send a GET request to the `/api/post/getwithcomments` route.
+And test it by using Postman to send a GET request to the `/api/video/getwithcomments` route.
 
 ## Exercises
 
-1. Update the `PostRepository.GetById()` method to include the `UserProfile` object in the returned `Post` object.
-1. Add a `GetPostByIdWithComments()` method to your `PostRepository` that gets a single `Post` and includes that Post's comments.
+1. Update the `VideoRepository.GetById()` method to include the `UserProfile` object in the returned `Video` object.
+1. Add a `GetVideoByIdWithComments()` method to your `VideoRepository` that gets a single `Video` and includes that Video's comments.
 1. Create a `UserProfileController` and `UserProfileRepository` with all the basic CRUD operations.
-1. Add methods to the `UserProfileController` and `UserProfileRepository` to return a single `UserProfile` along with the list of posts authored by that user.
+1. Add methods to the `UserProfileController` and `UserProfileRepository` to return a single `UserProfile` along with the list of videos authored by that user.
 
 ### Challenge
 
-1. Update the method you added in Exercise 4 to include all the comments for each post.
+1. Update the method you added in Exercise 4 to include all the comments for each video.
