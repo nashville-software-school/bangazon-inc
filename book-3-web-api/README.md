@@ -1,6 +1,6 @@
 # Book 3 - Web APIs with <span>ASP.</span>NET Core
 
-This book prepares you for building the Tabloid API
+This book prepares you for building the Tabloid Fullstack Application
 
 ## Topics
 
@@ -11,7 +11,7 @@ This book prepares you for building the Tabloid API
 * Models
 * Model Validation
 * Web API + React
-* Integration testing
+* Testing
 * JWT tokens
 * Firebase auth
 
