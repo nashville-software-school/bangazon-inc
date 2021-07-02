@@ -1,4 +1,6 @@
-# Utility Classes, Special-Purpose Repository Methods and More Complex SQL
+# Streamish
+
+## Utility Classes, Special-Purpose Repository Methods and More Complex SQL
 
 ---
 
@@ -176,15 +178,15 @@ Now we're ready to create the `VideoRepository`. This is the first version of th
 > Repositories/VideoRepository.cs
 
 ```cs
-using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.Extensions.Configuration;
 using Streamish.Models;
 using Streamish.Utils;
 
 namespace Streamish.Repositories
 {
+
     public class VideoRepository : BaseRepository, IVideoRepository
     {
         public VideoRepository(IConfiguration configuration) : base(configuration) { }
@@ -197,9 +199,10 @@ namespace Streamish.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                          SELECT Id, Title, Caption, DateCreated, ImageUrl, UserProfileId
+                          SELECT Id, Title, Description, Url, DateCreated, UserProfileId
                             FROM Video
-                        ORDER BY DateCreated";
+                        ORDER BY DateCreated
+                    ";
 
                     var reader = cmd.ExecuteReader();
 
@@ -210,9 +213,9 @@ namespace Streamish.Repositories
                         {
                             Id = DbUtils.GetInt(reader, "Id"),
                             Title = DbUtils.GetString(reader, "Title"),
-                            Caption = DbUtils.GetString(reader, "Caption"),
+                            Description = DbUtils.GetString(reader, "Description"),
                             DateCreated = DbUtils.GetDateTime(reader, "DateCreated"),
-                            ImageUrl = DbUtils.GetString(reader, "ImageUrl"),
+                            Url = DbUtils.GetString(reader, "Url"),
                             UserProfileId = DbUtils.GetInt(reader, "UserProfileId"),
                         });
                     }
@@ -232,7 +235,7 @@ namespace Streamish.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                          SELECT Title, Caption, DateCreated, ImageUrl, UserProfileId
+                          SELECT Title, Description, Url, DateCreated, UserProfileId
                             FROM Video
                            WHERE Id = @Id";
 
@@ -247,9 +250,9 @@ namespace Streamish.Repositories
                         {
                             Id = id,
                             Title = DbUtils.GetString(reader, "Title"),
-                            Caption = DbUtils.GetString(reader, "Caption"),
+                            Description = DbUtils.GetString(reader, "Description"),
                             DateCreated = DbUtils.GetDateTime(reader, "DateCreated"),
-                            ImageUrl = DbUtils.GetString(reader, "ImageUrl"),
+                            Url = DbUtils.GetString(reader, "Url"),
                             UserProfileId = DbUtils.GetInt(reader, "UserProfileId"),
                         };
                     }
@@ -269,14 +272,14 @@ namespace Streamish.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        INSERT INTO Video (Title, Caption, DateCreated, ImageUrl, UserProfileId)
+                        INSERT INTO Video (Title, Description, DateCreated, Url, UserProfileId)
                         OUTPUT INSERTED.ID
-                        VALUES (@Title, @Caption, @DateCreated, @ImageUrl, @UserProfileId)";
+                        VALUES (@Title, @Description, @DateCreated, @Url, @UserProfileId)";
 
                     DbUtils.AddParameter(cmd, "@Title", video.Title);
-                    DbUtils.AddParameter(cmd, "@Caption", video.Caption);
+                    DbUtils.AddParameter(cmd, "@Description", video.Description);
                     DbUtils.AddParameter(cmd, "@DateCreated", video.DateCreated);
-                    DbUtils.AddParameter(cmd, "@ImageUrl", video.ImageUrl);
+                    DbUtils.AddParameter(cmd, "@Url", video.Url);
                     DbUtils.AddParameter(cmd, "@UserProfileId", video.UserProfileId);
 
                     video.Id = (int)cmd.ExecuteScalar();
@@ -294,16 +297,16 @@ namespace Streamish.Repositories
                     cmd.CommandText = @"
                         UPDATE Video
                            SET Title = @Title,
-                               Caption = @Caption,
+                               Description = @Description,
                                DateCreated = @DateCreated,
-                               ImageUrl = @ImageUrl,
+                               Url = @Url,
                                UserProfileId = @UserProfileId
                          WHERE Id = @Id";
 
                     DbUtils.AddParameter(cmd, "@Title", video.Title);
-                    DbUtils.AddParameter(cmd, "@Caption", video.Caption);
+                    DbUtils.AddParameter(cmd, "@Description", video.Description);
                     DbUtils.AddParameter(cmd, "@DateCreated", video.DateCreated);
-                    DbUtils.AddParameter(cmd, "@ImageUrl", video.ImageUrl);
+                    DbUtils.AddParameter(cmd, "@Url", video.Url);
                     DbUtils.AddParameter(cmd, "@UserProfileId", video.UserProfileId);
                     DbUtils.AddParameter(cmd, "@Id", video.Id);
 
@@ -602,14 +605,15 @@ public List<Video> GetAll()
         using (var cmd = conn.CreateCommand())
         {
             cmd.CommandText = @"
-                SELECT p.Id AS VideoId, p.Title, p.Caption, p.DateCreated AS VideoDateCreated, 
-                       p.ImageUrl AS VideoImageUrl, p.UserProfileId,
+               SELECT v.Id, v.Title, v.Description, v.Url, v.DateCreated, v.UserProfileId,
 
-                       up.Name, up.Bio, up.Email, up.DateCreated AS UserProfileDateCreated, 
-                       up.ImageUrl AS UserProfileImageUrl
-                  FROM Video p 
-                       LEFT JOIN UserProfile up ON p.UserProfileId = up.id
-              ORDER BY p.DateCreated";
+                      up.Name, up.Email, up.DateCreated AS UserProfileDateCreated,
+                      up.ImageUrl AS UserProfileImageUrl
+                        
+                 FROM Video v 
+                      JOIN UserProfile up ON v.UserProfileId = up.Id
+             ORDER BY DateCreated
+            ";
 
             var reader = cmd.ExecuteReader();
 
@@ -618,11 +622,11 @@ public List<Video> GetAll()
             {
                 videos.Add(new Video()
                 {
-                    Id = DbUtils.GetInt(reader, "VideoId"),
+                    Id = DbUtils.GetInt(reader, "Id"),
                     Title = DbUtils.GetString(reader, "Title"),
-                    Caption = DbUtils.GetString(reader, "Caption"),
-                    DateCreated = DbUtils.GetDateTime(reader, "VideoDateCreated"),
-                    ImageUrl = DbUtils.GetString(reader, "VideoImageUrl"),
+                    Description = DbUtils.GetString(reader, "Description"),
+                    Url = DbUtils.GetString(reader, "Url"),
+                    DateCreated = DbUtils.GetDateTime(reader, "DateCreated"),
                     UserProfileId = DbUtils.GetInt(reader, "UserProfileId"),
                     UserProfile = new UserProfile()
                     {
@@ -668,17 +672,18 @@ public List<Video> GetAllWithComments()
         using (var cmd = conn.CreateCommand())
         {
             cmd.CommandText = @"
-                SELECT p.Id AS VideoId, p.Title, p.Caption, p.DateCreated AS VideoDateCreated,
-                       p.ImageUrl AS VideoImageUrl, p.UserProfileId AS VideoUserProfileId,
+                SELECT v.Id AS VideoId, v.Title, v.Description, v.Url, 
+                       v.DateCreated AS VideoDateCreated, v.UserProfileId As VideoUserProfileId,
 
-                       up.Name, up.Bio, up.Email, up.DateCreated AS UserProfileDateCreated,
+                       up.Name, up.Email, up.DateCreated AS UserProfileDateCreated,
                        up.ImageUrl AS UserProfileImageUrl,
-
+                        
                        c.Id AS CommentId, c.Message, c.UserProfileId AS CommentUserProfileId
-                  FROM Video p
-                       LEFT JOIN UserProfile up ON p.UserProfileId = up.id
-                       LEFT JOIN Comment c on c.VideoId = p.id
-              ORDER BY p.DateCreated";
+                  FROM Video v 
+                       JOIN UserProfile up ON v.UserProfileId = up.Id
+                       LEFT JOIN Comment c on c.VideoId = v.id
+             ORDER BY  v.DateCreated
+            ";
 
             var reader = cmd.ExecuteReader();
 
@@ -694,9 +699,9 @@ public List<Video> GetAllWithComments()
                     {
                         Id = videoId,
                         Title = DbUtils.GetString(reader, "Title"),
-                        Caption = DbUtils.GetString(reader, "Caption"),
+                        Description = DbUtils.GetString(reader, "Description"),
                         DateCreated = DbUtils.GetDateTime(reader, "VideoDateCreated"),
-                        ImageUrl = DbUtils.GetString(reader, "VideoImageUrl"),
+                        Url = DbUtils.GetString(reader, "Url"),
                         UserProfileId = DbUtils.GetInt(reader, "VideoUserProfileId"),
                         UserProfile = new UserProfile()
                         {
@@ -730,6 +735,7 @@ public List<Video> GetAllWithComments()
         }
     }
 }
+
 ```
 
 This method is quite a bit more complex than the `GetAll()` method. How's should we go about understanding it?
