@@ -26,10 +26,12 @@ This book prepares you for building the Tabloid Fullstack Application
 * Chapter 5 - [Testing](./chapters/TESTING.md)
 * Chapter 6 - [React & Web API](./chapters/REACT_WITH_API.md)
 * Chapter 7 - [React Routing Revisited](./chapters/REACT_ROUTER.md)
-* Supplementary Exercises
-  * [Enhancing Gifter](./chapters/GIFTER_SUPPLEMENTAL.md)
-  * [Challenge: Audit Tables and Interfaces](./chapter/../chapters/POWER_OF_REPO_INTERFACES.md)
 * Chapter 8 - [Firebase Authentication](./chapters/FIREBASE_AUTH.md)
+<!--
+* Supplementary Exercises
+  * [Enhancikng Gifter](./chapters/GIFTER_SUPPLEMENTAL.md)
+  * [Challenge: Audit Tables and Interfaces](./chapter/../chapters/POWER_OF_REPO_INTERFACES.md)
+-->
 
 > __Sprint__ - Full-stack Tabloid
 
