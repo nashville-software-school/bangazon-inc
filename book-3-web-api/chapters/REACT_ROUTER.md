@@ -1,4 +1,4 @@
-  # React Router Revisited
+# React Router Revisited
 
 ---
 
@@ -23,6 +23,8 @@ npm i react-router-dom
 ```
 
 We can use the React router to only render certain views when a user is on a specific URL. Let's create a component that will specify this. Make a new file in your components directory and name it `ApplicationViews.js`
+
+> `src/components/ApplicationViews.js`
 
 ```js
 import React from "react";
@@ -55,31 +57,25 @@ Second thing to note is the presence of the `exact` attribute on the home route.
 
 Second thing to note is the `<Route>` component. If a url matches the value of the `path` attribute, the children of that `<Route>` will be what gets rendered. As we've seen before, URLs often have _route params_ in them. The third route here is an example of a path with a route param: `/videos/:id`. Using the colon, we can tell the react router that this will be some `id` parameter. These are all examples of paths that would match this route:
 
-**/videos/5** 
-
-**/videos/12345**
-
-**/videos/foo**
-
+> **/videos/5**  
+> **/videos/12345**  
+> **/videos/foo**  
 
 To be able to use this `ApplicationViews` component, we have to import it into our `App.js` file and also wrap our entire app in a `<Router>` component.
 
-> App.js
+> `src/App.js`
 
 ```js
 import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import "./App.css";
 import ApplicationViews from "./components/ApplicationViews";
-import { VideoProvider } from "./providers/VideoProvider";
 
 function App() {
   return (
     <div className="App">
       <Router>
-        <VideoProvider>
-          <ApplicationViews />
-        </VideoProvider>
+        <ApplicationViews />
       </Router>
     </div>
   );
@@ -94,7 +90,7 @@ Run the app and go to `localhost:3000` and `localhost:3000/videos/add`
 
 We don't expect our users to manually type into their url bar every time they want to navigate through the app so let's create a navbar component. Add a `Header.js` file to your components directory.
 
-> Header.js
+> `src/components/Header.js`
 
 ```js
 import React from "react";
@@ -134,17 +130,14 @@ import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import "./App.css";
 import ApplicationViews from "./components/ApplicationViews";
-import { VideoProvider } from "./providers/VideoProvider";
 import Header from "./components/Header";
 
 function App() {
   return (
     <div className="App">
       <Router>
-        <VideoProvider>
-          <Header />
-          <ApplicationViews />
-        </VideoProvider>
+        <Header />
+        <ApplicationViews />
       </Router>
     </div>
   );
@@ -155,92 +148,74 @@ export default App;
 
 The `<Link>` component is great for rendering links in our UI, but what about if we want to navigate the user programmatically? For example, on the Video form after a user submits and the new video gets successfully gets processed by our API, we'd like to maybe send the user back to the main feed. We can't do this with a simple `<Link>` component. Fortunately, the react router gives us an easy to use hook to allow us to do this called `useHistory`.
 
-In the last chapter you added a `VideoForm` component that saves new videos. Your component may look a little different than this, but there's only a couple lines of code that need to be added to make this work.
+In the last chapter you added a `VideoForm` component that saves new videos. Your component may look a little different than this, but should work in a similar way.
 
 ```js
-import React, { useState, useContext } from "react";
-import {
-  Form,
-  FormGroup,
-  Card,
-  CardBody,
-  Label,
-  Input,
-  Button,
-} from "reactstrap";
-import { VideoContext } from "../providers/VideoProvider";
-import { useHistory } from "react-router-dom";
+import React, { useState } from 'react';
+import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import { addVideo } from "../modules/videoManager";
 
-const VideoForm = () => {
-  const { addVideo } = useContext(VideoContext);
-  const [userProfileId, setUserProfileId] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
-  const [title, setTitle] = useState("");
-  const [caption, setCaption] = useState("");
+const VideoForm = ({ getVideos }) => {
+  const emptyVideo = {
+    title: '',
+    description: '',
+    url: ''
+  };
 
-  // Use this hook to allow us to programmatically redirect users
-  const history = useHistory();
+  const [video, setVideo] = useState(emptyVideo);
 
-  const submit = (e) => {
-    const video = {
-      imageUrl,
-      title,
-      caption,
-      userProfileId: +userProfileId,
-    };
+  const handleInputChange = (evt) => {
+    const value = evt.target.value;
+    const key = evt.target.id;
 
-    addVideo(video).then((p) => {
-      // Navigate the user back to the home route
-      history.push("/");
+    const videoCopy = { ...video };
+
+    videoCopy[key] = value;
+    setVideo(videoCopy);
+  };
+
+  const handleSave = (evt) => {
+    evt.preventDefault();
+
+    addVideo(video).then(() => {
+      setVideo(emptyVideo);
+      getVideos();
     });
   };
 
   return (
-    <div className="container pt-4">
-      <div className="row justify-content-center">
-        <Card className="col-sm-12 col-lg-6">
-          <CardBody>
-            <Form>
-              <FormGroup>
-                <Label for="userId">User Id (For Now...)</Label>
-                <Input
-                  id="userId"
-                  onChange={(e) => setUserProfileId(e.target.value)}
-                />
-              </FormGroup>
-              <FormGroup>
-                <Label for="imageUrl">Gif URL</Label>
-                <Input
-                  id="imageUrl"
-                  onChange={(e) => setImageUrl(e.target.value)}
-                />
-              </FormGroup>
-              <FormGroup>
-                <Label for="title">Title</Label>
-                <Input id="title" onChange={(e) => setTitle(e.target.value)} />
-              </FormGroup>
-              <FormGroup>
-                <Label for="caption">Caption</Label>
-                <Input
-                  id="caption"
-                  onChange={(e) => setCaption(e.target.value)}
-                />
-              </FormGroup>
-            </Form>
-            <Button color="info" onClick={submit}>
-              SUBMIT
-            </Button>
-          </CardBody>
-        </Card>
-      </div>
-    </div>
+    <Form>
+      <FormGroup>
+        <Label for="title">Title</Label>
+        <Input type="text" name="title" id="title" placeholder="video title"
+          value={video.title}
+          onChange={handleInputChange} />
+      </FormGroup>
+      <FormGroup>
+        <Label for="url">URL</Label>
+        <Input type="text" name="url" id="url" placeholder="video link" 
+          value={video.url}
+          onChange={handleInputChange} />
+      </FormGroup>
+      <FormGroup>
+        <Label for="description">Description</Label>
+        <Input type="textarea" name="description" id="description"
+          value={video.description}
+          onChange={handleInputChange} />
+      </FormGroup>
+      <Button className="btn btn-primary" onClick={handleSave}>Submit</Button>
+    </Form>
   );
 };
 
 export default VideoForm;
 ```
 
-Again, your Add form will likely look different than this, but there's only two sections to call out in this example. This code says to send the user back to the home (or `/`) route after the video has been successfully added.
+The `VideoForm` component above was written with the assumption that the form is displayed alongside of the `VideoList` component. Note that after the video is saved, the form is cleared and the video list is refreshed.
+
+Now that we're adding routes, however, we will no longer display the form and the list at the same time. AFter the data is saved, the user will need to be redirected to the list page.
+
+Change the `addVideo` call to look like this:
 
 ```js
 addVideo(video).then((p) => {
@@ -261,20 +236,14 @@ Add these two lines of code to your own `VideoForm` component and try adding a n
 
 The last thing we want to do with our new routing abilities, is create a `VideoDetails` component and use the route parameter to decide which video's details we should be showing. For example, if a user navigates to `/videos/2`, the component code will have to read the route param of `2` and use that value to make a fetch call to get that video's details.
 
-Before we make a Video Details component, let's add a function to our provider that makes that fetch call
+Before we make a Video Details component, let's add a function to the `videoManager` that makes that fetch call
 
-> VideoProvider.js
+> `modules/videoManager.js`
 
 ```js
-const getVideo = (id) => {
-    return fetch(`/api/video/${id}`).then((res) => res.json());
+export const getVideo = (id) => {
+    return fetch(`${baseUrl}/${id}`).then((res) => res.json());
 };
-```
-
-Now make sure to provide that new function
-
-```js
-<VideoContext.Provider value={{ videos, getAllVideos, addVideo, getVideo }}>
 ```
 
 **NOTE** This assumes your API is set up to return a video object which includes an array of comments. If you need to make an additional fetch call to get the comments for a video, update the `getVideo` function as needed.

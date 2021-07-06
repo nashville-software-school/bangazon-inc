@@ -278,9 +278,11 @@ export default VideoList;
       ```
 
       2. READ THE CODE you just pasted into the `VideoController.Post` method. What does it do?
-      3. Create a `VideoForm` React component in the components directory and place it above the list of videos.  
+      3. Create a `VideoForm` React component in the components directory and place it above the list of videos in the `VideoList` component.  
           * The user should not enter a `UserProfileId`
           * The user should not enter a `DateCreated`
           * The user may leave the `Description` blank
           * The user should be able to copy and paste the URL of a YouTube video directly from the web browser's location bar and should not have to do anything special to get an embeddable url
-      4. Comment the code in detail to describe what it does and _why_ it does it.
+      4. After a new video is saved to the database, the list of videos should be refreshed to display the new video.
+          > **NOTE:** One way to accomplish this is to pass the `getVideos` function into the `VideoForm` component as a prop.
+      5. Comment the code in detail to describe what it does and _why_ it does it.
