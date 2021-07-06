@@ -60,8 +60,8 @@ Create the `Video`, `UserProfile` and `Comment` models. We're going to ignore th
 
 ```cs
 using System;
-using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Streamish.Models
 {
@@ -72,10 +72,10 @@ namespace Streamish.Models
         [Required]
         public string Title { get; set; }
 
-        [Required]
-        public string ImageUrl { get; set; }
+        public string Description { get; set; }
 
-        public string Caption { get; set; }
+        [Required]
+        public string Url { get; set; }
 
         public DateTime DateCreated { get; set; }
 
@@ -84,7 +84,6 @@ namespace Streamish.Models
         public UserProfile UserProfile { get; set; }
 
         public List<Comment> Comments { get; set; }
-
     }
 }
 ```
