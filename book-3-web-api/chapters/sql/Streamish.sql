@@ -2,8 +2,10 @@ USE [master]
 GO
 
 IF db_id('Streamish') IS NOT NULL
+BEGIN
   ALTER DATABASE [Streamish] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
   DROP DATABASE [Streamish]
+END
 GO
 
 CREATE DATABASE [Streamish]

@@ -10,7 +10,7 @@ After completing this lesson and working on related exercises you should be able
 
 ---
 
-Let's add different routes to our Stremish application so that we can have certain components on different views and at different URLs. In this chapter we'll set up the following routes:
+Let's add different routes to our Streamish application so that we can have certain components on different views and at different URLs. In this chapter we'll set up the following routes:
 
 - `/` Main feed for all videos
 - `/videos/add` Form for adding a new video
