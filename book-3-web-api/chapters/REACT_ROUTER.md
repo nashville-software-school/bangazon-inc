@@ -250,18 +250,17 @@ export const getVideo = (id) => {
 
 Now we can add a `VideoDetails.js` file in your components directory. Notice the use of the `useParams` hook to access the route param.
 
-> VideoDetails.js
+> `src/components/VideoDetails.js`
 
 ```js
-import React, { useEffect, useContext, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ListGroup, ListGroupItem } from "reactstrap";
-import { VideoContext } from "../providers/VideoProvider";
 import { useParams } from "react-router-dom";
 import Video from "./Video";
+import { getVideo } from "../modules/videoManager";
 
 const VideoDetails = () => {
   const [video, setVideo] = useState();
-  const { getVideo } = useContext(VideoContext);
   const { id } = useParams();
 
   useEffect(() => {
@@ -293,12 +292,14 @@ export default VideoDetails;
 
 Finally, we want to update each video in the feed to have a link to the details. Update the `Video` component to import the Link component from the react router and wrap the Title of each video in a `Link`.
 
-> Video.js
+> `src/components/Video.js`
+
 ```js
 import { Link } from "react-router-dom";
-...
-```
 
+// ...
+
+```
 
 ```js
 <Link to={`/videos/${video.id}`}>
