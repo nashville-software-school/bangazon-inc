@@ -47,7 +47,7 @@ namespace Tests
 }
 ```
 
-It might seem weird to think about writing code to test our code, but this is an important step in the development process. If we write tests for our code as we go ([or even _before_ we start writing our code](https://www.agilealliance.org/glossary/tdd/#q=~(infinite~false~filters~(postType~(~'page~'post~'aa_book~'aa_event_session~'aa_experience_report~'aa_glossary~'aa_research_paper~'aa_video)~tags~(~'tdd))~searchTerm~'~sort~false~sortDirection~'asc~page~1))), we can have peace of mind knowing that it works _and_ if it ever stops working in the future, we'll know.
+It might seem weird to think about writing code to test our code, but this is an important step in the development process. If we write tests for our code as we go ([or even _before_ we start writing our code](https://www.agilealliance.org/glossary/tdd/#q=~(infinite~false~filters~(videoType~(~'page~'video~'aa_book~'aa_event_session~'aa_experience_report~'aa_glossary~'aa_research_paper~'aa_video)~tags~(~'tdd))~searchTerm~'~sort~false~sortDirection~'asc~page~1))), we can have peace of mind knowing that it works _and_ if it ever stops working in the future, we'll know.
 
 ## Types of Automated Testing
 
@@ -59,17 +59,17 @@ There are a few common types of automated tests you'll write during the developm
 
 - **End to End (E2E) Testing** - These tests simulate the actual flow of an end user. In web development, E2E tests may involve automating the process of launching a browser, typing in form values, clicking buttons, etc.
 
-In this chapter we'll look at how to write **unit** tests for the methods in Gifter's `PostController`. To do this, we're going to use a testing tool called XUnit
+In this chapter we'll look at how to write **unit** tests for the methods in Streamish's `VideoController`. To do this, we're going to use a testing tool called XUnit
 
 ## Setup
 
-The tests we write are not part of our application, so we don't put them in the same project, however they _can_ go in the same Visual Studio solution. Open up the Gifter application in Visual Studio and right click the top item in Solution Explorer marked `Solution 'Gifter'` and select Add > New Project. Search the templates for "xUnit Test Project (using .NET 5)" and select the one for C#. Give it the name "Gifter.Tests". This will create a new project for you as well as a file to start writing some tests in that looks like this:
+The tests we write are not part of our application, so we don't put them in the same project, however they _can_ go in the same Visual Studio solution. Open up the Streamish application in Visual Studio and right click the top item in Solution Explorer marked `Solution 'Streamish'` and select Add > New Project. Search the templates for "xUnit Test Project (using .NET 5)" and select the one for C#. Give it the name "Streamish.Tests". This will create a new project for you as well as a file to start writing some tests in that looks like this:
 
 ```csharp
 using System;
 using Xunit;
 
-namespace Gifter.Tests
+namespace Streamish.Tests
 {
     public class UnitTest1
     {
@@ -88,7 +88,7 @@ Let's update this to write an incredibly simple test...
 using System;
 using Xunit;
 
-namespace Gifter.Tests
+namespace Streamish.Tests
 {
     public class UnitTest1
     {
@@ -106,89 +106,89 @@ namespace Gifter.Tests
 
 Now let's see how we can execute this test to see the results. In Visual Studio, go to the top menu bar and select Test > Test Explorer. This opens the Test Explorer window where we can see and run all of our tests. Right click the name of the test project and select "Run". This will run our lone test called "Two Numbers Should Equal". The test will fail--but this is a good thing! We always want to start off by writing _failing_ tests. This ensures that we're not getting an false positives by accident. After the test fails, change the code in the test to make it pass and run it again. Your red X is now a green checkmark. Welcome to the joys of software development.
 
-Now let's start setting up some more meaningful tests that will test the behavior of some of our PostRepository methods.
+Now let's start setting up some more meaningful tests that will test the behavior of some of our VideoRepository methods.
 
 ### Reference the Project to Test
 
-Our tests will be written to verify that the Gifter app behaves as we expect. This means we'll have to tell our test project about the Gifter project.
+Our tests will be written to verify that the Streamish app behaves as we expect. This means we'll have to tell our test project about the Streamish project.
 
 Add this project reference to your test project's `*.csproj` file.
 
 ```xml
 <ItemGroup>
-  <ProjectReference Include="..\Gifter\Gifter.csproj" />
+  <ProjectReference Include="..\Streamish\Streamish.csproj" />
 </ItemGroup>
 ```
 
-> **NOTE:** The Gifter app is referred to as the [_System Under Test_](https://en.wikipedia.org/wiki/System_under_test) (SUT).
+> **NOTE:** The Streamish app is referred to as the [_System Under Test_](https://en.wikipedia.org/wiki/System_under_test) (SUT).
 
 ## Writing Controller Tests
 
 As we know ASP<span>.</span>NET controllers are special classes that handle HTTP requests. However when it comes to unit testing a controller, we don't have to worry about what makes controllers "special". Instead we rely on the fact that they are really _just C# classes_.
 
-Here's a snippet of Gifter's `PostController` class
+Here's a snippet of the Streamish `VideoController` class
 
 ```cs
 [ApiController]
-public class PostController : ControllerBase
+public class VideoController : ControllerBase
 {
-    private readonly IPostRepository _postRepository;
-    public PostController(IPostRepository postRepository)
+    private readonly IVideoRepository _videoRepository;
+    public VideoController(IVideoRepository videoRepository)
     {
-        _postRepository = postRepository;
+        _videoRepository = videoRepository;
     }
 
     [HttpGet]
     public IActionResult Get()
     {
-        return Ok(_postRepository.GetAll());
+        return Ok(_videoRepository.GetAll());
     }
 
 // ...
 ```
 
-Let's focus on the `Get()` method. What does it do? It returns an object - some kind of `IActionResult` - that contains a list of all the posts in our database.
+Let's focus on the `Get()` method. What does it do? It returns an object - some kind of `IActionResult` - that contains a list of all the videos in our database.
 
 What do you think we'd need to do in order to test the `Get()` method? Well, to see if the `Get()` method does what we think it should do, we could _run it and see if it does what we think it should do_.
 
 How do we do that?
 
-1. Create an instance of the `PostController`.
+1. Create an instance of the `VideoController`.
 1. Call the `Get()` method.
-1. Check the object returned by the `Get()` method to see if it contains the list of posts.
+1. Check the object returned by the `Get()` method to see if it contains the list of videos.
 
-### Unit Testing the PostController
+### Unit Testing the VideoController
 
-#### Creating an Instance of the `PostController`
+#### Creating an Instance of the `VideoController`
 
-The process outlined above sounds simple enough until we look a little closer. The first step is to create instance of the `PostController` class, but an examination of the `PostController` constructor shows us that we need to pass in instance of `IPostRepository` when we instantiate a `PostController`.
+The process outlined above sounds simple enough until we look a little closer. The first step is to create instance of the `VideoController` class, but an examination of the `VideoController` constructor shows us that we need to pass in instance of `IVideoRepository` when we instantiate a `VideoController`.
 
-#### "Mocking" the IPostRepository
+#### "Mocking" the IVideoRepository
 
 Let's revisit the definition of a _uint test_. A unit test is a test that verifies a single method works properly.
 
 But how can we test a single controller method given that each controller method calls into the repository and the repository sends SQL commands to the database. If you think about it you'll see that's a LOT more than one method.
 
-We solve this problem by creating a _mock_ repository. This is a fake version of repository that we will use for tests. Instead of connecting to SQL Server, this mock repository will mimic the behavior using a simple list of posts.
+We solve this problem by creating a _mock_ repository. This is a fake version of repository that we will use for tests. Instead of connecting to SQL Server, this mock repository will mimic the behavior using a simple list of videos.
 
 In your test project create a folder called 'Mocks` and add the following class.
 
-> Mocks/InMemoryPostRepository.cs
+> Mocks/InMemoryVideoRepository.cs
 
 ```cs
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Gifter.Models;
-using Gifter.Repositories;
+using Streamish.Models;
+using Streamish.Repositories;
 
-namespace Gifter.Tests.Mocks
+namespace Streamish.Tests.Mocks
 {
-    class InMemoryPostRepository : IPostRepository
+    class InMemoryVideoRepository : IVideoRepository
     {
-        private readonly List<Post> _data;
+        private readonly List<Video> _data;
 
-        public List<Post> InternalData
+        public List<Video> InternalData
         {
             get
             {
@@ -196,65 +196,65 @@ namespace Gifter.Tests.Mocks
             }
         }
 
-        public InMemoryPostRepository(List<Post> startingData)
+        public InMemoryVideoRepository(List<Video> startingData)
         {
             _data = startingData;
         }
 
-        public void Add(Post post)
+        public void Add(Video video)
         {
-            var lastPost = _data.Last();
-            post.Id = lastPost.Id + 1;
-            _data.Add(post);
+            var lastVideo = _data.Last();
+            video.Id = lastVideo.Id + 1;
+            _data.Add(video);
         }
 
         public void Delete(int id)
         {
-            var postTodelete = _data.FirstOrDefault(p => p.Id == id);
-            if (postTodelete == null)
+            var videoToDelete = _data.FirstOrDefault(p => p.Id == id);
+            if (videoToDelete == null)
             {
                 return;
             }
 
-            _data.Remove(postTodelete);
+            _data.Remove(videoToDelete);
         }
 
-        public List<Post> GetAll()
+        public List<Video> GetAll()
         {
             return _data;
         }
 
-        public Post GetById(int id)
+        public Video GetById(int id)
         {
             return _data.FirstOrDefault(p => p.Id == id);
         }
 
-        public void Update(Post post)
+        public void Update(Video video)
         {
-            var currentPost = _data.FirstOrDefault(p => p.Id == post.Id);
-            if (currentPost == null)
+            var currentVideo = _data.FirstOrDefault(p => p.Id == video.Id);
+            if (currentVideo == null)
             {
                 return;
             }
 
-            currentPost.Caption = post.Caption;
-            currentPost.Title = post.Title;
-            currentPost.DateCreated = post.DateCreated;
-            currentPost.ImageUrl = post.ImageUrl;
-            currentPost.UserProfileId = post.UserProfileId;
+            currentVideo.Description = video.Description;
+            currentVideo.Title = video.Title;
+            currentVideo.DateCreated = video.DateCreated;
+            currentVideo.Url = video.Url;
+            currentVideo.UserProfileId = video.UserProfileId;
         }
 
-        public List<Post> Search(string criterion, bool sortDescending)
+        public List<Video> Search(string criterion, bool sortDescending)
         {
             throw new NotImplementedException();
         }
 
-        public List<Post> GetAllWithComments()
+        public List<Video> GetAllWithComments()
         {
             throw new NotImplementedException();
         }
 
-        public Post GetPostByIdWithComments(int id)
+        public Video GetVideoByIdWithComments(int id)
         {
             throw new NotImplementedException();
         }
@@ -264,61 +264,61 @@ namespace Gifter.Tests.Mocks
 
 Take a spin through the code. What do you see?
 
-The first thing to note is that the `InMemoryPostRepository` implements the `IPostRepository` interface. This means it has the same methods as the "real" `PostRepository` class in our Gifter application.
+The first thing to note is that the `InMemoryVideoRepository` implements the `IVideoRepository` interface. This means it has the same methods as the "real" `VideoRepository` class in our Streamish application.
 
-Have you been wondering why we have to go to all the trouble of creating both an interface and a class for each repository? Well this is the reason. Be creating the `IPostRepository` interface and using that interface within the `PostController` class, our code is flexible enough to allow us to use a mock repository in unit tests.
+Have you been wondering why we have to go to all the trouble of creating both an interface and a class for each repository? Well this is the reason. Be creating the `IVideoRepository` interface and using that interface within the `VideoController` class, our code is flexible enough to allow us to use a mock repository in unit tests.
 
 Another important thing ot notice is how we use the `_data` list. Instead of a SQL Server database, our mock repository stores data inside this list. Since the list is resides within our C# program, we say we're storing the data _in memory_.
 
-#### The `PostControllerTests` Test Class
+#### The `VideoControllerTests` Test Class
 
-Rename the `UnitTes1.cs` file to `PostControllerTests.cs` and copy the following code into it.
+Rename the `UnitTes1.cs` file to `VideoControllerTests.cs` and copy the following code into it.
 
-> `PostControllerTests.cs`
+> `VideoControllerTests.cs`
 
 ```cs
-using Gifter.Controllers;
-using Gifter.Models;
-using Gifter.Tests.Mocks;
+using Streamish.Controllers;
+using Streamish.Models;
+using Streamish.Tests.Mocks;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using Xunit;
 
-namespace Gifter.Tests
+namespace Streamish.Tests
 {
-    public class PostControllerTests
+    public class VideoControllerTests
     {
         [Fact]
-        public void Get_Returns_All_Posts()
+        public void Get_Returns_All_Videos()
         {
             // Arrange 
-            var postCount = 20;
-            var posts = CreateTestPosts(postCount);
+            var videoCount = 20;
+            var videos = CreateTestVideos(videoCount);
 
-            var repo = new InMemoryPostRepository(posts);
-            var controller = new PostController(repo);
+            var repo = new InMemoryVideoRepository(videos);
+            var controller = new VideoController(repo);
 
             // Act 
             var result = controller.Get();
 
             // Assert
             var okResult = Assert.IsType<OkObjectResult>(result);
-            var actualPosts = Assert.IsType<List<Post>>(okResult.Value);
+            var actualVideos = Assert.IsType<List<Video>>(okResult.Value);
 
-            Assert.Equal(postCount, actualPosts.Count);
-            Assert.Equal(posts, actualPosts);
+            Assert.Equal(videoCount, actualVideos.Count);
+            Assert.Equal(videos, actualVideos);
         }
 
         [Fact]
         public void Get_By_Id_Returns_NotFound_When_Given_Unknown_id()
         {
             // Arrange 
-            var posts = new List<Post>(); // no posts
+            var videos = new List<Video>(); // no videos
 
-            var repo = new InMemoryPostRepository(posts);
-            var controller = new PostController(repo);
+            var repo = new InMemoryVideoRepository(videos);
+            var controller = new VideoController(repo);
 
             // Act
             var result = controller.Get(1);
@@ -328,153 +328,153 @@ namespace Gifter.Tests
         }
 
         [Fact]
-        public void Get_By_Id_Returns_Post_With_Given_Id()
+        public void Get_By_Id_Returns_Video_With_Given_Id()
         {
             // Arrange
-            var testPostId = 99;
-            var posts = CreateTestPosts(5);
-            posts[0].Id = testPostId; // Make sure we know the Id of one of the posts
+            var testVideoId = 99;
+            var videos = CreateTestVideos(5);
+            videos[0].Id = testVideoId; // Make sure we know the Id of one of the videos
 
-            var repo = new InMemoryPostRepository(posts);
-            var controller = new PostController(repo);
+            var repo = new InMemoryVideoRepository(videos);
+            var controller = new VideoController(repo);
 
             // Act
-            var result = controller.Get(testPostId);
+            var result = controller.Get(testVideoId);
 
             // Assert
             var okResult = Assert.IsType<OkObjectResult>(result);
-            var actualPost = Assert.IsType<Post>(okResult.Value);
+            var actualVideo = Assert.IsType<Video>(okResult.Value);
 
-            Assert.Equal(testPostId, actualPost.Id);
+            Assert.Equal(testVideoId, actualVideo.Id);
         }
 
         [Fact]
-        public void Post_Method_Adds_A_New_Post()
+        public void Post_Method_Adds_A_New_Video()
         {
             // Arrange 
-            var postCount = 20;
-            var posts = CreateTestPosts(postCount);
+            var videoCount = 20;
+            var videos = CreateTestVideos(videoCount);
 
-            var repo = new InMemoryPostRepository(posts);
-            var controller = new PostController(repo);
+            var repo = new InMemoryVideoRepository(videos);
+            var controller = new VideoController(repo);
 
             // Act
-            var newPost = new Post()
+            var newVideo = new Video()
             {
-                Caption = "Caption",
+                Description = "Description",
                 Title = "Title",
-                ImageUrl = "http://post.image.url/",
+                Url = "http://video.url/",
                 DateCreated = DateTime.Today,
                 UserProfileId = 999,
                 UserProfile = CreateTestUserProfile(999),
             };
 
-            controller.Post(newPost);
+            controller.Post(newVideo);
 
             // Assert
-            Assert.Equal(postCount + 1, repo.InternalData.Count);
+            Assert.Equal(videoCount + 1, repo.InternalData.Count);
         }
 
         [Fact]
         public void Put_Method_Returns_BadRequest_When_Ids_Do_Not_Match()
         {
             // Arrange
-            var testPostId = 99;
-            var posts = CreateTestPosts(5);
-            posts[0].Id = testPostId; // Make sure we know the Id of one of the posts
+            var testVideoId = 99;
+            var videos = CreateTestVideos(5);
+            videos[0].Id = testVideoId; // Make sure we know the Id of one of the videos
 
-            var repo = new InMemoryPostRepository(posts);
-            var controller = new PostController(repo);
+            var repo = new InMemoryVideoRepository(videos);
+            var controller = new VideoController(repo);
 
-            var postToUpdate = new Post()
+            var videoToUpdate = new Video()
             {
-                Id = testPostId,
-                Caption = "Updated!",
+                Id = testVideoId,
+                Description = "Updated!",
                 Title = "Updated!",
                 UserProfileId = 99,
                 DateCreated = DateTime.Today,
-                ImageUrl = "http://some.image.url",
+                Url = "http://some.url",
             };
-            var someOtherPostId = testPostId + 1; // make sure they aren't the same
+            var someOtherVideoId = testVideoId + 1; // make sure they aren't the same
 
             // Act
-            var result = controller.Put(someOtherPostId, postToUpdate);
+            var result = controller.Put(someOtherVideoId, videoToUpdate);
 
             // Assert
             Assert.IsType<BadRequestResult>(result);
         }
 
         [Fact]
-        public void Put_Method_Updates_A_Post()
+        public void Put_Method_Updates_A_Video()
         {
             // Arrange
-            var testPostId = 99;
-            var posts = CreateTestPosts(5);
-            posts[0].Id = testPostId; // Make sure we know the Id of one of the posts
+            var testVideoId = 99;
+            var videos = CreateTestVideos(5);
+            videos[0].Id = testVideoId; // Make sure we know the Id of one of the videos
 
-            var repo = new InMemoryPostRepository(posts);
-            var controller = new PostController(repo);
+            var repo = new InMemoryVideoRepository(videos);
+            var controller = new VideoController(repo);
 
-            var postToUpdate = new Post()
+            var videoToUpdate = new Video()
             {
-                Id = testPostId,
-                Caption = "Updated!",
+                Id = testVideoId,
+                Description = "Updated!",
                 Title = "Updated!",
                 UserProfileId = 99,
                 DateCreated = DateTime.Today,
-                ImageUrl = "http://some.image.url",
+                Url = "http://some.url",
             };
 
             // Act
-            controller.Put(testPostId, postToUpdate);
+            controller.Put(testVideoId, videoToUpdate);
 
             // Assert
-            var postFromDb = repo.InternalData.FirstOrDefault(p => p.Id == testPostId);
-            Assert.NotNull(postFromDb);
+            var videoFromDb = repo.InternalData.FirstOrDefault(p => p.Id == testVideoId);
+            Assert.NotNull(videoFromDb);
 
-            Assert.Equal(postToUpdate.Caption, postFromDb.Caption);
-            Assert.Equal(postToUpdate.Title, postFromDb.Title);
-            Assert.Equal(postToUpdate.UserProfileId, postFromDb.UserProfileId);
-            Assert.Equal(postToUpdate.DateCreated, postFromDb.DateCreated);
-            Assert.Equal(postToUpdate.ImageUrl, postFromDb.ImageUrl);
+            Assert.Equal(videoToUpdate.Description, videoFromDb.Description);
+            Assert.Equal(videoToUpdate.Title, videoFromDb.Title);
+            Assert.Equal(videoToUpdate.UserProfileId, videoFromDb.UserProfileId);
+            Assert.Equal(videoToUpdate.DateCreated, videoFromDb.DateCreated);
+            Assert.Equal(videoToUpdate.Url, videoFromDb.Url);
         }
 
         [Fact]
-        public void Delete_Method_Removes_A_Post()
+        public void Delete_Method_Removes_A_Video()
         {
             // Arrange
-            var testPostId = 99;
-            var posts = CreateTestPosts(5);
-            posts[0].Id = testPostId; // Make sure we know the Id of one of the posts
+            var testVideoId = 99;
+            var videos = CreateTestVideos(5);
+            videos[0].Id = testVideoId; // Make sure we know the Id of one of the videos
 
-            var repo = new InMemoryPostRepository(posts);
-            var controller = new PostController(repo);
+            var repo = new InMemoryVideoRepository(videos);
+            var controller = new VideoController(repo);
 
             // Act
-            controller.Delete(testPostId);
+            controller.Delete(testVideoId);
 
             // Assert
-            var postFromDb = repo.InternalData.FirstOrDefault(p => p.Id == testPostId);
-            Assert.Null(postFromDb);
+            var videoFromDb = repo.InternalData.FirstOrDefault(p => p.Id == testVideoId);
+            Assert.Null(videoFromDb);
         }
 
-        private List<Post> CreateTestPosts(int count)
+        private List<Video> CreateTestVideos(int count)
         {
-            var posts = new List<Post>();
+            var videos = new List<Video>();
             for (var i = 1; i <= count; i++)
             {
-                posts.Add(new Post()
+                videos.Add(new Video()
                 {
                     Id = i,
-                    Caption = $"Caption {i}",
+                    Description = $"Description {i}",
                     Title = $"Title {i}",
-                    ImageUrl = $"http://post.image.url/{i}",
+                    Url = $"http://video.url/{i}",
                     DateCreated = DateTime.Today.AddDays(-i),
                     UserProfileId = i,
                     UserProfile = CreateTestUserProfile(i),
                 });
             }
-            return posts;
+            return videos;
         }
 
         private UserProfile CreateTestUserProfile(int id)
@@ -486,39 +486,39 @@ namespace Gifter.Tests
                 Email = $"user{id}@example.com",
                 Bio = $"Bio {id}",
                 DateCreated = DateTime.Today.AddDays(-id),
-                ImageUrl = $"http://user.image.url/{id}",
+                Url = $"http://user.url/{id}",
             };
         }
     }
 }
 ```
 
-Take a look at the code. Focus on the `Get_Returns_All_Posts()` method for now.
+Take a look at the code. Focus on the `Get_Returns_All_Videos()` method for now.
 
 ```cs
 [Fact]
-public void Get_Returns_All_Posts()
+public void Get_Returns_All_Videos()
 {
     // Arrange
-    var postCount = 20;
-    var posts = CreateTestPosts(postCount);
+    var videoCount = 20;
+    var videos = CreateTestVideos(videoCount);
 
-    var repo = new InMemoryPostRepository(posts);
-    var controller = new PostController(repo);
+    var repo = new InMemoryVideoRepository(videos);
+    var controller = new VideoController(repo);
 
     // Act
     var result = controller.Get();
 
     // Assert
     var okResult = Assert.IsType<OkObjectResult>(result);
-    var actualPosts = Assert.IsType<List<Post>>(okResult.Value);
+    var actualVideos = Assert.IsType<List<Video>>(okResult.Value);
 
-    Assert.Equal(postCount, actualPosts.Count);
-    Assert.Equal(posts, actualPosts);
+    Assert.Equal(videoCount, actualVideos.Count);
+    Assert.Equal(videos, actualVideos);
 }
 ```
 
-The `Get_Returns_All_Posts()` method is a single test. Tests are public methods marked with the `[Fact]` attribute. The `[Fact]` attribute is provided by the xUnit testing library.
+The `Get_Returns_All_Videos()` method is a single test. Tests are public methods marked with the `[Fact]` attribute. The `[Fact]` attribute is provided by the xUnit testing library.
 
 It's also very common to write out very long names for tests. The name should describe what the test is doing.
 
@@ -526,27 +526,27 @@ It's also very common to write out very long names for tests. The name should de
 
 #### Arrange, Act, Assert
 
-Unit tests often follow the "Arrange, Act, Assert" pattern. The `Get_Returns_All_Posts` test is no exception. Notice the comments above each section of the test that call out the pattern.
+Unit tests often follow the "Arrange, Act, Assert" pattern. The `Get_Returns_All_Videos` test is no exception. Notice the comments above each section of the test that call out the pattern.
 
 ##### Arrange
 
-In the _arrange_ section we create any objects that are needed for the test. In our example we create some test Posts, a mock repository and an instance of the `PostController` class.
+In the _arrange_ section we create any objects that are needed for the test. In our example we create some test Videos, a mock repository and an instance of the `VideoController` class.
 
-> **NOTE:** It's important to understand what's happening in the arrange section of the `Get_Get_Returns_All_Posts` test. Pay particular attention to our use of the `InMemoryPostRepository` as a mock repository.
+> **NOTE:** It's important to understand what's happening in the arrange section of the `Get_Get_Returns_All_Videos` test. Pay particular attention to our use of the `InMemoryVideoRepository` as a mock repository.
 
 ##### Act
 
-In the _act_ section we execute the method that is being testing. In our example we call the `PostController.Get()` method.
+In the _act_ section we execute the method that is being testing. In our example we call the `VideoController.Get()` method.
 
 ##### Assert
 
 In the _assert_ section we verify that the method we're testing did what we expected it to do. We usually use the `Assert` utility class (provided by xUnit) to help.
 
-In the example we verify the result of `Get()` method is an instance of the `OkObjectResult` class - this is the type returned by the `Ok()` method - and then we verify that it contains the expected list of posts.
+In the example we verify the result of `Get()` method is an instance of the `OkObjectResult` class - this is the type returned by the `Ok()` method - and then we verify that it contains the expected list of videos.
 
 ### Run the Tests
 
-Use the Visual Studio Test Explorer to run all the tests in the `PostControllerTests` class, then take some time to explore each test.
+Use the Visual Studio Test Explorer to run all the tests in the `VideoControllerTests` class, then take some time to explore each test.
 
 ## Exercises
 
@@ -560,4 +560,4 @@ Use the Visual Studio Test Explorer to run all the tests in the `PostControllerT
 
     > **NOTE:** You'll need to create a mock repository as part of this exercise.
  
-1. Create a test for the `PostController.Search()` method.
+1. Create a test for the `VideoController.Search()` method.
