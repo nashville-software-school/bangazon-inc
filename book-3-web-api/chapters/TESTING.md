@@ -363,7 +363,7 @@ namespace Streamish.Tests
             {
                 Description = "Description",
                 Title = "Title",
-                Url = "http://video.url/",
+                Url = "http://youtube.url?v=1234",
                 DateCreated = DateTime.Today,
                 UserProfileId = 999,
                 UserProfile = CreateTestUserProfile(999),
@@ -468,7 +468,7 @@ namespace Streamish.Tests
                     Id = i,
                     Description = $"Description {i}",
                     Title = $"Title {i}",
-                    Url = $"http://video.url/{i}",
+                    Url = $"http://youtube.url/{i}?v=1234",
                     DateCreated = DateTime.Today.AddDays(-i),
                     UserProfileId = i,
                     UserProfile = CreateTestUserProfile(i),
@@ -484,9 +484,8 @@ namespace Streamish.Tests
                 Id = id,
                 Name = $"User {id}",
                 Email = $"user{id}@example.com",
-                Bio = $"Bio {id}",
                 DateCreated = DateTime.Today.AddDays(-id),
-                Url = $"http://user.url/{id}",
+                ImageUrl = $"http://user.url/{id}",
             };
         }
     }
