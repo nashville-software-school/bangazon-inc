@@ -28,7 +28,7 @@ GO
 CREATE TABLE [Video] (
   [Id] INTEGER PRIMARY KEY IDENTITY NOT NULL,
   [Title] VARCHAR(255) NOT NULL,
-  [Description] VARCHAR(MAX) NULL,
+  [Description] VARCHAR(MAX),
   [Url] VARCHAR(255) NOT NULL,
   [DateCreated] DATETIME NOT NULL,
   [UserProfileId] INTEGER NOT NULL,
@@ -74,8 +74,10 @@ SET IDENTITY_INSERT [Video] ON
 INSERT INTO [Video]
     ([Id], [DateCreated], [Title], [Description], [Url], [UserProfileId])
 VALUES
-    (1, SYSDATETIME(), 'Erlang the Movie', 'A beautiful film about an elegant, but ugly lanaguage', 'https://www.youtube.com/embed/xrIjfIjssLE', 1),
-    (2, SYSDATETIME(), 'Early Computing', 'Early Computing: Crash Course Computer Science #1', 'https://www.youtube.com/embed/O5nskjZ_GoI', 2)
+    (1, '2019-10-3', 'Erlang the Movie', 'A beautiful film about an elegant, but ugly lanaguage', 'https://www.youtube.com/embed/xrIjfIjssLE', 1),
+    (2, '2019-5-20', 'Early Computing', 'Early Computing: Crash Course Computer Science #1', 'https://www.youtube.com/embed/O5nskjZ_GoI', 2),
+    (3, '2020-1-2', 'C# 101', 'What is C#? It''s a powerful and widely used programming language that you can use to make websites, games, mobile apps, desktop apps and more with .NET', 'https://www.youtube.com/embed/BM4CHBmAPh4', 2),
+    (4, '2020-12-15', '.NET 101', 'What is .NET, anyway?', 'https://www.youtube.com/embed/eIHKZfgddLM', 3)
 SET IDENTITY_INSERT [Video] OFF
 
 
