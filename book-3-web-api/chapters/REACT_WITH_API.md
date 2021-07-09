@@ -286,3 +286,5 @@ export default VideoList;
       4. After a new video is saved to the database, the list of videos should be refreshed to display the new video.
           > **NOTE:** One way to accomplish this is to pass the `getVideos` function into the `VideoForm` component as a prop.
       5. Comment the code in detail to describe what it does and _why_ it does it.
+      6. **CHALLENGE** Create and/or update the unit tests for the `VideoController.Post` method. 
+          > **NOTE:** You will need more than one test method to fully test the `Post` method.
