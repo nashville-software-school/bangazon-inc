@@ -6,8 +6,7 @@ The technologies outlines in this chapter are _NOT_ the only technologies you ar
 
 _**If you would like to use an alternative technology (ex. MVC, etc...) you must get approval from your capstone mentor.**_
 
-Most of these steps will require copying code from Tabloid and Gifter, so you may want to have those repositories handy before you start
-
+Most of these steps will require copying code from Tabloid and Streamish, so you may want to have those repositories handy before you start
 
 ## Set up project
 
@@ -17,11 +16,11 @@ Most of these steps will require copying code from Tabloid and Gifter, so you ma
 
 ## Setup SQL Server
 1. Create a `SQL` folder in the root of your project
-1. Add a SQL script called `01_Db_Create.sql` that creates your database (start by either copying and modifying the Gifter script or generate one from DBDiagram)
+1. Add a SQL script called `01_Db_Create.sql` that creates your database (start by either copying and modifying the Streamish script or generate one from DBDiagram)
 1. (Optional) Add a SQL script called  `02_Seed_Data.sql` to insert seed data records into your database tables. **Note** You could also add the seed data in the first script if you prefer
 1. Run the script(s) to create and seed your database.
 
-> **NOTE:** The script(s) should be written such that they can be re-run as needed to recreate your database. _See the Gifter script for an example_
+> **NOTE:** The script(s) should be written such that they can be re-run as needed to recreate your database. _See the Streamish script for an example_
 
 
 ## Set up Firebase
@@ -33,13 +32,13 @@ Most of these steps will require copying code from Tabloid and Gifter, so you ma
 
 ## Server Side
 
-1. Install Nuget Packages (Copy from Tabloid.csproj and/or Gifter.csproj)
+1. Install Nuget Packages (Copy from Tabloid.csproj and/or Streamish.csproj)
 1. Add connection string to `appsettings.json`
 1. Create Models
 1. Update `appsettings.json` to include your `FirebaseProjectId`
 1. Update `Startup.cs` to handle JWTs
 1. Update `Startup.cs` to call `UseAuthentication` before `UseAuthorization`
-1. Copy in the `UserProfileRepository`, `IUserProfileRepository` and `UserProfileController` from Tabloid/Gifter and modify as needed
+1. Copy in the `UserProfileRepository`, `IUserProfileRepository` and `UserProfileController` from Tabloid/Streamish and modify as needed
 1. Register the `UserProfileRepository` with ASP.NET by calling `services.AddTransient` inside `Startup.cs`
 
 > **NOTE:** Make sure to update the `namespace` of any classes you copy/paste from another project.
@@ -52,6 +51,6 @@ Most of these steps will require copying code from Tabloid and Gifter, so you ma
 1. Install whatever component library you want
 1. Create a `.env.local` file in your `client` folder (DON'T forget the leading `.`) and add the firebase API Key
 1. Update the `index.js` file to add the call to `firebase.initializeApp`
-1. Copy in `UserProfileProvider.js`, `Login.js`, `Register.js` from Tabloid (and optionally copy in the `Login.css` file if you want that bootstrap styling)
-1. Copy in `ApplicationViews.js` from Tabloid/Gifter and remove code that's not needed
-1. Modify `App.js` to use the `Router`, `UserProfileProvider`, and `ApplicationViews` components
+1. Copy in `authManager.js`, `Login.js`, `Register.js` from Tabloid.
+1. Copy in `ApplicationViews.js` from Tabloid/Streamish and remove code that's not needed
+1. Modify `App.js` to use the `Router` and `ApplicationViews` components, and to use the `isLoggedIn` state.
