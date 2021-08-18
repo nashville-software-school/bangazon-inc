@@ -320,7 +320,7 @@ List<int> small = numbers.Where(n => n < 10).ToList();
 List<int> even = numbers.Where(n => n % 2 == 0).ToList();
 
 List<string> words = new List<string>() { "do", "you", "understand", "the", "words", "coming", "out", "of", "my", "mouth?" };
-List<string> yelling = words.Select(w => w.ToUpper());
+List<string> yelling = words.Select(w => w.ToUpper())ToList();
 string sentence = string.Join(" ", yelling);
 
 List<Person> people = GetPeopleFromSomeplace();
