@@ -302,7 +302,7 @@ const small = numbers.filter((n) => n < 10);
 const even = numbers.filter((n) => n % 2 === 0);
 
 const words = [ "do", "you", "understand", "the", "words", "coming", "out", "of", "my", "mouth?", ];
-const yelling = words.map((w) => w.ToUpperCase());
+const yelling = words.map((w) => w.ToUpperCase()).ToList();
 const sentence = yelling.join(" ");
 
 const people = getPeopleFromSomeplace();
