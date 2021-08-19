@@ -96,7 +96,7 @@ In the terminal, paste the following and add your email:
 git config --global user.email "you@example.com"
 ```
 
-In the terminal, paste the following and add your name:
+In the terminal, paste the following and add your name (this is _not_ your Github username):
 
 ```sh
 git config --global user.name "Your Name"
@@ -233,7 +233,7 @@ drwxr-xr-x 1 mecar 197609    0 Feb 26 13:41 ../
 ```sh
 $ git config --list
 user.email=youremail@example.com  
-user.name=yourGitHubUsername  
+user.name=Your Name 
 pull.rebase=false  
 init.defaultbranch=main  
 ```
