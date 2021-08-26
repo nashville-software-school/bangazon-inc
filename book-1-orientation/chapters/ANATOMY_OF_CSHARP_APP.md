@@ -26,7 +26,7 @@ In addition to these files you will also find two directories called `bin` and `
 
 ## Program.cs
 
-`Program.cs` is _usually_ the starting point of you C# program. It contains a class called `Program` with method called `Main`. The `Main` method is always where the code starts executing.
+`Program.cs` is _usually_ the starting point of your C# program. It contains a class called `Program` with method called `Main`. The `Main` method is always where the code starts executing.
 
 The code you have been writing at the top of the `Program.cs` file, should go inside the `Main` method from now on.
 
