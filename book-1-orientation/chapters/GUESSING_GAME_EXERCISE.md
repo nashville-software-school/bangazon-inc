@@ -42,7 +42,7 @@ The program should be updated to...
 
 The program should be updated to...
 
-1. Use a random number between 1 and 100 instead of a hard-coded number.
+1. Use a random number to set the secret number between 1 and 100 instead of a hard-coded number.
 1. The prompt should display the number of guesses the user has left.
 
 ### Phase 6
