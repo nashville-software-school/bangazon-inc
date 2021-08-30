@@ -148,7 +148,7 @@ For each of the following exercises, provide the appropriate query. Yes, even th
 1. Query all of the entries in the `Genre` table
 1. Query all the entries in the `Artist` table and order by the artist's name. HINT: use the ORDER BY keywords
 1. Write a `SELECT` query that lists all the songs in the `Song` table and include the Artist name
-1. Write a `SELECT` query that lists all the Artists that have a Pop Album
+1. Write a `SELECT` query that lists all the Artists that have a Soul Album
 1. Write a `SELECT` query that lists all the Artists that have a Jazz or Rock Album
 1. Write a `SELECT` statement that lists the Albums with no songs
 1. Using the `INSERT` statement, add one of your favorite artists to the `Artist` table.
