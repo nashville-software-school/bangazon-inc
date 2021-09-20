@@ -253,7 +253,7 @@ This code will get all the walkers in the Walker table, convert it to a List and
 
 ### Viewing the list of walkers
 
-Currently, we're passing data into a view that doesn't exist. Let's fix that. Right click the method name `Index` in your controller and click "Add View". In the dialog box that appears, leave the view name "Index", for template select "List", and for Model class select "Walker". Then click the Add button. 
+Currently, we're passing data into a view that doesn't exist. Let's fix that. Right click the method name `Index` in your controller and click "Add View". You will see a dialog box that gives a choice of "Razor View (empty)" or "Razor View". Select "Razor View," and click "Add." In the next dialog box that appears, leave the view name "Index", for template select "List", and for Model class select "Walker". Then click the Add button. 
 
 The generated view creates an html table and iterates over each walker in the list and creates a new row for each one.
 
