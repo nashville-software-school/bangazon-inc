@@ -113,25 +113,24 @@ namespace DogGo.Repositories
                         FROM Walker
                     ";
 
-                    SqlDataReader reader = cmd.ExecuteReader();
-
-                    List<Walker> walkers = new List<Walker>();
-                    while (reader.Read())
+                    using (SqlDataReader reader = cmd.ExecuteReader())
                     {
-                        Walker walker = new Walker
+                        List<Walker> walkers = new List<Walker>();
+                        while (reader.Read())
                         {
-                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
-                            Name = reader.GetString(reader.GetOrdinal("Name")),
-                            ImageUrl = reader.GetString(reader.GetOrdinal("ImageUrl")),
-                            NeighborhoodId = reader.GetInt32(reader.GetOrdinal("NeighborhoodId"))
-                        };
+                            Walker walker = new Walker
+                            {
+                                Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                                Name = reader.GetString(reader.GetOrdinal("Name")),
+                                ImageUrl = reader.GetString(reader.GetOrdinal("ImageUrl")),
+                                NeighborhoodId = reader.GetInt32(reader.GetOrdinal("NeighborhoodId"))
+                            };
 
-                        walkers.Add(walker);
+                            walkers.Add(walker);
+                        }
+                        
+                        return walkers;
                     }
-
-                    reader.Close();
-
-                    return walkers;
                 }
             }
         }
@@ -151,26 +150,25 @@ namespace DogGo.Repositories
 
                     cmd.Parameters.AddWithValue("@id", id);
 
-                    SqlDataReader reader = cmd.ExecuteReader();
-
-                    if (reader.Read())
+                    using (SqlDataReader reader = cmd.ExecuteReader())
                     {
-                        Walker walker = new Walker
+                        if (reader.Read())
                         {
-                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
-                            Name = reader.GetString(reader.GetOrdinal("Name")),
-                            ImageUrl = reader.GetString(reader.GetOrdinal("ImageUrl")),
-                            NeighborhoodId = reader.GetInt32(reader.GetOrdinal("NeighborhoodId"))
-                        };
-
-                        reader.Close();
-                        return walker;
-                    }
-                    else
-                    {
-                        reader.Close();
-                        return null;
-                    }
+                            Walker walker = new Walker
+                            {
+                                Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                                Name = reader.GetString(reader.GetOrdinal("Name")),
+                                ImageUrl = reader.GetString(reader.GetOrdinal("ImageUrl")),
+                                NeighborhoodId = reader.GetInt32(reader.GetOrdinal("NeighborhoodId"))
+                            };
+                            
+                            return walker;
+                        }
+                        else
+                        {                            
+                            return null;
+                        }
+                    }   
                 }
             }
         }
