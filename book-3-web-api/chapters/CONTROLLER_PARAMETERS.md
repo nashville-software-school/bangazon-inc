@@ -128,33 +128,33 @@ public List<Video> Search(string criterion, bool sortDescending)
 
             cmd.CommandText = sql;
             DbUtils.AddParameter(cmd, "@Criterion", $"%{criterion}%");
-            var reader = cmd.ExecuteReader();
-
-            var videos = new List<Video>();
-            while (reader.Read())
+            using (SqlDataReader reader = cmd.ExecuteReader())
             {
-                videos.Add(new Video()
+
+                var videos = new List<Video>();
+                while (reader.Read())
                 {
-                    Id = DbUtils.GetInt(reader, "Id"),
-                    Title = DbUtils.GetString(reader, "Title"),
-                    Description = DbUtils.GetString(reader, "Description"),
-                    DateCreated = DbUtils.GetDateTime(reader, "VideoDateCreated"),
-                    Url = DbUtils.GetString(reader, "Url"),
-                    UserProfileId = DbUtils.GetInt(reader, "UserProfileId"),
-                    UserProfile = new UserProfile()
+                    videos.Add(new Video()
                     {
-                        Id = DbUtils.GetInt(reader, "UserProfileId"),
-                        Name = DbUtils.GetString(reader, "Name"),
-                        Email = DbUtils.GetString(reader, "Email"),
-                        DateCreated = DbUtils.GetDateTime(reader, "UserProfileDateCreated"),
-                        ImageUrl = DbUtils.GetString(reader, "UserProfileImageUrl"),
-                    },
-                });
+                        Id = DbUtils.GetInt(reader, "Id"),
+                        Title = DbUtils.GetString(reader, "Title"),
+                        Description = DbUtils.GetString(reader, "Description"),
+                        DateCreated = DbUtils.GetDateTime(reader, "VideoDateCreated"),
+                        Url = DbUtils.GetString(reader, "Url"),
+                        UserProfileId = DbUtils.GetInt(reader, "UserProfileId"),
+                        UserProfile = new UserProfile()
+                        {
+                            Id = DbUtils.GetInt(reader, "UserProfileId"),
+                            Name = DbUtils.GetString(reader, "Name"),
+                            Email = DbUtils.GetString(reader, "Email"),
+                            DateCreated = DbUtils.GetDateTime(reader, "UserProfileDateCreated"),
+                            ImageUrl = DbUtils.GetString(reader, "UserProfileImageUrl"),
+                        },
+                    });
+                }
+
+                return videos;
             }
-
-            reader.Close();
-
-            return videos;
         }
     }
 }
