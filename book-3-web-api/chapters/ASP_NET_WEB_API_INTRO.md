@@ -399,7 +399,7 @@ Some of the `[HttpXXX]`attributes refer to `{id}`. The `id` in this case says th
 
 You'll also note that, unlike MVC, we don't have two methods for creating, editing or deleting entities. This is because Web API does not have the concept of Views, so there are no forms to present to the user.
 
-Also, since there is no View, you won't see a call the the `View()` method as we did in MVC. Instead you'll see a few other methods. Two common methods are `Ok()` and `NoContent()`. `Ok()` is used when we want to return data. `NoContent()` is used to indicate that the action was successful, but we don't have any data to return.
+Also, since there is no View, you won't see a call to the `View()` method as we did in MVC. Instead you'll see a few other methods. Two common methods are `Ok()` and `NoContent()`. `Ok()` is used when we want to return data. `NoContent()` is used to indicate that the action was successful, but we don't have any data to return.
 
 Some final differences from an MVC controller can be seen at the top of the class. We must decorate a Web API controller with a couple of attributes and the controller class should inherit from the `ControllerBase` class instead of `Controller`.
 
