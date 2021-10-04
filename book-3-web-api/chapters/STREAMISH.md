@@ -41,7 +41,7 @@ Let's explore this idea some more with an example application, Streamish. Along 
 
 ## Streamish
 
-Streamish is a social app for sharing videos with others. For the time being we'll focus on using building a Web API. In future chapters we'll be creating a React application that will interact with the API. Along the way we'll dig into some more complex queries.
+Streamish is a social app for sharing videos with others. For the time being we'll focus on building a Web API. In future chapters we'll be creating a React application that will interact with the API. Along the way we'll dig into some more complex queries.
 
 ### Project Setup
 
