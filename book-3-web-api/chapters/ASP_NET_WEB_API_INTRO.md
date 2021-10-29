@@ -134,26 +134,26 @@ namespace CoffeeShop.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = "SELECT Id, [Name], Region, Notes FROM BeanVariety;";
-                    var reader = cmd.ExecuteReader();
-                    var varieties = new List<BeanVariety>();
-                    while (reader.Read())
+                    using (SqlDataReader reader = cmd.ExecuteReader())
                     {
-                        var variety = new BeanVariety()
+                        var varieties = new List<BeanVariety>();
+                        while (reader.Read())
                         {
-                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
-                            Name = reader.GetString(reader.GetOrdinal("Name")),
-                            Region = reader.GetString(reader.GetOrdinal("Region")),
-                        };
-                        if (!reader.IsDBNull(reader.GetOrdinal("Notes")))
-                        {
-                            variety.Notes = reader.GetString(reader.GetOrdinal("Notes"));
+                            var variety = new BeanVariety()
+                            {
+                                Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                                Name = reader.GetString(reader.GetOrdinal("Name")),
+                                Region = reader.GetString(reader.GetOrdinal("Region")),
+                            };
+                            if (!reader.IsDBNull(reader.GetOrdinal("Notes")))
+                            {
+                                variety.Notes = reader.GetString(reader.GetOrdinal("Notes"));
+                            }
+                            varieties.Add(variety);
                         }
-                        varieties.Add(variety);
+                       
+                        return varieties;
                     }
-
-                    reader.Close();
-
-                    return varieties;
                 }
             }
         }
@@ -171,26 +171,25 @@ namespace CoffeeShop.Repositories
                          WHERE Id = @id;";
                     cmd.Parameters.AddWithValue("@id", id);
 
-                    var reader = cmd.ExecuteReader();
-
-                    BeanVariety variety = null;
-                    if (reader.Read())
+                    using (SqlDataReader reader = cmd.ExecuteReader())
                     {
-                        variety = new BeanVariety()
+                        BeanVariety variety = null;
+                        if (reader.Read())
                         {
-                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
-                            Name = reader.GetString(reader.GetOrdinal("Name")),
-                            Region = reader.GetString(reader.GetOrdinal("Region")),
-                        };
-                        if (!reader.IsDBNull(reader.GetOrdinal("Notes")))
-                        {
-                            variety.Notes = reader.GetString(reader.GetOrdinal("Notes"));
+                            variety = new BeanVariety()
+                            {
+                                Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                                Name = reader.GetString(reader.GetOrdinal("Name")),
+                                Region = reader.GetString(reader.GetOrdinal("Region")),
+                            };
+                            if (!reader.IsDBNull(reader.GetOrdinal("Notes")))
+                            {
+                                variety.Notes = reader.GetString(reader.GetOrdinal("Notes"));
+                            }
                         }
+
+                        return variety;
                     }
-
-                    reader.Close();
-
-                    return variety;
                 }
             }
         }

@@ -44,27 +44,26 @@ namespace DogGo.Repositories
 
                     cmd.Parameters.AddWithValue("@id", id);
 
-                    SqlDataReader reader = cmd.ExecuteReader();
-
-                    if (reader.Read())
+                    using (SqlDataReader reader = cmd.ExecuteReader())
                     {
-                        Owner owner = new Owner()
+                        if (reader.Read())
                         {
-                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
-                            Name = reader.GetString(reader.GetOrdinal("Name")),
-                            Email = reader.GetString(reader.GetOrdinal("Email")),
-                            Address = reader.GetString(reader.GetOrdinal("Address")),
-                            Phone = reader.GetString(reader.GetOrdinal("Phone")),
-                            NeighborhoodId = reader.GetInt32(reader.GetOrdinal("NeighborhoodId"))
-                        };
+                            Owner owner = new Owner()
+                            {
+                                Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                                Name = reader.GetString(reader.GetOrdinal("Name")),
+                                Email = reader.GetString(reader.GetOrdinal("Email")),
+                                Address = reader.GetString(reader.GetOrdinal("Address")),
+                                Phone = reader.GetString(reader.GetOrdinal("Phone")),
+                                NeighborhoodId = reader.GetInt32(reader.GetOrdinal("NeighborhoodId"))
+                            };
 
-                        reader.Close();
-                        return owner;
+                            return owner;
+                        }
+
+                        return null;
                     }
-
-                    reader.Close();
-                    return null;
-                }
+                }    
             }
         }
 
@@ -83,26 +82,25 @@ namespace DogGo.Repositories
 
                     cmd.Parameters.AddWithValue("@email", email);
 
-                    SqlDataReader reader = cmd.ExecuteReader();
-
-                    if (reader.Read())
+                    using (SqlDataReader reader = cmd.ExecuteReader())
                     {
-                        Owner owner = new Owner()
+                        if (reader.Read())
                         {
-                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
-                            Name = reader.GetString(reader.GetOrdinal("Name")),
-                            Email = reader.GetString(reader.GetOrdinal("Email")),
-                            Address = reader.GetString(reader.GetOrdinal("Address")),
-                            Phone = reader.GetString(reader.GetOrdinal("Phone")),
-                            NeighborhoodId = reader.GetInt32(reader.GetOrdinal("NeighborhoodId"))
-                        };
+                            Owner owner = new Owner()
+                            {
+                                Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                                Name = reader.GetString(reader.GetOrdinal("Name")),
+                                Email = reader.GetString(reader.GetOrdinal("Email")),
+                                Address = reader.GetString(reader.GetOrdinal("Address")),
+                                Phone = reader.GetString(reader.GetOrdinal("Phone")),
+                                NeighborhoodId = reader.GetInt32(reader.GetOrdinal("NeighborhoodId"))
+                            };
 
-                        reader.Close();
-                        return owner;
+                            return owner;
+                        }
+
+                        return null;
                     }
-
-                    reader.Close();
-                    return null;
                 }
             }
         }

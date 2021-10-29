@@ -274,41 +274,40 @@ Before you get started, let's introduce some terms that will be used during this
                 cmd.CommandText = "SELECT Id, Name, MaxOccupancy FROM Room";
 
                 // Execute the SQL in the database and get a "reader" that will give us access to the data.
-                SqlDataReader reader = cmd.ExecuteReader();
-
-                // A list to hold the rooms we retrieve from the database.
-                List<Room> rooms = new List<Room>();
-
-                // Read() will return true if there's more data to read
-                while (reader.Read())
+                using (SqlDataReader reader = cmd.ExecuteReader())
                 {
-                    // The "ordinal" is the numeric position of the column in the query results.
-                    //  For our query, "Id" has an ordinal value of 0 and "Name" is 1.
-                    int idColumnPosition = reader.GetOrdinal("Id");
+                   // A list to hold the rooms we retrieve from the database.
+                   List<Room> rooms = new List<Room>();
 
-                    // We user the reader's GetXXX methods to get the value for a particular ordinal.
-                    int idValue = reader.GetInt32(idColumnPosition);
+                   // Read() will return true if there's more data to read
+                   while (reader.Read())
+                   {
+                       // The "ordinal" is the numeric position of the column in the query results.
+                       //  For our query, "Id" has an ordinal value of 0 and "Name" is 1.
+                       int idColumnPosition = reader.GetOrdinal("Id");
 
-                    int nameColumnPosition = reader.GetOrdinal("Name");
-                    string nameValue = reader.GetString(nameColumnPosition);
+                       // We user the reader's GetXXX methods to get the value for a particular ordinal.
+                       int idValue = reader.GetInt32(idColumnPosition);
 
-                    int maxOccupancyColumPosition = reader.GetOrdinal("MaxOccupancy");
-                    int maxOccupancy = reader.GetInt32(maxOccupancyColumPosition);
+                       int nameColumnPosition = reader.GetOrdinal("Name");
+                       string nameValue = reader.GetString(nameColumnPosition);
 
-                    // Now let's create a new room object using the data from the database.
-                    Room room = new Room
-                    {
-                        Id = idValue,
-                        Name = nameValue,
-                        MaxOccupancy = maxOccupancy,
-                    };
+                       int maxOccupancyColumPosition = reader.GetOrdinal("MaxOccupancy");
+                       int maxOccupancy = reader.GetInt32(maxOccupancyColumPosition);
 
-                    // ...and add that room object to our list.
-                    rooms.Add(room);
+                       // Now let's create a new room object using the data from the database.
+                       Room room = new Room
+                       {
+                           Id = idValue,
+                           Name = nameValue,
+                           MaxOccupancy = maxOccupancy,
+                       };
+
+                       // ...and add that room object to our list.
+                       rooms.Add(room);
+                   }
                 }
-
-                // We should Close() the reader. Unfortunately, a "using" block won't work here.
-                reader.Close();
+               
 
                 // Return the list of rooms who whomever called this method.
                 return rooms;
@@ -372,22 +371,22 @@ Before you get started, let's introduce some terms that will be used during this
             {
                 cmd.CommandText = "SELECT Name, MaxOccupancy FROM Room WHERE Id = @id";
                 cmd.Parameters.AddWithValue("@id", id);
-                SqlDataReader reader = cmd.ExecuteReader();
-
-                Room room = null;
-
-                // If we only expect a single row back from the database, we don't need a while loop.
-                if (reader.Read())
+                
+                using (SqlDataReader reader = cmd.ExecuteReader())
                 {
-                    room = new Room
-                    {
-                        Id = id,
-                        Name = reader.GetString(reader.GetOrdinal("Name")),
-                        MaxOccupancy = reader.GetInt32(reader.GetOrdinal("MaxOccupancy")),
-                    };
-                }
+                   Room room = null;
 
-                reader.Close();
+                   // If we only expect a single row back from the database, we don't need a while loop.
+                   if (reader.Read())
+                   {
+                       room = new Room
+                       {
+                           Id = id,
+                           Name = reader.GetString(reader.GetOrdinal("Name")),
+                           MaxOccupancy = reader.GetInt32(reader.GetOrdinal("MaxOccupancy")),
+                       };
+                   }
+                }
 
                 return room;
             }
