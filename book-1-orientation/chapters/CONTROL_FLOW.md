@@ -33,7 +33,7 @@ int b = a + 40;
 
 On a single line of code, it is often useful to think of code executing from right to left.
 
-In the code below, the `data.GetUserById()` method runs first to get a user with `id` of 100, then that user is passed to the `messageGenerator.GetMessageForUsername()` method get a message, finally, the `message` variable is created and assigned the value of the message;
+In the code below, the `data.GetUserById()` method runs first to get a user with `id` of 100, then that user is passed to the `messageGenerator.GetMessageForUser()` method get a message, finally, the `message` variable is created and assigned the value of the message;
 
 ```cs
 string message = messageGenerator.GetMessageForUser(data.GetUserById(100));
