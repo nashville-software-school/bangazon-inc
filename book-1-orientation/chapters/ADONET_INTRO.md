@@ -110,7 +110,7 @@ Before you get started, let's introduce some terms that will be used during this
         {
             //  This is the address of the database.
             //  We define it here as a constant since it will never change.
-            private const string CONNECTION_STRING = @"server=localhost\SQLExpress;database=Roommates;integrated security=true";
+            private const string CONNECTION_STRING = @"server=localhost\SQLExpress;database=Roommates;integrated security=true;TrustServerCertificate=true;";
 
             static void Main(string[] args)
             {
@@ -386,9 +386,9 @@ Before you get started, let's introduce some terms that will be used during this
                            MaxOccupancy = reader.GetInt32(reader.GetOrdinal("MaxOccupancy")),
                        };
                    }
+                    return room;
                 }
 
-                return room;
             }
         }
     }
