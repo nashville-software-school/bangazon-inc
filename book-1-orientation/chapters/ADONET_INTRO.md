@@ -306,11 +306,10 @@ Before you get started, let's introduce some terms that will be used during this
                        // ...and add that room object to our list.
                        rooms.Add(room);
                    }
-                // Return the list of rooms who whomever called this method.
-                return rooms;
+                    // Return the list of rooms who whomever called this method.
+                    return rooms;
                 }
                
-
             }
         }
     }
