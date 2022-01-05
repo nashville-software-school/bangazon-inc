@@ -30,7 +30,7 @@ In this chapter we'll walk through creating a "Coffee Shop" Web API in ASP<span>
 1. In the "Create a new project" dialog, choose the C# "ASP<span>.NET</span> Core Web API" option
 1. Name the project "CoffeeShop" and click "Next"
 1. Select ".NET 5.0 (Current)" for the "Target Framework" and click "Create"
-1. In Solution Explorer, right click the name of the project and select "Manage Nuget Packages". Install the `Microsoft.Data.SqlClient` pacakge
+1. In Solution Explorer, right click the name of the project and select "Manage Nuget Packages". Install the `Microsoft.Data.SqlClient` package
 1. Review and run [this SQL script](./sql/CoffeeShop.sql) to create the `CoffeeShop` database.
 
 You now have an ASP<span>.NET</span> Core Web API project. Spend some time looking around the code that Visual Studio generated. You'll find several familiar items.
@@ -50,7 +50,7 @@ As in an MVC project, a Web API project has an `appsettings.json` file to store 
   },
   "AllowedHosts": "*",
   "ConnectionStrings": {
-    "DefaultConnection":  "server=localhost\\SQLExpress;database=CoffeeShop;integrated security=true"
+    "DefaultConnection":  "server=localhost\\SQLExpress;database=CoffeeShop;integrated security=true;TrustServerCertificate=true;"
   }
 }
 ```
@@ -465,7 +465,7 @@ npx serve -l 3000 .
 
 > **NOTE:** The default port for `serve` is `5000`, but our an ASP<span>.NET</span> app is already running on ports `5000` and `5001`, so we use the `-l` (a.k.a. _listen_) flag to tell `serve` to use port `3000`.
 
-Open the console and then click the `Run It!` button. What do you see?
+Open the dev tools and then click the `Run It!` button. What do you see?
 
 That's right...a "CORS" error.
 
