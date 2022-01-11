@@ -19,7 +19,7 @@ Let's add different routes to our Streamish application so that we can have cert
 Start by installing the React router package from npm. `cd` into your client directory and run
 
 ```sh
-npm i react-router-dom
+npm i react-router-dom@5.3.0
 ```
 
 We can use the React router to only render certain views when a user is on a specific URL. Let's create a component that will specify this. Make a new file in your components directory and name it `ApplicationViews.js`
