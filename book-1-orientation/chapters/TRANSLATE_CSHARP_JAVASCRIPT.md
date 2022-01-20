@@ -2,7 +2,7 @@
 
 Your instructor will walk you though completing the **C# to JavaScript** exercises found in this repo:
 
-https://github.com/NewForce-Cohort-4/translate-csharp-js
+https://github.com/NewForce-Cohort-5/translate-csharp-js
 
 > **NOTE:** These exercises are **_very challenging_**. It's expected that they will take a lot of time and many people will not finish in the time alloted. Don't let it get you down.
 
