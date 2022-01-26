@@ -50,7 +50,7 @@ Most of these steps will require copying code from Tabloid and Streamish, so you
 1. Create client directory and run `npx create-react-app .`
 1. `create-react-app` will create a git repo inside the client folder if you haven't run `git init` in the root folder yet. Check to make sure no `.git` folder is in the `client` folder. If there is, from the `client` directory, run `rm -rf .git` to remove this nested git repo **before** you commit anything. This probably means you should check to make sure that you **do** have a git repo in the root directory of your capstone.   Reminder: dotfiles will not appear when you use `ls` only, you need to use `ls -a` to check for the `.git` directories.
 1. Setup proxy in `package.json`
-1. Install firebase and react router using `npm install react-router-dom firebase`
+1. Install firebase and react router using `npm install react-router-dom@5.2.0 firebase@8.7.1`
 1. Install whatever component library you want
 1. Create a `.env.local` file in your `client` folder (DON'T forget the leading `.`) and add the firebase API Key
 1. Update the `index.js` file to add the call to `firebase.initializeApp`
