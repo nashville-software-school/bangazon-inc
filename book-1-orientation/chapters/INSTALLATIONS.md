@@ -160,10 +160,9 @@ fi' >> ~/.bashrc
 ## Visual Studio IDE
 
  [Visual Studio Community Edition](https://visualstudio.microsoft.com/vs/community/). This will be your main code authoring tool for the server-side course.
-   > **INFO:** When installing Visual Studio, you will be presented with a variety of workloads. Select the following workloads.
+   > **INFO:** When installing Visual Studio, you will be presented with a variety of workloads. Select the following workload:
    >
    > - ASP.NET and web development
-   > - .NET Core cross-platform development
 
 ## SQL Server Express Database
 
