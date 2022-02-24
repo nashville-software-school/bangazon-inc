@@ -164,6 +164,21 @@ fi' >> ~/.bashrc
    >
    > - ASP.NET and web development
 
+
+## Setting .NET 5 as the SDK version 
+
+When you installed Visual Studio 2022, it also installed .NET 6. .NET 6 is great, but the curriculum was written with .NET 5 in mind, and the two are different enough that we will be using 5.
+
+Run the following command in your terminal:
+
+```sh
+echo $'{
+   "sdk": {
+      "version": "5.0.405"
+   }
+}' > ~/global.json
+```
+
 ## SQL Server Express Database
 
 [SQL Server Express](https://www.microsoft.com/en-us/sql-server/sql-server-downloads). This is the database tool where all your data will be stored for the server-side course. Click the Download button under the Express option. During the setup, take the basic installation option
