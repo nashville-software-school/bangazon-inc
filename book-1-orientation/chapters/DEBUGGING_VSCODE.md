@@ -16,9 +16,9 @@ After completing this lesson you should be able to:
 
 ---
 
-_To follow along with the example code below, clone this repo_
+_To follow along with the example code below, create a repo from this template_
 
-[VS Code Debugging Example](https://github.com/nashville-software-school/vscode-csharp-debug-demo)
+[VS Code Debugging Example](https://github.com/nashville-software-school/vs-code-debug-example)
 
 ## Visual Studio Code
 
