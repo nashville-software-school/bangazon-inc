@@ -24,7 +24,7 @@ This book prepares you for building the Tabloid API
 * Chapter 6 - [React & Web API](./chapters/REACT_WITH_API.md)
 * Chapter 7 - [React Routing](./chapters/REACT_ROUTER.md)
 * Supplementary Exercises - [Gifter](./chapters/GIFTER_SUPPLEMENTAL.md)
-* Chapter 8 - [Firebase Authentication](./chapters/API_AUTH.md)
+* Chapter 8 - [Authentication](./chapters/API_AUTH.md)
 
 > __Sprint 1__ - Full-stack Tabloid
 
