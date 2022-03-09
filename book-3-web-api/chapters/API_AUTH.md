@@ -9,11 +9,11 @@ Let's walk through the process of authentication. First, a user opens our applic
 
 #### Register
 1. Let's say the user needs to register. They fill out the register form and click submit! 
-1. When they click submit, our React application (aka our client) sends an HTTP POST request to our API. It sends all the information the user just entered into the form-- their name, their email, their password, etc.
-1. When our API gets a POST request (aka a fetch call) to register a new user, it wraps that info up from the form and sends it to the database using ADO.NET and SQL. 
+1. When they click submit, our client (aka our React App) sends an HTTP POST request (aka a fetch call) to our API. It sends all the information the user just entered into the form-- their name, their email, their password, etc.
+1. When our API gets a POST request to register a new user, it wraps that info up from the form and sends it to the database using ADO.NET and SQL. 
 1. When we add the new user to our SQL Server database, SQL Server generates a unique id for that user. That user id is going to be really important!
-1. Our API sends back the **entire user object, including that shiny new id** to our React App. This is basically like the API saying "yep, it worked! I created a user! Here it is!"
-1. By now, our React App has the response from the API-- the full user object! Our React app stores it in local storage, in the browser, so that we can access that super important user id later to figure out which user is logged in. 
+1. Our API sends back the **entire user object, including that shiny new id** to our React app. This is basically like the API saying "yep, it worked! I created a user! Here it is!"
+1. By now, our React App has the response from the API-- the full user object! Our React app stores it in local storage, in the browser, so that we can access that super important user id later to figure out which user is logged in. (Again: super insecure! That's ok for now.)
 
 #### Logging In
 1. If the user wants to log in, they fill out their email and password into a log in form in our React app
@@ -32,41 +32,53 @@ What's the point of all this? Why go to all this trouble to store the user's inf
 
 
 #### Ok, after all that, what code do I actually need to write?
-Take a read and read back through the overview above with this question in mind. Then take five minutes and write down what you think you will need to change in your Gifter code base to accomplish these steps. 
+Take a few minutes and read back through the overview above with this question in mind. Then set a timer for five to ten minutes and write down what you think you will need to change in your Gifter code base to accomplish these steps. 
 1. What components will you need to add to your React app? 
 2. What controllers and repositories will you need to add in your API? 
 3. What methods will those controllers have? 
+
+
 **We're going to give you the answer below, but don't cheat-- this will be the process you have to do on your capstone and on the job.** If you need help thinking this through, talk to a classmate or an instructor. This is worth spending time on. Translating human-readable steps to a solid plan for how you're going to build it with code is the number one skill every developer needs to have.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
 Have you made a list of the files and methods you think you'll need? No? Just want to skip down to the answer? DON'T DO IT! Give this an honest shot. please. You won't always have an answer key. 
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 Okay, great job. Thanks for giving this a try! Now is a great time to check in on how the process of planning your authentication process went for you. If this felt really hard, it's probably wise to ask your instructor about how you can practice planning. If it felt doable, that's great! Even if the plan ends up changing, coming up with _some_ kind of plan allows you to communicate better with your team, estimate your time wisely, and predict road blocks before you hit them. Here's the plan that we came up with:
 1. Becaues the user needs to see a login form and a register form, we will need to add a login component and a register component to our React app.
 2. Because we will need work with the `UserProfile` table in the database, we will need to add a `UserProfile` controller and repository to our API.
