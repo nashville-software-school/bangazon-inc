@@ -12,8 +12,6 @@ This book prepares you for building the Tabloid API
 * Model Validation
 * Web API + React
 * Integration testing
-* JWT tokens
-* Firebase auth
 
 ## Chapters
 
