@@ -392,4 +392,4 @@ export const UserProvider = (props) => {
 
 # Exercises
 1. Create routes in `ApplicationViews` for your login and register forms. 
-2. Modify your Post List to show _only_ the user's posts. Remember that you can get the user's id out of local storage. 
+2. Modify your Post List to show _only_ the user's posts. 
