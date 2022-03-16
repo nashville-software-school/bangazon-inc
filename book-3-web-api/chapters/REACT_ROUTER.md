@@ -16,34 +16,34 @@ We can use the React router to only render certain views when a user is on a spe
 
 ```js
 import React from "react";
-import { Switch, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import PostList from "./PostList";
 import PostForm from "./PostForm";
+import { PostProvider } from "./providers/PostProvider";
+
 
 const ApplicationViews = () => {
   return (
-    <Switch>
-      <Route path="/" exact>
-        <PostList />
-      </Route>
+  <PostProvider>
+    <Routes>
+      <Route path="/" element= {<PostList />} />
 
-      <Route path="/posts/add">
-        <PostForm />
-      </Route>
+      <Route path="/posts/add" element={<PostForm />} />
 
-      <Route path="/posts/:id">{/* TODO: Post Details Component */}</Route>
-    </Switch>
+      <Route path="/posts/:id" element={/* TODO: Post Details Component */} />
+    </Routes>
+    </PostProvider>
   );
 };
 
 export default ApplicationViews;
 ```
-
+<!-- 
 A few things to note here. First, the `<Switch>` and `<Route>` components are ones we get from the npm module we just installed. The `Switch` component is going to look at the url and render the first route that is a match.
 
-Second thing to note is the presence of the `exact` attribute on the home route. Technically "/" will match every single route in our application since they all start like that. The `exact` attribute specifies that we only want to render this component then the url is _exactly_ `/`
+Second thing to note is the presence of the `exact` attribute on the home route. Technically "/" will match every single route in our application since they all start like that. The `exact` attribute specifies that we only want to render this component then the url is _exactly_ `/` -->
 
-Second thing to note is the `<Route>` component. If a url matches the value of the `path` attribute, the children of that `<Route>` will be what gets rendered. As we've seen before, URLs often have _route params_ in them. The third route here is an example of a path with a route param: `/posts/:id`. Using the colon, we can tell the react router that this will be some `id` parameter. These are all examples of paths that would match this route:
+A thing to note is the `<Route>` component. If a url matches the value of the `path` attribute, the children of that `<Route>` will be what gets rendered. As we've seen before, URLs often have _route params_ in them. The third route here is an example of a path with a route param: `/posts/:id`. Using the colon, we can tell the react router that this will be some `id` parameter. These are all examples of paths that would match this route:
 
 **/posts/5** 
 
@@ -61,15 +61,13 @@ import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import "./App.css";
 import ApplicationViews from "./components/ApplicationViews";
-import { PostProvider } from "./providers/PostProvider";
+
 
 function App() {
   return (
     <div className="App">
       <Router>
-        <PostProvider>
           <ApplicationViews />
-        </PostProvider>
       </Router>
     </div>
   );
@@ -124,17 +122,14 @@ import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import "./App.css";
 import ApplicationViews from "./components/ApplicationViews";
-import { PostProvider } from "./providers/PostProvider";
 import Header from "./components/Header";
 
 function App() {
   return (
     <div className="App">
       <Router>
-        <PostProvider>
           <Header />
           <ApplicationViews />
-        </PostProvider>
       </Router>
     </div>
   );
@@ -143,7 +138,7 @@ function App() {
 export default App;
 ```
 
-The `<Link>` component is great for rendering links in our UI, but what about if we want to navigate the user programmatically? For example, on the Post form after a user submits and the new post gets successfully gets processed by our API, we'd like to maybe send the user back to the main feed. We can't do this with a simple `<Link>` component. Fortunately, the react router gives us an easy to use hook to allow us to do this called `useHistory`.
+The `<Link>` component is great for rendering links in our UI, but what about if we want to navigate the user programmatically? For example, on the Post form after a user submits and the new post gets successfully gets processed by our API, we'd like to maybe send the user back to the main feed. We can't do this with a simple `<Link>` component. Fortunately, the react router gives us an easy to use hook to allow us to do this called `useNavigate`.
 
 In the last chapter you added a `PostForm` component that saves new posts. Your component may look a little different than this, but there's only a couple lines of code that need to be added to make this work.
 
@@ -159,7 +154,7 @@ import {
   Button,
 } from "reactstrap";
 import { PostContext } from "../providers/PostProvider";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const PostForm = () => {
   const { addPost } = useContext(PostContext);
@@ -169,7 +164,7 @@ const PostForm = () => {
   const [caption, setCaption] = useState("");
 
   // Use this hook to allow us to programatically redirect users
-  const history = useHistory();
+  const navigate = useNaviagte();
 
   const submit = (e) => {
     const post = {
@@ -181,7 +176,7 @@ const PostForm = () => {
 
     addPost(post).then((p) => {
       // Navigate the user back to the home route
-      history.push("/");
+      navigate("/");
     });
   };
 
@@ -235,14 +230,14 @@ Again, your Add form will likely look different than this, but there's only two 
 ```js
 addPost(post).then((p) => {
     // Navigate the user back to the home route
-    history.push("/");
+    navigate("/");
 });
 ```
 
-To get access to the `history` instance, we need to use the `useHistory` hook
+To get access to the `navigate` instance, we need to use the `useNavigate` hook
 
 ```js
-const history = useHistory();
+const navigate = useNavigate();
 ```
 
 Add these two lines of code to your own `PostForm` component and try adding a new post. You should be taken back to the feed after submitting the form.
