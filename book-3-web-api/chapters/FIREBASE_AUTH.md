@@ -194,7 +194,7 @@ As you work through the following checklist, make sure to use the `WisdomAndGrac
 
 As you work through the following checklist, make sure to use the `WisdomAndGrace` application as an example.
 
-1. Use npm to install the firebase library: `npm install firebase`.
+1. Use npm to install the firebase library: `npm install firebase@8.7.1`.
 1. Create a `authManager.js` module with `login`, `register`, `logout`, `getToken` and `onLoginStatusChange` functions. Make sure you get all the helper functions too.
 1. Add an `isLoggedIn` boolean to the `App`'s state and setup the `onLoginStatusChange` function to update the `isLoggedIn` state.
 1. Add code to `index.js` to initialize Firebase.
