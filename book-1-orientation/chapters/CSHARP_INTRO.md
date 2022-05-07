@@ -164,7 +164,7 @@ In addition to the above terms, you might find online references to **"mono", "x
 
 ## Pushing To Github
 
-Before you push to Github, make sure that you add a gitignore file to your project. In your terminal, from the root of the application run `dnignore`. If you get an error saying the command is not found, be sure to go back to the installation chapter and get that added to your bashrc file.
+Before you push to Github, make sure that you add a gitignore file to your project. In your terminal, from the root of the application run `dotnet new gitignore`.
 
 ## Learning a Second Language
 

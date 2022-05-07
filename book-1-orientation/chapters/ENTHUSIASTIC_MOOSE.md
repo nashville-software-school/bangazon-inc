@@ -30,7 +30,7 @@ As you go through the phases make sure you...
 1. Add a gitignore to the project
 
    ```sh
-   dnignore
+   dotnet new gitignore
    ```
 
    > **NOTE:** Make sure you run this command from the `EnthusiasticMoose` directory.

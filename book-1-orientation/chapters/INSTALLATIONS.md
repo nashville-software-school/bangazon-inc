@@ -126,21 +126,7 @@ npm i -g serve json-server
 
 1. Install .NET 5 from [here](https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/sdk-5.0.405-windows-x64-installer)
    * Run the program once it is downloaded
-1. Open a terminal and run `dotnet --version`. You should see a version greater than or equal to `5.0.405`
-
-## Gitignore Shortcut
-
-You'll be making a lot of new projects and we want to easily be able to create a gitignore file before pushing to Github. Run the following code from a git bash window
-
-```sh
-echo "
-dnignore() {
-    curl -L -s 'https://raw.githubusercontent.com/github/gitignore/master/VisualStudio.gitignore' > .gitignore
-}
-" >> ~/.bashrc
-```
-
-You now have access in your terminal to a command called `dnignore` which will add a gitignore file to your project.
+1. Open a terminal and run `dotnet --version`. You should see a version equal to `5.0.405`
 
 ## Always Open a Terminal Window in Last Directory
 If you would like your terminal window to always open in the last directory you were in, then you can run the following code in your terminal.
@@ -231,7 +217,7 @@ $ json-server -v
 
 ```sh
 $ dotnet --version
-5.0.103
+5.0.405
 ```
 
 ```sh
@@ -253,16 +239,6 @@ init.defaultbranch=main
 ```
 
 > **Note:** There are many settings listed. You only need to check `user.email`, `user.name`, `pull.rebase`, & `init.defaultBranch`.
-
-```sh
-$ type dnignore
-dnignore is a function  
-dnignore ()  
-{  
-   curl -L -s "https://<span></span>raw.githu<span></span>busercontent.<span></span>com/dotnet/core/master/.gitignore" > .gitignore  
-}
-```
-
 ```sh
 $ type cd
 cd is a function  
