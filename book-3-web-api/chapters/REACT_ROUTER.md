@@ -68,7 +68,7 @@ Second, we have a route at the top level of our routes that uses the `*` wildcar
 
 Finally, our top level route `/`, like the next level `videos`, has child routes (`videos` is actually a child of `/`). But unlike `videos`, the `/` route specifies an element to render, `App`. This means that every time a route that matches `/` is requested (every route in the app matches `/`!) the `App` component will render. 
 
-So how do we render other components inside `App`? If we have nested routes inside the route that will render `App`, we can indicate where to render that nested component using the `Outlet` component from `react-router-dom` like this:
+So how do we render other components inside `App`? If we have nested routes inside the route that will route to `App`, we can indicate where to render that nested component using the `Outlet` component from `react-router-dom` like this:
 
 > `src/App.js`
 
@@ -89,7 +89,7 @@ export default App;
 
 Run the app and go to `localhost:3000` and `localhost:3000/videos/add`
 
-These will render the `App` component with the `VideoList` and `VideoForm` component rendered inside it, respectively. 
+This will render the `App` component with the `VideoForm` component rendered inside it. 
 
 ## Adding a Header Component
 
