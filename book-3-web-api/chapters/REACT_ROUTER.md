@@ -19,7 +19,7 @@ Let's add different routes to our Streamish application so that we can have cert
 Start by installing the React router package from npm. `cd` into your client directory and run
 
 ```sh
-npm i react-router-dom@5.3.0
+npm i react-router-dom
 ```
 
 We can use the React router to only render certain views when a user is on a specific URL. Let's create a component that will specify this. Make a new file in your components directory and name it `ApplicationViews.js`
@@ -28,38 +28,38 @@ We can use the React router to only render certain views when a user is on a spe
 
 ```js
 import React from "react";
-import { Switch, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import VideoList from "./VideoList";
 import VideoForm from "./VideoForm";
 
 const ApplicationViews = () => {
   return (
-    <Switch>
-      <Route path="/" exact>
-        <VideoList />
+    <Routes>
+      <Route path="/" >
+        <Route index element={<VideoList/>} />
+        <Route path="videos">
+          <Route index element={<VideoList/>} />
+          <Route path="add" element={<VideoForm/>} />
+          <Route path=":id" element={<p>TODO: Make Video Details component</p>} />
+        </Route>
       </Route>
-
-      <Route path="/videos/add">
-        <VideoForm />
-      </Route>
-
-      <Route path="/videos/:id">{/* TODO: Video Details Component */}</Route>
-    </Switch>
+      <Route path="*" element={<p>Whoops, nothing here...</p>} />
+    </Routes>
   );
 };
 
 export default ApplicationViews;
 ```
 
-A few things to note here. First, the `<Switch>` and `<Route>` components are ones we get from the npm module we just installed. The `Switch` component is going to look at the url and render the first route that is a match.
+A few things to note here. First, the `<Routes>` and `<Route>` components are ones we get from the npm module we just installed. The `Routes` component is going to look through its child routes and find the match.
 
-Second thing to note is the presence of the `exact` attribute on the home route. Technically "/" will match every single route in our application since they all start like that. The `exact` attribute specifies that we only want to render this component then the url is _exactly_ `/`
-
-Second thing to note is the `<Route>` component. If a url matches the value of the `path` attribute, the children of that `<Route>` will be what gets rendered. As we've seen before, URLs often have _route params_ in them. The third route here is an example of a path with a route param: `/videos/:id`. Using the colon, we can tell the react router that this will be some `id` parameter. These are all examples of paths that would match this route:
+Second thing to note is the `<Route>` component. If a url matches the value of the `path` attribute, the `element` of that `<Route>` will be what gets rendered. As we've seen before, URLs often have _route params_ in them. The third route here is an example of a path with a route param: `:id`. Using the colon, we can tell the react router that this will be some `id` parameter. These are all examples of paths that would match this route:
 
 > **/videos/5**  
 > **/videos/12345**  
 > **/videos/foo**  
+
+Finally, the `Route` with a `path` of `*` indicates a default route when none of the routes match, which is a convenient way to provide an indication to the user that they were looking for a route that doesn't exist in the application.
 
 To be able to use this `ApplicationViews` component, we have to import it into our `App.js` file and also wrap our entire app in a `<Router>` component.
 
@@ -220,14 +220,14 @@ Change the `addVideo` call to look like this:
 ```js
 addVideo(video).then((p) => {
     // Navigate the user back to the home route
-    history.push("/");
+    navigate("/");
 });
 ```
 
-To get access to the `history` instance, we need to use the `useHistory` hook
+To get access to the `navigate` instance, we need to use the `useNavigate` hook
 
 ```js
-const history = useHistory();
+const navigate = useNavigate();
 ```
 
 Add these two lines of code to your own `VideoForm` component and try adding a new video. You should be taken back to the feed after submitting the form.
