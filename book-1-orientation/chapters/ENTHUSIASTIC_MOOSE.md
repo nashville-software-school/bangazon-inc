@@ -207,7 +207,7 @@ Our moose is an inquisitive moose, but doesn't have time (or the attention span)
     MooseSays("H I, I'M  E N T H U S I A S T I C !");
     MooseSays("I really am enthusiastic");
 
-    // As a question
+    // Ask a question
     bool isTrue = MooseAsks("Is Canada real?");
     Console.WriteLine(isTrue);
     ```
@@ -255,7 +255,7 @@ Let's add multiple questions. We could do that at the top of the file, but that 
     MooseSays("H I, I'M  E N T H U S I A S T I C !");
     MooseSays("I really am enthusiastic");
 
-    // As a question
+    // Ask a question
     CanadaQuestion();
 
 
@@ -349,7 +349,7 @@ void Main()
     MooseSays("H I, I'M  E N T H U S I A S T I C !");
     MooseSays("I really am enthusiastic");
 
-    // As a question
+    // Ask a question
     CanadaQuestion();
     EnthusiasticQuestion();
     LoveCSharpQuestion();
