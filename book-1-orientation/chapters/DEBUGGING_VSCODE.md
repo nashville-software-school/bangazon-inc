@@ -34,7 +34,7 @@ This will create a `.vscode` folder in your project that contains a `launch.json
 
 Open the `launch.json` file and find the "console" property. This property can have 1 of 3 values
 
-- **"integratedConsole"**: The output from statements such as `Console.WriteLine` will show up in a VS Code window called the Debug Console
+- **"internalConsole"**: The output from statements such as `Console.WriteLine` will show up in a VS Code window called the Debug Console
 
 - **"integratedTerminal"**: The output will show up in the terminal that is built into VS Code
 
