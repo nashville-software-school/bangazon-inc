@@ -88,7 +88,7 @@ public class Customer
 
 ### Methods
 
-Methods are the new name for functions. They are code blocks on a class that performs a series of logic. Think of them as the behaviors of your custom type. Copy pasta this example code into your `Program.cs` file.
+Methods are the new name for functions. They are code blocks on a class that performs a series of logic. Think of them as the behaviors of your custom type. Copy paste this example code into your `Program.cs` file.
 
 ```cs
 using System;
@@ -191,7 +191,7 @@ namespace Classes
 
 ### Fields
 
-Much like **properties**, **Fields** are use to store values in an object. Unlike properties fields are usually marked as **`private`** meaning they cannot be accessed outside the object. The concept of storing private data that is only accessible inside the object is referred to as **encapsulation**.
+Much like **properties**, **Fields** are used to store values in an object. Unlike properties fields are usually marked as **`private`** meaning they cannot be accessed outside the object. The concept of storing private data that is only accessible inside the object is referred to as **encapsulation**.
 
 ```cs
 public class Box 
