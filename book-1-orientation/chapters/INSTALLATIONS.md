@@ -13,7 +13,6 @@
 When installing Visual Studio, you will be presented with a variety of [Workloads](https://visualstudio.microsoft.com/vs/support/selecting-workloads-visual-studio-2017/). Select these workloads.
 
 1. ASP.NET and web development
-1. .NET Core cross-platform development
 
 ## 3. Install the [Visual Studio Code C# Extension](https://code.visualstudio.com/Docs/languages/csharp)
 
