@@ -21,7 +21,7 @@ Run the following command in your terminal:
 ```sh
 echo $'{
    "sdk": {
-      "version": "5.0.408"
+      "version": "5.0.405"
    }
 }' > ~/global.json
 ```
