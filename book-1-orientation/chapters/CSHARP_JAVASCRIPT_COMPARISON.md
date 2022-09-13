@@ -143,7 +143,7 @@ const createPerson = (name, birthday, hobbies) => {
     birthday: birthday,
     hobbies: hobbies,
     addHobby: (hobby) => {
-      this.hobbies.push(hobby);
+      hobbies.push(hobby);
     },
   };
 };
