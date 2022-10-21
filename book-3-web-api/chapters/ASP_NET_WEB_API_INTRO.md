@@ -46,7 +46,7 @@ As in an MVC project, a Web API project has an `appsettings.json` file to store 
   },
   "AllowedHosts": "*",
   "ConnectionStrings": {
-    "DefaultConnection":  "server=localhost\\SQLExpress;database=CoffeeShop;integrated security=true"
+    "DefaultConnection":  "server=localhost\\SQLExpress;database=CoffeeShop;integrated security=true;TrustServerCertificate=True;"
   }
 }
 ```
