@@ -168,10 +168,10 @@ Now lets update the `PostList` component to use the new `Post` component
 ```js
 import React, { useState, useEffect } from "react";
 import Post from './Post';
-import { getAllVideos } from "../modules/videoManager";
+import { getAllPosts } from "../modules/PostManager";
 
 const PostList = () => {
-  const [posts, getAllPosts] = useState([]);
+  const [posts, setPosts] = useState([]);
 
   const getPosts = () => {
     getAllPosts().then(allPosts => setPosts(allPosts));
