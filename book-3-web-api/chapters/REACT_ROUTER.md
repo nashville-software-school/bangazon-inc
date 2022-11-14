@@ -6,7 +6,7 @@ Let's add different routes to our Gifter application so that we can have certain
 - `/posts/add` Form for adding a new post
 - `/posts/{id}` Details for a single post with all comments
 
-Start by installing the React router package from npm. `cd` into your client directory and run
+Start by installing the React router package from npm. `cd` into your client directory where `package.json` is and run
 
 ```sh
 npm i react-router-dom
@@ -19,31 +19,30 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import PostList from "./PostList";
 import PostForm from "./PostForm";
-import { PostProvider } from "./providers/PostProvider";
 
 
 const ApplicationViews = () => {
   return (
-  <PostProvider>
     <Routes>
       <Route path="/" element= {<PostList />} />
 
       <Route path="/posts/add" element={<PostForm />} />
 
       <Route path="/posts/:id" element={/* TODO: Post Details Component */} />
+
+      <Route path="*" element={<p>Whoops, nothing here...</p>} />
     </Routes>
-    </PostProvider>
   );
 };
 
 export default ApplicationViews;
 ```
 <!-- 
-A few things to note here. First, the `<Switch>` and `<Route>` components are ones we get from the npm module we just installed. The `Switch` component is going to look at the url and render the first route that is a match.
+A few things to note here. First, the `<Routes>` and `<Route>` components are ones we get from the npm module we just installed. The `Routes` component is going to look at the url and render the first route that is a match.
 
 Second thing to note is the presence of the `exact` attribute on the home route. Technically "/" will match every single route in our application since they all start like that. The `exact` attribute specifies that we only want to render this component then the url is _exactly_ `/` -->
 
-A thing to note is the `<Route>` component. If a url matches the value of the `path` attribute, the children of that `<Route>` will be what gets rendered. As we've seen before, URLs often have _route params_ in them. The third route here is an example of a path with a route param: `/posts/:id`. Using the colon, we can tell the react router that this will be some `id` parameter. These are all examples of paths that would match this route:
+Second thing to note is the <Route> component. If a url matches the value of the path attribute, the element of that <Route> will be what gets rendered. As we've seen before, URLs often have route params in them. The third route here is an example of a path with a route param: :id. Using the colon, we can tell the react router that this will be some id parameter. These are all examples of paths that would match this route:
 
 **/posts/5** 
 
@@ -51,6 +50,7 @@ A thing to note is the `<Route>` component. If a url matches the value of the `p
 
 **/posts/foo**
 
+Finally, the Route with a path of * indicates a default route when none of the routes match, which is a convenient way to provide an indication to the user that they were looking for a route that doesn't exist in the application.
 
 To be able to use this `ApplicationViews` component, we have to import it into our `App.js` file and also wrap our entire app in a `<Router>` component.
 
@@ -143,7 +143,7 @@ The `<Link>` component is great for rendering links in our UI, but what about if
 In the last chapter you added a `PostForm` component that saves new posts. Your component may look a little different than this, but there's only a couple lines of code that need to be added to make this work.
 
 ```js
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import {
   Form,
   FormGroup,
@@ -153,33 +153,37 @@ import {
   Input,
   Button,
 } from "reactstrap";
-import { PostContext } from "../providers/PostProvider";
+import { addPost } from "../modules/PostManager";
 import { useNavigate } from "react-router-dom";
 
-const PostForm = () => {
-  const { addPost } = useContext(PostContext);
-  const [userProfileId, setUserProfileId] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
-  const [title, setTitle] = useState("");
-  const [caption, setCaption] = useState("");
+const PostForm = ({getPosts}) => {
+  const emptyPost = {
+  title: '',
+  caption: '',
+  imageUrl: ''
+  };
+  
+  const [post, setPost] = useState(emptyPost);
 
-  // Use this hook to allow us to programatically redirect users
-  const navigate = useNaviagte();
+ 
+  const handleInputChange = (evt) => {
+    const value = evt.target.value;
+    const key = evt.target.id;
 
-  const submit = (e) => {
-    const post = {
-      imageUrl,
-      title,
-      caption,
-      userProfileId: +userProfileId,
-    };
+    const postCopy = { ...post };
 
-    addPost(post).then((p) => {
-      // Navigate the user back to the home route
-      navigate("/");
-    });
+    postCopy[key] = value;
+    setPost(postCopy);
   };
 
+  const handleSave = (evt) => {
+    evt.preventDefault();
+
+    addpost(post).then(() => {
+      setPost(emptyPost);
+      getPosts();
+    });
+  };
   return (
     <div className="container pt-4">
       <div className="row justify-content-center">
@@ -187,32 +191,25 @@ const PostForm = () => {
           <CardBody>
             <Form>
               <FormGroup>
-                <Label for="userId">User Id (For Now...)</Label>
-                <Input
-                  id="userId"
-                  onChange={(e) => setUserProfileId(e.target.value)}
-                />
-              </FormGroup>
-              <FormGroup>
                 <Label for="imageUrl">Gif URL</Label>
                 <Input
-                  id="imageUrl"
-                  onChange={(e) => setImageUrl(e.target.value)}
+                  value={post.imageUrl}
+                  onChange={handleInputChange}
                 />
               </FormGroup>
               <FormGroup>
                 <Label for="title">Title</Label>
-                <Input id="title" onChange={(e) => setTitle(e.target.value)} />
+                <Input value={post.title} onChange={handleInputChange}/>
               </FormGroup>
               <FormGroup>
                 <Label for="caption">Caption</Label>
                 <Input
-                  id="caption"
-                  onChange={(e) => setCaption(e.target.value)}
+                  value={post.caption}
+                  onChange={handleInputChange}
                 />
               </FormGroup>
             </Form>
-            <Button color="info" onClick={submit}>
+            <Button color="info" onClick={handleSave}>
               SUBMIT
             </Button>
           </CardBody>
@@ -246,9 +243,9 @@ Add these two lines of code to your own `PostForm` component and try adding a ne
 
 The last thing we want to do with our new routing abilities, is create a `PostDetails` component and use the route parameter to decide which post's details we should be showing. For example, if a user navigates to `/posts/2`, the component code will have to read the route param of `2` and use that value to make a fetch call to get that post's details.
 
-Before we make a Post Details component, let's add a function to our provider that makes that fetch call
+Before we make a Post Details component, let's add a function to our API manager that makes that fetch call
 
-> PostProvider.js
+> PostManager.js
 
 ```js
 const getPost = (id) => {
@@ -256,11 +253,6 @@ const getPost = (id) => {
 };
 ```
 
-Now make sure to provide that new function
-
-```js
-<PostContext.Provider value={{ posts, getAllPosts, addPost, getPost }}>
-```
 
 **NOTE** This assumes your API is set up to return a post object which includes an array of comments. If you need to make an additional fetch call to get the comments for a post, update the `getPost` function as needed.
 
@@ -269,15 +261,14 @@ Now we can add a `PostDetails.js` file in your components directory. Notice the 
 > PostDetails.js
 
 ```js
-import React, { useEffect, useContext, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ListGroup, ListGroupItem } from "reactstrap";
-import { PostContext } from "../providers/PostProvider";
+import { getPost } from "../modules/PostManager";
 import { useParams } from "react-router-dom";
 import Post from "./Post";
 
 const PostDetails = () => {
   const [post, setPost] = useState();
-  const { getPost } = useContext(PostContext);
   const { id } = useParams();
 
   useEffect(() => {
