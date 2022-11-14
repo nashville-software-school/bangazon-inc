@@ -1,5 +1,17 @@
 # Strongly Typed Variables
 
+---
+
+## Objectives
+
+After completing this lesson you should be able to:
+
+1. Informally define what it means for C# to be "strongly typed"
+1. Recognize a variable declaration
+1. List at least four types that we can use in C#
+
+---
+
 Consider the following JavaScript code:
 
 ```js

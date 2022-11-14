@@ -1,5 +1,20 @@
 # Control Flow
 
+---
+
+## Objectives
+
+After completing this lesson you should be able to:
+
+1. Informally define "control flow"
+1. List three types of loops in C#
+1. Recognize an `if` statement
+1. Recognize a `while` loop
+1. Recognize a `for` loop
+1. Recognize a `foreach` loop
+
+---
+
 Control flow _(also known as "signal flow")_ refers to the order in which statements and expressions execute in our code. It's basically the order of "stuff that happens" in our program.
 
 ## Top-Down
@@ -18,7 +33,7 @@ int b = a + 40;
 
 On a single line of code, it is often useful to think of code executing from right to left.
 
-In the code below, the `data.GetUserById()` method runs first to get a user with `id` of 100, then that user is passed to the `messageGenerator.GetMessageForUsername()` method get a message, finally, the `message` variable is created and assigned the value of the message;
+In the code below, the `data.GetUserById()` method runs first to get a user with `id` of 100, then that user is passed to the `messageGenerator.GetMessageForUser()` method get a message, finally, the `message` variable is created and assigned the value of the message;
 
 ```cs
 string message = messageGenerator.GetMessageForUser(data.GetUserById(100));

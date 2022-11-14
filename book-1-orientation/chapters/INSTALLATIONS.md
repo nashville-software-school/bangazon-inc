@@ -1,5 +1,16 @@
 # Installing Required Software in Windows
 
+---
+
+## Objectives
+
+After completing this chapter you should be able to:
+
+1. Informally describe what it means to install software
+1. Install and configure the tools mentioned in this chapter on a new Windows computer
+
+---
+
 > **NOTE:** If you used Windows in the front-end course, you have most of this installed and configured already, but there are a few new tools to install so please carefully read through this document.
 
 ## Zoom
@@ -85,7 +96,7 @@ In the terminal, paste the following and add your email:
 git config --global user.email "you@example.com"
 ```
 
-In the terminal, paste the following and add your name:
+In the terminal, paste the following and add your name (this is _not_ your Github username):
 
 ```sh
 git config --global user.name "Your Name"
@@ -113,21 +124,9 @@ npm i -g serve json-server
 
 ## .NET
 
-1. Install .NET from https://dotnet.microsoft.com/download
-   * Click the `Download .NET SDK x64` button under the large `.NET` header on the left side. This will download the _.NET 5 Software Development Kit_
-1. Open a terminal and run `dotnet --version`. You should see a version greater than or equal to `5.0.103`
-
-## Gitignore Shortcut
-
-You'll be making a lot of new projects and we want to easily be able to create a gitignore file before pushing to Github. Run the following code from a git bash window
-
-```sh
-echo "dnignore() {
-    curl -L -s 'https://raw.githubusercontent.com/github/gitignore/master/VisualStudio.gitignore' > .gitignore
-}" >> ~/.bashrc
-```
-
-You now have access in your terminal to a command called `dnignore` which will add a gitignore file to your project.
+1. Install .NET 5 from [here](https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/sdk-5.0.405-windows-x64-installer)
+   * Run the program once it is downloaded
+1. Open a terminal and run `dotnet --version`. You should see a version equal to `5.0.405`
 
 ## Always Open a Terminal Window in Last Directory
 If you would like your terminal window to always open in the last directory you were in, then you can run the following code in your terminal.
@@ -147,20 +146,35 @@ fi' >> ~/.bashrc
 ## Visual Studio IDE
 
  [Visual Studio Community Edition](https://visualstudio.microsoft.com/vs/community/). This will be your main code authoring tool for the server-side course.
-   > **INFO:** When installing Visual Studio, you will be presented with a variety of workloads. Select the following workloads.
+   > **INFO:** When installing Visual Studio, you will be presented with a variety of workloads. Select the following workload:
    >
    > - ASP.NET and web development
-   > - .NET Core cross-platform development
+
+
+## Setting .NET 5 as the SDK version 
+
+When you installed Visual Studio 2022, it also installed .NET 6. .NET 6 is great, but the curriculum was written with .NET 5 in mind, and the two are different enough that we will be using 5.
+
+Run the following command in your terminal:
+
+```sh
+echo $'{
+   "sdk": {
+      "version": "5.0.405"
+   }
+}' > ~/global.json
+```
 
 ## SQL Server Express Database
 
 [SQL Server Express](https://www.microsoft.com/en-us/sql-server/sql-server-downloads). This is the database tool where all your data will be stored for the server-side course. Click the Download button under the Express option. During the setup, take the basic installation option
 
-
 ## Installation Check
+
 Now that you have finished the installation process, please double check that you have not missed something.
 
 ### Installation Check: Start Menu
+
 Check that you have the following programs by pressing your Windows key (Windows keyboard) or Command key (Apple keyboard) to open the Start menu, and begin typing in the name of the following progams to see that they are installed:
 
 ```ssh
@@ -176,6 +190,7 @@ SQL Server 2019 Configuration Manager
 ```
 
 ### Installation Check: Terminal Commands
+
 Finally, run the following commands in Windows Terminal to check that the following are installed or set correctly. Example outputs are listed under each command:
 
 > **NOTE:** The version numbers you see may be higher than those listed below. It's completely fine to have a higher version of any of these tools, but if you have a lower version, please ask an instructor to take a look.
@@ -202,7 +217,7 @@ $ json-server -v
 
 ```sh
 $ dotnet --version
-5.0.103
+5.0.405
 ```
 
 ```sh
@@ -218,21 +233,12 @@ drwxr-xr-x 1 mecar 197609    0 Feb 26 13:41 ../
 ```sh
 $ git config --list
 user.email=youremail@example.com  
-user.name=yourGitHubUsername  
+user.name=Your Name 
 pull.rebase=false  
 init.defaultbranch=main  
 ```
+
 > **Note:** There are many settings listed. You only need to check `user.email`, `user.name`, `pull.rebase`, & `init.defaultBranch`.
-
-```sh
-$ type dnignore
-dnignore is a function  
-dnignore ()  
-{  
-   curl -L -s "https://<span></span>raw.githu<span></span>busercontent.<span></span>com/dotnet/core/master/.gitignore" > .gitignore  
-}
-```
-
 ```sh
 $ type cd
 cd is a function  
@@ -255,6 +261,6 @@ https://docs.microsoft.com/en-us/dotnet/
 
 ### .NET on YouTube
 
-- **Main page**: https://www.youtube.com/channel/UCvtT19MZW8dq5Wwfu6B0oxw
-- **C# 101**: https://www.youtube.com/watch?v=BM4CHBmAPh4&list=PLdo4fOZ0oVxKLQCHpiUWun7vlJJvUiN
-- **.NET 101**: https://www.youtube.com/watch?v=eIHKZfgddLM&list=PLdo4fOcmZ0oWoazjhXQzBKMrFuArxpW80
+* **Main page**: https://www.youtube.com/channel/UCvtT19MZW8dq5Wwfu6B0oxw
+* **C# 101**: https://www.youtube.com/watch?v=BM4CHBmAPh4&list=PLdo4fOZ0oVxKLQCHpiUWun7vlJJvUiN
+* **.NET 101**: https://www.youtube.com/watch?v=eIHKZfgddLM&list=PLdo4fOcmZ0oWoazjhXQzBKMrFuArxpW80

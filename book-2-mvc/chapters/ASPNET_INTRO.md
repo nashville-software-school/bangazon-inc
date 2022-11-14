@@ -35,7 +35,7 @@ Open the `appsettings.json` file and add your connection string. The file should
   },
   "AllowedHosts": "*",
   "ConnectionStrings": {
-    "DefaultConnection": "Server=localhost\\SQLEXPRESS;Database=DogWalkerMVC;Trusted_Connection=True;"
+    "DefaultConnection": "Server=localhost\\SQLEXPRESS;Database=DogWalkerMVC;Trusted_Connection=True;TrustServerCertificate=true;"
   }
 }
 ```
@@ -113,25 +113,24 @@ namespace DogGo.Repositories
                         FROM Walker
                     ";
 
-                    SqlDataReader reader = cmd.ExecuteReader();
-
-                    List<Walker> walkers = new List<Walker>();
-                    while (reader.Read())
+                    using (SqlDataReader reader = cmd.ExecuteReader())
                     {
-                        Walker walker = new Walker
+                        List<Walker> walkers = new List<Walker>();
+                        while (reader.Read())
                         {
-                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
-                            Name = reader.GetString(reader.GetOrdinal("Name")),
-                            ImageUrl = reader.GetString(reader.GetOrdinal("ImageUrl")),
-                            NeighborhoodId = reader.GetInt32(reader.GetOrdinal("NeighborhoodId"))
-                        };
+                            Walker walker = new Walker
+                            {
+                                Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                                Name = reader.GetString(reader.GetOrdinal("Name")),
+                                ImageUrl = reader.GetString(reader.GetOrdinal("ImageUrl")),
+                                NeighborhoodId = reader.GetInt32(reader.GetOrdinal("NeighborhoodId"))
+                            };
 
-                        walkers.Add(walker);
+                            walkers.Add(walker);
+                        }
+                        
+                        return walkers;
                     }
-
-                    reader.Close();
-
-                    return walkers;
                 }
             }
         }
@@ -151,26 +150,25 @@ namespace DogGo.Repositories
 
                     cmd.Parameters.AddWithValue("@id", id);
 
-                    SqlDataReader reader = cmd.ExecuteReader();
-
-                    if (reader.Read())
+                    using (SqlDataReader reader = cmd.ExecuteReader())
                     {
-                        Walker walker = new Walker
+                        if (reader.Read())
                         {
-                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
-                            Name = reader.GetString(reader.GetOrdinal("Name")),
-                            ImageUrl = reader.GetString(reader.GetOrdinal("ImageUrl")),
-                            NeighborhoodId = reader.GetInt32(reader.GetOrdinal("NeighborhoodId"))
-                        };
-
-                        reader.Close();
-                        return walker;
-                    }
-                    else
-                    {
-                        reader.Close();
-                        return null;
-                    }
+                            Walker walker = new Walker
+                            {
+                                Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                                Name = reader.GetString(reader.GetOrdinal("Name")),
+                                ImageUrl = reader.GetString(reader.GetOrdinal("ImageUrl")),
+                                NeighborhoodId = reader.GetInt32(reader.GetOrdinal("NeighborhoodId"))
+                            };
+                            
+                            return walker;
+                        }
+                        else
+                        {                            
+                            return null;
+                        }
+                    }   
                 }
             }
         }
@@ -253,7 +251,7 @@ This code will get all the walkers in the Walker table, convert it to a List and
 
 ### Viewing the list of walkers
 
-Currently, we're passing data into a view that doesn't exist. Let's fix that. Right click the method name `Index` in your controller and click "Add View". In the dialog box that appears, leave the view name "Index", for template select "List", and for Model class select "Walker". Then click the Add button. 
+Currently, we're passing data into a view that doesn't exist. Let's fix that. Right click the method name `Index` in your controller and click "Add View". You will see a dialog box that gives a choice of "Razor View (empty)" or "Razor View". Select "Razor View," and click "Add." In the next dialog box that appears, leave the view name "Index", for template select "List", and for Model class select "Walker". Then click the Add button. 
 
 The generated view creates an html table and iterates over each walker in the list and creates a new row for each one.
 

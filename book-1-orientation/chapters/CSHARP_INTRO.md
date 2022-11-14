@@ -1,5 +1,21 @@
 # Hello, C#
 
+---
+
+## Objectives
+
+After completing this lesson and working on related exercises you should be able to:
+
+1. Define the acronym "CLI"
+1. State the purpose of a `*.csproj` file
+1. State the purpose of a `*.cs` file
+1. Informally distinguish between the terms ".NET 5", ".NET Core" and ".NET Framework".
+1. Create a new, empty C# console program
+1. Write a simple "Hello World" C# console program
+1. Run a C# program using the `dotnet run` command
+
+---
+
 ## Your first console application
 
 Let's begin with your first C# console application _(also known as a "command line interface" application or "cli" app)_.
@@ -138,17 +154,17 @@ In your online research you will find references to technologies called **".NET 
 
 Once you get some experience under your belt this will all make (_a little_) more sense, but for now here's all you need to know...
 
-* **.NET 5** is the latest version of .NET, and _**It is what we will use in this course**_.
-* **dotnet** is the command line tool we'll use during the first part of the course. It will target .NET 5 without us having to do anything special.
+* **.NET 5** is not the latest version of .NET (.NET 6 is), but _**It is what we will use in this course**_.
+* **dotnet** is the command line tool we'll use during the first part of the course. It will target .NET 5 without us having to do anything special (assuming you added the `global.json` file in the installations chapter).
 * **.NET Core** is the _previous version_ of .NET, but it is not very old. If you find documentation, blog posts, Stack Overflow answers, etc... referring to .NET Core, most of the time _**the information will still be accurate and you should use it**_. However, you should pay attention to the _version number_ of .NET Core. Information about versions `2.x` or `3.x` is much better than `1.x`.
-* **.NET Framework** is the old, Windows-only version of .NET. It was replaced by .NET Core and then by .NET 5. Even though it's old, it is still used _a lot_, so you'll probably find references to it on the web. _**We will NOT be using .NET Framework in this corse. When you find information that refers to .NET Framework, you should IGNORE IT**_.
-* **.NET** is an umbrella term that might refer to _**ANY**_ of the above technologies. Microsoft is _trying_ to re-brand .NET to refer to .NET 5, but that hasn't happened (yet?). When you run into this term you should try to figure out which .NET is refers to. If you can't, ask for help or move on to another resource.
+* **.NET Framework** is the old, Windows-only version of .NET. It was replaced by .NET Core and then by .NET 5 (and now .NET 6). Even though it's old, it is still used _a lot_, so you'll probably find references to it on the web. _**We will NOT be using .NET Framework in this corse. When you find information that refers to .NET Framework, you should IGNORE IT**_.
+* **.NET** is an umbrella term that might refer to _**ANY**_ of the above technologies. Microsoft is _trying_ to re-brand .NET to refer to .NET 5 and later, but that hasn't happened (yet?). When you run into this term you should try to figure out which .NET is refers to. If you can't, ask for help or move on to another resource.
  
-In addition to the above terms, you might find online references to **"mono", "xamarin" or "unity"**. These are still current technologies that are related to .NET, but they won't be covered in this corse.
+In addition to the above terms, you might find online references to **"mono", "xamarin" or "unity"**. These are still current technologies that are related to .NET, but they won't be covered in this course.
 
 ## Pushing To Github
 
-Before you push to Github, make sure that you add a gitignore file to your project. In your terminal, from the root of the application run `dnignore`. If you get an error saying the command is not found, be sure to go back to the installation chapter and get that added to your bashrc file.
+Before you push to Github, make sure that you add a gitignore file to your project. In your terminal, from the root of the application run `dotnet new gitignore`.
 
 ## Learning a Second Language
 

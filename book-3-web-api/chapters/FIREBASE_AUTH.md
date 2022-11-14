@@ -50,7 +50,7 @@ Now that we have some initial setup out of the way, let's take some time to thin
 
 Our goal is to build a full-stack application using ASP<span>.NET</span> Core Web API on the server, ADO<span>.</span>NET to interact with a SQL Server database, React on the client and Firebase for authentication.
 
-Because Web API, EF Core and React are all familiar to us, we won't go into them here. But we do need to get a high-level idea of how authentication will fit into the project. The image below describes the process.
+Because Web API, ADO<span>.</span>NET and React are all familiar to us, we won't go into them here. But we do need to get a high-level idea of how authentication will fit into the project. The image below describes the process.
 
 ![Firebase auth flow](./images/firebase-auth-architecture-small-1.png)
 
@@ -64,7 +64,8 @@ Because Web API, EF Core and React are all familiar to us, we won't go into them
 1. The react application (running on a user's browser) sends a request to the Firebase server containing the user's email and password.
 1. Firebase communicates with the Google  API server to confirm that the user's credentials are valid.
 1. Once confirmed, Firebase sends a token (called a [JWT](https://jwt.io/introduction/)) to the React application. This token contains encoded information about the user.
-1. The react application stores the token in the browser's `sessionStorage`. **The user is now _logged in_** to the app.
+1. Inside the react application, the Firebase library stores the token in the browser's `IndexedDB`. **The user is now _logged in_** to the app.
+    > **NOTE:** We don't really need to care how or where Firebase stores the token. We just need to know how to get the token from Firebase when we need it. We'll see how to do that shortly.
 1. When the react application needs to make an authenticated request to the Web API server, it passes token along with the request.
 1. When the Web API sever receives the request from the react application, it verifies the token and uses it to determine who the user is.
 
@@ -102,18 +103,18 @@ Your instructor will take you through the parts of the demo application and desc
 
 * JWT Authentication in `Startup.cs`.
 * `app.UseAuthentication()` in `Startup.cs`.
-* `FirebaseUserId` property in `UserPofile.cs`.
+* `FirebaseUserId` property in `UserProfile.cs`.
 * `GetCurrentUser()` method in `QuoteController`.
 * Use of the `[Authorize]` attribute to secure the `UserProfileController` and `QuoteController` controllers.
 * Firebase JavaScript Library installed from npm.
-* `Login`, `Register` and `Logout` functions in `UserProfileProvider.js`.
-* Using the token (JWT) in the `fetch()` calls in both `UserProfileProvider.js` and `QuoteProvider.js`.
-* Simple `UserType` verification in `QuoteController.cs` and in `QuoteProvider.js`.
+* `login`, `register`, `logout`, `getToken` and `onLoginStatusChange` functions in `authManager.js`.
+* Using the token (JWT) in the `fetch()` calls in both `authManager.js` and `quoteManager.js`.
+* Simple `UserType` verification in `QuoteController.cs` and in `quoteManager.js`.
 
 ## Exercise
 
 1. Go through the chapter and follow the steps to make the `WisdomAndGrace` app work on your computer.
-1. Add Firebase authentication to the Gifter application.
+1. Add Firebase authentication to the Streamish application.
 
 ### Firebase Authentication Checklist
 
@@ -121,13 +122,13 @@ Your instructor will take you through the parts of the demo application and desc
 
 1. Create a new Firebase project.
 1. Enable the `Email/Password` `Sign-in method`.
-1. Add at least two new users to Firebase. Each user **must** have the same email address as one of the users in your Gifter application.
+1. Add at least two new users to Firebase. Each user **must** have the same email address as one of the users in your Streamish application.
 
-#### In the Gifter Database
+#### In the Streamish Database
 
 > **NOTE:** The following will delete and recreate the database.
 
-1. Update the Gifter SQL script to add a `FirebaseUserId` column to the `UserProfile` table.
+1. Update the Streamish SQL script to add a `FirebaseUserId` column to the `UserProfile` table.
 
     ```sql
     CREATE TABLE [UserProfile] (
@@ -135,8 +136,7 @@ Your instructor will take you through the parts of the demo application and desc
       [FirebaseUserId] NVARCHAR(28) NOT NULL,
       [Name] NVARCHAR(255) NOT NULL,
       [Email] NVARCHAR(255) NOT NULL,
-      [ImageUrl] NVARCHAR(255),
-      [Bio] NVARCHAR(255),
+      [ImageUrl] NVARCHAR(255) NULL,
       [DateCreated] DATETiME NOT NULL,
 
       CONSTRAINT UQ_FirebaseUserId UNIQUE(FirebaseUserId)
@@ -144,7 +144,7 @@ Your instructor will take you through the parts of the demo application and desc
     ```
 
 1. Change the `UserProfile` `INSERT` statements to insert users with the `FirebaseUserId`s and `Email`s that match the users you created in Firebase.
-1. Run the script to recreate the Gifter database.
+1. Run the script to recreate the Streamish database.
 
 #### In the Visual Studio Web API Project
 
@@ -188,14 +188,14 @@ As you work through the following checklist, make sure to use the `WisdomAndGrac
 
     > **NOTE:** You should already have an API action for adding a new UserProfile that will be used in the registration process.
 
-1. Add [Authorize] attributes to all of your controllers. We will not allow anonymous users in the Gifter app.
+1. Add `[Authorize]` attributes to all of your controllers. We will not allow anonymous users in the Streamish app.
 
 #### In the React Client App
 
 As you work through the following checklist, make sure to use the `WisdomAndGrace` application as an example.
 
-1. Use npm to install the firebase library: `npm install firebase`.
-1. Create a `UserProfileProvider` component and a `UserProfileContext` context in a `UserProfileProvider.js` file.
-1. Add `login`, `logout` and `register` functions to the `UserProfileProvider`.
-1. Add an `isLoggedIn` boolean to the `UserProfileProvider`'s state.
+1. Use npm to install the firebase library: `npm install firebase@8.7.1`.
+1. Create a `authManager.js` module with `login`, `register`, `logout`, `getToken` and `onLoginStatusChange` functions. Make sure you get all the helper functions too.
+1. Add an `isLoggedIn` boolean to the `App`'s state and setup the `onLoginStatusChange` function to update the `isLoggedIn` state.
+1. Add code to `index.js` to initialize Firebase.
 1. Update `fetch()` calls throughout the app to include an `Authorization` header that uses the Firebase token.

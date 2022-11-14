@@ -20,10 +20,10 @@ This book builds a strong foundation in the syntax, data structures, and valuabl
 * Chapter 11 - [Anatomy of a C# Program](./chapters/ANATOMY_OF_CSHARP_APP.md)
 * Chapter 12 - [User Defined Types with Classes](./chapters/CLASS_BASICS.md)
 * Chapter 13 - [Exercise - Translate Part 2](./chapters/TRANSLATE_CSHARP_JAVASCRIPT.md)
-* Chapter 14 - [Collections](./chapters/COLLECTIONS.md)
-* Chapter 15 - [Wrangling Data with LINQ](./chapters/LINQ_INTRO.md)
-* Chapter 16 - [Exercise - Translate Part 3](./chapters/TRANSLATE_CSHARP_JAVASCRIPT.md)
-* Chapter 17 - [Exceptions and Try/Catch](./chapters/TRY_CATCH_INTRO.md)
+* Chapter 14 - [Exercise - An Adventurer's Quest](./chapters/QUEST.md)
+* Chapter 15 - [Collections](./chapters/COLLECTIONS.md)
+* Chapter 16 - [Exceptions and Try/Catch](./chapters/TRY_CATCH_INTRO.md)
+* Chapter 17 - [Exercise - Translate Part 3](./chapters/TRANSLATE_CSHARP_JAVASCRIPT.md)
 * Chapter 18 - [Exercise - Plan Your Heist](./chapters/PLAN_YOUR_HEIST.md)
 
 **Part 2: SQL**
@@ -36,18 +36,22 @@ This book builds a strong foundation in the syntax, data structures, and valuabl
 
 * Chapter 22 - [Inheritance](./chapters/INHERITANCE_INTRO.md)
 * Chapter 23 - [Interfaces](./chapters/INTERFACES_INTRO.md)
-* Chapter 24 - [Object Relationship Vocabulary Terms](./chapters/RELATIONSHIPS.md)
-* Chapter 25 - [More about Classes](./chapters/CLASS_ADVANCED.md)
-* Chapter 26 - [Exercise - Heist Part II](./chapters/CLASSIC_HEIST.md)
+* Chapter 24 - [Exercise - Heist Part II](./chapters/CLASSIC_HEIST.md)
+* Chapter 25 - [Object Relationship Vocabulary Terms](./chapters/RELATIONSHIPS.md)
+* Chapter 26 - [More about Classes](./chapters/CLASS_ADVANCED.md)
 
-**Part 4: C# and SQL with ADO<span>.NET</span>**
+**Part 4: Handling Data in C#**
 
-* Chapter 27 - [Intro to Visual Studio](./chapters/VISUAL_STUDIO.md)
-* Chapter 28 - [Debugging in Visual Studio](./chapters/DEBUGGING_VS.md)
-* Chapter 29 - [Using ADO.NET and SQL](./chapters/ADONET_INTRO.md)
-* Chapter 30 - [Using ADO.NET and SQL Part II](./chapters/ADONET_CONTINUED.md)
+* Chapter 27 - [Wrangling Data with LINQ](./chapters/LINQ_INTRO.md)
 
-**Part 5: Tabloid CLI Group Project**
+**Part 5: C# and SQL with ADO<span>.NET</span>**
+
+* Chapter 28 - [Intro to Visual Studio](./chapters/VISUAL_STUDIO.md)
+* Chapter 29 - [Debugging in Visual Studio](./chapters/DEBUGGING_VS.md)
+* Chapter 30 - [Using ADO.NET and SQL](./chapters/ADONET_INTRO.md)
+* Chapter 31 - [Using ADO.NET and SQL Part II](./chapters/ADONET_CONTINUED.md)
+
+**Part 6: Tabloid CLI Group Project**
 
 ## Supplementary Content
 

@@ -3,8 +3,6 @@
 Get started with Visual Studio Tutorial
 https://tutorials.visualstudio.com/vs-get-started/intro
 
-> **NOTE:** This tutorial covers VS 2017, but it is largely relevant to VS 2019. The main difference is the UI for creating a new project.
-
 
 ## Some important parts of Visual Studio
 

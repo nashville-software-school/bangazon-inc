@@ -20,7 +20,7 @@ Before you get started, let's introduce some terms that will be used during this
 
 - **Models** - Models are C# classes that represent our database tables. For example, we have a `Chore` table in our database with a `Id` and `Name` column. To model this, we'd make a C# class named `Chore` with an `Id` and `Name` property.
 - **Repository** - Repositories are classes that we create whose purpose is data access. We'll define lots of our CRUD functionality there. They often have methods like `Get`, `GetById`, `Add`, `Delete`, etc
-- **Connection String** - A connection string is an address of a database--similar to a URL. It specifies the source of the data as well as the means of connecting to it. For example, you're about to create a database inside of SQL Server called `Roommates`; the connection string for the `Roommates` database will be `server=localhost\SQLExpress;database=Roommates;integrated security=true`
+- **Connection String** - A connection string is an address of a database--similar to a URL. It specifies the source of the data as well as the means of connecting to it. For example, you're about to create a database inside of SQL Server called `Roommates`; the connection string for the `Roommates` database will be `server=localhost\SQLExpress;database=Roommates;integrated security=true;TrustServerCertificate=true`
 - **ADO.NET** - ADO.NET is an umbrella term for all of the C# classes we'll be using (listed above) for accessing our SQL database from our C# console app. 
 
 
@@ -110,7 +110,7 @@ Before you get started, let's introduce some terms that will be used during this
         {
             //  This is the address of the database.
             //  We define it here as a constant since it will never change.
-            private const string CONNECTION_STRING = @"server=localhost\SQLExpress;database=Roommates;integrated security=true";
+            private const string CONNECTION_STRING = @"server=localhost\SQLExpress;database=Roommates;integrated security=true;TrustServerCertificate=true;";
 
             static void Main(string[] args)
             {
@@ -274,44 +274,42 @@ Before you get started, let's introduce some terms that will be used during this
                 cmd.CommandText = "SELECT Id, Name, MaxOccupancy FROM Room";
 
                 // Execute the SQL in the database and get a "reader" that will give us access to the data.
-                SqlDataReader reader = cmd.ExecuteReader();
-
-                // A list to hold the rooms we retrieve from the database.
-                List<Room> rooms = new List<Room>();
-
-                // Read() will return true if there's more data to read
-                while (reader.Read())
+                using (SqlDataReader reader = cmd.ExecuteReader())
                 {
-                    // The "ordinal" is the numeric position of the column in the query results.
-                    //  For our query, "Id" has an ordinal value of 0 and "Name" is 1.
-                    int idColumnPosition = reader.GetOrdinal("Id");
+                   // A list to hold the rooms we retrieve from the database.
+                   List<Room> rooms = new List<Room>();
 
-                    // We user the reader's GetXXX methods to get the value for a particular ordinal.
-                    int idValue = reader.GetInt32(idColumnPosition);
+                   // Read() will return true if there's more data to read
+                   while (reader.Read())
+                   {
+                       // The "ordinal" is the numeric position of the column in the query results.
+                       //  For our query, "Id" has an ordinal value of 0 and "Name" is 1.
+                       int idColumnPosition = reader.GetOrdinal("Id");
 
-                    int nameColumnPosition = reader.GetOrdinal("Name");
-                    string nameValue = reader.GetString(nameColumnPosition);
+                       // We user the reader's GetXXX methods to get the value for a particular ordinal.
+                       int idValue = reader.GetInt32(idColumnPosition);
 
-                    int maxOccupancyColumPosition = reader.GetOrdinal("MaxOccupancy");
-                    int maxOccupancy = reader.GetInt32(maxOccupancyColumPosition);
+                       int nameColumnPosition = reader.GetOrdinal("Name");
+                       string nameValue = reader.GetString(nameColumnPosition);
 
-                    // Now let's create a new room object using the data from the database.
-                    Room room = new Room
-                    {
-                        Id = idValue,
-                        Name = nameValue,
-                        MaxOccupancy = maxOccupancy,
-                    };
+                       int maxOccupancyColumPosition = reader.GetOrdinal("MaxOccupancy");
+                       int maxOccupancy = reader.GetInt32(maxOccupancyColumPosition);
 
-                    // ...and add that room object to our list.
-                    rooms.Add(room);
+                       // Now let's create a new room object using the data from the database.
+                       Room room = new Room
+                       {
+                           Id = idValue,
+                           Name = nameValue,
+                           MaxOccupancy = maxOccupancy,
+                       };
+
+                       // ...and add that room object to our list.
+                       rooms.Add(room);
+                   }
+                    // Return the list of rooms who whomever called this method.
+                    return rooms;
                 }
-
-                // We should Close() the reader. Unfortunately, a "using" block won't work here.
-                reader.Close();
-
-                // Return the list of rooms who whomever called this method.
-                return rooms;
+               
             }
         }
     }
@@ -372,24 +370,24 @@ Before you get started, let's introduce some terms that will be used during this
             {
                 cmd.CommandText = "SELECT Name, MaxOccupancy FROM Room WHERE Id = @id";
                 cmd.Parameters.AddWithValue("@id", id);
-                SqlDataReader reader = cmd.ExecuteReader();
-
-                Room room = null;
-
-                // If we only expect a single row back from the database, we don't need a while loop.
-                if (reader.Read())
+                
+                using (SqlDataReader reader = cmd.ExecuteReader())
                 {
-                    room = new Room
-                    {
-                        Id = id,
-                        Name = reader.GetString(reader.GetOrdinal("Name")),
-                        MaxOccupancy = reader.GetInt32(reader.GetOrdinal("MaxOccupancy")),
-                    };
+                   Room room = null;
+
+                   // If we only expect a single row back from the database, we don't need a while loop.
+                   if (reader.Read())
+                   {
+                       room = new Room
+                       {
+                           Id = id,
+                           Name = reader.GetString(reader.GetOrdinal("Name")),
+                           MaxOccupancy = reader.GetInt32(reader.GetOrdinal("MaxOccupancy")),
+                       };
+                   }
+                    return room;
                 }
 
-                reader.Close();
-
-                return room;
             }
         }
     }

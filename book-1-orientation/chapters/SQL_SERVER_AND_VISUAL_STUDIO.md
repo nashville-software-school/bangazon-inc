@@ -25,8 +25,8 @@ In this course we use Visual Studio for writing C# code, but, turns out, it's al
 
 ### Getting Started
 
-1. Start Visual Studio 2019.
-1. At the start screen select `Continue without code`.
+1. Start Visual Studio 2022.
+1. At the start screen select `Continue without code`. (If you don't see this screen, that's fine)
 1. Open the `View` menu and select `SQL Server Object Explorer`.
 1. Right-click the `SQL Server` node, select `Add SQL Server...`.
 1. In the dialog that appears, expand the `Local` node and select the SQL Server instance called `SQLEXPRESS`.

@@ -95,66 +95,66 @@ The Reddit example demonstrates a common use case for query string parameters. T
 
 ### Query String Example
 
-Let's add the ability to search Posts in Gifter. We'll search by `Title` and allow the results to be sorted by date in either an ascending or descending direction.
+Let's add the ability to search Videos in Streamish. We'll search by `Title` and allow the results to be sorted by date in either an ascending or descending direction.
 
-We'll start by adding a new method to our `PostRepository`.
+We'll start by adding a new method to our `VideoRepository`.
 
 ```cs
-public List<Post> Search(string criterion, bool sortDescending)
+public List<Video> Search(string criterion, bool sortDescending)
 {
     using (var conn = Connection)
     {
         conn.Open();
         using (var cmd = conn.CreateCommand())
         {
-            var sql =
-                @"SELECT p.Id AS PostId, p.Title, p.Caption, p.DateCreated AS PostDateCreated, 
-                        p.ImageUrl AS PostImageUrl, p.UserProfileId,
+            var sql = @"
+              SELECT v.Id, v.Title, v.Description, v.Url, v.DateCreated AS VideoDateCreated, v.UserProfileId,
 
-                        up.Name, up.Bio, up.Email, up.DateCreated AS UserProfileDateCreated, 
-                        up.ImageUrl AS UserProfileImageUrl
-                    FROM Post p 
-                        LEFT JOIN UserProfile up ON p.UserProfileId = up.id
-                    WHERE p.Title LIKE @Criterion OR p.Caption LIKE @Criterion";
+                     up.Name, up.Email, up.DateCreated AS UserProfileDateCreated,
+                     up.ImageUrl AS UserProfileImageUrl
+                        
+                FROM Video v 
+                     JOIN UserProfile up ON v.UserProfileId = up.Id
+               WHERE v.Title LIKE @Criterion OR v.Description LIKE @Criterion";
 
             if (sortDescending)
             {
-                sql += " ORDER BY p.DateCreated DESC";
+                sql += " ORDER BY v.DateCreated DESC";
             }
             else
             {
-                sql += " ORDER BY p.DateCreated";
+                sql += " ORDER BY v.DateCreated";
             }
 
             cmd.CommandText = sql;
             DbUtils.AddParameter(cmd, "@Criterion", $"%{criterion}%");
-            var reader = cmd.ExecuteReader();
-
-            var posts = new List<Post>();
-            while (reader.Read())
+            using (SqlDataReader reader = cmd.ExecuteReader())
             {
-                posts.Add(new Post()
+
+                var videos = new List<Video>();
+                while (reader.Read())
                 {
-                    Id = DbUtils.GetInt(reader, "PostId"),
-                    Title = DbUtils.GetString(reader, "Title"),
-                    Caption = DbUtils.GetString(reader, "Caption"),
-                    DateCreated = DbUtils.GetDateTime(reader, "PostDateCreated"),
-                    ImageUrl = DbUtils.GetString(reader, "PostImageUrl"),
-                    UserProfileId = DbUtils.GetInt(reader, "UserProfileId"),
-                    UserProfile = new UserProfile()
+                    videos.Add(new Video()
                     {
-                        Id = DbUtils.GetInt(reader, "UserProfileId"),
-                        Name = DbUtils.GetString(reader, "Name"),
-                        Email = DbUtils.GetString(reader, "Email"),
-                        DateCreated = DbUtils.GetDateTime(reader, "UserProfileDateCreated"),
-                        ImageUrl = DbUtils.GetString(reader, "UserProfileImageUrl"),
-                    },
-                });
+                        Id = DbUtils.GetInt(reader, "Id"),
+                        Title = DbUtils.GetString(reader, "Title"),
+                        Description = DbUtils.GetString(reader, "Description"),
+                        DateCreated = DbUtils.GetDateTime(reader, "VideoDateCreated"),
+                        Url = DbUtils.GetString(reader, "Url"),
+                        UserProfileId = DbUtils.GetInt(reader, "UserProfileId"),
+                        UserProfile = new UserProfile()
+                        {
+                            Id = DbUtils.GetInt(reader, "UserProfileId"),
+                            Name = DbUtils.GetString(reader, "Name"),
+                            Email = DbUtils.GetString(reader, "Email"),
+                            DateCreated = DbUtils.GetDateTime(reader, "UserProfileDateCreated"),
+                            ImageUrl = DbUtils.GetString(reader, "UserProfileImageUrl"),
+                        },
+                    });
+                }
+
+                return videos;
             }
-
-            reader.Close();
-
-            return posts;
         }
     }
 }
@@ -164,29 +164,29 @@ The `Search()` method builds a SQL query that uses the `LIKE` operator to find r
 
 > **NOTE:** The `cmd.CommandText` property is just a string, so we can append to it as we would any other string.
 
-Once we have a repository method, we'll create the new Action in the `PostController`.
+Once we have a repository method, we'll create the new Action in the `VideoController`.
 
 ```cs 
 [HttpGet("search")]
 public IActionResult Search(string q, bool sortDesc)
 {
-    return Ok(_postRepository.Search(q, sortDesc));
+    return Ok(_videoRepository.Search(q, sortDesc));
 }
 ```
 
 The above method will respond to a request that looks like this:
 
-> https://localhost:5001/api/post/search?q=p&sortDesc=false
+> https://localhost:5001/api/video/search?q=e&sortDesc=false
 
 Notice the URL's route contains `search` and the URL's query string has values for `q` and `sortDesc` keys. `search` corresponds to the the argument passed to the `[HttpGet("search")]` attribute, and `q` and `sortDesc` correspond to the method's parameters.
 
 ## Exercises
 
-1. Update your Gifter API to allow searching of Posts by title as illustrated in this chapter.
-1. Add a new endpoint, `/api/post/hottest?since=<SOME_DATE>` that will return posts created on or after the provided date.
+1. Update your Streamish API to allow searching of Videos by title as illustrated in this chapter.
+1. Add a new endpoint, `/api/video/hottest?since=<SOME_DATE>` that will return videos created on or after the provided date.
 
 > **NOTE:** as always make sure to use Postman to test your API.
 
 ## Challenge
 
-1. Take a look at the methods in your `PostRepository`. Pay special attention to the "query" methods - those that `SELECT` data. What do you notice? There's a LOT of redundant code. Your challenge is to create one or more `private` helper methods to reduce the complexity and call those new methods from the query methods.
+1. Take a look at the methods in your `VideoRepository`. Pay special attention to the "query" methods - those that `SELECT` data. What do you notice? There's a LOT of redundant code. Your challenge is to create one or more `private` helper methods to reduce the complexity and call those new methods from the query methods.

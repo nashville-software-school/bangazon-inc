@@ -1,8 +1,12 @@
 # C# for the JavaScript Developer
 
+## A Cheat Sheet
+
 Learning your first programming language is hard. It's hard because you're not only learning a language, but you're also learning _how to program_.
 
 It is often said that learning a second programming language is easier because you now have the mental model of programming and how programming languages work. Now you can transfer the knowledge from the language you know to the language you're learning.
+
+> **NOTE:** You should keep this chapter handy throughout the orientation portion of the course.
 
 ---
 
@@ -297,7 +301,18 @@ const numbers = [100, 32, 98, 4, 1, 22, 73, 8];
 const small = numbers.filter((n) => n < 10);
 const even = numbers.filter((n) => n % 2 === 0);
 
-const words = [ "do", "you", "understand", "the", "words", "coming", "out", "of", "my", "mouth?", ];
+const words = [
+  "do",
+  "you",
+  "understand",
+  "the",
+  "words",
+  "coming",
+  "out",
+  "of",
+  "my",
+  "mouth?",
+];
 const yelling = words.map((w) => w.ToUpperCase());
 const sentence = yelling.join(" ");
 
@@ -320,7 +335,7 @@ List<int> small = numbers.Where(n => n < 10).ToList();
 List<int> even = numbers.Where(n => n % 2 == 0).ToList();
 
 List<string> words = new List<string>() { "do", "you", "understand", "the", "words", "coming", "out", "of", "my", "mouth?" };
-List<string> yelling = words.Select(w => w.ToUpper())ToList();
+List<string> yelling = words.Select(w => w.ToUpper().ToString();
 string sentence = string.Join(" ", yelling);
 
 List<Person> people = GetPeopleFromSomeplace();
@@ -338,7 +353,9 @@ bool doesEveryoneHaveAHobby = people.All(p => p.Hobbies.Count > 0);
 try {
   const age = getAgeFromSomeplace();
   if (age < 0) {
-    throw new Error("You can't be younger than zero, no matter how hard you try.");
+    throw new Error(
+      "You can't be younger than zero, no matter how hard you try.",
+    );
   }
 } catch (err) {
   console.log(err.message);

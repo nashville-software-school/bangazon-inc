@@ -115,34 +115,36 @@ public List<Dog> GetDogsByOwnerId(int ownerId)
 
             cmd.Parameters.AddWithValue("@ownerId", ownerId);
 
-            SqlDataReader reader = cmd.ExecuteReader();
-
-            List<Dog> dogs = new List<Dog>();
-
-            while (reader.Read())
+            using (SqlDataReader reader = cmd.ExecuteReader())
             {
-                Dog dog = new Dog()
-                {
-                    Id = reader.GetInt32(reader.GetOrdinal("Id")),
-                    Name = reader.GetString(reader.GetOrdinal("Name")),
-                    Breed = reader.GetString(reader.GetOrdinal("Breed")),
-                    OwnerId = reader.GetInt32(reader.GetOrdinal("OwnerId"))
-                };
+               
+               List<Dog> dogs = new List<Dog>();
 
-                // Check if optional columns are null
-                if (reader.IsDBNull(reader.GetOrdinal("Notes")) == false)
+                while (reader.Read())
                 {
-                    dog.Notes = reader.GetString(reader.GetOrdinal("Notes"));
-                }
-                if (reader.IsDBNull(reader.GetOrdinal("ImageUrl")) == false)
-                {
-                    dog.ImageUrl = reader.GetString(reader.GetOrdinal("ImageUrl"));
-                }
+                    Dog dog = new Dog()
+                    {
+                        Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                        Name = reader.GetString(reader.GetOrdinal("Name")),
+                        Breed = reader.GetString(reader.GetOrdinal("Breed")),
+                        OwnerId = reader.GetInt32(reader.GetOrdinal("OwnerId"))
+                    };
 
-                dogs.Add(dog);
+                    // Check if optional columns are null
+                    if (reader.IsDBNull(reader.GetOrdinal("Notes")) == false)
+                    {
+                        dog.Notes = reader.GetString(reader.GetOrdinal("Notes"));
+                    }
+                    if (reader.IsDBNull(reader.GetOrdinal("ImageUrl")) == false)
+                    {
+                        dog.ImageUrl = reader.GetString(reader.GetOrdinal("ImageUrl"));
+                    }
+
+                    dogs.Add(dog);
+                }
+                
+                return dogs;
             }
-            reader.Close();
-            return dogs;
         }
     }
 }
@@ -174,25 +176,25 @@ public List<Walker> GetWalkersInNeighborhood(int neighborhoodId)
 
             cmd.Parameters.AddWithValue("@neighborhoodId", neighborhoodId);
 
-            SqlDataReader reader = cmd.ExecuteReader();
-
-            List<Walker> walkers = new List<Walker>();
-            while (reader.Read())
+            using (SqlDataReader reader = cmd.ExecuteReader())
             {
-                Walker walker = new Walker
+
+                List<Walker> walkers = new List<Walker>();
+                while (reader.Read())
                 {
-                    Id = reader.GetInt32(reader.GetOrdinal("Id")),
-                    Name = reader.GetString(reader.GetOrdinal("Name")),
-                    ImageUrl = reader.GetString(reader.GetOrdinal("ImageUrl")),
-                    NeighborhoodId = reader.GetInt32(reader.GetOrdinal("NeighborhoodId"))
-                };
+                    Walker walker = new Walker
+                    {
+                        Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                        Name = reader.GetString(reader.GetOrdinal("Name")),
+                        ImageUrl = reader.GetString(reader.GetOrdinal("ImageUrl")),
+                        NeighborhoodId = reader.GetInt32(reader.GetOrdinal("NeighborhoodId"))
+                    };
 
-                walkers.Add(walker);
+                    walkers.Add(walker);
+                }
+
+                return walkers;
             }
-
-            reader.Close();
-
-            return walkers;
         }
     }
 }
@@ -402,23 +404,23 @@ namespace DogGo.Repositories
                 {
                     cmd.CommandText = @"SELECT Id, Name FROM Neighborhood";
 
-                    SqlDataReader reader = cmd.ExecuteReader();
-
-                    List<Neighborhood> neighborhoods = new List<Neighborhood>();
-
-                    while (reader.Read())
+                    using (SqlDataReader reader = cmd.ExecuteReader())
                     {
-                        Neighborhood neighborhood = new Neighborhood()
+
+                        List<Neighborhood> neighborhoods = new List<Neighborhood>();
+
+                        while (reader.Read())
                         {
-                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
-                            Name = reader.GetString(reader.GetOrdinal("Name"))
-                        };
-                        neighborhoods.Add(neighborhood);
+                            Neighborhood neighborhood = new Neighborhood()
+                            {
+                                Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                                Name = reader.GetString(reader.GetOrdinal("Name"))
+                            };
+                            neighborhoods.Add(neighborhood);
+                        }
+
+                        return neighborhoods;
                     }
-
-                    reader.Close();
-
-                    return neighborhoods;
                 }
             }
         }
