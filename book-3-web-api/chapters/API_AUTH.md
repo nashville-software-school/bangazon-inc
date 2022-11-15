@@ -237,17 +237,16 @@ namespace Gifter.Controllers
 ### Add a login form
 >Login.js
 ```js
-import React, { useContext, useEffect, useState } from "react";
-import { UserContext } from "../providers/UserProvider";
+import React, { useEffect, useState } from "react";
+import { login } from "../modules/UserManager";
 
 export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { login } = useContext(UserContext);
 
   const submitLoginForm = (e) => {
     e.preventDefault();
-    login({ email, password });
+    getUsers({ email, password });
   };
 
   return (
@@ -280,7 +279,7 @@ export const Login = () => {
 >Register.js
 ```js
 import React, { useContext, useEffect, useState } from "react";
-import { UserContext } from "../providers/UserProvider";
+import { register } from "../modules/UserManager";
 
 export const Register = () => {
   // Create state variables for each form field
@@ -289,13 +288,11 @@ export const Register = () => {
   const [bio, setBio] = useState("");
   const [imageurl, setImageurl] = useState("");
 
-  // Import the register function from our context-- we'll use this when they click submit
-  const { register } = useContext(UserContext);
-
+  
   // This function will run when the user has finished filling out the form and clicks submit
   const submitLoginForm = (e) => {
     e.preventDefault();
-    register({ name, email, bio, imageurl });
+    registerUser({ name, email, bio, imageurl });
   };
 
   return (
@@ -333,13 +330,13 @@ export const Register = () => {
 ```
 
 ### Add your data provider
->UserProvider.js
+>UserManager.js
 ```js
 import React, { useState } from "react";
 
-export const UserContext = React.createContext();
 
-export const UserProvider = (props) => {
+
+export const UserManager = (props) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const getCurrentUser = () => {
     const currentUser = localStorage.getItem("gifterUser");
@@ -379,13 +376,7 @@ export const UserProvider = (props) => {
     setIsLoggedIn(false);
   };
 
-  return (
-    <UserContext.Provider
-      value={{ getCurrentUser, login, register, logout }}
-    >
-      {props.children}
-    </UserContext.Provider>
-  );
+ 
 };
 
 ```
