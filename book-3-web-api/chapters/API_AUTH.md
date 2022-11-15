@@ -250,7 +250,7 @@ export const Login = () => {
    password: password
   }
     e.preventDefault();
-    getUsers(newLogin);
+    login(newLogin);
   };
 
   return (
@@ -302,7 +302,7 @@ export const Register = () => {
   imageurl: imageurl
   }
     e.preventDefault();
-    registerUser(newUser);
+    register(newUser);
   };
 
   return (
