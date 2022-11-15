@@ -237,7 +237,7 @@ namespace Gifter.Controllers
 ### Add a login form
 >Login.js
 ```js
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { login } from "../modules/UserManager";
 
 export const Login = () => {
@@ -282,7 +282,7 @@ export const Login = () => {
 ### Add a register form
 >Register.js
 ```js
-import React, { useContext, useEffect, useState } from "react";
+import React, { useState } from "react";
 import { register } from "../modules/UserManager";
 
 export const Register = () => {
@@ -342,13 +342,8 @@ export const Register = () => {
 ### Add your data provider
 >UserManager.js
 ```js
-import React, { useState } from "react";
 
-
-
-export const UserManager = (props) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const getCurrentUser = () => {
+ export const getCurrentUser = () => {
     const currentUser = localStorage.getItem("gifterUser");
 
     return currentUser;
@@ -356,18 +351,17 @@ export const UserManager = (props) => {
 
 
 
-  const login = (userObject) => {
+  export const login = (userObject) => {
     debugger;
     fetch(`api/userprofile/getbyemail?email=${userObject.email}`)
       .then((r) => r.json())
       .then((userObjFromDB) => {
 
         localStorage.setItem("gifterUser", JSON.stringify(userObjFromDB));
-        setIsLoggedIn(true);
       })
   };
 
-  const register = (userObject) => {
+ export const register = (userObject) => {
     fetch("/api/userprofile", {
       method: "POST",
       headers: {
@@ -381,13 +375,9 @@ export const UserManager = (props) => {
       });
   };
 
-  const logout = () => {
+ export const logout = () => {
     localStorage.clear();
-    setIsLoggedIn(false);
   };
-
- 
-};
 
 ```
 
