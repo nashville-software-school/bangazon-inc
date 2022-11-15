@@ -245,8 +245,12 @@ export const Login = () => {
   const [password, setPassword] = useState("");
 
   const submitLoginForm = (e) => {
+  const newLogin = {
+   email: email,
+   password: password
+  }
     e.preventDefault();
-    getUsers({ email, password });
+    getUsers(newLogin);
   };
 
   return (
@@ -291,8 +295,14 @@ export const Register = () => {
   
   // This function will run when the user has finished filling out the form and clicks submit
   const submitLoginForm = (e) => {
+  const newUser = {
+  name: name,
+  email: email,
+  bio: bio,
+  imageurl: imageurl
+  }
     e.preventDefault();
-    registerUser({ name, email, bio, imageurl });
+    registerUser(newUser);
   };
 
   return (
