@@ -29,7 +29,7 @@ mkdir -p ~/workspace/csharp/Intro && cd $_
 Create a new console application with the `dotnet` command line utility.
 
 ```sh
-dotnet new console
+dotnet new console -o <projectname> -f net5.0
 ```
 
 This will create _(a.k.a. "scaffold")_ two files in the directory as well as an `obj` directory. Go ahead and open the `Intro` directory in Visual Studio Code.
