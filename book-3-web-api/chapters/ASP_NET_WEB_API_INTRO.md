@@ -30,7 +30,6 @@ In this chapter we'll walk through creating a "Coffee Shop" Web API in ASP<span>
 1. Choose the C# "ASP<span>.NET</span> Core Web API" option
 1. Name the project "CoffeeShop"
 1. Select ".NET 6.0" for the "Target Framework" and click "Create"
-1. In Solution Explorer, right click the name of the project and select "Manage Nuget Packages". Install the `Microsoft.Data.SqlClient` pacakge
 
 You now have an ASP<span>.NET</span> Core Web API project. Spend some time looking around the code that Visual Studio generated. You'll find several familiar items.
 
