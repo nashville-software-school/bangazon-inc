@@ -27,48 +27,18 @@ In this chapter we'll walk through creating a "Coffee Shop" Web API in ASP<span>
 
 1. Open Visual Studio
 1. Select "Create a new project"
-1. In the "Create a new project" dialog, choose the C# "ASP<span>.NET</span> Core Web API" option
-1. Name the project "CoffeeShop" and click "Next"
-1. Select ".NET 5.0 (Current)" for the "Target Framework" and click "Create"
+1. Choose the C# "ASP<span>.NET</span> Core Web API" option
+1. Name the project "CoffeeShop"
+1. Select ".NET 6.0" for the "Target Framework" and click "Create"
 1. In Solution Explorer, right click the name of the project and select "Manage Nuget Packages". Install the `Microsoft.Data.SqlClient` pacakge
-1. Review and run [this SQL script](./sql/CoffeeShop.sql) to create the `CoffeeShop` database.
 
 You now have an ASP<span>.NET</span> Core Web API project. Spend some time looking around the code that Visual Studio generated. You'll find several familiar items.
-
-As in an MVC project, a Web API project has an `appsettings.json` file to store configuration information for the app. Update the `appsettings.json` file to contain the database connection string.
-
-> appsettings.json
-
-```json
-{
-  "Logging": {
-    "LogLevel": {
-      "Default": "Information",
-      "Microsoft": "Warning",
-      "Microsoft.Hosting.Lifetime": "Information"
-    }
-  },
-  "AllowedHosts": "*",
-  "ConnectionStrings": {
-    "DefaultConnection":  "server=localhost\\SQLExpress;database=CoffeeShop;integrated security=true"
-  }
-}
-```
 
 ## Models
 
 In this chapter we'll be focused on the `BeanVariety` entity and you'll work with the `Coffee` entity in the exercise.
 
-```sql
-CREATE TABLE BeanVariety (
-    Id INTEGER NOT NULL PRIMARY KEY IDENTITY,
-    [Name] VARCHAR(50) NOT NULL,
-    Region VARCHAR(255) NOT NULL,
-    Notes TEXT
-);
-```
-
-Models (a,k.a _data models_) in Web API are exactly the same as in MVC. They are simple classes containing properties that correspond to columns in a database table. We can even use the same `DataAnnotations` as we used in MVC.
+Models (a,k.a _data models_) in Web API are simple classes containing properties that correspond to columns in a database table.
 
 Create a `Models` folder and add a `BeanVariety` class.
 
@@ -514,7 +484,7 @@ Return to the test web page and click the button again. You should see bean vari
 ## Exercises
 
 1. Create the CoffeeShop project outlined in this chapter.
-1. Create the necessary classes (model, repository and controller) to implement full CRUD functionality for the `/api/coffee` endpoint. Use Postman to test the endpoint.
+1. Create the necessary classes (model, repository and controller) to implement full CRUD functionality for the `/api/coffee` endpoint. Use Postman or Swagger to test the endpoint.
     * **NOTE:** Your `Coffee` model should contain both `BeanVarietyId` and `BeanVariety` properties.
 1. Update the JavaScript and HTML to display all bean varieties in the DOM when the "Run It!" button is clicked.
 1. Update the JavaScript and HTML with a form for adding a new bean variety to the database.
