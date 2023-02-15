@@ -123,22 +123,25 @@ namespace CoffeeShop.Repositories
 
 ### `IBeanVarietyRepository`
 
-1. Use the `Extract Interface...` feature of Visual Studio to create the `IBeanVarietyRepository` interface.
-2. Update the `ConfigureServices` method in the `Startup` class to register your new repository with ASP<span>.</span>NET.
+1. Use the `Extract Interface...` feature of Visual Studio to create the `IBeanVarietyRepository` interface.  Do this by right-clicking on the name of the `BeanVarietyRepository` class, choosing `Quick Actions and Refactoring` (the lightbulb option), and then choosing `Extract Interface...`.  Choose `OK` on the dialog that pops up.
+2. Update `Program.cs` class to register your new repository with ASP<span>.</span>NET. Add this line of code in the same area with other lines starting `builder.Services`, before the line of code `var app = builder.Build()`.
 
     ```cs
-    services.AddTransient<IBeanVarietyRepository, BeanVarietyRepository>();
+    builder.Services.AddTransient<IBeanVarietyRepository, BeanVarietyRepository>();
     ```
+Registering a service in your application means that the instantiation of that registered Type will be automatically handled and you don't need to 'new up' any repositories yourself.  Trust us, it's a good thing and it makes your app run better.
+
 
 ## Controllers
 
-Controllers in Web API are similar to controllers in MVC with a few small differences. They perform the same function in MVC. As in MVC a Web API controller contains methods to respond to HTTP requests.
+Controllers in Web API contain methods to respond to HTTP requests.  The job of the controller is to construct and return a response to an HTTP request.  It's the basic logic of your API.
 
 Create a `BeanVarietyController` class in the `Controllers` directory.
 
 1. Right-click on the `Controllers` folder in the Solution Explorer and select `Add` -> `Controller...`.
 1. In the dialog box that appears, select `API` on the left panel.
 1. Next select `API Controller - Empty` in the center panel.
+1. Name it `BeanVarietyController`
 1. Finally click the `Add` button
 
 > Controllers/BeanVarietyController.cs
@@ -246,17 +249,7 @@ Some of the `[HttpXXX]`attributes refer to `{id}`. The `id` in this case says th
 
 > https://localhost:5001/api/beanvariety/42
 
-You'll also note that, unlike MVC, we don't have two methods for creating, editing or deleting entities. This is because Web API does not have the concept of Views, so there are no forms to present to the user.
-
-Also, since there is no View, you won't see a call the the `View()` method as we did in MVC. Instead you'll see a few other methods. Two common methods are `Ok()` and `NoContent()`. `Ok()` is used when we want to return data. `NoContent()` is used to indicate that the action was successful, but we don't have any data to return.
-
-Some final differences from an MVC controller can be seen at the top of the class. We must decorate a Web API controller with a couple of attributes and the controller class should inherit from the `ControllerBase` class instead of `Controller`.
-
-```cs
-[Route("api/[controller]")]
-[ApiController]
-public class BeanVarietyController : ControllerBase
-```
+Two common methods are `Ok()` and `NoContent()`. `Ok()` is used when we want to return data. `NoContent()` is used to indicate that the action was successful, but we don't have any data to return.
 
 ## Invoking a Web API
 
