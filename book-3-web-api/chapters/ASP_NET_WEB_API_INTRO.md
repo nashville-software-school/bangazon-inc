@@ -316,37 +316,48 @@ That's right...a "CORS" error.
 Access to fetch at 'https://localhost:5001/api/beanvariety/' from origin 'http://localhost:3000' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. If an opaque response serves your needs, set the request's mode to 'no-cors' to fetch the resource with CORS disabled.
 ```
 
-[CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS/Errors) is a browser security feature that prevents JavaScript from talking to APIs without the web server's consent. CORS is extremely important for production applications, but in development we can afford to be a bit more lax. Update the `Configure` method in the `Startup` class to call `app.UseCors()` to configure CORS behavior.
+[CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS/Errors) is a browser security feature that prevents JavaScript from talking to APIs without the web server's consent. CORS is extremely important for production applications, but in development we can afford to be a bit more lax. Update `Program.cs` to call `app.UseCors()` to configure CORS behavior.
 
 ```cs
-public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+using CoffeeShopAPI.Repository;
+
+var builder = WebApplication.CreateBuilder(args);
+
+// Add services to the container.
+
+builder.Services.AddControllers();
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+builder.Services.AddTransient<IBeanVarietyRepository, BeanVarietyRepository>();
+
+var app = builder.Build();
+
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
 {
-    if (env.IsDevelopment())
+    app.UseSwagger();
+    app.UseSwaggerUI();
+    
+    // Do not block requests while in development
+    app.UseCors(options =>
     {
-        app.UseDeveloperExceptionPage();
-        app.UseSwagger();
-        app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "CoffeeShop v1"));
-
-        // Do not block requests while in development
-        app.UseCors(options =>
-        {
-            options.AllowAnyOrigin();
-            options.AllowAnyMethod();
-            options.AllowAnyHeader();
-        });
-    }
-
-    app.UseHttpsRedirection();
-
-    app.UseRouting();
-
-    app.UseAuthorization();
-
-    app.UseEndpoints(endpoints =>
-    {
-        endpoints.MapControllers();
+        options.AllowAnyOrigin();
+        options.AllowAnyMethod();
+        options.AllowAnyHeader();
     });
+    
 }
+
+app.UseHttpsRedirection();
+
+app.UseAuthorization();
+
+app.MapControllers();
+
+app.Run();
+
+        
 ```
 
 Return to the test web page and click the button again. You should see bean variety data print in the console.
