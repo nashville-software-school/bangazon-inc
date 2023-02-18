@@ -108,12 +108,18 @@ namespace CoffeeShop.Repositories
     {
         var foundBeanVariety = _beanVarieties.Find(b => b.Id == variety.Id);
 
-        foundBeanVariety = variety;
+        variety.Id = newId;
+        _beanVarieties.Add(variety);
     }
 
     public void Delete(int id)
     {
         _beanVarieties.Remove(Get(id));
+    }
+    
+    private int GetNextId()
+    {
+        return _beanVarieties.Max(x => x.Id) + 1;
     }
 }
 }
