@@ -101,15 +101,19 @@ namespace CoffeeShop.Repositories
 
     public void Add(BeanVariety variety)
     {
+         var newId = GetNextId(); 
+        variety.Id = newId;
         _beanVarieties.Add(variety);
     }
 
     public void Update(BeanVariety variety)
     {
-        var foundBeanVariety = _beanVarieties.Find(b => b.Id == variety.Id);
-
-        variety.Id = newId;
-        _beanVarieties.Add(variety);
+       var foundBeanVariety = _beanVarieties.Find(b => b.Id == variety.Id);
+        if (foundBeanVariety != null)
+        {
+            _beanVarieties.Remove(foundBeanVariety);
+            _beanVarieties.Add(variety);
+        }
     }
 
     public void Delete(int id)
