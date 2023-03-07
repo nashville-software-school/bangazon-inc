@@ -27,17 +27,48 @@ In this chapter we'll walk through creating a "Coffee Shop" Web API in ASP<span>
 
 1. Open Visual Studio
 1. Select "Create a new project"
-1. Choose the C# "ASP<span>.NET</span> Core Web API" option
-1. Name the project "CoffeeShop"
-1. Select ".NET 6.0" for the "Target Framework" and click "Create"
+1. In the "Create a new project" dialog, choose the C# "ASP<span>.NET</span> Core Web API" option
+1. Name the project "CoffeeShop" and click "Next"
+1. Select ".NET 5.0 (Current)" for the "Target Framework" and click "Create"
+1. In Solution Explorer, right click the name of the project and select "Manage Nuget Packages". Install the `Microsoft.Data.SqlClient` pacakge
+1. Review and run [this SQL script](./sql/CoffeeShop.sql) to create the `CoffeeShop` database.
 
 You now have an ASP<span>.NET</span> Core Web API project. Spend some time looking around the code that Visual Studio generated. You'll find several familiar items.
+
+As in an MVC project, a Web API project has an `appsettings.json` file to store configuration information for the app. Update the `appsettings.json` file to contain the database connection string.
+
+> appsettings.json
+
+```json
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft": "Warning",
+      "Microsoft.Hosting.Lifetime": "Information"
+    }
+  },
+  "AllowedHosts": "*",
+  "ConnectionStrings": {
+    "DefaultConnection":  "server=localhost\\SQLExpress;database=CoffeeShop;integrated security=true"
+  }
+}
+```
 
 ## Models
 
 In this chapter we'll be focused on the `BeanVariety` entity and you'll work with the `Coffee` entity in the exercise.
 
-Models (a,k.a _data models_) in Web API are simple classes containing properties that correspond to columns in a database table.
+```sql
+CREATE TABLE BeanVariety (
+    Id INTEGER NOT NULL PRIMARY KEY IDENTITY,
+    [Name] VARCHAR(50) NOT NULL,
+    Region VARCHAR(255) NOT NULL,
+    Notes TEXT
+);
+```
+
+Models (a,k.a _data models_) in Web API are exactly the same as in MVC. They are simple classes containing properties that correspond to columns in a database table. We can even use the same `DataAnnotations` as we used in MVC.
 
 Create a `Models` folder and add a `BeanVariety` class.
 
@@ -74,58 +105,168 @@ Create a `Repositories` directory and a `BeanVarietyRepository` class.
 > Repositories/BeanVarietyRepository.cs
 
 ```cs
+using System;
+using System.Collections.Generic;
+using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
 using CoffeeShop.Models;
 
 namespace CoffeeShop.Repositories
 {
     public class BeanVarietyRepository
-{
-    private static List<BeanVariety> _beanVarieties = new List<BeanVariety>() 
-    { 
-        new BeanVariety() {Id = 1, Name = "Arusha", Region = "Mount Meru in Tanzania, and Papua New Guinea", Notes = null},
-        new BeanVariety() {Id = 2, Name = "Benguet", Region = "Philippines", Notes = "Typica variety grown in Benguet in the Cordillera highlands of the northern Philippines since 1875."},
-        new BeanVariety() {Id = 3, Name = "Catuai", Region = "Latin America", Notes = "This is a hybrid of Mundo Novo and Caturra bred in Brazil in the late 1940s."},
-        new BeanVariety() {Id = 4, Name = "Typica", Region = "Worldwide", Notes = " 	Typica originated from Yemeni stock, taken first to Malabar, India, and later to Indonesia by the Dutch, and the Philippines by the Spanish"},
-        new BeanVariety() {Id = 5, Name = "Ruiru 11", Region = "Kenya", Notes = "Ruiru 11 was released in 1985 by the Kenyan Coffee Research Station. While the variety is generally disease resistant, it produces a lower cup quality than K7, SL28 and 34"},
-    };
-
-    public List<BeanVariety> GetAll()
     {
-        return _beanVarieties;
-    }
-
-    public BeanVariety Get(int id)
-    {
-        return _beanVarieties.Find(x => x.Id == id);
-    }
-
-    public void Add(BeanVariety variety)
-    {
-         var newId = GetNextId(); 
-        variety.Id = newId;
-        _beanVarieties.Add(variety);
-    }
-
-    public void Update(BeanVariety variety)
-    {
-       var foundBeanVariety = _beanVarieties.Find(b => b.Id == variety.Id);
-        if (foundBeanVariety != null)
+        private readonly string _connectionString;
+        public BeanVarietyRepository(IConfiguration configuration)
         {
-            _beanVarieties.Remove(foundBeanVariety);
-            _beanVarieties.Add(variety);
+            _connectionString = configuration.GetConnectionString("DefaultConnection");
+        }
+
+        private SqlConnection Connection
+        {
+            get { return new SqlConnection(_connectionString); }
+        }
+
+        public List<BeanVariety> GetAll()
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = "SELECT Id, [Name], Region, Notes FROM BeanVariety;";
+                    var reader = cmd.ExecuteReader();
+                    var varieties = new List<BeanVariety>();
+                    while (reader.Read())
+                    {
+                        var variety = new BeanVariety()
+                        {
+                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                            Name = reader.GetString(reader.GetOrdinal("Name")),
+                            Region = reader.GetString(reader.GetOrdinal("Region")),
+                        };
+                        if (!reader.IsDBNull(reader.GetOrdinal("Notes")))
+                        {
+                            variety.Notes = reader.GetString(reader.GetOrdinal("Notes"));
+                        }
+                        varieties.Add(variety);
+                    }
+
+                    reader.Close();
+
+                    return varieties;
+                }
+            }
+        }
+
+        public BeanVariety Get(int id)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        SELECT Id, [Name], Region, Notes 
+                          FROM BeanVariety
+                         WHERE Id = @id;";
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    var reader = cmd.ExecuteReader();
+
+                    BeanVariety variety = null;
+                    if (reader.Read())
+                    {
+                        variety = new BeanVariety()
+                        {
+                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                            Name = reader.GetString(reader.GetOrdinal("Name")),
+                            Region = reader.GetString(reader.GetOrdinal("Region")),
+                        };
+                        if (!reader.IsDBNull(reader.GetOrdinal("Notes")))
+                        {
+                            variety.Notes = reader.GetString(reader.GetOrdinal("Notes"));
+                        }
+                    }
+
+                    reader.Close();
+
+                    return variety;
+                }
+            }
+        }
+
+        public void Add(BeanVariety variety)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        INSERT INTO BeanVariety ([Name], Region, Notes)
+                        OUTPUT INSERTED.ID
+                        VALUES (@name, @region, @notes)";
+                    cmd.Parameters.AddWithValue("@name", variety.Name);
+                    cmd.Parameters.AddWithValue("@region", variety.Region);
+                    if (variety.Notes == null)
+                    {
+                        cmd.Parameters.AddWithValue("@notes", DBNull.Value);
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("@notes", variety.Notes);
+                    }
+
+                    variety.Id = (int)cmd.ExecuteScalar();
+                }
+            }
+        }
+
+        public void Update(BeanVariety variety)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        UPDATE BeanVariety 
+                           SET [Name] = @name, 
+                               Region = @region, 
+                               Notes = @notes
+                         WHERE Id = @id";
+                    cmd.Parameters.AddWithValue("@id", variety.Id);
+                    cmd.Parameters.AddWithValue("@name", variety.Name);
+                    cmd.Parameters.AddWithValue("@region", variety.Region);
+                    if (variety.Notes == null)
+                    {
+                        cmd.Parameters.AddWithValue("@notes", DBNull.Value);
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("@notes", variety.Notes);
+                    }
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public void Delete(int id)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = "DELETE FROM BeanVariety WHERE Id = @id";
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
         }
     }
-
-    public void Delete(int id)
-    {
-        _beanVarieties.Remove(Get(id));
-    }
-    
-    private int GetNextId()
-    {
-        return _beanVarieties.Max(x => x.Id) + 1;
-    }
-}
 }
 ```
 
@@ -133,25 +274,22 @@ namespace CoffeeShop.Repositories
 
 ### `IBeanVarietyRepository`
 
-1. Use the `Extract Interface...` feature of Visual Studio to create the `IBeanVarietyRepository` interface.  Do this by right-clicking on the name of the `BeanVarietyRepository` class, choosing `Quick Actions and Refactoring` (the lightbulb option), and then choosing `Extract Interface...`.  Choose `OK` on the dialog that pops up.
-2. Update `Program.cs` class to register your new repository with ASP<span>.</span>NET. Add this line of code in the same area with other lines starting `builder.Services`, before the line of code `var app = builder.Build()`.
+1. Use the `Extract Interface...` feature of Visual Studio to create the `IBeanVarietyRepository` interface.
+2. Update the `ConfigureServices` method in the `Startup` class to register your new repository with ASP<span>.</span>NET.
 
     ```cs
-    builder.Services.AddTransient<IBeanVarietyRepository, BeanVarietyRepository>();
+    services.AddTransient<IBeanVarietyRepository, BeanVarietyRepository>();
     ```
-Registering a service in your application means that the instantiation of that registered Type will be automatically handled and you don't need to 'new up' any repositories yourself.  Trust us, it's a good thing and it makes your app run better.
-
 
 ## Controllers
 
-Controllers in Web API contain methods to respond to HTTP requests.  The job of the controller is to construct and return a response to an HTTP request.  It's the basic logic of your API.
+Controllers in Web API are similar to controllers in MVC with a few small differences. They perform the same function in MVC. As in MVC a Web API controller contains methods to respond to HTTP requests.
 
 Create a `BeanVarietyController` class in the `Controllers` directory.
 
 1. Right-click on the `Controllers` folder in the Solution Explorer and select `Add` -> `Controller...`.
 1. In the dialog box that appears, select `API` on the left panel.
 1. Next select `API Controller - Empty` in the center panel.
-1. Name it `BeanVarietyController`
 1. Finally click the `Add` button
 
 > Controllers/BeanVarietyController.cs
@@ -259,7 +397,17 @@ Some of the `[HttpXXX]`attributes refer to `{id}`. The `id` in this case says th
 
 > https://localhost:5001/api/beanvariety/42
 
-Two common methods are `Ok()` and `NoContent()`. `Ok()` is used when we want to return data. `NoContent()` is used to indicate that the action was successful, but we don't have any data to return.
+You'll also note that, unlike MVC, we don't have two methods for creating, editing or deleting entities. This is because Web API does not have the concept of Views, so there are no forms to present to the user.
+
+Also, since there is no View, you won't see a call the the `View()` method as we did in MVC. Instead you'll see a few other methods. Two common methods are `Ok()` and `NoContent()`. `Ok()` is used when we want to return data. `NoContent()` is used to indicate that the action was successful, but we don't have any data to return.
+
+Some final differences from an MVC controller can be seen at the top of the class. We must decorate a Web API controller with a couple of attributes and the controller class should inherit from the `ControllerBase` class instead of `Controller`.
+
+```cs
+[Route("api/[controller]")]
+[ApiController]
+public class BeanVarietyController : ControllerBase
+```
 
 ## Invoking a Web API
 
@@ -326,48 +474,37 @@ That's right...a "CORS" error.
 Access to fetch at 'https://localhost:5001/api/beanvariety/' from origin 'http://localhost:3000' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. If an opaque response serves your needs, set the request's mode to 'no-cors' to fetch the resource with CORS disabled.
 ```
 
-[CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS/Errors) is a browser security feature that prevents JavaScript from talking to APIs without the web server's consent. CORS is extremely important for production applications, but in development we can afford to be a bit more lax. Update `Program.cs` to call `app.UseCors()` to configure CORS behavior.
+[CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS/Errors) is a browser security feature that prevents JavaScript from talking to APIs without the web server's consent. CORS is extremely important for production applications, but in development we can afford to be a bit more lax. Update the `Configure` method in the `Startup` class to call `app.UseCors()` to configure CORS behavior.
 
 ```cs
-using CoffeeShopAPI.Repository;
-
-var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
-
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-builder.Services.AddTransient<IBeanVarietyRepository, BeanVarietyRepository>();
-
-var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
-    
-    // Do not block requests while in development
-    app.UseCors(options =>
+    if (env.IsDevelopment())
     {
-        options.AllowAnyOrigin();
-        options.AllowAnyMethod();
-        options.AllowAnyHeader();
+        app.UseDeveloperExceptionPage();
+        app.UseSwagger();
+        app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "CoffeeShop v1"));
+
+        // Do not block requests while in development
+        app.UseCors(options =>
+        {
+            options.AllowAnyOrigin();
+            options.AllowAnyMethod();
+            options.AllowAnyHeader();
+        });
+    }
+
+    app.UseHttpsRedirection();
+
+    app.UseRouting();
+
+    app.UseAuthorization();
+
+    app.UseEndpoints(endpoints =>
+    {
+        endpoints.MapControllers();
     });
-    
 }
-
-app.UseHttpsRedirection();
-
-app.UseAuthorization();
-
-app.MapControllers();
-
-app.Run();
-
-        
 ```
 
 Return to the test web page and click the button again. You should see bean variety data print in the console.
@@ -377,7 +514,7 @@ Return to the test web page and click the button again. You should see bean vari
 ## Exercises
 
 1. Create the CoffeeShop project outlined in this chapter.
-1. Create the necessary classes (model, repository and controller) to implement full CRUD functionality for the `/api/coffee` endpoint. Use Postman or Swagger to test the endpoint.
+1. Create the necessary classes (model, repository and controller) to implement full CRUD functionality for the `/api/coffee` endpoint. Use Postman to test the endpoint.
     * **NOTE:** Your `Coffee` model should contain both `BeanVarietyId` and `BeanVariety` properties.
 1. Update the JavaScript and HTML to display all bean varieties in the DOM when the "Run It!" button is clicked.
 1. Update the JavaScript and HTML with a form for adding a new bean variety to the database.
