@@ -29,7 +29,7 @@ In this chapter we'll walk through creating a "Coffee Shop" Web API in ASP<span>
 1. Select "Create a new project"
 1. In the "Create a new project" dialog, choose the C# "ASP<span>.NET</span> Core Web API" option
 1. Name the project "CoffeeShop" and click "Next"
-1. Select ".NET 5.0 (Current)" for the "Target Framework" and click "Create"
+1. Select ".NET 6.0 (Current)" for the "Target Framework" and click "Create"
 1. In Solution Explorer, right click the name of the project and select "Manage Nuget Packages". Install the `Microsoft.Data.SqlClient` pacakge
 1. Review and run [this SQL script](./sql/CoffeeShop.sql) to create the `CoffeeShop` database.
 
@@ -275,10 +275,10 @@ namespace CoffeeShop.Repositories
 ### `IBeanVarietyRepository`
 
 1. Use the `Extract Interface...` feature of Visual Studio to create the `IBeanVarietyRepository` interface.
-2. Update the `ConfigureServices` method in the `Startup` class to register your new repository with ASP<span>.</span>NET.
+2. Update `Program.cs` to register your new repository with ASP<span>.</span>NET by adding this line anywhere in the area where the `builder` variable is available.
 
     ```cs
-    services.AddTransient<IBeanVarietyRepository, BeanVarietyRepository>();
+    builder.Services.AddTransient<IBeanVarietyRepository, BeanVarietyRepository>();
     ```
 
 ## Controllers
