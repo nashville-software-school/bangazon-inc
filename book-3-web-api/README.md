@@ -12,8 +12,6 @@ This book prepares you for building the Tabloid API
 * Model Validation
 * Web API + React
 * Integration testing
-* JWT tokens
-* Firebase auth
 
 ## Chapters
 
@@ -28,7 +26,6 @@ This book prepares you for building the Tabloid API
 * Supplementary Exercises
   * [Enhancing Gifter](./chapters/GIFTER_SUPPLEMENTAL.md)
   * [Challenge: Audit Tables and Interfaces](./chapter/../chapters/POWER_OF_REPO_INTERFACES.md)
-* Chapter 7 - [Firebase Authentication](./chapters/FIREBASE_AUTH.md)
 
 > __Sprint 1__ - Full-stack Tabloid
 
