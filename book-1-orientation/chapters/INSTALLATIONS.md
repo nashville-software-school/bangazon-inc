@@ -13,7 +13,6 @@
    > **INFO:** When installing Visual Studio, you will be presented with a variety of workloads. Select the following workloads.
    >
    > - ASP.NET and web development
-   > - .NET Core cross-platform development
 
 ## SQL Server Express Database
 
