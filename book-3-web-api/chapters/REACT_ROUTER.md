@@ -134,7 +134,10 @@ import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import "./App.css";
 import ApplicationViews from "./components/ApplicationViews";
+<<<<<<< HEAD
 import { PostProvider } from "./providers/PostProvider";
+=======
+>>>>>>> master
 import Header from "./components/Header";
 
 function App() {

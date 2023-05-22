@@ -256,12 +256,19 @@ By placing our `try/catch` block inside the loop, we are able to continue loopin
 2. Replace the default Program class with the code below.
 3. Follow the instructions in the comments.
 
+##### Hint: For the address book's list of contacts, the easiest and most efficient way to structure your data is a dictionary with the person's email address as the key and their contact as a value. We'll talk about dictionaries in slightly more depth later, but for today you can skip ahead to [this chapter](https://github.com/NewForce-at-Mountwest/bangazon-inc/blob/master/book-1-orientation/chapters/COLLECTIONS.md) and _just_ read the part about dictionaries. Here's an example of what your data structure might look like in your `AddressBook` class. 
+
+```
+private Dictionary<string, Contact> _contactList {get; set;} = new Dictionary<string, Contact>();
+```
+
+### Program.cs
 ```csharp
 class Program
 {
     /*
         1. Add the required classes to make the following code compile.
-        HINT: Use a Dictionary in the AddressBook class to store Contacts. The key should be the contact's email address.
+        
 
         2. Run the program and observe the exception.
 

@@ -36,6 +36,10 @@ So how do we overcome the issues of `json-server`? We write our own Web API! Ins
 
 With ASP<span>.NET</span> Core, you can use the Web API project type to actually build business logic into your API. In the next chapter, we'll do just that. Along the way we'll see that Web API has many similarities to MVC. Much of what we learned in MVC will transfer. In fact, it could be argued that Web API is essentially MVC without Views.
 
+<<<<<<< HEAD
 ## Resources
 
 1. [Create a Web API with ASP.NET Core and Visual Studio](https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-web-api) - This tutorial uses Entity Framework (which we will cover later), but still is a good tutorial to see how everything works.
+=======
+
+>>>>>>> master
