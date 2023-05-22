@@ -34,7 +34,7 @@ In this course we use Visual Studio for writing C# code, but, turns out, it's al
 
 Now you should have a listing for your SQL Server instance in the `SQL Server Object Explorer` window. You can expand it and interact with your databases.
 
-> **NOTE:** You can also connect to SQL Server from Visual Studio when you have a C@ project open.
+> **NOTE:** You can also connect to SQL Server from Visual Studio when you have a C# project open.
 
 ## Other Tools
 

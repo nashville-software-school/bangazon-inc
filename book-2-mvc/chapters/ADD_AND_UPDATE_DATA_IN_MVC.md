@@ -2,25 +2,6 @@
 
 In this chapter you'll continue to implement CRUD for the DogGo application by adding Create, Edit, and Delete routes for our dog owners.
 
-<hr/>
-
-**QUICK NOTE**
-
-Did you get tired of stopping and restarting your server every time you make a change? There's a helpful package for you so that when you're only making changes to your view, you don't have to manually stop and restart your server.
-
-To install it right click on the project name and select Manage Nuget Packages. Search for and install
-```Microsoft.AspNetCore.MVC.Razor.RuntimeCompilation```
-
-Then go to `Startup.cs` and change this line `services.AddControllersWithViews();` to this
-
-```csharp
-services.AddControllersWithViews().AddRazorRuntimeCompilation();
-```
-
-And you're good to go. To see changes made in your view, just save your cshtml file are refresh your browser. It'd be nice if we could also automatically refresh when we make changes to our controllers and repositories.... but for now this will have to do....
-
-<hr/>
-
 As part of the exercises in the previous chapter, you should have already created an OwnerRepository that has a method for getting all owners and getting a single owner by Id. We'll need additional CRUD functionality in the repository for this chapter, so update OwnerRepository to have the following code
 
 ```csharp
@@ -219,14 +200,14 @@ Let's first look at a couple things about this form.
 
 ##### asp-for
 
-```html
+```html+razor
 <label asp-for="Email" class="control-label"></label>
 <input asp-for="Email" class="form-control" />
 ```
 
 The `asp-for` attribute is something we get from ASP.<span>NET</span> and razor. When the attribute is on a `<label>` element, the generated html will be whatever the property name is. In the example here, the label will literally have the word "Email" in it. The resulting html will look like this
 
-```html
+```html+razor
 <label for="Email" class="control-label">Email</label>
 ```
 
@@ -235,11 +216,11 @@ When the `asp-for` attribute is on an `<input>` element, it will generate html a
 
 ##### asp-action
 
-```html
+```html+razor
 <form asp-action="Create">
 ```
 
-All of our input elements should be inside a form. The `asp-for` attribute is added to the form element to specify which controller action should be called when the form gets submitted. The the contents of the form we're building here should be submitted to the `Create` method in our controller.
+All of our input elements should be inside a form. The `asp-action` attribute is added to the form element to specify which controller action should be called when the form gets submitted. The the contents of the form we're building here should be submitted to the `Create` method in our controller.
 
 ##### Update the form
 
@@ -385,9 +366,9 @@ Put a breakpoint in your controller code so you can inspect the owner object tha
 
 The trick is to _hide_ the input field in the view, but keep it in the form. Put the Id input field back in the form and give it a `type=hidden` attribute, and delete the `<label>` and `<span>` tags.
 
-```html
+```html+razor
 <div class="form-group">
-    <input asp-for="Id" type="hidden" class="form-control" />
+    <input asp-for="Id" type="hidden" />
 </div>
 ```
 

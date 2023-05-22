@@ -20,17 +20,19 @@ We'll be experimenting with technologies and concepts while building a simple ap
 * Chapter 1 - [Intro to MVC](./chapters/INTRO_TO_MVC.md)
 * Chapter 2 - [Introduction to ASP.NET Web Applications](./chapters/ASPNET_INTRO.md)
 * Chapter 3 - [ASP.NET Web Applications Part 2](./chapters/ADD_AND_UPDATE_DATA_IN_MVC.md)
-* Chapter 4 - [HTTP Requests and Routing](./chapters/ROUTING.md)
-* Chapter 5 - [Creating a Profile page with View Models](./chapters/VIEW_MODELS.md)
-* Chapter 6 - [Auth & User related data](./chapters/USER_RELATED_DATA.md)
-* Chapter 7 - [Annotations and model validation](./chapters/MODEL_ANNOTATIONS.md)
+* Chapter 4 - [Creating a Profile page with View Models](./chapters/VIEW_MODELS.md)
+* Chapter 5 - [Auth & User related data](./chapters/USER_RELATED_DATA.md)
+* Chapter 6 - [HTTP Requests and Routing](./chapters/ROUTING.md)
+* Chapter 7 - [Validating Input and Customizing the Display Using C# Attributes](./chapters/MODEL_ATTRIBUTES.md)
 
-> [__Sprint_ - Tabloid Web App Prototype](./chapters/GROUP_PROJECT.md)
+> [_Sprint_ - Tabloid Web App Prototype](./chapters/GROUP_PROJECT.md)
 
 * Chapter 8 - [SQL Exercises](./chapters/SQL_EXERCISES.md)
+* Optional Project - [Refining DogGo](./chapters/HOLIDAY_MVC_PROJECT.md)
 
 ## Supplementary Content
 
+* [Visual Studio Tips](./chapters/VISUAL_STUDIO_TIPS.md)
 * [Building HTML Views with Razor](./chapters/RAZOR_FEATURES.md)
-* Supplement - [Additional Student Exercises MVC Features](./chapters/STUDENT_EXERCISES_CHALLENGES.md)
 * Supplement - [Writing Web Application Integration Tests](./chapters/XUNIT_INTRO.md)
+* Supplement - [Simple Profile Images Using Gravatar](./chapters/GRAVATAR.md)

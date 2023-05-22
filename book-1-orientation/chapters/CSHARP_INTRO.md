@@ -1,8 +1,4 @@
-# Not Hello, World
-
-## Getting Started Guide
-
-Please read and complete the steps in the official [Get Started with C# and Visual Studio Code](https://docs.microsoft.com/en-us/dotnet/core/tutorials/with-visual-studio-code) guide.
+# Hello, C#
 
 ## Your first console application
 
@@ -20,31 +16,84 @@ Create a new console application with the `dotnet` command line utility.
 dotnet new console
 ```
 
-This will create two files in the directory
+This will create _(a.k.a. "scaffold")_ two files in the directory as well as an `obj` directory. Go ahead and open the `Intro` directory in Visual Studio Code.
 
-1. `intro.csproj` - This file holds all the packages that you application will be using. It's the `package.json` for C#.
-1. `Program.cs` - This is the file that holds your logic. Think of it as your `main.js`. It's where the logic of your application starts.
+1. `intro.csproj` - This is the _C# project file_ that contains certain configuration settings for your application. It's kinda like the `package.json` for C#.
 
-Copy this code into your Program.cs, replacing everything there.
+    ```xml
+    <Project Sdk="Microsoft.NET.Sdk">
 
-```cs
-using System;
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net5.0</TargetFramework>
+    </PropertyGroup>
 
-namespace Intro
-{
-    public class Program
+    </Project>
+    ```
+
+1. `Program.cs` - This is a _C# source file_. It's the file that holds your C# source code. _(note the `.cs` file extension)_ Think of it as your `main.js`. It's where the logic of your application starts.
+
+    ```cs
+    using System;
+
+    namespace Intro
     {
-        public static void Main(string[] args)
+        class Program
         {
-            Console.Write("What is your name? ");
-            string name = Console.ReadLine();
-            Console.WriteLine($"Hello, {name}! I'm glad to meet you.");
+            static void Main(string[] args)
+            {
+                Console.WriteLine("Hello World!");
+            }
         }
     }
+    ``  `
+
+Before we dig any deeper, let's run our new application. Back in your terminal run this command.
+
+```sh
+dotnet run
+```
+
+### So much code...
+
+I suspect you weren't surprised by what happened when you ran the code. But you might be surprised at just how much code it took to simply write "Hello World!" to the screen.
+
+It turns out it doesn't _actually_ take that much code. Let's refactor the `Program.cs` file so that the code is as minimal as possible while still doing the same thing.
+
+Replace everything in `Program.cs` with this code and run the program again.
+
+```cs
+System.Console.WriteLine("Hello World!");
+```
+
+That's a lot shorter.
+
+Yes, it's still a little more code than you'd write in JavaScript, but there are benefits to the verbosity of C#. Trust me.
+
+> **NOTE:** There is a good reason the `dotnet new console` command created all that extra code. We just don't need it for this simple program.
+
+### Making things a little more interesting
+
+Copy this code into your `Program.cs` file, replacing everything there.
+
+```cs
+System.Console.Write("Who would you like to say hello to? ");
+
+string name = System.Console.ReadLine();
+
+if (string.IsNullOrWhiteSpace(name))
+{
+    System.Console.WriteLine("Fine, don't say 'hello'!");
+}
+else
+{
+    System.Console.WriteLine($"Hello, {name}!");
 }
 ```
 
-Run the program.
+Take a moment to read this code. Can you predict what it will do?
+
+Once you've made your prediction, run the program.
 
 ```sh
 dotnet run
@@ -52,7 +101,54 @@ dotnet run
 
 Enter a name and marvel at the warm greeting you receive.
 
-What else would you like app to say? Take a few minutes and play with this code. What deep, philosophical truths can you make this app reveal?
+What happens when you don't enter a name?
+
+### Using `using`
+
+Before we move on, let's do one last refactor of our code to make it a little easier to read.
+
+Update your `Program.cs` file with this code.
+
+```cs
+using System;
+
+Console.Write("Who would you like to say hello to? ");
+
+string name = Console.ReadLine();
+
+if (string.IsNullOrWhiteSpace(name))
+{
+    Console.WriteLine("Fine, don't say 'hello'!");
+}
+else
+{
+    Console.WriteLine($"Hello, {name}!");
+}
+```
+
+What did we change? What do you think the `using` statement does?
+
+## What's in a name? 
+
+> _That which we call .NET by any other name would code as sweet._
+
+We begin our .NET journey with a warning: _Microsoft is bad at naming things._
+
+In your online research you will find references to technologies called **".NET 5", "dotnet", ".NET Core", ".NET Framework"** and just plain old **".NET"**.
+
+Once you get some experience under your belt this will all make (_a little_) more sense, but for now here's all you need to know...
+
+* **.NET 5** is the latest version of .NET, and _**It is what we will use in this course**_.
+* **dotnet** is the command line tool we'll use during the first part of the course. It will target .NET 5 without us having to do anything special.
+* **.NET Core** is the _previous version_ of .NET, but it is not very old. If you find documentation, blog posts, Stack Overflow answers, etc... referring to .NET Core, most of the time _**the information will still be accurate and you should use it**_. However, you should pay attention to the _version number_ of .NET Core. Information about versions `2.x` or `3.x` is much better than `1.x`.
+* **.NET Framework** is the old, Windows-only version of .NET. It was replaced by .NET Core and then by .NET 5. Even though it's old, it is still used _a lot_, so you'll probably find references to it on the web. _**We will NOT be using .NET Framework in this corse. When you find information that refers to .NET Framework, you should IGNORE IT**_.
+* **.NET** is an umbrella term that might refer to _**ANY**_ of the above technologies. Microsoft is _trying_ to re-brand .NET to refer to .NET 5, but that hasn't happened (yet?). When you run into this term you should try to figure out which .NET is refers to. If you can't, ask for help or move on to another resource.
+ 
+In addition to the above terms, you might find online references to **"mono", "xamarin" or "unity"**. These are still current technologies that are related to .NET, but they won't be covered in this corse.
+
+## Pushing To Github
+
+Before you push to Github, make sure that you add a gitignore file to your project. In your terminal, from the root of the application run `dnignore`. If you get an error saying the command is not found, be sure to go back to the installation chapter and get that added to your bashrc file.
 
 ## Learning a Second Language
 

@@ -5,11 +5,13 @@ In this chapter you'll create a new MVC project to start the Nashville dog walki
 ## Getting Started
 
 1. Create new project in Visual Studio
-1. Choose the _ASP.NET Core Web Application_
+1. Choose the _ASP.NET Core Web App (Model-View-Controller)_
+1. Click _Next_
 1. Specify project name of _DogGo_
-1. Click _Ok_
-1. Choose _Web Application (Model-View-Controller)_
-1. Click _Ok_
+1. Click _Next_
+1. Select _.NET 5.0 (Current)_ as the Target Framework
+1. Check the box that says _Enable Razor runtime compilation_
+1. Click _Create_
 1. Add the Nuget package for `Microsoft.Data.SqlClient`
 
 Take a look around at the project files that come out of the box with a new ASP.NET MVC project. It already has folders for Models, Views, and Controllers. It has a `wwwroot` folder which contains some static assets like javascript and css files. It has a `Startup.cs` file where we can configure certain things about our web application if we choose.
@@ -33,7 +35,7 @@ Open the `appsettings.json` file and add your connection string. The file should
   },
   "AllowedHosts": "*",
   "ConnectionStrings": {
-    "DefaultConnection": "Server=localhost\\SQLEXPRESS;Database=DogWalkerMVC;Trusted_Connection=True;TrustServerCertificate=True;"
+    "DefaultConnection": "Server=localhost\\SQLEXPRESS;Database=DogWalkerMVC;Trusted_Connection=True;"
   }
 }
 ```
@@ -71,7 +73,7 @@ namespace DogGo.Models
 
 Let's also create a repository for walkers. For now we'll just give it methods for getting all walkers and getting a single walker by their Id.
 
-Create a new folder at root of the project called Repositories and create a `WalkerRepository.cs` file inside it. Add the following code
+Create a new folder at root of the project called Repositories and create a `WalkerRepository.cs` file inside it. Add the following code (This won't immediately compile--we'll create the interface in the next step)
 
 ```csharp
 using DogGo.Models;
@@ -176,9 +178,9 @@ namespace DogGo.Repositories
 }
 ```
 
-Create an `IWalkerRepository.cs` file inside it. Add the following code
+Now create an interface for this repository in a new file called `IWalkerRepository.cs` and add the following code
 
-```cs
+```csharp
 using DogGo.Models;
 using Microsoft.Data.SqlClient;
 using System.Collections.Generic;
@@ -193,9 +195,9 @@ namespace DogGo.Repositories
 }
 ```
 
-Update the `Startup.cs` file to let ASP<span>.</span>NET Core know about our new repository. Add the following line to the `ConfigureServices` method.
+Update the `Startup.cs` file to let ASP.NET Core know about our new repository. Add the following line to the `ConfigureServices` method. And don't worry! We'll discuss why we do these steps soon enough
 
-```cs
+```csharp
 services.AddTransient<IWalkerRepository, WalkerRepository>();
 ```
 
@@ -205,7 +207,7 @@ We can use Visual Studio to scaffold us the skeleton of a controller. Right clic
 
 Visual Studio kindly just created a whole bunch of code for us.
 
-Add a private field for `WalkerRepository` and a constructor
+Add a private field for `IWalkerRepository` and a constructor
 
 ```csharp
 private readonly IWalkerRepository _walkerRepo;
@@ -217,7 +219,7 @@ public WalkersController(IWalkerRepository walkerRepository)
 }
 ```
 
-### The power of ASP<span>.NET</span> Controllers
+### A Route Invokes a Controller Method
 
 In the context of ASP<span>.NET</span>, each of the public methods in the controllers is considered an **Action**. When our application receives incoming HTTP requests, The ASP<span>.NET</span> framework is smart enough to know which controller Action to invoke.  
 
@@ -229,7 +231,7 @@ endpoints.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 ```
 
-ASPNET will inspect the parts of the url route. If a request comes in at `localhost:5001/Walkers/Index`, the framework will look for an `Index` action on the `Walker` controller and invoke it. If a request comes in at `localhost:5001/Walkers/Details/5`, The framework will look for a `Details` action in the `Walkers` controller and invoke it while passing in the parameter `5`. You'll also notice in the code above that some defaults have been set up in the routes. If the url of the request does not contain an action, the framework will invoke the Index action by default--meaning `localhost:5001/Walkers` would still trigger the `Index` action in the `Walkers` controller. Likewise, if the url doesn't contain a controller, i.e. `localhost:5001/`, the framework will assume the `Home` controller and the `Index` action. You are of course welcome to change these defaults.
+ASP<span>.</span>NET will inspect the parts of the url route. If a request comes in at `localhost:5001/Walkers/Index`, the framework will look for an `Index` action on the `Walker` controller and invoke it. If a request comes in at `localhost:5001/Walkers/Details/5`, The framework will look for a `Details` action in the `Walkers` controller and invoke it while passing in the parameter `5`. You'll also notice in the code above that some defaults have been set up in the routes. If the url of the request does not contain an action, the framework will invoke the Index action by default--meaning `localhost:5001/Walkers` would still trigger the `Index` action in the `Walkers` controller. Likewise, if the url doesn't contain a controller, i.e. `localhost:5001/`, the framework will assume the `Home` controller and the `Index` action. You are of course welcome to change these defaults.
 
 ### Get All Walkers
 
@@ -255,7 +257,7 @@ Currently, we're passing data into a view that doesn't exist. Let's fix that. Ri
 
 The generated view creates an html table and iterates over each walker in the list and creates a new row for each one.
 
-##### Razor Templates
+#### Razor Templates
 
 You'll notice a couple things about the code in the view. For one, it's not in an html file--it's in a cshtml file. This is called a _razor template_. With razor we can write a mix of C# and html code. It's similar to JSX in that it can dynamically create html. Once data gets passed into the view, the razor engine will convert it to an html page that can be returned to the browser. Here's an example of what razor code might look like
 
@@ -284,7 +286,7 @@ Run the application and go to `/walkers/index`. You should see your data driven 
 
 The view that Visual Studio scaffolded for us is a decent start, but it has a number of flaws with it. For now, lets take care of the image urls. Instead of seeing the actual url, lets replace that with an actual image. Replace the code that say `@Html.DisplayFor(modelItem => item.ImageUrl)` with the following
 
-```html
+```html+razor
 <img src="@item.ImageUrl" alt="avatar" />
 ```
 
@@ -298,7 +300,7 @@ Finally, uncomment the the code at the bottom of the view, and instead of using 
 </td>
 ```
 
-These action links will generate `<a>` tags at runtime. The first one, for example, is saying that we want an `<a>` tag whose text content says the work "Edit", and we also want it to link to the `Edit` action in the controller. Lastly, it's saying that we want to include whatever `item.Id` is as a route parameter. The genereated anchor tag would look something like this
+These action links will generate `<a>` tags at runtime. The first one, for example, is saying that we want an `<a>` tag whose text content says the word "Edit", and we also want it to link to the `Edit` action in the controller. Lastly, it's saying that we want to include whatever `item.Id` is as a route parameter. The generated anchor tag would look something like this
 
 ```html
 <a href="/Walkers/Edit/5">Edit</a>
@@ -339,4 +341,5 @@ Run the application and go to `/walkers/details/1`. Then go to `/walkers/details
 1. Create an `OwnerRepository`, an `IOwnerRepository` and an `OwnersController` file and implement the `Index` and `Details` methods.
 1. Update the `Startup` class to tell ASP<span>.</span>NET about the `OwnerRepository`.
 1. Go into the `Shared` folder in the `_Layout.cshtml` file. Add links for "Walkers" and "Owners" in the navbar. If you finish, try changing the views and the styling to your liking.
+1. Try getting the walkers pages to display the Neighborhood name instead of just the Neighborhood Id
 1. **Challenge**: When viewing the details page of an owner, list all the dogs for that owner as well.

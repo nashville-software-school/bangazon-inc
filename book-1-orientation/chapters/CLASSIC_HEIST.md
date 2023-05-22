@@ -14,15 +14,15 @@
   - A method called `PerformSkill` that takes in a `Bank` parameter and doesn't return anything.
 
 - Since bank security consists of alarms, vaults, and security guards; we'll need crew members that can deal with each of them. We'll need **hackers** to take care of the alarms; **lock pick specialists** to crack the vaults, and some good old fashion **muscle** to handle the security guards. Create three classes: `Hacker`, `Muscle`, and `LockSpecialist`. They should all implement the `IRobber` interface. Each implementation for `PerformSkill` should do three things:
-    - Take the `Bank` parameter and decrement its appropraite security score by the `SkillLevel`. i.e. A Hacker with a skill level of 50 should decrement the bank's `AlarmScore` by 50.
+    - Take the `Bank` parameter and decrement its appropriate security score by the `SkillLevel`. i.e. A Hacker with a skill level of 50 should decrement the bank's `AlarmScore` by 50.
     - Print to the console the name of the robber and what action they are performing. i.e. _"Mr. Pink is hacking the alarm system. Decreased security 50 points"_
     - If the appropriate security score has be reduced to 0 or below, print a message to the console, i.e. _"Mr Pink has disabled the alarm system!"_
 
-Before we start trying to assemble the perfect crew, we need to know who our options are. Let's build out a rolodex of possible recruits first. We'll pick the team and plan out the actual opperation later.
+Before we start trying to assemble the perfect crew, we need to know who our options are. Let's build out a rolodex of possible recruits first. We'll pick the team and plan out the actual operation later.
 
 - In the `Main` method, create a `List<IRobber>` and store it in a variable named `rolodex`. This list will contain all possible operatives that we could employ for future heists. We want to give the user the opportunity to add new operatives to this list, but for now let's pre-populate the list with 5 or 6 robbers (give it a mix of Hackers, Lock Specialists, and Muscle).
 
-- When the program starts, print out the number of current operatives in the roladex. Then prompt the user to enter the name of a new possible crew member. Once the user has entered a name, print out a list of possible specialties and have the user select which specialty this operative has. The list should contain the following options
+- When the program starts, print out the number of current operatives in the rolodex. Then prompt the user to enter the name of a new possible crew member. Once the user has entered a name, print out a list of possible specialties and have the user select which specialty this operative has. The list should contain the following options
   - Hacker (Disables alarms)
   - Muscle (Disarms guards)
   - Lock Specialist (cracks vault)

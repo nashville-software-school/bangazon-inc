@@ -41,7 +41,11 @@ CREATE TABLE Chore (
 CREATE TABLE RoommateChore (
     Id INTEGER NOT NULL PRIMARY KEY IDENTITY,
     RoommateId INTEGER NOT NULL,
+<<<<<<< HEAD
+    ChoreId INTEGER NOT NULL,
+=======
     ChoreID INTEGER NOT NULL,
+>>>>>>> master
 
     CONSTRAINT FK_RoommateChore_Roomate FOREIGN KEY(RoommateId) REFERENCES Roommate(Id),
     CONSTRAINT FK_RoommateChore_Chore FOREIGN KEY(ChoreId) REFERENCES Chore(Id)
@@ -68,5 +72,22 @@ VALUES
     ('Karen', 'Kidsthesedays', 50, '1981-07-01', 1);
 
 
+<<<<<<< HEAD
+INSERT INTO Chore ([Name])
+VALUES 
+    ('Taking out the trash'), 
+    ('Wash the dishes'), 
+    ('Water the plants'), 
+    ('Vacuum'), 
+    ('Change air filters')
+
+INSERT INTO RoommateChore 
+    (RoommateId, ChoreId)
+VALUES
+    (2, 2),
+    (3, 2),
+    (1, 4)
+=======
 -- TODO: Add some data for the Chore and RoommateChore tables
 
+>>>>>>> master
