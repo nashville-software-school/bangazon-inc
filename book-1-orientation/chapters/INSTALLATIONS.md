@@ -19,6 +19,17 @@
 
 [SQL Server Express](https://www.microsoft.com/en-us/sql-server/sql-server-downloads). This is the database tool where all your data will be stored for the server-side course. Click the Download button under the Express option. During the setup, take the basic installation option
 
+## Gitignore Shortcut
+
+You'll be making a lot of new projects and we want to easily be able to create a gitignore file before pushing to Github. Run the following code from a git bash window
+
+```sh
+echo "dnignore() {
+    curl -L -s 'https://raw.githubusercontent.com/github/gitignore/master/VisualStudio.gitignore' > .gitignore
+}" >> ~/.bashrc
+```
+
+You now have access in your terminal to a command called `dnignore` which will add a gitignore file to your project.
 
 
 ## Bookmark the Following Sites
