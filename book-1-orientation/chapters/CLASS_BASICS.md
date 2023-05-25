@@ -341,55 +341,11 @@ namespace Classes
 1. In the `Main` method of your console application, create a new instance of Company, and three instances of Employee. Then assign the employees to the company.
 
 
-## Practice: An Adventurer's Quest
+## CHALLENGE: An Adventurer's Quest
+
+This exercise is a challenge. It does not need to be completed to go onto the next chapter.
 
 Follow [this link](./QUEST.md) to begin your quest.
 
 <br/>
 <br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-
-[ø](https://github.com/nashville-software-school/bangazon-inc/wiki/ClassStrategy)
