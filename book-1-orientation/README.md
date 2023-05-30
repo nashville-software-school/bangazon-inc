@@ -26,19 +26,19 @@ This book builds a strong foundation in the syntax, data structures, and valuabl
 * Chapter 17 - [Exceptions and Try/Catch](./chapters/TRY_CATCH_INTRO.md)
 * Chapter 18 - [Exercise - Plan Your Heist](./chapters/PLAN_YOUR_HEIST.md)
 
-**Part 2: SQL**
+**Part 2: C# Class Relationships**
 
-* Chapter 19 - [SQL Server using Visual Studio](./chapters/SQL_SERVER_AND_VISUAL_STUDIO.md)
-* Chapter 20 - [Introduction to SQL](./chapters/SQL_INTRO.md)
-* Chapter 21 - [Exercise - Poems by Kids](./chapters/SQL_EXERCISE_POKI.md)
+* Chapter 19 - [Inheritance](./chapters/INHERITANCE_INTRO.md)
+* Chapter 20 - [Interfaces](./chapters/INTERFACES_INTRO.md)
+* Chapter 21 - [Object Relationship Vocabulary Terms](./chapters/RELATIONSHIPS.md)
+* Chapter 22 - [More about Classes](./chapters/CLASS_ADVANCED.md)
+* Chapter 23 - [Exercise - Heist Part II](./chapters/CLASSIC_HEIST.md)
 
-**Part 3: C# Class Relationships**
+**Part 3: SQL**
 
-* Chapter 22 - [Inheritance](./chapters/INHERITANCE_INTRO.md)
-* Chapter 23 - [Interfaces](./chapters/INTERFACES_INTRO.md)
-* Chapter 24 - [Object Relationship Vocabulary Terms](./chapters/RELATIONSHIPS.md)
-* Chapter 25 - [More about Classes](./chapters/CLASS_ADVANCED.md)
-* Chapter 26 - [Exercise - Heist Part II](./chapters/CLASSIC_HEIST.md)
+* Chapter 24 - [SQL Server using Visual Studio](./chapters/SQL_SERVER_AND_VISUAL_STUDIO.md)
+* Chapter 25 - [Introduction to SQL](./chapters/SQL_INTRO.md)
+* Chapter 26 - [Exercise - Poems by Kids](./chapters/SQL_EXERCISE_POKI.md)
 
 **Part 4: C# and SQL with ADO<span>.NET</span>**
 
