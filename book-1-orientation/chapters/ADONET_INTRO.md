@@ -20,7 +20,7 @@ Before you get started, let's introduce some terms that will be used during this
 
 - **Models** - Models are C# classes that represent our database tables. For example, we have a `Chore` table in our database with a `Id` and `Name` column. To model this, we'd make a C# class named `Chore` with an `Id` and `Name` property.
 - **Repository** - Repositories are classes that we create whose purpose is data access. We'll define lots of our CRUD functionality there. They often have methods like `Get`, `GetById`, `Add`, `Delete`, etc
-- **Connection String** - A connection string is an address of a database--similar to a URL. It specifies the source of the data as well as the means of connecting to it. For example, you're about to create a database inside of SQL Server called `Roommates`; the connection string for the `Roommates` database will be `server=localhost\SQLExpress;database=Roommates;integrated security=true`
+- **Connection String** - A connection string is an address of a database--similar to a URL. It specifies the source of the data as well as the means of connecting to it. For example, you're about to create a database inside of SQL Server called `Roommates`; the connection string for the `Roommates` database will be `server=localhost\SQLExpress;database=Roommates;integrated security=true; TrustServerCertificate=True;`
 - **ADO.NET** - ADO.NET is an umbrella term for all of the C# classes we'll be using (listed above) for accessing our SQL database from our C# console app. 
 
 
@@ -29,7 +29,7 @@ Before you get started, let's introduce some terms that will be used during this
 1. Use the [Roommates](./assets/roommates.sql) SQL script to create a `Roommates` database.
 1. Take a look at the ERD to familiarize yourself with the database.
 ![Roommates ERD](./assets/Roommates.png)
-1. In Visual Studio, create a new project. Make it a console application (using .NET 5 as the target framework) and call it `Roommates`. The following screen will ask you where you want to put this project. Select your `workspace` directory.
+1. In Visual Studio, create a new project. Make it a console application (using .NET 6 as the target framework, check 'Do not use top-level statements') and call it `Roommates`. The following screen will ask you where you want to put this project. Select your `workspace` directory.
 1. In your terminal, navigate to the directory where you created your project. The directory will have a `Roommates.sln` file in it.
 1. `cd` into your project directory. When you list what's in the directory, you should see your `Roommates.csproj` and `Program.cs`.
 1. Run the following commands. This imports the required package needed for using the ADO.NET classes.
@@ -110,7 +110,7 @@ Before you get started, let's introduce some terms that will be used during this
         {
             //  This is the address of the database.
             //  We define it here as a constant since it will never change.
-            private const string CONNECTION_STRING = @"server=localhost\SQLExpress;database=Roommates;integrated security=true";
+            private const string CONNECTION_STRING = @"server=localhost\SQLExpress;database=Roommates;integrated security=true; TrustServerCertificate=True;";
 
             static void Main(string[] args)
             {
@@ -477,13 +477,12 @@ The process of using ADO.NET is lengthy and verbose. You will undoubtedly be tem
 
 ## Create a Chore Repository
 
-<<<<<<< HEAD
 1. Create a new file in the Repositories folder called `ChoreRepository` and implement the same methods as we did with the `RoomRepository`. After implementing each method, update the `Main` method to add an option in the menu.
 
 1. Create a `RoommateRepository` and implement only the `GetById` method. It should take in a `int id` as a parameter and return a `Roommate` object. The trick: When you add a menu option for searching for a roommate by their Id, the output to the screen should output their first name, their rent portion, and _the name of the room they occupy_. Hint: You'll want to use a JOIN statement in your SQL query
 
 1. Add a method to `ChoreRepository` called `GetUnassignedChores`. It should not accept any parameters and should return a list of chores that don't have any roommates already assigned to them. After implementing this method, add an option to the menu so the user can see the list of unassigned chores.
-=======
+
 1. Implement the `RoommateRepository` class to include the following methods
     - `public List<Roommate> GetAll()` 
         - Roommate objects should have a null value for their Room property
@@ -500,7 +499,6 @@ The process of using ADO.NET is lengthy and verbose. You will undoubtedly be tem
 
 1. Change the program to provide the user with a menu to allow them to interact with the Roommates database
 1. Add Chores to the applications. Users should be able to perform full CRUD on Chores as well as assign and remove them from Roommates.
->>>>>>> master
 
 1. Add a `RoommateRepository` and define a `GetAll` method on it, but don't add a menu option to view all roommates yet. Next create a method in the `ChoreRepository` named `AssignChore`. It should accept 2 parameters--a roommateId and a choreId. Finally, add an option to the menu for "Assign chore to roommate". When the user selects that option, the program should first show a list of all chores and prompt the user to select the Id of the chore they want. Next the program should show a list of all roommates and prompt the user to select the Id of the roommate they want assigned to that chore. After the roommate has been assigned to the chore the program should print a message to the user to let them know the operation was successful.
 
