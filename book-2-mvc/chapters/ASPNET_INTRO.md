@@ -14,7 +14,7 @@ In this chapter you'll create a new MVC project to start the Nashville dog walki
 1. Click _Create_
 1. Add the Nuget package for `Microsoft.Data.SqlClient`
 
-Take a look around at the project files that come out of the box with a new ASP.NET MVC project. It already has folders for Models, Views, and Controllers. It has a `wwwroot` folder which contains some static assets like javascript and css files. It has a `Startup.cs` file where we can configure certain things about our web application if we choose.
+Take a look around at the project files that come out of the box with a new ASP.NET MVC project. It already has folders for Models, Views, and Controllers. It has a `wwwroot` folder which contains some static assets like javascript and css files. It has a `Program.cs` file where we can configure certain things about our web application if we choose.
 
 ## Database
 
@@ -195,10 +195,10 @@ namespace DogGo.Repositories
 }
 ```
 
-Update the `Startup.cs` file to let ASP.NET Core know about our new repository. Add the following line to the `ConfigureServices` method. And don't worry! We'll discuss why we do these steps soon enough
+Update the `Program.cs` file to let ASP.NET Core know about our new repository. Add the following line right after `builder.Services.AddControllersWithViews();`. And don't worry! We'll discuss why we do these steps soon enough
 
 ```csharp
-services.AddTransient<IWalkerRepository, WalkerRepository>();
+builder.Services.AddTransient<IWalkerRepository, WalkerRepository>();
 ```
 
 ## Controller
@@ -223,7 +223,7 @@ public WalkersController(IWalkerRepository walkerRepository)
 
 In the context of ASP<span>.NET</span>, each of the public methods in the controllers is considered an **Action**. When our application receives incoming HTTP requests, The ASP<span>.NET</span> framework is smart enough to know which controller Action to invoke.  
 
-How does it do this? Take a look at the bottom of the `Startup.cs` class
+How does it do this? Take a look at the bottom of the `Program.cs` class
 
 ```csharp
 endpoints.MapControllerRoute(
@@ -339,7 +339,7 @@ Run the application and go to `/walkers/details/1`. Then go to `/walkers/details
 ## Exercise
 
 1. Create an `OwnerRepository`, an `IOwnerRepository` and an `OwnersController` file and implement the `Index` and `Details` methods.
-1. Update the `Startup` class to tell ASP<span>.</span>NET about the `OwnerRepository`.
+1. Update the `Program` class to tell ASP<span>.</span>NET about the `OwnerRepository`.
 1. Go into the `Shared` folder in the `_Layout.cshtml` file. Add links for "Walkers" and "Owners" in the navbar. If you finish, try changing the views and the styling to your liking.
 1. Try getting the walkers pages to display the Neighborhood name instead of just the Neighborhood Id
 1. **Challenge**: When viewing the details page of an owner, list all the dogs for that owner as well.
