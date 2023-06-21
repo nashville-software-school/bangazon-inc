@@ -35,7 +35,7 @@ Open the `appsettings.json` file and add your connection string. The file should
   },
   "AllowedHosts": "*",
   "ConnectionStrings": {
-    "DefaultConnection": "Server=localhost\\SQLEXPRESS;Database=DogWalkerMVC;Trusted_Connection=True; integrated security=true; "
+    "DefaultConnection": "Server=localhost\\SQLEXPRESS;Database=DogWalkerMVC;Trusted_Connection=True; integrated security=true; TrustServerCertificate=True "
   }
 }
 ```
