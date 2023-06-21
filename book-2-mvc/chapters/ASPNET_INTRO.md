@@ -9,8 +9,8 @@ In this chapter you'll create a new MVC project to start the Nashville dog walki
 1. Click _Next_
 1. Specify project name of _DogGo_
 1. Click _Next_
-1. Select _.NET 5.0 (Current)_ as the Target Framework
-1. Check the box that says _Enable Razor runtime compilation_
+1. Select _.NET 6.0 (Long Term Support)_ as the Target Framework
+1. Check the box that says _Do not use top-level statements_
 1. Click _Create_
 1. Add the Nuget package for `Microsoft.Data.SqlClient`
 
@@ -35,7 +35,7 @@ Open the `appsettings.json` file and add your connection string. The file should
   },
   "AllowedHosts": "*",
   "ConnectionStrings": {
-    "DefaultConnection": "Server=localhost\\SQLEXPRESS;Database=DogWalkerMVC;Trusted_Connection=True;"
+    "DefaultConnection": "Server=localhost\\SQLEXPRESS;Database=DogWalkerMVC;Trusted_Connection=True; integrated security=true; "
   }
 }
 ```
