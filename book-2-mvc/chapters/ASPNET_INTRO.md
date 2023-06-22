@@ -344,7 +344,7 @@ Run the application and go to `/walkers/details/1`. Then go to `/walkers/details
 
 ## Exercise
 
-1. Create an `OwnerRepository`, an `IOwnerRepository` and an `OwnersController` file and implement the `Index` and `Details` methods.
+1. Create an `Owner` model, an `OwnerRepository`, an `IOwnerRepository` and an `OwnersController` file and implement the `Index` and `Details` methods.
 1. Update the `Program` class to tell ASP<span>.</span>NET about the `OwnerRepository`.
 1. Go into the `Shared` folder in the `_Layout.cshtml` file. Add links for "Walkers" and "Owners" in the navbar. If you finish, try changing the views and the styling to your liking.
 1. Try getting the walkers pages to display the Neighborhood name instead of just the Neighborhood Id
