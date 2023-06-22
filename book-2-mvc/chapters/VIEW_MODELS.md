@@ -426,7 +426,7 @@ namespace DogGo.Repositories
 }
 ```
 
-Just like before we have to create the `INeighborhoodRepository` and register it with the `Startup.cs` class
+Just like before we have to create the `INeighborhoodRepository` and register it with the `Program.cs` class
 
 > INeighborhoodRepository
 
@@ -443,10 +443,10 @@ namespace DogGo.Repositories
 }
 ```
 
-> Startup.cs
+> Program.cs
 
 ```csharp
-services.AddTransient<INeighborhoodRepository, NeighborhoodRepository>();
+builder.Services.AddTransient<INeighborhoodRepository, NeighborhoodRepository>();
 ```
 
 Now add a `NeighborhoodRepository`  to the fields and the constructor inside `OwnersController` like before
