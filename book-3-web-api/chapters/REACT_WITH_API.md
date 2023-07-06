@@ -42,39 +42,57 @@ In development, our React app will be running on port 3000 and our API will be r
 
 ## Adding Post Provider
 
-Make two directories under the `src` folder: `components` and `providers`. In the prodivers directory create a file called `PostProvider.js` and give it the following code
+Make two directories under the `src` folder: `components` and `APIManagers`. In the prodivers directory create a file called `PostManager.js` and give it the following code
 
 ```js
-import React, { useState } from "react";
+import React from "react";
 
-export const PostContext = React.createContext();
+const baseUrl = '/api/post';
 
-export const PostProvider = (props) => {
-  const [posts, setPosts] = useState([]);
+export const getAllPosts = () => {
+  return fetch(baseUrl) 
+    .then((res) => res.json())
+};
 
-  const getAllPosts = () => {
-    return fetch("/api/post")
-      .then((res) => res.json())
-      .then(setPosts);
-  };
-
-  const addPost = (post) => {
-    return fetch("/api/post", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(post),
-    });
-  };
-
-  return (
-    <PostContext.Provider value={{ posts, getAllPosts, addPost }}>
-      {props.children}
-    </PostContext.Provider>
-  );
+export const addPost = (singlePost) => { 
+  return fetch(baseUrl, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(singlePost),
+  });
 };
 ```
+<!--  import React, { useState } from "react";
+
+ export const PostContext = React.createContext();
+
+ export const PostProvider = (props) => {
+   const [posts, setPosts] = useState([]);
+
+   const getAllPosts = () => {
+     return fetch("/api/post")
+       .then((res) => res.json())
+       .then(setPosts);
+   };
+
+   const addPost = (post) => {
+     return fetch("/api/post", {
+       method: "POST",
+       headers: {
+         "Content-Type": "application/json",
+       },
+       body: JSON.stringify(post),
+     });
+   };
+
+   return (
+     <PostContext.Provider value={{ posts, getAllPosts, addPost }}>
+       {props.children}
+     </PostContext.Provider>
+   );
+ }; -->
 
 This providers the state value of the posts array, as well as methods to fetch all posts and add a new post. Note that the urls we are making requests to are relative urls--they don't have anything like `https://localhost:5001/api/posts`. This is a benefit of adding the `proxy` attribute in our package.json file.
 
@@ -83,7 +101,41 @@ This providers the state value of the posts array, as well as methods to fetch a
 Inside the components directory, create a file called `PostList.js` and add the following code
 
 ```js
-import React, { useContext, useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import Post from './Post';
+import { getAllPosts } from "../APIManagers/PostManager";
+
+const PostList = () => {
+  const [posts, setPosts] = useState([]);
+
+  const getPosts = () => {
+    getAllPosts().then(allPosts => setPosts(allPosts)); 
+  };
+
+  useEffect(() => {
+    getPosts();
+  }, []); 
+
+
+
+  return (  
+    <div>
+      {posts.map((post) => (
+        <div key={post.id}>
+          <img src={post.imageUrl} alt={post.title} />
+          <p>
+            <strong>{post.title}</strong>
+          </p>
+          <p>{post.caption}</p>
+        </div>
+      ))}
+    </div>
+  );
+};
+
+export default PostList;
+```
+<!-- import React, { useContext, useEffect } from "react";
 import { PostContext } from "../providers/PostProvider";
 
 const PostList = () => {
@@ -108,8 +160,7 @@ const PostList = () => {
   );
 };
 
-export default PostList;
-```
+export default PostList; -->
 
 Nothing too fancy here. When the component loads, it will call the `getAllPosts` method it recieves from the provider and render a list of posts.
 
@@ -120,15 +171,12 @@ We have our nice provider and component so lets use them. Replace App.js with th
 ```js
 import React from "react";
 import "./App.css";
-import { PostProvider } from "./providers/PostProvider";
 import PostList from "./components/PostList";
 
 function App() {
   return (
     <div className="App">
-      <PostProvider>
         <PostList />
-      </PostProvider>
     </div>
   );
 }
@@ -159,23 +207,25 @@ Our posts might get a little more complex so it's probably a good idea to separa
 ```js
 import React from "react";
 import { Card, CardImg, CardBody } from "reactstrap";
+import { Link } from "react-router-dom";
 
-const Post = ({ post }) => {
+
+export const Post = ({ post }) => {
   return (
     <Card className="m-4">
       <p className="text-left px-2">Posted by: {post.userProfile.name}</p>
       <CardImg top src={post.imageUrl} alt={post.title} />
       <CardBody>
         <p>
+          <Link to={`/posts/${post.id}`}>
           <strong>{post.title}</strong>
+          </Link>
         </p>
         <p>{post.caption}</p>
       </CardBody>
     </Card>
   );
 };
-
-export default Post;
 ```
 
 Again, nothing fancy here; we're just using the Card component that comes with reactstrap to organize some of the post details.
@@ -184,16 +234,19 @@ Now lets update the `PostList` component to use the new `Post` component
 
 ```js
 import React, { useContext, useEffect } from "react";
-import { PostContext } from "../providers/PostProvider";
-import Post from "./Post";
+import { getAllPosts } from "../ApiManagers/PostManager";
+import { Post } from "./Post";
 
 const PostList = () => {
-  const { posts, getAllPosts } = useContext(PostContext);
+  const [posts, setPosts] = useState([]);
+
+  const getPosts = () => {
+    getAllPosts().then(allPosts => setPosts(allPosts)); 
+  };
 
   useEffect(() => {
-    getAllPosts();
-  }, []);
-
+    getPosts();
+  }, []); 
   return (
     <div className="container">
       <div className="row justify-content-center">
