@@ -83,16 +83,6 @@ v12.16.3
 ```
 
 ```sh
-$ serve -v
-11.3.2
-```
-
-```sh
-$ json-server -v
-0.16.3
-```
-
-```sh
 $ dotnet --version
 6.0.411
 ```
