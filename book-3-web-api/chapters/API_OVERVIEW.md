@@ -20,15 +20,13 @@ An API, in contrast, is a software interface that _other software uses to intera
 
 > **NOTE:** An example of a "non-web" API is ADO<span>.NET</span>. ADO<span>.NET</span> gives us an API for interacting with a database from our C# code.
 
-## `json-server`
+## `Firebase`
 
-In the client side course, you learned how to create a JSON based Web API using `json-server`.
+In the client side course, you learned how to create a JSON based Web API using `Firebase`.
 
-Let's consider `json-server` for a moment. It's a pretty impressive application, isn't it? It reads a JSON file and dynamically generates Web API _endpoints_ for the resources in that file. All we have to do to use it is create a JSON file and run `json-server` from the command line. The code in the `json-server` application handles responding to `GET`, `POST`, `PUT`, `PATCH` and `DELETE` requests and performing the appropriate CRUD operations in the JSON file.
+As useful as `Firebase` was for us on the Front end, it has limitations.
 
-As impressive as `json-server` is, however, it has limitations. Firstly, it does not allow us to store our data in a real database. Storing data in a JSON file is great if your app is only going to be used by one person at a time and doesn't have a lot of data, but once you want to put a web application in production to be used by several people and with real-world data, you need a real database like SQL Server.
-
-Secondly, `json-server` will only perform simple CRUD operations to our data. We cannot add _logic_ to the `json-server` API. For example, imagine we'd like to verify that a Dog is not already in the database before we save it. `json-server` will not help us. We will be forced to download the entire list of Dogs and search through it in our JavaScript code. This is, at best, inefficient and, at worst, a security concern since we are potentially downloading sensitive data to the user's browser.
+Firstly, `Firebase` will only perform simple CRUD operations to our data. We cannot add _logic_ to the `Firebase` API. For example, imagine we'd like to verify that a Dog is not already in the database before we save it. `Firebase` will not help us. We will be forced to download the entire list of Dogs and search through it in our JavaScript code. This is, at best, inefficient and, at worst, a security concern since we are potentially downloading sensitive data to the user's browser.
 
 ## ASP<span>.NET</span> Core Web API
 
