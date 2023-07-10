@@ -26,7 +26,7 @@ In the client side course, you learned how to create a JSON based Web API using 
 
 As useful as `Firebase` was for us on the Front end, it has limitations.
 
-Firstly, `Firebase` will only perform simple CRUD operations to our data. We cannot add _logic_ to the `Firebase` API. For example, imagine we'd like to verify that a Dog is not already in the database before we save it. `Firebase` will not help us. We will be forced to download the entire list of Dogs and search through it in our JavaScript code. This is, at best, inefficient and, at worst, a security concern since we are potentially downloading sensitive data to the user's browser.
+`Firebase` will only perform simple CRUD operations to our data. We cannot add _logic_ to the `Firebase` API. For example, imagine we'd like to verify that a Dog is not already in the database before we save it. `Firebase` will not help us. We will be forced to download the entire list of Dogs and search through it in our JavaScript code. This is, at best, inefficient and, at worst, a security concern since we are potentially downloading sensitive data to the user's browser.
 
 ## ASP<span>.NET</span> Core Web API
 
