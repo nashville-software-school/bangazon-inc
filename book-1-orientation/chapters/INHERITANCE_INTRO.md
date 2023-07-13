@@ -17,21 +17,22 @@ You work for a company that sells all kinds of motorized vehicles - Gary's Whole
 
 We will represent _types_ of vehicles using C# classes.
 
+Create a new console project in your csharp directory called `GarysGarage`.
+
 > `Zero.cs`
 
 ```cs
-namespace Garage
-{
-    public class Zero  // Electric motorcycle
-    {
-        public double BatteryKWh { get; set; }
-        public string MainColor { get; set; }
-        public int MaximumOccupancy { get; set; }
+namespace Garage;
 
-        public void ChargeBattery()
-        {
-            // method definition omitted
-        }
+public class Zero  // Electric motorcycle
+{
+    public double BatteryKWh { get; set; }
+    public string MainColor { get; set; }
+    public int MaximumOccupancy { get; set; }
+
+    public void ChargeBattery()
+    {
+        // method definition omitted
     }
 }
 ```
@@ -39,18 +40,17 @@ namespace Garage
 > `Cessna.cs`
 
 ```cs
-namespace Garage
-{
-    public class Cessna  // Propellor light aircraft
-    {
-        public double FuelCapacity { get; set; }
-        public string MainColor { get; set; }
-        public int MaximumOccupancy { get; set; }
+namespace Garage;
 
-        public void RefuelTank()
-        {
-            // method definition omitted
-        }
+public class Cessna  // Propellor light aircraft
+{
+    public double FuelCapacity { get; set; }
+    public string MainColor { get; set; }
+    public int MaximumOccupancy { get; set; }
+
+    public void RefuelTank()
+    {
+        // method definition omitted
     }
 }
 ```
@@ -58,18 +58,17 @@ namespace Garage
 > `Tesla.cs`
 
 ```cs
-namespace Garage
-{
-    public class Tesla  // Electric car
-    {
-        public double BatteryKWh { get; set; }
-        public string MainColor { get; set; }
-        public int MaximumOccupancy { get; set; }
+namespace Garage;
 
-        public void ChargeBattery()
-        {
-            // method definition omitted
-        }
+public class Tesla  // Electric car
+{
+    public double BatteryKWh { get; set; }
+    public string MainColor { get; set; }
+    public int MaximumOccupancy { get; set; }
+
+    public void ChargeBattery()
+    {
+        // method definition omitted
     }
 }
 ```
@@ -77,18 +76,17 @@ namespace Garage
 > `Ram.cs`
 
 ```cs
-namespace Garage
-{
-    public class Ram  // Gas powered truck
-    {
-        public double FuelCapacity { get; set; }
-        public string MainColor { get; set; }
-        public int MaximumOccupancy { get; set; }
+namespace Garage;
 
-        public void RefuelTank()
-        {
-            // method definition omitted
-        }
+public class Ram  // Gas powered truck
+{
+    public double FuelCapacity { get; set; }
+    public string MainColor { get; set; }
+    public int MaximumOccupancy { get; set; }
+
+    public void RefuelTank()
+    {
+        // method definition omitted
     }
 }
 ```
@@ -110,13 +108,12 @@ Since all of the types are vehicles, a good name for this new type would be `Veh
 > `Vehicle.cs`
 
 ```cs
-namespace Garage
+namespace Garage;
+
+public class Vehicle
 {
-    public class Vehicle
-    {
-        public string MainColor { get; set; }
-        public int MaximumOccupancy { get; set; }
-    }
+    public string MainColor { get; set; }
+    public int MaximumOccupancy { get; set; }
 }
 ```
 
@@ -127,23 +124,21 @@ When two classes are involved in an inheritance relationship, we call the more g
 > `Tesla.cs`
 
 ```cs
-namespace Garage
-{
-    public class Tesla : Vehicle
-    {
-        public double BatteryKWh { get; set; }
+namespace Garage;
 
-        public void ChargeBattery()
-        {
-            // method definition omitted
-        }
+public class Tesla : Vehicle
+{
+    public double BatteryKWh { get; set; }
+
+    public void ChargeBattery()
+    {
+        // method definition omitted
     }
 }
 ```
 
 Now any instance of `Tesla` will have both of those properties on it automatically.
 
-![example of inherited properties](./images/inheritance-example.gif)
 
 ## Overriding Parent Behavior
 
@@ -154,17 +149,16 @@ You can safely assume that each vehicle can be driven. What you would then do is
 > `Vehicle.cs`
 
 ```cs
-namespace Garage
-{
-    public class Vehicle
-    {
-        public string MainColor { get; set; }
-        public int MaximumOccupancy { get; set; }
+namespace Garage;
 
-        public void Drive()
-        {
-            Console.WriteLine("Vrooom!");
-        }
+public class Vehicle
+{
+    public string MainColor { get; set; }
+    public int MaximumOccupancy { get; set; }
+
+    public void Drive()
+    {
+        Console.WriteLine("Vrooom!");
     }
 }
 ```
@@ -174,22 +168,15 @@ Once you do this, all of the specific vehicles can be driven. For now, however, 
 > `Program.cs`
 
 ```cs
-namespace Garage
-{
-    class Program
-    {
-        static void Main(string[] args) 
-        {
-            Zero fxs = new Zero();
-            Tesla modelS = new Tesla();
-            Cessna mx410 = new Cessna();
+using Garage;
+            
+Zero fxs = new Zero();
+Tesla modelS = new Tesla();
+Cessna mx410 = new Cessna();
 
-            fxs.Drive();
-            modelS.Drive();
-            mx410.Drive();
-        }
-    }
-}
+fxs.Drive();
+modelS.Drive();
+mx410.Drive();
 ```
 
 ![all vehicles make the same sound](./images/non-overridden-method.gif)
@@ -199,17 +186,16 @@ To have each vehicle make its own sound, you need to do two things.
 1. Define the `Drive()` method as virtual.
 
     ```cs
-    namespace Garage
-    {
-        public class Vehicle
-        {
-            public string MainColor { get; set; }
-            public int MaximumOccupancy { get; set; }
+    namespace Garage;
 
-            public virtual void Drive()
-            {
-                Console.WriteLine("Vrooom!");
-            }
+    public class Vehicle
+    {
+        public string MainColor { get; set; }
+        public int MaximumOccupancy { get; set; }
+
+        public virtual void Drive()
+        {
+            Console.WriteLine("Vrooom!");
         }
     }
     ```
@@ -217,21 +203,20 @@ To have each vehicle make its own sound, you need to do two things.
 1. Override the method in the child class.
 
     ```cs
-    namespace Garage
+    namespace Garage;
+
+    public class Cessna : Vehicle
     {
-        public class Cessna : Vehicle
+        public double FuelCapacity { get; set; }
+
+        public void RefuelTank()
         {
-            public double FuelCapacity { get; set; }
+            // method definition omitted
+        }
 
-            public void RefuelTank()
-            {
-                // method definition omitted
-            }
-
-            public override void Drive()
-            {
-                Console.WriteLine("Zoooooom!");
-            }
+        public override void Drive()
+        {
+            Console.WriteLine("Zoooooom!");
         }
     }
     ```
