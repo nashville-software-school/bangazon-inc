@@ -18,146 +18,131 @@ In this phase we'll get going with some starter code. We'll add to this initial 
 
     > `Program.cs`
 
-    ```cs
-    using System;
-    using System.Collections.Generic;
+    ```csharp
+    using Quest;
 
-    // Every class in the program is defined within the "Quest" namespace
-    // Classes within the same namespace refer to one another without a "using" statement
-    namespace Quest
-    {
-        class Program
-        {
-            static void Main(string[] args)
-            {
-                // Create a few challenges for our Adventurer's quest
-                // The "Challenge" Constructor takes three arguments
-                //   the text of the challenge
-                //   a correct answer
-                //   a number of awesome points to gain or lose depending on the success of the challenge
-                Challenge twoPlusTwo = new Challenge("2 + 2?", 4, 10);
-                Challenge theAnswer = new Challenge(
-                    "What's the answer to life, the universe and everything?", 42, 25);
-                Challenge whatSecond = new Challenge(
-                    "What is the current second?", DateTime.Now.Second, 50);
+    // Create a few challenges for our Adventurer's quest
+    // The "Challenge" Constructor takes three arguments
+    //   the text of the challenge
+    //   a correct answer
+    //   a number of awesome points to gain or lose depending on the success of the challenge
+    Challenge twoPlusTwo = new Challenge("2 + 2?", 4, 10);
+    Challenge theAnswer = new Challenge(
+        "What's the answer to life, the universe and everything?", 42, 25);
+    Challenge whatSecond = new Challenge(
+        "What is the current second?", DateTime.Now.Second, 50);
 
-                int randomNumber = new Random().Next() % 10;
-                Challenge guessRandom = new Challenge("What number am I thinking of?", randomNumber, 25);
+    int randomNumber = new Random().Next() % 10;
+    Challenge guessRandom = new Challenge("What number am I thinking of?", randomNumber, 25);
 
-                Challenge favoriteBeatle = new Challenge(
-                    @"Who's your favorite Beatle?
-        1) John
-        2) Paul
-        3) George
-        4) Ringo
+    Challenge favoriteBeatle = new Challenge(
+        @"Who's your favorite Beatle?
+    1) John
+    2) Paul
+    3) George
+    4) Ringo
     ",
-                    4, 20
-                );
+        4, 20
+    );
 
-                // "Awesomeness" is like our Adventurer's current "score"
-                // A higher Awesomeness is better
+    // "Awesomeness" is like our Adventurer's current "score"
+    // A higher Awesomeness is better
 
-                // Here we set some reasonable min and max values.
-                //  If an Adventurer has an Awesomeness greater than the max, they are truly awesome
-                //  If an Adventurer has an Awesomeness less than the min, they are terrible
-                int minAwesomeness = 0;
-                int maxAwesomeness = 100;
+    // Here we set some reasonable min and max values.
+    //  If an Adventurer has an Awesomeness greater than the max, they are truly awesome
+    //  If an Adventurer has an Awesomeness less than the min, they are terrible
+    int minAwesomeness = 0;
+    int maxAwesomeness = 100;
 
-                // Make a new "Adventurer" object using the "Adventurer" class
-                Adventurer theAdventurer = new Adventurer("Jack");
+    // Make a new "Adventurer" object using the "Adventurer" class
+    Adventurer theAdventurer = new Adventurer("Jack");
 
-                // A list of challenges for the Adventurer to complete
-                // Note we can use the List class here because have the line "using System.Collections.Generic;" at the top of the file.
-                List<Challenge> challenges = new List<Challenge>()
-                {
-                    twoPlusTwo,
-                    theAnswer,
-                    whatSecond,
-                    guessRandom,
-                    favoriteBeatle
-                };
+    // A list of challenges for the Adventurer to complete
+    // Note we can use the List class here because have the line "using System.Collections.Generic;" at the top of the file.
+    List<Challenge> challenges = new List<Challenge>()
+    {
+        twoPlusTwo,
+        theAnswer,
+        whatSecond,
+        guessRandom,
+        favoriteBeatle
+    };
 
-                // Loop through all the challenges and subject the Adventurer to them
-                foreach (Challenge challenge in challenges)
-                {
-                    challenge.RunChallenge(theAdventurer);
-                }
-
-                // This code examines how Awesome the Adventurer is after completing the challenges
-                // And praises or humiliates them accordingly
-                if (theAdventurer.Awesomeness >= maxAwesomeness)
-                {
-                    Console.WriteLine("YOU DID IT! You are truly awesome!");
-                }
-                else if (theAdventurer.Awesomeness <= minAwesomeness)
-                {
-                    Console.WriteLine("Get out of my sight. Your lack of awesomeness offends me!");
-                }
-                else
-                {
-                    Console.WriteLine("I guess you did...ok? ...sorta. Still, you should get out of my sight.");
-                }
-            }
-        }
+    // Loop through all the challenges and subject the Adventurer to them
+    foreach (Challenge challenge in challenges)
+    {
+        challenge.RunChallenge(theAdventurer);
     }
+
+    // This code examines how Awesome the Adventurer is after completing the challenges
+    // And praises or humiliates them accordingly
+    if (theAdventurer.Awesomeness >= maxAwesomeness)
+    {
+        Console.WriteLine("YOU DID IT! You are truly awesome!");
+    }
+    else if (theAdventurer.Awesomeness <= minAwesomeness)
+    {
+        Console.WriteLine("Get out of my sight. Your lack of awesomeness offends me!");
+    }
+    else
+    {
+        Console.WriteLine("I guess you did...ok? ...sorta. Still, you should get out of my sight.");
+    }
+
     ```
 
     > `Challenge.cs`
 
     ```cs
-    using System;
-
-    namespace Quest
+    namespace Quest;
+    // An instance of the Challenge class is an occurrence of a single challenge
+    public class Challenge
     {
-        // An instance of the Challenge class is an occurrence of a single challenge
-        public class Challenge
+        // These private fields hold the "state" of an individual challenge object.
+        // The values stored in these fields are not accessible outside the class,
+        //  but can be used by methods or properties within the class
+        private string _text;
+        private int _correctAnswer;
+        private int _awesomenessChange;
+
+
+        // A constructor for the Challenge
+        // We can tell it's a constructor because it has the same name as the class 
+        //   and it doesn't specify a return type
+        // Note the constructor parameters and what is done with them
+        public Challenge(string text, int correctAnswer, int awesomenessChange)
         {
-            // These private fields hold the "state" of an individual challenge object.
-            // The values stored in these fields are not accessible outside the class,
-            //  but can be used by methods or properties within the class
-            private string _text;
-            private int _correctAnswer;
-            private int _awesomenessChange;
+            _text = text;
+            _correctAnswer = correctAnswer;
+            _awesomenessChange = awesomenessChange;
+        }
 
+        // This method will take an Adventurer object and make that Adventurer perform the challenge
+        public void RunChallenge(Adventurer adventurer)
+        {
+            Console.Write($"{_text}: ");
+            string answer = Console.ReadLine();
 
-            // A constructor for the Challenge
-            // We can tell it's a constructor because it has the same name as the class 
-            //   and it doesn't specify a return type
-            // Note the constructor parameters and what is done with them
-            public Challenge(string text, int correctAnswer, int awesomenessChange)
+            int numAnswer;
+            bool isNumber = int.TryParse(answer, out numAnswer);
+
+            Console.WriteLine();
+            if (isNumber && numAnswer == _correctAnswer)
             {
-                _text = text;
-                _correctAnswer = correctAnswer;
-                _awesomenessChange = awesomenessChange;
+                Console.WriteLine("Well Done!");
+
+                // Note how we access an Adventurer object's property
+                adventurer.Awesomeness += _awesomenessChange;
+            }
+            else
+            {
+                Console.WriteLine("You have failed the challenge, there will be consequences.");
+                adventurer.Awesomeness -= _awesomenessChange;
             }
 
-            // This method will take an Adventurer object and make that Adventurer perform the challenge
-            public void RunChallenge(Adventurer adventurer)
-            {
-                Console.Write($"{_text}: ");
-                string answer = Console.ReadLine();
-
-                int numAnswer;
-                bool isNumber = int.TryParse(answer, out numAnswer);
-
-                Console.WriteLine();
-                if (isNumber && numAnswer == _correctAnswer)
-                {
-                    Console.WriteLine("Well Done!");
-
-                    // Note how we access an Adventurer object's property
-                    adventurer.Awesomeness += _awesomenessChange;
-                }
-                else
-                {
-                    Console.WriteLine("You have failed the challenge, there will be consequences.");
-                    adventurer.Awesomeness -= _awesomenessChange;
-                }
-
-                // Note how we call an Adventurer object's method
-                Console.WriteLine(adventurer.GetAdventurerStatus());
-                Console.WriteLine();
-            }
+            // Note how we call an Adventurer object's method
+            Console.WriteLine(adventurer.GetAdventurerStatus());
+            Console.WriteLine();
         }
     }
     ```
@@ -165,53 +150,51 @@ In this phase we'll get going with some starter code. We'll add to this initial 
     > `Adventurer.cs`
 
     ```cs
-    namespace Quest
+    namespace Quest;
+    // An instance of the Adventurer class is an object that will undergo some challenges
+    public class Adventurer
     {
-        // An instance of the Adventurer class is an object that will undergo some challenges
-        public class Adventurer
+        // This is an "immutable" property. It only has a "get".
+        // The only place the Name can be set is in the Adventurer constructor
+        // Note: the constructor is defined below.
+        public string Name { get; }
+
+        // This is a mutable property it has a "get" and a "set"
+        //  So it can be read and changed by any code in the application
+        public int Awesomeness { get; set; }
+
+        // A constructor to make a new Adventurer object with a given name
+        public Adventurer(string name)
         {
-            // This is an "immutable" property. It only has a "get".
-            // The only place the Name can be set is in the Adventurer constructor
-            // Note: the constructor is defined below.
-            public string Name { get; }
+            Name = name;
+            Awesomeness = 50;
+        }
 
-            // This is a mutable property it has a "get" and a "set"
-            //  So it can be read and changed by any code in the application
-            public int Awesomeness { get; set; }
 
-            // A constructor to make a new Adventurer object with a given name
-            public Adventurer(string name)
+        // This method returns a string that describes the Adventurer's status
+        // Note one way to describe what this method does is:
+        //   it transforms the Awesomeness integer into a status string
+        public string GetAdventurerStatus()
+        {
+            string status = "okay";
+            if (Awesomeness >= 75)
             {
-                Name = name;
-                Awesomeness = 50;
+                status = "great";
+            }
+            else if (Awesomeness < 25 && Awesomeness >= 10)
+            {
+                status = "not so good";
+            }
+            else if (Awesomeness < 10 && Awesomeness > 0)
+            {
+                status = "barely hanging on";
+            }
+            else if (Awesomeness <= 0)
+            {
+                status = "not gonna make it";
             }
 
-
-            // This method returns a string that describes the Adventurer's status
-            // Note one way to describe what this method does is:
-            //   it transforms the Awesomeness integer into a status string
-            public string GetAdventurerStatus()
-            {
-                string status = "okay";
-                if (Awesomeness >= 75)
-                {
-                    status = "great";
-                }
-                else if (Awesomeness < 25 && Awesomeness >= 10)
-                {
-                    status = "not so good";
-                }
-                else if (Awesomeness < 10 && Awesomeness > 0)
-                {
-                    status = "barely hanging on";
-                }
-                else if (Awesomeness <= 0)
-                {
-                    status = "not gonna make it";
-                }
-
-                return $"Adventurer, {Name}, is {status}";
-            }
+            return $"Adventurer, {Name}, is {status}";
         }
     }
     ```
