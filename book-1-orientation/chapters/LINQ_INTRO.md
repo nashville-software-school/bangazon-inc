@@ -1,8 +1,7 @@
 # Dealing with Data
 
-As you know a major aspect of software development is the searching, filtering and transformation of data. We often use the umbrella term, _query_, to encompass this broad concept. In C# applications it's common to invoke SQL to query data directly in the database, but it's sometimes the case that our data isn't in a database. For example, we may retrieve data from a web API or from a text file. How do we handle these situations?
+As you know a major aspect of software development is the searching, filtering and transformation of data. We often use the umbrella term, _query_, to encompass this broad concept. In C# applications it's common to invoke SQL to query data directly in the database, but we can also use Linq to create SQL queries with Entity Framework Core.
 
-> **NOTE:** We haven't, yet, discussed mixing SQL into our C# applications. We'll do that soon, but for now just know that it's possible. This chapter will discuss tools for handling data when SQL is not an option.
 
 ## Collections of Objects
 
