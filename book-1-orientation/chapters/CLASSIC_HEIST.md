@@ -1,4 +1,7 @@
 # Heist Part II
+In this explorer chapter, you will rewrite the Plan Your Heist program using classes and interfaces. You do _not_ need to start with the code from the previous exercise. This program will be a new console application, which you should know how to create. 
+
+## Setup and Requirements
 
 - Knocking over banks isn't going to be easy. Alarms... Vaults... Security Guards.... Each of these safeguards is something we'll have to handle for a successful heist. First things first. Let's create a `Bank` class to represent the security we're up against. Give the `Bank` class the following properties:
   - An integer property for `CashOnHand`
@@ -20,7 +23,7 @@
 
 Before we start trying to assemble the perfect crew, we need to know who our options are. Let's build out a rolodex of possible recruits first. We'll pick the team and plan out the actual operation later.
 
-- In the `Main` method, create a `List<IRobber>` and store it in a variable named `rolodex`. This list will contain all possible operatives that we could employ for future heists. We want to give the user the opportunity to add new operatives to this list, but for now let's pre-populate the list with 5 or 6 robbers (give it a mix of Hackers, Lock Specialists, and Muscle).
+- In `Program.cs` create a `List<IRobber>` and store it in a variable named `rolodex`. This list will contain all possible operatives that we could employ for future heists. We want to give the user the opportunity to add new operatives to this list, but for now let's pre-populate the list with 5 or 6 robbers (give it a mix of Hackers, Lock Specialists, and Muscle).
 
 - When the program starts, print out the number of current operatives in the rolodex. Then prompt the user to enter the name of a new possible crew member. Once the user has entered a name, print out a list of possible specialties and have the user select which specialty this operative has. The list should contain the following options
   - Hacker (Disables alarms)
