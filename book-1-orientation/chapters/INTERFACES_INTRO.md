@@ -238,7 +238,7 @@ List<IFlying> birds = new List<IFlying>() { p, s };
 
 ## Practice: More Gary's Wholesale Garage
 
-> this exercise will build on the C# project you build in the previous chapter.
+> this exercise will build on the C# project you build in the previous book.
 
 Here are some types of vehicles from **Gary's Wholesale Garage**.
 
@@ -319,69 +319,61 @@ public class Ram : Vehicle // Gas powered truck
 }
 ```
 
-Your challenge is to replace your `Main` method with the following code and make the appropriate changes and additions to your project in order to make this `Main` method work.
+Your challenge is to replace your `Program.cs` with the following code and make the appropriate changes and additions to your project in order to make this program work.
 
 > **HINT:** An example addition to your code might be an `IElectricVehicle` interface.
 
 ```cs
-namespace Garage
+using Garage;
+Zero fxs = new Zero();
+Zero fx = new Zero();
+Tesla modelS = new Tesla();
+
+List<???> electricVehicles = new List<???>() {
+    fx, fxs, modelS
+};
+
+Console.WriteLine("Electric Vehicles");
+foreach(??? ev in electricVehicles)
 {
-    class Program
-    {
-        static void Main (string[] args)
-        {
-            Zero fxs = new Zero();
-            Zero fx = new Zero();
-            Tesla modelS = new Tesla();
+    Console.WriteLine($"{ev.CurrentChargePercentage}");
+}
 
-            List<???> electricVehicles = new List<???>() {
-                fx, fxs, modelS
-            };
+foreach(??? ev in electricVehicles)
+{
+    // This should charge the vehicle to 100%
+    ev.ChargeBattery();
+}
 
-            Console.WriteLine("Electric Vehicles");
-            foreach(??? ev in electricVehicles)
-            {
-                Console.WriteLine($"{ev.CurrentChargePercentage}");
-            }
+foreach(??? ev in electricVehicles)
+{
+    Console.WriteLine($"{ev.CurrentChargePercentage}");
+}
 
-            foreach(??? ev in electricVehicles)
-            {
-                // This should charge the vehicle to 100%
-                ev.ChargeBattery();
-            }
+/***********************************************/
 
-            foreach(??? ev in electricVehicles)
-            {
-                Console.WriteLine($"{ev.CurrentChargePercentage}");
-            }
+Ram ram = new Ram ();
+Cessna cessna150 = new Cessna ();
 
-            /***********************************************/
+List<???> gasVehicles = new List<???>() {
+    ram, cessna150
+};
 
-            Ram ram = new Ram ();
-            Cessna cessna150 = new Cessna ();
+Console.WriteLine("Gas Vehicles");
+foreach(??? gv in gasVehicles)
+{
+    Console.WriteLine($"{gv.CurrentTankPercentage}");
+}
 
-            List<???> gasVehicles = new List<???>() {
-                ram, cessna150
-            };
+foreach(??? gv in gasVehicles)
+{
+    // This should completely refuel the gas tank
+    gv.RefuelTank();
+}
 
-            Console.WriteLine("Gas Vehicles");
-            foreach(??? gv in gasVehicles)
-            {
-                Console.WriteLine($"{gv.CurrentTankPercentage}");
-            }
-
-            foreach(??? gv in gasVehicles)
-            {
-                // This should completely refuel the gas tank
-                gv.RefuelTank();
-            }
-
-            foreach(??? gv in gasVehicles)
-            {
-                Console.WriteLine($"{gv.CurrentTankPercentage}");
-            }
-        }
-    }
+foreach(??? gv in gasVehicles)
+{
+    Console.WriteLine($"{gv.CurrentTankPercentage}");
 }
 ```
 
