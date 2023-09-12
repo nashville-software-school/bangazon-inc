@@ -2,6 +2,8 @@
 
 You've already experienced making http requests from your browser via `fetch`. While building web applications, we often want to make those requests from our server side code. .NET provides us with the `HttpClient` class that allows us to do that.
 
+Create a new console application called `DadJokes`. 
+
 We'll first need to install an additional package to make this work. Run the following command in your project (NOTE: This is required only if you are in a Console application. If you are in an ASP.NET project, this is not necessary):
 
 ```sh
@@ -18,7 +20,7 @@ In a full stack web application, we know we can make requests to 3rd party APIs 
 - Cache data on server to avoid lots of database calls
 
 ## Making an Http Request
-
+>Program.cs
 ```csharp
 var uri = "https://icanhazdadjoke.com/search?term=cat";
 var client = new HttpClient();
@@ -65,8 +67,10 @@ The Joke API will return a JSON response. When this response comes back, .NET wi
 ```
 
 Given the shape of this data, create a new C# class (or classes) that matches these properties.
-
+>JokeResponse.cs
 ```csharp
+using System.Text.Json.Serialization;
+
 public class JokeResponse
 {
     [JsonPropertyName("current_page")]
@@ -99,7 +103,10 @@ public class JokeResponse
 
 public class JokeResult
 {
+
+    [JsonPropertyName("id")]
     public string Id { get; set; }
+    [JsonPropertyName("joke")]
     public string Joke { get; set; }
 }
 ```
@@ -117,34 +124,31 @@ public int TotalJokes { get; set; }
 
 > _Alternatively, you could pass in a `JsonSerializerOptions` object to the `Deserialize` method that is used below (but we will not be doing that in this example)._
 
-If creating classes for API responses seems like a tedious process, Visual studio can handle a lot of this for you by [generating classes for you based off of JSON](https://dailydotnettips.com/did-you-know-you-can-automatically-create-classes-from-json-or-xml-in-visual-studio/). If you're not using visual studio (and maybe using VSCode) there are online tools like [QuickType](https://quicktype.io/) available to help you.
+If creating classes for API responses seems like a tedious process, there are online tools like [QuickType](https://quicktype.io/) available to help you.
 
 ## Handling Responses
 
 Now that we've seen how to make a request, let's looks at how to handle a response back from an API. Here is the full example:
-
+>Program.cs
 ```csharp
-class Program
+using System.Net.Http.Headers;
+using System.Text.Json;
+
+var uri = "https://icanhazdadjoke.com/search?term=cat";
+var httpClient = new HttpClient();
+httpClient.DefaultRequestHeaders
+    .Accept
+    .Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+var response = await httpClient.GetAsync(uri);
+if (response.IsSuccessStatusCode)
 {
-    static async Task Main(string[] args)
+    var json = await response.Content.ReadAsStreamAsync();
+    var jokeData = await JsonSerializer.DeserializeAsync<JokeResponse>(json);
+
+    foreach (var result in jokeData.Results)
     {
-        var uri = "https://icanhazdadjoke.com/search?term=cat";
-        var httpClient = new HttpClient();
-        httpClient.DefaultRequestHeaders
-            .Accept
-            .Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-        var response = await httpClient.GetAsync(uri);
-        if (response.IsSuccessStatusCode)
-        {
-            var json = await response.Content.ReadAsStreamAsync();
-            var jokeData = await JsonSerializer.DeserializeAsync<JokeResponse>(json);
-
-            foreach (var result in jokeData.Results)
-            {
-                Console.WriteLine(result.Joke);
-            }
-        }
+        Console.WriteLine(result.Joke);
     }
 }
 ```
