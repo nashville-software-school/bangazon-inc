@@ -163,7 +163,7 @@ public class Vehicle
 }
 ```
 
-Once you do this, all of the specific vehicles can be driven. For now, however, they will all make the same sound, which is ridicuous because a plane doesn't sound like a truck which doesn't sound like a motorcycle.
+Once you do this, all of the specific vehicles can be driven. For now, however, they will all make the same sound, which is ridiculous because a plane doesn't sound like a truck which doesn't sound like a motorcycle.
 
 > `Program.cs`
 
@@ -233,7 +233,7 @@ Now you can run the program again and the Cessna will make a different noise.
 1. Create a `Drive()` method in the **`Vehicle`** class.
 1. Override the `Drive()` method in all the other vehicle classes. Include the vehicle's color in the message _(i.e. "The blue Ram drives past. RRrrrrrummbbble!")_.
    ![output of all vehicles driving](./images/all-vehicles-driving.gif)
-1. Create a `Turn(string direction)` mathod, and a `Stop()` method on **`Vehicle`**. Define a basic implementation of each.
+1. Create a `Turn(string direction)` method, and a `Stop()` method on **`Vehicle`**. Define a basic implementation of each.
 1. Override all three of those methods on some of the vehicles. For example, the `Stop()` method for a plane would be to output the message _"The white Cessna rolls to a stop after rolling a mile down the runway."_
 1. Make your vehicle instances perform all three behaviors.
 
