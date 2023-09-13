@@ -142,7 +142,7 @@ Now any instance of `Tesla` will have both of those properties on it automatical
 
 ## Overriding Parent Behavior
 
-To this point, you've seen how to inherit common properties from a parent class, and now you're going to implement a behavior on a parent class. Each child class will automatically inherit it, but then an **_override_** the default logic.
+To this point, you've seen how to inherit common properties from a parent class, and now you're going to implement a behavior on a parent class. Each child class will automatically inherit it, but then **_override_** the default logic.
 
 You can safely assume that each vehicle can be driven. What you would then do is implement a `Drive()` method on the **`Vehicle`** class.
 
