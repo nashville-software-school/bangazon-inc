@@ -35,7 +35,7 @@ The program should be updated to...
 The program should be updated to...
 
 1. Display the number of the user's current guess in the prompt.
-   For example, if the user has already guessed one time, the prommpt should say something like `Your guess (2)>`.
+   For example, if the user has already guessed one time, the prompt should say something like `Your guess (2)>`.
 1. End the loop early if the user guesses the correct number.
 
 ### Phase 5
