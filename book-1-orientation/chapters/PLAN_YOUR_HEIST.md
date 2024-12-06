@@ -70,3 +70,16 @@ The program should be updated to...
 
 1. At the beginning of the program, prompt the user to enter the difficulty level of the bank.
 1. At the end of the program, display a report showing the number of successful runs and the number of failed runs.
+
+### Optional Phase Seven
+
+Once you have implemented all of the required functionality above, you can try to implement a fun challenge.
+
+The program should be updated to...
+1. Modify the team dynamics to account for individual contributions based on skill and courage.
+    - A team member will only contribute to the heist if their (Skill Level × Courage Factor) is greater than the bank's base difficulty level (as set by the user before luck modification).
+    - If a team member does not meet this threshold, they will "chicken out" and leave the heist.
+1. Adjust the team's total skill level by subtracting the skill levels of any members who leave the heist.
+1. After prompting the user for the number of trial runs:
+    - Display a message listing the names of the team members who have chickened out.
+    - Use the remaining team's adjusted skill level for the heist calculations.
